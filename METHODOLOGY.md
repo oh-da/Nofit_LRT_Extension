@@ -144,6 +144,23 @@ spatial pattern is indicative only.
 **Outputs.** `Output/matrix_{10,20}_weighted_{CAR,TRANSIT,RAIL,OTHER}.csv` (eight
 matrices, weighted OD totals over observed zones).
 
+## 4c. Step 1d — Sub-area matrices (`THS_2018_MTX_submatrix.ipynb`)
+
+**Method.** Restricts the weighted matrices (all-mode and the four mode groups, both
+days) to a given list of 119 study TAZs — keeping only trips with origin **and**
+destination inside the list. Every sub-matrix is reindexed to the full 119-zone list in
+the given order (unobserved zones become zero rows/columns), so all ten files share the
+identical 119×119 layout and the four mode files per day sum to that day's all-mode file.
+
+**Results.** ≈ 6% of all expanded AM-peak trips have both ends inside the sub-area
+(142,532 on Day 10 / 139,007 on Day 20). By mode: CAR ≈ 5%, TRANSIT ≈ 9%, OTHER ≈ 7.5%;
+RAIL is empty on Day 10 and nearly empty on Day 20 (169 expanded trips) — surveyed rail
+trips almost never have both ends inside the sub-area. 18 of the 119 zones never appear
+as an AM-peak survey origin (12 never as a destination).
+
+**Outputs.** `Output/submatrices/` — same ten filenames as the parent matrices,
+119×119 each.
+
 ## 5. Step 2 — Superzone hybrid via empirical-Bayes shrinkage (`THS_2018_MTX_hybrid.ipynb`)
 
 **Reasoning.** Rather than replacing cellular with survey, blend them per origin
@@ -238,6 +255,7 @@ tables), `hybrid_taz_cv_results.csv`, CV-curve and R-heatmap figures.
 | `matrix_10_weighted.csv`, `matrix_20_weighted.csv` | 660×707 / 651×696 | Step 1 | Weighted OD trip totals (Σ `wf_new`), observed zones |
 | `prob_matrix_10_weighted.csv`, `prob_matrix_20_weighted.csv` | same | Step 1 | Row-normalized versions |
 | `matrix_{10,20}_weighted_{CAR,TRANSIT,RAIL,OTHER}.csv` | observed zones | Step 1c | Weighted OD totals by aggregated mode |
+| `submatrices/*.csv` | 119×119 | Step 1d | Sub-area versions of the ten weighted matrices |
 | `prob_matrix_cellular.csv` | 778×778 | Step 1b | Cellular AM-peak probabilities (validated reconstruction) |
 | `prob_sz_cellular.csv`, `prob_sz_10_weighted.csv`, `prob_sz_20_weighted.csv` | 36×36 | Step 1b | Superzone probability matrices |
 | `hybrid_sz_prob.csv`, `hybrid_sz_prob_k100.csv` | 36×36 | Step 2 | Superzone hybrid (k\* = 2 / k = 100) |
