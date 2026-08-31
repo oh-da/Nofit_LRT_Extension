@@ -125,21 +125,24 @@ scatter figures under `Output/figures/`.
 for mode-specific demand analysis.
 
 **Method.** Identical trip extraction and weighting; `MODE_NAME` (14 values, full
-coverage, no nulls) is mapped to three groups — **CAR** (Vehicle as Driver/Passenger,
-Motorcycle/Moped), **TRANSIT** (Public Bus, Matronit, Train, Special/Group Taxi),
-**OTHER** (Pedestrian, Default, Chartered Bus, Bicycle, Other, Truck). A trip's mode is
-the `MODE_NAME` of its *destination* activity row (the mode used to arrive). The three
-matrices per day sum exactly to the corresponding all-mode weighted matrix.
+coverage, no nulls) is mapped to four groups — **CAR** (Vehicle as Driver/Passenger,
+Motorcycle/Moped), **TRANSIT** (Public Bus, Matronit, Special/Group Taxi), **RAIL**
+(Train), **OTHER** (Pedestrian, Default, Chartered Bus, Bicycle, Other, Truck). A trip's
+mode is the `MODE_NAME` of its *destination* activity row (the mode used to arrive). The
+four matrices per day sum exactly to the corresponding all-mode weighted matrix.
 
 **Results** (expanded AM-peak trips; shares stable across days):
 
-| | CAR | TRANSIT | OTHER |
-|---|---|---|---|
-| Day 10 | 1,298,688 (56.5%) | 164,217 (7.1%) | 833,913 (36.3%) |
-| Day 20 | 1,263,355 (55.8%) | 167,447 (7.4%) | 833,356 (36.8%) |
+| | CAR | TRANSIT | RAIL | OTHER |
+|---|---|---|---|---|
+| Day 10 | 1,298,688 (56.5%) | 149,539 (6.5%) | 14,678 (0.6%) | 833,913 (36.3%) |
+| Day 20 | 1,263,355 (55.8%) | 152,525 (6.7%) | 14,923 (0.7%) | 833,356 (36.8%) |
 
-**Outputs.** `Output/matrix_{10,20}_weighted_{CAR,TRANSIT,OTHER}.csv` (six matrices,
-weighted OD totals over observed zones).
+RAIL rests on only 80 / 90 sampled trips per day (18×15 / 24×16 observed zones), so its
+spatial pattern is indicative only.
+
+**Outputs.** `Output/matrix_{10,20}_weighted_{CAR,TRANSIT,RAIL,OTHER}.csv` (eight
+matrices, weighted OD totals over observed zones).
 
 ## 5. Step 2 — Superzone hybrid via empirical-Bayes shrinkage (`THS_2018_MTX_hybrid.ipynb`)
 
@@ -234,7 +237,7 @@ tables), `hybrid_taz_cv_results.csv`, CV-curve and R-heatmap figures.
 |---|---|---|---|
 | `matrix_10_weighted.csv`, `matrix_20_weighted.csv` | 660×707 / 651×696 | Step 1 | Weighted OD trip totals (Σ `wf_new`), observed zones |
 | `prob_matrix_10_weighted.csv`, `prob_matrix_20_weighted.csv` | same | Step 1 | Row-normalized versions |
-| `matrix_{10,20}_weighted_{CAR,TRANSIT,OTHER}.csv` | observed zones | Step 1c | Weighted OD totals by aggregated mode |
+| `matrix_{10,20}_weighted_{CAR,TRANSIT,RAIL,OTHER}.csv` | observed zones | Step 1c | Weighted OD totals by aggregated mode |
 | `prob_matrix_cellular.csv` | 778×778 | Step 1b | Cellular AM-peak probabilities (validated reconstruction) |
 | `prob_sz_cellular.csv`, `prob_sz_10_weighted.csv`, `prob_sz_20_weighted.csv` | 36×36 | Step 1b | Superzone probability matrices |
 | `hybrid_sz_prob.csv`, `hybrid_sz_prob_k100.csv` | 36×36 | Step 2 | Superzone hybrid (k\* = 2 / k = 100) |
