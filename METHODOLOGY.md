@@ -119,6 +119,28 @@ the dense range [0, 0.25]. Unweighted matrices recomputed alongside as reference
 `prob_sz_cellular.csv`, `prob_sz_10_weighted.csv`, `prob_sz_20_weighted.csv` (36×36),
 scatter figures under `Output/figures/`.
 
+## 4b. Step 1c — Weighted matrices by mode (`THS_2018_MTX_weighted_by_mode.ipynb`)
+
+**Reasoning.** Split the weighted Day 10 / Day 20 matrices by an aggregated travel mode
+for mode-specific demand analysis.
+
+**Method.** Identical trip extraction and weighting; `MODE_NAME` (14 values, full
+coverage, no nulls) is mapped to three groups — **CAR** (Vehicle as Driver/Passenger,
+Motorcycle/Moped), **TRANSIT** (Public Bus, Matronit, Train, Special/Group Taxi),
+**OTHER** (Pedestrian, Default, Chartered Bus, Bicycle, Other, Truck). A trip's mode is
+the `MODE_NAME` of its *destination* activity row (the mode used to arrive). The three
+matrices per day sum exactly to the corresponding all-mode weighted matrix.
+
+**Results** (expanded AM-peak trips; shares stable across days):
+
+| | CAR | TRANSIT | OTHER |
+|---|---|---|---|
+| Day 10 | 1,298,688 (56.5%) | 164,217 (7.1%) | 833,913 (36.3%) |
+| Day 20 | 1,263,355 (55.8%) | 167,447 (7.4%) | 833,356 (36.8%) |
+
+**Outputs.** `Output/matrix_{10,20}_weighted_{CAR,TRANSIT,OTHER}.csv` (six matrices,
+weighted OD totals over observed zones).
+
 ## 5. Step 2 — Superzone hybrid via empirical-Bayes shrinkage (`THS_2018_MTX_hybrid.ipynb`)
 
 **Reasoning.** Rather than replacing cellular with survey, blend them per origin
@@ -212,6 +234,7 @@ tables), `hybrid_taz_cv_results.csv`, CV-curve and R-heatmap figures.
 |---|---|---|---|
 | `matrix_10_weighted.csv`, `matrix_20_weighted.csv` | 660×707 / 651×696 | Step 1 | Weighted OD trip totals (Σ `wf_new`), observed zones |
 | `prob_matrix_10_weighted.csv`, `prob_matrix_20_weighted.csv` | same | Step 1 | Row-normalized versions |
+| `matrix_{10,20}_weighted_{CAR,TRANSIT,OTHER}.csv` | observed zones | Step 1c | Weighted OD totals by aggregated mode |
 | `prob_matrix_cellular.csv` | 778×778 | Step 1b | Cellular AM-peak probabilities (validated reconstruction) |
 | `prob_sz_cellular.csv`, `prob_sz_10_weighted.csv`, `prob_sz_20_weighted.csv` | 36×36 | Step 1b | Superzone probability matrices |
 | `hybrid_sz_prob.csv`, `hybrid_sz_prob_k100.csv` | 36×36 | Step 2 | Superzone hybrid (k\* = 2 / k = 100) |
