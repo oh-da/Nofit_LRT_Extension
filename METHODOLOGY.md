@@ -163,21 +163,27 @@ as an AM-peak survey origin (12 never as a destination).
 
 ## 4d. Step 1e — AM-peak trip generation rates per person (`THS_2018_MTX_trip_generation.ipynb`)
 
-**Method.** A trip *production* rate by residence zone: expanded AM-peak trips made by a
-zone's residents (same extraction rule; trips attributed to the household's home
-`TAZ` / `SuperZone` from the weights file, regardless of where they occur) divided by
-the zone's expanded population (surveyed persons per household × `wf_new`). Computed per
-survey day and averaged.
+**Method.** A trip *production* rate by residence zone, per survey day. **Home zone =
+the zone where the person's `mainActivity` was Home at 3:00 AM** — the survey day starts
+at 03:00 and every person-day's first diary activity begins exactly then, so the home
+zone is the `taz` of that first activity when it is Home (96.4% of person-days; the rest
+— night workers, people away — are excluded from both sides of the ratio for that day;
+individuals Home on both days sit in the same taz 99.99% of the time). Numerator:
+expanded AM-peak trips made that day by persons home in the zone (same extraction rule,
+attributed to the home zone regardless of where they occur). Denominator: expanded
+persons home in the zone at 3:00 (`wf_new` per person). Superzones via the keys table's
+`SZ_NEW`.
 
-**Results.** 16,401 surveyed persons expand to a population of 2,682,356. Overall rate:
-**0.856 (Day 10) / 0.844 (Day 20) → 0.850 AM-peak trips per person**. Superzone rates
-span 0.62 (SZ 4) to 1.21 (SZ 25); 35 superzones and 511 home TAZs are covered (86 TAZs
-have < 10 sampled persons — flagged, indicative only; 267 TAZs were never sampled as
-home locations and have no rate).
+**Results.** Overall rate: **0.875 (Day 10) / 0.869 (Day 20) → 0.872 AM-peak trips per
+person** over ≈ 2.60M expanded persons home at 3:00. Superzone rates span 0.63 (SZ 4)
+to 1.25 (SZ 25); 35 superzones and 520 home TAZs are covered (93 TAZs have < 20 sampled
+person-days — flagged, indicative only). This diary-based home definition agrees with
+the household register (`households_with_weights.csv` TAZ) for ~95% of households, with
+disagreements almost all in adjacent zones.
 
-**Outputs.** `Output/trip_generation_taz.csv`, `trip_generation_sz.csv` (per zone:
-sampled households/persons, weighted persons, weighted trips and rates per day and
-averaged), rate figure under `Output/figures/`.
+**Outputs.** `Output/trip_generation_taz.csv`, `trip_generation_sz.csv` (per zone and
+day: sampled and weighted persons, weighted trips, rates, and the two-day average), rate
+figure under `Output/figures/`.
 
 ## 5. Step 2 — Superzone hybrid via empirical-Bayes shrinkage (`THS_2018_MTX_hybrid.ipynb`)
 
@@ -286,7 +292,7 @@ tables), `hybrid_taz_cv_results.csv`, CV-curve and R-heatmap figures.
 | `prob_matrix_10_weighted.csv`, `prob_matrix_20_weighted.csv` | same | Step 1 | Row-normalized versions |
 | `matrix_{10,20}_weighted_{CAR,TRANSIT,RAIL,OTHER}.csv` | observed zones | Step 1c | Weighted OD totals by aggregated mode |
 | `submatrices/*.csv` | 119×119 | Step 1d | Sub-area versions of the ten weighted matrices |
-| `trip_generation_taz.csv`, `trip_generation_sz.csv` | 511 / 35 rows | Step 1e | AM-peak trips per person by home zone |
+| `trip_generation_taz.csv`, `trip_generation_sz.csv` | 520 / 35 rows | Step 1e | AM-peak trips per person by home zone (Home at 3:00 AM) |
 | `prob_matrix_cellular.csv` | 778×778 | Step 1b | Cellular AM-peak probabilities (validated reconstruction) |
 | `prob_sz_cellular.csv`, `prob_sz_10_weighted.csv`, `prob_sz_20_weighted.csv` | 36×36 | Step 1b | Superzone probability matrices |
 | `hybrid_sz_prob.csv`, `hybrid_sz_prob_k100.csv` | 36×36 | Step 2 | Superzone hybrid (k\* = 2 / k = 100) |
