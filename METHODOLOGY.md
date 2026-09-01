@@ -459,6 +459,28 @@ terminal). A fifth date file (`Input/trips_table_2022-05-10.csv`) sits outside t
 `bus_od_taz_avg.csv` (722×711 average-Tuesday OD passengers),
 `bus_boardings_alightings_taz.csv` (per-TAZ averages).
 
+## 6g. Step 9 — Bus OD combined with OnBoard survey probabilities (`BusOnBoard_matrix.ipynb`)
+
+**Input.** `Input/6_9_BusProbability_ByTAZ.xlsx` (OnBoard survey): P(alight at `toTAZ` |
+board at `fromTAZ`) for 6:00–9:00, 599 origins, rows summing exactly to 1 including a
+`toTAZ = NaN` unknown-alighting share (median 7.4% where present).
+
+**Method.** (1) Probability matrix: NaN destinations dropped, rows renormalized
+(unknown alightings assumed to distribute like known ones). (2) "New" matrix: each
+origin's RavKav volume (row sum of `bus_od_taz_avg.csv`) distributed over destinations
+by the OnBoard probabilities — RavKav sets the volumes, OnBoard the destination
+pattern. Origins without OnBoard coverage (5.5% of volume) keep their RavKav row.
+
+**Results.** Total preserved at 143,402 average-Tuesday passengers; 94.5% of the volume
+redistributed by OnBoard probabilities. The two sources genuinely disagree on fine-grain
+destinations (r ≈ 0.13 at TAZ level even for high-volume origins) while agreeing
+regionally (r ≈ 0.69 at superzone level) — RavKav's destinations are algorithmically
+inferred alightings, OnBoard's are passenger-reported, which is the rationale for the
+substitution.
+
+**Outputs.** `Output/bus/bus_probability_matrix.csv` (594×548, row-stochastic),
+`bus_od_taz_new.csv` (722×728, combined matrix).
+
 ---
 
 ## 7. Output inventory (`Output/`)
@@ -488,6 +510,7 @@ terminal). A fifth date file (`Input/trips_table_2022-05-10.csv`) sits outside t
 | `ths2017/study_taz/submatrices/*` | 119×119 | Step 6 | Sub-area versions of the averaged mode matrices and hybrid trips |
 | `ths2017/trip_generation_*.csv` | 478 / 35 / 25 rows | Step 7 | Per-person AM-peak generation rates on the trips-file source |
 | `bus/bus_stops_taz.csv`, `bus/bus_od_taz_avg.csv`, `bus/bus_boardings_alightings_taz.csv` | 27k stops / 722×711 / 730 rows | Step 8 | RavKav stop tags, average-Tuesday AM-peak bus OD, per-TAZ boardings/alightings |
+| `bus/bus_probability_matrix.csv`, `bus/bus_od_taz_new.csv` | 594×548 / 722×728 | Step 9 | OnBoard destination probabilities; RavKav volumes × OnBoard pattern |
 | `figures/` | — | Steps 1b–3 | Scatter plots, CV curves, λ curves, R_AB heatmap |
 
 All matrices are indexed by origin zone (rows) × destination zone (columns). Probability
