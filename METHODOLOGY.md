@@ -355,9 +355,21 @@ Mode composition differs: this file assigns more trips to CAR (≈ 62% vs 56%) a
 to OTHER, and RAIL keeps out-of-region destination zones (17–19k expanded vs 4k under
 the model-area-restricted activities extraction).
 
-**Outputs.** `Output/ths2017/matrix_day{1,2}_{CAR,TRANSIT,RAIL,OTHER,ALL}.csv` (ten
-matrices over observed zones; the four mode matrices per day sum exactly to that day's
-ALL matrix).
+**Day-averaged matrices.** The two survey days are different by activity, so the
+representative weekday set is the cell-wise average `(day1 + day2) / 2` over the union
+of observed zones: `matrix_avg_{CAR,TRANSIT,RAIL,OTHER,ALL}.csv` — 2,184,632 average-
+weekday AM-peak trips (CAR 1,361,754 / OTHER 662,908 / TRANSIT 141,755 / RAIL 18,214),
+with the mode matrices summing exactly to ALL.
+
+**Zone-system warning.** `actTaz` uses its own zonation (1,512 zones, range 3–2636). It
+is **not** the 778-TAZ study system and matches none of the key table's systems
+(`TAZ_1270`, `TAZ_250`, `TAZ_33`, `TAZ_15`); the ~310 shared zone numbers are
+coincidental collisions. These matrices are therefore valid within the trips file's own
+zonation and cannot be aggregated to `SZ_NEW`/GS or fused with the cellular/hybrid chain
+until an `actTaz` → study-TAZ correspondence table is provided.
+
+**Outputs.** `Output/ths2017/matrix_day{1,2}_{CAR,TRANSIT,RAIL,OTHER,ALL}.csv` and
+`matrix_avg_{CAR,TRANSIT,RAIL,OTHER,ALL}.csv` (fifteen matrices over observed zones).
 
 ---
 
@@ -382,7 +394,7 @@ ALL matrix).
 | `hybrid_taz_cv_results.csv` | k-grid | Step 3 | Route-A validation table |
 | `prob_gs_*.csv`, `hybrid_gs_*.csv`, `gs_correction_factors.csv` | 25×25 | Step 4 | GS-level survey/cellular/hybrid matrices, λ table, CV results, correction factors |
 | `hybrid_taz_prob_gs.csv`, `hybrid_taz_trips_gs.csv` | 778×778 | Step 4 | TAZ matrices calibrated through GS zoning |
-| `ths2017/matrix_day{1,2}_*.csv` | observed zones | Step 5 | Day × mode matrices from the THS 2017 trips file |
+| `ths2017/matrix_day{1,2}_*.csv`, `ths2017/matrix_avg_*.csv` | observed zones (trips-file zonation) | Step 5 | Day × mode and day-averaged matrices from the THS 2017 trips file |
 | `figures/` | — | Steps 1b–3 | Scatter plots, CV curves, λ curves, R_AB heatmap |
 
 All matrices are indexed by origin zone (rows) × destination zone (columns). Probability
