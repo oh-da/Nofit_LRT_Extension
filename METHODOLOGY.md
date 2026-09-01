@@ -285,6 +285,29 @@ matters), `hybrid_taz_trips.csv` (778×778 trips), `submatrices/hybrid_taz_trips
 (119×119), `sz_correction_factors.csv` / `sz_correction_factors_k100.csv` (36×36 R
 tables), `hybrid_taz_cv_results.csv`, CV-curve and R-heatmap figures.
 
+## 6b. Step 4 — GS zoning pipeline (`THS_2018_MTX_GS.ipynb`)
+
+**Reasoning.** `Input/TAZ_GSnew.csv` introduces a second aggregation geography — **GS**
+(25 zones, covering every study TAZ, including TAZ 105 which the keys table lacks an
+`SZ_NEW` for). This step recreates the superzone-level products on GS with identical
+methodology (only the TAZ→GS mapping replaces TAZ→`SZ_NEW`).
+
+**Results.** Weighted survey vs cellular at GS level: r = 0.840 / 0.838 (Day 10/20).
+Cross-day validation of the shrinkage constant finds a genuine but tiny interior
+optimum, **k\* = 1** (JSD 0.0248 vs 0.0252 at k = 0; monotone rise beyond), so the GS
+hybrid is again survey-dominant (λ = 0.909–0.9999; the smallest GS origin has only 10
+pooled observations). Hybrid trips total ≈ 2.18M average-weekday AM-peak trips. GS
+correction factors applied to cellular TAZ cells: diagonal R median 1.89 (max 5.7),
+off-diagonal median 0.09, 48% of off-diagonal GS pairs have zero pooled survey
+observations. TAZ-level GS-based trips match GS survey departure totals exactly
+(asserted).
+
+**Outputs.** `Output/prob_gs_{10,20}_weighted.csv`, `prob_gs_cellular.csv` (25×25);
+`hybrid_gs_prob.csv` (k\* = 1), `hybrid_gs_prob_k100.csv`, `hybrid_gs_trips.csv`,
+`hybrid_gs_lambda.csv`, `hybrid_gs_cv_results.csv`; `gs_correction_factors.csv` (25×25);
+`hybrid_taz_prob_gs.csv`, `hybrid_taz_trips_gs.csv` (778×778 TAZ matrices calibrated
+through GS instead of superzones).
+
 ---
 
 ## 7. Output inventory (`Output/`)
@@ -306,6 +329,8 @@ tables), `hybrid_taz_cv_results.csv`, CV-curve and R-heatmap figures.
 | `hybrid_taz_trips.csv`, `submatrices/hybrid_taz_trips.csv` | 778×778 / 119×119 | Step 3 | Hybrid as average-weekday AM-peak trips, full area and sub-area |
 | `sz_correction_factors.csv`, `sz_correction_factors_k100.csv` | 36×36 | Step 3 | R_AB tables |
 | `hybrid_taz_cv_results.csv` | k-grid | Step 3 | Route-A validation table |
+| `prob_gs_*.csv`, `hybrid_gs_*.csv`, `gs_correction_factors.csv` | 25×25 | Step 4 | GS-level survey/cellular/hybrid matrices, λ table, CV results, correction factors |
+| `hybrid_taz_prob_gs.csv`, `hybrid_taz_trips_gs.csv` | 778×778 | Step 4 | TAZ matrices calibrated through GS zoning |
 | `figures/` | — | Steps 1b–3 | Scatter plots, CV curves, λ curves, R_AB heatmap |
 
 All matrices are indexed by origin zone (rows) × destination zone (columns). Probability
