@@ -182,8 +182,11 @@ the household register (`households_with_weights.csv` TAZ) for ~95% of household
 disagreements almost all in adjacent zones.
 
 **Outputs.** `Output/trip_generation_taz.csv`, `trip_generation_sz.csv` (per zone and
-day: sampled and weighted persons, weighted trips, rates, and the two-day average), rate
-figure under `Output/figures/`.
+day: sampled and weighted persons, weighted trips, rates, and the two-day average);
+`trip_generation_summary.csv` — a compact one-row-per-TAZ table with `TAZ`, `SuperZone`,
+`trips_per_person` (two-day average) and `population` (`wf_new` × observed persons home
+at 3:00, averaged over the two days; total ≈ 2.59M — SuperZone is blank for the few home
+zones outside the keys-table mapping); rate figure under `Output/figures/`.
 
 ## 5. Step 2 — Superzone hybrid via empirical-Bayes shrinkage (`THS_2018_MTX_hybrid.ipynb`)
 
@@ -293,6 +296,7 @@ tables), `hybrid_taz_cv_results.csv`, CV-curve and R-heatmap figures.
 | `matrix_{10,20}_weighted_{CAR,TRANSIT,RAIL,OTHER}.csv` | observed zones | Step 1c | Weighted OD totals by aggregated mode |
 | `submatrices/*.csv` | 119×119 | Step 1d | Sub-area versions of the ten weighted matrices |
 | `trip_generation_taz.csv`, `trip_generation_sz.csv` | 520 / 35 rows | Step 1e | AM-peak trips per person by home zone (Home at 3:00 AM) |
+| `trip_generation_summary.csv` | 520 rows | Step 1e | Compact table: TAZ, SuperZone, trips per person, expanded population |
 | `prob_matrix_cellular.csv` | 778×778 | Step 1b | Cellular AM-peak probabilities (validated reconstruction) |
 | `prob_sz_cellular.csv`, `prob_sz_10_weighted.csv`, `prob_sz_20_weighted.csv` | 36×36 | Step 1b | Superzone probability matrices |
 | `hybrid_sz_prob.csv`, `hybrid_sz_prob_k100.csv` | 36×36 | Step 2 | Superzone hybrid (k\* = 2 / k = 100) |

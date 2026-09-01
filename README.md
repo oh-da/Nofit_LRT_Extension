@@ -50,6 +50,8 @@ flowchart LR
   survey-unobserved OD pairs
 - `hybrid_sz_prob.csv` / `hybrid_sz_trips.csv` — superzone hybrid (probabilities /
   average-weekday trips)
+- `trip_generation_summary.csv` — per home TAZ: SuperZone, AM-peak trips per person,
+  expanded population
 - Full inventory in [METHODOLOGY.md §7](METHODOLOGY.md#7-output-inventory-output)
 
 ## Setup
