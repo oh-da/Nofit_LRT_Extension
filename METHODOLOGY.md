@@ -428,6 +428,33 @@ only).
 `trip_generation_gs.csv`, `trip_generation_summary.csv` (TAZ_2636, TAZ_1250, SZ, GS,
 rate, population — total 2,601,228), figure `ths2017_trip_generation.png`.
 
+## 6f. Step 8 — Bus RavKav AM-peak matrix by TAZ (`BusRavKav_matrix.ipynb`)
+
+**Inputs.** `Input/TAZ_North/TAZ_North.shp` (781 TAZ polygons, Israeli TM CRS,
+`TAZ_NUMBER` field) and four RavKav bus-trip files (`Input/BusRavKav/`, Tuesdays
+2022-05-03/17/24/31, ~2.5–2.9M records each; national coverage). Each record is one
+passenger boarding with journey `orig`/`dest` stops and physical `board`/`alight` stops
+(WGS84 lat/lon), `weekday`, a passenger count (`total_boardings`), and the journey
+timestamp embedded in `passanger_trip_id` (the `date` column has no time).
+
+**Method.** 27,186 unique stops spatially joined to the TAZ polygons (9,924 = 36.5%
+fall inside the northern study area). Filters: `weekday = 3` and journey hour ∈ {6,7,8}.
+Weighted by `total_boardings`, averaged over the four Tuesdays: an OD matrix from
+journey `orig`→`dest` stops (both ends inside `TAZ_North`), and per-TAZ boarding /
+alighting totals from the physical `board`/`alight` stops (unlinked events — a transfer
+journey counts at each boarding point).
+
+**Results.** ≈ 775–880k AM-peak bus passengers nationally per Tuesday, of which ≈ 17%
+(143,240 on the average day) have both journey ends inside the northern study area.
+Per-TAZ totals: 157,187 average boardings / 147,272 alightings across 730 TAZs; the
+largest generator is TAZ 1219 (≈ 6,500 boardings, ≈ 9,000 alightings — a major
+terminal). A fifth date file (`Input/trips_table_2022-05-10.csv`) sits outside the
+`BusRavKav` directory and is excluded per the four-file instruction.
+
+**Outputs.** `Output/bus/bus_stops_taz.csv` (stop → TAZ tags),
+`bus_od_taz_avg.csv` (722×711 average-Tuesday OD passengers),
+`bus_boardings_alightings_taz.csv` (per-TAZ averages).
+
 ---
 
 ## 7. Output inventory (`Output/`)
@@ -456,6 +483,7 @@ rate, population — total 2,601,228), figure `ths2017_trip_generation.png`.
 | `ths2017/study_taz/hybrid_*`, `*_correction_factors.csv` | various | Step 6 | **Primary hybrid products** on the trips-file source (SZ/GS hybrids, TAZ matrices, trips) |
 | `ths2017/study_taz/submatrices/*` | 119×119 | Step 6 | Sub-area versions of the averaged mode matrices and hybrid trips |
 | `ths2017/trip_generation_*.csv` | 478 / 35 / 25 rows | Step 7 | Per-person AM-peak generation rates on the trips-file source |
+| `bus/bus_stops_taz.csv`, `bus/bus_od_taz_avg.csv`, `bus/bus_boardings_alightings_taz.csv` | 27k stops / 722×711 / 730 rows | Step 8 | RavKav stop tags, average-Tuesday AM-peak bus OD, per-TAZ boardings/alightings |
 | `figures/` | — | Steps 1b–3 | Scatter plots, CV curves, λ curves, R_AB heatmap |
 
 All matrices are indexed by origin zone (rows) × destination zone (columns). Probability
