@@ -438,16 +438,20 @@ passenger boarding with journey `orig`/`dest` stops and physical `board`/`alight
 timestamp embedded in `passanger_trip_id` (the `date` column has no time).
 
 **Method.** 27,186 unique stops spatially joined to the TAZ polygons (9,924 = 36.5%
-fall inside the northern study area). Filters: `weekday = 3` and journey hour ∈ {6,7,8}.
-Weighted by `total_boardings`, averaged over the four Tuesdays: an OD matrix from
-journey `orig`→`dest` stops (both ends inside `TAZ_North`), and per-TAZ boarding /
-alighting totals from the physical `board`/`alight` stops (unlinked events — a transfer
-journey counts at each boarding point).
+fall inside the northern study area). The raw files carry duplicate records (≈ 7% of
+rows, including exact repeats of a leg), so a **journey** is one `passanger_trip_id`
+(first leg by `bus_trip_id` carries `orig`/`dest` and the start hour) and a **leg** is
+one (`passanger_trip_id`, `bus_trip_id`) pair. Filters: `weekday = 3` and
+**`bus_trip_hour`** ∈ {6,7,8} (the `date` column has no time). Weighted by
+`total_boardings`, averaged over the four Tuesdays: an OD matrix from journey
+`orig`→`dest` stops (each journey once, both ends inside `TAZ_North`), and per-TAZ
+boarding / alighting totals from each leg's physical `board`/`alight` stops.
 
-**Results.** ≈ 775–880k AM-peak bus passengers nationally per Tuesday, of which ≈ 17%
-(143,240 on the average day) have both journey ends inside the northern study area.
-Per-TAZ totals: 157,187 average boardings / 147,272 alightings across 730 TAZs; the
-largest generator is TAZ 1219 (≈ 6,500 boardings, ≈ 9,000 alightings — a major
+**Results.** ≈ 760–890k AM-peak bus passengers nationally per Tuesday, of which ≈ 17%
+(143,402 on the average day) have both journey ends inside the northern study area —
+strikingly close to the THS TRANSIT estimate of 134,349 in-study AM-peak trips.
+Per-TAZ totals: 157,264 average boardings / 147,632 alightings across 730 TAZs; the
+largest generator is TAZ 1219 (≈ 6,500 boardings, ≈ 8,900 alightings — a major
 terminal). A fifth date file (`Input/trips_table_2022-05-10.csv`) sits outside the
 `BusRavKav` directory and is excluded per the four-file instruction.
 
