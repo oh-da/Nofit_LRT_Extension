@@ -406,6 +406,28 @@ sub-area; hybrid trips 94,610; RAIL empty).
 (SZ-calibrated, 778×778), `hybrid_taz_prob_gs.csv` / `hybrid_taz_trips_gs.csv`
 (GS-calibrated), and `submatrices/` (119×119: avg ALL + four modes + hybrid trips).
 
+## 6e. Step 7 — Trip generation rates on the trips file (`THS_2017_trip_generation.ipynb`)
+
+**Method.** Mirrors step 1e on the new source: home = the 3:00 AM location (the
+`placeno = 1` row, always starting at 03:00) when `mainActivity = 1` (Home; 96.9% of
+person-days, rest excluded from both sides), numerator = the person-day's AM-peak trips
+(validated extraction) × `new_wf`, denominator = expanded persons home at 3:00. Rates at
+the native 2636-zone resolution and, via the dominant study zone of the home 1250-zone,
+at `SZ_NEW` and GS levels. Unlike the activities-based rates, **all** AM-peak trips
+count (every trip in this file has a real TAZ), so this is the total generation rate
+including trips leaving the study area.
+
+**Results.** Overall **0.831 (Day 1) / 0.827 (Day 2) → 0.829 AM-peak trips per person**
+over ≈ 2.60M expanded persons — versus 0.835 on the activities-based source, and with an
+almost identical superzone ranking (SZ 25 and 39 highest at ≈ 1.18/1.12, SZ 19 and 4
+lowest at ≈ 0.60/0.63). 478 home 2636-zones covered (89 with < 20 sampled person-days,
+flagged); 209 person-days have homes outside the northern study area (2636-zone table
+only).
+
+**Outputs.** `Output/ths2017/trip_generation_taz2636.csv`, `trip_generation_sz.csv`,
+`trip_generation_gs.csv`, `trip_generation_summary.csv` (TAZ_2636, TAZ_1250, SZ, GS,
+rate, population — total 2,601,228), figure `ths2017_trip_generation.png`.
+
 ---
 
 ## 7. Output inventory (`Output/`)
@@ -433,6 +455,7 @@ sub-area; hybrid trips 94,610; RAIL empty).
 | `ths2017/study_taz/matrix_avg_*` | 778×778 / 36×36 / 25×25 | Step 5 | Averaged trips-file matrices converted to the study TAZ / SZ_NEW / GS systems |
 | `ths2017/study_taz/hybrid_*`, `*_correction_factors.csv` | various | Step 6 | **Primary hybrid products** on the trips-file source (SZ/GS hybrids, TAZ matrices, trips) |
 | `ths2017/study_taz/submatrices/*` | 119×119 | Step 6 | Sub-area versions of the averaged mode matrices and hybrid trips |
+| `ths2017/trip_generation_*.csv` | 478 / 35 / 25 rows | Step 7 | Per-person AM-peak generation rates on the trips-file source |
 | `figures/` | — | Steps 1b–3 | Scatter plots, CV curves, λ curves, R_AB heatmap |
 
 All matrices are indexed by origin zone (rows) × destination zone (columns). Probability
