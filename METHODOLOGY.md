@@ -27,6 +27,8 @@ survey as *evidence*, and combine them at the spatial scale where each is reliab
 | `households_with_weights.csv` | Household expansion weights | 5,108 rows, one per `HHID` — exactly matching the activities file (no missing, no duplicates). Columns: `HHID`, `TAZ`, `SuperZone`, `wf` (original weight), `wf_new` (revised weight; mean ≈ 159, range 5–350). **`wf_new` is the weight used throughout.** |
 | `AvgDayHourlyTrips201819_1270_weekday_v1.csv` | Cellular OD trips, average weekday 2018–19, hourly (`h0`–`h23`), national 1270-zone system | Only the AM-peak hours `h6`, `h7`, `h8` are used |
 | `1270_02_09_2021_TAZ_North_keys.csv` | Zone correspondence table (windows-1255 encoded) | Maps the national 1270-zone system (`TAZ_1270`) to the 778 study TAZs (`TAZ_NUMBER`) and to 36 superzones (`SZ_NEW`). 400 national zones cover the study area; one national zone contains up to 8 study TAZs (mean ≈ 2) |
+| `../TAZ_GSnew.csv` (in `Input/`) | TAZ → GS zoning | 781 TAZs → 25 GS zones; covers every study TAZ including 105 |
+| `../trips_ths_2017.xlsx` (in `Input/`) | THS trips file: one row per activity per person per survey day | 146,394 rows, 16,401 persons (same panel as the activities file), `SurveyDay` 1/2; `placeno` orders activities per `PerID3`, `actTaz` locates them, `Dep_h` is the hour of departing the activity, `mode` is pre-aggregated (CAR/TRANSIT/RAIL/OTHER, `IRR` = first activity), `new_wf` carries the weight |
 
 **Data-version note.** The activities file currently in the repository contains more
 records than the file used by the original `THS_2018_MTX.ipynb` Colab run: identical
@@ -330,6 +332,33 @@ totals exactly (asserted).
 `hybrid_taz_prob_gs.csv`, `hybrid_taz_trips_gs.csv` (778×778 TAZ matrices calibrated
 through GS instead of superzones).
 
+## 6c. Step 5 — Matrices from the THS 2017 trips file (`THS_2017_trips_matrices.ipynb`)
+
+**Method.** An independent trip extraction from `Input/trips_ths_2017.xlsx`: within each
+person (`PerID3`) and survey day, activities ordered by `placeno` form trips from the
+previous activity's `actTaz` to the current one's; the trip's departure hour is the
+*origin* row's `Dep_h` (kept for `Dep_h` ∈ {6,7,8}); its mode is the *destination* row's
+pre-aggregated `mode`; each trip contributes its `new_wf`. `IRR` marks first activities
+only and never becomes a trip mode (asserted). No `actTaz` is 0; zones beyond the
+778-zone system keep their real TAZ, so out-of-region trip ends are retained.
+
+**Results** (expanded AM-peak trips):
+
+| | CAR | TRANSIT | RAIL | OTHER | All |
+|---|---|---|---|---|---|
+| Day 1 | 1,380,188 (62.8%) | 142,924 (6.5%) | 17,219 (0.8%) | 656,482 (29.9%) | 2,196,813 |
+| Day 2 | 1,343,321 (61.8%) | 140,585 (6.5%) | 19,210 (0.9%) | 669,334 (30.8%) | 2,172,451 |
+
+All-mode totals agree with the activities-based matrices within 0.2–0.4%
+(2,196,813 vs 2,193,422 on day 1/10), a strong cross-validation of the two extractions.
+Mode composition differs: this file assigns more trips to CAR (≈ 62% vs 56%) and fewer
+to OTHER, and RAIL keeps out-of-region destination zones (17–19k expanded vs 4k under
+the model-area-restricted activities extraction).
+
+**Outputs.** `Output/ths2017/matrix_day{1,2}_{CAR,TRANSIT,RAIL,OTHER,ALL}.csv` (ten
+matrices over observed zones; the four mode matrices per day sum exactly to that day's
+ALL matrix).
+
 ---
 
 ## 7. Output inventory (`Output/`)
@@ -353,6 +382,7 @@ through GS instead of superzones).
 | `hybrid_taz_cv_results.csv` | k-grid | Step 3 | Route-A validation table |
 | `prob_gs_*.csv`, `hybrid_gs_*.csv`, `gs_correction_factors.csv` | 25×25 | Step 4 | GS-level survey/cellular/hybrid matrices, λ table, CV results, correction factors |
 | `hybrid_taz_prob_gs.csv`, `hybrid_taz_trips_gs.csv` | 778×778 | Step 4 | TAZ matrices calibrated through GS zoning |
+| `ths2017/matrix_day{1,2}_*.csv` | observed zones | Step 5 | Day × mode matrices from the THS 2017 trips file |
 | `figures/` | — | Steps 1b–3 | Scatter plots, CV curves, λ curves, R_AB heatmap |
 
 All matrices are indexed by origin zone (rows) × destination zone (columns). Probability
