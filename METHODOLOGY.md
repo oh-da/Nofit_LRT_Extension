@@ -241,9 +241,21 @@ median ≈ 0.10). The correction transfers the survey's pattern *and its sparsit
 motivates the second variant: at k_SZ = 100 the off-diagonal median is ≈ 0.26, keeping a
 substantial cellular floor on survey-unobserved OD pairs.
 
+**Trips version.** The hybrid probabilities are converted to trips with an origin-volume
+vector built on the same principle (survey sets the scale, cellular the structure):
+each superzone's average-weekday expanded survey departure total is split among its
+member TAZs by cellular outflow shares, then spread over destinations by the hybrid
+probabilities. Total ≈ 2.15M average-weekday AM-peak trips — lower than the superzone
+trips file (≈ 2.28M) because only trips with both ends inside the 778-TAZ system are
+covered. Superzone-level origin totals match the survey expanded departures exactly
+(asserted in the notebook); the within-superzone split inherits the cellular replication
+caveat. A 119×119 sub-area extraction (same zone list, order and layout as
+`Output/submatrices/`) captures 121,179 trips (5.6% of the total).
+
 **Outputs.** `Output/hybrid_taz_prob.csv` (778×778, k_SZ = 2 — follows the survey
 wherever it speaks), `hybrid_taz_prob_k100.csv` (safer where coverage of rare OD pairs
-matters), `sz_correction_factors.csv` / `sz_correction_factors_k100.csv` (36×36 R
+matters), `hybrid_taz_trips.csv` (778×778 trips), `submatrices/hybrid_taz_trips.csv`
+(119×119), `sz_correction_factors.csv` / `sz_correction_factors_k100.csv` (36×36 R
 tables), `hybrid_taz_cv_results.csv`, CV-curve and R-heatmap figures.
 
 ---
@@ -262,6 +274,7 @@ tables), `hybrid_taz_cv_results.csv`, CV-curve and R-heatmap figures.
 | `hybrid_sz_trips.csv` | 36×36 | Step 2 | Hybrid scaled to average-weekday expanded departures |
 | `hybrid_lambda.csv`, `hybrid_cv_results.csv` | 36 rows / k-grid | Step 2 | Per-origin n_A and λ; validation table |
 | `hybrid_taz_prob.csv`, `hybrid_taz_prob_k100.csv` | 778×778 | Step 3 | **Final TAZ-level OD probability matrices** |
+| `hybrid_taz_trips.csv`, `submatrices/hybrid_taz_trips.csv` | 778×778 / 119×119 | Step 3 | Hybrid as average-weekday AM-peak trips, full area and sub-area |
 | `sz_correction_factors.csv`, `sz_correction_factors_k100.csv` | 36×36 | Step 3 | R_AB tables |
 | `hybrid_taz_cv_results.csv` | k-grid | Step 3 | Route-A validation table |
 | `figures/` | — | Steps 1b–3 | Scatter plots, CV curves, λ curves, R_AB heatmap |
@@ -284,9 +297,11 @@ zone i ends in zone j.
 4. **Cross-day validation limits** — both survey days come from the same household
    panel, so CV can calibrate against self-consistency only; at TAZ level this bias is
    strong enough to disqualify CV entirely (§6, Route A).
-5. **Volumes at TAZ level** — the Step-3 deliverables are probability matrices. TAZ-level
-   absolute volumes would need an origin-departure (production) model; superzone-level
-   volumes are available in `hybrid_sz_trips.csv`.
+5. **Volumes at TAZ level** — `hybrid_taz_trips.csv` scales the hybrid probabilities by
+   superzone survey departure totals split among member TAZs by cellular outflow shares.
+   The superzone-level scale is survey-based and solid; the within-superzone origin split
+   rests on cellular structure (with its replication caveat), not on a production model —
+   treat individual TAZ origin totals accordingly.
 
 ## 9. Reproduction
 

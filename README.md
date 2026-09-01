@@ -43,6 +43,8 @@ flowchart LR
 ## Key deliverables (`Output/`)
 
 - `hybrid_taz_prob.csv` — final TAZ-level OD probability matrix (778×778)
+- `hybrid_taz_trips.csv` — the hybrid as average-weekday AM-peak trips
+  (778×778; 119×119 sub-area version under `submatrices/`)
 - `hybrid_taz_prob_k100.csv` — variant with a stronger cellular floor on
   survey-unobserved OD pairs
 - `hybrid_sz_prob.csv` / `hybrid_sz_trips.csv` — superzone hybrid (probabilities /
