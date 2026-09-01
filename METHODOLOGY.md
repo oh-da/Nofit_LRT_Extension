@@ -361,15 +361,26 @@ of observed zones: `matrix_avg_{CAR,TRANSIT,RAIL,OTHER,ALL}.csv` — 2,184,632 a
 weekday AM-peak trips (CAR 1,361,754 / OTHER 662,908 / TRANSIT 141,755 / RAIL 18,214),
 with the mode matrices summing exactly to ALL.
 
-**Zone-system warning.** `actTaz` uses its own zonation (1,512 zones, range 3–2636). It
-is **not** the 778-TAZ study system and matches none of the key table's systems
-(`TAZ_1270`, `TAZ_250`, `TAZ_33`, `TAZ_15`); the ~310 shared zone numbers are
-coincidental collisions. These matrices are therefore valid within the trips file's own
-zonation and cannot be aggregated to `SZ_NEW`/GS or fused with the cellular/hybrid chain
-until an `actTaz` → study-TAZ correspondence table is provided.
+**Zone systems.** `actTaz` uses the national 2636-zone system — not the study system
+(the ~310 shared zone numbers are coincidental collisions). `Input/TAZ_2636_Keys.xlsx`
+bridges it: `actTaz` (2636) → `TAZ_1250` (same ids as the study keys' `TAZ_1270`) →
+study `TAZ_NUMBER`. The keys cover 100% of trip ends; 95.9% of weighted trips have both
+ends in the northern study area. Because the last link is one-to-many (a 1250-zone holds
+up to 8 study TAZs), each trip's weight is allocated proportionally to child TAZ pairs by
+cellular outflow (origin side) / inflow (destination side) shares — `M_taz = Sₒᵀ M₁₂₅₀ S_d`
+— and `SZ_NEW`/GS aggregations follow exactly from the allocated TAZ matrices.
 
-**Outputs.** `Output/ths2017/matrix_day{1,2}_{CAR,TRANSIT,RAIL,OTHER,ALL}.csv` and
-`matrix_avg_{CAR,TRANSIT,RAIL,OTHER,ALL}.csv` (fifteen matrices over observed zones).
+**Study-system results** (averaged weekday, trips with both ends in the study area:
+2,068,158 after excluding 116,473 weighted with an end outside): CAR 1,283,589 /
+OTHER 645,111 / TRANSIT 134,349 / RAIL 5,109. Validation: the superzone probability
+pattern correlates at **r = 0.994** with the activities-based pipeline — the two
+independent extractions agree at distribution level, not just in totals.
+
+**Outputs.** `Output/ths2017/matrix_day{1,2}_{CAR,TRANSIT,RAIL,OTHER,ALL}.csv`,
+`matrix_avg_{CAR,TRANSIT,RAIL,OTHER,ALL}.csv` (trips-file zonation);
+`Output/ths2017/study_taz/matrix_avg_{CAR,TRANSIT,RAIL,OTHER,ALL}_taz.csv` (778×778,
+allocation-based) and `matrix_avg_ALL_sznew.csv` / `matrix_avg_ALL_gs.csv` (36×36 /
+25×25).
 
 ---
 
@@ -395,6 +406,7 @@ until an `actTaz` → study-TAZ correspondence table is provided.
 | `prob_gs_*.csv`, `hybrid_gs_*.csv`, `gs_correction_factors.csv` | 25×25 | Step 4 | GS-level survey/cellular/hybrid matrices, λ table, CV results, correction factors |
 | `hybrid_taz_prob_gs.csv`, `hybrid_taz_trips_gs.csv` | 778×778 | Step 4 | TAZ matrices calibrated through GS zoning |
 | `ths2017/matrix_day{1,2}_*.csv`, `ths2017/matrix_avg_*.csv` | observed zones (trips-file zonation) | Step 5 | Day × mode and day-averaged matrices from the THS 2017 trips file |
+| `ths2017/study_taz/matrix_avg_*` | 778×778 / 36×36 / 25×25 | Step 5 | Averaged trips-file matrices converted to the study TAZ / SZ_NEW / GS systems |
 | `figures/` | — | Steps 1b–3 | Scatter plots, CV curves, λ curves, R_AB heatmap |
 
 All matrices are indexed by origin zone (rows) × destination zone (columns). Probability
