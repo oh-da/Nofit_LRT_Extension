@@ -1,7 +1,7 @@
 *.csv filter=lfs diff=lfs merge=lfs -text
 Input/Matrices/AvgDayHourlyTrips*.csv filter=lfs diff=lfs merge=lfs -text
-
 # Output matrices are small enough for regular git storage (LFS uploads are blocked
 # from the remote Claude environment where these are generated)
 Output/*.csv -filter -diff -merge -text
 Output/**/*.csv -filter -diff -merge -text
+. filter=lfs diff=lfs merge=lfs -text
