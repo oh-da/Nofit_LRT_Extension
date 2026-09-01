@@ -382,6 +382,30 @@ independent extractions agree at distribution level, not just in totals.
 allocation-based) and `matrix_avg_ALL_sznew.csv` / `matrix_avg_ALL_gs.csv` (36×36 /
 25×25).
 
+## 6d. Step 6 — Hybrid pipeline on the THS 2017 trips file (`THS_2017_hybrid_pipeline.ipynb`)
+
+**The primary fusion products**, rebuilding the full chain with the trips file as the
+survey source (superseding the activities-based `Output/hybrid_*` set, which remains as
+the historical version). Methodology identical: EB shrinkage with cross-day validation,
+then correction factors on cellular structure. Survey side: study-area trips (13,476 /
+13,387 sampled; 2,068,158 average-weekday expanded), day-averaged for the final
+matrices, pooled counts for λ (dominant SZ/GS per 1250-zone for the counts).
+
+**Results.** Cross-day validation now finds a genuine interior optimum: **k\* = 5** at
+both superzone and GS levels (SZ JSD 0.0191 at k = 5 vs 0.0195 at k = 0, monotone rise
+beyond). Hybrids: λ = 0.962–0.997 (SZ), 0.706–0.999 (GS). Correction factors: SZ
+diagonal median 2.04 / off-diagonal median 0.18; GS 1.79 / 0.17 — off-diagonals sit
+higher than in the activities-based run because the survey side already carries cellular
+sub-structure from the allocation step. All trips totals preserved exactly (asserted).
+The 119-TAZ sub-matrices are regenerated from this source (ALL 110,641 trips inside the
+sub-area; hybrid trips 94,610; RAIL empty).
+
+**Outputs** (all under `Output/ths2017/study_taz/`): `hybrid_sz_prob/trips/lambda.csv`,
+`hybrid_gs_prob/trips/lambda.csv`, `hybrid_cv_results.csv`, `sz_correction_factors.csv`,
+`gs_correction_factors.csv`, `hybrid_taz_prob.csv` / `hybrid_taz_trips.csv`
+(SZ-calibrated, 778×778), `hybrid_taz_prob_gs.csv` / `hybrid_taz_trips_gs.csv`
+(GS-calibrated), and `submatrices/` (119×119: avg ALL + four modes + hybrid trips).
+
 ---
 
 ## 7. Output inventory (`Output/`)
@@ -407,6 +431,8 @@ allocation-based) and `matrix_avg_ALL_sznew.csv` / `matrix_avg_ALL_gs.csv` (36×
 | `hybrid_taz_prob_gs.csv`, `hybrid_taz_trips_gs.csv` | 778×778 | Step 4 | TAZ matrices calibrated through GS zoning |
 | `ths2017/matrix_day{1,2}_*.csv`, `ths2017/matrix_avg_*.csv` | observed zones (trips-file zonation) | Step 5 | Day × mode and day-averaged matrices from the THS 2017 trips file |
 | `ths2017/study_taz/matrix_avg_*` | 778×778 / 36×36 / 25×25 | Step 5 | Averaged trips-file matrices converted to the study TAZ / SZ_NEW / GS systems |
+| `ths2017/study_taz/hybrid_*`, `*_correction_factors.csv` | various | Step 6 | **Primary hybrid products** on the trips-file source (SZ/GS hybrids, TAZ matrices, trips) |
+| `ths2017/study_taz/submatrices/*` | 119×119 | Step 6 | Sub-area versions of the averaged mode matrices and hybrid trips |
 | `figures/` | — | Steps 1b–3 | Scatter plots, CV curves, λ curves, R_AB heatmap |
 
 All matrices are indexed by origin zone (rows) × destination zone (columns). Probability
