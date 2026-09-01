@@ -27,6 +27,8 @@ survey as *evidence*, and combine them at the spatial scale where each is reliab
 | `households_with_weights.csv` | Household expansion weights | 5,108 rows, one per `HHID` — exactly matching the activities file (no missing, no duplicates). Columns: `HHID`, `TAZ`, `SuperZone`, `wf` (original weight), `wf_new` (revised weight; mean ≈ 159, range 5–350). **`wf_new` is the weight used throughout.** |
 | `AvgDayHourlyTrips201819_1270_weekday_v1.csv` | Cellular OD trips, average weekday 2018–19, hourly (`h0`–`h23`), national 1270-zone system | Only the AM-peak hours `h6`, `h7`, `h8` are used |
 | `1270_02_09_2021_TAZ_North_keys.csv` | Zone correspondence table (windows-1255 encoded) | Maps the national 1270-zone system (`TAZ_1270`) to the 778 study TAZs (`TAZ_NUMBER`) and to 36 superzones (`SZ_NEW`). 400 national zones cover the study area; one national zone contains up to 8 study TAZs (mean ≈ 2) |
+| `../TAZ_GSnew.csv` (in `Input/`) | TAZ → GS zoning | 781 TAZs → 25 GS zones; covers every study TAZ including 105 |
+| `../trips_ths_2017.xlsx` (in `Input/`) | THS trips file: one row per activity per person per survey day | 146,394 rows, 16,401 persons (same panel as the activities file), `SurveyDay` 1/2; `placeno` orders activities per `PerID3`, `actTaz` locates them, `Dep_h` is the hour of departing the activity, `mode` is pre-aggregated (CAR/TRANSIT/RAIL/OTHER, `IRR` = first activity), `new_wf` carries the weight |
 
 **Data-version note.** The activities file currently in the repository contains more
 records than the file used by the original `THS_2018_MTX.ipynb` Colab run: identical
@@ -48,6 +50,19 @@ stay comparable across steps:
 4. **Leaving time** = `EndTime` if the previous state is captured by
    `mainActivity == 'Home'`, otherwise `StartTime` (timestamps parsed day-first).
 5. Keep trips with leaving hour in **[6, 9)**.
+6. **Model-area filter** (added after an audit of the trip definition): keep only trips
+   whose origin **and** destination have a real TAZ (non-null and ≠ 0), and drop trips
+   whose destination-activity mode is `Default` (code 99 — no reported travel).
+
+The audit behind rule 6: `Default`/99 turns out to be almost exclusively the survey
+day's *first* activity (20,511 of 20,585 records), which never forms a trip anyway —
+only 3 of ~29.6k extracted AM-peak trips had a Default arrival, so phantom trips from
+"stayed at home" records were negligible. Persons who never left home (10.9% of
+person-days, single all-day activity) already produce zero trips by construction. The
+material cleanup is **taz 0**: 998 trips (204k weighted, 3.4% of trips) touched an
+unlocatable zone and previously sat in the raw matrices (e.g. the 0→0 cell). Removing
+all of the above leaves the intra-superzone share of trips unchanged (75%), i.e. the
+survey–cellular diagonal divergence is genuine survey content, not an artifact.
 
 The original notebook also contains a "v2" timing rule (departure = previous activity's
 `EndTime` for all trips); the work below uses the original ("v1") rule throughout.
@@ -76,11 +91,13 @@ origin–destination pair instead of counting trips.
 
 | | Day 10 | Day 20 |
 |---|---|---|
-| Sampled trips (raw count) | 14,912 | 14,705 |
-| Expanded trips (Σ `wf_new`) | 2,296,819 | 2,264,158 |
-| Matrix shape (observed zones) | 660 × 707 | 651 × 696 |
+| Sampled trips (raw count) | 14,420 | 14,197 |
+| Expanded trips (Σ `wf_new`) | 2,193,422 | 2,163,320 |
+| Matrix shape (observed zones) | 656 × 706 | 650 × 695 |
 
-Average expansion ≈ 154 trips per sampled trip, consistent across days.
+Average expansion ≈ 152 trips per sampled trip, consistent across days. (Under the
+original pre-filter definition the totals were 14,912 / 14,705 sampled and
+2,296,819 / 2,264,158 expanded.)
 
 **Outputs.** `Output/matrix_10_weighted.csv`, `matrix_20_weighted.csv` (weighted OD
 counts) and `prob_matrix_10_weighted.csv`, `prob_matrix_20_weighted.csv`
@@ -135,11 +152,12 @@ four matrices per day sum exactly to the corresponding all-mode weighted matrix.
 
 | | CAR | TRANSIT | RAIL | OTHER |
 |---|---|---|---|---|
-| Day 10 | 1,298,688 (56.5%) | 149,539 (6.5%) | 14,678 (0.6%) | 833,913 (36.3%) |
-| Day 20 | 1,263,355 (55.8%) | 152,525 (6.7%) | 14,923 (0.7%) | 833,356 (36.8%) |
+| Day 10 | 1,234,371 (56.3%) | 143,215 (6.5%) | 3,990 (0.2%) | 811,847 (37.0%) |
+| Day 20 | 1,202,092 (55.6%) | 143,776 (6.6%) | 4,669 (0.2%) | 812,783 (37.6%) |
 
-RAIL rests on only 80 / 90 sampled trips per day (18×15 / 24×16 observed zones), so its
-spatial pattern is indicative only.
+The model-area filter hits RAIL hardest: expanded rail trips drop from ≈ 14.7k to ≈ 4k
+per day — most surveyed rail trips have an end outside the model area — leaving only
+11×14 / 17×15 observed zones. The RAIL matrices are indicative only.
 
 **Outputs.** `Output/matrix_{10,20}_weighted_{CAR,TRANSIT,RAIL,OTHER}.csv` (eight
 matrices, weighted OD totals over observed zones).
@@ -152,11 +170,12 @@ destination inside the list. Every sub-matrix is reindexed to the full 119-zone 
 the given order (unobserved zones become zero rows/columns), so all ten files share the
 identical 119×119 layout and the four mode files per day sum to that day's all-mode file.
 
-**Results.** ≈ 6% of all expanded AM-peak trips have both ends inside the sub-area
-(142,532 on Day 10 / 139,007 on Day 20). By mode: CAR ≈ 5%, TRANSIT ≈ 9%, OTHER ≈ 7.5%;
-RAIL is empty on Day 10 and nearly empty on Day 20 (169 expanded trips) — surveyed rail
-trips almost never have both ends inside the sub-area. 18 of the 119 zones never appear
-as an AM-peak survey origin (12 never as a destination).
+**Results.** ≈ 6.5% of expanded AM-peak trips have both ends inside the sub-area
+(142,532 on Day 10 / 139,007 on Day 20 — unchanged by the model-area filter, since the
+119 listed zones exclude taz 0). By mode: CAR ≈ 5%, TRANSIT ≈ 9.5%, OTHER ≈ 7.5%; RAIL
+is empty on Day 10 and nearly empty on Day 20 (169 expanded trips). 16 of the 119 zones
+never appear as an AM-peak survey origin across the two days pooled (15 never as a
+destination).
 
 **Outputs.** `Output/submatrices/` — same ten filenames as the parent matrices,
 119×119 each.
@@ -174,16 +193,20 @@ attributed to the home zone regardless of where they occur). Denominator: expand
 persons home in the zone at 3:00 (`wf_new` per person). Superzones via the keys table's
 `SZ_NEW`.
 
-**Results.** Overall rate: **0.875 (Day 10) / 0.869 (Day 20) → 0.872 AM-peak trips per
-person** over ≈ 2.60M expanded persons home at 3:00. Superzone rates span 0.63 (SZ 4)
+**Results.** Overall rate: **0.837 (Day 10) / 0.833 (Day 20) → 0.835 AM-peak trips per
+person** over ≈ 2.60M expanded persons home at 3:00 (model-area trips only; under the
+pre-filter definition the rate was 0.872). Superzone rates span 0.63 (SZ 4)
 to 1.25 (SZ 25); 35 superzones and 520 home TAZs are covered (93 TAZs have < 20 sampled
 person-days — flagged, indicative only). This diary-based home definition agrees with
 the household register (`households_with_weights.csv` TAZ) for ~95% of households, with
 disagreements almost all in adjacent zones.
 
 **Outputs.** `Output/trip_generation_taz.csv`, `trip_generation_sz.csv` (per zone and
-day: sampled and weighted persons, weighted trips, rates, and the two-day average), rate
-figure under `Output/figures/`.
+day: sampled and weighted persons, weighted trips, rates, and the two-day average);
+`trip_generation_summary.csv` — a compact one-row-per-TAZ table with `TAZ`, `SuperZone`,
+`trips_per_person` (two-day average) and `population` (`wf_new` × observed persons home
+at 3:00, averaged over the two days; total ≈ 2.59M — SuperZone is blank for the few home
+zones outside the keys-table mapping); rate figure under `Output/figures/`.
 
 ## 5. Step 2 — Superzone hybrid via empirical-Bayes shrinkage (`THS_2018_MTX_hybrid.ipynb`)
 
@@ -227,7 +250,8 @@ disagree.
 `hybrid_sz_prob_k100.csv` (sensitivity variant, λ_A = 0.66–0.95), `hybrid_sz_trips.csv`
 (rows scaled to average-weekday expanded AM-peak departures, ≈ 2.28M trips),
 `hybrid_lambda.csv` (n_A and λ per origin), `hybrid_cv_results.csv`, CV-curve and
-λ-curve figures.
+λ-curve figures. Hybrid trips total ≈ 2.15M average-weekday AM-peak trips (superzone-
+mapped model-area trips).
 
 ## 6. Step 3 — TAZ-level matrix via superzone correction factors (`THS_2018_MTX_hybrid_taz.ipynb`)
 
@@ -269,9 +293,9 @@ substantial cellular floor on survey-unobserved OD pairs.
 vector built on the same principle (survey sets the scale, cellular the structure):
 each superzone's average-weekday expanded survey departure total is split among its
 member TAZs by cellular outflow shares, then spread over destinations by the hybrid
-probabilities. Total ≈ 2.15M average-weekday AM-peak trips — lower than the superzone
-trips file (≈ 2.28M) because only trips with both ends inside the 778-TAZ system are
-covered. Superzone-level origin totals match the survey expanded departures exactly
+probabilities. Total ≈ 2.15M average-weekday AM-peak trips (matching the superzone
+trips file — under the model-area trip definition both cover the same trips).
+Superzone-level origin totals match the survey expanded departures exactly
 (asserted in the notebook); the within-superzone split inherits the cellular replication
 caveat. A 119×119 sub-area extraction (same zone list, order and layout as
 `Output/submatrices/`) captures 121,179 trips (5.6% of the total).
@@ -281,6 +305,59 @@ wherever it speaks), `hybrid_taz_prob_k100.csv` (safer where coverage of rare OD
 matters), `hybrid_taz_trips.csv` (778×778 trips), `submatrices/hybrid_taz_trips.csv`
 (119×119), `sz_correction_factors.csv` / `sz_correction_factors_k100.csv` (36×36 R
 tables), `hybrid_taz_cv_results.csv`, CV-curve and R-heatmap figures.
+
+## 6b. Step 4 — GS zoning pipeline (`THS_2018_MTX_GS.ipynb`)
+
+**Reasoning.** `Input/TAZ_GSnew.csv` introduces a second aggregation geography — **GS**
+(25 zones, covering every study TAZ, including TAZ 105 which the keys table lacks an
+`SZ_NEW` for). This step recreates the superzone-level products on GS with identical
+methodology (only the TAZ→GS mapping replaces TAZ→`SZ_NEW`).
+
+**Results.** GS-level expanded trips: 2,193,422 / 2,163,320 (equal to the full matrix
+totals — the GS mapping covers every model-area TAZ). Weighted survey vs cellular at GS
+level: r = 0.840 / 0.838 (Day 10/20).
+Cross-day validation of the shrinkage constant finds a genuine but tiny interior
+optimum, **k\* = 1** (JSD 0.0248 vs 0.0252 at k = 0; monotone rise beyond), so the GS
+hybrid is again survey-dominant (λ = 0.909–0.9999; the smallest GS origin has only 10
+pooled observations). Hybrid trips total ≈ 2.18M average-weekday AM-peak trips. GS
+correction factors applied to cellular TAZ cells: diagonal R median 1.89 (max 5.7),
+off-diagonal median 0.09, 48% of off-diagonal GS pairs have zero pooled survey
+observations. Hybrid GS trips total ≈ 2.18M (slightly above the superzone-based 2.15M
+because GS also maps TAZ 105). TAZ-level GS-based trips match GS survey departure
+totals exactly (asserted).
+
+**Outputs.** `Output/prob_gs_{10,20}_weighted.csv`, `prob_gs_cellular.csv` (25×25);
+`hybrid_gs_prob.csv` (k\* = 1), `hybrid_gs_prob_k100.csv`, `hybrid_gs_trips.csv`,
+`hybrid_gs_lambda.csv`, `hybrid_gs_cv_results.csv`; `gs_correction_factors.csv` (25×25);
+`hybrid_taz_prob_gs.csv`, `hybrid_taz_trips_gs.csv` (778×778 TAZ matrices calibrated
+through GS instead of superzones).
+
+## 6c. Step 5 — Matrices from the THS 2017 trips file (`THS_2017_trips_matrices.ipynb`)
+
+**Method.** An independent trip extraction from `Input/trips_ths_2017.xlsx`: within each
+person (`PerID3`) and survey day, activities ordered by `placeno` form trips from the
+previous activity's `actTaz` to the current one's; the trip's departure hour is the
+*origin* row's `Dep_h` (kept for `Dep_h` ∈ {6,7,8}); its mode is the *destination* row's
+pre-aggregated `mode`; each trip contributes its `new_wf`. `IRR` marks first activities
+only and never becomes a trip mode (asserted). No `actTaz` is 0; zones beyond the
+778-zone system keep their real TAZ, so out-of-region trip ends are retained.
+
+**Results** (expanded AM-peak trips):
+
+| | CAR | TRANSIT | RAIL | OTHER | All |
+|---|---|---|---|---|---|
+| Day 1 | 1,380,188 (62.8%) | 142,924 (6.5%) | 17,219 (0.8%) | 656,482 (29.9%) | 2,196,813 |
+| Day 2 | 1,343,321 (61.8%) | 140,585 (6.5%) | 19,210 (0.9%) | 669,334 (30.8%) | 2,172,451 |
+
+All-mode totals agree with the activities-based matrices within 0.2–0.4%
+(2,196,813 vs 2,193,422 on day 1/10), a strong cross-validation of the two extractions.
+Mode composition differs: this file assigns more trips to CAR (≈ 62% vs 56%) and fewer
+to OTHER, and RAIL keeps out-of-region destination zones (17–19k expanded vs 4k under
+the model-area-restricted activities extraction).
+
+**Outputs.** `Output/ths2017/matrix_day{1,2}_{CAR,TRANSIT,RAIL,OTHER,ALL}.csv` (ten
+matrices over observed zones; the four mode matrices per day sum exactly to that day's
+ALL matrix).
 
 ---
 
@@ -293,6 +370,7 @@ tables), `hybrid_taz_cv_results.csv`, CV-curve and R-heatmap figures.
 | `matrix_{10,20}_weighted_{CAR,TRANSIT,RAIL,OTHER}.csv` | observed zones | Step 1c | Weighted OD totals by aggregated mode |
 | `submatrices/*.csv` | 119×119 | Step 1d | Sub-area versions of the ten weighted matrices |
 | `trip_generation_taz.csv`, `trip_generation_sz.csv` | 520 / 35 rows | Step 1e | AM-peak trips per person by home zone (Home at 3:00 AM) |
+| `trip_generation_summary.csv` | 520 rows | Step 1e | Compact table: TAZ, SuperZone, trips per person, expanded population |
 | `prob_matrix_cellular.csv` | 778×778 | Step 1b | Cellular AM-peak probabilities (validated reconstruction) |
 | `prob_sz_cellular.csv`, `prob_sz_10_weighted.csv`, `prob_sz_20_weighted.csv` | 36×36 | Step 1b | Superzone probability matrices |
 | `hybrid_sz_prob.csv`, `hybrid_sz_prob_k100.csv` | 36×36 | Step 2 | Superzone hybrid (k\* = 2 / k = 100) |
@@ -302,6 +380,9 @@ tables), `hybrid_taz_cv_results.csv`, CV-curve and R-heatmap figures.
 | `hybrid_taz_trips.csv`, `submatrices/hybrid_taz_trips.csv` | 778×778 / 119×119 | Step 3 | Hybrid as average-weekday AM-peak trips, full area and sub-area |
 | `sz_correction_factors.csv`, `sz_correction_factors_k100.csv` | 36×36 | Step 3 | R_AB tables |
 | `hybrid_taz_cv_results.csv` | k-grid | Step 3 | Route-A validation table |
+| `prob_gs_*.csv`, `hybrid_gs_*.csv`, `gs_correction_factors.csv` | 25×25 | Step 4 | GS-level survey/cellular/hybrid matrices, λ table, CV results, correction factors |
+| `hybrid_taz_prob_gs.csv`, `hybrid_taz_trips_gs.csv` | 778×778 | Step 4 | TAZ matrices calibrated through GS zoning |
+| `ths2017/matrix_day{1,2}_*.csv` | observed zones | Step 5 | Day × mode matrices from the THS 2017 trips file |
 | `figures/` | — | Steps 1b–3 | Scatter plots, CV curves, λ curves, R_AB heatmap |
 
 All matrices are indexed by origin zone (rows) × destination zone (columns). Probability
