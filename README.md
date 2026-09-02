@@ -41,13 +41,19 @@ flowchart LR
 | `THS_2018_MTX_hybrid.ipynb` | Superzone hybrid via empirical-Bayes shrinkage, with the shrinkage constant chosen by cross-day validation |
 | `THS_2018_MTX_hybrid_taz.ipynb` | Final 778-TAZ matrix: superzone correction factors R_AB applied to cellular OD cells, row-normalized |
 | `THS_2018_MTX_GS.ipynb` | The same pipeline on the GS zoning (25 zones, `Input/TAZ_GSnew.csv`): GS matrices, GS hybrid, and GS-calibrated TAZ matrices |
-| `THS_2017_trips_matrices.ipynb` | Independent day × mode matrices from `Input/trips_ths_2017.xlsx` (placeno-ordered activities, Dep_h 6–8, `new_wf` weights) |
+| `THS_2017_trips_matrices.ipynb` | Independent day × mode + day-averaged matrices from `Input/trips_ths_2017.xlsx` (placeno-ordered activities, Dep_h 6–8, `new_wf` weights), converted to the study zone systems |
+| `THS_2017_hybrid_pipeline.ipynb` | **Primary fusion products** on the trips-file source: SZ/GS hybrids (k* = 5 by cross-day CV), correction-factor TAZ matrices, trips, and 119-TAZ submatrices |
+| `THS_2017_trip_generation.ipynb` | Per-person AM-peak generation rates on the trips-file source (overall ≈ 0.83), by 2636-zone / SZ / GS |
+| `BusRavKav_matrix.ipynb` | RavKav bus data: stop→TAZ spatial tagging, weekday-3 / 6–9 AM filter, average-Tuesday OD matrix and per-TAZ boardings/alightings |
+| `BusOnBoard_matrix.ipynb` | OnBoard survey probability matrix + combined bus matrix (RavKav volumes × OnBoard destination pattern) |
 
 ## Key deliverables (`Output/`)
 
-- `hybrid_taz_prob.csv` — final TAZ-level OD probability matrix (778×778)
-- `hybrid_taz_trips.csv` — the hybrid as average-weekday AM-peak trips
-  (778×778; 119×119 sub-area version under `submatrices/`)
+- `ths2017/study_taz/hybrid_taz_prob.csv` / `hybrid_taz_trips.csv` — **primary**
+  TAZ-level OD hybrid (778×778, trips-file source; 119×119 sub-area versions under
+  `ths2017/study_taz/submatrices/`)
+- `hybrid_taz_prob.csv` / `hybrid_taz_trips.csv` — activities-based versions
+  (historical)
 - `hybrid_taz_prob_k100.csv` — variant with a stronger cellular floor on
   survey-unobserved OD pairs
 - `hybrid_sz_prob.csv` / `hybrid_sz_trips.csv` — superzone hybrid (probabilities /

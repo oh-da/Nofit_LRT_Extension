@@ -355,9 +355,131 @@ Mode composition differs: this file assigns more trips to CAR (≈ 62% vs 56%) a
 to OTHER, and RAIL keeps out-of-region destination zones (17–19k expanded vs 4k under
 the model-area-restricted activities extraction).
 
-**Outputs.** `Output/ths2017/matrix_day{1,2}_{CAR,TRANSIT,RAIL,OTHER,ALL}.csv` (ten
-matrices over observed zones; the four mode matrices per day sum exactly to that day's
-ALL matrix).
+**Day-averaged matrices.** The two survey days are different by activity, so the
+representative weekday set is the cell-wise average `(day1 + day2) / 2` over the union
+of observed zones: `matrix_avg_{CAR,TRANSIT,RAIL,OTHER,ALL}.csv` — 2,184,632 average-
+weekday AM-peak trips (CAR 1,361,754 / OTHER 662,908 / TRANSIT 141,755 / RAIL 18,214),
+with the mode matrices summing exactly to ALL.
+
+**Zone systems.** `actTaz` uses the national 2636-zone system — not the study system
+(the ~310 shared zone numbers are coincidental collisions). `Input/TAZ_2636_Keys.xlsx`
+bridges it: `actTaz` (2636) → `TAZ_1250` (same ids as the study keys' `TAZ_1270`) →
+study `TAZ_NUMBER`. The keys cover 100% of trip ends; 95.9% of weighted trips have both
+ends in the northern study area. Because the last link is one-to-many (a 1250-zone holds
+up to 8 study TAZs), each trip's weight is allocated proportionally to child TAZ pairs by
+cellular outflow (origin side) / inflow (destination side) shares — `M_taz = Sₒᵀ M₁₂₅₀ S_d`
+— and `SZ_NEW`/GS aggregations follow exactly from the allocated TAZ matrices.
+
+**Study-system results** (averaged weekday, trips with both ends in the study area:
+2,068,158 after excluding 116,473 weighted with an end outside): CAR 1,283,589 /
+OTHER 645,111 / TRANSIT 134,349 / RAIL 5,109. Validation: the superzone probability
+pattern correlates at **r = 0.994** with the activities-based pipeline — the two
+independent extractions agree at distribution level, not just in totals.
+
+**Outputs.** `Output/ths2017/matrix_day{1,2}_{CAR,TRANSIT,RAIL,OTHER,ALL}.csv`,
+`matrix_avg_{CAR,TRANSIT,RAIL,OTHER,ALL}.csv` (trips-file zonation);
+`Output/ths2017/study_taz/matrix_avg_{CAR,TRANSIT,RAIL,OTHER,ALL}_taz.csv` (778×778,
+allocation-based) and `matrix_avg_ALL_sznew.csv` / `matrix_avg_ALL_gs.csv` (36×36 /
+25×25).
+
+## 6d. Step 6 — Hybrid pipeline on the THS 2017 trips file (`THS_2017_hybrid_pipeline.ipynb`)
+
+**The primary fusion products**, rebuilding the full chain with the trips file as the
+survey source (superseding the activities-based `Output/hybrid_*` set, which remains as
+the historical version). Methodology identical: EB shrinkage with cross-day validation,
+then correction factors on cellular structure. Survey side: study-area trips (13,476 /
+13,387 sampled; 2,068,158 average-weekday expanded), day-averaged for the final
+matrices, pooled counts for λ (dominant SZ/GS per 1250-zone for the counts).
+
+**Results.** Cross-day validation now finds a genuine interior optimum: **k\* = 5** at
+both superzone and GS levels (SZ JSD 0.0191 at k = 5 vs 0.0195 at k = 0, monotone rise
+beyond). Hybrids: λ = 0.962–0.997 (SZ), 0.706–0.999 (GS). Correction factors: SZ
+diagonal median 2.04 / off-diagonal median 0.18; GS 1.79 / 0.17 — off-diagonals sit
+higher than in the activities-based run because the survey side already carries cellular
+sub-structure from the allocation step. All trips totals preserved exactly (asserted).
+The 119-TAZ sub-matrices are regenerated from this source (ALL 110,641 trips inside the
+sub-area; hybrid trips 94,610; RAIL empty).
+
+**Outputs** (all under `Output/ths2017/study_taz/`): `hybrid_sz_prob/trips/lambda.csv`,
+`hybrid_gs_prob/trips/lambda.csv`, `hybrid_cv_results.csv`, `sz_correction_factors.csv`,
+`gs_correction_factors.csv`, `hybrid_taz_prob.csv` / `hybrid_taz_trips.csv`
+(SZ-calibrated, 778×778), `hybrid_taz_prob_gs.csv` / `hybrid_taz_trips_gs.csv`
+(GS-calibrated), and `submatrices/` (119×119: avg ALL + four modes + hybrid trips).
+
+## 6e. Step 7 — Trip generation rates on the trips file (`THS_2017_trip_generation.ipynb`)
+
+**Method.** Mirrors step 1e on the new source: home = the 3:00 AM location (the
+`placeno = 1` row, always starting at 03:00) when `mainActivity = 1` (Home; 96.9% of
+person-days, rest excluded from both sides), numerator = the person-day's AM-peak trips
+(validated extraction) × `new_wf`, denominator = expanded persons home at 3:00. Rates at
+the native 2636-zone resolution and, via the dominant study zone of the home 1250-zone,
+at `SZ_NEW` and GS levels. Unlike the activities-based rates, **all** AM-peak trips
+count (every trip in this file has a real TAZ), so this is the total generation rate
+including trips leaving the study area.
+
+**Results.** Overall **0.831 (Day 1) / 0.827 (Day 2) → 0.829 AM-peak trips per person**
+over ≈ 2.60M expanded persons — versus 0.835 on the activities-based source, and with an
+almost identical superzone ranking (SZ 25 and 39 highest at ≈ 1.18/1.12, SZ 19 and 4
+lowest at ≈ 0.60/0.63). 478 home 2636-zones covered (89 with < 20 sampled person-days,
+flagged); 209 person-days have homes outside the northern study area (2636-zone table
+only).
+
+**Outputs.** `Output/ths2017/trip_generation_taz2636.csv`, `trip_generation_sz.csv`,
+`trip_generation_gs.csv`, `trip_generation_summary.csv` (TAZ_2636, TAZ_1250, SZ, GS,
+rate, population — total 2,601,228), figure `ths2017_trip_generation.png`.
+
+## 6f. Step 8 — Bus RavKav AM-peak matrix by TAZ (`BusRavKav_matrix.ipynb`)
+
+**Inputs.** `Input/TAZ_North/TAZ_North.shp` (781 TAZ polygons, Israeli TM CRS,
+`TAZ_NUMBER` field) and four RavKav bus-trip files (`Input/BusRavKav/`, Tuesdays
+2022-05-03/17/24/31, ~2.5–2.9M records each; national coverage). Each record is one
+passenger boarding with journey `orig`/`dest` stops and physical `board`/`alight` stops
+(WGS84 lat/lon), `weekday`, a passenger count (`total_boardings`), and the journey
+timestamp embedded in `passanger_trip_id` (the `date` column has no time).
+
+**Method.** 27,186 unique stops spatially joined to the TAZ polygons (9,924 = 36.5%
+fall inside the northern study area). The raw files carry duplicate records (≈ 7% of
+rows, including exact repeats of a leg), so a **journey** is one `passanger_trip_id`
+(first leg by `bus_trip_id` carries `orig`/`dest` and the start hour) and a **leg** is
+one (`passanger_trip_id`, `bus_trip_id`) pair. Filters: `weekday = 3` and
+**`bus_trip_hour`** ∈ {6,7,8} (the `date` column has no time). Weighted by
+`total_boardings`, averaged over the four Tuesdays: an OD matrix from journey
+`orig`→`dest` stops (each journey once, both ends inside `TAZ_North`), and per-TAZ
+boarding / alighting totals from each leg's physical `board`/`alight` stops.
+
+**Results.** ≈ 760–890k AM-peak bus passengers nationally per Tuesday, of which ≈ 17%
+(143,402 on the average day) have both journey ends inside the northern study area —
+strikingly close to the THS TRANSIT estimate of 134,349 in-study AM-peak trips.
+Per-TAZ totals: 157,264 average boardings / 147,632 alightings across 730 TAZs; the
+largest generator is TAZ 1219 (≈ 6,500 boardings, ≈ 8,900 alightings — a major
+terminal). A fifth date file (`Input/trips_table_2022-05-10.csv`) sits outside the
+`BusRavKav` directory and is excluded per the four-file instruction.
+
+**Outputs.** `Output/bus/bus_stops_taz.csv` (stop → TAZ tags),
+`bus_od_taz_avg.csv` (722×711 average-Tuesday OD passengers),
+`bus_boardings_alightings_taz.csv` (per-TAZ averages).
+
+## 6g. Step 9 — Bus OD combined with OnBoard survey probabilities (`BusOnBoard_matrix.ipynb`)
+
+**Input.** `Input/6_9_BusProbability_ByTAZ.xlsx` (OnBoard survey): P(alight at `toTAZ` |
+board at `fromTAZ`) for 6:00–9:00, 599 origins, rows summing exactly to 1 including a
+`toTAZ = NaN` unknown-alighting share (median 7.4% where present).
+
+**Method.** (1) Probability matrix: NaN destinations dropped, rows renormalized
+(unknown alightings assumed to distribute like known ones). (2) "New" matrix: each
+origin's RavKav volume (row sum of `bus_od_taz_avg.csv`) distributed over destinations
+by the OnBoard probabilities — RavKav sets the volumes, OnBoard the destination
+pattern. Origins without OnBoard coverage (5.5% of volume) keep their RavKav row.
+
+**Results.** Total preserved at 143,402 average-Tuesday passengers; 94.5% of the volume
+redistributed by OnBoard probabilities. The two sources genuinely disagree on fine-grain
+destinations (r ≈ 0.13 at TAZ level even for high-volume origins) while agreeing
+regionally (r ≈ 0.69 at superzone level) — RavKav's destinations are algorithmically
+inferred alightings, OnBoard's are passenger-reported, which is the rationale for the
+substitution.
+
+**Outputs.** `Output/bus/bus_probability_matrix.csv` (594×548, row-stochastic),
+`bus_od_taz_new.csv` (722×728, combined matrix).
 
 ---
 
@@ -382,7 +504,13 @@ ALL matrix).
 | `hybrid_taz_cv_results.csv` | k-grid | Step 3 | Route-A validation table |
 | `prob_gs_*.csv`, `hybrid_gs_*.csv`, `gs_correction_factors.csv` | 25×25 | Step 4 | GS-level survey/cellular/hybrid matrices, λ table, CV results, correction factors |
 | `hybrid_taz_prob_gs.csv`, `hybrid_taz_trips_gs.csv` | 778×778 | Step 4 | TAZ matrices calibrated through GS zoning |
-| `ths2017/matrix_day{1,2}_*.csv` | observed zones | Step 5 | Day × mode matrices from the THS 2017 trips file |
+| `ths2017/matrix_day{1,2}_*.csv`, `ths2017/matrix_avg_*.csv` | observed zones (trips-file zonation) | Step 5 | Day × mode and day-averaged matrices from the THS 2017 trips file |
+| `ths2017/study_taz/matrix_avg_*` | 778×778 / 36×36 / 25×25 | Step 5 | Averaged trips-file matrices converted to the study TAZ / SZ_NEW / GS systems |
+| `ths2017/study_taz/hybrid_*`, `*_correction_factors.csv` | various | Step 6 | **Primary hybrid products** on the trips-file source (SZ/GS hybrids, TAZ matrices, trips) |
+| `ths2017/study_taz/submatrices/*` | 119×119 | Step 6 | Sub-area versions of the averaged mode matrices and hybrid trips |
+| `ths2017/trip_generation_*.csv` | 478 / 35 / 25 rows | Step 7 | Per-person AM-peak generation rates on the trips-file source |
+| `bus/bus_stops_taz.csv`, `bus/bus_od_taz_avg.csv`, `bus/bus_boardings_alightings_taz.csv` | 27k stops / 722×711 / 730 rows | Step 8 | RavKav stop tags, average-Tuesday AM-peak bus OD, per-TAZ boardings/alightings |
+| `bus/bus_probability_matrix.csv`, `bus/bus_od_taz_new.csv` | 594×548 / 722×728 | Step 9 | OnBoard destination probabilities; RavKav volumes × OnBoard pattern |
 | `figures/` | — | Steps 1b–3 | Scatter plots, CV curves, λ curves, R_AB heatmap |
 
 All matrices are indexed by origin zone (rows) × destination zone (columns). Probability
