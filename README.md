@@ -50,7 +50,7 @@ flowchart LR
 ## Key deliverables (`Output/`)
 
 - `ths2017/study_taz/hybrid_taz_prob.csv` / `hybrid_taz_trips.csv` — **primary**
-  TAZ-level OD hybrid (778×778, trips-file source; 119×119 sub-area versions under
+  TAZ-level OD hybrid (778×778, trips-file source; 28-area sub-matrices under
   `ths2017/study_taz/submatrices/`)
 - `hybrid_taz_prob.csv` / `hybrid_taz_trips.csv` — activities-based versions
   (historical)
