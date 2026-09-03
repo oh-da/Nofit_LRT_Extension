@@ -488,7 +488,16 @@ inferred alightings, OnBoard's are passenger-reported, which is the rationale fo
 substitution.
 
 **Outputs.** `Output/bus/bus_probability_matrix.csv` (594×548, row-stochastic),
-`bus_od_taz_new.csv` (722×728, combined matrix).
+`bus_od_taz_new.csv` (722×728, combined matrix), `bus_od_area_new.csv` (28×28 — the
+combined matrix restricted to the 205 sub-area TAZs and aggregated to the named areas).
+
+**Comparison with THS TRANSIT at area level.** Sub-area totals: RavKav×OnBoard 41,351
+vs THS TRANSIT 26,247 average-weekday passengers (ratio 1.58). Cell-level correlation
+r = 0.76 on counts; most areas sit at a fairly uniform ratio of ≈ 1.5–1.8 (consistent
+with survey under-coverage of non-resident riders and the 2017-survey vs 2022-ticketing
+gap), with hub/employment areas as outliers — Hamifrats 18×, Lower City 3.9×, Kiryat
+Ata Center 3.9× — where ticketing sees many journeys the household survey attributes
+elsewhere. Figure: `Output/figures/bus_vs_ths_transit_area.png`.
 
 ---
 
