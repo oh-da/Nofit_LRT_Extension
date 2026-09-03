@@ -397,14 +397,23 @@ beyond). Hybrids: λ = 0.962–0.997 (SZ), 0.706–0.999 (GS). Correction factor
 diagonal median 2.04 / off-diagonal median 0.18; GS 1.79 / 0.17 — off-diagonals sit
 higher than in the activities-based run because the survey side already carries cellular
 sub-structure from the allocation step. All trips totals preserved exactly (asserted).
-The 119-TAZ sub-matrices are regenerated from this source (ALL 110,641 trips inside the
-sub-area; hybrid trips 94,610; RAIL empty).
+
+**Sub-matrices (aggregated areas).** `Input/Submatrix_tazs.xlsx` defines the sub-area:
+205 TAZs grouped into 28 named aggregated areas (`AggAreaCode`/`AggAreaName`) with an
+`IsLRT_Corridor` flag — its 119 corridor TAZs are identical to the earlier sub-matrix
+list, extended by 86 non-corridor TAZs (2 areas mix both). Each matrix (averaged
+ALL + four modes + hybrid trips) is restricted to trips with both ends among the listed
+TAZs and aggregated to the 28 areas: ALL 276,977 avg-weekday trips in the sub-area
+(110,641 with both ends in the LRT corridor — matching the previous 119-TAZ submatrix
+exactly); hybrid trips 273,320 (94,610 in-corridor); RAIL 131.
 
 **Outputs** (all under `Output/ths2017/study_taz/`): `hybrid_sz_prob/trips/lambda.csv`,
 `hybrid_gs_prob/trips/lambda.csv`, `hybrid_cv_results.csv`, `sz_correction_factors.csv`,
 `gs_correction_factors.csv`, `hybrid_taz_prob.csv` / `hybrid_taz_trips.csv`
 (SZ-calibrated, 778×778), `hybrid_taz_prob_gs.csv` / `hybrid_taz_trips_gs.csv`
-(GS-calibrated), and `submatrices/` (119×119: avg ALL + four modes + hybrid trips).
+(GS-calibrated), and `submatrices/` (28×28 aggregated-area matrices: avg ALL + four
+modes + hybrid trips, plus `area_legend.csv` with names, TAZ counts, and corridor
+flags).
 
 ## 6e. Step 7 — Trip generation rates on the trips file (`THS_2017_trip_generation.ipynb`)
 
@@ -507,7 +516,7 @@ substitution.
 | `ths2017/matrix_day{1,2}_*.csv`, `ths2017/matrix_avg_*.csv` | observed zones (trips-file zonation) | Step 5 | Day × mode and day-averaged matrices from the THS 2017 trips file |
 | `ths2017/study_taz/matrix_avg_*` | 778×778 / 36×36 / 25×25 | Step 5 | Averaged trips-file matrices converted to the study TAZ / SZ_NEW / GS systems |
 | `ths2017/study_taz/hybrid_*`, `*_correction_factors.csv` | various | Step 6 | **Primary hybrid products** on the trips-file source (SZ/GS hybrids, TAZ matrices, trips) |
-| `ths2017/study_taz/submatrices/*` | 119×119 | Step 6 | Sub-area versions of the averaged mode matrices and hybrid trips |
+| `ths2017/study_taz/submatrices/*` | 28×28 areas | Step 6 | Sub-area matrices aggregated to the 28 named areas (205 TAZs, LRT-corridor flags in `area_legend.csv`) |
 | `ths2017/trip_generation_*.csv` | 478 / 35 / 25 rows | Step 7 | Per-person AM-peak generation rates on the trips-file source |
 | `bus/bus_stops_taz.csv`, `bus/bus_od_taz_avg.csv`, `bus/bus_boardings_alightings_taz.csv` | 27k stops / 722×711 / 730 rows | Step 8 | RavKav stop tags, average-Tuesday AM-peak bus OD, per-TAZ boardings/alightings |
 | `bus/bus_probability_matrix.csv`, `bus/bus_od_taz_new.csv` | 594×548 / 722×728 | Step 9 | OnBoard destination probabilities; RavKav volumes × OnBoard pattern |

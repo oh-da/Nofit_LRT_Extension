@@ -1,0 +1,29 @@
+AggAreaCode,AggAreaName,n_TAZs,corridor_TAZs,IsLRT_Corridor
+1,TiratCarmel,13,13,1
+2,Matam,3,3,1
+3,Neot Peres,5,5,1
+4,Neve David,5,5,1
+5,Ein Hayam,2,2,1
+6,Bat Galim,5,5,1
+7,Kiryat Eliezer,6,6,1
+8,Hamoshava,3,3,1
+9,Lower City,6,6,1
+10,Hadar Carmel,7,7,1
+11,Namal,6,6,1
+12,Neve Yosef,4,4,1
+13,Hamifrats,7,7,1
+14,Hutzot,4,4,1
+15,Kiryat Nahum,3,2,-1
+16,Kiryat Ata Center,7,7,1
+17,Kiryat Bialik South,2,2,1
+18,Kiryat Ata East,9,8,-1
+19,Shefaram,5,5,1
+20,Adi,1,1,1
+21,Alon Hagalil,2,2,1
+22,Tzipori,1,1,1
+23,Nazareth Area,15,15,1
+24,Kiryat Yam,20,0,0
+25,Kiryat Motzkin-Bialik,38,0,0
+26,Haifa Airport,5,0,0
+27,Nesher Lower,12,0,0
+28,Kiryat Ata South,9,0,0
