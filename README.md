@@ -6,7 +6,9 @@ Survey with a cellular-derived OD matrix: cellular acts as the population-scale 
 the survey as evidence, combined at the spatial scale where each is reliable.
 
 See **[METHODOLOGY.md](METHODOLOGY.md)** for the full reasoning, methodology, inputs
-and outputs of every step.
+and outputs of every step, and **[TRANSIT_DEMAND_PLAN.md](TRANSIT_DEMAND_PLAN.md)**
+for the agreed plan to complete the corridor transit demand once the train matrix
+arrives.
 
 ## Pipeline
 
