@@ -499,6 +499,23 @@ gap), with hub/employment areas as outliers — Hamifrats 18×, Lower City 3.9×
 Ata Center 3.9× — where ticketing sees many journeys the household survey attributes
 elsewhere. Figure: `Output/figures/bus_vs_ths_transit_area.png`.
 
+## 6h. Step 10 — Train matrix, complete transit, adjusted all-mode (`Transit_complete_matrix.ipynb`)
+
+Executes `TRANSIT_DEMAND_PLAN.md`. **Train**: `Input/Matrices/Train_mtx_table.csv`
+(2019 smartcards, windows-1255; station-to-station by station TAZ, hourly columns) —
+hours 6+7+8 summed, the `TAZ 9999` "rest of stations" rows ignored (13,624 out-of-area
+trips): 5,535 avg-day trips between the 19 named stations, of which 962 have both ends
+in the sub-area. **Complete transit** = filtered bus (41,272) + train (962) = 42,234
+passengers at the 26 areas. **Adjusted all-mode**: `ALL_adjusted = (survey ALL −
+TRANSIT − RAIL) + measured transit` = 286,384 trips; transit share rises from the
+survey's 9.8% to **14.7%** (corridor areas: **16.1%**). Vintage mix documented (base
+2018, bus 2022, train 2019). Mode-share table per area in
+`Output/transit/mode_share_area.csv`; hub areas (Neve Yosef 84%, Hamifrats 66%) reflect
+boarding-location and non-resident frame effects, not residential mode choice.
+
+**Outputs.** `Output/train/train_od_taz_6_9.csv`, `train_od_area.csv`;
+`Output/transit/transit_od_area.csv`, `all_adjusted_area.csv`, `mode_share_area.csv`.
+
 ---
 
 ## 7. Output inventory (`Output/`)
@@ -529,6 +546,8 @@ elsewhere. Figure: `Output/figures/bus_vs_ths_transit_area.png`.
 | `ths2017/trip_generation_*.csv` | 478 / 35 / 25 rows | Step 7 | Per-person AM-peak generation rates on the trips-file source |
 | `bus/bus_stops_taz.csv`, `bus/bus_od_taz_avg.csv`, `bus/bus_boardings_alightings_taz.csv` | 27k stops / 722×711 / 730 rows | Step 8 | RavKav stop tags, average-Tuesday AM-peak bus OD, per-TAZ boardings/alightings |
 | `bus/bus_probability_matrix.csv`, `bus/bus_od_taz_new.csv` | 594×548 / 722×728 | Step 9 | OnBoard destination probabilities; RavKav volumes × OnBoard pattern |
+| `train/train_od_taz_6_9.csv`, `train/train_od_area.csv` | 19×19 / 26×26 | Step 10 | Train OD 6–9 (2019 smartcards), station TAZs and areas |
+| `transit/transit_od_area.csv`, `transit/all_adjusted_area.csv`, `transit/mode_share_area.csv` | 26×26 | Step 10 | Complete transit matrix, adjusted all-mode matrix, mode shares |
 | `figures/` | — | Steps 1b–3 | Scatter plots, CV curves, λ curves, R_AB heatmap |
 
 All matrices are indexed by origin zone (rows) × destination zone (columns). Probability

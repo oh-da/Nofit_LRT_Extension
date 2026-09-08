@@ -1,6 +1,9 @@
 # Corridor Transit Demand — Decision and Plan (pending train matrix)
 
-*Status: agreed 2026-09. Execute when the train OD matrix arrives.*
+*Status: **executed 2026-09-08** in `Transit_complete_matrix.ipynb` (train matrix:
+`Input/Matrices/Train_mtx_table.csv`, 2019 smartcards). Outputs under `Output/train/`
+and `Output/transit/`. This document is kept as the record of the decision and its
+rationale; step 5 (vintage alignment) remains optional and unexecuted.*
 
 ## Decision
 
