@@ -593,6 +593,7 @@ with population/employment levels per area).
 | `train/train_od_taz_6_9.csv`, `train/train_od_area.csv` | 19×19 / 25×25 | Step 10 | Train OD 6–9 (2019 smartcards), station TAZs and areas |
 | `transit/transit_od_area.csv`, `transit/all_adjusted_area.csv`, `transit/mode_share_area.csv` | 25×25 | Step 10 | Complete transit matrix, adjusted all-mode matrix, mode shares (mixed vintages) |
 | `transit/car_other_area_2022.csv`, `transit/all_adjusted_area_2022.csv`, `transit/mode_share_area_2022.csv`, `transit/area_growth_factors_2018_2022.csv` | 25×25 / 28 rows | Step 11 | 2022-leveled base, all-mode matrix, mode shares; per-area growth factors |
+| `demographics/scenario_totals_by_class.csv`, `demographics/scenario_comparison_area.csv` | 5 / 28 rows | `Demographic_scenario_comparison.ipynb` | BU vs HS forecast comparison (2040/2050, `Input/Demographic_Forecast/`): totals by corridor/research/study class; per-area growth factors and HS−BU deltas |
 | `figures/` | — | Steps 1b–3 | Scatter plots, CV curves, λ curves, R_AB heatmap |
 
 All matrices are indexed by origin zone (rows) × destination zone (columns). Probability
