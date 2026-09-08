@@ -6,7 +6,9 @@ Survey with a cellular-derived OD matrix: cellular acts as the population-scale 
 the survey as evidence, combined at the spatial scale where each is reliable.
 
 See **[METHODOLOGY.md](METHODOLOGY.md)** for the full reasoning, methodology, inputs
-and outputs of every step.
+and outputs of every step, and **[TRANSIT_DEMAND_PLAN.md](TRANSIT_DEMAND_PLAN.md)**
+for the agreed plan to complete the corridor transit demand once the train matrix
+arrives.
 
 ## Pipeline
 
@@ -46,6 +48,8 @@ flowchart LR
 | `THS_2017_trip_generation.ipynb` | Per-person AM-peak generation rates on the trips-file source (overall ≈ 0.83), by 2636-zone / SZ / GS |
 | `BusRavKav_matrix.ipynb` | RavKav bus data: stop→TAZ spatial tagging, weekday-3 / 6–9 AM filter, average-Tuesday OD matrix and per-TAZ boardings/alightings |
 | `BusOnBoard_matrix.ipynb` | OnBoard survey probability matrix + combined bus matrix (RavKav volumes × OnBoard destination pattern) |
+| `Transit_complete_matrix.ipynb` | Train matrix (2019 smartcards, 6–9), complete transit matrix (bus+train), adjusted all-mode matrix and mode shares |
+| `Vintage_alignment_2022.ipynb` | Levels all components to a 2022 base: CAR/OTHER Furnessed to demographic growth margins (zonal 2020/2025 files), train scaled to 2022 rail ridership, bus as anchor |
 
 ## Key deliverables (`Output/`)
 
