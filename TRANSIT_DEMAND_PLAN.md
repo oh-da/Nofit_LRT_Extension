@@ -6,8 +6,9 @@ and `Output/transit/`. **Rebuilt later the same day** after fixing the RavKav jo
 deduplication (`passanger_trip_id` is unique per boarding, `bus_trip_id` is the
 linked-journey id; the original build counted every transfer leg as a full journey,
 inflating bus OD volumes ×1.52). This document records the decision and its rationale
-with the corrected numbers; step 5 (vintage alignment) remains optional and
-unexecuted.*
+with the corrected numbers. Step 5 (vintage alignment) was **executed 2026-09-08** in
+`Vintage_alignment_2022.ipynb`: all components leveled to a 2022 base using the zonal
+2020 (observed) / 2025 (forecast) socioeconomic files.*
 
 ## Decision
 
@@ -33,7 +34,8 @@ remains the base for CAR / OTHER and for behavioral context.
   will actually carry. Journey origins are boarding locations, so hub attribution is
   right for corridor loading (see caveats).
 - **Growth context**: read as 2018→2022 change, the sub-area ratio is −8.6% total
-  (−2.2%/yr) — consistent with 2022 bus ridership still below pre-COVID levels
+  (−2.2%/yr) — a real, modest decline (the study team verified May 2022 ridership was
+  not COVID-suppressed), confounded by frame differences
   (`Output/bus/bus_growth_2018_2022.csv`). The previously reported +6.7% rested on
   the leg-inflated volumes.
 
@@ -58,10 +60,17 @@ remains the base for CAR / OTHER and for behavioral context.
    the survey's weakest components (TRANSIT + RAIL).
 4. **Produce the mode-share table** per area (and corridor-only, via `IsLRT_Corridor`
    in `area_legend.csv`) from the adjusted matrix.
-5. **Optional vintage alignment**: the base is residents-2018, the transit layer
-   everyone-2022. If a single-year footing is required, grow CAR/OTHER to 2022 with a
-   population-based factor for the Krayot (the bus signal suggests only ~1.6%/yr
-   overall); otherwise keep un-grown and state the vintage mix.
+5. **Vintage alignment** *(executed in `Vintage_alignment_2022.ipynb`)*: level every
+   layer to **2022**, the RavKav anchor year — patterns untouched, only margins moved.
+   Per-area factors `(X_2025/X_2020)^(4/5)` from `Input/Zonal_2020.csv` (observed) and
+   `Input/Zonal_BU_2025.csv` (forecast): `POPULATION` on the origin side (AM origins
+   are homes; employment fallback for the pure-employment districts), `EMPL_TOT` on
+   the destination side. The CAR/OTHER base is Furnessed to the grown margins
+   (235,899 → 251,684, +6.7%); train is scaled by the national rail ridership factor
+   2019→2022 (69M → 54.7M, ×0.793; 962 → 763); bus is untouched. Result:
+   `ALL_adjusted_2022` = 276,355 trips, transit share **8.9%** overall, **9.9%** in
+   the corridor. May 2022 bus ridership was verified as not COVID-suppressed, so no
+   pandemic correction is applied beyond the measured rail series.
 
 ## Caveats to carry into the deliverable
 
@@ -87,4 +96,6 @@ remains the base for CAR / OTHER and for behavioral context.
 | `Output/ths2017/study_taz/submatrices/matrix_avg_{ALL,TRANSIT,RAIL}_area.csv` | Survey all-mode base and components to subtract |
 | `Output/ths2017/study_taz/submatrices/area_legend.csv` | Area names + LRT-corridor flags |
 | `Input/Submatrix_tazs.xlsx` | 205-TAZ → 28-area key |
+| `Input/Zonal_2020.csv`, `Input/Zonal_BU_2025.csv` | Zonal population/employment (2020 observed, 2025 forecast) for the growth factors |
+| `Output/transit/car_other_area_2022.csv`, `all_adjusted_area_2022.csv`, `mode_share_area_2022.csv`, `area_growth_factors_2018_2022.csv` | 2022-leveled products (step 5) |
 | `BusRavKav_matrix.ipynb`, `BusOnBoard_matrix.ipynb` | Templates for the train processing and combination |

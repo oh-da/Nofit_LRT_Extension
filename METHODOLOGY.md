@@ -507,9 +507,10 @@ correlation r = 0.76 on counts; the large residential areas sit near parity
 areas remain the outliers — Hamifrats 9.0×, Kiryat Ata Center 1.9×, Neve Yosef 1.8× —
 where ticketing attributes to the boarding area journeys the household survey
 attributes to the traveler's true origin. Read as 2018→2022 change, the sub-area ratio
-is −8.6% total (−2.2%/yr), consistent with 2022 ridership still below pre-COVID levels;
-the full-study −30% additionally reflects the ticketing frame (both ends geocoded, no
-taxi-type modes). Figure: `Output/figures/bus_vs_ths_transit_area.png`.
+is −8.6% total (−2.2%/yr) — a real, modest decline (the study team verified May 2022
+ridership was not COVID-suppressed), confounded by frame; the full-study −30%
+additionally reflects the ticketing frame (both ends geocoded, no taxi-type modes).
+Figure: `Output/figures/bus_vs_ths_transit_area.png`.
 
 ## 6h. Step 10 — Train matrix, complete transit, adjusted all-mode (`Transit_complete_matrix.ipynb`)
 
@@ -529,6 +530,35 @@ frame effects, not residential mode choice.
 
 **Outputs.** `Output/train/train_od_taz_6_9.csv`, `train_od_area.csv`;
 `Output/transit/transit_od_area.csv`, `all_adjusted_area.csv`, `mode_share_area.csv`.
+
+## 6i. Step 11 — Vintage alignment to 2022 (`Vintage_alignment_2022.ipynb`)
+
+**Purpose.** The adjusted all-mode matrix mixes vintages (CAR/OTHER base 2018, bus
+2022, train 2019). This step levels everything to **2022**, the RavKav anchor year —
+patterns untouched, only margins moved.
+
+**Inputs.** `Input/Zonal_2020.csv` (observed zonal socioeconomics, 781 TAZs) and
+`Input/Zonal_BU_2025.csv` (forecast): `POPULATION` and `EMPL_TOT` per study TAZ.
+
+**Method.** Per-area growth factors `g = (X_2025/X_2020)^(4/5)` — the 2020→2025 annual
+rate applied over 2018→2022 — with `POPULATION` on the origin side (AM-peak origins are
+predominantly homes; areas with 2020 population < 500 — the pure employment districts
+Namal, Hutzot, Kiryat Nahum, Haifa Airport, Hamifrats, Matam — fall back to the
+employment factor) and `EMPL_TOT` on the destination side. The 2018 CAR/OTHER area
+matrix is Furnessed to the grown margins (column targets rescaled to the origin-side
+grand total). Train is scaled by the national heavy-rail ridership factor 2019→2022
+(69M → 54.7M passengers, ×0.793 — rail recovery lagged; May 2022 **bus** ridership was
+verified by the study team as not COVID-suppressed, so no pandemic correction is
+applied anywhere else). Bus is the untouched anchor.
+
+**Results.** CAR/OTHER 235,899 → 251,684 (+6.7%; origin factors 0.948 Nesher to 1.256
+Tirat Carmel, trip-weighted mean 1.067); train 962 → 763; `ALL_adjusted_2022` =
+276,355 trips; transit share **8.9%** overall, **9.9%** in the corridor (vs 9.5% /
+10.7% on the mixed-vintage table — largest per-area change just −1.4 pp).
+
+**Outputs.** `Output/transit/car_other_area_2022.csv`, `all_adjusted_area_2022.csv`,
+`mode_share_area_2022.csv`, `area_growth_factors_2018_2022.csv` (derived factor table
+with population/employment levels per area).
 
 ---
 
@@ -561,7 +591,8 @@ frame effects, not residential mode choice.
 | `bus/bus_stops_taz.csv`, `bus/bus_od_taz_avg.csv`, `bus/bus_boardings_alightings_taz.csv` | 27k stops / 722×711 / 730 rows | Step 8 | RavKav stop tags, average-Tuesday AM-peak bus OD (journey-level), per-TAZ boardings/alightings (leg-level) |
 | `bus/bus_probability_matrix.csv`, `bus/bus_od_taz_new.csv`, `bus/bus_od_area_new{,_filtered}.csv` | 594×548 / 722×728 / 28×28, 25×25 | Step 9 | OnBoard destination probabilities; RavKav volumes × OnBoard pattern; area aggregation and noise-filtered version |
 | `train/train_od_taz_6_9.csv`, `train/train_od_area.csv` | 19×19 / 25×25 | Step 10 | Train OD 6–9 (2019 smartcards), station TAZs and areas |
-| `transit/transit_od_area.csv`, `transit/all_adjusted_area.csv`, `transit/mode_share_area.csv` | 25×25 | Step 10 | Complete transit matrix, adjusted all-mode matrix, mode shares |
+| `transit/transit_od_area.csv`, `transit/all_adjusted_area.csv`, `transit/mode_share_area.csv` | 25×25 | Step 10 | Complete transit matrix, adjusted all-mode matrix, mode shares (mixed vintages) |
+| `transit/car_other_area_2022.csv`, `transit/all_adjusted_area_2022.csv`, `transit/mode_share_area_2022.csv`, `transit/area_growth_factors_2018_2022.csv` | 25×25 / 28 rows | Step 11 | 2022-leveled base, all-mode matrix, mode shares; per-area growth factors |
 | `figures/` | — | Steps 1b–3 | Scatter plots, CV curves, λ curves, R_AB heatmap |
 
 All matrices are indexed by origin zone (rows) × destination zone (columns). Probability
