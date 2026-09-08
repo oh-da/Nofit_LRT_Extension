@@ -594,6 +594,7 @@ with population/employment levels per area).
 | `transit/transit_od_area.csv`, `transit/all_adjusted_area.csv`, `transit/mode_share_area.csv` | 25×25 | Step 10 | Complete transit matrix, adjusted all-mode matrix, mode shares (mixed vintages) |
 | `transit/car_other_area_2022.csv`, `transit/all_adjusted_area_2022.csv`, `transit/mode_share_area_2022.csv`, `transit/area_growth_factors_2018_2022.csv` | 25×25 / 28 rows | Step 11 | 2022-leveled base, all-mode matrix, mode shares; per-area growth factors |
 | `demographics/scenario_totals_by_class.csv`, `demographics/scenario_comparison_area.csv` | 5 / 28 rows | `Demographic_scenario_comparison.ipynb` | BU vs HS forecast comparison (2040/2050, `Input/Demographic_Forecast/`): totals by corridor/research/study class; per-area growth factors and HS−BU deltas |
+| `forecast/all_modes_area_{BU,HS}_{2040,2050}.csv`, `forecast/forecast_margins_growth.csv` | 25×25 / 100 rows | `Forecast_matrices_2040_2050.ipynb` | Four forecast all-modes AM-peak matrices (2022 base Furnessed to scenario-year margins: population → origins, employment → destinations, 2020→2022 bridge via the BU-2025 interpolation, new-resident production term for sub-500-population areas); per-area growth factors and margin targets |
 | `figures/` | — | Steps 1b–3 | Scatter plots, CV curves, λ curves, R_AB heatmap |
 
 All matrices are indexed by origin zone (rows) × destination zone (columns). Probability
