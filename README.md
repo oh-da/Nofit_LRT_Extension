@@ -50,6 +50,11 @@ flowchart LR
 | `BusOnBoard_matrix.ipynb` | OnBoard survey probability matrix + combined bus matrix (RavKav volumes × OnBoard destination pattern) |
 | `Transit_complete_matrix.ipynb` | Train matrix (2019 smartcards, 6–9), complete transit matrix (bus+train), adjusted all-mode matrix and mode shares |
 | `Vintage_alignment_2022.ipynb` | Levels all components to a 2022 base: CAR/OTHER Furnessed to demographic growth margins (zonal 2020/2025 files), train scaled to 2022 rail ridership, bus as anchor |
+| `Demographic_scenario_comparison.ipynb` | BU vs HS forecast scenarios (2040/2050) compared on the Furness-margin resolution (28 research areas): corridor totals match but spatial allocation diverges sharply — verdict: **each scenario needs its own matrix** |
+| `Forecast_matrices_2040_2050.ipynb` | Grows the 2022 all-modes area matrix to the four scenario-years (BU/HS × 2040/2050) via IPF with demographically grown margins (population → origins, employment → destinations, constant trip rates, explicit new-resident productions for HS's residential conversions) |
+| `Base_mode_shares_2022.ipynb` | Revealed per-OD modal shares (car/other, bus, rail) from the 2022 components, EB-smoothed toward corridor-class × distance-band strata — the no-build behavioral baseline for the LRT-capture step |
+| `NoBuild_and_LRT_market.ipynb` | No-build modal matrices per scenario-year (pivot of smoothed base shares onto forecast totals — modes are never grown independently) and the LRT market definition (core = both ends corridor, 38–44% of trips; extended = one end) |
+| `LRT_alignment_markets.ipynb` | Market counts for the two alignment scenarios (`Input/lrt_alignment_flags.csv`): MainCorridor (Hamifrats–Tirat Carmel + transfer-influenced Krayot, 23–31% of trips) vs FullLength (Nazareth–Tirat Carmel, ~56%), per forecast scenario-year |
 
 ## Key deliverables (`Output/`)
 
