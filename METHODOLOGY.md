@@ -442,31 +442,38 @@ rate, population — total 2,601,228), figure `ths2017_trip_generation.png`.
 **Inputs.** `Input/TAZ_North/TAZ_North.shp` (781 TAZ polygons, Israeli TM CRS,
 `TAZ_NUMBER` field) and four RavKav bus-trip files (`Input/BusRavKav/`, Tuesdays
 2022-05-03/17/24/31, ~2.5–2.9M records each; national coverage). Each record is one
-passenger boarding with journey `orig`/`dest` stops and physical `board`/`alight` stops
-(WGS84 lat/lon), `weekday`, a passenger count (`total_boardings`), and the journey
-timestamp embedded in `passanger_trip_id` (the `date` column has no time).
+**boarding (leg)** with its physical `board`/`alight` stops, plus journey-level fields
+that are constant across a journey's legs: `orig`/`dest` stops (first boarding → final
+alighting), `bus_trip_hour` (journey start hour) and `total_boardings` (expansion
+weight). `passanger_trip_id` embeds the boarding timestamp, so it is unique per leg;
+**`bus_trip_id` is the linked-journey id** (passenger + journey-of-day number). The
+`date` column has no time.
 
 **Method.** 27,186 unique stops spatially joined to the TAZ polygons (9,924 = 36.5%
-fall inside the northern study area). The raw files carry duplicate records (≈ 7% of
-rows, including exact repeats of a leg), so a **journey** is one `passanger_trip_id`
-(first leg by `bus_trip_id` carries `orig`/`dest` and the start hour) and a **leg** is
-one (`passanger_trip_id`, `bus_trip_id`) pair. Filters: `weekday = 3` and
-**`bus_trip_hour`** ∈ {6,7,8} (the `date` column has no time). Weighted by
+fall inside the northern study area). Exact repeated records (≈ 7% of rows) are dropped
+first; a **journey** is then one `bus_trip_id` and a **leg** one deduplicated record.
+Filters: `weekday = 3` and **`bus_trip_hour`** ∈ {6,7,8}. Weighted by
 `total_boardings`, averaged over the four Tuesdays: an OD matrix from journey
-`orig`→`dest` stops (each journey once, both ends inside `TAZ_North`), and per-TAZ
-boarding / alighting totals from each leg's physical `board`/`alight` stops.
+`orig`→`dest` stops (each journey once — transfers not double-counted — both ends
+inside `TAZ_North`), and per-TAZ boarding / alighting totals from each leg's physical
+`board`/`alight` stops. *(An earlier revision deduplicated journeys by
+`passanger_trip_id`, which counted every transfer leg as a full journey and inflated
+the OD matrix ×1.52 area-wide; fixed 2026-09-08.)*
 
-**Results.** ≈ 760–890k AM-peak bus passengers nationally per Tuesday, of which ≈ 17%
-(143,402 on the average day) have both journey ends inside the northern study area —
-strikingly close to the THS TRANSIT estimate of 134,349 in-study AM-peak trips.
-Per-TAZ totals: 157,264 average boardings / 147,632 alightings across 730 TAZs; the
-largest generator is TAZ 1219 (≈ 6,500 boardings, ≈ 8,900 alightings — a major
-terminal). A fifth date file (`Input/trips_table_2022-05-10.csv`) sits outside the
-`BusRavKav` directory and is excluded per the four-file instruction.
+**Results.** ≈ 510–560k AM-peak bus journeys nationally per Tuesday, of which ≈ 17%
+(94,203 on the average day) have both journey ends inside the northern study area —
+about 70% of the THS TRANSIT estimate of 134,349 in-study AM-peak trips (the ticketing
+OD requires both ends geocoded inside `TAZ_North` and carries no taxi-type modes, which
+THS TRANSIT includes). Per-TAZ totals: 157,264 average boardings / 147,632 alightings
+across 730 TAZs (leg-level by design — a transfer journey counts at each boarding
+point); the largest generator is TAZ 1219 (≈ 6,500 boardings, ≈ 8,900 alightings — a
+major terminal). A fifth date file (`Input/trips_table_2022-05-10.csv`) sits outside
+the `BusRavKav` directory and is excluded per the four-file instruction.
 
 **Outputs.** `Output/bus/bus_stops_taz.csv` (stop → TAZ tags),
-`bus_od_taz_avg.csv` (722×711 average-Tuesday OD passengers),
-`bus_boardings_alightings_taz.csv` (per-TAZ averages).
+`bus_od_taz_avg.csv` (722×711 average-Tuesday OD journeys),
+`bus_boardings_alightings_taz.csv` (per-TAZ averages),
+`neve_yosef_stops.csv` (the 30 stops in the Neve Yosef TAZs with per-stop AM volumes).
 
 ## 6g. Step 9 — Bus OD combined with OnBoard survey probabilities (`BusOnBoard_matrix.ipynb`)
 
@@ -478,26 +485,31 @@ board at `fromTAZ`) for 6:00–9:00, 599 origins, rows summing exactly to 1 incl
 (unknown alightings assumed to distribute like known ones). (2) "New" matrix: each
 origin's RavKav volume (row sum of `bus_od_taz_avg.csv`) distributed over destinations
 by the OnBoard probabilities — RavKav sets the volumes, OnBoard the destination
-pattern. Origins without OnBoard coverage (5.5% of volume) keep their RavKav row.
+pattern. Origins without OnBoard coverage (6.4% of volume) keep their RavKav row.
 
-**Results.** Total preserved at 143,402 average-Tuesday passengers; 94.5% of the volume
+**Results.** Total preserved at 94,203 average-Tuesday journeys; 93.6% of the volume
 redistributed by OnBoard probabilities. The two sources genuinely disagree on fine-grain
-destinations (r ≈ 0.13 at TAZ level even for high-volume origins) while agreeing
-regionally (r ≈ 0.69 at superzone level) — RavKav's destinations are algorithmically
+destinations (r ≈ 0.09 at TAZ level even for high-volume origins) while agreeing
+regionally (r ≈ 0.70 at superzone level) — RavKav's destinations are algorithmically
 inferred alightings, OnBoard's are passenger-reported, which is the rationale for the
 substitution.
 
 **Outputs.** `Output/bus/bus_probability_matrix.csv` (594×548, row-stochastic),
 `bus_od_taz_new.csv` (722×728, combined matrix), `bus_od_area_new.csv` (28×28 — the
-combined matrix restricted to the 205 sub-area TAZs and aggregated to the named areas).
+combined matrix restricted to the 205 sub-area TAZs and aggregated to the named areas),
+`bus_od_area_new_filtered.csv` (25×25 after the noise cut), `bus_growth_2018_2022.csv`.
 
-**Comparison with THS TRANSIT at area level.** Sub-area totals: RavKav×OnBoard 41,351
-vs THS TRANSIT 26,247 average-weekday passengers (ratio 1.58). Cell-level correlation
-r = 0.76 on counts; most areas sit at a fairly uniform ratio of ≈ 1.5–1.8 (consistent
-with survey under-coverage of non-resident riders and the 2017-survey vs 2022-ticketing
-gap), with hub/employment areas as outliers — Hamifrats 18×, Lower City 3.9×, Kiryat
-Ata Center 3.9× — where ticketing sees many journeys the household survey attributes
-elsewhere. Figure: `Output/figures/bus_vs_ths_transit_area.png`.
+**Comparison with THS TRANSIT at area level.** Sub-area totals: RavKav×OnBoard 23,995
+vs THS TRANSIT 26,247 average-weekday passengers (ratio 0.91) — with journeys counted
+once, the two independent sources corroborate each other's scale. Cell-level
+correlation r = 0.76 on counts; the large residential areas sit near parity
+(Kiryat Yam 0.96, Kiryat Motzkin-Bialik 0.89, Tirat Carmel 0.99), while hub/boundary
+areas remain the outliers — Hamifrats 9.0×, Kiryat Ata Center 1.9×, Neve Yosef 1.8× —
+where ticketing attributes to the boarding area journeys the household survey
+attributes to the traveler's true origin. Read as 2018→2022 change, the sub-area ratio
+is −8.6% total (−2.2%/yr), consistent with 2022 ridership still below pre-COVID levels;
+the full-study −30% additionally reflects the ticketing frame (both ends geocoded, no
+taxi-type modes). Figure: `Output/figures/bus_vs_ths_transit_area.png`.
 
 ## 6h. Step 10 — Train matrix, complete transit, adjusted all-mode (`Transit_complete_matrix.ipynb`)
 
@@ -505,13 +517,15 @@ Executes `TRANSIT_DEMAND_PLAN.md`. **Train**: `Input/Matrices/Train_mtx_table.cs
 (2019 smartcards, windows-1255; station-to-station by station TAZ, hourly columns) —
 hours 6+7+8 summed, the `TAZ 9999` "rest of stations" rows ignored (13,624 out-of-area
 trips): 5,535 avg-day trips between the 19 named stations, of which 962 have both ends
-in the sub-area. **Complete transit** = filtered bus (41,272) + train (962) = 42,234
-passengers at the 26 areas. **Adjusted all-mode**: `ALL_adjusted = (survey ALL −
-TRANSIT − RAIL) + measured transit` = 286,384 trips; transit share rises from the
-survey's 9.8% to **14.7%** (corridor areas: **16.1%**). Vintage mix documented (base
-2018, bus 2022, train 2019). Mode-share table per area in
-`Output/transit/mode_share_area.csv`; hub areas (Neve Yosef 84%, Hamifrats 66%) reflect
-boarding-location and non-resident frame effects, not residential mode choice.
+in the sub-area. **Complete transit** = filtered bus (23,909) + train (962) = 24,871
+passengers at the 25 areas. **Adjusted all-mode**: `ALL_adjusted = (survey ALL −
+TRANSIT − RAIL) + measured transit` = 260,770 trips; transit share is **9.5%**
+(corridor areas: **10.7%**) against the survey's own 10.1% — with journeys counted
+once, the substitution is nearly scale-neutral and changes the *pattern and frame*
+of the transit layer rather than its size. Vintage mix documented (base 2018, bus
+2022, train 2019). Mode-share table per area in `Output/transit/mode_share_area.csv`;
+hub areas (Neve Yosef 75%, Hamifrats 50%) reflect boarding-location and non-resident
+frame effects, not residential mode choice.
 
 **Outputs.** `Output/train/train_od_taz_6_9.csv`, `train_od_area.csv`;
 `Output/transit/transit_od_area.csv`, `all_adjusted_area.csv`, `mode_share_area.csv`.
@@ -544,10 +558,10 @@ boarding-location and non-resident frame effects, not residential mode choice.
 | `ths2017/study_taz/hybrid_*`, `*_correction_factors.csv` | various | Step 6 | **Primary hybrid products** on the trips-file source (SZ/GS hybrids, TAZ matrices, trips) |
 | `ths2017/study_taz/submatrices/*` | 28×28 areas | Step 6 | Sub-area matrices aggregated to the 28 named areas (205 TAZs, LRT-corridor flags in `area_legend.csv`) |
 | `ths2017/trip_generation_*.csv` | 478 / 35 / 25 rows | Step 7 | Per-person AM-peak generation rates on the trips-file source |
-| `bus/bus_stops_taz.csv`, `bus/bus_od_taz_avg.csv`, `bus/bus_boardings_alightings_taz.csv` | 27k stops / 722×711 / 730 rows | Step 8 | RavKav stop tags, average-Tuesday AM-peak bus OD, per-TAZ boardings/alightings |
-| `bus/bus_probability_matrix.csv`, `bus/bus_od_taz_new.csv` | 594×548 / 722×728 | Step 9 | OnBoard destination probabilities; RavKav volumes × OnBoard pattern |
-| `train/train_od_taz_6_9.csv`, `train/train_od_area.csv` | 19×19 / 26×26 | Step 10 | Train OD 6–9 (2019 smartcards), station TAZs and areas |
-| `transit/transit_od_area.csv`, `transit/all_adjusted_area.csv`, `transit/mode_share_area.csv` | 26×26 | Step 10 | Complete transit matrix, adjusted all-mode matrix, mode shares |
+| `bus/bus_stops_taz.csv`, `bus/bus_od_taz_avg.csv`, `bus/bus_boardings_alightings_taz.csv` | 27k stops / 722×711 / 730 rows | Step 8 | RavKav stop tags, average-Tuesday AM-peak bus OD (journey-level), per-TAZ boardings/alightings (leg-level) |
+| `bus/bus_probability_matrix.csv`, `bus/bus_od_taz_new.csv`, `bus/bus_od_area_new{,_filtered}.csv` | 594×548 / 722×728 / 28×28, 25×25 | Step 9 | OnBoard destination probabilities; RavKav volumes × OnBoard pattern; area aggregation and noise-filtered version |
+| `train/train_od_taz_6_9.csv`, `train/train_od_area.csv` | 19×19 / 25×25 | Step 10 | Train OD 6–9 (2019 smartcards), station TAZs and areas |
+| `transit/transit_od_area.csv`, `transit/all_adjusted_area.csv`, `transit/mode_share_area.csv` | 25×25 | Step 10 | Complete transit matrix, adjusted all-mode matrix, mode shares |
 | `figures/` | — | Steps 1b–3 | Scatter plots, CV curves, λ curves, R_AB heatmap |
 
 All matrices are indexed by origin zone (rows) × destination zone (columns). Probability
