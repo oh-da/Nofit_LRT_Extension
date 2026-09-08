@@ -1,0 +1,18 @@
+from_code,to_code,from_area,to_area,flow_dir_1_to_23,flow_dir_23_to_1,total_both_dir
+1,2,TiratCarmel,Matam,776.0,192.0,968.0
+2,3,Matam,Neot Peres,1047.0,419.0,1466.0
+3,4,Neot Peres,Neve David,1037.0,874.0,1911.0
+4,5,Neve David,Ein Hayam,1632.0,1629.0,3261.0
+5,6,Ein Hayam,Bat Galim,1853.0,1648.0,3501.0
+6,7,Bat Galim,Kiryat Eliezer,1656.0,2584.0,4240.0
+7,8,Kiryat Eliezer,Hamoshava,1554.0,2398.0,3952.0
+8,9,Hamoshava,Lower City,1461.0,2326.0,3787.0
+9,10,Lower City,Hadar Carmel,1175.0,2736.0,3911.0
+10,11,Hadar Carmel,Namal,725.0,2652.0,3377.0
+11,12,Namal,Neve Yosef,678.0,2692.0,3370.0
+12,13,Neve Yosef,Hamifrats,591.0,2093.0,2684.0
+13,14,Hamifrats,Hutzot,168.0,1618.0,1786.0
+14,16,Hutzot,Kiryat Ata Center,17.0,1547.0,1564.0
+16,17,Kiryat Ata Center,Kiryat Bialik South,31.0,1282.0,1313.0
+17,19,Kiryat Bialik South,Shefaram,0.0,1397.0,1397.0
+19,23,Shefaram,Nazareth Area,0.0,1363.0,1363.0
