@@ -624,6 +624,59 @@ zone i ends in zone j.
    rests on cellular structure (with its replication caveat), not on a production model —
    treat individual TAZ origin totals accordingly.
 
+## 8b. Related work — PCA-based analysis and structural comparison of OD matrices
+
+Context for the PCA validation notebooks (`THS_2018_MTX_PCA_vs_cellular.ipynb`,
+`THS_2017_PCA_vs_cellular.ipynb`), which re-examine the survey↔cellular comparison
+through component structure rather than cell-by-cell statistics. The approach is
+grounded in four strands of literature:
+
+**1. PCA on OD matrices for estimation and calibration.** The premise that OD
+matrices carry a stable low-dimensional structure — the property the PCA notebooks
+measure per source (T1) and compare across sources (T2/T3) — underpins a whole line
+of demand-estimation work started at TU Delft:
+[Djukic, van Lint & Hoogendoorn (TRR 2012)](https://www.researchgate.net/publication/255567936_Application_of_Principal_Component_Analysis_to_Predict_Dynamic_Origin-Destination_Matrices)
+represent dynamic OD matrices by a few "demand principal components" and
+[use PCA for efficient real-time OD estimation (IEEE ITSC 2012)](https://www.researchgate.net/publication/255567935_Efficient_real_time_OD_matrix_estimation_based_on_Principal_Component_Analysis);
+[Prakash, Seshadri, Antoniou, Pereira & Ben-Akiva (TRR 2017)](https://journals.sagepub.com/doi/10.3141/2667-10)
+([open PDF](https://dspace.mit.edu/bitstream/handle/1721.1/117154/ReducingthedimensionofonlinecalibrationinDynamicTrafficAssignmentsystems.pdf?sequence=1&isAllowed=y))
+calibrate DTA demand inside the PC subspace; [PC-SPSA (Qurashi et al., IEEE
+T-ITS)](https://discovery.ucl.ac.uk/id/eprint/10093641/) and
+[joint Islands-GA + PC-SPSA calibration](https://www.sciencedirect.com/science/article/pii/S2352146521001320)
+made this the standard dimensionality-reduction move in simulation calibration.
+
+**2. Structural comparison of OD matrices — the critique of cell-by-cell metrics.**
+A distinct line (largely QUT Brisbane) argues that RMSE/GEH/r neglect matrix
+structure — the same motivation as the PCA notebooks, with windowed rather than
+spectral instruments:
+[geographical-window structural similarity, GSSI (Behara, Bhaskar & Chung, J. ITS 2022)](https://www.tandfonline.com/doi/full/10.1080/15472450.2020.1795651),
+[Levenshtein distance for OD comparison (TR Part C 2020)](https://www.sciencedirect.com/science/article/abs/pii/S0968090X19307053),
+[local-windows comparison tied to socioeconomic characteristics (J. Adv. Transp. 2021)](https://onlinelibrary.wiley.com/doi/10.1155/2021/9968698).
+
+**3. Phone-derived vs survey OD, compared structurally.**
+[A comparative analysis of mobile phone data and travel surveys (*Transportation*, 2025)](https://link.springer.com/article/10.1007/s11116-025-10708-4)
+compares MPD and survey matrices with Pearson + MSSIM and finds more consistency at
+macro-zone than transport-zone level — the same scale effect and complementarity
+conclusion reached here (§4 and the PCA notebooks).
+
+**4. Eigen-analysis of flow matrices as discovery.**
+[Lakhina et al. (SIGMETRICS 2004)](https://www.cs.bu.edu/faculty/crovella/paper-archive/sigm04-odflows.pdf)
+showed internet OD-flow ensembles have small intrinsic dimension ("eigenflows") —
+the cross-domain ancestor of the T1 finding that the cellular matrix compresses to
+~40–50 effective components; mobility siblings include
+[Eigenbehaviors (Eagle & Pentland)](https://dspace.mit.edu/server/api/core/bitstreams/472df72e-ef98-43aa-8b9c-2ecd6aee7d8d/content),
+[Eigenplaces (Reades, Calabrese & Ratti, 2009)](https://journals.sagepub.com/doi/abs/10.1068/b34133t),
+and [low-rank forecasting of metro OD matrices](https://arxiv.org/pdf/2101.00466).
+
+Against this literature, the combination used here — spectral comparison of two
+*independent sources* (rather than model-vs-observed), formal benchmarks
+(permuted-geography null plus the day-to-day internal-consistency ceiling, akin to
+test–retest reliability in psychometrics, where Tucker congruence originates), and
+the diagonal-ablation decomposition isolating *where* structures diverge — does not
+appear assembled in any single prior work. Practitioner validation guidance still
+standardizes on the cell-based toolkit (GEH, %RMSE), which is precisely what strand
+2 pushes back on.
+
 ## 9. Reproduction
 
 ```bash
