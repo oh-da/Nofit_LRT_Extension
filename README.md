@@ -45,6 +45,7 @@ flowchart LR
 | `THS_2018_MTX_hybrid_taz.ipynb` | Final 778-TAZ matrix: superzone correction factors R_AB applied to cellular OD cells, row-normalized |
 | `THS_2018_MTX_GS.ipynb` | The same pipeline on the GS zoning (25 zones, `Input/TAZ_GSnew.csv`): GS matrices, GS hybrid, and GS-calibrated TAZ matrices |
 | `THS_2017_PCA_vs_cellular.ipynb` | The PCA suite re-run on the trips-file source (day 1 / day 2 converted to study zones with the pipeline's allocation chain): every structural conclusion replicates (overlap 0.76, congruences 0.97/0.90, 87% of divergence on the diagonal), against higher internal-consistency ceilings (SZ 0.94, TAZ 0.60) — corroborating the trips file as the cleaner, primary source |
+| `THS_PCA_eigenvector_maps.ipynb` | Eigenvector charts for the PCA suite: the top-4 components drawn as destination-loading maps and origin-score maps on the superzone geography (cellular vs survey day 10 / day 20 / 2017, Hungarian-matched and sign-aligned), ranked loading bars, biplots, axis-meaning checks and a reconstruction-fit check; exports `Output/pca_sz_eigenvectors.csv` |
 | `THS_2017_trips_matrices.ipynb` | Independent day × mode + day-averaged matrices from `Input/trips_ths_2017.xlsx` (placeno-ordered activities, Dep_h 6–8, `new_wf` weights), converted to the study zone systems |
 | `THS_2017_hybrid_pipeline.ipynb` | **Primary fusion products** on the trips-file source: SZ/GS hybrids (k* = 5 by cross-day CV), correction-factor TAZ matrices, trips, and 119-TAZ submatrices |
 | `THS_2017_trip_generation.ipynb` | Per-person AM-peak generation rates on the trips-file source (overall ≈ 0.83), by 2636-zone / SZ / GS |
@@ -71,6 +72,9 @@ flowchart LR
   average-weekday trips)
 - `trip_generation_summary.csv` — per home TAZ: SuperZone, AM-peak trips per person,
   expanded population
+- `pca_sz_eigenvectors.csv` — top-6 superzone eigenvectors (destination loadings) and origin
+  scores per source, matched to cellular and sign-aligned; charts in `figures/pca_eigenvector_*.png`
+  and the write-up in `PCA_Eigenvector_Report.docx`
 - Full inventory in [METHODOLOGY.md §7](METHODOLOGY.md#7-output-inventory-output)
 
 ## Setup
