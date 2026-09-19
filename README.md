@@ -75,7 +75,7 @@ flowchart LR
   expanded population
 - `pca_sz_eigenvectors.csv` — top-6 superzone eigenvectors (destination loadings) and origin
   scores per source, matched to cellular and sign-aligned; charts in `figures/pca_eigenvector_*.png`
-  and the write-up in `PCA_Eigenvector_Report.docx` (revised after review; the review's tests are in `THS_PCA_review_tests.ipynb`, figures `figures/pca_review_*.png`)
+  and the write-up in `PCA_Eigenvector_Report.docx` (revised after review; the review's tests are in `THS_PCA_review_tests.ipynb`, figures `figures/pca_review_*.png`; plain-language Hebrew version in `PCA_Eigenvector_Report_Hebrew_Explainer.docx`)
 - Full inventory in [METHODOLOGY.md §7](METHODOLOGY.md#7-output-inventory-output)
 
 ## Setup
