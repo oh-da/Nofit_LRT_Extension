@@ -77,6 +77,12 @@ Key facts driving the list (2017 trips-file hybrid, `Output/ths2017/study_taz/`)
       Sakhnin, Daliyat al-Karmel / Isfiya, Ma'alot, Safed and Beit She'an. Ask the provider
       which operators the extract covers and whether cash / unvalidated boardings are
       included before using RavKav volumes outside the metropolitan core.
+      *Refinement found in `Corridor_profile_hybrid_vs_ticketing.ipynb`: the gap is a
+      local-trip gap (Nazareth: ticketing sees 8 % of the survey's intra-superzone bus
+      trips but 74 % of its trips to the Haifa superzones). Apply the coverage rule
+      separately to local and inter-superzone trips in `THS_2017_two_mode_matrix.ipynb`,
+      then re-run steps 16–18; the 23 → 1 corridor profile will move towards the
+      ticketing one.*
 - [ ] **B2. Population frames**
   - [ ] Reconcile the transit layer (RavKav journeys by boarding stop, incl. non-residents
         and transfers; Hamifrats 120 THS vs 1,079 RavKav) with the resident-household

@@ -874,6 +874,37 @@ traverse more links than car trips.
 `corridor_link_flows_comparison_2022.csv` (both profiles, the earlier ones and the
 link-level transit share); figures `corridor_flow_profile_{total,transit}_survey2022.png`.
 
+
+## 6p. Step 18 — Corridor transit profiles: calibrated survey vs ticketing (`Corridor_profile_hybrid_vs_ticketing.ipynb`)
+
+**Question.** The step-17 transit profile (calibrated survey bus + taxi-type + survey
+rail) against the step-11 ticketing profile (RavKav × OnBoard bus + station train),
+link by link and per direction, with the calibration's intermediate steps (raw 2018
+survey bus, all-RavKav variant), the area pairs that drive the differences, the transit
+share of link flow in both matrix sets, and a local-vs-intercity split of the ticketing
+coverage in the guarded superzones.
+
+**Results.** Towards Nazareth (1 → 23) the calibrated bus sits within ≈ 10 % of the
+ticketing bus along the Haifa segment (raw survey 25–40 % lower); the hybrid transit
+profile is 1.5 × the ticketing one only because of the taxi-type layer (9,300 sub-area
+trips, 1,000–1,400 per Haifa-segment link), which ticketing does not see. Towards Tirat
+Carmel (23 → 1) the ticketing profile is ≈ 2 × from Ein Hayam to Kiryat Bialik South and
+3 × at the Nazareth end, driven by journeys from the Nazareth Area (1,363 ticketed vs
+417 survey-based; −9,700 link-trips), Hamifrats (782 vs 443) and Neve Yosef (741 vs 250)
+into Haifa's western districts — hub attribution plus the coverage guard. The guard
+turns out to address a **local-trip** gap: in the Nazareth superzone ticketing records
+8 % of the survey's intra-superzone bus trips but 34 % of its inter-superzone trips and
+74 % of its trips to the Haifa superzones (other guarded superzones: local 0.05–0.24,
+inter-superzone 0.31–1.22). Refinement recorded in the task list (B1b): apply the
+coverage rule separately to local and inter-superzone trips. Transit share of link flow:
+30–45 % on the Haifa segment in the hybrid set; 15–27 % (1 → 23) / 35–55 % (23 → 1) in
+the ticketing set, whose total includes walk / other modes.
+
+**Outputs.** `Output/ths2017/three_mode_2022/corridor_profile_hybrid_vs_ticketing.csv`,
+`corridor_profile_components.csv`, `corridor_profile_pair_contributions.csv`,
+`corridor_profile_coverage_local_vs_intercity.csv`; figures
+`corridor_profile_hybrid_vs_ticketing.png`, `corridor_profile_transit_share.png`.
+
 ---
 
 ## 7. Output inventory (`Output/`)
