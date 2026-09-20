@@ -805,6 +805,49 @@ with OnBoard-informed alightings (survey 0.78).
 car, taxi-type and rail at 2018); below the 1250-zone the survey's TAZ detail is a
 population / employment split, not observation.
 
+
+## 6n. Step 16 — Three-mode matrices for 2022: car, bus, rail (`THS_2017_three_mode_2022.ipynb`)
+
+**Purpose.** Moves the survey-only two-mode matrix (step 15) to the **2022 base** with
+the vintage conventions of step 11, at TAZ level, and splits it into three matrices:
+**car**, **bus** (calibrated Public Bus + Matronit plus the survey's taxi-type modes —
+all road public transport; the parts are saved separately) and **rail**.
+
+**Method.** Growth factors `g = (X_2025 / X_2020)^(4/5)` per TAZ from
+`Input/Zonal_2020.csv` / `Input/Zonal_BU_2025.csv`, used where the 2020 base is ≥ 500
+(population for origins: 606 TAZs; employment for destinations: 506), pure-employment
+zones taking the employment factor on the origin side (72), and all smaller zones their
+superzone's factor (100 origins / 272 destinations). Car: Furness to the grown margins
+(one grand total from the origin side). Bus: RavKav-calibrated superzone rows are the
+2022 anchor and untouched; the seven coverage-guarded superzones' rows × their TAZ
+origin factor; taxi-type Furnessed like car. Rail: survey rail × 54.7 / 69.0 = 0.793
+(national heavy-rail ridership 2019 → 2022, the series used in step 11; 2018 taken at
+the 2019 level); the 2019 smartcard station-to-station matrix scaled the same way is
+saved beside it for corridor-loading work.
+
+**Results.**
+
+| | 2018 base | 2022 base |
+|---|---|---|
+| Car | 1,283,589 | 1,353,798 (+5.5 %) |
+| Bus (incl. taxi-type) | 128,920 | 131,504 (anchored rows 85,452 unchanged; guarded rows 25,203 → 26,693; taxi-type 18,266 → 19,359) |
+| Rail (survey, door-to-door) | 5,109 | 4,050 |
+| Bus / rail share, all | 9.1 % / 0.4 % | 8.8 % / 0.3 % |
+| Bus share, corridor → corridor | 14.7 % | 14.0 % |
+
+Origin factors: median 1.050, car-trip-weighted 1.055 (largest ≈ 1.28 in Pardes
+Hanna-Karkur and Tirat Carmel TAZs); destination factors: weighted 1.135 before the
+grand-total rescaling. Corridor-bound car trips fall 5.8 % while every other class grows
+because the BU-2025 forecast puts corridor employment growth below the regional average
+— a property of the demographic scenario, not of the survey. The station-based rail
+alternative carries 763 trips with both stations in the sub-area against 104
+door-to-door survey rail trips there.
+
+**Outputs** (`Output/ths2017/three_mode_2022/`): `{car,bus,rail}_2022_{taz,sz,area}.csv`,
+`bus_2022_excl_taxi_taz.csv`, `taxi_2022_taz.csv`, `all_three_modes_2022_taz.csv`,
+`rail_station_smartcard_2022_taz.csv`, `growth_factors_taz_2018_2022.csv`,
+`summary_2018_2022.csv`, `summary_sz_2018_2022.csv`; figure `three_mode_2022.png`.
+
 ---
 
 ## 7. Output inventory (`Output/`)
@@ -836,6 +879,7 @@ population / employment split, not observation.
 | `ths2017/tests/ks*.csv` | various | Step 13 | KS tests: trip length distributions (all / off-diagonal / per origin / corridor class), flow concentration, distance-proxy calibration |
 | `ths2017/tests/mssim_*.csv` | various | Step 14 | MSSIM tests: index by level / window / scale / ordering with term decomposition, broken-correspondence null, per-origin and superzone-block local SSIM, corridor classes |
 | `ths2017/two_mode/*.csv` | 778×778 / 36×36 / 28×28 | Step 15 | Survey-only two-mode matrices (car, transit) with the bus part calibrated to RavKav × OnBoard (coverage-guarded), calibration tables, mode shares |
+| `ths2017/three_mode_2022/*.csv` | 778×778 / 36×36 / 28×28 | Step 16 | 2022-base car / bus / rail matrices from the survey-only two-mode set (demographic growth, RavKav anchor, rail ridership series), TAZ growth factors, summaries |
 | `ths2017/trip_generation_*.csv` | 478 / 35 / 25 rows | Step 7 | Per-person AM-peak generation rates on the trips-file source |
 | `bus/bus_stops_taz.csv`, `bus/bus_od_taz_avg.csv`, `bus/bus_boardings_alightings_taz.csv` | 27k stops / 722×711 / 730 rows | Step 8 | RavKav stop tags, average-Tuesday AM-peak bus OD (journey-level), per-TAZ boardings/alightings (leg-level) |
 | `bus/bus_probability_matrix.csv`, `bus/bus_od_taz_new.csv`, `bus/bus_od_area_new{,_filtered}.csv` | 594×548 / 722×728 / 28×28, 25×25 | Step 9 | OnBoard destination probabilities; RavKav volumes × OnBoard pattern; area aggregation and noise-filtered version |
