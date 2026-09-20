@@ -71,6 +71,12 @@ Key facts driving the list (2017 trips-file hybrid, `Output/ths2017/study_taz/`)
         link (transit vs RavKav already done at area level: ratio 0.91).
   - [ ] Resolve the TAZ → superzone key precedence between the 2017 and 2018 chains
         (`prob_sz_cellular.csv` vs the 2017 rebuild; ≤ 0.07 in a handful of cells).
+- [ ] **B1b. Ticketing coverage** *(found 2026-09-20 in `THS_2017_two_mode_matrix.ipynb`)*: the
+      RavKav extract sees 0.9–1.5 × the survey's bus trips in the Haifa metropolitan
+      superzones but only 0.21–0.43 × in Nazareth / Kafr Kanna, Shefa-'Amr / Tamra,
+      Sakhnin, Daliyat al-Karmel / Isfiya, Ma'alot, Safed and Beit She'an. Ask the provider
+      which operators the extract covers and whether cash / unvalidated boardings are
+      included before using RavKav volumes outside the metropolitan core.
 - [ ] **B2. Population frames**
   - [ ] Reconcile the transit layer (RavKav journeys by boarding stop, incl. non-residents
         and transfers; Hamifrats 120 THS vs 1,079 RavKav) with the resident-household

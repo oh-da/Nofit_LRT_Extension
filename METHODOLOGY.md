@@ -737,6 +737,74 @@ ordering × pair with the term decomposition and off-diagonal MSSIM), `mssim_hea
 `mssim_by_origin_sz.csv`, `mssim_corridor_classes.csv`, `mssim_sz_blocks_*.csv`; figures
 `Output/figures/mssim_{window,maps,sz_blocks}.png`.
 
+
+## 6m. Step 15 — Two-mode matrix from the trips file, transit calibrated to RavKav × OnBoard (`THS_2017_two_mode_matrix.ipynb`)
+
+**Purpose.** A second base-year matrix built **entirely from the survey trips file**
+(days 1 / 2) — no cellular data in the chain — split into **car** (`mainmode` 10 / 11)
+and **transit** = bus (3 Public Bus, 4 Matronit) + taxi-type (5, 8) + rail (7), with the
+bus part calibrated against the ticketing / on-board products of steps 8–9. OTHER
+(walk, bicycle, …; 645k trips) is excluded from the two-mode base and reported.
+
+**Zone conversion without cellular.** `actTaz` → `TAZ_1250` → study TAZ, the one-to-many
+last link split by 2020 **population** (origins) and **employment** (destinations) from
+`Input/Zonal_2020.csv` (fallback to the other variable, then uniform; 396 zones: 331 /
+47 / 18 on the origin side, 378 / 0 / 18 on the destination side). Superzones and the 28
+sub-areas follow from the TAZ matrices.
+
+**Calibration design (bus).** Each source does what it measures well, at the scale
+where it is reliable:
+
+1. *Destination pattern, superzone level* — empirical-Bayes blend
+   `P* = λ_A P_survey + (1 − λ_A) P_prior`, prior = RavKav × OnBoard
+   (`bus_od_taz_new.csv`) aggregated to superzones, `λ_A = n_A / (n_A + k)`.
+   **`k` by household-split validation** (households split at random into halves,
+   40 splits, the blend on one half predicts the other's rows, mean row JSD): interior
+   optimum **k\* = 5** (JSD 0.331 vs 0.353 for raw survey rows and 0.433 for pure
+   ticketing rows); λ = 0.29–0.97, trip-weighted 0.86. Cross-day validation — the
+   selector of the cellular hybrid — would give k = 0 because the two survey days are
+   the same households repeating the same commutes; it is reported but not used.
+2. *Origin volumes* — RavKav journey boardings per superzone replace the survey's
+   departures (ratio RavKav / survey applied as a factor), **with a coverage guard**:
+   where the ratio is below 0.5 the survey volume is kept. Regional ratio 0.80;
+   superzone ratios 0.9–1.5 across the Haifa metropolitan area but 0.21–0.43 in seven
+   superzones — Nazareth / Kafr Kanna (0.21, 88 sampled trips), Sakhnin, Ma'alot /
+   Beit Jann, Safed, Beit She'an, Shefa-'Amr / Tamra, Daliyat al-Karmel / Isfiya —
+   76 % Arab-sector population against 19 % elsewhere. The raw extract records ≈ 3,500
+   AM boarding legs in the Nazareth superzone against 12,400 survey-expanded bus
+   trips, so the gap is in the ticketing volume itself, not in the OD geocoding; the
+   files carry route ids but no operator field, so the coverage question goes to the
+   provider. Transfer hubs (leg boardings ≫ journeys: SZ 12, 13) and thin survey rows
+   with large upward factors (SZ 31, 38: 2 sampled trips) are flagged.
+3. *TAZ detail* — origin split within a superzone = λ-blend of survey home-based
+   departure shares and RavKav boarding shares; destination split = μ-blend of survey
+   arrival shares and OnBoard alighting shares (`μ_B = m_B / (m_B + k)`).
+
+**Results.** Bus 116,083 (survey 2018) → **110,654** calibrated (all-RavKav variant
+92,713); transit total 134,029; transit share of the car + transit base 9.8 % → 9.5 %
+(corridor-to-corridor 12.7 % → 14.7 %, corridor → outside 17.9 % → 21.2 %,
+outside → outside 8.2 % → 7.4 %). Against the RavKav × OnBoard matrix the calibrated
+bus scores cosine 0.658 at superzone level (survey 0.589; all-RavKav variant 0.735) and
+0.882 on the 28 sub-areas (survey 0.745), with 67 % of sub-area flow within GEH 5
+(survey 30 %; day-to-day 67 %); the column totals, never imposed, reach cosine 0.86
+with OnBoard-informed alightings (survey 0.78).
+
+**Outputs** (`Output/ths2017/two_mode/`): `car_{taz,sz,area}.csv`,
+`transit_{taz,sz,area}.csv` (calibrated), `transit_survey_*.csv`,
+`bus_calibrated_{taz,sz,area}.csv`, `bus_survey_*`, `taxi_survey_taz.csv`,
+`rail_survey_taz.csv`, variants `bus_calibrated_all_ravkav_{taz,sz}.csv` and
+`bus_calibrated_uniform_factor_taz.csv`; calibration tables `bus_calibration_cv.csv`,
+`bus_calibration_lambda_sz.csv`, `bus_calibration_factors_sz.csv`,
+`bus_pattern_sz_prob.csv`, `bus_calibration_validation.csv`,
+`bus_calibration_destinations_sz.csv`; `mode_share_sz.csv`,
+`mode_share_corridor_classes.csv`; figures `two_mode_bus_cv.png`,
+`two_mode_transit_share.png`.
+
+**Caveats.** Frames (boarding-stop vs doorstep origins, non-residents) as in
+`TRANSIT_DEMAND_PLAN.md`; vintage mix (calibrated superzones at May 2022, guarded ones,
+car, taxi-type and rail at 2018); below the 1250-zone the survey's TAZ detail is a
+population / employment split, not observation.
+
 ---
 
 ## 7. Output inventory (`Output/`)
@@ -767,6 +835,7 @@ ordering × pair with the term decomposition and off-diagonal MSSIM), `mssim_hea
 | `ths2017/tests/*.csv` | various | Step 12 | Cosine / GEH similarity tests: headline summary, per-origin cosine, permutation null, scale audit, GEH pass rates by level / flow band / corridor class, 28-area cells |
 | `ths2017/tests/ks*.csv` | various | Step 13 | KS tests: trip length distributions (all / off-diagonal / per origin / corridor class), flow concentration, distance-proxy calibration |
 | `ths2017/tests/mssim_*.csv` | various | Step 14 | MSSIM tests: index by level / window / scale / ordering with term decomposition, broken-correspondence null, per-origin and superzone-block local SSIM, corridor classes |
+| `ths2017/two_mode/*.csv` | 778×778 / 36×36 / 28×28 | Step 15 | Survey-only two-mode matrices (car, transit) with the bus part calibrated to RavKav × OnBoard (coverage-guarded), calibration tables, mode shares |
 | `ths2017/trip_generation_*.csv` | 478 / 35 / 25 rows | Step 7 | Per-person AM-peak generation rates on the trips-file source |
 | `bus/bus_stops_taz.csv`, `bus/bus_od_taz_avg.csv`, `bus/bus_boardings_alightings_taz.csv` | 27k stops / 722×711 / 730 rows | Step 8 | RavKav stop tags, average-Tuesday AM-peak bus OD (journey-level), per-TAZ boardings/alightings (leg-level) |
 | `bus/bus_probability_matrix.csv`, `bus/bus_od_taz_new.csv`, `bus/bus_od_area_new{,_filtered}.csv` | 594×548 / 722×728 / 28×28, 25×25 | Step 9 | OnBoard destination probabilities; RavKav volumes × OnBoard pattern; area aggregation and noise-filtered version |
