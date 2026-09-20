@@ -679,6 +679,64 @@ day-1-vs-day-2 `D` and a 200-replicate household bootstrap of the survey.
 `ks5_concentration.csv`, `ks5_concentration_stats.csv`; figures
 `Output/figures/ks_{tld,by_origin,corridor,concentration}.png`.
 
+
+## 6l. Step 14 — MSSIM tests on the three matrices (`THS_2017_MSSIM_tests.ipynb`)
+
+**Question.** The structural similarity index (Wang et al. 2004; adapted to OD matrices
+by Djukic, van Lint & Hoogendoorn 2013) compares two matrices window by window on local
+means (luminance), local standard deviations (contrast) and local correlation
+(structure), and MSSIM is the mean over windows. It rewards getting the *neighbourhood*
+right, so neighbouring rows and columns must be spatial neighbours: TAZs are ordered
+along a Hilbert curve of their centroids (77 % of adjacent rows share a superzone; the
+native numbering is the ordering sensitivity). Same three matrices as steps 12–13
+(trips-file survey days 1 / 2, allocated cellular scaled to the survey total, primary
+hybrid); windows 5 / 9 / 15 / 25 at TAZ, 3 / 5 at superzone, 3 on the 28 sub-areas; raw
+trips (Djukic-standard) and log(1 + trips). Chance level: a **broken-correspondence
+null** — one matrix's zones permuted, the other kept in Hilbert order (20–40 replicates).
+A random ordering applied to *both* matrices is only an ordering sensitivity: it keeps
+every cell pair aligned and homogenises the windows, which pushes the luminance and
+contrast terms up, so it can score above the spatial ordering.
+
+**Results** (MSSIM, Hilbert order; null in brackets).
+
+| | day 1 vs day 2 | survey vs cellular | hybrid vs cellular | hybrid vs survey |
+|---|---|---|---|---|
+| TAZ, window 9, raw trips | 0.999 (0.98) | 0.993 (0.99) | 0.978 (0.93) | 0.994 (0.99) |
+| TAZ, window 9, log | 0.814 (0.14) | 0.128 (0.02) | 0.475 (0.03) | 0.388 (0.11) |
+| TAZ, window 25, log | 0.753 (0.08) | 0.112 (0.02) | 0.498 (0.04) | 0.332 (0.09) |
+| superzone, window 3, log | 0.686 (0.07) | 0.362 (0.09) | 0.441 (0.09) | 0.938 (0.06) |
+| 28 sub-areas, window 3, log | 0.619 (0.07) | 0.257 (0.05) | 0.678 (0.08) | 0.370 (0.06) |
+| TAZ, window 9, log — luminance / contrast / structure terms | 0.92 / 0.91 / 0.92 | 0.29 / 0.69 / 0.70 | 0.67 / 0.87 / 0.77 | 0.60 / 0.80 / 0.74 |
+
+1. **On raw trips the index says nothing.** Every pair scores 0.97–0.999 and so does the
+   null: the constants $C_1, C_2$ are set from the matrix maximum (intra-zonal cells of
+   tens of thousands of trips), which swamps the small-cell windows that make up almost
+   all of the matrix. The log scale is the informative one for OD matrices whose cells
+   span five orders of magnitude.
+2. **Survey vs cellular is close to chance at TAZ level** (0.13 against a null of 0.02
+   and a day-to-day ceiling of 0.81) and its weakest term is luminance (0.29): in the
+   same neighbourhoods the two matrices carry very different local levels — the
+   diagonal / short-trip gap of steps 12–13 seen window by window. Contrast and
+   structure (0.69 / 0.70) say the local texture is only moderately shared.
+3. **The hybrid sits between its sources and above both pairings**: 0.48 vs cellular,
+   0.39 vs the survey at TAZ level; at superzone level it is the survey (0.94) and at
+   sub-area level it is closer to cellular (0.68) — the correction factors keep the
+   superzone pattern and let cellular shape the cells below it.
+4. **Where.** Per origin superzone, survey-vs-cellular local SSIM is 0.05–0.28 with the
+   corridor superzones 19, 21, 20, 11, 4 and 10 at the bottom (≤ 0.08); the hybrid lifts
+   every origin to 0.36–0.57. Corridor-to-corridor windows: 0.12 survey vs cellular,
+   0.53 hybrid vs cellular (day-to-day 0.67). Intra-superzone blocks agree better than
+   inter-superzone ones for survey vs cellular (0.25 vs 0.11) and much better for the
+   hybrid (0.76 vs 0.44).
+5. **Ordering barely matters** (Hilbert vs native within 0.01–0.05), and window size
+   moves the survey-vs-cellular result by < 0.03, so the conclusions do not hinge on
+   those choices.
+
+**Outputs.** `Output/ths2017/tests/mssim_summary.csv` (every level × window × scale ×
+ordering × pair with the term decomposition and off-diagonal MSSIM), `mssim_headline.csv`,
+`mssim_by_origin_sz.csv`, `mssim_corridor_classes.csv`, `mssim_sz_blocks_*.csv`; figures
+`Output/figures/mssim_{window,maps,sz_blocks}.png`.
+
 ---
 
 ## 7. Output inventory (`Output/`)
@@ -708,6 +766,7 @@ day-1-vs-day-2 `D` and a 200-replicate household bootstrap of the survey.
 | `ths2017/study_taz/submatrices/*` | 28×28 areas | Step 6 | Sub-area matrices aggregated to the 28 named areas (205 TAZs, LRT-corridor flags in `area_legend.csv`) |
 | `ths2017/tests/*.csv` | various | Step 12 | Cosine / GEH similarity tests: headline summary, per-origin cosine, permutation null, scale audit, GEH pass rates by level / flow band / corridor class, 28-area cells |
 | `ths2017/tests/ks*.csv` | various | Step 13 | KS tests: trip length distributions (all / off-diagonal / per origin / corridor class), flow concentration, distance-proxy calibration |
+| `ths2017/tests/mssim_*.csv` | various | Step 14 | MSSIM tests: index by level / window / scale / ordering with term decomposition, broken-correspondence null, per-origin and superzone-block local SSIM, corridor classes |
 | `ths2017/trip_generation_*.csv` | 478 / 35 / 25 rows | Step 7 | Per-person AM-peak generation rates on the trips-file source |
 | `bus/bus_stops_taz.csv`, `bus/bus_od_taz_avg.csv`, `bus/bus_boardings_alightings_taz.csv` | 27k stops / 722×711 / 730 rows | Step 8 | RavKav stop tags, average-Tuesday AM-peak bus OD (journey-level), per-TAZ boardings/alightings (leg-level) |
 | `bus/bus_probability_matrix.csv`, `bus/bus_od_taz_new.csv`, `bus/bus_od_area_new{,_filtered}.csv` | 594×548 / 722×728 / 28×28, 25×25 | Step 9 | OnBoard destination probabilities; RavKav volumes × OnBoard pattern; area aggregation and noise-filtered version |
