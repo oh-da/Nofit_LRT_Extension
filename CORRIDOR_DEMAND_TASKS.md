@@ -58,9 +58,13 @@ Key facts driving the list (2017 trips-file hybrid, `Output/ths2017/study_taz/`)
 ## B. Scale and frame
 
 - [ ] **B1. Scale validation** **[needs LFS data]**
-  - [ ] Survey-expanded origin / destination totals vs cellular AM volumes by superzone
+  - [x] Survey-expanded origin / destination totals vs cellular AM volumes by superzone
         and by cellular zone; the diagonal magnitude in particular (does cellular miss
         ~70 % of intra-superzone trips, or does the survey over-record them?).
+        *Done in `THS_2017_cosine_GEH_tests.ipynb` (G1, `Output/ths2017/tests/geh_scale_audit_*.csv`):
+        survey 3.56 × cellular overall, 2.19 × on inter-1250-zone trips; cellular is 14 %
+        intra-1250-zone vs survey 47 %; superzone origin ratios 0.19–0.78. Which side is
+        right still needs the cellular trip definition (next bullet).*
   - [ ] Obtain the cellular product's trip definition (dwell-time, minimum-distance
         thresholds).
   - [ ] Car volumes vs screenline counts on the corridor, with an explicit assignment

@@ -560,6 +560,72 @@ Tirat Carmel, trip-weighted mean 1.067); train 962 → 763; `ALL_adjusted_2022` 
 `mode_share_area_2022.csv`, `area_growth_factors_2018_2022.csv` (derived factor table
 with population/employment levels per area).
 
+
+## 6j. Step 12 — Cosine similarity and GEH tests on the three matrices (`THS_2017_cosine_GEH_tests.ipynb`)
+
+**Question.** Two standard similarity measures applied to the three AM-peak matrices —
+THS survey (trips file, days 1 / 2, rebuilt with the step-5 chain and asserted equal to
+`matrix_avg_ALL_taz.csv`; the activities file is not read), cellular, and the primary
+hybrid — at superzone (36), GS (25), 28-sub-area and TAZ (778) resolution. Cosine
+similarity is scale-free and asks whether demand sits in the same cells; GEH is the
+link-count tolerance (`√(2(m−c)²/(m+c))`, hourly flows = 3-hour matrix / 3) and needs a
+common scale. Reference for every statistic: survey day 1 vs day 2 (sampling-noise
+ceiling) and a permuted-geography null (chance level).
+
+**Cellular volumes.** For volume tests the cellular matrix is allocated to TAZs with the
+same `Sₒᵀ · C₁₂₅₀ · S_d` chain as the survey (each cellular trip counted once, study-area
+total preserved: 580,506 AM trips over 396 native zones). The pipeline's replicated
+variant (`prob_matrix_cellular.csv`) sums to 6.4 × that and is used only as a probability
+sensitivity.
+
+**Results.**
+
+| | SZ | GS | 28 areas | TAZ |
+|---|---|---|---|---|
+| Cosine (raw) day 1 vs day 2 / survey vs cellular / hybrid vs cellular | 0.996 / 0.915 / 0.917 | 0.999 / 0.953 / 0.963 | 0.997 / 0.897 / 0.902 | 0.972 / 0.442 / 0.734 |
+| Cosine (row-normalized) same pairs | 0.998 / 0.870 / 0.874 | 0.986 / 0.852 / 0.891 | 0.885 / 0.681 / 0.805 | 0.675 / 0.437 / 0.825 |
+| Permuted-geography null, mean (raw) | 0.58 | 0.28 | 0.20 | 0.14 |
+| GEH < 5, flow-weighted share of cells: day 1 vs day 2 / survey vs cellular (row-matched) / hybrid vs cellular (row-matched) / hybrid vs survey | 46 % / 6 % / 5 % / 94 % | 39 % / 1 % / 2 % / 52 % | 63 % / 9 % / 13 % / 15 % | 79 % / 46 % / 67 % / 39 % |
+
+1. **Pattern agreement is real but well below the survey's own ceiling.** Survey vs
+   cellular cosine is 0.92 at SZ against a day-to-day ceiling of 0.996 and a chance level
+   of 0.58 (p < 0.0005 in 2,000 permutations at every level). Per origin, the
+   flow-weighted cosine of destination profiles is 0.89 (SZ) and the worst rows are the
+   corridor superzones 10 and 11 (0.33 / 0.46) — driven by the diagonal: off-diagonal
+   they score 0.75 / 0.69.
+2. **The hybrid is the survey at superzone level and cellular below it**, by
+   construction: hybrid vs survey cosine 1.000 at SZ (GEH < 5 in 94 % of flow), while at
+   TAZ the hybrid is closer to cellular (0.83 row-normalized) than to the survey (0.48),
+   whose TAZ pattern is itself only an allocation of cellular shares. The correction
+   factors move 33 % of TAZ-level flow beyond GEH 5 relative to the row-matched cellular.
+3. **Scale audit (task B1).** The survey expansion carries 3.56 × the cellular AM volume
+   (2,068,158 vs 580,506); the ratio is 2.19 on inter-1250-zone trips and far higher on
+   intra-zone ones (survey 47 % intra-1250-zone, cellular 14 %). Origin-total ratios
+   cellular / survey range 0.19–0.78 across superzones (median 0.29); after one global
+   factor only 11 % of superzones have origin totals within GEH 5 (cosine of the origin
+   vector 0.985, of the destination vector 0.967) — the cellular product under-detects
+   short trips and its zonal margins differ from the household expansion by more than
+   scale alone.
+4. **GEH is unforgiving at aggregate levels** because the cells are large (SZ cells run
+   to 6,000 trips/h, where GEH 5 means ± 4 %): even the two survey days pass GEH 5 in
+   only 46 % of SZ flow. Read GEH relative to that ceiling: survey / hybrid vs cellular
+   reach 5–13 % at SZ / GS / sub-area level versus 39–63 % for the two survey days.
+5. **Corridor.** Row-matched cellular puts 1.8 × the hybrid's outside → corridor flow
+   (253k vs 138k) and 0.75 × its corridor-internal flow (71k vs 95k): cellular sees the
+   corridor as a stronger attractor of inbound trips and a weaker container of local
+   ones. Among the 148 sub-area cells above 100 trips/h, 14 % are within GEH 5 of the
+   row-matched cellular (day-to-day: 57 %); the largest disagreements are the
+   intra-area cells of Kiryat Motzkin–Bialik, Kiryat Ata South, Tirat Carmel and Kiryat
+   Yam (hybrid 2–3 × cellular) and cellular's larger Krayot → Lower City / Bat Galim /
+   Kiryat Nahum flows.
+
+**Outputs.** `Output/ths2017/tests/`: `cosine_geh_summary.csv` (headline table),
+`cosine_whole_matrix.csv`, `cosine_by_origin_sz.csv`, `cosine_by_origin_summary.csv`,
+`cosine_permutation_null.csv`, `geh_scale_audit_{totals,sz,1250}.csv`,
+`geh_margins_scaled.csv`, `geh_cells_summary.csv`, `geh_by_flow_band.csv`,
+`geh_corridor_classes.csv`, `geh_area_cells.csv`; figures
+`Output/figures/cosine_geh_{whole_matrix,by_origin,cdf,corridor}.png`.
+
 ---
 
 ## 7. Output inventory (`Output/`)
@@ -587,6 +653,7 @@ with population/employment levels per area).
 | `ths2017/study_taz/matrix_avg_*` | 778×778 / 36×36 / 25×25 | Step 5 | Averaged trips-file matrices converted to the study TAZ / SZ_NEW / GS systems |
 | `ths2017/study_taz/hybrid_*`, `*_correction_factors.csv` | various | Step 6 | **Primary hybrid products** on the trips-file source (SZ/GS hybrids, TAZ matrices, trips) |
 | `ths2017/study_taz/submatrices/*` | 28×28 areas | Step 6 | Sub-area matrices aggregated to the 28 named areas (205 TAZs, LRT-corridor flags in `area_legend.csv`) |
+| `ths2017/tests/*.csv` | various | Step 12 | Cosine / GEH similarity tests: headline summary, per-origin cosine, permutation null, scale audit, GEH pass rates by level / flow band / corridor class, 28-area cells |
 | `ths2017/trip_generation_*.csv` | 478 / 35 / 25 rows | Step 7 | Per-person AM-peak generation rates on the trips-file source |
 | `bus/bus_stops_taz.csv`, `bus/bus_od_taz_avg.csv`, `bus/bus_boardings_alightings_taz.csv` | 27k stops / 722×711 / 730 rows | Step 8 | RavKav stop tags, average-Tuesday AM-peak bus OD (journey-level), per-TAZ boardings/alightings (leg-level) |
 | `bus/bus_probability_matrix.csv`, `bus/bus_od_taz_new.csv`, `bus/bus_od_area_new{,_filtered}.csv` | 594×548 / 722×728 / 28×28, 25×25 | Step 9 | OnBoard destination probabilities; RavKav volumes × OnBoard pattern; area aggregation and noise-filtered version |

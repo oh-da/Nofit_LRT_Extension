@@ -50,6 +50,7 @@ flowchart LR
 | `THS_PCA_review_tests.ipynb` | Review follow-up with direct tests: conditional outbound distributions q(j\|i) survey vs cellular (TV ≈ 0.31, ≈ 2.3× the sampling-noise expectation — the divergence is not only on the diagonal, and the hybrid carries the survey's outbound pattern), household bootstrap of the 2017 trips file (congruence spreads), spectrum-flattening decomposition (the survey's flat spectrum is its diagonal's doing, not noise), diagonal audit (intra-superzone trips are real, short: median 0.7 km), within-superzone destination check at 1250-zone resolution for the corridor superzones, and what the absolute totals rest on |
 | `THS_2017_trips_matrices.ipynb` | Independent day × mode + day-averaged matrices from `Input/trips_ths_2017.xlsx` (placeno-ordered activities, Dep_h 6–8, `new_wf` weights), converted to the study zone systems |
 | `THS_2017_hybrid_pipeline.ipynb` | **Primary fusion products** on the trips-file source: SZ/GS hybrids (k* = 5 by cross-day CV), correction-factor TAZ matrices, trips, and 119-TAZ submatrices |
+| `THS_2017_cosine_GEH_tests.ipynb` | Cosine similarity and GEH tests on the three matrices (trips-file survey days 1 / 2, cellular, hybrid) at SZ / GS / 28-area / TAZ level, against the day-1-vs-day-2 ceiling and a permuted-geography null; includes the survey-vs-cellular scale audit (survey 3.56 × cellular AM volume, driven by intra-zone trips) and corridor-class GEH |
 | `THS_2017_trip_generation.ipynb` | Per-person AM-peak generation rates on the trips-file source (overall ≈ 0.83), by 2636-zone / SZ / GS |
 | `BusRavKav_matrix.ipynb` | RavKav bus data: stop→TAZ spatial tagging, weekday-3 / 6–9 AM filter, average-Tuesday OD matrix and per-TAZ boardings/alightings |
 | `BusOnBoard_matrix.ipynb` | OnBoard survey probability matrix + combined bus matrix (RavKav volumes × OnBoard destination pattern) |
@@ -77,6 +78,8 @@ flowchart LR
 - `pca_sz_eigenvectors.csv` — top-6 superzone eigenvectors (destination loadings) and origin
   scores per source, matched to cellular and sign-aligned; charts in `figures/pca_eigenvector_*.png`
   and the write-up in `PCA_Eigenvector_Report.docx` (revised after review; the review's tests are in `THS_PCA_review_tests.ipynb`, figures `figures/pca_review_*.png`; plain-language Hebrew version in `PCA_Eigenvector_Report_Hebrew_Explainer.docx`)
+- `ths2017/tests/cosine_geh_summary.csv` — headline cosine / GEH table per level and pair (details in
+  `ths2017/tests/`, figures `figures/cosine_geh_*.png`, write-up in [METHODOLOGY.md §6j](METHODOLOGY.md#6j-step-12--cosine-similarity-and-geh-tests-on-the-three-matrices-ths_2017_cosine_geh_testsipynb))
 - Full inventory in [METHODOLOGY.md §7](METHODOLOGY.md#7-output-inventory-output)
 
 ## Setup

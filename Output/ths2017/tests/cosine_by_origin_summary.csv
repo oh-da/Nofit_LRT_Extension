@@ -1,0 +1,25 @@
+level,pair,origins,median,p10,p90,flow-weighted mean,share < 0.8
+SZ,d1 vs d2,36,0.9992,0.9944,0.9998,0.9987,0.0000
+SZ,survey vs cellular,36,0.8797,0.7410,0.9701,0.8894,0.1944
+SZ,hybrid vs cellular,36,0.8838,0.7478,0.9711,0.8926,0.1944
+SZ,hybrid vs survey,36,1.0000,0.9998,1.0000,0.9999,0.0000
+SZ,survey vs cellular (off-diag),36,0.8892,0.7750,0.9615,0.8990,0.1111
+SZ,hybrid vs cellular (off-diag),36,0.8942,0.7858,0.9666,0.9035,0.1111
+GS,d1 vs d2,25,0.9995,0.9987,0.9999,0.9993,0.0400
+GS,survey vs cellular,25,0.8988,0.6074,0.9831,0.8938,0.4000
+GS,hybrid vs cellular,25,0.9236,0.7259,0.9850,0.9201,0.3200
+GS,hybrid vs survey,25,0.9991,0.8899,0.9999,0.9803,0.0800
+GS,survey vs cellular (off-diag),25,0.9453,0.8229,0.9875,0.9330,0.0400
+GS,hybrid vs cellular (off-diag),25,0.9373,0.8114,0.9875,0.9336,0.1200
+AREA,d1 vs d2,28,0.9763,0.5148,0.9993,0.9802,0.2500
+AREA,survey vs cellular,28,0.7266,0.4272,0.9277,0.8066,0.6429
+AREA,hybrid vs cellular,28,0.8460,0.6569,0.9426,0.8575,0.4286
+AREA,hybrid vs survey,28,0.8556,0.5013,0.9962,0.9401,0.3571
+AREA,survey vs cellular (off-diag),28,0.6052,0.4284,0.8374,0.6837,0.8214
+AREA,hybrid vs cellular (off-diag),28,0.8292,0.7238,0.8926,0.8243,0.3571
+TAZ,d1 vs d2,697,0.9404,0.3055,0.9968,0.9344,0.2159
+TAZ,survey vs cellular,730,0.5134,0.1649,0.8075,0.5950,0.8278
+TAZ,hybrid vs cellular,778,0.8435,0.6592,0.9518,0.8313,0.3817
+TAZ,hybrid vs survey,730,0.6321,0.1462,0.9008,0.6736,0.6710
+TAZ,survey vs cellular (off-diag),727,0.4422,0.1353,0.7449,0.5127,0.8895
+TAZ,hybrid vs cellular (off-diag),778,0.7965,0.6355,0.9209,0.7963,0.5103

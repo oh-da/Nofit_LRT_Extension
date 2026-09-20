@@ -1,0 +1,17 @@
+level,pair,cosine raw,cosine off-diag,cosine row-norm,per-origin cosine (flow-wtd),GEH scaling,GEH<5 (flow-wtd),GEH<10 (flow-wtd),GEH<5 off-diag (flow-wtd)
+SZ,survey d1 vs survey d2,0.9963,0.9739,0.9978,0.9987,none,0.4593,0.7409,0.5668
+SZ,survey avg vs cellular,0.9153,0.8506,0.8699,0.8894,row,0.0552,0.1081,0.1225
+SZ,hybrid vs cellular,0.9173,0.8586,0.8742,0.8926,row,0.0538,0.1145,0.1180
+SZ,hybrid vs survey avg,0.9999,0.9992,0.9999,0.9999,none,0.9361,1.0000,0.9858
+GS,survey d1 vs survey d2,0.9987,0.9828,0.9856,0.9993,none,0.3897,0.7695,0.5088
+GS,survey avg vs cellular,0.9529,0.9142,0.8521,0.8938,row,0.0132,0.0339,0.0394
+GS,hybrid vs cellular,0.9627,0.8660,0.8914,0.9201,row,0.0205,0.0553,0.0573
+GS,hybrid vs survey avg,0.9941,0.9028,0.9685,0.9803,none,0.5170,0.6103,0.5544
+AREA,survey d1 vs survey d2,0.9969,0.9781,0.8846,0.9802,none,0.6324,0.9415,0.6098
+AREA,survey avg vs cellular,0.8967,0.6832,0.6813,0.8066,row,0.0911,0.2036,0.1451
+AREA,hybrid vs cellular,0.9024,0.8044,0.8046,0.8575,row,0.1317,0.2751,0.2149
+AREA,hybrid vs survey avg,0.9601,0.8549,0.8420,0.9401,none,0.1486,0.2258,0.3227
+TAZ,survey d1 vs survey d2,0.9717,0.9397,0.6749,0.9344,none,0.7943,0.9435,0.8199
+TAZ,survey avg vs cellular,0.4416,0.4166,0.4374,0.5950,row,0.4591,0.6566,0.5243
+TAZ,hybrid vs cellular,0.7337,0.7366,0.8253,0.8313,row,0.6686,0.8718,0.7091
+TAZ,hybrid vs survey avg,0.4324,0.5376,0.4837,0.6736,none,0.3908,0.6541,0.4422

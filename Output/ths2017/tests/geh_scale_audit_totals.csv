@@ -1,0 +1,6 @@
+,AM trips (3 h),ratio to survey avg,intra-TAZ share,intra-SZ share,intra-1250-zone share
+survey d1,2077301.9965,1.0044,0.2461,0.7281,0.4666
+survey d2,2059014.9286,0.9956,0.2470,0.7316,0.4713
+survey avg,2068158.4626,1.0000,0.2465,0.7298,0.4689
+cellular (native),580505.9913,0.2807,0.0685,,0.1371
+hybrid,2068158.2614,1.0000,0.1220,0.7175,
