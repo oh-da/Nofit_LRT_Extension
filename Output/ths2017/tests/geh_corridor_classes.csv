@@ -1,0 +1,25 @@
+pair,scaling,class,A trips,B trips,ratio B/A,GEH (class total),cells GEH<5 (flow-wtd)
+survey d1 vs survey d2,none,corridor→corridor,110791.1575,110491.8502,0.9973,0.5195,0.8889
+survey d1 vs survey d2,none,corridor→outside,67922.9233,71006.3916,1.0454,6.7546,0.7941
+survey d1 vs survey d2,none,outside→corridor,121368.5469,120952.5549,0.9966,0.6900,0.7912
+survey d1 vs survey d2,none,outside→outside,1777219.3688,1756564.1319,0.9884,8.9715,0.7886
+survey avg vs cellular,global,corridor→corridor,110641.5038,94125.5055,0.8507,29.8009,0.5168
+survey avg vs cellular,global,corridor→outside,69464.6575,151473.9362,2.1806,142.4563,0.7627
+survey avg vs cellular,global,outside→corridor,121160.5509,265636.3997,2.1924,189.6741,0.7394
+survey avg vs cellular,global,outside→outside,1766891.7504,1556922.6211,0.8812,94.0354,0.4113
+survey avg vs cellular,row,corridor→corridor,110641.5038,71057.7280,0.6422,75.8220,0.4891
+survey avg vs cellular,row,corridor→outside,69464.6575,109048.4333,1.5698,76.4956,0.7362
+survey avg vs cellular,row,outside→corridor,121160.5509,251327.1522,2.0743,174.1398,0.7380
+survey avg vs cellular,row,outside→outside,1766891.7504,1636725.1491,0.9263,57.6081,0.4124
+hybrid vs cellular,global,corridor→corridor,94610.2037,94125.4963,0.9949,0.9110,0.6636
+hybrid vs cellular,global,corridor→outside,91680.0535,151473.9215,1.6522,99.0080,0.8495
+hybrid vs cellular,global,outside→corridor,138008.3900,265636.3739,1.9248,164.0214,0.8433
+hybrid vs cellular,global,outside→outside,1743859.6143,1556922.4697,0.8928,84.0120,0.6309
+hybrid vs cellular,row,corridor→corridor,94610.2037,70668.6039,0.7469,48.0838,0.6196
+hybrid vs cellular,row,corridor→outside,91680.0535,115621.6533,1.2611,42.9345,0.8296
+hybrid vs cellular,row,outside→corridor,138008.3900,252688.3651,1.8310,149.8035,0.8597
+hybrid vs cellular,row,outside→outside,1743859.6143,1629179.6391,0.9342,50.9837,0.6390
+hybrid vs survey avg,none,corridor→corridor,94610.2037,110641.5038,1.1694,28.8921,0.4390
+hybrid vs survey avg,none,corridor→outside,91680.0535,69464.6575,0.7577,45.1856,0.6081
+hybrid vs survey avg,none,outside→corridor,138008.3900,121160.5509,0.8779,27.0214,0.6559
+hybrid vs survey avg,none,outside→outside,1743859.6143,1766891.7504,1.0132,10.0366,0.3584

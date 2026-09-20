@@ -1,0 +1,17 @@
+class,pair,D,at km,signed gap (A−B),A median km,B median km
+corridor→corridor,survey d1 vs survey d2,0.0167,6.5903,-0.0167,1.0707,0.9990
+corridor→corridor,survey avg vs cellular,0.3873,2.6305,0.3873,1.0316,4.2048
+corridor→corridor,hybrid vs cellular,0.2761,4.0306,0.2761,1.5774,4.2048
+corridor→corridor,hybrid vs survey avg,0.1232,2.6305,-0.1232,1.5774,1.0316
+corridor→outside,survey d1 vs survey d2,0.0373,6.8804,-0.0373,4.3387,4.2155
+corridor→outside,survey avg vs cellular,0.2817,4.0675,0.2817,4.2965,8.3938
+corridor→outside,hybrid vs cellular,0.2240,6.7833,0.2240,4.9797,8.3938
+corridor→outside,hybrid vs survey avg,0.0879,3.0334,-0.0879,4.9797,4.2965
+outside→corridor,survey d1 vs survey d2,0.0237,19.7724,0.0237,5.1996,5.1604
+outside→corridor,survey avg vs cellular,0.2406,4.0941,0.2406,5.1868,8.8435
+outside→corridor,hybrid vs cellular,0.1786,5.2959,0.1786,5.8501,8.8435
+outside→corridor,hybrid vs survey avg,0.0863,2.8996,-0.0863,5.8501,5.1868
+outside→outside,survey d1 vs survey d2,0.0098,3.3754,-0.0098,1.7952,1.7639
+outside→outside,survey avg vs cellular,0.4320,3.7318,0.4320,1.7823,7.6413
+outside→outside,hybrid vs cellular,0.2482,5.4766,0.2482,3.7253,7.6413
+outside→outside,hybrid vs survey avg,0.2033,3.0842,-0.2033,3.7253,1.7823

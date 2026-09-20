@@ -1,0 +1,7 @@
+,survey d1 vs survey d2,survey avg vs cellular,hybrid vs cellular,hybrid vs survey avg
+corridor→corridor,0.6715,0.1194,0.5323,0.2770
+corridor→outside,0.8023,0.1125,0.4365,0.3960
+outside→corridor,0.7826,0.1034,0.4601,0.3375
+outside→outside,0.8263,0.1355,0.4829,0.3993
+intra-SZ blocks (mean),0.7702,0.2465,0.7587,0.3460
+inter-SZ blocks (mean),0.8146,0.1120,0.4422,0.3886
