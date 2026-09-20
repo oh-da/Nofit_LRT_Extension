@@ -1,0 +1,171 @@
+profile,pair,direction,link,A,B,ratio,GEH
+total,hybrid vs survey-only,1→23,TiratCarmel – Matam,4381.936,3167.702,1.383,11.410
+total,hybrid vs survey-only,1→23,Matam – Neot Peres,3812.673,2762.266,1.380,10.577
+total,hybrid vs survey-only,1→23,Neot Peres – Neve David,3973.684,2489.810,1.596,15.070
+total,hybrid vs survey-only,1→23,Neve David – Ein Hayam,4818.040,4345.445,1.109,4.031
+total,hybrid vs survey-only,1→23,Ein Hayam – Bat Galim,4748.423,6376.179,0.745,12.601
+total,hybrid vs survey-only,1→23,Bat Galim – Kiryat Eliezer,5220.708,6075.342,0.859,6.566
+total,hybrid vs survey-only,1→23,Kiryat Eliezer – Hamoshava,6163.809,6124.697,1.006,0.288
+total,hybrid vs survey-only,1→23,Hamoshava – Lower City,5740.344,5254.759,1.092,3.781
+total,hybrid vs survey-only,1→23,Lower City – Hadar Carmel,4500.657,4073.787,1.105,3.764
+total,hybrid vs survey-only,1→23,Hadar Carmel – Namal,2164.158,2524.258,0.857,4.294
+total,hybrid vs survey-only,1→23,Namal – Neve Yosef,1935.227,2308.922,0.838,4.684
+total,hybrid vs survey-only,1→23,Neve Yosef – Hamifrats,1689.634,1747.174,0.967,0.801
+total,hybrid vs survey-only,1→23,Hamifrats – Hutzot,828.859,676.051,1.226,3.216
+total,hybrid vs survey-only,1→23,Hutzot – Kiryat Ata Center,402.184,375.019,1.072,0.796
+total,hybrid vs survey-only,1→23,Kiryat Ata Center – Kiryat Bialik South,292.681,257.593,1.136,1.221
+total,hybrid vs survey-only,1→23,Kiryat Bialik South – Shefaram,234.002,152.127,1.538,3.402
+total,hybrid vs survey-only,1→23,Shefaram – Nazareth Area,276.911,178.353,1.553,3.771
+total,hybrid vs survey-only,23→1,TiratCarmel – Matam,1897.235,1566.751,1.211,4.585
+total,hybrid vs survey-only,23→1,Matam – Neot Peres,3146.227,3006.482,1.046,1.455
+total,hybrid vs survey-only,23→1,Neot Peres – Neve David,4775.656,3414.469,1.399,12.281
+total,hybrid vs survey-only,23→1,Neve David – Ein Hayam,6392.567,3517.779,1.817,23.578
+total,hybrid vs survey-only,23→1,Ein Hayam – Bat Galim,6417.991,2955.805,2.171,29.198
+total,hybrid vs survey-only,23→1,Bat Galim – Kiryat Eliezer,6693.356,5690.417,1.176,7.359
+total,hybrid vs survey-only,23→1,Kiryat Eliezer – Hamoshava,4351.178,4082.751,1.066,2.387
+total,hybrid vs survey-only,23→1,Hamoshava – Lower City,4431.256,2948.556,1.503,14.092
+total,hybrid vs survey-only,23→1,Lower City – Hadar Carmel,4412.521,3555.899,1.241,7.835
+total,hybrid vs survey-only,23→1,Hadar Carmel – Namal,2802.736,3121.016,0.898,3.376
+total,hybrid vs survey-only,23→1,Namal – Neve Yosef,3025.159,3320.162,0.911,3.024
+total,hybrid vs survey-only,23→1,Neve Yosef – Hamifrats,2586.669,3102.186,0.834,5.581
+total,hybrid vs survey-only,23→1,Hamifrats – Hutzot,2528.985,3616.366,0.699,11.326
+total,hybrid vs survey-only,23→1,Hutzot – Kiryat Ata Center,2471.162,3637.416,0.679,12.184
+total,hybrid vs survey-only,23→1,Kiryat Ata Center – Kiryat Bialik South,1832.082,3295.652,0.556,16.688
+total,hybrid vs survey-only,23→1,Kiryat Bialik South – Shefaram,1624.144,1491.906,1.089,1.934
+total,hybrid vs survey-only,23→1,Shefaram – Nazareth Area,577.570,740.510,0.780,3.664
+total,survey day 1 vs survey day 2,1→23,TiratCarmel – Matam,3150.955,3184.448,0.989,0.344
+total,survey day 1 vs survey day 2,1→23,Matam – Neot Peres,2740.375,2784.157,0.984,0.481
+total,survey day 1 vs survey day 2,1→23,Neot Peres – Neve David,2539.412,2440.209,1.041,1.148
+total,survey day 1 vs survey day 2,1→23,Neve David – Ein Hayam,4383.920,4306.970,1.018,0.674
+total,survey day 1 vs survey day 2,1→23,Ein Hayam – Bat Galim,6441.831,6310.526,1.021,0.949
+total,survey day 1 vs survey day 2,1→23,Bat Galim – Kiryat Eliezer,6147.704,6002.979,1.024,1.072
+total,survey day 1 vs survey day 2,1→23,Kiryat Eliezer – Hamoshava,6336.793,5912.599,1.072,3.129
+total,survey day 1 vs survey day 2,1→23,Hamoshava – Lower City,5342.780,5166.736,1.034,1.402
+total,survey day 1 vs survey day 2,1→23,Lower City – Hadar Carmel,3834.264,4313.307,0.889,4.333
+total,survey day 1 vs survey day 2,1→23,Hadar Carmel – Namal,2459.455,2589.060,0.950,1.489
+total,survey day 1 vs survey day 2,1→23,Namal – Neve Yosef,2313.580,2304.264,1.004,0.112
+total,survey day 1 vs survey day 2,1→23,Neve Yosef – Hamifrats,1655.938,1838.409,0.901,2.520
+total,survey day 1 vs survey day 2,1→23,Hamifrats – Hutzot,765.981,586.121,1.307,3.994
+total,survey day 1 vs survey day 2,1→23,Hutzot – Kiryat Ata Center,320.650,429.389,0.747,3.242
+total,survey day 1 vs survey day 2,1→23,Kiryat Ata Center – Kiryat Bialik South,197.321,317.866,0.621,4.336
+total,survey day 1 vs survey day 2,1→23,Kiryat Bialik South – Shefaram,116.625,187.630,0.622,3.324
+total,survey day 1 vs survey day 2,1→23,Shefaram – Nazareth Area,110.045,246.662,0.446,5.906
+total,survey day 1 vs survey day 2,23→1,TiratCarmel – Matam,1909.853,1223.650,1.561,10.009
+total,survey day 1 vs survey day 2,23→1,Matam – Neot Peres,2751.544,3261.422,0.844,5.369
+total,survey day 1 vs survey day 2,23→1,Neot Peres – Neve David,3303.050,3525.888,0.937,2.202
+total,survey day 1 vs survey day 2,23→1,Neve David – Ein Hayam,3219.171,3816.388,0.844,5.813
+total,survey day 1 vs survey day 2,23→1,Ein Hayam – Bat Galim,2445.058,3466.552,0.705,10.848
+total,survey day 1 vs survey day 2,23→1,Bat Galim – Kiryat Eliezer,5277.752,6103.081,0.865,6.317
+total,survey day 1 vs survey day 2,23→1,Kiryat Eliezer – Hamoshava,3608.768,4556.734,0.792,8.566
+total,survey day 1 vs survey day 2,23→1,Hamoshava – Lower City,2523.579,3373.532,0.748,9.037
+total,survey day 1 vs survey day 2,23→1,Lower City – Hadar Carmel,3410.796,3701.002,0.922,2.810
+total,survey day 1 vs survey day 2,23→1,Hadar Carmel – Namal,3463.722,2778.308,1.247,7.083
+total,survey day 1 vs survey day 2,23→1,Namal – Neve Yosef,3543.739,3096.585,1.144,4.480
+total,survey day 1 vs survey day 2,23→1,Neve Yosef – Hamifrats,3266.752,2937.618,1.112,3.412
+total,survey day 1 vs survey day 2,23→1,Hamifrats – Hutzot,4091.024,3141.706,1.302,9.114
+total,survey day 1 vs survey day 2,23→1,Hutzot – Kiryat Ata Center,4243.839,3030.991,1.400,11.610
+total,survey day 1 vs survey day 2,23→1,Kiryat Ata Center – Kiryat Bialik South,3654.771,2936.531,1.245,7.223
+total,survey day 1 vs survey day 2,23→1,Kiryat Bialik South – Shefaram,1788.840,1194.970,1.497,8.877
+total,survey day 1 vs survey day 2,23→1,Shefaram – Nazareth Area,992.624,488.396,2.032,10.698
+transit,hybrid vs survey-only,1→23,TiratCarmel – Matam,727.945,1047.833,0.695,6.198
+transit,hybrid vs survey-only,1→23,Matam – Neot Peres,730.087,1167.746,0.625,8.203
+transit,hybrid vs survey-only,1→23,Neot Peres – Neve David,836.396,823.798,1.015,0.252
+transit,hybrid vs survey-only,1→23,Neve David – Ein Hayam,1164.486,1824.208,0.638,9.853
+transit,hybrid vs survey-only,1→23,Ein Hayam – Bat Galim,1172.252,2730.396,0.429,20.365
+transit,hybrid vs survey-only,1→23,Bat Galim – Kiryat Eliezer,1385.063,2241.654,0.618,11.614
+transit,hybrid vs survey-only,1→23,Kiryat Eliezer – Hamoshava,1725.954,2012.564,0.858,3.827
+transit,hybrid vs survey-only,1→23,Hamoshava – Lower City,1560.257,2210.897,0.706,8.651
+transit,hybrid vs survey-only,1→23,Lower City – Hadar Carmel,1149.446,1594.153,0.721,6.932
+transit,hybrid vs survey-only,1→23,Hadar Carmel – Namal,528.431,933.903,0.566,8.657
+transit,hybrid vs survey-only,1→23,Namal – Neve Yosef,431.214,845.096,0.510,9.459
+transit,hybrid vs survey-only,1→23,Neve Yosef – Hamifrats,348.100,479.927,0.725,3.741
+transit,hybrid vs survey-only,1→23,Hamifrats – Hutzot,134.333,230.659,0.582,4.117
+transit,hybrid vs survey-only,1→23,Hutzot – Kiryat Ata Center,50.759,105.811,0.480,3.592
+transit,hybrid vs survey-only,1→23,Kiryat Ata Center – Kiryat Bialik South,12.026,31.648,0.380,2.424
+transit,hybrid vs survey-only,1→23,Kiryat Bialik South – Shefaram,6.247,0.000,,2.041
+transit,hybrid vs survey-only,1→23,Shefaram – Nazareth Area,5.853,0.000,,1.975
+transit,hybrid vs survey-only,23→1,TiratCarmel – Matam,252.909,569.770,0.444,9.020
+transit,hybrid vs survey-only,23→1,Matam – Neot Peres,543.309,904.317,0.601,7.747
+transit,hybrid vs survey-only,23→1,Neot Peres – Neve David,868.071,1208.194,0.718,6.095
+transit,hybrid vs survey-only,23→1,Neve David – Ein Hayam,1183.482,1173.536,1.008,0.167
+transit,hybrid vs survey-only,23→1,Ein Hayam – Bat Galim,1171.158,922.707,1.269,4.433
+transit,hybrid vs survey-only,23→1,Bat Galim – Kiryat Eliezer,1192.987,1015.281,1.175,3.088
+transit,hybrid vs survey-only,23→1,Kiryat Eliezer – Hamoshava,591.916,785.574,0.753,4.260
+transit,hybrid vs survey-only,23→1,Hamoshava – Lower City,736.151,833.505,0.883,2.006
+transit,hybrid vs survey-only,23→1,Lower City – Hadar Carmel,837.332,901.186,0.929,1.250
+transit,hybrid vs survey-only,23→1,Hadar Carmel – Namal,639.291,923.503,0.692,5.870
+transit,hybrid vs survey-only,23→1,Namal – Neve Yosef,642.274,768.545,0.836,2.745
+transit,hybrid vs survey-only,23→1,Neve Yosef – Hamifrats,554.620,611.240,0.907,1.354
+transit,hybrid vs survey-only,23→1,Hamifrats – Hutzot,502.943,491.326,1.024,0.301
+transit,hybrid vs survey-only,23→1,Hutzot – Kiryat Ata Center,501.109,487.405,1.028,0.356
+transit,hybrid vs survey-only,23→1,Kiryat Ata Center – Kiryat Bialik South,349.992,487.405,0.718,3.877
+transit,hybrid vs survey-only,23→1,Kiryat Bialik South – Shefaram,301.889,211.084,1.430,3.274
+transit,hybrid vs survey-only,23→1,Shefaram – Nazareth Area,151.263,170.787,0.886,0.888
+transit,survey day 1 vs survey day 2,1→23,TiratCarmel – Matam,1249.556,846.110,1.477,7.196
+transit,survey day 1 vs survey day 2,1→23,Matam – Neot Peres,1249.556,1085.936,1.151,2.764
+transit,survey day 1 vs survey day 2,1→23,Neot Peres – Neve David,905.608,741.988,1.221,3.291
+transit,survey day 1 vs survey day 2,1→23,Neve David – Ein Hayam,1908.973,1739.442,1.097,2.292
+transit,survey day 1 vs survey day 2,1→23,Ein Hayam – Bat Galim,2886.956,2573.836,1.122,3.460
+transit,survey day 1 vs survey day 2,1→23,Bat Galim – Kiryat Eliezer,2259.036,2224.271,1.016,0.424
+transit,survey day 1 vs survey day 2,1→23,Kiryat Eliezer – Hamoshava,1929.526,2095.600,0.921,2.137
+transit,survey day 1 vs survey day 2,1→23,Hamoshava – Lower City,2127.860,2293.934,0.928,2.039
+transit,survey day 1 vs survey day 2,1→23,Lower City – Hadar Carmel,1584.172,1604.131,0.988,0.289
+transit,survey day 1 vs survey day 2,1→23,Hadar Carmel – Namal,977.416,890.390,1.098,1.644
+transit,survey day 1 vs survey day 2,1→23,Namal – Neve Yosef,888.609,801.583,1.109,1.728
+transit,survey day 1 vs survey day 2,1→23,Neve Yosef – Hamifrats,412.254,547.600,0.753,3.567
+transit,survey day 1 vs survey day 2,1→23,Hamifrats – Hutzot,276.941,184.378,1.502,3.519
+transit,survey day 1 vs survey day 2,1→23,Hutzot – Kiryat Ata Center,137.459,74.162,1.853,3.553
+transit,survey day 1 vs survey day 2,1→23,Kiryat Ata Center – Kiryat Bialik South,63.296,0.000,,6.496
+transit,survey day 1 vs survey day 2,1→23,Kiryat Bialik South – Shefaram,0.000,0.000,,0.000
+transit,survey day 1 vs survey day 2,1→23,Shefaram – Nazareth Area,0.000,0.000,,0.000
+transit,survey day 1 vs survey day 2,23→1,TiratCarmel – Matam,569.770,569.770,1.000,0.000
+transit,survey day 1 vs survey day 2,23→1,Matam – Neot Peres,755.218,1053.417,0.717,5.725
+transit,survey day 1 vs survey day 2,23→1,Neot Peres – Neve David,1314.782,1101.607,1.194,3.541
+transit,survey day 1 vs survey day 2,23→1,Neve David – Ein Hayam,1178.451,1168.622,1.008,0.166
+transit,survey day 1 vs survey day 2,23→1,Ein Hayam – Bat Galim,900.187,945.227,0.952,0.856
+transit,survey day 1 vs survey day 2,23→1,Bat Galim – Kiryat Eliezer,814.715,1215.847,0.670,7.268
+transit,survey day 1 vs survey day 2,23→1,Kiryat Eliezer – Hamoshava,547.856,1023.292,0.535,9.793
+transit,survey day 1 vs survey day 2,23→1,Hamoshava – Lower City,547.856,1119.154,0.490,11.425
+transit,survey day 1 vs survey day 2,23→1,Lower City – Hadar Carmel,573.004,1229.369,0.466,12.623
+transit,survey day 1 vs survey day 2,23→1,Hadar Carmel – Namal,903.576,943.429,0.958,0.757
+transit,survey day 1 vs survey day 2,23→1,Namal – Neve Yosef,593.661,943.429,0.629,7.284
+transit,survey day 1 vs survey day 2,23→1,Neve Yosef – Hamifrats,370.377,852.101,0.435,11.249
+transit,survey day 1 vs survey day 2,23→1,Hamifrats – Hutzot,370.377,612.274,0.605,6.301
+transit,survey day 1 vs survey day 2,23→1,Hutzot – Kiryat Ata Center,380.659,594.151,0.641,5.583
+transit,survey day 1 vs survey day 2,23→1,Kiryat Ata Center – Kiryat Bialik South,380.659,594.151,0.641,5.583
+transit,survey day 1 vs survey day 2,23→1,Kiryat Bialik South – Shefaram,10.281,411.886,0.025,15.959
+transit,survey day 1 vs survey day 2,23→1,Shefaram – Nazareth Area,0.000,341.573,0.000,15.090
+transit,hybrid vs survey-only (bus calibrated),1→23,TiratCarmel – Matam,727.945,1155.664,0.630,8.047
+transit,hybrid vs survey-only (bus calibrated),1→23,Matam – Neot Peres,730.087,1225.945,0.596,9.154
+transit,hybrid vs survey-only (bus calibrated),1→23,Neot Peres – Neve David,836.396,1108.847,0.754,5.044
+transit,hybrid vs survey-only (bus calibrated),1→23,Neve David – Ein Hayam,1164.486,1989.658,0.585,11.997
+transit,hybrid vs survey-only (bus calibrated),1→23,Ein Hayam – Bat Galim,1172.252,2895.067,0.405,22.057
+transit,hybrid vs survey-only (bus calibrated),1→23,Bat Galim – Kiryat Eliezer,1385.063,2472.032,0.560,14.290
+transit,hybrid vs survey-only (bus calibrated),1→23,Kiryat Eliezer – Hamoshava,1725.954,2242.898,0.770,6.700
+transit,hybrid vs survey-only (bus calibrated),1→23,Hamoshava – Lower City,1560.257,2319.685,0.673,9.955
+transit,hybrid vs survey-only (bus calibrated),1→23,Lower City – Hadar Carmel,1149.446,1753.769,0.655,9.158
+transit,hybrid vs survey-only (bus calibrated),1→23,Hadar Carmel – Namal,528.431,1219.803,0.433,13.501
+transit,hybrid vs survey-only (bus calibrated),1→23,Namal – Neve Yosef,431.214,1197.738,0.360,15.507
+transit,hybrid vs survey-only (bus calibrated),1→23,Neve Yosef – Hamifrats,348.100,594.324,0.586,6.549
+transit,hybrid vs survey-only (bus calibrated),1→23,Hamifrats – Hutzot,134.333,337.455,0.398,7.636
+transit,hybrid vs survey-only (bus calibrated),1→23,Hutzot – Kiryat Ata Center,50.759,112.244,0.452,3.932
+transit,hybrid vs survey-only (bus calibrated),1→23,Kiryat Ata Center – Kiryat Bialik South,12.026,47.622,0.253,3.763
+transit,hybrid vs survey-only (bus calibrated),1→23,Kiryat Bialik South – Shefaram,6.247,3.416,1.829,0.744
+transit,hybrid vs survey-only (bus calibrated),1→23,Shefaram – Nazareth Area,5.853,1.663,3.520,1.248
+transit,hybrid vs survey-only (bus calibrated),23→1,TiratCarmel – Matam,252.909,551.835,0.458,8.604
+transit,hybrid vs survey-only (bus calibrated),23→1,Matam – Neot Peres,543.309,1185.596,0.458,12.612
+transit,hybrid vs survey-only (bus calibrated),23→1,Neot Peres – Neve David,868.071,1776.757,0.489,14.427
+transit,hybrid vs survey-only (bus calibrated),23→1,Neve David – Ein Hayam,1183.482,1673.455,0.707,7.485
+transit,hybrid vs survey-only (bus calibrated),23→1,Ein Hayam – Bat Galim,1171.158,1432.301,0.818,4.179
+transit,hybrid vs survey-only (bus calibrated),23→1,Bat Galim – Kiryat Eliezer,1192.987,1593.761,0.749,6.199
+transit,hybrid vs survey-only (bus calibrated),23→1,Kiryat Eliezer – Hamoshava,591.916,1193.827,0.496,11.630
+transit,hybrid vs survey-only (bus calibrated),23→1,Hamoshava – Lower City,736.151,1288.759,0.571,10.027
+transit,hybrid vs survey-only (bus calibrated),23→1,Lower City – Hadar Carmel,837.332,1537.131,0.545,11.726
+transit,hybrid vs survey-only (bus calibrated),23→1,Hadar Carmel – Namal,639.291,1593.335,0.401,16.486
+transit,hybrid vs survey-only (bus calibrated),23→1,Namal – Neve Yosef,642.274,1308.277,0.491,12.313
+transit,hybrid vs survey-only (bus calibrated),23→1,Neve Yosef – Hamifrats,554.620,1201.414,0.462,12.602
+transit,hybrid vs survey-only (bus calibrated),23→1,Hamifrats – Hutzot,502.943,850.571,0.591,7.715
+transit,hybrid vs survey-only (bus calibrated),23→1,Hutzot – Kiryat Ata Center,501.109,797.297,0.629,6.711
+transit,hybrid vs survey-only (bus calibrated),23→1,Kiryat Ata Center – Kiryat Bialik South,349.992,738.484,0.474,9.615
+transit,hybrid vs survey-only (bus calibrated),23→1,Kiryat Bialik South – Shefaram,301.889,478.313,0.631,5.157
+transit,hybrid vs survey-only (bus calibrated),23→1,Shefaram – Nazareth Area,151.263,410.547,0.368,8.932

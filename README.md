@@ -57,6 +57,7 @@ flowchart LR
 | `THS_2017_three_mode_2022.ipynb` | Moves the survey-only two-mode matrix to a 2022 base at TAZ level (car Furnessed to population / employment growth margins, RavKav-calibrated bus rows as the anchor, guarded rows and taxi-type grown, rail × the national ridership series) and splits it into **car / bus / rail** matrices |
 | `Corridor_flow_profile_survey_2022.ipynb` | Directional link-flow profiles along the corridor for the survey-only 2022 matrices — total (car + bus + rail) and transit only — with the earlier hybrid- / ticketing-based profiles overlaid |
 | `Corridor_profile_hybrid_vs_ticketing.ipynb` | Link-by-link comparison of the calibrated-survey transit profile with the ticketing-based one (components, calibration steps, area pairs driving the differences, transit share of link flow, local-vs-intercity ticketing coverage) |
+| `Corridor_profile_hybrid_vs_survey_tests.ipynb` | GEH per link and a shape descriptor D for the corridor profiles of the cellular hybrid vs the survey-only matrix at 2018 with matching mode content, against the survey's day 1 / day 2 profiles as the noise reference |
 | `THS_2017_trip_generation.ipynb` | Per-person AM-peak generation rates on the trips-file source (overall ≈ 0.83), by 2636-zone / SZ / GS |
 | `BusRavKav_matrix.ipynb` | RavKav bus data: stop→TAZ spatial tagging, weekday-3 / 6–9 AM filter, average-Tuesday OD matrix and per-TAZ boardings/alightings |
 | `BusOnBoard_matrix.ipynb` | OnBoard survey probability matrix + combined bus matrix (RavKav volumes × OnBoard destination pattern) |

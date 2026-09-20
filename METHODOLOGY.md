@@ -905,6 +905,55 @@ the ticketing set, whose total includes walk / other modes.
 `corridor_profile_coverage_local_vs_intercity.csv`; figures
 `corridor_profile_hybrid_vs_ticketing.png`, `corridor_profile_transit_share.png`.
 
+
+## 6q. Step 19 — Corridor profile tests: cellular hybrid vs survey-only (`Corridor_profile_hybrid_vs_survey_tests.ipynb`)
+
+**Question.** Are the corridor profiles of the cellular hybrid and of the survey-only
+matrix the same, once compared on the same footing — 2018 vintage, the same mode content
+(the hybrid's walk / other layer removed with the survey's own other-mode share per
+superzone pair; total = car + transit, transit = bus + taxi-type + rail), the same line
+sequence and link rule? A KS test is not the instrument (a profile is a fixed-order curve
+of 17 dependent, weighted values, not a sample); the tests are **GEH per link and
+direction** on hourly flows, and a **shape descriptor D** (largest gap between the two
+cumulative link-trip-share curves along the line), both judged against the survey's day 1
+vs day 2 profiles rebuilt with the same allocation.
+
+**Results** (share of link flow within GEH 5 / max GEH / shape D):
+
+| | 1 → 23 (to Nazareth) | 23 → 1 (to Tirat Carmel) |
+|---|---|---|
+| Total, hybrid vs survey-only | 57 % / 15 / 0.07 | 31 % / 29 / 0.13 |
+| Total, day 1 vs day 2 | 100 % / 6 / 0.02 | 25 % / 12 / 0.10 |
+| Transit, hybrid vs survey-only | 23 % / 20 / 0.04 | 75 % / 9 / 0.06 |
+| Transit, day 1 vs day 2 | 94 % / 7 / 0.04 | 39 % / 16 / 0.13 |
+
+1. **Towards Nazareth the two matrices agree on the total profile east of Neve David**
+   (GEH 0–7 from Ein Hayam to Nazareth) and disagree on the first three links
+   (Tirat Carmel → Neve David: hybrid 4,400 / 3,800 / 4,000 vs survey-only 3,200 /
+   2,800 / 2,500, GEH 11–15): the cellular structure sends more Tirat Carmel trips into
+   the Haifa coast districts than the population / employment split does.
+2. **Towards Tirat Carmel the disagreement is in the Haifa west** (Neve David → Bat
+   Galim: hybrid 6,400 vs survey-only 3,000–3,500, GEH 24–29) and in the Krayot
+   (hybrid 1,800–2,500 vs 3,300–3,600, GEH 11–17), i.e. the cellular-shaped cells put
+   the westbound flow through Bat Galim / Neve David and less through Kiryat Ata.
+   But the survey's own two days differ almost as much in this direction (25 % of flow
+   within GEH 5, D 0.10): the 23 → 1 profile is where the survey sample is thinnest,
+   so a good part of the gap is within noise.
+3. **Transit towards Nazareth is the clearest difference**: the hybrid carries 35–50 %
+   less transit than the survey-only matrix along the whole Haifa segment (Ein Hayam –
+   Bat Galim 1,170 vs 2,730, GEH 20) while the two survey days agree there (94 % of
+   flow within GEH 5). The hybrid's transit is the survey's mode share applied to
+   cellular-shaped cells, and cellular places fewer of the corridor's trips on the
+   intra-Haifa pairs where the transit share is high. Towards Tirat Carmel the transit
+   profiles agree (75 % within GEH 5, max GEH 9).
+4. **Shape**: D of 0.04–0.13 against a day-to-day 0.02–0.13 — the profiles have the same
+   shape along the line within survey noise; the differences are in level on
+   particular segments, not in where the demand sits.
+
+**Outputs.** `Output/ths2017/tests/corridor_profile_hybrid_vs_survey_summary.csv`,
+`corridor_profile_hybrid_vs_survey_links.csv`; figures
+`corridor_profile_hybrid_vs_survey.png`, `corridor_profile_hybrid_vs_survey_shape.png`.
+
 ---
 
 ## 7. Output inventory (`Output/`)
