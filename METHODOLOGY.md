@@ -848,6 +848,32 @@ door-to-door survey rail trips there.
 `rail_station_smartcard_2022_taz.csv`, `growth_factors_taz_2018_2022.csv`,
 `summary_2018_2022.csv`, `summary_sz_2018_2022.csv`; figure `three_mode_2022.png`.
 
+
+## 6o. Step 17 — Corridor demand profile of the survey-only 2022 matrices (`Corridor_flow_profile_survey_2022.ipynb`)
+
+**Method.** Same construction as the profile of the leveled hybrid-based matrix
+(commit 7d07a91): the 18 corridor areas of the line sequence in `AggAreaCode` order
+(Adi, Alon Hagalil and Tzipori left out as before), every OD pair with both ends on the
+line assigned to each link between them in its direction of travel, on the step-16
+area matrices — **total** = car + bus + rail and **transit** = bus (incl. taxi-type) +
+rail. The earlier profiles are overlaid as reference.
+
+**Results.** Total: corridor-internal demand 69,655 trips (earlier matrix 101,004 —
+it included the walk / other modes and a different car source); peak link Bat Galim –
+Kiryat Eliezer, 6,862 towards Nazareth / 6,458 towards Tirat Carmel (earlier 7,671 /
+7,576); the Haifa-side profile matches the earlier one closely, the Krayot-to-Nazareth
+segment carries less in both directions. Transit: 10,770 corridor-internal trips, peak
+link Ein Hayam – Bat Galim 2,966 towards Nazareth; the survey-based profile is heavier
+on the Tirat Carmel – Lower City segment in the 1 → 23 direction and much lighter on the
+Krayot – Nazareth segment in the 23 → 1 direction than the ticketing-based one (which
+carries hub-attributed and non-resident journeys). Transit is 25–45 % of link flow on
+the Haifa segment against 15 % of corridor-internal trips, because transit trips
+traverse more links than car trips.
+
+**Outputs.** `Output/ths2017/three_mode_2022/corridor_link_flows_{total,transit}_2022.csv`,
+`corridor_link_flows_comparison_2022.csv` (both profiles, the earlier ones and the
+link-level transit share); figures `corridor_flow_profile_{total,transit}_survey2022.png`.
+
 ---
 
 ## 7. Output inventory (`Output/`)
