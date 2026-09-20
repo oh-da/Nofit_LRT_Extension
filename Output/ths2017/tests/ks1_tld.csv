@@ -1,0 +1,25 @@
+cells,pair,D,at km,signed gap (A−B),D boot p2.5,D boot p97.5
+all cells,survey d1 vs survey d2,0.0086,2.9475,-0.0086,,
+all cells,survey avg vs cellular,0.4230,3.7253,0.4230,0.4127,0.4339
+all cells,survey d1 vs cellular,0.4192,3.7253,0.4192,,
+all cells,survey d2 vs cellular,0.4268,3.7253,0.4268,,
+all cells,hybrid vs cellular,0.2486,5.1102,0.2486,,
+all cells,hybrid vs survey avg,0.1920,3.0334,-0.1920,0.1813,0.2057
+all cells,hybrid (GS-cal.) vs cellular,0.2056,6.5868,0.2056,,
+all cells,hybrid (GS-cal.) vs survey avg,0.2443,3.0825,-0.2443,0.2331,0.2576
+excl. intra-TAZ,survey d1 vs survey d2,0.0108,2.9475,-0.0108,,
+excl. intra-TAZ,survey avg vs cellular,0.3741,3.9634,0.3741,0.3626,0.3888
+excl. intra-TAZ,survey d1 vs cellular,0.3697,3.9634,0.3697,,
+excl. intra-TAZ,survey d2 vs cellular,0.3787,3.9756,0.3787,,
+excl. intra-TAZ,hybrid vs cellular,0.2419,6.2973,0.2419,,
+excl. intra-TAZ,hybrid vs survey avg,0.1532,3.0343,-0.1532,0.1407,0.1691
+excl. intra-TAZ,hybrid (GS-cal.) vs cellular,0.2068,7.6187,0.2068,,
+excl. intra-TAZ,hybrid (GS-cal.) vs survey avg,0.1989,3.4675,-0.1989,0.1869,0.2146
+excl. intra-cellular-zone,survey d1 vs survey d2,0.0088,6.0431,-0.0088,,
+excl. intra-cellular-zone,survey avg vs cellular,0.3013,4.4554,0.3013,0.2857,0.3185
+excl. intra-cellular-zone,survey d1 vs cellular,0.2983,4.4552,0.2983,,
+excl. intra-cellular-zone,survey d2 vs cellular,0.3043,4.4554,0.3043,,
+excl. intra-cellular-zone,hybrid vs cellular,0.1792,7.6223,0.1792,,
+excl. intra-cellular-zone,hybrid vs survey avg,0.1847,3.0651,-0.1847,0.1690,0.2028
+excl. intra-cellular-zone,hybrid (GS-cal.) vs cellular,0.1666,8.8960,0.1666,,
+excl. intra-cellular-zone,hybrid (GS-cal.) vs survey avg,0.2088,3.1040,-0.2088,0.1935,0.2265

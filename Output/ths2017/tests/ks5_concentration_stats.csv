@@ -1,0 +1,11 @@
+level,matrix,non-zero cells,Gini,share of trips in top 1% cells,share of trips in cells < 10/h
+SZ,survey d1,738,0.9193,0.4712,0.0003
+SZ,survey d2,730,0.9209,0.4706,0.0003
+SZ,survey avg,816,0.9181,0.4709,0.0004
+SZ,cellular,1296,0.7597,0.2436,0.0003
+SZ,hybrid,1296,0.9138,0.4641,0.0008
+TAZ,survey d1,26049,0.9904,0.8417,0.0892
+TAZ,survey d2,25997,0.9904,0.8412,0.0924
+TAZ,survey avg,33249,0.9890,0.8238,0.1132
+TAZ,cellular,583588,0.8430,0.3763,0.5204
+TAZ,hybrid,583588,0.9425,0.6403,0.2878

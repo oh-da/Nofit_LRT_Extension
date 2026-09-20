@@ -626,6 +626,59 @@ sensitivity.
 `geh_corridor_classes.csv`, `geh_area_cells.csv`; figures
 `Output/figures/cosine_geh_{whole_matrix,by_origin,cdf,corridor}.png`.
 
+
+## 6k. Step 13 — Kolmogorov–Smirnov tests on the three matrices (`THS_2017_KS_tests.ipynb`)
+
+**Question.** A two-sample KS test compares one-dimensional distributions, so it is
+applied to the distributions an OD matrix implies, each weighted by trips: the trip
+length distribution (TLD, straight-line centroid km from `Input/TAZ_North`, intra-TAZ =
+half the nearest-centroid distance) — overall, without the diagonal, per origin
+superzone and per corridor class — and the flow-concentration curve (share of trips
+carried by cells of a given size). Same three matrices as step 12 (trips-file survey
+days 1 / 2, allocated cellular, primary hybrid). No classical p-values: expansion
+weights would make everything "significant", so `D` is judged against the survey's
+day-1-vs-day-2 `D` and a 200-replicate household bootstrap of the survey.
+
+**Results.**
+
+| `D` (max gap in cumulative trip share) | day 1 vs day 2 | survey vs cellular | hybrid vs cellular | hybrid vs survey |
+|---|---|---|---|---|
+| TLD, all cells | 0.009 | 0.423 (at 3.7 km; bootstrap 0.41–0.43) | 0.249 | 0.192 |
+| TLD, excl. intra-TAZ | 0.011 | 0.374 | 0.242 | 0.153 |
+| TLD, excl. intra-cellular-zone | 0.009 | 0.301 | 0.179 | 0.185 |
+| per-origin TLD, flow-weighted (SZ) | 0.034 | 0.450 (range 0.28–0.72) | 0.284 | 0.236 |
+| TLD, corridor → corridor | 0.017 | 0.387 | 0.276 | 0.123 |
+| flow concentration, SZ / TAZ | 0.087 / 0.028 | 0.459 / 0.499 | 0.449 / 0.310 | 0.078 / 0.252 |
+
+1. **The length distributions are different populations, not noisy versions of one.**
+   Median centroid trip length: survey 1.95 km, cellular 7.6 km, hybrid 3.8 km; share
+   under 3 km 62 % / 21 % / 43 %. `D` = 0.42 against a day-to-day `D` of 0.009 and a
+   bootstrap spread of ± 0.01.
+2. **It is not only the diagonal.** Dropping intra-TAZ cells leaves `D` = 0.37, and
+   dropping every cell inside one native cellular zone still leaves `D` = 0.30 with the
+   gap at 4.5 km — the cellular product is short of *inter*-zone trips below ~5 km as
+   well, consistent with the step-12 scale audit (survey / cellular = 2.19 off the
+   diagonal).
+3. **Every origin shows it.** Per-superzone `D` runs 0.28–0.72 with the corridor
+   superzones 10 and 11 at the top (0.72 / 0.63; survey medians 1.5 / 0.8 km against
+   cellular 13.1 / 8.3 km), against a day-to-day `D` of 0.01–0.12.
+4. **The hybrid keeps the survey's lengths inside the corridor** (corridor → corridor
+   `D` vs survey 0.12, median 1.6 vs 1.0 km) and sits between the two elsewhere
+   (outside → outside: 3.7 km against survey 1.8 / cellular 7.6).
+5. **Cellular is far more diffuse.** At TAZ level 52 % of cellular trips (scaled to the
+   survey total) sit in cells below 10 trips/h against 11 % for the survey and 29 % for
+   the hybrid; Gini 0.84 vs 0.99 / 0.94; at superzone level the top 1 % of cells carry
+   24 % of cellular trips against 47 % of the survey's.
+6. **Distance-proxy calibration (KS0).** Against the survey's own reported `TrvlDist`
+   the centroid proxy overstates short trips (`D` = 0.23 at 0.7 km; median 1.95 vs
+   1.11 km reported). Both matrices carry the same proxy, so the comparisons are fair,
+   but absolute lengths below ~1 km are a zone-geometry artefact.
+
+**Outputs.** `Output/ths2017/tests/ks_summary.csv`, `ks0_distance_proxy.csv`,
+`ks1_tld.csv`, `ks1_tld_stats.csv`, `ks3_by_origin_sz.csv`, `ks4_corridor_classes.csv`,
+`ks5_concentration.csv`, `ks5_concentration_stats.csv`; figures
+`Output/figures/ks_{tld,by_origin,corridor,concentration}.png`.
+
 ---
 
 ## 7. Output inventory (`Output/`)
@@ -654,6 +707,7 @@ sensitivity.
 | `ths2017/study_taz/hybrid_*`, `*_correction_factors.csv` | various | Step 6 | **Primary hybrid products** on the trips-file source (SZ/GS hybrids, TAZ matrices, trips) |
 | `ths2017/study_taz/submatrices/*` | 28×28 areas | Step 6 | Sub-area matrices aggregated to the 28 named areas (205 TAZs, LRT-corridor flags in `area_legend.csv`) |
 | `ths2017/tests/*.csv` | various | Step 12 | Cosine / GEH similarity tests: headline summary, per-origin cosine, permutation null, scale audit, GEH pass rates by level / flow band / corridor class, 28-area cells |
+| `ths2017/tests/ks*.csv` | various | Step 13 | KS tests: trip length distributions (all / off-diagonal / per origin / corridor class), flow concentration, distance-proxy calibration |
 | `ths2017/trip_generation_*.csv` | 478 / 35 / 25 rows | Step 7 | Per-person AM-peak generation rates on the trips-file source |
 | `bus/bus_stops_taz.csv`, `bus/bus_od_taz_avg.csv`, `bus/bus_boardings_alightings_taz.csv` | 27k stops / 722×711 / 730 rows | Step 8 | RavKav stop tags, average-Tuesday AM-peak bus OD (journey-level), per-TAZ boardings/alightings (leg-level) |
 | `bus/bus_probability_matrix.csv`, `bus/bus_od_taz_new.csv`, `bus/bus_od_area_new{,_filtered}.csv` | 594×548 / 722×728 / 28×28, 25×25 | Step 9 | OnBoard destination probabilities; RavKav volumes × OnBoard pattern; area aggregation and noise-filtered version |

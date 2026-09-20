@@ -1,0 +1,5 @@
+pair,TLD D (all cells),TLD D (excl. intra-TAZ),TLD D (excl. intra-cellular-zone),concentration D (SZ),concentration D (TAZ),"per-origin TLD D, flow-wtd (SZ)"
+survey d1 vs survey d2,0.0086,0.0108,0.0088,0.0869,0.0280,0.0344
+survey avg vs cellular,0.4230,0.3741,0.3013,0.4592,0.4987,0.4503
+hybrid vs cellular,0.2486,0.2419,0.1792,0.4490,0.3095,0.2845
+hybrid vs survey avg,0.1920,0.1532,0.1847,0.0778,0.2523,0.2359
