@@ -1,0 +1,3 @@
+level,k,car vs transit overlap,bootstrap p5,bootstrap p95,car day-to-day,transit day-to-day,permutation null mean,permutation p,overlap without diagonal,mean self-containment car,mean self-containment transit,diagonal share of divergence,common-direction p,displacement ratio (vs transit day-to-day)
+SZ,20,0.7486,0.6590,0.7635,0.9507,0.8125,0.5724,0.0005,0.7156,0.6206,0.4530,0.4395,0.0426,1.5166
+AREA,6,0.5760,,,0.9295,0.5977,0.2255,0.0005,,,,,,
