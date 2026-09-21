@@ -31,7 +31,36 @@ representative weekday, at 2022 vintage (bus cells that took RavKav volumes at M
 everything else grown from 2018 by demographic factors, rail by the national ridership
 series). It is fit for exploratory corridor screening with the caveats of §8; it is not
 yet an externally validated estimate of corridor demand, and its corridor profiles are
-three-hour potential movements, not passenger loads.
+potential movements — three-hour totals (§6o) and peak-departure-hour values (§6r) —
+not passenger loads. The plain-language account of this base, its tests and its
+corridor results is `reports/Survey_Matrices_Car_Bus_Rail_Report.docx` (revision 2.1,
+21 September 2026); the older reports under `reports/historical/` carry dated status
+notes saying which of their conclusions are overtaken.
+
+**Conclusions for the corridor, as the base stands (21 September 2026).**
+
+| Quantity (2022 layers, 06:00–09:00 unless stated) | Value | Where |
+|---|---|---|
+| Corridor-to-corridor trips: car / bus / taxi-type / rail | 72,331 / 9,366 / 3,812 / 0 | §6n |
+| Bus share of corridor-to-corridor trips (bus + rail over all layers) | 11 % | §6n |
+| Bus base 2018 under the segmented coverage rule (survey / ticketing / binary rule) | 126,117 (116,083 / 92,713 / 110,654); threshold sweep 117,500–131,700 | §6m |
+| Busiest transit link, three hours (bus + rail) | 1,661 towards Nazareth (Ein Hayam – Bat Galim); 1,650 towards Tirat Carmel (Neot Peres – Neve David) | §6o |
+| Ticketing-based transit profile against it | ≈ 0.63–1.05 × towards Nazareth; ≈ 2 × (Haifa segment) to 3 × (Nazareth end) towards Tirat Carmel — frame and allocation, not coverage | §6p |
+| Peak hour (departures) | 07:00–08:00 for every layer; corridor car towards Nazareth 07:15–08:15 | §6r |
+| Share of the three hours in the peak hour (PHF₃ₕ) | car 0.62 (corridor by direction 0.66 / 0.63), bus 0.59, taxi-type 0.58 — ≈ 1.8 × an average hour | §6r |
+| Within-hour factor (PHF₆₀) | car 0.69, bus 0.75 | §6r |
+| Busiest transit link, peak hour | 981 towards Nazareth, 974 towards Tirat Carmel (average hour ≈ 550); ± 15 % on the bus factor basis | §6r |
+| Busiest link, all layers, peak hour | 4,609 towards Nazareth (Ein Hayam – Bat Galim); 4,205 towards Tirat Carmel (Bat Galim – Kiryat Eliezer) | §6r |
+
+What these support: relative questions — ranking alignments and segments, sizing the
+market between line areas, locating the demand, and the design-hour scaling of that
+market (1.8 × an average hour). What they do not support: passenger loads, capacity or
+frequency decisions, ridership forecasts, or appraisal — the volumes are unvalidated
+externally, the bus total depends on an assumed coverage threshold, the two transit
+frames disagree by 2–3 × at the Nazareth end in one direction, TAZ detail is a
+purpose-blind allocation, and the peak-hour values are departure-hour potential
+movements between line areas with no station access, route choice or off-line trips.
+The forecast branch has not yet been rebuilt on this base.
 
 Every published product, what it was built from, and its status:
 
@@ -40,6 +69,7 @@ Every published product, what it was built from, and its status:
 | `ths2017/three_mode_2022/{car,bus,taxi,rail}_2022_{taz,sz,area}.csv`, `all_modes_2022_taz.csv` | step 16 | `ths2017/two_mode/` + zonal 2020/2025 growth | 778 TAZ / 36 SZ / 28 areas | car; bus (Public Bus + Matronit); taxi-type (codes 5, 8); rail (survey door-to-door) | 2022 | **current** |
 | `ths2017/three_mode_2022/rail_station_smartcard_2022_taz.csv` | step 16 | `train/train_od_taz_6_9.csv` × 0.793 | 19 station TAZs | rail, station-to-station, all riders | 2022 | current (separate frame) |
 | `ths2017/three_mode_2022/corridor_link_flows_{total,transit,taxi}_2022.csv`, `corridor_profile_*.csv` | steps 17–18 | the row above | 18 line areas | as above | 2022 | current — three-hour potential movements |
+| `ths2017/three_mode_2022/peak_hour_factors*.csv`, `corridor_link_flows_peak_hour_2022.csv`, `peak_hour_sensitivity.csv` | step 20 | survey departure times × the row above | 18 line areas | car, bus, taxi-type, rail | 2022 | current — peak-departure-hour potential movements |
 | `ths2017/two_mode/car_*`, `bus_calibrated_*`, `transit_*`, `taxi_survey_*`, `rail_survey_*`, calibration tables | step 15 | `Input/trips_ths_2017.xlsx`, `bus/bus_od_taz_new.csv`, `bus/bus_boardings_alightings_taz.csv`, zonal 2020 | 778 / 36 / 28 | car; bus; taxi-type; rail | 2018 (bus cells with RavKav volumes: 2022) | current intermediate |
 | `bus/bus_od_taz_avg.csv`, `bus/bus_boardings_alightings_taz.csv` | step 8 | RavKav May 2022 Tuesdays (LFS) | 722–730 TAZ | bus journeys (first boarding → final alighting), all riders | 2022 | current input |
 | `bus/bus_od_taz_new.csv`, `bus_od_area_new*.csv` | step 9 | step 8 × OnBoard probabilities | 722 TAZ / 28 areas | bus; **unit of the OnBoard rows (leg or journey) unconfirmed** | 2022 | current input, open question |
@@ -61,8 +91,9 @@ labelled `_gs` and `_area` respectively and must not be joined on position.
 does not consume the current base (lineage above; rebuild is task D2); the TAZ hybrid
 does not reproduce its superzone OD blocks (§6q: tested, rebalanced); the coverage rule is
 now segmented (§6m); taxi-type is out of the bus layer (§6n); corridor values are
-labelled three-hour potential movements (§6o–§6p); README diagram and reproduction order
-describe the current chain. Confirmed and still open (§8, tasks): the OnBoard unit and
+labelled three-hour potential movements (§6o–§6p) and, since step 20, given in
+peak-departure-hour terms with sampling ranges (§6r); README diagram and reproduction
+order describe the current chain; the final report (revision 2.1) describes all of it. Confirmed and still open (§8, tasks): the OnBoard unit and
 bus-to-rail duplication; the replicated cellular mapping inside the hybrids' TAZ
 structure; the k = 50 share smoothing acting on expanded volumes; purpose-blind
 allocation; external sectors and the three dropped areas; the vintage ledger; external
@@ -1022,6 +1053,52 @@ this step does not repair.
 figure `hybrid_sz_conservation.png`. The notebook ends with a pass / fail assertion
 (blocks within 1 %, origin totals within 0.1 %) and runs on committed outputs alone.
 
+## 6r. Step 20 — Peak hour on the corridor: peak-hour factors and peak-hour potential movements (`Corridor_peak_hour_2022.ipynb`)
+
+**Question.** The corridor profiles of steps 17–18 are three-hour totals; design needs the
+busiest hour. What is the peak hour, how peaked is it, and what do the link profiles look
+like in peak-hour terms?
+
+**Method.** The trips file records departure time to the minute (`STDep`; `Dep_h` is its
+floor, agreeing in 99.5 % of trips). The AM trips of step 15, allocated to TAZs and to the
+28 sub-areas with the same population / employment split, are binned in 15-minute
+departure intervals over 06:00–09:00. For each layer the **peak hour** is the 60-minute
+window (15-minute steps) with the largest share; **PHF₃ₕ** = peak-hour trips / three-hour
+trips (an average hour is 0.333); **PHF₆₀** = peak-hour trips / (4 × busiest 15 minutes).
+Profiles are computed (a) study-area-wide per layer, (b) for the trips between line areas
+per direction and layer, weighted by links crossed, and (c) per link. A 200-replicate
+household bootstrap gives the sampling range of (b). The factor applied to the 2022 link
+profiles is the direction-level one where the corridor sample has at least 100 sampled
+trips (car: 194 / 236), otherwise the study-area factor of the layer (bus 1,636, taxi-type
+253 sampled trips; rail takes the bus factor). The factor is on departure time; the
+link-crossing hour lags it by the travel time to the link.
+
+**Results.**
+
+| Layer | Peak hour (study area) | PHF₃ₕ study area | PHF₆₀ study area | PHF₃ₕ corridor 1 → 23 (n) | PHF₃ₕ corridor 23 → 1 (n) | Applied |
+|---|---|---|---|---|---|---|
+| Car | 07:00–08:00 | 0.621 | 0.69 | 0.661 (194; bootstrap 0.51–0.81) | 0.626 (236; 0.47–0.75) | direction-level |
+| Bus | 07:00–08:00 | 0.590 | 0.75 | 0.655 (48; 0.54–0.84) | 0.435 (26; 0.43–0.79) | study area 0.590 |
+| Taxi-type | 07:00–08:00 | 0.580 | 0.68 | 0.784 (35) | 0.837 (25) | study area 0.580 |
+| Walk / other | 07:00–08:00 | 0.793 | 0.64 | — | — | not in the profile |
+
+The peak hour carries ≈ 1.8 × an average hour. Per-link factors are identifiable only
+for car (19 link-directions with ≥ 30 sampled trips) and scatter −0.12 to +0.19 around
+the direction factor (mean +0.03); bus links have at most 25 sampled trips. Peak-hour
+potential movements (2022 layers): transit (bus + rail) 981 on Ein Hayam – Bat Galim
+towards Nazareth (three-hour 1,661, average hour 554) and 974 on Neot Peres – Neve David
+towards Tirat Carmel (1,650 / 550); all layers 4,609 towards Nazareth on Ein Hayam – Bat
+Galim and 4,205 towards Tirat Carmel on Bat Galim – Kiryat Eliezer. Sensitivity of the
+busiest transit link to the bus factor basis (study area / corridor pooled / corridor
+direction): 981 / 835 / 1,089 towards Nazareth, 974 / 829 / 718 towards Tirat Carmel.
+These remain potential movements in the peak departure hour, not loads.
+
+**Outputs.** `Output/ths2017/three_mode_2022/peak_hour_factors.csv` (all levels, with
+hourly shares and bootstrap ranges), `peak_hour_factors_applied.csv`,
+`peak_hour_factors_by_link.csv`, `corridor_link_flows_peak_hour_2022.csv` (per link and
+direction: three-hour, average-hour and peak-hour flows by layer),
+`peak_hour_sensitivity.csv`; figure `corridor_flow_profile_peak_hour_2022.png`.
+
 ---
 
 ## 7. Output inventory (`Output/`)
@@ -1055,7 +1132,7 @@ figure `hybrid_sz_conservation.png`. The notebook ends with a pass / fail assert
 | `ths2017/tests/ks*.csv` | various | Step 13 | KS tests: trip length distributions (all / off-diagonal / per origin / corridor class), flow concentration, distance-proxy calibration |
 | `ths2017/tests/mssim_*.csv` | various | Step 14 | MSSIM tests: index by level / window / scale / ordering with term decomposition, broken-correspondence null, per-origin and superzone-block local SSIM, corridor classes |
 | `ths2017/two_mode/*.csv` | 778×778 / 36×36 / 28×28 | Step 15 | Survey-only two-mode matrices (car, transit) with the bus part calibrated to RavKav × OnBoard per origin × segment; binary-guard / all-RavKav / uniform variants; calibration tables incl. `bus_calibration_factors_segments.csv` and the threshold sweep; mode shares |
-| `ths2017/three_mode_2022/*.csv` | 778×778 / 36×36 / 28×28 | Steps 16–18 | **Current 2022-base layers** car / bus / taxi / rail (demographic growth, RavKav anchor, rail ridership series), `all_modes_2022_taz.csv`, TAZ growth factors, summaries; corridor link profiles (three-hour potential movements) and the comparison with the ticketing profile |
+| `ths2017/three_mode_2022/*.csv` | 778×778 / 36×36 / 28×28 | Steps 16–18, 20 | **Current 2022-base layers** car / bus / taxi / rail (demographic growth, RavKav anchor, rail ridership series), `all_modes_2022_taz.csv`, TAZ growth factors, summaries; corridor link profiles (three-hour potential movements), the comparison with the ticketing profile, and the peak-hour factors and peak-hour link profiles |
 | `ths2017/tests/hybrid_sz_conservation_*.csv`, `ths2017/study_taz/hybrid_taz_{trips,prob}_balanced.csv` | 3 / 12 rows; 778×778 | Step 19 | Superzone conservation test of the TAZ hybrids and the jointly-constrained rebalanced primary hybrid |
 | `ths2017/trip_generation_*.csv` | 478 / 35 / 25 rows | Step 7 | Per-person AM-peak generation rates on the trips-file source |
 | `bus/bus_stops_taz.csv`, `bus/bus_od_taz_avg.csv`, `bus/bus_boardings_alightings_taz.csv` | 27k stops / 722×711 / 730 rows | Step 8 | RavKav stop tags, average-Tuesday AM-peak bus OD (journey-level), per-TAZ boardings/alightings (leg-level) |
@@ -1094,10 +1171,53 @@ zone i ends in zone j.
    rests on cellular structure (with its replication caveat), not on a production model —
    treat individual TAZ origin totals accordingly.
 
+Added after the methodology review of 21 September 2026:
+
+6. **Superzone OD blocks of the TAZ hybrids are not conserved** by the correction-factor
+   construction (§6q); use `hybrid_taz_trips_balanced.csv` if a hybrid is needed at all.
+   The replicated cellular mapping (§2) also weights each national zone by its number of
+   child TAZs inside the within-superzone origin split and the TAZ destination mix; a
+   mass-preserving rebuild needs the cellular file (LFS) and the allocation-matrix
+   conversion of step 5.
+7. **Units of the transit sources are not reconciled.** The OnBoard file gives
+   P(alight | board) — whether per boarding leg or per journey is unconfirmed — and it is
+   applied to RavKav *journey* row totals; a bus-to-rail traveller may sit in both the
+   RavKav bus OD (journey ending at the station stop) and the station train matrix. Both
+   are untested. Keep person-journey products (the survey base) and boarding products
+   (RavKav, station matrix) separate until an access / transfer allocation links them.
+8. **The segmented coverage rule is an assumption with a threshold** (§6m): its bus
+   total exceeds both sources and moves by ± 5 % over thresholds 0.3–0.7; the cause of
+   sub-0.5 ratios (operator coverage, cash fares, survey over-expansion) is unresolved.
+9. **Taxi-type codes 5 / 8** are a separate layer; their exact meaning awaits the survey
+   codebook, and they should not be summed into an LRT market by default.
+10. **The forecast branch** (`transit/all_adjusted_*`, `forecast/*`) rests on the
+    historical 25-area composite, mixes a residents' door-to-door car / other layer with
+    all-rider boardings, freezes 2022 modal shares (its 8.9 % → 7.5–8.0 % transit decline
+    is composition, not behaviour), smooths shares with k = 50 applied to *expanded*
+    volumes (inert for cells of thousands of trips; sampled counts are the right
+    information measure), preserves the 155 zero cells of the base under Furness, and
+    excludes the 116,473 weighted trips with one end outside the study area and the three
+    line areas below 50 observed bus trips. It is a demographic reference, not a forecast
+    of LRT demand, and is to be rebuilt from the current base (tasks D1–D4).
+11. **Vintage alignment is an assumption**: `(X2025 / X2020)^(4/5)` extrapolates a forecast
+    trend to represent 2018–2022; the national rail ratio stands in for local AM change;
+    the claim that May 2022 bus ridership was not COVID-suppressed rests on the study
+    team's statement and has no evidence in the repository.
+12. **Corridor profiles are potential movements** between line areas — three-hour totals
+    (§6o) and, since step 20, peak-departure-hour values (§6r) — not passenger loads or
+    upper bounds on LRT demand. The peak-hour factors rest on survey departure times
+    (car by direction, bus and taxi-type study-area-wide); a boarding-hour factor from
+    RavKav is still to be derived.
+13. **Similarity tests are diagnostics**: day-to-day agreement of the same households is
+    a repeatability reference, not a ceiling (the hybrid exceeds it against the survey by
+    construction); a better fit to RavKav after calibrating to RavKav is not validation.
+    External counts (Haifa-segment bus loads, Nazareth local vs Haifa-bound services,
+    Hamifrats transfers, road screenlines, station boardings) are still absent.
+
 ## 8b. Related work — PCA-based analysis and structural comparison of OD matrices
 
 Context for the PCA validation notebooks (`THS_2018_MTX_PCA_vs_cellular.ipynb`,
-`THS_2017_PCA_vs_cellular.ipynb`), which re-examine the survey↔cellular comparison
+`THS_2017_PCA_vs_cellular.ipynb`, and the eigenplaces typology `Cellular_eigenplaces_TAZ.ipynb`, all under `notebooks/diagnostics/`), which re-examine the survey↔cellular comparison
 through component structure rather than cell-by-cell statistics. The approach is
 grounded in four strands of literature:
 
@@ -1146,45 +1266,6 @@ the diagonal-ablation decomposition isolating *where* structures diverge — doe
 appear assembled in any single prior work. Practitioner validation guidance still
 standardizes on the cell-based toolkit (GEH, %RMSE), which is precisely what strand
 2 pushes back on.
-Added after the methodology review of 21 September 2026:
-
-6. **Superzone OD blocks of the TAZ hybrids are not conserved** by the correction-factor
-   construction (§6q); use `hybrid_taz_trips_balanced.csv` if a hybrid is needed at all.
-   The replicated cellular mapping (§2) also weights each national zone by its number of
-   child TAZs inside the within-superzone origin split and the TAZ destination mix; a
-   mass-preserving rebuild needs the cellular file (LFS) and the allocation-matrix
-   conversion of step 5.
-7. **Units of the transit sources are not reconciled.** The OnBoard file gives
-   P(alight | board) — whether per boarding leg or per journey is unconfirmed — and it is
-   applied to RavKav *journey* row totals; a bus-to-rail traveller may sit in both the
-   RavKav bus OD (journey ending at the station stop) and the station train matrix. Both
-   are untested. Keep person-journey products (the survey base) and boarding products
-   (RavKav, station matrix) separate until an access / transfer allocation links them.
-8. **The segmented coverage rule is an assumption with a threshold** (§6m): its bus
-   total exceeds both sources and moves by ± 5 % over thresholds 0.3–0.7; the cause of
-   sub-0.5 ratios (operator coverage, cash fares, survey over-expansion) is unresolved.
-9. **Taxi-type codes 5 / 8** are a separate layer; their exact meaning awaits the survey
-   codebook, and they should not be summed into an LRT market by default.
-10. **The forecast branch** (`transit/all_adjusted_*`, `forecast/*`) rests on the
-    historical 25-area composite, mixes a residents' door-to-door car / other layer with
-    all-rider boardings, freezes 2022 modal shares (its 8.9 % → 7.5–8.0 % transit decline
-    is composition, not behaviour), smooths shares with k = 50 applied to *expanded*
-    volumes (inert for cells of thousands of trips; sampled counts are the right
-    information measure), preserves the 155 zero cells of the base under Furness, and
-    excludes the 116,473 weighted trips with one end outside the study area and the three
-    line areas below 50 observed bus trips. It is a demographic reference, not a forecast
-    of LRT demand, and is to be rebuilt from the current base (tasks D1–D4).
-11. **Vintage alignment is an assumption**: `(X2025 / X2020)^(4/5)` extrapolates a forecast
-    trend to represent 2018–2022; the national rail ratio stands in for local AM change;
-    the claim that May 2022 bus ridership was not COVID-suppressed rests on the study
-    team's statement and has no evidence in the repository.
-12. **Corridor profiles are three-hour potential movements** between line areas, not
-    passenger loads or upper bounds on LRT demand (§6o).
-13. **Similarity tests are diagnostics**: day-to-day agreement of the same households is
-    a repeatability reference, not a ceiling (the hybrid exceeds it against the survey by
-    construction); a better fit to RavKav after calibrating to RavKav is not validation.
-    External counts (Haifa-segment bus loads, Nazareth local vs Haifa-bound services,
-    Hamifrats transfers, road screenlines, station boardings) are still absent.
 
 ## 9. Reproduction
 
@@ -1197,6 +1278,7 @@ jupyter nbconvert --to notebook --execute --inplace notebooks/current/THS_2017_t
 jupyter nbconvert --to notebook --execute --inplace notebooks/current/THS_2017_three_mode_2022.ipynb
 jupyter nbconvert --to notebook --execute --inplace notebooks/current/Corridor_flow_profile_survey_2022.ipynb
 jupyter nbconvert --to notebook --execute --inplace notebooks/current/Corridor_profile_hybrid_vs_ticketing.ipynb
+jupyter nbconvert --to notebook --execute --inplace notebooks/current/Corridor_peak_hour_2022.ipynb
 
 # regression test of the hybrid branch (committed outputs only)
 jupyter nbconvert --to notebook --execute --inplace notebooks/diagnostics/Hybrid_superzone_conservation_test.ipynb

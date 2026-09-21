@@ -58,7 +58,8 @@ Key facts driving the list (2017 trips-file hybrid, `Output/ths2017/study_taz/`)
   - [ ] Check the `Dep_h` coding (16 % of daily trips fall in the 7:00 hour, 3 % at 6:00).
   - [ ] Hour-of-day and direction factors by purpose and corridor class from the survey
         (all hours), RavKav hourly boardings and **[needs LFS data]** the 24 cellular
-        hourly matrices; produce PM-peak and daily corridor matrices.
+        hourly matrices; produce PM-peak and daily corridor matrices. *(AM peak hour done —
+        B1e.)*
 
 ## B. Scale and frame
 
@@ -90,6 +91,11 @@ Key facts driving the list (2017 trips-file hybrid, `Output/ths2017/study_taz/`)
       P(alight | board) rows are per boarding leg or per journey; test whether bus-to-rail
       travellers sit in both the RavKav bus OD and the station matrix; keep person-journey
       and boarding products separate until an access / transfer allocation links them.
+- [x] **B1e. Peak hour** *(done 2026-09-21, `Corridor_peak_hour_2022.ipynb`, METHODOLOGY
+      §6r)*: peak-hour factors from survey departure times (07:00–08:00; PHF₃ₕ 0.59–0.66) and
+      peak-hour link profiles. Still open: a boarding-hour factor from the RavKav files
+      (`bus_trip_hour`, LFS) as the independent check for the bus layer, and a
+      link-crossing (rather than departure) hour once travel times exist (A2).
 - [ ] **B2. Population frames**
   - [ ] Reconcile the transit layer (RavKav journeys by boarding stop, incl. non-residents
         and transfers; Hamifrats 120 THS vs 1,079 RavKav) with the resident-household
