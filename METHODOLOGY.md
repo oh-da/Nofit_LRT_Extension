@@ -31,7 +31,36 @@ representative weekday, at 2022 vintage (bus cells that took RavKav volumes at M
 everything else grown from 2018 by demographic factors, rail by the national ridership
 series). It is fit for exploratory corridor screening with the caveats of §8; it is not
 yet an externally validated estimate of corridor demand, and its corridor profiles are
-three-hour potential movements, not passenger loads.
+potential movements — three-hour totals (§6o) and peak-departure-hour values (§6r) —
+not passenger loads. The plain-language account of this base, its tests and its
+corridor results is `reports/Survey_Matrices_Car_Bus_Rail_Report.docx` (revision 2.1,
+21 September 2026); the older reports under `reports/historical/` carry dated status
+notes saying which of their conclusions are overtaken.
+
+**Conclusions for the corridor, as the base stands (21 September 2026).**
+
+| Quantity (2022 layers, 06:00–09:00 unless stated) | Value | Where |
+|---|---|---|
+| Corridor-to-corridor trips: car / bus / taxi-type / rail | 72,331 / 9,366 / 3,812 / 0 | §6n |
+| Bus share of corridor-to-corridor trips (bus + rail over all layers) | 11 % | §6n |
+| Bus base 2018 under the segmented coverage rule (survey / ticketing / binary rule) | 126,117 (116,083 / 92,713 / 110,654); threshold sweep 117,500–131,700 | §6m |
+| Busiest transit link, three hours (bus + rail) | 1,661 towards Nazareth (Ein Hayam – Bat Galim); 1,650 towards Tirat Carmel (Neot Peres – Neve David) | §6o |
+| Ticketing-based transit profile against it | ≈ 0.63–1.05 × towards Nazareth; ≈ 2 × (Haifa segment) to 3 × (Nazareth end) towards Tirat Carmel — frame and allocation, not coverage | §6p |
+| Peak hour (departures) | 07:00–08:00 for every layer; corridor car towards Nazareth 07:15–08:15 | §6r |
+| Share of the three hours in the peak hour (PHF₃ₕ) | car 0.62 (corridor by direction 0.66 / 0.63), bus 0.59, taxi-type 0.58 — ≈ 1.8 × an average hour | §6r |
+| Within-hour factor (PHF₆₀) | car 0.69, bus 0.75 | §6r |
+| Busiest transit link, peak hour | 981 towards Nazareth, 974 towards Tirat Carmel (average hour ≈ 550); ± 15 % on the bus factor basis | §6r |
+| Busiest link, all layers, peak hour | 4,609 towards Nazareth (Ein Hayam – Bat Galim); 4,205 towards Tirat Carmel (Bat Galim – Kiryat Eliezer) | §6r |
+
+What these support: relative questions — ranking alignments and segments, sizing the
+market between line areas, locating the demand, and the design-hour scaling of that
+market (1.8 × an average hour). What they do not support: passenger loads, capacity or
+frequency decisions, ridership forecasts, or appraisal — the volumes are unvalidated
+externally, the bus total depends on an assumed coverage threshold, the two transit
+frames disagree by 2–3 × at the Nazareth end in one direction, TAZ detail is a
+purpose-blind allocation, and the peak-hour values are departure-hour potential
+movements between line areas with no station access, route choice or off-line trips.
+The forecast branch has not yet been rebuilt on this base.
 
 Every published product, what it was built from, and its status:
 
@@ -62,8 +91,9 @@ labelled `_gs` and `_area` respectively and must not be joined on position.
 does not consume the current base (lineage above; rebuild is task D2); the TAZ hybrid
 does not reproduce its superzone OD blocks (§6q: tested, rebalanced); the coverage rule is
 now segmented (§6m); taxi-type is out of the bus layer (§6n); corridor values are
-labelled three-hour potential movements (§6o–§6p); README diagram and reproduction order
-describe the current chain. Confirmed and still open (§8, tasks): the OnBoard unit and
+labelled three-hour potential movements (§6o–§6p) and, since step 20, given in
+peak-departure-hour terms with sampling ranges (§6r); README diagram and reproduction
+order describe the current chain; the final report (revision 2.1) describes all of it. Confirmed and still open (§8, tasks): the OnBoard unit and
 bus-to-rail duplication; the replicated cellular mapping inside the hybrids' TAZ
 structure; the k = 50 share smoothing acting on expanded volumes; purpose-blind
 allocation; external sectors and the three dropped areas; the vintage ledger; external

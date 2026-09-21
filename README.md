@@ -12,7 +12,15 @@ hybrids are **historical**, and the 2040 / 2050 forecasts and LRT-market tables 
 **demographic reference built on an older 25-area composite**, not on the current base —
 they are to be rebuilt. [METHODOLOGY.md §0](METHODOLOGY.md#0-status-authoritative-baseline-and-lineage-21-september-2026)
 carries the lineage table that says, for every published file, what it was built from
-and whether it is current. The external methodology review that prompted this
+and whether it is current, and a conclusions table for the corridor. **Headline corridor
+results (2022 layers):** corridor-to-corridor trips 72,331 car / 9,366 bus / 3,812
+taxi-type (bus share 11 %); busiest transit link ≈ 1,650 potential movements per
+direction over 06:00–09:00; **peak hour 07:00–08:00 holding 59–66 % of the three hours
+(1.8 × an average hour)**, so ≈ 980 transit and 4,200–4,600 all-layer potential
+movements per direction on the busiest links in the peak hour. These are screening
+quantities, not loads. The plain-language account is
+[`reports/Survey_Matrices_Car_Bus_Rail_Report.docx`](reports/Survey_Matrices_Car_Bus_Rail_Report.docx)
+(revision 2.1). The external methodology review that prompted this
 (`docs/Nofit_Demand_Methodology_Review.md`, 21 Sep 2026) and the response to it are recorded
 in [METHODOLOGY.md §8](METHODOLOGY.md#8-known-caveats-and-open-questions) and
 [CORRIDOR_DEMAND_TASKS.md](docs/CORRIDOR_DEMAND_TASKS.md).
