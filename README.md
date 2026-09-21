@@ -114,6 +114,21 @@ hybrid (`THS_2018_MTX_*`), the 2017 trips-file hybrid (`THS_2017_hybrid_pipeline
   survey / cellular / hybrid diagnostics (§6j–§6l)
 - `ths2017/study_taz/hybrid_*`, `hybrid_*` (root), `transit/`, `forecast/` — historical
   and demographic-reference products; see the lineage table in METHODOLOGY §0 before use
+
+## Reports
+
+- `Survey_Matrices_Car_Bus_Rail_Report.docx` — **revision 2, 21 September 2026**: the
+  current base in plain language (survey-only matrix, tests, segmented bus calibration,
+  2022 layers, corridor potential movements, what changed since revision 1 and why)
+- `Nofit_LRT_OD_Demand_Report.docx` (8 September 2026) — kept as a record with a dated
+  status note at the front saying which parts are overtaken; the `.pdf` beside it is the
+  8 September rendering without the note
+- `Demographic_Scenario_Comparison_Report.docx` — the BU / HS scenario comparison, with a
+  status note on the forecast branch's lineage
+- `PCA_Eigenvector_Report.docx`, `PCA_Eigenvector_Report_Hebrew_Explainer.docx`,
+  `PCA_Comparison_Hebrew_Explainer.docx` — the PCA diagnostics, unchanged
+- `Nofit_Demand_Methodology_Review.md` — the external review of 21 September 2026 that
+  the revision responds to
 - Full inventory in [METHODOLOGY.md §7](METHODOLOGY.md#7-output-inventory-output)
 
 ## Setup
