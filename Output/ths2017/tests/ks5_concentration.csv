@@ -1,0 +1,9 @@
+level,pair,D,at trips/h
+SZ,survey d1 vs survey d2,0.0869,25570.7469
+SZ,survey avg vs cellular,0.4592,10526.5678
+SZ,hybrid vs cellular,0.4490,10526.5678
+SZ,hybrid vs survey avg,0.0778,24978.2998
+TAZ,survey d1 vs survey d2,0.0280,387.1532
+TAZ,survey avg vs cellular,0.4987,50.2513
+TAZ,hybrid vs cellular,0.3095,39.1811
+TAZ,hybrid vs survey avg,0.2523,207.9653

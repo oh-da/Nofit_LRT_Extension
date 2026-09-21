@@ -8,3 +8,5 @@ Output/**/*.csv -filter -diff -merge -text
 Input/Zonal_2020.csv -filter -diff -merge -text
 Input/Zonal_BU_2025.csv -filter -diff -merge -text
 Input/lrt_alignment_flags.csv -filter -diff -merge -text
+Input/taz_keys_from_shapefile.csv -filter -diff -merge -text
+Input/sz_localities.csv -filter -diff -merge -text

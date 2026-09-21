@@ -1,0 +1,60 @@
+level,pair,band (hourly flow),cells,share of flow,GEH<5,median GEH
+SZ,survey d1 vs survey d2,0–10,54,0.0004,0.8889,1.8257
+SZ,survey d1 vs survey d2,10–50,195,0.0075,0.4308,6.8273
+SZ,survey d1 vs survey d2,50–200,301,0.0452,0.5050,4.8796
+SZ,survey d1 vs survey d2,200–1000,190,0.1201,0.5474,4.4027
+SZ,survey d1 vs survey d2,1000–inf,76,0.8267,0.5395,4.3432
+SZ,survey avg vs cellular,0–10,103,0.0010,0.4369,5.1470
+SZ,survey avg vs cellular,10–50,389,0.0151,0.1285,8.5408
+SZ,survey avg vs cellular,50–200,410,0.0622,0.2293,11.9147
+SZ,survey avg vs cellular,200–1000,288,0.1802,0.1181,17.8533
+SZ,survey avg vs cellular,1000–inf,106,0.7416,0.0660,39.8195
+SZ,hybrid vs cellular,0–10,100,0.0010,0.4800,5.0304
+SZ,hybrid vs cellular,10–50,389,0.0151,0.1362,8.3456
+SZ,hybrid vs cellular,50–200,407,0.0615,0.2359,11.6116
+SZ,hybrid vs cellular,200–1000,294,0.1845,0.1259,17.0340
+SZ,hybrid vs cellular,1000–inf,106,0.7379,0.0472,37.6692
+SZ,hybrid vs survey avg,0–10,530,0.0006,1.0000,0.8771
+SZ,hybrid vs survey avg,10–50,195,0.0076,1.0000,0.2891
+SZ,hybrid vs survey avg,50–200,299,0.0451,0.9967,0.4060
+SZ,hybrid vs survey avg,200–1000,194,0.1219,0.9845,0.7846
+SZ,hybrid vs survey avg,1000–inf,78,0.8248,0.9615,1.4112
+AREA,survey d1 vs survey d2,0–10,66,0.0041,0.7273,3.5512
+AREA,survey d1 vs survey d2,10–50,149,0.0412,0.4228,6.3643
+AREA,survey d1 vs survey d2,50–200,124,0.1266,0.6290,2.4055
+AREA,survey d1 vs survey d2,200–1000,45,0.2098,0.6889,3.4661
+AREA,survey d1 vs survey d2,1000–inf,12,0.6184,0.6667,3.4452
+AREA,survey avg vs cellular,0–10,280,0.0111,0.8500,3.1393
+AREA,survey avg vs cellular,10–50,275,0.0775,0.2909,7.2924
+AREA,survey avg vs cellular,50–200,154,0.1601,0.2727,8.7429
+AREA,survey avg vs cellular,200–1000,62,0.2788,0.1129,19.5194
+AREA,survey avg vs cellular,1000–inf,13,0.4725,0.0000,43.8075
+AREA,hybrid vs cellular,0–10,272,0.0125,0.9779,1.7977
+AREA,hybrid vs cellular,10–50,274,0.0733,0.6350,4.0757
+AREA,hybrid vs cellular,50–200,157,0.1692,0.2866,7.8164
+AREA,hybrid vs cellular,200–1000,70,0.3119,0.0857,14.6536
+AREA,hybrid vs cellular,1000–inf,11,0.4330,0.0909,24.6804
+AREA,hybrid vs survey avg,0–10,379,0.0114,0.9077,2.1779
+AREA,hybrid vs survey avg,10–50,216,0.0570,0.3981,5.9184
+AREA,hybrid vs survey avg,50–200,127,0.1312,0.3937,7.5845
+AREA,hybrid vs survey avg,200–1000,49,0.2045,0.3061,12.6671
+AREA,hybrid vs survey avg,1000–inf,13,0.5959,0.0000,22.6884
+TAZ,survey d1 vs survey d2,0–10,23960,0.1132,0.9401,1.5037
+TAZ,survey d1 vs survey d2,10–50,6697,0.2072,0.7581,0.8825
+TAZ,survey d1 vs survey d2,50–200,1911,0.2609,0.7996,1.2889
+TAZ,survey d1 vs survey d2,200–1000,644,0.3202,0.8323,2.4991
+TAZ,survey d1 vs survey d2,1000–inf,37,0.0985,0.6486,1.9292
+TAZ,survey avg vs cellular,0–10,543091,0.3429,0.9950,0.5329
+TAZ,survey avg vs cellular,10–50,7842,0.2301,0.3855,6.3732
+TAZ,survey avg vs cellular,50–200,1755,0.2402,0.2439,10.4876
+TAZ,survey avg vs cellular,200–1000,318,0.1504,0.0881,18.9335
+TAZ,survey avg vs cellular,1000–inf,16,0.0364,0.0000,54.3577
+TAZ,hybrid vs cellular,0–10,572726,0.4014,0.9999,0.3257
+TAZ,hybrid vs cellular,10–50,8832,0.2653,0.7509,3.6128
+TAZ,hybrid vs cellular,50–200,1841,0.2468,0.3455,7.1371
+TAZ,hybrid vs cellular,200–1000,189,0.0865,0.1746,11.8396
+TAZ,hybrid vs survey avg,0–10,573664,0.2405,0.9962,0.2383
+TAZ,hybrid vs survey avg,10–50,7489,0.2246,0.2994,6.7192
+TAZ,hybrid vs survey avg,50–200,2046,0.2907,0.2502,9.2080
+TAZ,hybrid vs survey avg,200–1000,442,0.2145,0.1968,12.6474
+TAZ,hybrid vs survey avg,1000–inf,14,0.0296,0.0000,63.6144

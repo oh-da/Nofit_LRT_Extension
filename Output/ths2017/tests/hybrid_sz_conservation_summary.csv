@@ -1,0 +1,13 @@
+,"primary (trips file, Output/ths2017/study_taz)","historical (activities file, Output/)","primary, balanced"
+total TAZ,2068158.2614,2152928.2137,2068158.2614
+total SZ,2068158.4626,2152928.4038,2068158.4626
+origin totals max |rel|,0.0000,0.0672,0.0000
+dest totals max |rel|,0.0256,0.1201,0.0000
+blocks > 100,627.0000,580.0000,627.0000
+|rel| > 10 %,55.0000,80.0000,0.0000
+|rel| > 25 %,12.0000,20.0000,0.0000
+flow-weighted mean |rel| (blocks),0.0202,0.0254,0.0000
+max |rel| (blocks),0.4898,0.5457,0.0001
+diagonal ratio min,0.9414,0.9057,1.0000
+diagonal ratio median,0.9889,0.9878,1.0000
+off-diagonal ratio,1.0360,1.0392,1.0000

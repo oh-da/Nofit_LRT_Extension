@@ -1,0 +1,5 @@
+,reported TrvlDist,centroid proxy
+median km,1.112,1.95
+p90 km,14.111,14.474
+share < 1 km,0.474,0.265
+share < 3 km,0.698,0.618

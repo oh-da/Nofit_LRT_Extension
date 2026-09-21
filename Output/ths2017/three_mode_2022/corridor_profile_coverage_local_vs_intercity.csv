@@ -1,0 +1,12 @@
+SZ,localities,guarded (binary rule),guarded segments (segmented rule),survey local,RavKav local,ratio local,survey inter-SZ,RavKav inter-SZ,ratio inter-SZ,survey → Haifa SZs,RavKav → Haifa SZs
+19,"נצרת, כפר כנא",True,"local / inter-SZ, other",6164.40,505.66,0.08,6264.73,2137.09,0.34,1679.92,1237.39
+4,"שפרעם, טמרה",True,"inter-SZ, corridor-bound / inter-SZ, other",525.06,396.03,0.75,1548.31,475.97,0.31,1358.21,278.43
+23,"דאלית אל-כרמל, מועצה מקומית עוספיא",True,"local / inter-SZ, corridor-bound",849.64,145.85,0.17,977.90,642.65,0.66,841.00,622.10
+30,"סח'נין, עראבה",True,"local / inter-SZ, corridor-bound / inter-SZ, other",508.43,122.43,0.24,508.07,167.07,0.33,158.07,67.88
+34,"מעלות-תרשיחא, בית ג'ן",True,"local / inter-SZ, corridor-bound / inter-SZ, other",1454.62,151.81,0.10,1328.79,736.15,0.55,0.00,149.08
+33,"צפת, מועצה אזורית מרום גליל",True,local,2625.00,411.11,0.16,530.74,646.89,1.22,175.00,68.44
+37,"בית שאן, מועצה אזורית עמק המעיינות",True,"local / inter-SZ, corridor-bound / inter-SZ, other",665.33,30.00,0.05,1251.55,692.25,0.55,0.00,565.68
+17,חיפה,False,,2566.83,1905.27,0.74,4768.29,5062.60,1.06,6494.02,6410.81
+14,חיפה,False,local,1304.64,623.36,0.48,4294.67,3678.11,0.86,5260.73,3530.60
+16,חיפה,False,local,4389.74,1913.07,0.44,4457.90,3419.93,0.77,8397.89,4885.04
+9,"קרית אתא, מועצה אזורית זבולון",False,,3212.38,1887.64,0.59,1733.64,2531.61,1.46,780.59,1608.09
