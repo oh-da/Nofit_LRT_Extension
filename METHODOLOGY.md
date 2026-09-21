@@ -51,10 +51,18 @@ notes saying which of their conclusions are overtaken.
 | Within-hour factor (PHF₆₀) | car 0.69, bus 0.75 | §6r |
 | Busiest transit link, peak hour | 981 towards Nazareth, 974 towards Tirat Carmel (average hour ≈ 550); ± 15 % on the bus factor basis | §6r |
 | Busiest link, all layers, peak hour | 4,609 towards Nazareth (Ein Hayam – Bat Galim); 4,205 towards Tirat Carmel (Bat Galim – Kiryat Eliezer) | §6r |
+| Car vs transit destination structure (survey PCA, superzones) | overlap 0.75 (0.83 on well-sampled origins) against transit repeatability 0.81 (0.86): the same dominant structure | §6s |
+| … where transit differs from car | less local (self-containment 0.45 vs 0.62), share moved to the Haifa core (+2–3 points; common direction p = 0.04 at superzones, p = 0.002 with TAZ origins) | §6s |
+| … by resolution | corridor areas: at transit's noise floor (0.57 vs 0.65); TAZ × superzone: 0.75 vs 0.89 — clearly different; TAZ × TAZ: 0.27 vs 0.55 — only the coarse geography shared | §6s |
 
 What these support: relative questions — ranking alignments and segments, sizing the
 market between line areas, locating the demand, and the design-hour scaling of that
-market (1.8 × an average hour). What they do not support: passenger loads, capacity or
+market (1.8 × an average hour). They also settle one method question: the transit
+market cannot be read off the car pattern by scaling. Transit trips from the outer
+superzones are markedly more Haifa-bound and less local than car trips from the same
+places (§6s), so a transit-specific destination pattern — as in the step-15 calibration
+and the OnBoard pattern below superzone level — is required, and any cell-wise
+mode-share shortcut on an all-mode matrix at TAZ level would mis-place transit demand. What they do not support: passenger loads, capacity or
 frequency decisions, ridership forecasts, or appraisal — the volumes are unvalidated
 externally, the bus total depends on an assumed coverage threshold, the two transit
 frames disagree by 2–3 × at the Nazareth end in one direction, TAZ detail is a

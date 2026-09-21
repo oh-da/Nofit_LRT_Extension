@@ -18,7 +18,10 @@ taxi-type (bus share 11 %); busiest transit link ≈ 1,650 potential movements p
 direction over 06:00–09:00; **peak hour 07:00–08:00 holding 59–66 % of the three hours
 (1.8 × an average hour)**, so ≈ 980 transit and 4,200–4,600 all-layer potential
 movements per direction on the busiest links in the peak hour. These are screening
-quantities, not loads. The plain-language account is
+quantities, not loads. **Car and transit share the dominant destination structure in the
+survey but transit is less local and more Haifa-bound** (PCA, METHODOLOGY §6s): the
+transit market cannot be read off the car pattern by scaling, which is why the base keeps
+a transit-specific destination pattern. The plain-language account is
 [`reports/Survey_Matrices_Car_Bus_Rail_Report.docx`](reports/Survey_Matrices_Car_Bus_Rail_Report.docx)
 (revision 2.1). The external methodology review that prompted this
 (`docs/Nofit_Demand_Methodology_Review.md`, 21 Sep 2026) and the response to it are recorded
