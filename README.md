@@ -64,6 +64,8 @@ flowchart LR
     NB17 --> NB20[Corridor_peak_hour_2022.ipynb<br/>step 20: peak-hour factors and peak-hour profiles]
     THS --> NB20
     NB16 --> OUT[Output/ths2017/three_mode_2022/<br/>car, bus, taxi, rail 2022 × taz / sz / area]
+    OUT --> NB22[Final_matrices_2022.ipynb<br/>step 22: car / transit / total deliverables]
+    NB22 --> FIN[Output/final_2022/]
 ```
 
 Historical branches (kept, not consumed by the current base): the 2018 activities-file
@@ -119,6 +121,7 @@ anywhere inside the repository.
 | `THS_2017_three_mode_2022.ipynb` | **current** | Moves the two-mode set to a 2022 base at TAZ level and splits it into **car / bus / taxi-type / rail** (car Furnessed to growth margins, RavKav-volume bus cells as the anchor, guarded cells and taxi grown, rail × the national ridership series) |
 | `Corridor_flow_profile_survey_2022.ipynb` | **current** | Directional link profiles of **three-hour potential movements** along the corridor — total, transit (bus + rail) and taxi-type — with the earlier profiles overlaid |
 | `Corridor_profile_hybrid_vs_ticketing.ipynb` | **current** | Link-by-link comparison of the calibrated-survey transit profile with the ticketing-based one (components, calibration steps, area pairs driving the differences, transit share, local-vs-intercity ticketing coverage) |
+| `Final_matrices_2022.ipynb` | **current** | Assembles the deliverable 2022 TAZ matrices (car, transit = bus + rail, total = car + transit, taxi-inclusive variants, long format) from the step-16 layers with additivity checks and a manifest |
 | `Corridor_peak_hour_2022.ipynb` | **current** | Peak-hour factors from the survey's minute-level departure times (peak hour 07:00–08:00; PHF₃ₕ ≈ 0.59–0.66, i.e. 1.8 × an average hour; household-bootstrap ranges) and the 2022 link profiles in peak-departure-hour terms, with a sensitivity to the bus factor basis |
 | `THS_2017_trip_generation.ipynb` | current | Per-person AM-peak generation rates on the trips-file source (overall ≈ 0.83) |
 | `BusRavKav_matrix.ipynb` | current | RavKav bus data: stop → TAZ tagging, weekday-3 / 06–09 filter, average-Tuesday journey OD and per-TAZ boardings / alightings |
@@ -133,6 +136,10 @@ anywhere inside the repository.
 
 ## Key deliverables (`Output/`)
 
+- **`final_2022/{car,transit,total}_2022_taz.csv`** — the deliverable 778×778 matrices for
+  2022 (transit = calibrated bus + rail; total = car + transit; taxi-inclusive variants,
+  a gzip long-format file for SQL, `MANIFEST.csv` and `final_2022_summary.csv` alongside;
+  [METHODOLOGY §6t](METHODOLOGY.md#6t-step-22--final-2022-taz-matrices-car-transit-total-final_matrices_2022ipynb))
 - `ths2017/three_mode_2022/{car,bus,taxi,rail}_2022_{taz,sz,area}.csv` — **the current
   2022-base layer set** (778×778; superzone and 28-area versions alongside);
   `all_modes_2022_taz.csv` is their sum ([METHODOLOGY.md §6n](METHODOLOGY.md#6n-step-16--2022-base-layers-car-bus-taxi-type-rail-ths_2017_three_mode_2022ipynb))
@@ -180,5 +187,5 @@ pip install pandas numpy scipy matplotlib jupyter openpyxl pyshp
 
 Run order for the current branch, all under `notebooks/current/`: `THS_2017_two_mode_matrix`
 → `THS_2017_three_mode_2022` → `Corridor_flow_profile_survey_2022` →
-`Corridor_profile_hybrid_vs_ticketing` → `Corridor_peak_hour_2022` (see METHODOLOGY §9).
+`Corridor_profile_hybrid_vs_ticketing` → `Corridor_peak_hour_2022` → `Final_matrices_2022` (see METHODOLOGY §9).
 `notebooks/diagnostics/Hybrid_superzone_conservation_test` runs on committed outputs alone.

@@ -25,7 +25,8 @@ with the bus layer calibrated to ticketing, and the cellular hybrids are histori
 ## 0. Status, authoritative baseline and lineage (21 September 2026)
 
 **Authoritative base-year product:** the survey-only 2022 layer set
-`Output/ths2017/three_mode_2022/{car,bus,taxi,rail}_2022_*.csv` (steps 15–16). It is a
+`Output/ths2017/three_mode_2022/{car,bus,taxi,rail}_2022_*.csv` (steps 15–16), delivered as
+**car / transit / total** TAZ matrices in `Output/final_2022/` (step 22, §6t). It is a
 *person-journey* product for residents with both trip ends in the study area, AM 06:00–09:00,
 representative weekday, at 2022 vintage (bus cells that took RavKav volumes at May 2022;
 everything else grown from 2018 by demographic factors, rail by the national ridership
@@ -74,6 +75,7 @@ Every published product, what it was built from, and its status:
 
 | Product (`Output/…`) | Built by | Base / inputs | Geography | Modes | Vintage | Status |
 |---|---|---|---|---|---|---|
+| **`final_2022/{car,transit,total}_2022_taz.csv`**, `*_incl_taxi_*`, `final_2022_long.csv.gz`, `MANIFEST.csv` | step 22 | the step-16 layers, summed | 778 TAZ | car; transit = bus + rail; total | 2022 | **current — the deliverable set** |
 | `ths2017/three_mode_2022/{car,bus,taxi,rail}_2022_{taz,sz,area}.csv`, `all_modes_2022_taz.csv` | step 16 | `ths2017/two_mode/` + zonal 2020/2025 growth | 778 TAZ / 36 SZ / 28 areas | car; bus (Public Bus + Matronit); taxi-type (codes 5, 8); rail (survey door-to-door) | 2022 | **current** |
 | `ths2017/three_mode_2022/rail_station_smartcard_2022_taz.csv` | step 16 | `train/train_od_taz_6_9.csv` × 0.793 | 19 station TAZs | rail, station-to-station, all riders | 2022 | current (separate frame) |
 | `ths2017/three_mode_2022/corridor_link_flows_{total,transit,taxi}_2022.csv`, `corridor_profile_*.csv` | steps 17–18 | the row above | 18 line areas | as above | 2022 | current — three-hour potential movements |
@@ -1160,6 +1162,33 @@ is warranted. Nothing follows at TAZ level or within Haifa from the survey's tra
 **Outputs.** `Output/ths2017/tests/pca_car_vs_transit_{summary,overlap,rcev,by_origin,levels,by_area}.csv`;
 figures `Output/figures/pca_cvt_{scree,subspace_overlap,component_match,divergence,levels}.png`.
 
+## 6t. Step 22 — Final 2022 TAZ matrices: car, transit, total (`Final_matrices_2022.ipynb`)
+
+**Purpose.** The deliverable set, assembled from the step-16 layers without any further
+modelling: **car** = `car_2022_taz`; **transit** = bus (calibrated) + rail (survey
+door-to-door); **total** = car + transit. Taxi-type is carried as a variant
+(`transit_incl_taxi`, `total_incl_taxi`), not in the headline transit matrix (§6n).
+A long-format file (`orig_taz, dest_taz, car, bus, rail, taxi_type, transit, total`,
+non-empty cells only, gzip) is written for SQL use, with a manifest and a summary.
+
+**Totals (2022, AM 06:00–09:00, 778 × 778).**
+
+| Layer | All | Corridor → corridor | Corridor → outside | Outside → corridor | Outside → outside |
+|---|---|---|---|---|---|
+| Car | 1,353,798 | 72,331 | 47,011 | 89,181 | 1,145,275 |
+| Transit (bus + rail) | 133,704 | 9,366 | 10,104 | 18,799 | 95,434 |
+| **Total (car + transit)** | **1,487,501** | 81,697 | 57,115 | 107,980 | 1,240,709 |
+| Taxi-type (variant) | 19,359 | 3,812 | 1,359 | 5,479 | 8,709 |
+| Transit share of total | 9.0 % | 11.5 % | 17.7 % | 17.4 % | 7.7 % |
+
+Checks: the four layers add to `all_modes_2022_taz.csv` cell by cell; the long file's
+total equals the matrix total; 351,223 of 605,284 cells carry demand (the bus layer is
+dense because the calibration spreads each origin's volume over the blended
+destination pattern; car has 24,173 non-zero cells).
+
+**Outputs.** `Output/final_2022/{car,transit,total,transit_incl_taxi,total_incl_taxi}_2022_taz.csv`,
+`final_2022_long.csv.gz`, `final_2022_summary.csv`, `MANIFEST.csv`.
+
 ---
 
 ## 7. Output inventory (`Output/`)
@@ -1193,6 +1222,7 @@ figures `Output/figures/pca_cvt_{scree,subspace_overlap,component_match,divergen
 | `ths2017/tests/ks*.csv` | various | Step 13 | KS tests: trip length distributions (all / off-diagonal / per origin / corridor class), flow concentration, distance-proxy calibration |
 | `ths2017/tests/mssim_*.csv` | various | Step 14 | MSSIM tests: index by level / window / scale / ordering with term decomposition, broken-correspondence null, per-origin and superzone-block local SSIM, corridor classes |
 | `ths2017/two_mode/*.csv` | 778×778 / 36×36 / 28×28 | Step 15 | Survey-only two-mode matrices (car, transit) with the bus part calibrated to RavKav × OnBoard per origin × segment; binary-guard / all-RavKav / uniform variants; calibration tables incl. `bus_calibration_factors_segments.csv` and the threshold sweep; mode shares |
+| `final_2022/*` | 778×778; long | Step 22 | **Deliverable matrices**: car, transit (bus + rail), total, taxi-inclusive variants, long format, manifest and summary |
 | `ths2017/three_mode_2022/*.csv` | 778×778 / 36×36 / 28×28 | Steps 16–18, 20 | **Current 2022-base layers** car / bus / taxi / rail (demographic growth, RavKav anchor, rail ridership series), `all_modes_2022_taz.csv`, TAZ growth factors, summaries; corridor link profiles (three-hour potential movements), the comparison with the ticketing profile, and the peak-hour factors and peak-hour link profiles |
 | `ths2017/tests/hybrid_sz_conservation_*.csv`, `ths2017/study_taz/hybrid_taz_{trips,prob}_balanced.csv` | 3 / 12 rows; 778×778 | Step 19 | Superzone conservation test of the TAZ hybrids and the jointly-constrained rebalanced primary hybrid |
 | `ths2017/tests/pca_car_vs_transit_*.csv` | various | Step 21 | PCA within the survey, car vs transit: overlap by k, RCEV, per-origin displacement and Haifa-bound shares, summary |
@@ -1341,6 +1371,7 @@ jupyter nbconvert --to notebook --execute --inplace notebooks/current/THS_2017_t
 jupyter nbconvert --to notebook --execute --inplace notebooks/current/Corridor_flow_profile_survey_2022.ipynb
 jupyter nbconvert --to notebook --execute --inplace notebooks/current/Corridor_profile_hybrid_vs_ticketing.ipynb
 jupyter nbconvert --to notebook --execute --inplace notebooks/current/Corridor_peak_hour_2022.ipynb
+jupyter nbconvert --to notebook --execute --inplace notebooks/current/Final_matrices_2022.ipynb
 
 # regression test of the hybrid branch (committed outputs only)
 jupyter nbconvert --to notebook --execute --inplace notebooks/diagnostics/Hybrid_superzone_conservation_test.ipynb
