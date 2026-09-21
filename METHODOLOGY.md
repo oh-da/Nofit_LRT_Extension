@@ -1094,10 +1094,50 @@ zone i ends in zone j.
    rests on cellular structure (with its replication caveat), not on a production model —
    treat individual TAZ origin totals accordingly.
 
+Added after the methodology review of 21 September 2026:
+
+6. **Superzone OD blocks of the TAZ hybrids are not conserved** by the correction-factor
+   construction (§6q); use `hybrid_taz_trips_balanced.csv` if a hybrid is needed at all.
+   The replicated cellular mapping (§2) also weights each national zone by its number of
+   child TAZs inside the within-superzone origin split and the TAZ destination mix; a
+   mass-preserving rebuild needs the cellular file (LFS) and the allocation-matrix
+   conversion of step 5.
+7. **Units of the transit sources are not reconciled.** The OnBoard file gives
+   P(alight | board) — whether per boarding leg or per journey is unconfirmed — and it is
+   applied to RavKav *journey* row totals; a bus-to-rail traveller may sit in both the
+   RavKav bus OD (journey ending at the station stop) and the station train matrix. Both
+   are untested. Keep person-journey products (the survey base) and boarding products
+   (RavKav, station matrix) separate until an access / transfer allocation links them.
+8. **The segmented coverage rule is an assumption with a threshold** (§6m): its bus
+   total exceeds both sources and moves by ± 5 % over thresholds 0.3–0.7; the cause of
+   sub-0.5 ratios (operator coverage, cash fares, survey over-expansion) is unresolved.
+9. **Taxi-type codes 5 / 8** are a separate layer; their exact meaning awaits the survey
+   codebook, and they should not be summed into an LRT market by default.
+10. **The forecast branch** (`transit/all_adjusted_*`, `forecast/*`) rests on the
+    historical 25-area composite, mixes a residents' door-to-door car / other layer with
+    all-rider boardings, freezes 2022 modal shares (its 8.9 % → 7.5–8.0 % transit decline
+    is composition, not behaviour), smooths shares with k = 50 applied to *expanded*
+    volumes (inert for cells of thousands of trips; sampled counts are the right
+    information measure), preserves the 155 zero cells of the base under Furness, and
+    excludes the 116,473 weighted trips with one end outside the study area and the three
+    line areas below 50 observed bus trips. It is a demographic reference, not a forecast
+    of LRT demand, and is to be rebuilt from the current base (tasks D1–D4).
+11. **Vintage alignment is an assumption**: `(X2025 / X2020)^(4/5)` extrapolates a forecast
+    trend to represent 2018–2022; the national rail ratio stands in for local AM change;
+    the claim that May 2022 bus ridership was not COVID-suppressed rests on the study
+    team's statement and has no evidence in the repository.
+12. **Corridor profiles are three-hour potential movements** between line areas, not
+    passenger loads or upper bounds on LRT demand (§6o).
+13. **Similarity tests are diagnostics**: day-to-day agreement of the same households is
+    a repeatability reference, not a ceiling (the hybrid exceeds it against the survey by
+    construction); a better fit to RavKav after calibrating to RavKav is not validation.
+    External counts (Haifa-segment bus loads, Nazareth local vs Haifa-bound services,
+    Hamifrats transfers, road screenlines, station boardings) are still absent.
+
 ## 8b. Related work — PCA-based analysis and structural comparison of OD matrices
 
 Context for the PCA validation notebooks (`THS_2018_MTX_PCA_vs_cellular.ipynb`,
-`THS_2017_PCA_vs_cellular.ipynb`), which re-examine the survey↔cellular comparison
+`THS_2017_PCA_vs_cellular.ipynb`, and the eigenplaces typology `Cellular_eigenplaces_TAZ.ipynb`, all under `notebooks/diagnostics/`), which re-examine the survey↔cellular comparison
 through component structure rather than cell-by-cell statistics. The approach is
 grounded in four strands of literature:
 
@@ -1146,45 +1186,6 @@ the diagonal-ablation decomposition isolating *where* structures diverge — doe
 appear assembled in any single prior work. Practitioner validation guidance still
 standardizes on the cell-based toolkit (GEH, %RMSE), which is precisely what strand
 2 pushes back on.
-Added after the methodology review of 21 September 2026:
-
-6. **Superzone OD blocks of the TAZ hybrids are not conserved** by the correction-factor
-   construction (§6q); use `hybrid_taz_trips_balanced.csv` if a hybrid is needed at all.
-   The replicated cellular mapping (§2) also weights each national zone by its number of
-   child TAZs inside the within-superzone origin split and the TAZ destination mix; a
-   mass-preserving rebuild needs the cellular file (LFS) and the allocation-matrix
-   conversion of step 5.
-7. **Units of the transit sources are not reconciled.** The OnBoard file gives
-   P(alight | board) — whether per boarding leg or per journey is unconfirmed — and it is
-   applied to RavKav *journey* row totals; a bus-to-rail traveller may sit in both the
-   RavKav bus OD (journey ending at the station stop) and the station train matrix. Both
-   are untested. Keep person-journey products (the survey base) and boarding products
-   (RavKav, station matrix) separate until an access / transfer allocation links them.
-8. **The segmented coverage rule is an assumption with a threshold** (§6m): its bus
-   total exceeds both sources and moves by ± 5 % over thresholds 0.3–0.7; the cause of
-   sub-0.5 ratios (operator coverage, cash fares, survey over-expansion) is unresolved.
-9. **Taxi-type codes 5 / 8** are a separate layer; their exact meaning awaits the survey
-   codebook, and they should not be summed into an LRT market by default.
-10. **The forecast branch** (`transit/all_adjusted_*`, `forecast/*`) rests on the
-    historical 25-area composite, mixes a residents' door-to-door car / other layer with
-    all-rider boardings, freezes 2022 modal shares (its 8.9 % → 7.5–8.0 % transit decline
-    is composition, not behaviour), smooths shares with k = 50 applied to *expanded*
-    volumes (inert for cells of thousands of trips; sampled counts are the right
-    information measure), preserves the 155 zero cells of the base under Furness, and
-    excludes the 116,473 weighted trips with one end outside the study area and the three
-    line areas below 50 observed bus trips. It is a demographic reference, not a forecast
-    of LRT demand, and is to be rebuilt from the current base (tasks D1–D4).
-11. **Vintage alignment is an assumption**: `(X2025 / X2020)^(4/5)` extrapolates a forecast
-    trend to represent 2018–2022; the national rail ratio stands in for local AM change;
-    the claim that May 2022 bus ridership was not COVID-suppressed rests on the study
-    team's statement and has no evidence in the repository.
-12. **Corridor profiles are three-hour potential movements** between line areas, not
-    passenger loads or upper bounds on LRT demand (§6o).
-13. **Similarity tests are diagnostics**: day-to-day agreement of the same households is
-    a repeatability reference, not a ceiling (the hybrid exceeds it against the survey by
-    construction); a better fit to RavKav after calibrating to RavKav is not validation.
-    External counts (Haifa-segment bus loads, Nazareth local vs Haifa-bound services,
-    Hamifrats transfers, road screenlines, station boardings) are still absent.
 
 ## 9. Reproduction
 
