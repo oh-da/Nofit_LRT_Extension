@@ -78,7 +78,7 @@ Every published product, what it was built from, and its status:
 | `ths2017/study_taz/hybrid_*`, `submatrices/*` | step 6 | trips file × cellular (LFS), replicated mapping | 778 / 36 / 25 / 28 | all modes | 2018 | **historical** — superzone OD blocks not reproduced (§6q) |
 | `ths2017/study_taz/matrix_avg_*`, `ths2017/matrix_*` | step 5 | trips file, cellular allocation shares | 778 / native | by mode | 2018 | current survey source (cellular used only for the 1250 → TAZ split) |
 | `historical/ths2018/*` (`hybrid_*`, `prob_*`, `matrix_*`, `submatrices/*`, `trip_generation_*`) | steps 1–4 | activities file × cellular, replicated mapping | 778 / 36 / 25 | all modes | 2018 | **historical** |
-| `ths2017/tests/*` | steps 12–14, 19 | the matrices above | various | — | — | diagnostics (regression record) |
+| `ths2017/tests/*` | steps 12–14, 19, 21 | the matrices above; step 21: survey car vs transit profiles | various | — | — | diagnostics (regression record) |
 | `transit/transit_od_area.csv`, `all_adjusted_area*.csv`, `mode_share_area*.csv`, `car_other_area_2022.csv` | steps 10–11 | survey ALL − TRANSIT − RAIL (cellular-allocated) + RavKav × OnBoard bus + station train | 25 areas | mixed frames (residents' car / other + all-rider boardings) | mixed → 2022 | **historical composite** |
 | `forecast/all_modes_area_*`, `share_*`, `nobuild_*`, `lrt_market_*`, `lrt_alignment_*` | forecast notebooks | `transit/all_adjusted_area_2022.csv` | 25 areas | composite | 2040 / 2050 | **demographic reference on the historical composite — to be rebuilt from the current base** |
 | `demographics/*` | scenario comparison | zonal forecast files (LFS) | 28 areas | — | 2040 / 2050 | current input analysis |
@@ -1099,6 +1099,44 @@ hourly shares and bootstrap ranges), `peak_hour_factors_applied.csv`,
 direction: three-hour, average-hour and peak-hour flows by layer),
 `peak_hour_sensitivity.csv`; figure `corridor_flow_profile_peak_hour_2022.png`.
 
+## 6s. Step 21 — PCA within the survey: car vs transit destination structure (`THS_2017_PCA_car_vs_transit.ipynb`)
+
+**Question.** Do car and transit trips share the same destination-choice structure, and
+where do they diverge? The PCA suite of steps 12–14's companions (§6j–§6l, and the PCA
+notebooks of §8b) is applied within the survey with the mode group as the grouping.
+
+**Method.** Trips file, step-15 extraction (AM, both ends in the study area, weighted),
+population / employment zone split; groups car (`mainmode` 10 / 11), transit (3, 4, 5, 8, 7),
+bus (3, 4) as a sensitivity; levels 36 superzones (35 usable origins) and 28 sub-areas
+(16 usable). Origins are observations, row-normalised destination profiles are features.
+References: each mode's own day 1 vs day 2 repeatability and a permuted-geography null;
+a 200-replicate household bootstrap of the overlap; a restricted run on the 26 origins
+with ≥ 20 sampled transit trips. Tests T1–T6 as in the earlier suites.
+
+**Results (superzone level, k = 20).** Car vs transit subspace overlap 0.75 (bootstrap
+0.66–0.76; null mean 0.57, max 0.70, p = 0.0005) against car repeatability 0.95 and
+transit repeatability 0.81; on the well-sampled origins 0.83 against transit repeatability
+0.86. Car components capture 86 % of the transit variance that transit's own components
+capture (transit repeatability 89 %). Leading pairs match one to one (0.72, 0.79): a
+geographic axis and a self-containment / Haifa-bound axis. Divergence: mean
+self-containment car 0.62 vs transit 0.45; only 44 % of the squared divergence is on the
+diagonal (survey vs cellular: 87 %); removing the diagonal does not raise the overlap
+(0.72); the sign-flip test finds a common direction (p = 0.04) — transit share moves from
+peripheral destinations (Tirat Carmel, Umm al-Fahm, Beit She'an, Ma'alot: −2 points) to
+the Haifa core (SZ 16, 14, 13, 12: +2–3 points). Displacement is 1.5 × transit's
+day-to-day noise. Largest well-sampled departures: Rekhasim / Zevulun (45 % of transit
+trips to the Haifa superzones vs 9 % of car), Shefa-'Amr / Tamra (66 % vs 14 %), Tirat
+Carmel (71 % vs 23 %). Sub-area level: car vs transit 0.58 at k = 6, indistinguishable
+from transit's own repeatability (0.60) — uninformative there.
+
+**Reading.** Car and transit share the dominant structure, but transit is systematically
+less local and more Haifa-core-bound; a transit market cannot be read off the car pattern
+by scaling, and a transit-specific destination pattern (as in the step-15 calibration)
+is warranted. Nothing follows at TAZ level or within Haifa from the survey's transit sample.
+
+**Outputs.** `Output/ths2017/tests/pca_car_vs_transit_{summary,overlap,rcev,by_origin}.csv`;
+figures `Output/figures/pca_cvt_{scree,subspace_overlap,component_match,divergence}.png`.
+
 ---
 
 ## 7. Output inventory (`Output/`)
@@ -1134,6 +1172,7 @@ direction: three-hour, average-hour and peak-hour flows by layer),
 | `ths2017/two_mode/*.csv` | 778×778 / 36×36 / 28×28 | Step 15 | Survey-only two-mode matrices (car, transit) with the bus part calibrated to RavKav × OnBoard per origin × segment; binary-guard / all-RavKav / uniform variants; calibration tables incl. `bus_calibration_factors_segments.csv` and the threshold sweep; mode shares |
 | `ths2017/three_mode_2022/*.csv` | 778×778 / 36×36 / 28×28 | Steps 16–18, 20 | **Current 2022-base layers** car / bus / taxi / rail (demographic growth, RavKav anchor, rail ridership series), `all_modes_2022_taz.csv`, TAZ growth factors, summaries; corridor link profiles (three-hour potential movements), the comparison with the ticketing profile, and the peak-hour factors and peak-hour link profiles |
 | `ths2017/tests/hybrid_sz_conservation_*.csv`, `ths2017/study_taz/hybrid_taz_{trips,prob}_balanced.csv` | 3 / 12 rows; 778×778 | Step 19 | Superzone conservation test of the TAZ hybrids and the jointly-constrained rebalanced primary hybrid |
+| `ths2017/tests/pca_car_vs_transit_*.csv` | various | Step 21 | PCA within the survey, car vs transit: overlap by k, RCEV, per-origin displacement and Haifa-bound shares, summary |
 | `ths2017/trip_generation_*.csv` | 478 / 35 / 25 rows | Step 7 | Per-person AM-peak generation rates on the trips-file source |
 | `bus/bus_stops_taz.csv`, `bus/bus_od_taz_avg.csv`, `bus/bus_boardings_alightings_taz.csv` | 27k stops / 722×711 / 730 rows | Step 8 | RavKav stop tags, average-Tuesday AM-peak bus OD (journey-level), per-TAZ boardings/alightings (leg-level) |
 | `bus/bus_probability_matrix.csv`, `bus/bus_od_taz_new.csv`, `bus/bus_od_area_new{,_filtered}.csv` | 594×548 / 722×728 / 28×28, 25×25 | Step 9 | OnBoard destination probabilities; RavKav volumes × OnBoard pattern; area aggregation and noise-filtered version |
@@ -1270,7 +1309,7 @@ standardizes on the cell-based toolkit (GEH, %RMSE), which is precisely what str
 ## 9. Reproduction
 
 ```bash
-pip install pandas numpy matplotlib jupyter openpyxl pyshp
+pip install pandas numpy scipy matplotlib jupyter openpyxl pyshp
 git lfs pull            # optional — needed only for the historical cellular chain, the raw RavKav / train files and the 2040 / 2050 zonal forecasts
 
 # current chain (survey-only base; runs on committed inputs and the committed step-8/9/10 outputs)
@@ -1282,6 +1321,8 @@ jupyter nbconvert --to notebook --execute --inplace notebooks/current/Corridor_p
 
 # regression test of the hybrid branch (committed outputs only)
 jupyter nbconvert --to notebook --execute --inplace notebooks/diagnostics/Hybrid_superzone_conservation_test.ipynb
+# PCA within the survey, car vs transit (trips file + committed keys; needs scipy)
+jupyter nbconvert --to notebook --execute --inplace notebooks/diagnostics/THS_2017_PCA_car_vs_transit.ipynb
 ```
 
 Upstream of the current chain (all in `notebooks/current/`), with the LFS files: `BusRavKav_matrix` → `BusOnBoard_matrix`

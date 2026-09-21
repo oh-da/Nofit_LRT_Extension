@@ -104,6 +104,7 @@ anywhere inside the repository.
 | `THS_2017_PCA_vs_cellular.ipynb` | diagnostic | The PCA suite on the trips-file source |
 | `THS_PCA_eigenvector_maps.ipynb` | diagnostic | Eigenvector charts for the PCA suite; exports `Output/pca_sz_eigenvectors.csv` |
 | `THS_PCA_review_tests.ipynb` | diagnostic | Direct tests answering the PCA report review (conditional outbound distributions, household bootstrap, diagonal audit) |
+| `THS_2017_PCA_car_vs_transit.ipynb` | diagnostic | PCA within the survey with the mode group as the grouping: car and transit share the dominant destination structure (overlap 0.75 at superzone level, 0.83 on well-sampled origins ≈ transit's own repeatability), but transit is less local (self-containment 0.45 vs 0.62) and shifts share to the Haifa core (common direction, p = 0.04) — a transit market cannot be read off the car pattern by scaling (METHODOLOGY §6s) |
 | `Cellular_eigenplaces_TAZ.ipynb` | diagnostic | Eigenplaces-style temporal typology of the TAZs from the 24-hour cellular trip-end profiles (PCA + k-means → four functional types, checked against 2020 demographics); the survey–cellular self-containment gap concentrates in the residential types — evidence for the short-trip hypothesis (METHODOLOGY §8b); needs the LFS cellular file |
 | `THS_2017_trips_matrices.ipynb` | current (survey source) | Day × mode + day-averaged matrices from `Input/trips_ths_2017.xlsx`, converted to the study zone systems by cellular allocation shares |
 | `THS_2017_hybrid_pipeline.ipynb` | historical | Survey × cellular hybrid on the trips-file source (k* = 5), correction-factor TAZ matrices, 28-area sub-matrices |
@@ -143,7 +144,8 @@ anywhere inside the repository.
 - `ths2017/tests/hybrid_sz_conservation_*.csv`, `ths2017/study_taz/hybrid_taz_trips_balanced.csv`
   — the superzone conservation test and the rebalanced hybrid (§6q)
 - `ths2017/tests/cosine_geh_summary.csv`, `ks_summary.csv`, `mssim_headline.csv` — the
-  survey / cellular / hybrid diagnostics (§6j–§6l)
+  survey / cellular / hybrid diagnostics (§6j–§6l); `pca_car_vs_transit_*.csv` — the
+  car-vs-transit PCA within the survey (§6s)
 - `ths2017/study_taz/hybrid_*`, `historical/ths2018/*`, `transit/`, `forecast/` — historical
   and demographic-reference products; see the lineage table in METHODOLOGY §0 before use
 
@@ -170,7 +172,7 @@ the RavKav / train raw files, whose processed outputs are committed:
 
 ```bash
 git lfs pull                      # optional: cellular, RavKav, train and forecast zonal files
-pip install pandas numpy matplotlib jupyter openpyxl pyshp
+pip install pandas numpy scipy matplotlib jupyter openpyxl pyshp
 ```
 
 Run order for the current branch, all under `notebooks/current/`: `THS_2017_two_mode_matrix`
