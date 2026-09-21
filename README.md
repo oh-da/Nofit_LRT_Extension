@@ -1,101 +1,131 @@
 # Nofit LRT Extension — OD Demand Matrix
 
-Builds an AM-peak (6:00–9:00) origin–destination demand matrix for the Nofit LRT
-extension study area (778 TAZs, northern Israel) by fusing the 2018 Travel Habits
-Survey with a cellular-derived OD matrix: cellular acts as the population-scale prior,
-the survey as evidence, combined at the spatial scale where each is reliable.
+Builds an AM-peak (06:00–09:00) origin–destination demand matrix for the Nofit LRT
+extension study area (778 TAZs, northern Israel) from the 2018 Travel Habits Survey,
+with the bus layer calibrated to RavKav ticketing and the OnBoard survey, and compares
+it against a cellular-derived OD matrix.
 
-See **[METHODOLOGY.md](METHODOLOGY.md)** for the full reasoning, methodology, inputs
-and outputs of every step, and **[TRANSIT_DEMAND_PLAN.md](TRANSIT_DEMAND_PLAN.md)**
-for the agreed plan to complete the corridor transit demand once the train matrix
-arrives, and **[CORRIDOR_DEMAND_TASKS.md](CORRIDOR_DEMAND_TASKS.md)** for the open task
-list that makes the base-year matrix fit for corridor demand estimation and 2050 growth.
+**Status (21 September 2026).** The repository holds three generations of matrices. The
+**authoritative base-year product is the survey-only 2022 layer set** under
+`Output/ths2017/three_mode_2022/` (car / bus / taxi-type / rail). The survey × cellular
+hybrids are **historical**, and the 2040 / 2050 forecasts and LRT-market tables are a
+**demographic reference built on an older 25-area composite**, not on the current base —
+they are to be rebuilt. [METHODOLOGY.md §0](METHODOLOGY.md#0-status-authoritative-baseline-and-lineage-21-september-2026)
+carries the lineage table that says, for every published file, what it was built from
+and whether it is current. The external methodology review that prompted this
+(`Nofit_Demand_Methodology_Review.md`, 21 Sep 2026) and the response to it are recorded
+in [METHODOLOGY.md §8](METHODOLOGY.md#8-known-caveats-and-open-questions) and
+[CORRIDOR_DEMAND_TASKS.md](CORRIDOR_DEMAND_TASKS.md).
 
-## Pipeline
+See **[METHODOLOGY.md](METHODOLOGY.md)** for the full reasoning, methodology, inputs and
+outputs of every step, **[TRANSIT_DEMAND_PLAN.md](TRANSIT_DEMAND_PLAN.md)** for the
+(historical) ticketing-substitution decision, **[CORRIDOR_DEMAND_TASKS.md](CORRIDOR_DEMAND_TASKS.md)**
+for the open task list, and **[LRT_CAPTURE_PLAN.md](LRT_CAPTURE_PLAN.md)** for the
+generalised-cost capture model still to be built.
+
+## Current pipeline (survey-only branch)
 
 ```mermaid
 flowchart LR
-    subgraph inputs [Input/Matrices]
-        ACT[ACTIVITIES_DEC18_corrected.csv]
-        HH[households_with_weights.csv]
-        CELL[AvgDayHourlyTrips 1270-zone]
-        KEYS[TAZ_North_keys]
+    subgraph inputs [Input]
+        THS[trips_ths_2017.xlsx]
+        K26[TAZ_2636_Keys.xlsx]
+        KEYS[taz_keys_from_shapefile.csv<br/>or the LFS keys table]
+        ZON[Zonal_2020 / Zonal_BU_2025]
+        RK[BusRavKav/*.csv  LFS]
+        OB[6_9_BusProbability_ByTAZ.xlsx]
+        TR[Train_mtx_table.csv  LFS]
     end
-    ACT --> NB1
-    HH --> NB1
-    NB1[THS_2018_MTX_weighted.ipynb<br/>step 1: weighted matrices] --> NB2
-    CELL --> NB2
-    KEYS --> NB2
-    NB2[THS_2018_MTX_weighted_vs_cellular.ipynb<br/>step 1b: validation vs cellular] --> NB3
-    NB3[THS_2018_MTX_hybrid.ipynb<br/>step 2: superzone hybrid, EB shrinkage] --> NB4
-    NB4[THS_2018_MTX_hybrid_taz.ipynb<br/>step 3: TAZ matrix via correction factors] --> OUT[Output/hybrid_taz_prob.csv]
+    RK --> NB8[BusRavKav_matrix.ipynb<br/>step 8: journeys, boardings]
+    NB8 --> NB9[BusOnBoard_matrix.ipynb<br/>step 9: RavKav volumes × OnBoard pattern]
+    OB --> NB9
+    TR --> NB10[Transit_complete_matrix.ipynb<br/>step 10: station rail matrix]
+    THS --> NB15
+    K26 --> NB15
+    KEYS --> NB15
+    ZON --> NB15
+    NB9 --> NB15[THS_2017_two_mode_matrix.ipynb<br/>step 15: car + bus calibrated per origin × segment]
+    NB15 --> NB16[THS_2017_three_mode_2022.ipynb<br/>step 16: 2022 base — car / bus / taxi / rail]
+    NB10 --> NB16
+    ZON --> NB16
+    NB16 --> NB17[Corridor_flow_profile_survey_2022.ipynb<br/>step 17: potential movements along the line]
+    NB17 --> NB18[Corridor_profile_hybrid_vs_ticketing.ipynb<br/>step 18: vs the ticketing profile]
+    NB16 --> OUT[Output/ths2017/three_mode_2022/<br/>car, bus, taxi, rail 2022 × taz / sz / area]
 ```
+
+Historical branches (kept, not consumed by the current base): the 2018 activities-file
+hybrid (`THS_2018_MTX_*`), the 2017 trips-file hybrid (`THS_2017_hybrid_pipeline`), the
+25-area ticketing composite (`Vintage_alignment_2022`) and everything downstream of it
+(`Forecast_matrices_2040_2050`, `Base_mode_shares_2022`, `NoBuild_and_LRT_market`,
+`LRT_alignment_markets`).
 
 ## Notebooks
 
-| Notebook | What it does |
-|---|---|
-| `THS_2018_MTX.ipynb` | Original analysis: unweighted survey matrices, first comparison against cellular |
-| `THS_2018_MTX_weighted.ipynb` | Recreates the Day 10 / Day 20 matrices with household expansion weights (`wf_new`) — ~2.3M expanded trips per day |
-| `THS_2018_MTX_weighted_by_mode.ipynb` | Splits the weighted matrices by aggregated mode (CAR / TRANSIT / RAIL / OTHER) from `MODE_NAME` |
-| `THS_2018_MTX_submatrix.ipynb` | Extracts 119×119 sub-area versions of the weighted matrices (all modes + mode groups) |
-| `THS_2018_MTX_trip_generation.ipynb` | AM-peak trip generation rates per person by home TAZ / superzone, home = Home activity at 3:00 AM (overall ≈ 0.84, model-area trips) |
-| `THS_2018_MTX_weighted_vs_cellular.ipynb` | Validates the weighted matrices against cellular: superzone r ≈ 0.855; identifies the systematic intra-zone divergence (survey 72% vs cellular 34% self-containment) |
-| `THS_2018_MTX_PCA_vs_cellular.ipynb` | PCA test suite on survey vs cellular: shared top-12 superzone destination-choice patterns (subspace overlap 0.76 vs 0.90 day-to-day ceiling, permutation p ≈ 0.0005), the same two leading components in swapped variance order, divergence confined to zone-specific self-containment (88% of squared divergence on the diagonal) |
-| `THS_2018_MTX_hybrid.ipynb` | Superzone hybrid via empirical-Bayes shrinkage, with the shrinkage constant chosen by cross-day validation |
-| `THS_2018_MTX_hybrid_taz.ipynb` | Final 778-TAZ matrix: superzone correction factors R_AB applied to cellular OD cells, row-normalized |
-| `THS_2018_MTX_GS.ipynb` | The same pipeline on the GS zoning (25 zones, `Input/TAZ_GSnew.csv`): GS matrices, GS hybrid, and GS-calibrated TAZ matrices |
-| `THS_2017_PCA_vs_cellular.ipynb` | The PCA suite re-run on the trips-file source (day 1 / day 2 converted to study zones with the pipeline's allocation chain): every structural conclusion replicates (overlap 0.76, congruences 0.97/0.90, 87% of divergence on the diagonal), against higher internal-consistency ceilings (SZ 0.94, TAZ 0.60) — corroborating the trips file as the cleaner, primary source |
-| `THS_PCA_eigenvector_maps.ipynb` | Eigenvector charts for the PCA suite: the top-4 components drawn as destination-loading maps and origin-score maps on the superzone geography (cellular vs survey day 10 / day 20 / 2017, Hungarian-matched and sign-aligned), ranked loading bars, biplots, axis-meaning checks and a reconstruction-fit check; exports `Output/pca_sz_eigenvectors.csv` |
-| `THS_PCA_review_tests.ipynb` | Review follow-up with direct tests: conditional outbound distributions q(j\|i) survey vs cellular (TV ≈ 0.31, ≈ 2.3× the sampling-noise expectation — the divergence is not only on the diagonal, and the hybrid carries the survey's outbound pattern), household bootstrap of the 2017 trips file (congruence spreads), spectrum-flattening decomposition (the survey's flat spectrum is its diagonal's doing, not noise), diagonal audit (intra-superzone trips are real, short: median 0.7 km), within-superzone destination check at 1250-zone resolution for the corridor superzones, and what the absolute totals rest on |
-| `THS_2017_trips_matrices.ipynb` | Independent day × mode + day-averaged matrices from `Input/trips_ths_2017.xlsx` (placeno-ordered activities, Dep_h 6–8, `new_wf` weights), converted to the study zone systems |
-| `THS_2017_hybrid_pipeline.ipynb` | **Primary fusion products** on the trips-file source: SZ/GS hybrids (k* = 5 by cross-day CV), correction-factor TAZ matrices, trips, and 119-TAZ submatrices |
-| `THS_2017_cosine_GEH_tests.ipynb` | Cosine similarity and GEH tests on the three matrices (trips-file survey days 1 / 2, cellular, hybrid) at SZ / GS / 28-area / TAZ level, against the day-1-vs-day-2 ceiling and a permuted-geography null; includes the survey-vs-cellular scale audit (survey 3.56 × cellular AM volume, driven by intra-zone trips) and corridor-class GEH |
-| `THS_2017_KS_tests.ipynb` | Kolmogorov–Smirnov tests on the same three matrices: trip length distributions (centroid km; all cells, off-diagonal, per origin superzone, corridor classes) and flow-concentration curves, judged against the day-1-vs-day-2 `D` and a household bootstrap — survey median 1.95 km vs cellular 7.6 km (`D` = 0.42, still 0.30 with every intra-cellular-zone cell removed), hybrid 3.8 km |
-| `THS_2017_MSSIM_tests.ipynb` | Structural similarity (MSSIM, Djukic et al.) on the same three matrices in Hilbert-curve zone order, by window size and scale, with luminance / contrast / structure decomposition, local SSIM maps and superzone blocks, against the day-1-vs-day-2 ceiling and a broken-correspondence null — raw-trip MSSIM is uninformative (≈ 0.99 for every pair and for the null); on the log scale survey vs cellular is 0.13 at TAZ level (ceiling 0.81, null 0.02), the hybrid 0.48 vs cellular and 0.94 vs the survey at superzone level |
-| `THS_2017_two_mode_matrix.ipynb` | Survey-only two-mode matrix (car / transit) from the trips file, cellular-free (population / employment TAZ split), with the bus part calibrated to RavKav × OnBoard: EB-blended superzone destination pattern (k\* = 5 by household-split validation) and RavKav origin volumes with a coverage guard — the ticketing extract sees only 0.2–0.4 of the survey's bus trips in the Nazareth, Shefa-'Amr, Sakhnin and other mostly Arab-sector / peripheral superzones, so those keep survey volumes |
-| `THS_2017_three_mode_2022.ipynb` | Moves the survey-only two-mode matrix to a 2022 base at TAZ level (car Furnessed to population / employment growth margins, RavKav-calibrated bus rows as the anchor, guarded rows and taxi-type grown, rail × the national ridership series) and splits it into **car / bus / rail** matrices |
-| `Corridor_flow_profile_survey_2022.ipynb` | Directional link-flow profiles along the corridor for the survey-only 2022 matrices — total (car + bus + rail) and transit only — with the earlier hybrid- / ticketing-based profiles overlaid |
-| `Corridor_profile_hybrid_vs_ticketing.ipynb` | Link-by-link comparison of the calibrated-survey transit profile with the ticketing-based one (components, calibration steps, area pairs driving the differences, transit share of link flow, local-vs-intercity ticketing coverage) |
-| `THS_2017_trip_generation.ipynb` | Per-person AM-peak generation rates on the trips-file source (overall ≈ 0.83), by 2636-zone / SZ / GS |
-| `BusRavKav_matrix.ipynb` | RavKav bus data: stop→TAZ spatial tagging, weekday-3 / 6–9 AM filter, average-Tuesday OD matrix and per-TAZ boardings/alightings |
-| `BusOnBoard_matrix.ipynb` | OnBoard survey probability matrix + combined bus matrix (RavKav volumes × OnBoard destination pattern) |
-| `Transit_complete_matrix.ipynb` | Train matrix (2019 smartcards, 6–9), complete transit matrix (bus+train), adjusted all-mode matrix and mode shares |
-| `Vintage_alignment_2022.ipynb` | Levels all components to a 2022 base: CAR/OTHER Furnessed to demographic growth margins (zonal 2020/2025 files), train scaled to 2022 rail ridership, bus as anchor |
-| `Demographic_scenario_comparison.ipynb` | BU vs HS forecast scenarios (2040/2050) compared on the Furness-margin resolution (28 research areas): corridor totals match but spatial allocation diverges sharply — verdict: **each scenario needs its own matrix** |
-| `Forecast_matrices_2040_2050.ipynb` | Grows the 2022 all-modes area matrix to the four scenario-years (BU/HS × 2040/2050) via IPF with demographically grown margins (population → origins, employment → destinations, constant trip rates, explicit new-resident productions for HS's residential conversions) |
-| `Base_mode_shares_2022.ipynb` | Revealed per-OD modal shares (car/other, bus, rail) from the 2022 components, EB-smoothed toward corridor-class × distance-band strata — the no-build behavioral baseline for the LRT-capture step |
-| `NoBuild_and_LRT_market.ipynb` | No-build modal matrices per scenario-year (pivot of smoothed base shares onto forecast totals — modes are never grown independently) and the LRT market definition (core = both ends corridor, 38–44% of trips; extended = one end) |
-| `LRT_alignment_markets.ipynb` | Market counts for the two alignment scenarios (`Input/lrt_alignment_flags.csv`): MainCorridor (Hamifrats–Tirat Carmel + transfer-influenced Krayot, 23–31% of trips) vs FullLength (Nazareth–Tirat Carmel, ~56%), per forecast scenario-year |
+| Notebook | Status | What it does |
+|---|---|---|
+| `THS_2018_MTX.ipynb` | historical | Original analysis: unweighted survey matrices, first comparison against cellular |
+| `THS_2018_MTX_weighted.ipynb` | historical | Day 10 / Day 20 matrices with household expansion weights (`wf_new`) — ~2.3M expanded trips per day |
+| `THS_2018_MTX_weighted_by_mode.ipynb` | historical | Weighted matrices by aggregated mode (CAR / TRANSIT / RAIL / OTHER) |
+| `THS_2018_MTX_submatrix.ipynb` | historical | 119×119 sub-area versions of the weighted matrices |
+| `THS_2018_MTX_trip_generation.ipynb` | historical | AM-peak trip generation rates per person by home TAZ / superzone |
+| `THS_2018_MTX_weighted_vs_cellular.ipynb` | diagnostic | Weighted matrices vs cellular: superzone r ≈ 0.855; the intra-zone divergence (survey 72 % vs cellular 34 % self-containment) |
+| `THS_2018_MTX_PCA_vs_cellular.ipynb` | diagnostic | PCA test suite on survey vs cellular (shared top-12 destination-choice patterns; the diagonal carries most of the divergence) |
+| `THS_2018_MTX_hybrid.ipynb` | historical | Superzone hybrid via empirical-Bayes shrinkage, k by cross-day validation |
+| `THS_2018_MTX_hybrid_taz.ipynb` | historical | 778-TAZ hybrid: superzone correction factors on cellular cells, row-normalised — **does not reproduce its superzone OD blocks** (see `Hybrid_superzone_conservation_test.ipynb`) |
+| `THS_2018_MTX_GS.ipynb` | historical | The same pipeline on the 25-zone GS zoning |
+| `THS_2017_PCA_vs_cellular.ipynb` | diagnostic | The PCA suite on the trips-file source |
+| `THS_PCA_eigenvector_maps.ipynb` | diagnostic | Eigenvector charts for the PCA suite; exports `Output/pca_sz_eigenvectors.csv` |
+| `THS_PCA_review_tests.ipynb` | diagnostic | Direct tests answering the PCA report review (conditional outbound distributions, household bootstrap, diagonal audit) |
+| `THS_2017_trips_matrices.ipynb` | current (survey source) | Day × mode + day-averaged matrices from `Input/trips_ths_2017.xlsx`, converted to the study zone systems by cellular allocation shares |
+| `THS_2017_hybrid_pipeline.ipynb` | historical | Survey × cellular hybrid on the trips-file source (k* = 5), correction-factor TAZ matrices, 28-area sub-matrices |
+| `Hybrid_superzone_conservation_test.ipynb` | **test** | Reaggregates the TAZ hybrids to superzone OD blocks (primary: 55 of 627 blocks > 100 trips off by > 10 %, worst +49 %), then rebalances the primary hybrid to superzone blocks and TAZ origin totals jointly (IPF, 1 % of trips relocated) → `hybrid_taz_trips_balanced.csv`, with a pass/fail assertion |
+| `THS_2017_cosine_GEH_tests.ipynb` | diagnostic | Cosine similarity and GEH on survey / cellular / hybrid at four resolutions; the scale audit (survey 3.56 × cellular AM volume) |
+| `THS_2017_KS_tests.ipynb` | diagnostic | Kolmogorov–Smirnov on trip length and flow concentration (survey median 1.95 km vs cellular 7.6 km) |
+| `THS_2017_MSSIM_tests.ipynb` | diagnostic | Structural similarity (MSSIM) in Hilbert-curve order; raw-trip MSSIM is uninformative, log-scale survey vs cellular 0.13 at TAZ level |
+| `THS_2017_two_mode_matrix.ipynb` | **current** | Survey-only car / transit matrices, cellular-free (population / employment TAZ split); bus calibrated to RavKav × OnBoard — EB-blended superzone pattern (k* = 5 by household-split validation) and RavKav volumes per **origin superzone × destination segment** (local / corridor-bound / other) where the ticketing / survey ratio is ≥ 0.5, survey volumes where it is not; binary-guard, all-RavKav and uniform-factor variants and a threshold sweep saved alongside |
+| `THS_2017_three_mode_2022.ipynb` | **current** | Moves the two-mode set to a 2022 base at TAZ level and splits it into **car / bus / taxi-type / rail** (car Furnessed to growth margins, RavKav-volume bus cells as the anchor, guarded cells and taxi grown, rail × the national ridership series) |
+| `Corridor_flow_profile_survey_2022.ipynb` | **current** | Directional link profiles of **three-hour potential movements** along the corridor — total, transit (bus + rail) and taxi-type — with the earlier profiles overlaid |
+| `Corridor_profile_hybrid_vs_ticketing.ipynb` | **current** | Link-by-link comparison of the calibrated-survey transit profile with the ticketing-based one (components, calibration steps, area pairs driving the differences, transit share, local-vs-intercity ticketing coverage) |
+| `THS_2017_trip_generation.ipynb` | current | Per-person AM-peak generation rates on the trips-file source (overall ≈ 0.83) |
+| `BusRavKav_matrix.ipynb` | current | RavKav bus data: stop → TAZ tagging, weekday-3 / 06–09 filter, average-Tuesday journey OD and per-TAZ boardings / alightings |
+| `BusOnBoard_matrix.ipynb` | current | OnBoard survey probability matrix + RavKav volumes × OnBoard destination pattern (the unit of the OnBoard rows — boarding leg or journey — is still to be confirmed) |
+| `Transit_complete_matrix.ipynb` | current for rail / historical for the composite | Station-to-station train matrix (2019 smartcards, 06–09); the bus + train composite and adjusted all-mode matrix are historical |
+| `Vintage_alignment_2022.ipynb` | historical | Levels the 25-area composite to 2022 |
+| `Demographic_scenario_comparison.ipynb` | current (input analysis) | BU vs HS forecast scenarios (2040 / 2050) at the 28 research areas: growth location differs sharply; each scenario needs its own matrix |
+| `Forecast_matrices_2040_2050.ipynb` | demographic reference (to be rebuilt) | Grows the 25-area 2022 composite to BU/HS × 2040/2050 by IPF on demographic margins — zero cells preserved, base is the historical composite |
+| `Base_mode_shares_2022.ipynb` | demographic reference (to be rebuilt) | Revealed 2022 modal shares of the composite, EB-smoothed with k = 50 applied to expanded volumes (which act as counts of thousands, so the smoothing is nearly inert) |
+| `NoBuild_and_LRT_market.ipynb` | demographic reference (to be rebuilt) | Frozen-share no-build modal matrices per scenario-year and the LRT core / extended market definition |
+| `LRT_alignment_markets.ipynb` | demographic reference (to be rebuilt) | Market counts for the two alignment scenarios per forecast scenario-year |
 
 ## Key deliverables (`Output/`)
 
-- `ths2017/study_taz/hybrid_taz_prob.csv` / `hybrid_taz_trips.csv` — **primary**
-  TAZ-level OD hybrid (778×778, trips-file source; 28-area sub-matrices under
-  `ths2017/study_taz/submatrices/`)
-- `hybrid_taz_prob.csv` / `hybrid_taz_trips.csv` — activities-based versions
-  (historical)
-- `hybrid_taz_prob_k100.csv` — variant with a stronger cellular floor on
-  survey-unobserved OD pairs
-- `hybrid_sz_prob.csv` / `hybrid_sz_trips.csv` — superzone hybrid (probabilities /
-  average-weekday trips)
-- `trip_generation_summary.csv` — per home TAZ: SuperZone, AM-peak trips per person,
-  expanded population
-- `pca_sz_eigenvectors.csv` — top-6 superzone eigenvectors (destination loadings) and origin
-  scores per source, matched to cellular and sign-aligned; charts in `figures/pca_eigenvector_*.png`
-  and the write-up in `PCA_Eigenvector_Report.docx` (revised after review; the review's tests are in `THS_PCA_review_tests.ipynb`, figures `figures/pca_review_*.png`; plain-language Hebrew version in `PCA_Eigenvector_Report_Hebrew_Explainer.docx`)
-- `Survey_Matrices_Car_Bus_Rail_Report.docx` — plain-language report on the survey-only car / bus / rail matrices: methodology, the similarity tests (cosine / GEH, KS, MSSIM), the RavKav × OnBoard calibration and its coverage finding, and the move to 2022
-- `ths2017/three_mode_2022/{car,bus,rail}_2022_taz.csv` — **2022-base car / bus / rail matrices** (778×778; superzone and 28-area versions alongside) built from the survey-only two-mode set ([METHODOLOGY.md §6n](METHODOLOGY.md#6n-step-16--three-mode-matrices-for-2022-car-bus-rail-ths_2017_three_mode_2022ipynb))
-- `ths2017/two_mode/car_taz.csv`, `ths2017/two_mode/transit_taz.csv` — survey-only two-mode matrices (778×778, 2018 base), transit with the RavKav × OnBoard-calibrated bus layer (see [METHODOLOGY.md §6m](METHODOLOGY.md#6m-step-15--two-mode-matrix-from-the-trips-file-transit-calibrated-to-ravkav--onboard-ths_2017_two_mode_matrixipynb)); calibration tables and mode shares alongside
-- `ths2017/tests/cosine_geh_summary.csv`, `ths2017/tests/ks_summary.csv`, `ths2017/tests/mssim_headline.csv` — headline cosine / GEH, KS and MSSIM tables per level and pair (details in
-  `ths2017/tests/`, figures `figures/cosine_geh_*.png`, `figures/ks_*.png`, `figures/mssim_*.png`, write-ups in [METHODOLOGY.md §6j](METHODOLOGY.md#6j-step-12--cosine-similarity-and-geh-tests-on-the-three-matrices-ths_2017_cosine_geh_testsipynb) , [§6k](METHODOLOGY.md#6k-step-13--kolmogorovsmirnov-tests-on-the-three-matrices-ths_2017_ks_testsipynb) and [§6l](METHODOLOGY.md#6l-step-14--mssim-tests-on-the-three-matrices-ths_2017_mssim_testsipynb))
+- `ths2017/three_mode_2022/{car,bus,taxi,rail}_2022_{taz,sz,area}.csv` — **the current
+  2022-base layer set** (778×778; superzone and 28-area versions alongside);
+  `all_modes_2022_taz.csv` is their sum ([METHODOLOGY.md §6n](METHODOLOGY.md#6n-step-16--2022-base-layers-car-bus-taxi-type-rail-ths_2017_three_mode_2022ipynb))
+- `ths2017/three_mode_2022/corridor_link_flows_{total,transit,taxi}_2022.csv`,
+  `corridor_profile_hybrid_vs_ticketing.csv` — three-hour potential movements along the
+  line and the comparison with the ticketing profile (§6o, §6p)
+- `ths2017/two_mode/` — the 2018-base car / bus / transit matrices, the calibration tables
+  (`bus_calibration_factors_segments.csv` is the segmented coverage rule;
+  `bus_calibration_threshold_sensitivity.csv` the threshold sweep) and the variants (§6m)
+- `ths2017/tests/hybrid_sz_conservation_*.csv`, `ths2017/study_taz/hybrid_taz_trips_balanced.csv`
+  — the superzone conservation test and the rebalanced hybrid (§6q)
+- `ths2017/tests/cosine_geh_summary.csv`, `ks_summary.csv`, `mssim_headline.csv` — the
+  survey / cellular / hybrid diagnostics (§6j–§6l)
+- `ths2017/study_taz/hybrid_*`, `hybrid_*` (root), `transit/`, `forecast/` — historical
+  and demographic-reference products; see the lineage table in METHODOLOGY §0 before use
 - Full inventory in [METHODOLOGY.md §7](METHODOLOGY.md#7-output-inventory-output)
 
 ## Setup
 
-Input CSVs are stored in Git LFS:
+Most inputs are stored in Git LFS; the survey-only branch runs without them except for
+the RavKav / train raw files, whose processed outputs are committed:
 
 ```bash
-git lfs pull
-pip install pandas numpy matplotlib jupyter
+git lfs pull                      # optional: cellular, RavKav, train and forecast zonal files
+pip install pandas numpy matplotlib jupyter openpyxl pyshp
 ```
+
+Run order for the current branch: `THS_2017_two_mode_matrix` → `THS_2017_three_mode_2022`
+→ `Corridor_flow_profile_survey_2022` → `Corridor_profile_hybrid_vs_ticketing`
+(see METHODOLOGY §9). `Hybrid_superzone_conservation_test` runs on committed outputs alone.

@@ -1,6 +1,6 @@
 # Corridor Demand — Task List
 
-*Status: open, agreed 2026-09-19. Records what the base-year hybrid matrix still needs
+*Status: open, agreed 2026-09-19; updated 2026-09-21 after the methodology review (`Nofit_Demand_Methodology_Review.md`). Records what the base-year hybrid matrix still needs
 before it is fit for corridor demand estimation, and the 2050 growth step that follows.
 Ordered by how much each item changes the corridor answer. Tasks marked **[needs LFS
 data]** require the raw inputs held in Git LFS (`git lfs pull` on the data machine):
@@ -45,6 +45,11 @@ Key facts driving the list (2017 trips-file hybrid, `Output/ths2017/study_taz/`)
   - [ ] Treat the diagonal explicitly: within-TAZ length distribution for intra-TAZ cells
         (the diagonal correction adds trips with a median reported length of 0.7 km), or
         exclude intra-TAZ cells from the LRT market with a documented rule.
+- [x] **A0. Superzone conservation of the TAZ hybrid** *(done 2026-09-21,
+      `Hybrid_superzone_conservation_test.ipynb`, METHODOLOGY §6q)*: the correction-factor
+      hybrid misses its superzone OD blocks by up to 49 %; a jointly-constrained rebalanced
+      version is published. The hybrids are historical; the replicated cellular mapping
+      inside them (A1) is still open.
 - [ ] **A3. Trip purpose**
   - [ ] Obtain the THS activity codebook (`mainActivity` codes 2, 4, 11 …).
   - [ ] Purpose shares per superzone pair from the trips file (HBW / HBE / other), applied
@@ -71,25 +76,28 @@ Key facts driving the list (2017 trips-file hybrid, `Output/ths2017/study_taz/`)
         link (transit vs RavKav already done at area level: ratio 0.91).
   - [ ] Resolve the TAZ → superzone key precedence between the 2017 and 2018 chains
         (`prob_sz_cellular.csv` vs the 2017 rebuild; ≤ 0.07 in a handful of cells).
-- [ ] **B1b. Ticketing coverage** *(found 2026-09-20 in `THS_2017_two_mode_matrix.ipynb`)*: the
-      RavKav extract sees 0.9–1.5 × the survey's bus trips in the Haifa metropolitan
-      superzones but only 0.21–0.43 × in Nazareth / Kafr Kanna, Shefa-'Amr / Tamra,
-      Sakhnin, Daliyat al-Karmel / Isfiya, Ma'alot, Safed and Beit She'an. Ask the provider
-      which operators the extract covers and whether cash / unvalidated boardings are
-      included before using RavKav volumes outside the metropolitan core.
-      *Refinement found in `Corridor_profile_hybrid_vs_ticketing.ipynb`: the gap is a
-      local-trip gap (Nazareth: ticketing sees 8 % of the survey's intra-superzone bus
-      trips but 74 % of its trips to the Haifa superzones). Apply the coverage rule
-      separately to local and inter-superzone trips in `THS_2017_two_mode_matrix.ipynb`,
-      then re-run steps 16–18; the 23 → 1 corridor profile will move towards the
-      ticketing one.*
+- [x] **B1b. Ticketing coverage — segmented rule** *(done 2026-09-21 in
+      `THS_2017_two_mode_matrix.ipynb`, METHODOLOGY §6m)*: the coverage test is applied per
+      origin superzone × destination segment (local / inter-SZ corridor-bound / inter-SZ
+      other); the binary rule is kept as a variant, with a threshold sweep. Steps 16–18
+      re-run. Result: the 23 → 1 corridor profile did **not** move towards the ticketing
+      one — the remaining gap is allocation and destination frame, not coverage (§6p).
+- [ ] **B1c. Cause of the sub-0.5 ratios** — ask the RavKav provider which operators the
+      extract covers and whether cash / unvalidated boardings are included; cross-check
+      route ids against an operator crosswalk valid for May 2022; obtain counts on Nazareth
+      local services. Until answered, publish the four bus variants, not one.
+- [ ] **B1d. Transit units (review §3)** — establish from the OnBoard codebook whether its
+      P(alight | board) rows are per boarding leg or per journey; test whether bus-to-rail
+      travellers sit in both the RavKav bus OD and the station matrix; keep person-journey
+      and boarding products separate until an access / transfer allocation links them.
 - [ ] **B2. Population frames**
   - [ ] Reconcile the transit layer (RavKav journeys by boarding stop, incl. non-residents
         and transfers; Hamifrats 120 THS vs 1,079 RavKav) with the resident-household
         car / other base: add non-resident and external components on the car side or
         strip them from transit, consistently. Students and military traffic explicitly.
   - [ ] Bring back trips with one end outside the study area (5 % of survey weight,
-        most rail trips) as an external segment.
+        most rail trips) as an external segment; bring Adi, Alon Hagalil and Tzipori back
+        into the line sequence with flagged uncertainty (review §11).
 - [ ] **B3. Market definition**
   - [ ] Extended market (one end in the corridor, 230k trips) with access / egress modes
         (walk catchment, feeder bus, park-and-ride) — depends on A1 and A2.
@@ -107,6 +115,15 @@ Key facts driving the list (2017 trips-file hybrid, `Output/ths2017/study_taz/`)
       choice.
 
 ## D. Growth to 2050 (after A–C)
+
+- [ ] **D0. Rebuild the forecast branch from the current base** *(review §2, §13, §14)*:
+      `Vintage_alignment_2022` → `Forecast_matrices_2040_2050` → `Base_mode_shares_2022` →
+      `NoBuild_and_LRT_market` → `LRT_alignment_markets` currently consume the historical
+      25-area composite `Output/transit/all_adjusted_area_2022.csv`. Re-point them at
+      `Output/ths2017/three_mode_2022/` (TAZ level, four layers), change the share
+      smoothing to act on sampled counts with rail availability handled explicitly, and
+      relabel the frozen-share no-build as a demographic reference. Needs the LFS
+      `Input/Demographic_Forecast/Zonal_*.csv` files.
 
 - [ ] **D1.** Calibrate a doubly-constrained gravity model with K-factors to the 2022
       hybrid at superzone level (deterrence by purpose once A3 exists); check
