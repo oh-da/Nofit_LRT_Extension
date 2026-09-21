@@ -50,6 +50,8 @@ flowchart LR
     ZON --> NB16
     NB16 --> NB17[Corridor_flow_profile_survey_2022.ipynb<br/>step 17: potential movements along the line]
     NB17 --> NB18[Corridor_profile_hybrid_vs_ticketing.ipynb<br/>step 18: vs the ticketing profile]
+    NB17 --> NB20[Corridor_peak_hour_2022.ipynb<br/>step 20: peak-hour factors and peak-hour profiles]
+    THS --> NB20
     NB16 --> OUT[Output/ths2017/three_mode_2022/<br/>car, bus, taxi, rail 2022 × taz / sz / area]
 ```
 
@@ -64,7 +66,7 @@ hybrid (`THS_2018_MTX_*`), the 2017 trips-file hybrid (`THS_2017_hybrid_pipeline
 ```
 README.md, METHODOLOGY.md      what the repository is and, step by step, what was done
 docs/                          plans, the open task list and the external review
-notebooks/current/             the survey-only chain and its inputs (steps 5, 7–10, 15–18) and the scenario comparison
+notebooks/current/             the survey-only chain and its inputs (steps 5, 7–10, 15–18, 20) and the scenario comparison
 notebooks/diagnostics/         similarity tests, PCA suites and the conservation test — evidence, not products
 notebooks/historical/          the survey × cellular hybrids and the 25-area composite / forecast branch — superseded, kept as record
 reports/                       Survey_Matrices_Car_Bus_Rail_Report.docx (current); reports/historical/ for the older ones
@@ -105,6 +107,7 @@ anywhere inside the repository.
 | `THS_2017_three_mode_2022.ipynb` | **current** | Moves the two-mode set to a 2022 base at TAZ level and splits it into **car / bus / taxi-type / rail** (car Furnessed to growth margins, RavKav-volume bus cells as the anchor, guarded cells and taxi grown, rail × the national ridership series) |
 | `Corridor_flow_profile_survey_2022.ipynb` | **current** | Directional link profiles of **three-hour potential movements** along the corridor — total, transit (bus + rail) and taxi-type — with the earlier profiles overlaid |
 | `Corridor_profile_hybrid_vs_ticketing.ipynb` | **current** | Link-by-link comparison of the calibrated-survey transit profile with the ticketing-based one (components, calibration steps, area pairs driving the differences, transit share, local-vs-intercity ticketing coverage) |
+| `Corridor_peak_hour_2022.ipynb` | **current** | Peak-hour factors from the survey's minute-level departure times (peak hour 07:00–08:00; PHF₃ₕ ≈ 0.59–0.66, i.e. 1.8 × an average hour; household-bootstrap ranges) and the 2022 link profiles in peak-departure-hour terms, with a sensitivity to the bus factor basis |
 | `THS_2017_trip_generation.ipynb` | current | Per-person AM-peak generation rates on the trips-file source (overall ≈ 0.83) |
 | `BusRavKav_matrix.ipynb` | current | RavKav bus data: stop → TAZ tagging, weekday-3 / 06–09 filter, average-Tuesday journey OD and per-TAZ boardings / alightings |
 | `BusOnBoard_matrix.ipynb` | current | OnBoard survey probability matrix + RavKav volumes × OnBoard destination pattern (the unit of the OnBoard rows — boarding leg or journey — is still to be confirmed) |
@@ -124,6 +127,8 @@ anywhere inside the repository.
 - `ths2017/three_mode_2022/corridor_link_flows_{total,transit,taxi}_2022.csv`,
   `corridor_profile_hybrid_vs_ticketing.csv` — three-hour potential movements along the
   line and the comparison with the ticketing profile (§6o, §6p)
+- `ths2017/three_mode_2022/peak_hour_factors*.csv`, `corridor_link_flows_peak_hour_2022.csv`
+  — peak-hour factors and the link profiles in peak-hour terms (§6r)
 - `ths2017/two_mode/` — the 2018-base car / bus / transit matrices, the calibration tables
   (`bus_calibration_factors_segments.csv` is the segmented coverage rule;
   `bus_calibration_threshold_sensitivity.csv` the threshold sweep) and the variants (§6m)
@@ -136,9 +141,9 @@ anywhere inside the repository.
 
 ## Reports
 
-- `reports/Survey_Matrices_Car_Bus_Rail_Report.docx` — **revision 2, 21 September 2026**: the
+- `reports/Survey_Matrices_Car_Bus_Rail_Report.docx` — **revision 2.1, 21 September 2026**: the
   current base in plain language (survey-only matrix, tests, segmented bus calibration,
-  2022 layers, corridor potential movements, what changed since revision 1 and why)
+  2022 layers, corridor potential movements and their peak hour, what changed since revision 1 and why)
 - `reports/historical/Nofit_LRT_OD_Demand_Report.docx` (8 September 2026) — kept as a record with a dated
   status note at the front saying which parts are overtaken (its stale PDF rendering was
   removed)
@@ -162,5 +167,5 @@ pip install pandas numpy matplotlib jupyter openpyxl pyshp
 
 Run order for the current branch, all under `notebooks/current/`: `THS_2017_two_mode_matrix`
 → `THS_2017_three_mode_2022` → `Corridor_flow_profile_survey_2022` →
-`Corridor_profile_hybrid_vs_ticketing` (see METHODOLOGY §9).
+`Corridor_profile_hybrid_vs_ticketing` → `Corridor_peak_hour_2022` (see METHODOLOGY §9).
 `notebooks/diagnostics/Hybrid_superzone_conservation_test` runs on committed outputs alone.
