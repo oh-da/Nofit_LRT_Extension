@@ -14,8 +14,8 @@ origin SZ,corridor,n sampled (2 days),lambda (survey weight)
 13,True,10,0.6667
 14,True,156,0.9689
 15,True,89,0.9468
-16,False,143,0.9662
-17,True,190,0.9744
+16,False,156,0.9689
+17,True,177,0.9725
 18,True,29,0.8529
 19,True,88,0.9462
 20,True,25,0.8333
@@ -29,8 +29,8 @@ origin SZ,corridor,n sampled (2 days),lambda (survey weight)
 32,False,17,0.7727
 33,False,21,0.8077
 34,False,30,0.8571
-35,False,105,0.9545
-36,False,48,0.9057
+35,False,110,0.9565
+36,False,43,0.8958
 37,False,13,0.7222
 38,False,2,0.2857
 39,False,35,0.8750
