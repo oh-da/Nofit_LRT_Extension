@@ -13,14 +13,14 @@ hybrids are **historical**, and the 2040 / 2050 forecasts and LRT-market tables 
 they are to be rebuilt. [METHODOLOGY.md §0](METHODOLOGY.md#0-status-authoritative-baseline-and-lineage-21-september-2026)
 carries the lineage table that says, for every published file, what it was built from
 and whether it is current. The external methodology review that prompted this
-(`Nofit_Demand_Methodology_Review.md`, 21 Sep 2026) and the response to it are recorded
+(`docs/Nofit_Demand_Methodology_Review.md`, 21 Sep 2026) and the response to it are recorded
 in [METHODOLOGY.md §8](METHODOLOGY.md#8-known-caveats-and-open-questions) and
-[CORRIDOR_DEMAND_TASKS.md](CORRIDOR_DEMAND_TASKS.md).
+[CORRIDOR_DEMAND_TASKS.md](docs/CORRIDOR_DEMAND_TASKS.md).
 
 See **[METHODOLOGY.md](METHODOLOGY.md)** for the full reasoning, methodology, inputs and
-outputs of every step, **[TRANSIT_DEMAND_PLAN.md](TRANSIT_DEMAND_PLAN.md)** for the
-(historical) ticketing-substitution decision, **[CORRIDOR_DEMAND_TASKS.md](CORRIDOR_DEMAND_TASKS.md)**
-for the open task list, and **[LRT_CAPTURE_PLAN.md](LRT_CAPTURE_PLAN.md)** for the
+outputs of every step, **[TRANSIT_DEMAND_PLAN.md](docs/TRANSIT_DEMAND_PLAN.md)** for the
+(historical) ticketing-substitution decision, **[CORRIDOR_DEMAND_TASKS.md](docs/CORRIDOR_DEMAND_TASKS.md)**
+for the open task list, and **[LRT_CAPTURE_PLAN.md](docs/LRT_CAPTURE_PLAN.md)** for the
 generalised-cost capture model still to be built.
 
 ## Current pipeline (survey-only branch)
@@ -59,9 +59,27 @@ hybrid (`THS_2018_MTX_*`), the 2017 trips-file hybrid (`THS_2017_hybrid_pipeline
 (`Forecast_matrices_2040_2050`, `Base_mode_shares_2022`, `NoBuild_and_LRT_market`,
 `LRT_alignment_markets`).
 
+## Repository layout
+
+```
+README.md, METHODOLOGY.md      what the repository is and, step by step, what was done
+docs/                          plans, the open task list and the external review
+notebooks/current/             the survey-only chain and its inputs (steps 5, 7–10, 15–18) and the scenario comparison
+notebooks/diagnostics/         similarity tests, PCA suites and the conservation test — evidence, not products
+notebooks/historical/          the survey × cellular hybrids and the 25-area composite / forecast branch — superseded, kept as record
+reports/                       Survey_Matrices_Car_Bus_Rail_Report.docx (current); reports/historical/ for the older ones
+Input/                         survey, ticketing, zonal and key files (large ones in Git LFS; committed substitutes noted in METHODOLOGY §1)
+Output/                        products by chain: ths2017/two_mode, ths2017/three_mode_2022 (current); bus, train (current inputs);
+                               ths2017/study_taz, historical/ths2018, transit, forecast (historical); ths2017/tests, figures (diagnostics)
+```
+
+Every notebook's first cell moves the working directory to the repository root, so all
+`Input/…` and `Output/…` paths are root-relative and a notebook can be executed from
+anywhere inside the repository.
+
 ## Notebooks
 
-| Notebook | Status | What it does |
+| Notebook (folder = status) | Status | What it does |
 |---|---|---|
 | `THS_2018_MTX.ipynb` | historical | Original analysis: unweighted survey matrices, first comparison against cellular |
 | `THS_2018_MTX_weighted.ipynb` | historical | Day 10 / Day 20 matrices with household expansion weights (`wf_new`) — ~2.3M expanded trips per day |
@@ -112,8 +130,23 @@ hybrid (`THS_2018_MTX_*`), the 2017 trips-file hybrid (`THS_2017_hybrid_pipeline
   — the superzone conservation test and the rebalanced hybrid (§6q)
 - `ths2017/tests/cosine_geh_summary.csv`, `ks_summary.csv`, `mssim_headline.csv` — the
   survey / cellular / hybrid diagnostics (§6j–§6l)
-- `ths2017/study_taz/hybrid_*`, `hybrid_*` (root), `transit/`, `forecast/` — historical
+- `ths2017/study_taz/hybrid_*`, `historical/ths2018/*`, `transit/`, `forecast/` — historical
   and demographic-reference products; see the lineage table in METHODOLOGY §0 before use
+
+## Reports
+
+- `reports/Survey_Matrices_Car_Bus_Rail_Report.docx` — **revision 2, 21 September 2026**: the
+  current base in plain language (survey-only matrix, tests, segmented bus calibration,
+  2022 layers, corridor potential movements, what changed since revision 1 and why)
+- `reports/historical/Nofit_LRT_OD_Demand_Report.docx` (8 September 2026) — kept as a record with a dated
+  status note at the front saying which parts are overtaken (its stale PDF rendering was
+  removed)
+- `reports/historical/Demographic_Scenario_Comparison_Report.docx` — the BU / HS scenario comparison, with a
+  status note on the forecast branch's lineage
+- `reports/historical/PCA_Eigenvector_Report.docx`, `reports/historical/PCA_Eigenvector_Report_Hebrew_Explainer.docx`,
+  `reports/historical/PCA_Comparison_Hebrew_Explainer.docx` — the PCA diagnostics, unchanged
+- `docs/Nofit_Demand_Methodology_Review.md` — the external review of 21 September 2026 that
+  the revision responds to
 - Full inventory in [METHODOLOGY.md §7](METHODOLOGY.md#7-output-inventory-output)
 
 ## Setup
@@ -126,6 +159,7 @@ git lfs pull                      # optional: cellular, RavKav, train and foreca
 pip install pandas numpy matplotlib jupyter openpyxl pyshp
 ```
 
-Run order for the current branch: `THS_2017_two_mode_matrix` → `THS_2017_three_mode_2022`
-→ `Corridor_flow_profile_survey_2022` → `Corridor_profile_hybrid_vs_ticketing`
-(see METHODOLOGY §9). `Hybrid_superzone_conservation_test` runs on committed outputs alone.
+Run order for the current branch, all under `notebooks/current/`: `THS_2017_two_mode_matrix`
+→ `THS_2017_three_mode_2022` → `Corridor_flow_profile_survey_2022` →
+`Corridor_profile_hybrid_vs_ticketing` (see METHODOLOGY §9).
+`notebooks/diagnostics/Hybrid_superzone_conservation_test` runs on committed outputs alone.

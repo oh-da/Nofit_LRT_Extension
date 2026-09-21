@@ -17,7 +17,7 @@ generation of the work fused two independent sources:
 The guiding idea of the first generation of this work was to treat cellular as the
 *prior* spatial distribution and the survey as *evidence*, combined at the scale where
 each is reliable. The tests of steps 12–14 and the external review of 21 September 2026
-(`Nofit_Demand_Methodology_Review.md`) changed that: the current base is survey-only,
+(`docs/Nofit_Demand_Methodology_Review.md`) changed that: the current base is survey-only,
 with the bus layer calibrated to ticketing, and the cellular hybrids are historical.
 
 ---
@@ -47,7 +47,7 @@ Every published product, what it was built from, and its status:
 | `ths2017/study_taz/hybrid_taz_trips_balanced.csv`, `hybrid_taz_prob_balanced.csv` | step 19 | `hybrid_taz_trips.csv` rebalanced to `hybrid_sz_trips.csv` blocks | 778 | all modes | 2018 | historical branch, corrected |
 | `ths2017/study_taz/hybrid_*`, `submatrices/*` | step 6 | trips file × cellular (LFS), replicated mapping | 778 / 36 / 25 / 28 | all modes | 2018 | **historical** — superzone OD blocks not reproduced (§6q) |
 | `ths2017/study_taz/matrix_avg_*`, `ths2017/matrix_*` | step 5 | trips file, cellular allocation shares | 778 / native | by mode | 2018 | current survey source (cellular used only for the 1250 → TAZ split) |
-| `hybrid_*`, `prob_*`, `matrix_*`, `submatrices/*`, `trip_generation_*` (root) | steps 1–4 | activities file × cellular, replicated mapping | 778 / 36 / 25 | all modes | 2018 | **historical** |
+| `historical/ths2018/*` (`hybrid_*`, `prob_*`, `matrix_*`, `submatrices/*`, `trip_generation_*`) | steps 1–4 | activities file × cellular, replicated mapping | 778 / 36 / 25 | all modes | 2018 | **historical** |
 | `ths2017/tests/*` | steps 12–14, 19 | the matrices above | various | — | — | diagnostics (regression record) |
 | `transit/transit_od_area.csv`, `all_adjusted_area*.csv`, `mode_share_area*.csv`, `car_other_area_2022.csv` | steps 10–11 | survey ALL − TRANSIT − RAIL (cellular-allocated) + RavKav × OnBoard bus + station train | 25 areas | mixed frames (residents' car / other + all-rider boardings) | mixed → 2022 | **historical composite** |
 | `forecast/all_modes_area_*`, `share_*`, `nobuild_*`, `lrt_market_*`, `lrt_alignment_*` | forecast notebooks | `transit/all_adjusted_area_2022.csv` | 25 areas | composite | 2040 / 2050 | **demographic reference on the historical composite — to be rebuilt from the current base** |
@@ -532,8 +532,7 @@ the `BusRavKav` directory and is excluded per the four-file instruction.
 
 **Outputs.** `Output/bus/bus_stops_taz.csv` (stop → TAZ tags),
 `bus_od_taz_avg.csv` (722×711 average-Tuesday OD journeys),
-`bus_boardings_alightings_taz.csv` (per-TAZ averages),
-`neve_yosef_stops.csv` (the 30 stops in the Neve Yosef TAZs with per-stop AM volumes).
+`bus_boardings_alightings_taz.csv` (per-TAZ averages).
 
 ## 6g. Step 9 — Bus OD combined with OnBoard survey probabilities (`BusOnBoard_matrix.ipynb`)
 
@@ -574,7 +573,7 @@ Figure: `Output/figures/bus_vs_ths_transit_area.png`.
 
 ## 6h. Step 10 — Train matrix, complete transit, adjusted all-mode (`Transit_complete_matrix.ipynb`)
 
-Executes `TRANSIT_DEMAND_PLAN.md`. **Train**: `Input/Matrices/Train_mtx_table.csv`
+Executes `docs/TRANSIT_DEMAND_PLAN.md`. **Train**: `Input/Matrices/Train_mtx_table.csv`
 (2019 smartcards, windows-1255; station-to-station by station TAZ, hourly columns) —
 hours 6+7+8 summed, the `TAZ 9999` "rest of stations" rows ignored (13,624 out-of-area
 trips): 5,535 avg-day trips between the 19 named stations, of which 962 have both ends
@@ -885,7 +884,7 @@ survey and RavKav trips, ratio, sampled count, basis, guarded flag, factor),
 `two_mode_transit_share.png`.
 
 **Caveats.** Frames (boarding-stop vs doorstep origins, non-residents) as in
-`TRANSIT_DEMAND_PLAN.md`; vintage mix (RavKav-volume segments at May 2022, guarded
+`docs/TRANSIT_DEMAND_PLAN.md`; vintage mix (RavKav-volume segments at May 2022, guarded
 segments, car, taxi-type and rail at 2018); below the 1250-zone the survey's TAZ detail
 is a population / employment split, not observation; the OnBoard prior's unit (boarding
 leg or journey) is unconfirmed (§8).
@@ -1027,6 +1026,8 @@ figure `hybrid_sz_conservation.png`. The notebook ends with a pass / fail assert
 
 ## 7. Output inventory (`Output/`)
 
+*Layout note (21 September 2026).* The products of steps 1–4 (the 2018 activities-file chain, listed first below with bare file names) now live under `Output/historical/ths2018/`; every other path is as written. Notebooks live under `notebooks/current/`, `notebooks/diagnostics/` and `notebooks/historical/` and anchor their working directory to the repository root, so the `Input/…` and `Output/…` paths in this document are unchanged.
+
 | File | Shape | Produced by | Content |
 |---|---|---|---|
 | `matrix_10_weighted.csv`, `matrix_20_weighted.csv` | 660×707 / 651×696 | Step 1 | Weighted OD trip totals (Σ `wf_new`), observed zones |
@@ -1140,18 +1141,18 @@ pip install pandas numpy matplotlib jupyter openpyxl pyshp
 git lfs pull            # optional — needed only for the historical cellular chain, the raw RavKav / train files and the 2040 / 2050 zonal forecasts
 
 # current chain (survey-only base; runs on committed inputs and the committed step-8/9/10 outputs)
-jupyter nbconvert --to notebook --execute --inplace THS_2017_two_mode_matrix.ipynb
-jupyter nbconvert --to notebook --execute --inplace THS_2017_three_mode_2022.ipynb
-jupyter nbconvert --to notebook --execute --inplace Corridor_flow_profile_survey_2022.ipynb
-jupyter nbconvert --to notebook --execute --inplace Corridor_profile_hybrid_vs_ticketing.ipynb
+jupyter nbconvert --to notebook --execute --inplace notebooks/current/THS_2017_two_mode_matrix.ipynb
+jupyter nbconvert --to notebook --execute --inplace notebooks/current/THS_2017_three_mode_2022.ipynb
+jupyter nbconvert --to notebook --execute --inplace notebooks/current/Corridor_flow_profile_survey_2022.ipynb
+jupyter nbconvert --to notebook --execute --inplace notebooks/current/Corridor_profile_hybrid_vs_ticketing.ipynb
 
 # regression test of the hybrid branch (committed outputs only)
-jupyter nbconvert --to notebook --execute --inplace Hybrid_superzone_conservation_test.ipynb
+jupyter nbconvert --to notebook --execute --inplace notebooks/diagnostics/Hybrid_superzone_conservation_test.ipynb
 ```
 
-Upstream of the current chain, with the LFS files: `BusRavKav_matrix` → `BusOnBoard_matrix`
+Upstream of the current chain (all in `notebooks/current/`), with the LFS files: `BusRavKav_matrix` → `BusOnBoard_matrix`
 (steps 8–9) and `Transit_complete_matrix` (step 10, for the station rail matrix only).
-The historical cellular chain is `THS_2018_MTX_weighted` → `THS_2018_MTX_weighted_vs_cellular`
+The historical cellular chain (`notebooks/historical/`) is `THS_2018_MTX_weighted` → `THS_2018_MTX_weighted_vs_cellular`
 → `THS_2018_MTX_hybrid` → `THS_2018_MTX_hybrid_taz`, and on the trips file
 `THS_2017_trips_matrices` → `THS_2017_hybrid_pipeline`. The forecast notebooks
 (`Vintage_alignment_2022` → `Forecast_matrices_2040_2050` → `Base_mode_shares_2022` →
@@ -1159,5 +1160,6 @@ The historical cellular chain is `THS_2018_MTX_weighted` → `THS_2018_MTX_weigh
 the historical composite; they are not part of the current chain until rebuilt.
 
 Each notebook is self-contained (loads its own inputs from `Input/` and writes to
-`Output/`). Outputs under `Output/` are committed as regular git files (exempted from
+`Output/`); its first cell moves the working directory to the repository root, so the
+notebooks can be run from any location inside the repository. Outputs under `Output/` are committed as regular git files (exempted from
 LFS in `.gitattributes`), as are the substitute key files under `Input/`.
