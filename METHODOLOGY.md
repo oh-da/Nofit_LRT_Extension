@@ -25,7 +25,8 @@ with the bus layer calibrated to ticketing, and the cellular hybrids are histori
 ## 0. Status, authoritative baseline and lineage (21 September 2026)
 
 **Authoritative base-year product:** the survey-only 2022 layer set
-`Output/ths2017/three_mode_2022/{car,bus,taxi,rail}_2022_*.csv` (steps 15–16). It is a
+`Output/ths2017/three_mode_2022/{car,bus,taxi,rail}_2022_*.csv` (steps 15–16), delivered as
+**car / transit / total** TAZ matrices in `Output/final_2022/` (step 22, §6t). It is a
 *person-journey* product for residents with both trip ends in the study area, AM 06:00–09:00,
 representative weekday, at 2022 vintage (bus cells that took RavKav volumes at May 2022;
 everything else grown from 2018 by demographic factors, rail by the national ridership
@@ -68,12 +69,14 @@ externally, the bus total depends on an assumed coverage threshold, the two tran
 frames disagree by 2–3 × at the Nazareth end in one direction, TAZ detail is a
 purpose-blind allocation, and the peak-hour values are departure-hour potential
 movements between line areas with no station access, route choice or off-line trips.
-The forecast branch has not yet been rebuilt on this base.
+The forecast branch is rebuilt on this base by step 23 (§6u, `docs/FORECAST_METHODOLOGY_2040_2050.md`);
+the four scenario sets are produced once the LFS scenario files are pulled.
 
 Every published product, what it was built from, and its status:
 
 | Product (`Output/…`) | Built by | Base / inputs | Geography | Modes | Vintage | Status |
 |---|---|---|---|---|---|---|
+| **`final_2022/{car,transit,total}_2022_taz.csv`**, `*_incl_taxi_*`, `final_2022_long.csv.gz`, `MANIFEST.csv` | step 22 | the step-16 layers, summed | 778 TAZ | car; transit = bus + rail; total | 2022 | **current — the deliverable set** |
 | `ths2017/three_mode_2022/{car,bus,taxi,rail}_2022_{taz,sz,area}.csv`, `all_modes_2022_taz.csv` | step 16 | `ths2017/two_mode/` + zonal 2020/2025 growth | 778 TAZ / 36 SZ / 28 areas | car; bus (Public Bus + Matronit); taxi-type (codes 5, 8); rail (survey door-to-door) | 2022 | **current** |
 | `ths2017/three_mode_2022/rail_station_smartcard_2022_taz.csv` | step 16 | `train/train_od_taz_6_9.csv` × 0.793 | 19 station TAZs | rail, station-to-station, all riders | 2022 | current (separate frame) |
 | `ths2017/three_mode_2022/corridor_link_flows_{total,transit,taxi}_2022.csv`, `corridor_profile_*.csv` | steps 17–18 | the row above | 18 line areas | as above | 2022 | current — three-hour potential movements |
@@ -88,7 +91,8 @@ Every published product, what it was built from, and its status:
 | `historical/ths2018/*` (`hybrid_*`, `prob_*`, `matrix_*`, `submatrices/*`, `trip_generation_*`) | steps 1–4 | activities file × cellular, replicated mapping | 778 / 36 / 25 | all modes | 2018 | **historical** |
 | `ths2017/tests/*` | steps 12–14, 19, 21 | the matrices above; step 21: survey car vs transit profiles | various | — | — | diagnostics (regression record) |
 | `transit/transit_od_area.csv`, `all_adjusted_area*.csv`, `mode_share_area*.csv`, `car_other_area_2022.csv` | steps 10–11 | survey ALL − TRANSIT − RAIL (cellular-allocated) + RavKav × OnBoard bus + station train | 25 areas | mixed frames (residents' car / other + all-rider boardings) | mixed → 2022 | **historical composite** |
-| `forecast/all_modes_area_*`, `share_*`, `nobuild_*`, `lrt_market_*`, `lrt_alignment_*` | forecast notebooks | `transit/all_adjusted_area_2022.csv` | 25 areas | composite | 2040 / 2050 | **demographic reference on the historical composite — to be rebuilt from the current base** |
+| `forecast_taz/{BU,HS}_{2040,2050}/*` (after the LFS scenario files are pulled; `forecast_taz/dry_run/` here) | step 23 | `final_2022/` layers × scenario zonal files | 778 TAZ / 36 SZ / 28 areas | car; transit; taxi-type; total | 2040 / 2050 | **current method — demographic reference; scenario sets pending the LFS run** |
+| `forecast/all_modes_area_*`, `share_*`, `nobuild_*`, `lrt_market_*`, `lrt_alignment_*` | forecast notebooks | `transit/all_adjusted_area_2022.csv` | 25 areas | composite | 2040 / 2050 | **historical** — superseded by step 23 |
 | `demographics/*` | scenario comparison | zonal forecast files (LFS) | 28 areas | — | 2040 / 2050 | current input analysis |
 
 The 25 GS zones (`Input/TAZ_GSnew.csv`) and the 25 retained research areas of the
@@ -1160,6 +1164,69 @@ is warranted. Nothing follows at TAZ level or within Haifa from the survey's tra
 **Outputs.** `Output/ths2017/tests/pca_car_vs_transit_{summary,overlap,rcev,by_origin,levels,by_area}.csv`;
 figures `Output/figures/pca_cvt_{scree,subspace_overlap,component_match,divergence,levels}.png`.
 
+## 6t. Step 22 — Final 2022 TAZ matrices: car, transit, total (`Final_matrices_2022.ipynb`)
+
+**Purpose.** The deliverable set, assembled from the step-16 layers without any further
+modelling: **car** = `car_2022_taz`; **transit** = bus (calibrated) + rail (survey
+door-to-door); **total** = car + transit. Taxi-type is carried as a variant
+(`transit_incl_taxi`, `total_incl_taxi`), not in the headline transit matrix (§6n).
+A long-format file (`orig_taz, dest_taz, car, bus, rail, taxi_type, transit, total`,
+non-empty cells only, gzip) is written for SQL use, with a manifest and a summary.
+
+**Totals (2022, AM 06:00–09:00, 778 × 778).**
+
+| Layer | All | Corridor → corridor | Corridor → outside | Outside → corridor | Outside → outside |
+|---|---|---|---|---|---|
+| Car | 1,353,798 | 72,331 | 47,011 | 89,181 | 1,145,275 |
+| Transit (bus + rail) | 133,704 | 9,366 | 10,104 | 18,799 | 95,434 |
+| **Total (car + transit)** | **1,487,501** | 81,697 | 57,115 | 107,980 | 1,240,709 |
+| Taxi-type (variant) | 19,359 | 3,812 | 1,359 | 5,479 | 8,709 |
+| Transit share of total | 9.0 % | 11.5 % | 17.7 % | 17.4 % | 7.7 % |
+
+Checks: the four layers add to `all_modes_2022_taz.csv` cell by cell; the long file's
+total equals the matrix total; 351,223 of 605,284 cells carry demand (the bus layer is
+dense because the calibration spreads each origin's volume over the blended
+destination pattern; car has 24,173 non-zero cells).
+
+**Outputs.** `Output/final_2022/{car,transit,total,transit_incl_taxi,total_incl_taxi}_2022_taz.csv`,
+`final_2022_long.csv.gz`, `final_2022_summary.csv`, `MANIFEST.csv`.
+
+## 6u. Step 23 — Growing the 2022 TAZ matrices to 2040 / 2050, BU and HS (`Forecast_matrices_TAZ_2040_2050.ipynb`)
+
+**Purpose.** Four demographic-reference matrix sets (BU / HS × 2040 / 2050) at TAZ level
+from the final 2022 layers (§6t), replacing the 25-area composite forecast of §7's
+`forecast/` products (historical). Full method: `docs/FORECAST_METHODOLOGY_2040_2050.md`.
+
+**Method in brief.** (1) 2022 demographic level bridged as `X_2020 (X_2025/X_2020)^(2/5)`.
+(2) Composite land-use indices fitted once on total 2022 demand by non-negative least
+squares — production `I = 0.506·P + 0.124·E`, attraction `J = 0.264·P + 0.814·E` (R² ≈ 0.5
+at TAZ level) — because AM destinations are jobs *and* residents (schools, homes, shops).
+(3) Margins per layer: `O_i^y = O_i + ρ_i ΔI_i`, `D_j^y = D_j + σ_j ΔJ_j`, own rate where the
+TAZ is established (index ≥ 500 residents' worth, growth ≤ 3×), superzone rate on the
+increment otherwise; destinations rescaled to the origin total. (4) Seed: existing demand
+keeps its 2022 cells; established origins / destinations grow along their own row /
+column; small-base or transforming ones receive the layer's superzone pattern spread by
+targets. (5) Furness per layer (car, transit, taxi-type); total = car + transit. Mode
+split, trip rates and destination choice stay at 2022 by construction.
+
+**Status.** The scenario zonal files are Git-LFS-only; in the remote environment the
+notebook ran a **dry run** (2022 → BU-2025, and a stress case with a synthetic
+10,000-resident conversion of the Matam TAZs and a 1.5 × employment jump) to exercise
+every path: margins met to 10⁻⁶ for car and transit (taxi-type, sparse, to 2–3 % after
+500 iterations); no negative or unreachable cells; car mean centroid length 7.32 →
+7.61 km on a 4.7 % growth (employment-only attractions would have given 7.91 km, the
+all-synthetic seed 7.84 km); transit length unchanged; the Matam conversion adds ≈ 2,400
+origin trips at the superzone rate. Outputs of the dry run are under
+`Output/forecast_taz/dry_run/` and are not scenario results. The four scenario sets are
+produced by running the notebook after `git lfs pull --include="Input/Demographic_Forecast/Zonal_*.csv"`;
+they will appear under `Output/forecast_taz/{BU_2040,BU_2050,HS_2040,HS_2050}/`.
+
+**Outputs (per scenario-year).** `{car,transit,taxi,total}_{scenario}_{taz,sz,area}.csv`,
+`margins_{scenario}.csv` (indices, targets and the rule each TAZ took); across scenarios
+`summary_by_class.csv`, `checks.csv`, `by_area.csv`, `trip_rates_by_sz.csv`,
+`corridor_link_flows_scenarios.csv`, `landuse_indices.csv`; figure
+`forecast_taz_profiles_{mode}.png`.
+
 ---
 
 ## 7. Output inventory (`Output/`)
@@ -1193,6 +1260,8 @@ figures `Output/figures/pca_cvt_{scree,subspace_overlap,component_match,divergen
 | `ths2017/tests/ks*.csv` | various | Step 13 | KS tests: trip length distributions (all / off-diagonal / per origin / corridor class), flow concentration, distance-proxy calibration |
 | `ths2017/tests/mssim_*.csv` | various | Step 14 | MSSIM tests: index by level / window / scale / ordering with term decomposition, broken-correspondence null, per-origin and superzone-block local SSIM, corridor classes |
 | `ths2017/two_mode/*.csv` | 778×778 / 36×36 / 28×28 | Step 15 | Survey-only two-mode matrices (car, transit) with the bus part calibrated to RavKav × OnBoard per origin × segment; binary-guard / all-RavKav / uniform variants; calibration tables incl. `bus_calibration_factors_segments.csv` and the threshold sweep; mode shares |
+| `forecast_taz/*` | 778×778 / 36×36 / 28×28 per scenario-year | Step 23 | Demographic-reference matrices 2040 / 2050 × BU / HS (car, transit, taxi-type, total), margins, checks, corridor profiles; dry run only until the LFS scenario files are pulled |
+| `final_2022/*` | 778×778; long | Step 22 | **Deliverable matrices**: car, transit (bus + rail), total, taxi-inclusive variants, long format, manifest and summary |
 | `ths2017/three_mode_2022/*.csv` | 778×778 / 36×36 / 28×28 | Steps 16–18, 20 | **Current 2022-base layers** car / bus / taxi / rail (demographic growth, RavKav anchor, rail ridership series), `all_modes_2022_taz.csv`, TAZ growth factors, summaries; corridor link profiles (three-hour potential movements), the comparison with the ticketing profile, and the peak-hour factors and peak-hour link profiles |
 | `ths2017/tests/hybrid_sz_conservation_*.csv`, `ths2017/study_taz/hybrid_taz_{trips,prob}_balanced.csv` | 3 / 12 rows; 778×778 | Step 19 | Superzone conservation test of the TAZ hybrids and the jointly-constrained rebalanced primary hybrid |
 | `ths2017/tests/pca_car_vs_transit_*.csv` | various | Step 21 | PCA within the survey, car vs transit: overlap by k, RCEV, per-origin displacement and Haifa-bound shares, summary |
@@ -1341,6 +1410,9 @@ jupyter nbconvert --to notebook --execute --inplace notebooks/current/THS_2017_t
 jupyter nbconvert --to notebook --execute --inplace notebooks/current/Corridor_flow_profile_survey_2022.ipynb
 jupyter nbconvert --to notebook --execute --inplace notebooks/current/Corridor_profile_hybrid_vs_ticketing.ipynb
 jupyter nbconvert --to notebook --execute --inplace notebooks/current/Corridor_peak_hour_2022.ipynb
+jupyter nbconvert --to notebook --execute --inplace notebooks/current/Final_matrices_2022.ipynb
+# demographic reference 2040 / 2050 (needs git lfs pull --include="Input/Demographic_Forecast/Zonal_*.csv"; dry run otherwise)
+jupyter nbconvert --to notebook --execute --inplace notebooks/current/Forecast_matrices_TAZ_2040_2050.ipynb
 
 # regression test of the hybrid branch (committed outputs only)
 jupyter nbconvert --to notebook --execute --inplace notebooks/diagnostics/Hybrid_superzone_conservation_test.ipynb

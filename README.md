@@ -64,6 +64,11 @@ flowchart LR
     NB17 --> NB20[Corridor_peak_hour_2022.ipynb<br/>step 20: peak-hour factors and peak-hour profiles]
     THS --> NB20
     NB16 --> OUT[Output/ths2017/three_mode_2022/<br/>car, bus, taxi, rail 2022 × taz / sz / area]
+    OUT --> NB22[Final_matrices_2022.ipynb<br/>step 22: car / transit / total deliverables]
+    NB22 --> FIN[Output/final_2022/]
+    FIN --> NB23[Forecast_matrices_TAZ_2040_2050.ipynb<br/>step 23: BU / HS × 2040 / 2050 demographic reference]
+    DEM[Demographic_Forecast/Zonal_*.csv  LFS] --> NB23
+    NB23 --> FOR[Output/forecast_taz/]
 ```
 
 Historical branches (kept, not consumed by the current base): the 2018 activities-file
@@ -76,7 +81,7 @@ hybrid (`THS_2018_MTX_*`), the 2017 trips-file hybrid (`THS_2017_hybrid_pipeline
 
 ```
 README.md, METHODOLOGY.md      what the repository is and, step by step, what was done
-docs/                          plans, the open task list and the external review
+docs/                          plans, the forecast methodology, the open task list and the external review
 notebooks/current/             the survey-only chain and its inputs (steps 5, 7–10, 15–18, 20) and the scenario comparison
 notebooks/diagnostics/         similarity tests, PCA suites and the conservation test — evidence, not products
 notebooks/historical/          the survey × cellular hybrids and the 25-area composite / forecast branch — superseded, kept as record
@@ -119,6 +124,8 @@ anywhere inside the repository.
 | `THS_2017_three_mode_2022.ipynb` | **current** | Moves the two-mode set to a 2022 base at TAZ level and splits it into **car / bus / taxi-type / rail** (car Furnessed to growth margins, RavKav-volume bus cells as the anchor, guarded cells and taxi grown, rail × the national ridership series) |
 | `Corridor_flow_profile_survey_2022.ipynb` | **current** | Directional link profiles of **three-hour potential movements** along the corridor — total, transit (bus + rail) and taxi-type — with the earlier profiles overlaid |
 | `Corridor_profile_hybrid_vs_ticketing.ipynb` | **current** | Link-by-link comparison of the calibrated-survey transit profile with the ticketing-based one (components, calibration steps, area pairs driving the differences, transit share, local-vs-intercity ticketing coverage) |
+| `Forecast_matrices_TAZ_2040_2050.ipynb` | **current** (dry run here) | Grows the final 2022 layers to BU / HS × 2040 / 2050 at TAZ level as a demographic reference: composite land-use indices, own-rate / superzone-rate margins with a small-base rule, own-pattern / superzone-pattern seed, Furness per layer (`docs/FORECAST_METHODOLOGY_2040_2050.md`); runs the four scenarios once the LFS zonal files are pulled |
+| `Final_matrices_2022.ipynb` | **current** | Assembles the deliverable 2022 TAZ matrices (car, transit = bus + rail, total = car + transit, taxi-inclusive variants, long format) from the step-16 layers with additivity checks and a manifest |
 | `Corridor_peak_hour_2022.ipynb` | **current** | Peak-hour factors from the survey's minute-level departure times (peak hour 07:00–08:00; PHF₃ₕ ≈ 0.59–0.66, i.e. 1.8 × an average hour; household-bootstrap ranges) and the 2022 link profiles in peak-departure-hour terms, with a sensitivity to the bus factor basis |
 | `THS_2017_trip_generation.ipynb` | current | Per-person AM-peak generation rates on the trips-file source (overall ≈ 0.83) |
 | `BusRavKav_matrix.ipynb` | current | RavKav bus data: stop → TAZ tagging, weekday-3 / 06–09 filter, average-Tuesday journey OD and per-TAZ boardings / alightings |
@@ -126,13 +133,21 @@ anywhere inside the repository.
 | `Transit_complete_matrix.ipynb` | current for rail / historical for the composite | Station-to-station train matrix (2019 smartcards, 06–09); the bus + train composite and adjusted all-mode matrix are historical |
 | `Vintage_alignment_2022.ipynb` | historical | Levels the 25-area composite to 2022 |
 | `Demographic_scenario_comparison.ipynb` | current (input analysis) | BU vs HS forecast scenarios (2040 / 2050) at the 28 research areas: growth location differs sharply; each scenario needs its own matrix |
-| `Forecast_matrices_2040_2050.ipynb` | demographic reference (to be rebuilt) | Grows the 25-area 2022 composite to BU/HS × 2040/2050 by IPF on demographic margins — zero cells preserved, base is the historical composite |
+| `Forecast_matrices_2040_2050.ipynb` | historical (superseded by step 23) | Grows the 25-area 2022 composite to BU/HS × 2040/2050 by IPF on demographic margins — zero cells preserved, base is the historical composite |
 | `Base_mode_shares_2022.ipynb` | demographic reference (to be rebuilt) | Revealed 2022 modal shares of the composite, EB-smoothed with k = 50 applied to expanded volumes (which act as counts of thousands, so the smoothing is nearly inert) |
 | `NoBuild_and_LRT_market.ipynb` | demographic reference (to be rebuilt) | Frozen-share no-build modal matrices per scenario-year and the LRT core / extended market definition |
 | `LRT_alignment_markets.ipynb` | demographic reference (to be rebuilt) | Market counts for the two alignment scenarios per forecast scenario-year |
 
 ## Key deliverables (`Output/`)
 
+- `forecast_taz/{BU,HS}_{2040,2050}/` — the 2040 / 2050 demographic-reference matrices
+  (car, transit, taxi-type, total), produced by step 23 after the LFS scenario files are
+  pulled; `forecast_taz/dry_run/` holds the mechanics test run here
+  ([docs/FORECAST_METHODOLOGY_2040_2050.md](docs/FORECAST_METHODOLOGY_2040_2050.md))
+- **`final_2022/{car,transit,total}_2022_taz.csv`** — the deliverable 778×778 matrices for
+  2022 (transit = calibrated bus + rail; total = car + transit; taxi-inclusive variants,
+  a gzip long-format file for SQL, `MANIFEST.csv` and `final_2022_summary.csv` alongside;
+  [METHODOLOGY §6t](METHODOLOGY.md#6t-step-22--final-2022-taz-matrices-car-transit-total-final_matrices_2022ipynb))
 - `ths2017/three_mode_2022/{car,bus,taxi,rail}_2022_{taz,sz,area}.csv` — **the current
   2022-base layer set** (778×778; superzone and 28-area versions alongside);
   `all_modes_2022_taz.csv` is their sum ([METHODOLOGY.md §6n](METHODOLOGY.md#6n-step-16--2022-base-layers-car-bus-taxi-type-rail-ths_2017_three_mode_2022ipynb))
@@ -180,5 +195,6 @@ pip install pandas numpy scipy matplotlib jupyter openpyxl pyshp
 
 Run order for the current branch, all under `notebooks/current/`: `THS_2017_two_mode_matrix`
 → `THS_2017_three_mode_2022` → `Corridor_flow_profile_survey_2022` →
-`Corridor_profile_hybrid_vs_ticketing` → `Corridor_peak_hour_2022` (see METHODOLOGY §9).
+`Corridor_profile_hybrid_vs_ticketing` → `Corridor_peak_hour_2022` → `Final_matrices_2022` →
+`Forecast_matrices_TAZ_2040_2050` (see METHODOLOGY §9).
 `notebooks/diagnostics/Hybrid_superzone_conservation_test` runs on committed outputs alone.
