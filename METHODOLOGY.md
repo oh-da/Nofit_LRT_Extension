@@ -1126,16 +1126,31 @@ peripheral destinations (Tirat Carmel, Umm al-Fahm, Beit She'an, Ma'alot: −2 p
 the Haifa core (SZ 16, 14, 13, 12: +2–3 points). Displacement is 1.5 × transit's
 day-to-day noise. Largest well-sampled departures: Rekhasim / Zevulun (45 % of transit
 trips to the Haifa superzones vs 9 % of car), Shefa-'Amr / Tamra (66 % vs 14 %), Tirat
-Carmel (71 % vs 23 %). Sub-area level: car vs transit 0.58 at k = 6, indistinguishable
-from transit's own repeatability (0.60) — uninformative there.
+Carmel (71 % vs 23 %).
+
+**By resolution.** Corridor aggregation areas (28 × 28; origins with ≥ 10 sampled transit
+trips, 14): car vs transit 0.57 against transit repeatability 0.65 and car 0.91 (≥ 20
+trips, 8 origins: 0.64 vs 0.70) — the modes are as alike as transit is to itself, and
+nothing finer is resolvable there; self-containment car 0.42 / transit 0.23; the mean
+shifts point the same way (Lower City, Kiryat Nahum, Matam, Neot Peres gain transit
+share; Nesher Lower, Tirat Carmel, Hamifrats lose) but with 14 origins no common
+direction is detectable (p = 0.6). Well-sampled outer areas: Kiryat Motzkin-Bialik sends
+26 % of transit trips to the Haifa line areas vs 6 % of car trips, Kiryat Yam 13 % vs 7 %,
+Kiryat Ata South 12 % vs 3 %; origins inside Haifa send 70–95 % of both modes there.
+TAZ origins × superzone destinations (133 TAZs with ≥ 5 transit trips, k = 15): 0.75
+against transit repeatability 0.89 and car 0.90, common direction p = 0.002 — the
+resolution at which the systematic difference is best established. TAZ × TAZ (same
+133 origins, k = 35): 0.27 against transit repeatability 0.55, car 0.71, chance 0.05;
+car components capture 39 % of transit variance; self-containment car 0.13 / transit
+0.06 — only the coarse geography is shared, not the fine destination cells.
 
 **Reading.** Car and transit share the dominant structure, but transit is systematically
 less local and more Haifa-core-bound; a transit market cannot be read off the car pattern
 by scaling, and a transit-specific destination pattern (as in the step-15 calibration)
 is warranted. Nothing follows at TAZ level or within Haifa from the survey's transit sample.
 
-**Outputs.** `Output/ths2017/tests/pca_car_vs_transit_{summary,overlap,rcev,by_origin}.csv`;
-figures `Output/figures/pca_cvt_{scree,subspace_overlap,component_match,divergence}.png`.
+**Outputs.** `Output/ths2017/tests/pca_car_vs_transit_{summary,overlap,rcev,by_origin,levels,by_area}.csv`;
+figures `Output/figures/pca_cvt_{scree,subspace_overlap,component_match,divergence,levels}.png`.
 
 ---
 
