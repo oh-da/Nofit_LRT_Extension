@@ -66,8 +66,8 @@ notes saying which of their conclusions are overtaken.
 | Generalized-cost first fill on the trunk pairs (trip-weighted): car door-to-door / bus fastest-path IVT / LRT IVT underground, ground | 14.5 / 12.5 / 20.6, 25.1 min; survey bus door-to-door 27.1 min (2.3 × the network IVT) | §6x |
 | Bus level of service from the GTFS (Tuesday 2 June 2026): TAZs with peak-hour service / best-line grade A–B / with a Metronit stop | 719 of 781 / 454 / 60 (41 in the V2 areas, 20 of 25 areas) | §6aa |
 | Direct-service skim, trunk pairs: bus scheduled IVT, combined headway; Metronit | 13.3 min at 1.7 min (82 of 90 pairs); 10.0 min at 6 min (72 pairs) | §6aa |
-| Generalized cost after the GTFS skim and the corrected LRT function, trunk pairs, trip-weighted: car / bus / Metronit / LRT underground, ground | 14.5 / 24.9 / 21.2 (on its pairs) / 43.9, 51.1 — LRT in-vehicle time (11.7 min) level with the bus timetable; the LRT dearer than the bus on every trunk pair by 7–31 generalized minutes, 18 of them station access (13.6 vs 4.7 min walk) | §6x addenda |
-| GTFS bus timetable against the survey's reported door-to-door time, same pairs | 23.0 vs 31.8 min (× 1.4): a fixed ≈ 9-minute overhead, 1.9 × under 3 km, 1.3 × at 3–20 km, 0.9 × beyond | §6x addendum 2 |
+| Generalized cost after the GTFS skims and the corrected LRT function, trunk pairs, trip-weighted: car / bus (observed running times) / Metronit / LRT underground, ground | 14.5 / 27.0 / 22.1 (on its pairs) / 43.9, 51.1 — LRT in-vehicle time (11.7 min) 3 min below the observed bus (14.4); the LRT dearer than the bus on every trunk pair by 4–31 generalized minutes, 18 of them station access (13.6 vs 4.7 min walk) | §6x addenda |
+| GTFS-based bus door-to-door (observed running time + walk + wait) against the survey's reported time, same pairs | 24.3 vs 31.8 min (× 1.3): a fixed ≈ 7-minute overhead, 1.9 × under 3 km, 1.1–1.5 × at 3–20 km, 0.8 × beyond | §6x addenda 2–3 |
 | Observed bus in-vehicle time (trips routed over the May 2026 link speeds) ÷ scheduled | per trip 1.09 (Metronit 0.87); hops < 500 m 1.00, > 2 km 1.42 — the link speeds include dwell, the long arterial hops run slower than the timetable; trunk pairs 12.7 vs 10.4 min demand-weighted | §6ab |
 
 What these support: relative questions — ranking alignments and segments, sizing the
@@ -1467,6 +1467,19 @@ sampled trips, so it is a trip-level result by distance band
 (`bus_gtfs_vs_survey_summary.csv`, figure `gc_bus_gtfs_vs_survey.png`). The open item on
 the LRT side is no longer its speed but station access (24 stations against 12,845 stops):
 an access / feeder treatment and the branch geometry (E1).
+
+**Addendum 3, 22 September 2026 — observed bus running times (step 30).** The bus in-vehicle
+time on the 422 direct pairs is now the observed running time of §6ab (the scheduled value
+kept as `ivt_scheduled`): trunk pairs, trip-weighted, 14.4 min observed against 10.4
+scheduled — the demand sits on the arterial hops that run 1.1–1.4 × slower than the
+timetable in the peak hour. Partial generalized cost on the trunk pairs: bus 27.0 (was
+24.9 on the timetable), Metronit 22.1 on its pairs (all-bus 20.2 there), LRT 43.9 / 51.1,
+car 14.5; the LRT stays dearer than the bus on every trunk pair (4–31 generalized minutes,
+median 17, of which 18 are access), while its in-vehicle time underground (11.7 min) is
+now 3 min *below* the observed bus running time. GTFS-based door-to-door against the
+survey on the same pairs: 24.3 vs 31.8 min (× 1.3; trunk 20.0 vs 26.8), a fixed overhead of
+≈ 7 minutes that is now transfer and the wait for the line actually needed, the running
+time being observed (`bus_gtfs_vs_survey_summary.csv`).
 
 ## 6y. Step 27 — Peak-hour factors on the V2 routes (`Corridor_peak_hour_V2_routes.ipynb`)
 
