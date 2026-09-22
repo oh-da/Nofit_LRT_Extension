@@ -135,10 +135,14 @@ Key facts driving the list (2017 trips-file hybrid, `Output/ths2017/study_taz/`)
       waiting are added. Ask the calibration's authors for a
       running-time / dwell decomposition (their own recommended refinement) or a
       distance-weighted re-estimate.
-- [ ] **E3. Bus level of service from GTFS** — route paths per area pair (in-vehicle time
+- [~] **E3. Bus level of service from GTFS** — route paths per area pair (in-vehicle time
       on actual services rather than the fastest bus-served path), AM headways (wait),
       transfers, stop locations (walk access). The speed network stays as the source of
-      running speeds.
+      running speeds. *Pipeline built 2026-09-22 (`GTFS_bus_LOS_TAZ.ipynb`, METHODOLOGY
+      §6aa): per-TAZ LOS for bus and for the Metronit BRT, and the direct-service skim
+      between the V2 areas; dry-run only until `Input/GTFS/israel-public-transportation.zip`
+      is on LFS. Open after the real run: transfers (path building), feeding the skim into
+      step 26.*
 - [ ] **E4. Money components** — fare tables (bus, LRT, integration), parking tariffs by
       destination area (the survey's `parkType` gives the paid share as a proxy), car
       operating cost per km, and the value of time from נוהל פר"ת by purpose. Confirm the
