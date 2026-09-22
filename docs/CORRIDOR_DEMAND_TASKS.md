@@ -127,6 +127,12 @@ Key facts driving the list (2017 trips-file hybrid, `Output/ths2017/study_taz/`)
       T2 Krayot, T3 Kiryat Yam); the underground / ground regime per section (the two
       scenarios of step 25 are the pure bounds); the planned AM headway per branch and the
       through-running pattern. Add TAZ 1509 (station S13) to the V2 aggregation.
+      **Interim, step 31 (22 September 2026):** for the fifteen V2 areas with no alignment
+      of their own, `Mode_skims_and_flow_comparison.ipynb` (METHODOLOGY §6ac) skims the LRT
+      as a feeder-bus composite instead — the observed bus skim to the least-cost gateway
+      station area, an 8-minute transfer, then the LRT leg — which is what the capture
+      numbers below currently rest on for the branch areas; it stands in for, not replaces,
+      the actual branch geometry.
 - [x] **E2. LRT speed on this spacing** *(resolved 2026-09-22, step 25 revision 2)* — the
       calibration report's 500 m section assumption was checked against the Red Line's
       timetable in the GTFS (underground sections 970 m, surface 577 m): the coefficients are
@@ -158,6 +164,21 @@ Key facts driving the list (2017 trips-file hybrid, `Output/ths2017/study_taz/`)
 - [ ] **E5. Car skim vintage** — the survey door-to-door times are 2017 / 18; a small
       Google Distance Matrix sample (≈ 40 pairs, Tuesday 07:30) or the national model's
       car skim gives the 2026 uplift.
+- [ ] **E7. Cost sensitivity λ** — open. What was tried (22 September 2026, step 31,
+      `Mode_skims_and_flow_comparison.ipynb`, METHODOLOGY §6ac): a volume-weighted binary
+      logit of the observed 2022 transit share on `GC_bus − GC_car` across the 573 sampled
+      area pairs (67,700 trips) returns the wrong sign (λ = −0.011 per generalized minute,
+      se 0.0005, ρ² 0.003); adding a constant per centroid-distance band still returns no
+      usable cost sensitivity (λ = +0.0002, ρ² 0.036) — the pairs with the largest bus
+      handicap are also the least car-available (captive riders, the northern-branch
+      localities) and the ones with charged destination parking, neither of which is in the
+      skims, so they dominate the cross-section and mask any genuine cost response.
+      `docs/LRT_CAPTURE_PLAN.md` §3 currently runs on an assumed central λ = 0.03 per
+      generalized minute (range 0.02–0.05, λ_T = 2λ). What closes it: either a segmented
+      logit on the survey's person-level records (car availability, trip purpose, distance
+      band, so the captive-rider and parking confounds are held constant rather than
+      averaged over), or a transferred λ from the national transport model's own mode-choice
+      calibration, with its source and estimation sample cited.
 - [ ] **C2. Segmentation** — car availability by zone (check the raw survey household
       file **[needs LFS data]**; otherwise census / zonal files).
 - [ ] **C3. Uncertainty** — carry as sensitivities into corridor numbers: survey

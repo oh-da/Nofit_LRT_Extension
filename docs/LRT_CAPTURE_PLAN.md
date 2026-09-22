@@ -47,7 +47,11 @@ GC_m = IVT + 2.0·walk + 2.0·wait + 8·transfers + (fare + parking)/VOT
   an all-underground and an all-ground scenario; access / egress from TAZ centroid to
   nearest station (step 26). Still needed: the alignment and stations of the segment
   beyond Hamifrats and of the three V2 branches, the planned headway, and the
-  underground / ground regime per section.
+  underground / ground regime per section. **Status, step 31 (22 September 2026):**
+  for the fifteen V2 areas without their own alignment, `Mode_skims_and_flow_comparison.ipynb`
+  (METHODOLOGY §6ac) fills the LRT skim with a feeder-bus composite instead — the
+  observed bus skim to the least-cost gateway station area, an 8-minute transfer, then
+  the LRT leg — as the interim for the branch areas until E1 is closed.
 
 **Status (22 September 2026).** `GC_data_inventory_and_skims.ipynb` (step 26,
 METHODOLOGY §6x) holds the component-by-component inventory on the 25 V2 areas
@@ -81,6 +85,24 @@ philosophy of the whole pipeline:
 
 Key property: with the LRT removed, the model reproduces observed 2022 behavior
 by construction — the first thing reviewers will test.
+
+**Status (22 September 2026).** The cross-sectional fit was run
+(`Mode_skims_and_flow_comparison.ipynb`, step 31, METHODOLOGY §6ac): a volume-weighted
+binary logit of the observed 2022 transit share on `GC_bus − GC_car` (573 area pairs,
+67,700 trips) returns the wrong sign (λ = −0.011 per generalized minute, se 0.0005,
+ρ² 0.003), and adding a constant per centroid-distance band still returns no usable
+cost sensitivity (λ = +0.0002, ρ² 0.036). The pairs where the bus is dearest relative to
+the car are also the least car-available (captive riders, the northern-branch
+localities) and the ones with charged destination parking — neither is in the skims —
+so the revealed 2022 split cannot identify λ from this cross-section, as anticipated
+above. λ is therefore **assumed**: central 0.03 per generalized minute (range
+0.02–0.05), with λ_T = 2λ within the transit nest. The pivot machinery of this section
+(the nested incremental logit, Empirical-Bayes-smoothed toward the study-area share) is
+implemented in step 31 and run on the 2022 corridor-internal flows for both LRT
+scenarios, giving central-case captures of 2,257 (underground) / 1,664 (ground) LRT
+trips 06:00–09:00 (low–high λ cases 1,289–3,895 / 748–3,390). Segmented estimation on the survey's person-level records (car
+availability, purpose) is the next step to actually fit λ, rather than assume it
+(`docs/CORRIDOR_DEMAND_TASKS.md` E7).
 
 ## 4. Sanity anchors and sensitivity
 
