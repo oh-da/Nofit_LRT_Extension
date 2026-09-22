@@ -27,6 +27,7 @@ GC_m = IVT + 2.0·walk + 2.0·wait + 8·transfers + (fare + parking)/VOT
 | VOT, fares, parking | **out of the comparison** (decision of 22 Sep 2026) | the transit fare in the area is flat and integrated with a daily cap (two fares pay for the day): identical for bus, Metronit and LRT and for every pair, so it drops out of the transit choice and is a constant per trip against the car, absorbed by the pivot; car operating cost and parking excluded on the same decision |
 | LRT commercial speed | **calibrated function** (Red Line, 22 Sep 2026) transferred through the Red Line's actual spacing: running 46 km/h + 49 s per stop underground, 31 km/h + 74 s at the surface, levelled to the observed means — 27.6 / 17.1 km/h on `hf_lrt_3`'s 815 m spacing (METHODOLOGY §6w rev. 2) | the report's 500 m reading (15.3 / 12.5 km/h) is superseded; `docs/Transit_Travel_Time_Calibration_Report_Operator22.md` |
 | LRT peak headway | 5 min (12 departures an hour) | assumption of 22 Sep 2026 |
+| LRT design regime (third scenario) | 50 km/h between stops + 10 s per stop, headway 5 min | specification of 22 Sep 2026; no acceleration allowance, a ceiling beside the two calibrated scenarios: 26.3 min end to end (42.7 km/h), central capture 3,970 trips in 2022 (METHODOLOGY §6w / §6ac addenda) |
 
 ## 2. Skims — mixed sourcing, not a single Google pull
 
@@ -106,7 +107,14 @@ scenarios, with an LRT premium of 5 generalized minutes and free LRT–Metronit 
 central-case captures of 3,332 (underground) / 2,544 (ground) LRT trips 06:00–09:00
 (λ range 2,357–4,855 / 1,472–4,277; without the premium 2,658 / 1,999). Segmented estimation on the survey's person-level records (car
 availability, purpose) is the next step to actually fit λ, rather than assume it
-(`docs/CORRIDOR_DEMAND_TASKS.md` E7).
+(`docs/CORRIDOR_DEMAND_TASKS.md` E7). Step 32 (`LRT_capture_forecast_2040_2050.ipynb`,
+METHODOLOGY §6ad) reruns this same pivot on step 23's four 2040/2050 forecast sets
+(BU_2040, BU_2050, HS_2040, HS_2050), giving central-case underground LRT trips of 4,114
+/ 4,498 (BU) and 4,520 / 5,354 (HS) against 3,332 in 2022, and ground trips of 3,105 /
+3,386 (BU) and 3,430 / 4,047 (HS) against 2,544. The capture rate itself is unchanged
+across scenario-years — the LRT's share of no-build transit stays 0.28–0.29 underground
+and 0.21–0.22 ground in every year — because step 32 holds the step-31 skims fixed and
+only the demographic-reference market grows.
 
 ## 4. Sanity anchors and sensitivity
 

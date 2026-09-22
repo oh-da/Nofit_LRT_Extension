@@ -5,3 +5,4 @@ all_underground,"nominal 500 m form (revision 1, slow bound)",73.50,15.30
 all_ground,decomposed form (estimate),65.84,17.08
 all_ground,section form (fast bound),55.03,20.44
 all_ground,"nominal 500 m form (revision 1, slow bound)",89.69,12.54
+design_50kmh,specified: 50 km/h + 10 s per stop,26.33,42.72

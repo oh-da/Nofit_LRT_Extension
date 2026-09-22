@@ -75,6 +75,10 @@ notes saying which of their conclusions are overtaken.
 | Cost sensitivity λ from the 2022 cross-section (binary logit, transit share vs `GC_bus − GC_car`, 573 pairs / 67,700 trips) | wrong sign (−0.011, ρ² 0.003); with distance-band constants +0.0002 (ρ² 0.036) — not identifiable; λ assumed 0.03 (range 0.02–0.05), λ_T = 2λ | §6ac |
 | LRT capture, central case (λ 0.03, λ_T 0.06, LRT premium 5, free LRT–Metronit transfer), 06:00–09:00 within the 25 areas: underground / ground trips (of which from bus / from car) | 3,332 (3,037 / 295) / 2,544 (2,375 / 169); λ range 2,357–4,855 (ug), 1,472–4,277 (ground); premium 0 / 10: 2,658 / 4,122 (ug) | §6ac |
 | LRT trunk-link loads, three hours, central underground vs today's bus | 79–995 per link-direction against bus 200–2,030 (a third to 45 %; 84 % on Namal-Giborim→Hamifrats up); ground 44–595; peak hour ug 47–588 | §6ac |
+| LRT design regime (50 km/h + 10 s per stop, specified): end to end / trunk-pair IVT / central capture 2022 / on the forecast sets | 26.3 min (42.7 km/h) / 8.0 min / 3,970 trips (19 % above underground) / 4,930–6,432 | §6w, §6ac, §6ad addenda |
+| Forecast market growth on the V2 areas (2022 → BU_2040 / BU_2050 / HS_2040 / HS_2050) | transit ×1.27 / 1.40 / 1.38 / 1.57 (11,664 → 14,836 / 16,369 / 16,076 / 18,291); car ×1.32 / 1.53 / 1.38 / 1.59; no-build transit share of car + transit stays 0.16–0.17 | §6ad |
+| LRT trips, central case, by scenario-year: underground / ground | 3,332 / 2,544 (2022) → 4,114 / 3,105 (BU_2040) → 4,498 / 3,386 (BU_2050); 4,520 / 3,430 (HS_2040) → 5,354 / 4,047 (HS_2050); LRT share of no-build transit fixed at 0.28–0.29 ug / 0.21–0.22 ground (skims held fixed) | §6ad |
+| Busiest trunk link by scenario-year, underground central (Namal-Giborim → Hamifrats down) | three hours 995 (2022) → 1,216 / 1,367 (BU) → 1,426 / 1,717 (HS); peak hour 588 → 718 / 807 / 842 / 1,014 | §6ad |
 
 What these support: relative questions — ranking alignments and segments, sizing the
 market between line areas, locating the demand, and the design-hour scaling of that
@@ -126,6 +130,11 @@ spacing (revision 2 of step 25 — the report's 500 m assumption had halved the 
 speed), gives 40.7 min (underground, 27.6 km/h) / 65.8 min (ground, 17.1 km/h) end to end;
 on the trunk pairs the LRT in-vehicle time (11.7 min underground) is level with the bus
 timetable and the LRT's remaining disadvantage in generalized cost is station access.
+Step 23's scenario sets were then produced (22 September 2026, after the LFS zonal files
+were pulled) and step 32 (§6ad) reran the step-31 capture on them with the skims held
+fixed, taking the central-case underground LRT capture from 3,332 (2022) to 4,114 / 4,498
+(BU 2040 / 2050) and 4,520 / 5,354 (HS 2040 / 2050) as the corridor-internal transit
+market grows ×1.27–1.57.
 
 Every published product, what it was built from, and its status:
 
@@ -146,13 +155,14 @@ Every published product, what it was built from, and its status:
 | `historical/ths2018/*` (`hybrid_*`, `prob_*`, `matrix_*`, `submatrices/*`, `trip_generation_*`) | steps 1–4 | activities file × cellular, replicated mapping | 778 / 36 / 25 | all modes | 2018 | **historical** |
 | `ths2017/tests/*` | steps 12–14, 19, 21 | the matrices above; step 21: survey car vs transit profiles | various | — | — | diagnostics (regression record) |
 | `transit/transit_od_area.csv`, `all_adjusted_area*.csv`, `mode_share_area*.csv`, `car_other_area_2022.csv` | steps 10–11 | survey ALL − TRANSIT − RAIL (cellular-allocated) + RavKav × OnBoard bus + station train | 25 areas | mixed frames (residents' car / other + all-rider boardings) | mixed → 2022 | **historical composite** |
-| `forecast_taz/{BU,HS}_{2040,2050}/*` (after the LFS scenario files are pulled; `forecast_taz/dry_run/` here) | step 23 | `final_2022/` layers × scenario zonal files | 778 TAZ / 36 SZ / 28 areas | car; transit; taxi-type; total | 2040 / 2050 | **current method — demographic reference; scenario sets pending the LFS run** |
+| `forecast_taz/{BU_2040,BU_2050,HS_2040,HS_2050}/*` (`forecast_taz/dry_run/` also kept, mechanics test only) | step 23 | `final_2022/` layers × scenario zonal files | 778 TAZ / 36 SZ / 28 areas | car; transit; taxi-type; total | 2040 / 2050 | **current — the four scenario sets, produced 22 September 2026** |
 | `forecast/all_modes_area_*`, `share_*`, `nobuild_*`, `lrt_market_*`, `lrt_alignment_*` | forecast notebooks | `transit/all_adjusted_area_2022.csv` | 25 areas | composite | 2040 / 2050 | **historical** — superseded by step 23 |
 | `demographics/*` | scenario comparison | zonal forecast files (LFS) | 28 areas | — | 2040 / 2050 | current input analysis |
 | `corridor_v2/*` | step 24 | the step-16 TAZ layers × `Input/Corridor_TAZ_Agg_V2.xlsx`; step-20 peak factors | 25 V2 areas, 3 routes + tree network | car; bus; taxi-type; rail; transit; total | 2022 | **current** — three-hour and peak-hour potential movements |
 | `lrt_v2/*` | step 25 | `Input/GeneralHalufa/` geometry × the calibrated travel-time function | 24 stations; 10 trunk areas | LRT in-vehicle time, two scenarios × two forms | planned line | **current** — trunk only (no branches) |
 | `gc/*` | step 26 | survey car times, `Input/BusSpeedData/` (LFS), `lrt_v2/` | 25 V2 areas | car; bus; LRT (2 scenarios) — generalized-cost components with status | 2017/18 (car), May 2026 (bus), planned (LRT) | **current** — partial fill; money components missing |
 | `skims/*` | step 31 | `gc/*` components, feeder composite (bus or Metronit) for the LRT, 2022 corridor flows | 25 V2 areas, 9 trunk links | car; bus; Metronit; LRT (2 scenarios) — complete skims, logit calibration, LRT capture scenarios, trunk-link loads | 2022 (flows), May 2026 (bus), planned (LRT) | **current** — money components still missing; λ assumed |
+| `skims/forecast/*` | step 32 | step-23 forecast sets (BU/HS × 2040/2050), step-31 skims (held fixed) | 25 V2 areas, 9 trunk links | car; transit; taxi — market; LRT (2 scenarios) — capture, boardings, trunk-link loads by scenario-year | 2040 / 2050 (market), 2026 skims (fixed) | **current** — skims fixed at step 31; λ assumed |
 
 The 25 GS zones (`Input/TAZ_GSnew.csv`) and the 25 retained research areas of the
 forecast tables are different geographies with the same matrix dimension; files are
@@ -1285,17 +1295,27 @@ column; small-base or transforming ones receive the layer's superzone pattern sp
 targets. (5) Furness per layer (car, transit, taxi-type); total = car + transit. Mode
 split, trip rates and destination choice stay at 2022 by construction.
 
-**Status.** The scenario zonal files are Git-LFS-only; in the remote environment the
-notebook ran a **dry run** (2022 → BU-2025, and a stress case with a synthetic
-10,000-resident conversion of the Matam TAZs and a 1.5 × employment jump) to exercise
-every path: margins met to 10⁻⁶ for car and transit (taxi-type, sparse, to 2–3 % after
-500 iterations); no negative or unreachable cells; car mean centroid length 7.32 →
-7.61 km on a 4.7 % growth (employment-only attractions would have given 7.91 km, the
-all-synthetic seed 7.84 km); transit length unchanged; the Matam conversion adds ≈ 2,400
-origin trips at the superzone rate. Outputs of the dry run are under
-`Output/forecast_taz/dry_run/` and are not scenario results. The four scenario sets are
-produced by running the notebook after `git lfs pull --include="Input/Demographic_Forecast/Zonal_*.csv"`;
-they will appear under `Output/forecast_taz/{BU_2040,BU_2050,HS_2040,HS_2050}/`.
+**Status.** The scenario zonal files were originally Git-LFS-only, so the notebook first
+ran a **dry run** (2022 → BU-2025, and a stress case with a synthetic 10,000-resident
+conversion of the Matam TAZs and a 1.5 × employment jump) to exercise every path: margins
+met to 10⁻⁶ for car and transit (taxi-type, sparse, to 2–3 % after 500 iterations); no
+negative or unreachable cells; car mean centroid length 7.32 → 7.61 km on a 4.7 % growth
+(employment-only attractions would have given 7.91 km, the all-synthetic seed 7.84 km);
+transit length unchanged; the Matam conversion adds ≈ 2,400 origin trips at the superzone
+rate. Outputs of the dry run remain under `Output/forecast_taz/dry_run/` and are not
+scenario results.
+
+**Scenario run, 22 September 2026.** The zonal forecast files were pulled
+(`git lfs pull --include="Input/Demographic_Forecast/Zonal_*.csv"`) and the notebook ran
+in scenario mode, producing the four sets BU_2040, BU_2050, HS_2040, HS_2050 under
+`Output/forecast_taz/{scenario}/` (`{car,transit,taxi,total}_{scenario}_{taz,sz,area}.csv`,
+`margins_{scenario}.csv`) plus `checks.csv`, `summary_by_class.csv`, `by_area.csv`,
+`trip_rates_by_sz.csv`, `corridor_link_flows_scenarios.csv`, `landuse_indices.csv`.
+Convergence per `checks.csv`: car and transit margins met to 10⁻⁶ in 25–140 Furness
+iterations; taxi-type (sparse) stops at 500 iterations with 10–15 % maximum relative
+row-margin error (column margins exact). On the corridor-internal V2-area market (step
+32, §6ad), the resulting growth is transit ×1.27 (BU_2040) / ×1.40 (BU_2050) / ×1.38
+(HS_2040) / ×1.57 (HS_2050) and car ×1.32 / ×1.53 / ×1.38 / ×1.59 over the 2022 base.
 
 **Outputs (per scenario-year).** `{car,transit,taxi,total}_{scenario}_{taz,sz,area}.csv`,
 `margins_{scenario}.csv` (indices, targets and the rule each TAZ took); across scenarios
@@ -1403,6 +1423,16 @@ three branches have no station on this geometry.
 `…_section_form.csv`, `lrt_line_profile.csv`, `lrt_area_representative_station.csv`,
 `lrt_area_ivt_{all_underground,all_ground}.csv`; figure `lrt_line_profile_hf_lrt_3.png`.
 
+**Addendum, 22 September 2026 — a third, specified regime.** At the study team's request a
+third scenario runs the line at a **design speed of 50 km/h between stops with 10 s per stop**
+(headway 5 minutes as before): section time = distance / 50 km/h + 10 s, with no acceleration
+or braking allowance. End to end S01 → S24: **26.3 min (42.7 km/h)**, 35 % below the calibrated
+underground case — the calibrated forms put 49–74 s per stop into the stop penalty, where
+dwell, acceleration and deceleration all sit, against 10 s here. It is a performance ceiling
+for the alignment, read beside the two calibrated scenarios rather than as a third observed
+regime. Outputs `lrt_station_times_design_50kmh.csv`, `lrt_area_ivt_design_50kmh.csv`, the
+row in `lrt_end_to_end_summary.csv` and the columns in `lrt_line_profile.csv`.
+
 ## 6x. Step 26 — Generalized cost on the V2 areas: data inventory, first-fill skims, gaps (`GC_data_inventory_and_skims.ipynb`)
 
 **Purpose.** For the capture model's formula (`docs/LRT_CAPTURE_PLAN.md`:
@@ -1507,6 +1537,12 @@ now carry the status `constant` (values zero) instead of `missing`, the inventor
 `gc_data_inventory.csv` lists nothing to obtain for them, and VOT is no longer needed. No
 generalized-cost value changes (money entered at zero before); task E4 of
 `docs/CORRIDOR_DEMAND_TASKS.md` closes.
+
+**Addendum 5, 22 September 2026 — the design-speed LRT regime.** Step 25's third scenario
+(50 km/h + 10 s per stop) enters as mode `lrt_design_50kmh` with the same walk, wait and
+transfer components as the two calibrated scenarios; `gc_area_v2_lrt_design_50kmh.csv` and
+a column in `gc_trunk_pairs_comparison.csv`. No section form (the regime is specified, not
+calibrated).
 
 ## 6y. Step 27 — Peak-hour factors on the V2 routes (`Corridor_peak_hour_V2_routes.ipynb`)
 
@@ -1785,6 +1821,98 @@ nearest-station walk of §6x, not a per-trip routing.
 
 ---
 
+**Addendum, 22 September 2026 — the design-speed regime in the skims and the capture.** The
+third LRT scenario (§6w addendum) runs through the same feeder composite and capture:
+in-vehicle time on the trunk pairs 8.0 min (12.6 underground, 20.4 ground), partial GC 39.4
+on the trunk pairs and 61.1 over all pairs; dearer than the bus on 494 of 598 pairs on
+physical cost (direct trunk pairs −8 to +26 generalized minutes, median 10.5), cheaper on
+192 pairs carrying 1,764 transit trips once the 5-minute premium is applied. Central
+capture **3,970** LRT trips 06:00–09:00 (3,534 from bus, 437 from car; 31 % of the transit
+trips, 40 % on the trunk pairs; λ range 3,227–5,272; premium 0 / 10 → 3,210 / 4,842); trunk
+links 108–1,237 (peak hour 64–730), busiest Namal-Giborim→Hamifrats down 1,237; boardings
+Hamifrats 1,237, Namal-Giborim 888, Hecht-Shprintzak 464, Bat Galim 428. The ceiling regime
+draws 19 % more than the calibrated underground case — less than the λ range.
+
+## 6ad. Step 32 — LRT capture on the 2040 / 2050 forecast matrices (`LRT_capture_forecast_2040_2050.ipynb`)
+
+**Purpose.** Run step 31's pivoted capture model (§6ac: nested incremental logit pivoted
+on the no-build transit trips per pair, λ = 0.03 per generalized minute, λ_T = 0.06, LRT
+premium 5 generalized minutes, free LRT–Metronit transfers, money out of the comparison)
+on the four step-23 demographic-reference forecast sets (§6u: BU_2040, BU_2050, HS_2040,
+HS_2050), to see how the LRT capture grows with the demographic forecast while the skims
+that drive the capture rate are held fixed.
+
+**Method.** Each of the four TAZ-level forecast sets is aggregated to the 25 V2 areas
+using the `TazAgg` key of `Input/Corridor_TAZ_Agg_V2.xlsx`, giving
+`{car,transit,taxi}_{scenario}_area_v2.csv` alongside a market-growth summary
+(`forecast_market_v2_growth.csv`) and the transit trips by origin area
+(`forecast_transit_origins_v2.csv`). The step-31 skims are reused unchanged for every
+scenario-year: the 2026 timetable and link speeds, 2017/18 car times, the drawn `hf_lrt_3`
+line with its feeder access, no congestion growth, no bus-network change and no branch
+LRT. The same nested incremental logit as §6ac — central case (λ = 0.03, λ_T = 0.06,
+premium 5), a λ range (λ = 0.02/λ_T = 0.03, λ = 0.05/λ_T = 0.10) and a premium range (0,
+10) — is run for each of the four scenario-years and both LRT scenarios (all underground,
+all ground), pivoting each pair's forecast no-build transit trips exactly as it pivoted
+the 2022 trips in §6ac. All flows are corridor-internal (both trip ends among the 25 V2
+areas), 06:00–09:00, off-diagonal.
+
+**Results.** Market growth on the V2 areas: transit trips 11,664 (2022) → 14,836 BU_2040
+(×1.27), 16,369 BU_2050 (×1.40), 16,076 HS_2040 (×1.38), 18,291 HS_2050 (×1.57); car
+56,445 → ×1.32 / 1.53 / 1.38 / 1.59; the no-build transit share of car + transit stays
+0.16–0.17 in every year (2022 mode split by construction of step 23). Growth location:
+under BU, Tirat Carmel transit origins grow 553 → 1,299 (2040) / 1,324 (2050), Kiryat
+Bialik Center 902 → 1,363 / 1,690, Kiryat Haim West 750 → 1,200 / 1,370, and Tsur Shalom
+and Kiryon nearly double; under HS, Matam grows 229 → 617 / 869, Hof Carmel 276 → 541 /
+685, Bat Galim 811 → 1,077 / 1,410, Kiryat Haim West 750 → 1,955 / 2,317, Kiryat Ata North
+256 → 491 / 662; Nazareth grows 1,070 → 1,179 / 1,445 (BU) and 1,070 → 1,069 / 1,257 (HS,
+essentially flat in 2040).
+
+LRT trips, central case, all underground: 3,332 (2022) → 4,114 (BU_2040) → 4,498
+(BU_2050); 4,520 (HS_2040) → 5,354 (HS_2050). All ground: 2,544 → 3,105 / 3,386; 3,430 /
+4,047. The LRT share of no-build transit stays fixed in every scenario-year — 0.28–0.29
+underground, 0.21–0.22 ground — because the skims (and so the capture rate) are held
+fixed; only the market changes with the year. Over the λ range: BU_2040 underground
+2,889–6,093; HS_2050 underground 3,828–7,815; HS_2050 ground 2,362–6,840. From bus / from
+car, underground: BU_2040 3,732 / 382; BU_2050 4,055 / 444; HS_2040 4,050 / 470; HS_2050
+4,768 / 586. Trunk-pair LRT trips underground: 1,580 (2022) → 1,952 / 2,040 (BU) and 2,053
+/ 2,437 (HS).
+
+Boardings by station area, underground central: Hamifrats 995 (2022) → 1,216 / 1,367 (BU
+2040 / 2050) and 1,426 / 1,717 (HS); Namal-Giborim 748 → 890 / 1,031 (BU), 886 / 1,015
+(HS); Tirat Carmel 251 → 591 / 623 (BU), 334 / 368 (HS); Bat Galim 353 → 364 / 385 (BU),
+468 / 617 (HS); Matam 118 → 139 / 151 (BU), 271 / 366 (HS); Hof Carmel 147 → 139 / 139
+(BU), 270 / 339 (HS); Hecht-Shprintzak 391 → 366 / 343 (BU), 389 / 400 (HS).
+Metronit-fed pairs grow fastest: Metronit→LRT trips go from 570 (2022) to 1,094 (HS_2050).
+
+Trunk links, underground central: the busiest link in every year is Namal-Giborim →
+Hamifrats down: 995 (2022) → 1,216 / 1,367 (BU) → 1,426 / 1,717 (HS) trips in three hours;
+peak hour (step 27's network bus factor 0.590): 588 → 718 / 807 / 842 / 1,014.
+
+**Outputs.** `Output/skims/forecast/{car,transit,taxi}_{scenario}_area_v2.csv`,
+`forecast_market_v2_growth.csv`, `forecast_transit_origins_v2.csv`,
+`lrt_capture_scenarios_forecast.csv`, `lrt_trips_{year}_{lrt_scenario}_central.csv`,
+`trunk_link_flows_forecast.csv`, `lrt_boardings_forecast.csv`,
+`lrt_trips_by_path_type_forecast.csv`, `lrt_trips_by_origin_area_forecast.csv`; figure
+`Output/figures/lrt_capture_forecast_2040_2050.png`.
+
+**Limits.** Corridor-internal trips only (both ends among the 25 V2 areas); the 2026
+skims of step 31 applied unchanged to every scenario-year, so no congestion growth, no
+bus-network change and no branch LRT are represented; the 2022 mode split carried into
+the no-build by construction of step 23; no capacity; the three perception assumptions of
+step 31 (λ assumed, the LRT premium, the free LRT–Metronit transfer) carry the same
+standing here; the forecast sets are step 23's demographic reference (margins grown from
+the zonal forecasts with the composite land-use indices; destination choice and trip
+rates held at 2022); taxi carried unchanged.
+
+---
+
+**Addendum, 22 September 2026 — the design-speed regime on the forecast sets.** Central
+case 3,970 (2022) → 4,930 / 5,404 (BU 2040 / 2050) → 5,416 / 6,432 (HS 2040 / 2050) LRT trips,
+a share of the no-build transit trips of 0.33–0.35 in every year; busiest link
+Namal-Giborim→Hamifrats down 1,503 / 1,693 (BU) and 1,749 / 2,104 (HS) in three hours, 1,242
+in the HS 2050 peak hour; Hamifrats boards 2,104 by HS 2050. About a fifth above the
+underground case in every scenario-year.
+
 ## 7. Output inventory (`Output/`)
 
 *Layout note (21 September 2026).* The products of steps 1–4 (the 2018 activities-file chain, listed first below with bare file names) now live under `Output/historical/ths2018/`; every other path is as written. Notebooks live under `notebooks/current/`, `notebooks/diagnostics/` and `notebooks/historical/` and anchor their working directory to the repository root, so the `Input/…` and `Output/…` paths in this document are unchanged.
@@ -1816,7 +1944,7 @@ nearest-station walk of §6x, not a per-trip routing.
 | `ths2017/tests/ks*.csv` | various | Step 13 | KS tests: trip length distributions (all / off-diagonal / per origin / corridor class), flow concentration, distance-proxy calibration |
 | `ths2017/tests/mssim_*.csv` | various | Step 14 | MSSIM tests: index by level / window / scale / ordering with term decomposition, broken-correspondence null, per-origin and superzone-block local SSIM, corridor classes |
 | `ths2017/two_mode/*.csv` | 778×778 / 36×36 / 28×28 | Step 15 | Survey-only two-mode matrices (car, transit) with the bus part calibrated to RavKav × OnBoard per origin × segment; binary-guard / all-RavKav / uniform variants; calibration tables incl. `bus_calibration_factors_segments.csv` and the threshold sweep; mode shares |
-| `forecast_taz/*` | 778×778 / 36×36 / 28×28 per scenario-year | Step 23 | Demographic-reference matrices 2040 / 2050 × BU / HS (car, transit, taxi-type, total), margins, checks, corridor profiles; dry run only until the LFS scenario files are pulled |
+| `forecast_taz/*` | 778×778 / 36×36 / 28×28 per scenario-year | Step 23 | Demographic-reference matrices 2040 / 2050 × BU / HS (car, transit, taxi-type, total), margins, checks, corridor profiles; the four scenario sets (BU_2040, BU_2050, HS_2040, HS_2050), produced 22 September 2026; `dry_run/` kept as the mechanics test |
 | `final_2022/*` | 778×778; long | Step 22 | **Deliverable matrices**: car, transit (bus + rail), total, taxi-inclusive variants, long format, manifest and summary |
 | `ths2017/three_mode_2022/*.csv` | 778×778 / 36×36 / 28×28 | Steps 16–18, 20 | **Current 2022-base layers** car / bus / taxi / rail (demographic growth, RavKav anchor, rail ridership series), `all_modes_2022_taz.csv`, TAZ growth factors, summaries; corridor link profiles (three-hour potential movements), the comparison with the ticketing profile, and the peak-hour factors and peak-hour link profiles |
 | `ths2017/tests/hybrid_sz_conservation_*.csv`, `ths2017/study_taz/hybrid_taz_{trips,prob}_balanced.csv` | 3 / 12 rows; 778×778 | Step 19 | Superzone conservation test of the TAZ hybrids and the jointly-constrained rebalanced primary hybrid |
@@ -1837,6 +1965,7 @@ nearest-station walk of §6x, not a per-trip routing.
 | `gtfs/*` | 781 rows; area pairs; 15,929 segments | Steps 29–30 | Bus and BRT level of service per TAZ from the national GTFS, the direct-service skim between the V2 areas (scheduled), the intermediates, and the observed skim from the trips routed over the measured link speeds |
 | `gc/*` | 25×25; long | Step 26 | Car / bus / LRT skims, LRT access, generalized-cost component table with status, partial GC matrices, cell status, trunk-pair comparison, the data-gap inventory |
 | `skims/*` | 25×25 per mode × component; long; 9 trunk links | Step 31 | Complete per-mode skims (car, bus, Metronit, LRT underground / ground) with status, `skims_area_v2.xlsx` and long-format table, the summary by mode; the logit calibration of the cost sensitivity λ against the 2022 flows; the LRT capture scenarios and pair-level flows; the trunk-link loads against today's bus movements |
+| `skims/forecast/*` | 25×25 per mode; 9 trunk links; per scenario-year | Step 32 | The four step-23 forecast sets aggregated to the V2 areas (car, transit, taxi); the market-growth and transit-origin summaries; the LRT capture scenarios, trip counts, boardings, path-type and origin-area breakdowns and trunk-link loads by scenario-year, on the step-31 skims held fixed |
 | `figures/` | — | Steps 1b–3 | Scatter plots, CV curves, λ curves, R_AB heatmap |
 
 All matrices are indexed by origin zone (rows) × destination zone (columns). Probability
@@ -1973,7 +2102,7 @@ jupyter nbconvert --to notebook --execute --inplace notebooks/current/Corridor_f
 jupyter nbconvert --to notebook --execute --inplace notebooks/current/Corridor_profile_hybrid_vs_ticketing.ipynb
 jupyter nbconvert --to notebook --execute --inplace notebooks/current/Corridor_peak_hour_2022.ipynb
 jupyter nbconvert --to notebook --execute --inplace notebooks/current/Final_matrices_2022.ipynb
-# demographic reference 2040 / 2050 (needs git lfs pull --include="Input/Demographic_Forecast/Zonal_*.csv"; dry run otherwise)
+# demographic reference 2040 / 2050 (needs git lfs pull --include="Input/Demographic_Forecast/Zonal_*.csv", pulled and run in scenario mode here 22 September 2026; dry run otherwise)
 jupyter nbconvert --to notebook --execute --inplace notebooks/current/Forecast_matrices_TAZ_2040_2050.ipynb
 # V2 aggregation, LRT geometry and generalized cost (steps 24–26; step 26 needs git lfs pull --include="Input/BusSpeedData/std_202605.csv" and pip install shapely pyproj)
 jupyter nbconvert --to notebook --execute --inplace notebooks/current/Corridor_peak_hour_V2_routes.ipynb          # step 27 first: step 24 reads its factors
@@ -1985,6 +2114,7 @@ jupyter nbconvert --to notebook --execute --inplace notebooks/current/GC_data_in
 jupyter nbconvert --to notebook --execute --inplace notebooks/current/GTFS_bus_LOS_TAZ.ipynb
 jupyter nbconvert --to notebook --execute --inplace notebooks/current/GTFS_bus_observed_times.ipynb   # step 30: needs step 29's intermediates and the bus-speed LFS file; run before step 26
 jupyter nbconvert --to notebook --execute --inplace notebooks/current/Mode_skims_and_flow_comparison.ipynb   # step 31: needs steps 24, 26, 27, 29, 30
+jupyter nbconvert --to notebook --execute --inplace notebooks/current/LRT_capture_forecast_2040_2050.ipynb   # step 32: needs step 23's scenario sets (git lfs pull --include="Input/Demographic_Forecast/Zonal_*.csv" first) and step 31
 
 # regression test of the hybrid branch (committed outputs only)
 jupyter nbconvert --to notebook --execute --inplace notebooks/diagnostics/Hybrid_superzone_conservation_test.ipynb

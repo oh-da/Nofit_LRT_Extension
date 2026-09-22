@@ -9,3 +9,5 @@ LRT all underground,all off-diagonal pairs,600,11664.0,1.0,33.5,9.9,4.9,0.2,64.6
 LRT all underground,trunk pairs (10 station areas),90,4174.0,1.0,12.6,13.2,2.5,0.0,44.0
 LRT all ground,all off-diagonal pairs,600,11664.0,1.0,38.7,9.9,5.0,0.2,70.0
 LRT all ground,trunk pairs (10 station areas),90,4174.0,1.0,20.4,13.2,2.5,0.0,51.8
+LRT design 50 km/h,all off-diagonal pairs,600,11664.0,1.0,29.1,9.9,5.1,0.2,61.1
+LRT design 50 km/h,trunk pairs (10 station areas),90,4174.0,1.0,8.0,13.2,2.5,0.0,39.4
