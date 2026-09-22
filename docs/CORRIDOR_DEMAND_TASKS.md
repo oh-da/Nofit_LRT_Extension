@@ -127,14 +127,19 @@ Key facts driving the list (2017 trips-file hybrid, `Output/ths2017/study_taz/`)
       T2 Krayot, T3 Kiryat Yam); the underground / ground regime per section (the two
       scenarios of step 25 are the pure bounds); the planned AM headway per branch and the
       through-running pattern. Add TAZ 1509 (station S13) to the V2 aggregation.
-- [ ] **E2. LRT speed on this spacing** — the calibrated coefficients are elapsed times per
-      500 m section; on the 815 m spacing of `hf_lrt_3` the distance form (15.3 / 12.5 km/h)
-      and the section form (24.9 / 20.4 km/h) differ by 39 %. Under the distance form the
-      LRT in-vehicle time on the trunk pairs is 21–25 min (underground / ground) against a
-      survey bus door-to-door time of 27 min, i.e. no door-to-door gain once access and
-      waiting are added. Ask the calibration's authors for a
-      running-time / dwell decomposition (their own recommended refinement) or a
-      distance-weighted re-estimate.
+- [x] **E2. LRT speed on this spacing** *(resolved 2026-09-22, step 25 revision 2)* — the
+      calibration report's 500 m section assumption was checked against the Red Line's
+      timetable in the GTFS (underground sections 970 m, surface 577 m): the coefficients are
+      now transferred through a running-time / stop-penalty decomposition, giving 27.6 km/h
+      underground and 17.1 km/h at ground level on `hf_lrt_3` (40.7 / 65.8 min end to end).
+      Remaining refinement: the regime per section of the actual design, and a check of the
+      levelled fit against a year-specific calibration. The LRT's open question is now
+      **station access** (13.6 min walk on the trunk pairs against 4.7 to a bus stop): an
+      access / feeder model (feeder buses, walking network, park-and-ride) — added as E6.
+- [ ] **E6. LRT access model** — replace the centroid-to-nearest-station walk with a walking
+      network, feeder-bus access from the GTFS (bus to the nearest station + transfer) and
+      park-and-ride where the station plan allows; this is what the generalized-cost
+      comparison now turns on.
 - [~] **E3. Bus level of service from GTFS** — *done 2026-09-22 for the direct services*
       (`GTFS_bus_LOS_TAZ.ipynb`, METHODOLOGY §6aa; feed of 22 May 2026): per-TAZ LOS for bus
       and for the Metronit (codes 83001, 67002, 67003, 62004, 52005 — the supplied 83002–83005

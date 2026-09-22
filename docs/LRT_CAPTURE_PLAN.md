@@ -23,8 +23,8 @@ GC_m = IVT + 2.0·walk + 2.0·wait + 8·transfers + (fare + parking)/VOT
 | wait | headway/2, capped ~10 min | |
 | transfer penalty | 8 generalized min | range 5–10; applies to the Main-alignment "influenced" tier (tier 1 in `Output/forecast/lrt_market_tiers_*.csv`) |
 | VOT, fares, parking | align with נוהל פר"ת | the study will be appraised against it |
-| LRT commercial speed | **calibrated function** (22 Sep 2026): 1.961 min per 500 m section underground, 2.393 min at ground level — 15.3 / 12.5 km/h in distance form, 20–25 km/h in section form on the 815 m spacing of `hf_lrt_3` (`docs/Transit_Travel_Time_Calibration_Report_Operator22.md`, METHODOLOGY §6w) | replaces the earlier 22–26 km/h assumption; the two forms bracket the answer until running and dwell are separated |
-| LRT peak headway | ~6 min | |
+| LRT commercial speed | **calibrated function** (Red Line, 22 Sep 2026) transferred through the Red Line's actual spacing: running 46 km/h + 49 s per stop underground, 31 km/h + 74 s at the surface, levelled to the observed means — 27.6 / 17.1 km/h on `hf_lrt_3`'s 815 m spacing (METHODOLOGY §6w rev. 2) | the report's 500 m reading (15.3 / 12.5 km/h) is superseded; `docs/Transit_Travel_Time_Calibration_Report_Operator22.md` |
+| LRT peak headway | 5 min (12 departures an hour) | assumption of 22 Sep 2026 |
 
 ## 2. Skims — mixed sourcing, not a single Google pull
 

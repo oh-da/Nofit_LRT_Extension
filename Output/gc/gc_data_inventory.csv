@@ -11,7 +11,7 @@ brt,ivt / wait / walk,derived (direct Metronit pairs),"GTFS Metronit lines 83001
 bus,fare,missing,—,fare tables of the metropolitan zones; integration with LRT
 lrt,ivt,derived (10 trunk areas),calibrated function on hf_lrt_3 stations,"alignment + stations of the segment Hamifrats → Tsomet Kiryat Ata and of the three branches (T1 Kiryat Ata – Nazareth, T2 Krayot, T3 Kiryat Yam); the regime (underground / ground) per section instead of the two pure scenarios; a running / dwell decomposition of the coefficients"
 lrt,walk,derived (10 trunk areas),TAZ centroid → nearest station,the same for the branch stations; a walking network instead of the 1.3 detour factor
-lrt,wait,assumed,headway 6 min / 2,the planned AM-peak headway per branch
+lrt,wait,assumed,headway 5 min (12 departures an hour) / 2,"the planned AM-peak headway per branch, confirmed by the operating plan"
 lrt,transfers,assumed (0 on the trunk),—,"the operating pattern: which branches are through-run, where the branches transfer"
 lrt,fare,missing,—,fare policy (integrated ticket with bus assumed)
 all,"weights (walk 2.0, wait 2.0, transfer 8)",assumed (plan defaults),LRT_CAPTURE_PLAN.md,"confirm against נוהל פר""ת; calibrate λ on the 2022 shares once the skims are complete"

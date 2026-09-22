@@ -1,0 +1,3 @@
+regime,scheduled sections,mean section length (m),mean scheduled section time (min),calibrated observed section time (min),fit: stop penalty (min),fit: min per km,running speed (km/h),level factor observed / scheduled,speed at the report's 500 m assumption (km/h),speed at the actual spacing (km/h)
+underground,4203,970.4994,2.0824,1.9608,0.8135,1.3075,45.8907,0.9416,15.2999,29.6972
+ground,10274,577.1596,2.3470,2.3927,1.2282,1.9385,30.9520,1.0195,12.5382,14.4731

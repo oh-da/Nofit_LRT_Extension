@@ -62,11 +62,12 @@ notes saying which of their conclusions are overtaken.
 | Calibrated survey vs ticketing transit on the V2 routes (Haifa segment, survey ÷ ticketing) | up 0.78–0.83 per route; down T2 0.92, T3 0.73, T1 0.66, network 0.63; Nazareth origin 1,070 vs 2,402 | §6z |
 | Car vs transit PCA on the V2 areas | 14 origins (≥ 10 sampled transit trips): overlap 0.55 vs transit repeatability 0.76 (car 0.79); 7 origins (≥ 20): 0.76 vs 0.80 — sample-limited; the superzone / TAZ × superzone evidence stands | §6s |
 | Busiest single link of any route | Kiryat Haim – Kiryat Bialik Center (T2), 10,144 towards Haifa, transit share 10 % | §6v |
-| LRT `hf_lrt_3`: 24 stations, 18.74 km S01 → S24, mean spacing 815 m | end to end 73.5 min underground / 89.7 min ground (distance form); 45.1 / 55.0 min (section form); underground −18.1 % | §6w |
+| LRT `hf_lrt_3`: 24 stations, 18.74 km S01 → S24, mean spacing 815 m | end to end **40.7 min underground (27.6 km/h) / 65.8 min ground (17.1 km/h)** — calibrated function transferred through the Red Line's actual spacing (revision 2); section form 45.1 / 55.0; the revision-1 500 m reading 73.5 / 89.7 superseded; underground −38 % | §6w |
 | Generalized-cost first fill on the trunk pairs (trip-weighted): car door-to-door / bus fastest-path IVT / LRT IVT underground, ground | 14.5 / 12.5 / 20.6, 25.1 min; survey bus door-to-door 27.1 min (2.3 × the network IVT) | §6x |
 | Bus level of service from the GTFS (Tuesday 2 June 2026): TAZs with peak-hour service / best-line grade A–B / with a Metronit stop | 719 of 781 / 454 / 60 (41 in the V2 areas, 20 of 25 areas) | §6aa |
 | Direct-service skim, trunk pairs: bus scheduled IVT, combined headway; Metronit | 13.3 min at 1.7 min (82 of 90 pairs); 10.0 min at 6 min (72 pairs) | §6aa |
-| Generalized cost after the GTFS skim, trunk pairs, trip-weighted: car / bus / Metronit / LRT underground | 14.5 / 24.9 / 21.2 (on its pairs) / 53.8 — the LRT dearer than the bus on every trunk pair, 9 generalized minutes of it station access | §6x addendum |
+| Generalized cost after the GTFS skim and the corrected LRT function, trunk pairs, trip-weighted: car / bus / Metronit / LRT underground, ground | 14.5 / 24.9 / 21.2 (on its pairs) / 43.9, 51.1 — LRT in-vehicle time (11.7 min) level with the bus timetable; the LRT dearer than the bus on every trunk pair by 7–31 generalized minutes, 18 of them station access (13.6 vs 4.7 min walk) | §6x addenda |
+| GTFS bus timetable against the survey's reported door-to-door time, same pairs | 23.0 vs 31.8 min (× 1.4): a fixed ≈ 9-minute overhead, 1.9 × under 3 km, 1.3 × at 3–20 km, 0.9 × beyond | §6x addendum 2 |
 
 What these support: relative questions — ranking alignments and segments, sizing the
 market between line areas, locating the demand, and the design-hour scaling of that
@@ -99,15 +100,15 @@ from the survey, bus from the speed network, LRT from step 25) and lists the gap
 (`Output/gc/gc_data_inventory.csv`, task list section E). Step 29 (§6aa) adds the bus and Metronit level of service per TAZ from the national GTFS
 (feed of 22 May 2026) and the direct-service skim that now feeds the bus components of §6x. The plain-language account of steps
 24–28 and of what every matrix product can be used for is
-`reports/V2_Corridor_LRT_Times_and_GC_Inputs_Report.docx` (revision 1, 22 September 2026).
+`reports/V2_Corridor_LRT_Times_and_GC_Inputs_Report.docx` (revision 1.1, 22 September 2026).
 Headline additions to the table below: on the tree network the trunk link Bazan-Hutsot – Tsomet Kiryat Ata carries
 16,231 potential movements towards Haifa in three hours (2,898 transit; peak hour
 8,792 / 1,710 with the route-specific factors of step 27); the Krayot branch link Kiryat Haim – Kiryat Bialik Center is the busiest
-single link at 10,144; the calibrated LRT function gives 73.5 min (underground) / 89.7 min
-(ground) end to end in distance form and 45 / 55 min in section form, and on the trunk pairs
-the LRT in-vehicle time (21–25 min) plus walk and wait is not shorter than today's surveyed
-bus door-to-door time (27 min) unless the section form holds — the LRT speed on this
-spacing is the decisive open input.
+single link at 10,144; the calibrated LRT function, once transferred through the Red Line's actual station
+spacing (revision 2 of step 25 — the report's 500 m assumption had halved the underground
+speed), gives 40.7 min (underground, 27.6 km/h) / 65.8 min (ground, 17.1 km/h) end to end;
+on the trunk pairs the LRT in-vehicle time (11.7 min underground) is level with the bus
+timetable and the LRT's remaining disadvantage in generalized cost is station access.
 
 Every published product, what it was built from, and its status:
 
@@ -1355,13 +1356,29 @@ because the coefficients embody dwell at 500 m spacing and this line's spacing a
 815 m. Area-to-area times for the ten trunk areas on the line use the station nearest each
 area's population + employment weighted centroid.
 
+**Revision 2 (22 September 2026) — the 500 m assumption checked.** The calibration report
+converts its per-section coefficients to speeds under a modelling assumption of 500 m
+between stops. The Red Line's own timetable is in the national GTFS (operator 22, routes
+34447 / 34448: 32 stops, 21.4 km, 70.6 min scheduled), with the distance at every stop:
+its underground sections average **970 m** and its surface sections **577 m**, so the
+calibrated 1.961 min per underground section is a 30 km/h section, not 15 km/h, and
+revision 1's distance form (which spread the section times over 500 m) made the
+underground scenario twice too slow. The function is now applied in a running-time +
+stop-penalty form fitted on the Red Line's 14,477 scheduled sections — underground
+0.81 min + 1.31 min/km (46 km/h running, 49-second stop penalty), surface 1.23 min +
+1.94 min/km (31 km/h, 74 seconds) — levelled to the calibration's observed means (× 0.94
+underground, × 1.02 surface); at Haifa's 815 m spacing a section takes 1.77 min underground
+(27.6 km/h) and 2.86 min at ground level (17.1 km/h). The section form is kept as the fast
+bound and the revision-1 nominal 500 m form as the superseded slow bound
+(`lrt_calibration_redline_spacing_check.csv`, `lrt_end_to_end_summary.csv`).
+
 **Results.** 18.94 km alignment; 24 stations spanning 18.74 km, spacing 354–1,396 m
-(mean 815). End to end S01 → S24: **73.5 min all underground / 89.7 min all ground** in the
-distance form (15.3 / 12.5 km/h), 45.1 / 55.0 min in the section form (24.9 / 20.4 km/h);
-underground saves 18.1 % on every pair in both forms. The plan's earlier 22–26 km/h assumption
-sits at the section-form end. Station S13 lies in TAZ 1509, which the V2 key does not list.
-Bazan-Hutsot (211), Tsomet Kiryat Ata (212) and the three branches have no station on this
-geometry.
+(mean 815). End to end S01 → S24: **40.7 min all underground (27.6 km/h) / 65.8 min all
+ground (17.1 km/h)** in the decomposed form; section form 45.1 / 55.0 min; nominal 500 m
+form 73.5 / 89.7 min (revision 1, superseded). Going underground saves 38 % (revision 1
+said 18 %: the two coefficients embed different section lengths). Station S13 lies in TAZ
+1509, which the V2 key does not list. Bazan-Hutsot (211), Tsomet Kiryat Ata (212) and the
+three branches have no station on this geometry.
 
 **Outputs.** `Output/lrt_v2/lrt_stations_hf_lrt_3.csv` / `.geojson`,
 `lrt_station_distances_km.csv`, `lrt_station_times_{all_underground,all_ground}.csv` and
@@ -1428,6 +1445,25 @@ stop, trip-weighted). The timetable's best direct bus is 18.6 min door to door a
 needed, delay) is the calibration margin for the bus cost. Status of the fill after the
 addendum: bus IVT 422 derived / 178 assumed, walk 625 derived, wait 420 derived / 203
 assumed, transfers 422 derived / 203 missing; `gc_area_v2_brt.csv` added.
+
+**Addendum 2, 22 September 2026 — the corrected LRT function, a 5-minute headway, and the
+GTFS skim against the survey.** With step 25 revision 2 the LRT in-vehicle time on the trunk
+pairs is 11.7 min all underground / 18.9 min all ground (trip-weighted; section form 13.3 /
+16.2), level with the bus timetable's 12.3 min; the LRT wait is now half a 5-minute headway
+(12 departures an hour). Partial generalized cost on the trunk pairs: LRT 43.9 / 51.1 against
+bus 24.9 and car 14.5 — the LRT dearer than the bus on every trunk pair by 7–31 generalized
+minutes (median 17), of which 18 are the access difference (13.6 min of walking to a station
+against 4.7 to a bus stop, weighted twice). Door to door the underground LRT (≈ 28 min)
+equals the bus users' reported time (27 min) and is 10 min slower than the timetable's best
+direct bus (17 min). The GTFS skim against the survey on the same pairs: timetable
+door-to-door 23.0 min (in-vehicle 15.8 + walk 5.3 + wait 1.9) against 31.8 reported, a
+ratio of 1.4 that is a fixed overhead of ≈ 9 minutes rather than proportional (1.9 × on
+pairs under 3 km, 1.3 × at 3–20 km, 0.9 × at 20–60 km; trunk-to-trunk 26.8 vs 17.4) — the
+transfer, the wait for the line actually needed and delay; only three pairs hold ≥ 3
+sampled trips, so it is a trip-level result by distance band
+(`bus_gtfs_vs_survey_summary.csv`, figure `gc_bus_gtfs_vs_survey.png`). The open item on
+the LRT side is no longer its speed but station access (24 stations against 12,845 stops):
+an access / feeder treatment and the branch geometry (E1).
 
 ## 6y. Step 27 — Peak-hour factors on the V2 routes (`Corridor_peak_hour_V2_routes.ipynb`)
 
