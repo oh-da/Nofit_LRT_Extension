@@ -190,10 +190,14 @@ Key facts driving the list (2017 trips-file hybrid, `Output/ths2017/study_taz/`)
 
 ## D. Growth to 2050 (after A–C)
 
-- [~] **D0. Rebuild the forecast branch from the current base** *(review §2, §13, §14)* —
+- [x] **D0. Rebuild the forecast branch from the current base** *(review §2, §13, §14)* —
       **method implemented 2026-09-21** in `Forecast_matrices_TAZ_2040_2050.ipynb`
       (`docs/FORECAST_METHODOLOGY_2040_2050.md`, METHODOLOGY §6u) and mechanics-tested on a
-      dry run; the four scenario sets await a run with the LFS zonal files. Original scope:
+      dry run; *done 2026-09-22 (step 23 scenario run — the LFS zonal files were pulled and
+      the notebook produced the four scenario sets BU_2040, BU_2050, HS_2040, HS_2050 under
+      `Output/forecast_taz/{scenario}/`; car and transit margins converge to 10⁻⁶, taxi-type
+      stops at 500 iterations with 10–15 % row-margin error; step 32 then reran the LRT
+      capture on the four sets, METHODOLOGY §6ad)*. Original scope:
       `Vintage_alignment_2022` → `Forecast_matrices_2040_2050` → `Base_mode_shares_2022` →
       `NoBuild_and_LRT_market` → `LRT_alignment_markets` currently consume the historical
       25-area composite `Output/transit/all_adjusted_area_2022.csv`. Re-point them at
