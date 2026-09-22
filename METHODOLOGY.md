@@ -68,6 +68,7 @@ notes saying which of their conclusions are overtaken.
 | Direct-service skim, trunk pairs: bus scheduled IVT, combined headway; Metronit | 13.3 min at 1.7 min (82 of 90 pairs); 10.0 min at 6 min (72 pairs) | §6aa |
 | Generalized cost after the GTFS skim and the corrected LRT function, trunk pairs, trip-weighted: car / bus / Metronit / LRT underground, ground | 14.5 / 24.9 / 21.2 (on its pairs) / 43.9, 51.1 — LRT in-vehicle time (11.7 min) level with the bus timetable; the LRT dearer than the bus on every trunk pair by 7–31 generalized minutes, 18 of them station access (13.6 vs 4.7 min walk) | §6x addenda |
 | GTFS bus timetable against the survey's reported door-to-door time, same pairs | 23.0 vs 31.8 min (× 1.4): a fixed ≈ 9-minute overhead, 1.9 × under 3 km, 1.3 × at 3–20 km, 0.9 × beyond | §6x addendum 2 |
+| Observed bus in-vehicle time (trips routed over the May 2026 link speeds) ÷ scheduled | per trip 1.09 (Metronit 0.87); hops < 500 m 1.00, > 2 km 1.42 — the link speeds include dwell, the long arterial hops run slower than the timetable; trunk pairs 12.7 vs 10.4 min demand-weighted | §6ab |
 
 What these support: relative questions — ranking alignments and segments, sizing the
 market between line areas, locating the demand, and the design-hour scaling of that
@@ -98,9 +99,11 @@ all-underground and an all-ground scenario; step 26 (§6x) inventories the
 generalized-cost components on the 25 areas, fills the skims that the data supports (car
 from the survey, bus from the speed network, LRT from step 25) and lists the gaps
 (`Output/gc/gc_data_inventory.csv`, task list section E). Step 29 (§6aa) adds the bus and Metronit level of service per TAZ from the national GTFS
-(feed of 22 May 2026) and the direct-service skim that now feeds the bus components of §6x. The plain-language account of steps
+(feed of 22 May 2026) and the direct-service skim that feeds the bus components of §6x; step 30
+(§6ab) routes the same trips over the measured May 2026 link speeds for an observed in-vehicle
+time, which §6x now uses. The plain-language account of steps
 24–28 and of what every matrix product can be used for is
-`reports/V2_Corridor_LRT_Times_and_GC_Inputs_Report.docx` (revision 1.1, 22 September 2026).
+`reports/V2_Corridor_LRT_Times_and_GC_Inputs_Report.docx` (revision 1.2, 22 September 2026).
 Headline additions to the table below: on the tree network the trunk link Bazan-Hutsot – Tsomet Kiryat Ata carries
 16,231 potential movements towards Haifa in three hours (2,898 transit; peak hour
 8,792 / 1,710 with the route-specific factors of step 27); the Krayot branch link Kiryat Haim – Kiryat Bialik Center is the busiest
@@ -1582,6 +1585,45 @@ synthetic dry run remains under `Output/gtfs/dry_run/`.
 **Outputs.** `Output/gtfs/bus_los_taz.csv` (781 rows), `Output/gtfs/bus_direct_skim_area_v2.csv`,
 figure `gtfs_bus_los_taz.png`.
 
+## 6ab. Step 30 — Observed bus in-vehicle time: GTFS trips routed over the measured bus link speeds (`GTFS_bus_observed_times.ipynb`)
+
+**Purpose.** Replace the timetable's in-vehicle time of §6aa with an observed one: every
+morning-peak GTFS trip's stop sequence is routed over the May 2026 bus-speed street network
+(§1: `Input/BusSpeedData`, weekday 3, 07:00–08:00, speeds by link and direction) and the
+running time along the measured links is summed, then compared with the schedule. The
+implementation was delegated to a lighter model against a written specification and
+reviewed; the undirected second pass and the ratio-of-sums statistic were added in review.
+
+**Method.** Study-area stops (step 29's intermediates) snapped to the nearest intersection
+node (median 24 m); the 15,929 distinct consecutive stop pairs of the 7,324 trips routed
+once each by shortest length on the directed graph (one dijkstra per source node, 6 s in
+all); per segment the length on links with a measured speed and its time, the uncovered
+remainder extrapolated at the segment's own covered speed. Segments whose directed path is
+unreachable or implausible (> 2.5 × the straight line or > 8 km — mostly short hops where a
+stop snapped to the far end of a one-way link forces a loop round the block) are routed
+again ignoring link direction and accepted if plausible; the rest (2 %) take the scheduled
+time, flagged. Trip times are cumulated along the stop sequence; the area skim uses §6aa's
+pair definition (first stop in the origin area to the first later stop in the destination
+area, departures 06:00–09:00; medians per pair; bus and Metronit) and reproduces §6aa's
+scheduled values to 0.003 min.
+
+**Results.** 84 % of trip-segments route in the directed graph, 13.5 % more after the
+undirected pass, 2 % fall back; 94 % of routed length carries a measured speed and 97 % of
+the area-pair segment length is observed. Observed ÷ scheduled in-vehicle time: per trip
+1.09 (median; p10 0.86, p90 1.42), Metronit 0.87, other buses 1.10; per area pair 0.99
+(Metronit pairs 0.86). By segment length (ratio of trip-segment-weighted sums): under 500 m
+— 65 % of all hops — 1.00, 500–1,000 m 1.11, 1–2 km 1.25, over 2 km 1.42: the measured link
+speeds therefore include dwell (short hops match the schedule, dwell and all), and the long
+arterial and interurban hops run slower than the timetable in the 07:00–08:00 hour.
+Demand-weighted on the 82 direct trunk pairs: 12.7 min observed against 10.4 scheduled;
+Metronit 8.6 against 7.8 on its 72 trunk pairs; long pairs (> 30 scheduled minutes) 0.88 ×
+the padded interurban timetables, except Nazareth → Haifa trunk at 8–9 min above schedule
+(62 min to Bat Galim against 54). Step 26 takes the observed values (the scheduled ones kept
+as `ivt_scheduled`).
+
+**Outputs.** `Output/gtfs/bus_segments_observed.csv`, `bus_trips_observed.csv.gz`,
+`bus_observed_skim_area_v2.csv`; figure `gtfs_bus_observed_vs_scheduled.png`.
+
 ---
 
 ## 7. Output inventory (`Output/`)
@@ -1633,7 +1675,7 @@ figure `gtfs_bus_los_taz.png`.
 | `forecast/lrt_market_tiers_{MainCorridor,FullLength}.csv`, `forecast/lrt_alignment_market_summary.csv` | 25×25 ×2 / 10 rows | `LRT_alignment_markets.ipynb` | Market tiers per OD (2 = core one-seat, 1 = transfer-influenced, 0 = outside) for the two alignment scenarios (`Input/lrt_alignment_flags.csv`: Main = areas 1–13 + influenced 24–28; Full = 1–19, 23), and market counts per alignment × scenario-year with the no-build transit conversion base |
 | `corridor_v2/*` | 25×25; link tables | Steps 24, 27, 28 | V2 area matrices per layer, per-route and tree-network link flows (three-hour and peak-hour), route summary, comparison with the 18-area profile; the V2 peak-hour factors; the survey-vs-ticketing comparison on the V2 routes |
 | `lrt_v2/*` | 24 stations; 24×24; 10×10 | Step 25 | Station table (CSV + GeoJSON), station distances, station-to-station times for the two scenarios in distance and section form, line profile, representative stations and area IVT |
-| `gtfs/*` | 781 rows; area pairs | Step 29 | Bus and BRT level of service per TAZ from the national GTFS, the direct-service skim between the V2 areas; `dry_run/` until the LFS archive is pulled |
+| `gtfs/*` | 781 rows; area pairs; 15,929 segments | Steps 29–30 | Bus and BRT level of service per TAZ from the national GTFS, the direct-service skim between the V2 areas (scheduled), the intermediates, and the observed skim from the trips routed over the measured link speeds |
 | `gc/*` | 25×25; long | Step 26 | Car / bus / LRT skims, LRT access, generalized-cost component table with status, partial GC matrices, cell status, trunk-pair comparison, the data-gap inventory |
 | `figures/` | — | Steps 1b–3 | Scatter plots, CV curves, λ curves, R_AB heatmap |
 
@@ -1781,6 +1823,7 @@ jupyter nbconvert --to notebook --execute --inplace notebooks/current/LRT_line_s
 jupyter nbconvert --to notebook --execute --inplace notebooks/current/GC_data_inventory_and_skims.ipynb
 # bus level of service from the national GTFS (step 29; needs git lfs pull --include="Input/GTFS/israel-public-transportation.zip", else a dry run); run it BEFORE step 26, which reads its skim
 jupyter nbconvert --to notebook --execute --inplace notebooks/current/GTFS_bus_LOS_TAZ.ipynb
+jupyter nbconvert --to notebook --execute --inplace notebooks/current/GTFS_bus_observed_times.ipynb   # step 30: needs step 29's intermediates and the bus-speed LFS file; run before step 26
 
 # regression test of the hybrid branch (committed outputs only)
 jupyter nbconvert --to notebook --execute --inplace notebooks/diagnostics/Hybrid_superzone_conservation_test.ipynb

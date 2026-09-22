@@ -147,6 +147,7 @@ anywhere inside the repository.
 | `Corridor_peak_hour_V2_routes.ipynb` | **current** | Peak-hour factors re-estimated on the V2 route sequences and the tree network (car by direction on every route, 0.62–0.65 up / 0.57–0.58 down, network 0.56 / 0.52; bus and taxi-type on the study-area factors); step 24 applies them (§6y) |
 | `Corridor_profile_V2_survey_vs_ticketing.ipynb` | **current** | The calibrated-survey vs ticketing-based transit profiles on the V2 routes and the tree network, from the TAZ-level products: up direction agrees (0.78–0.83), down direction route-specific (T2 0.92, T1 0.66), the Nazareth allocation and the alighting frame still the drivers (§6z) |
 | `GTFS_bus_LOS_TAZ.ipynb` | **current** | Bus level of service per TAZ from the national GTFS (stops, lines, peak-hour departures and combined headway with a TCQSM grade, direct reach, stop access) for all buses and for the **Metronit BRT** lines (codes 83001–83005) separately, with a BRT-access flag per TAZ; a direct-service in-vehicle time and headway skim between the V2 areas that now feeds the bus components of the generalized cost (§6aa); feed of 22 May 2026, Tuesday 2 June; 719 of 781 TAZs served in the peak hour, 60 with a Metronit stop; the Metronit codes in the feed are 83001, 67002, 67003, 62004, 52005 |
+| `GTFS_bus_observed_times.ipynb` | **current** | The morning-peak GTFS trips routed stop by stop over the May 2026 bus-speed street network: observed in-vehicle time per segment, trip and V2 area pair against the timetable — 1.09 × per trip (Metronit 0.87), short hops on schedule, long arterial hops 1.4 × slower; the observed skim now feeds step 26 (§6ab) |
 | `LRT_line_stations_travel_time.ipynb` | **current** | The planned line `hf_lrt_3` and its 46 platform points → 24 stations with chainage, TAZ and V2 area; station-to-station in-vehicle times with the calibrated function (1.961 min per underground section, 2.393 at ground level) transferred to Haifa's spacing through the Red Line's running-time / stop-penalty decomposition from the GTFS — 40.7 min underground / 65.8 min ground end to end (revision 2; the report's 500 m reading had halved the underground speed); area-level times for the ten trunk areas (§6w) |
 | `GC_data_inventory_and_skims.ipynb` | **current** | Generalized-cost components on the V2 areas: car door-to-door from the survey, bus fastest-path IVT on the May 2026 speed network (2.1–2.3 × below the survey's door-to-door), LRT IVT + walk access from step 25; partial GC matrices with a status per cell and the data-gap inventory; bus components from the GTFS skim, the Metronit as its own mode, the timetable checked against the survey's reported times (× 1.4, a fixed ≈ 9-minute overhead); with the corrected LRT function the LRT's in-vehicle time is level with the bus and its remaining disadvantage is station access (§6x) |
 | `THS_2017_trip_generation.ipynb` | current | Per-person AM-peak generation rates on the trips-file source (overall ≈ 0.83) |
@@ -207,7 +208,8 @@ anywhere inside the repository.
   scenarios, the generalized-cost inventory and first fill, and — Part D — what every matrix
   product in the repository can and cannot be used for; **revision 1.1** corrects the LRT travel
   times (the calibration's 500 m assumption checked against the Red Line's timetable) and adds
-  the bus level of service from the GTFS, the Metronit tagging and the timetable-vs-survey check
+  the bus level of service from the GTFS, the Metronit tagging and the timetable-vs-survey check;
+  **revision 1.2** adds the observed bus running times of step 30
 - `reports/Survey_Matrices_Car_Bus_Rail_Report.docx` — **revision 2.1, 21 September 2026**: the
   current base in plain language (survey-only matrix, tests, segmented bus calibration,
   2022 layers, corridor potential movements and their peak hour, what changed since revision 1 and why)
@@ -241,6 +243,6 @@ Run order for the current branch, all under `notebooks/current/`: `THS_2017_two_
 `Corridor_profile_hybrid_vs_ticketing` → `Corridor_peak_hour_2022` → `Final_matrices_2022` →
 `Forecast_matrices_TAZ_2040_2050` (see METHODOLOGY §9); then, on the new inputs,
 `Corridor_peak_hour_V2_routes` → `Corridor_flow_profile_V2_routes` → `Corridor_profile_V2_survey_vs_ticketing`
-→ `LRT_line_stations_travel_time` → `GTFS_bus_LOS_TAZ` → `GC_data_inventory_and_skims`
-(the last two need the GTFS and bus-speed LFS files; step 26 reads step 29's skim).
+→ `LRT_line_stations_travel_time` → `GTFS_bus_LOS_TAZ` → `GTFS_bus_observed_times` → `GC_data_inventory_and_skims`
+(the last three need the GTFS and bus-speed LFS files; step 26 reads the skims of steps 29 and 30).
 `notebooks/diagnostics/Hybrid_superzone_conservation_test` runs on committed outputs alone.

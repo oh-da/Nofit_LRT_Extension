@@ -149,6 +149,8 @@ Key facts driving the list (2017 trips-file hybrid, `Output/ths2017/study_taz/`)
       pairs) without a direct service; observed AVL running times instead of the timetable;
       the 8-minute gap between the timetable's best direct bus (18.6 min door to door on the
       trunk pairs) and the survey's reported 27.1 min as the bus calibration margin.
+      *Observed running times done 2026-09-22 (step 30, METHODOLOGY §6ab): the trips routed over
+      the May 2026 link speeds; the link speeds include dwell; step 26 uses the observed skim.*
 - [ ] **E4. Money components** — fare tables (bus, LRT, integration), parking tariffs by
       destination area (the survey's `parkType` gives the paid share as a proxy), car
       operating cost per km, and the value of time from נוהל פר"ת by purpose. Confirm the
