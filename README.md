@@ -200,6 +200,11 @@ anywhere inside the repository.
 
 ## Reports
 
+- `reports/V2_Corridor_LRT_Times_and_GC_Inputs_Report.docx` — **revision 1, 22 September 2026**: the
+  corridor on the V2 aggregation (three routes and the tree network, peak hour, survey vs
+  ticketing), the LRT line's station-to-station times under the underground and ground-level
+  scenarios, the generalized-cost inventory and first fill, and — Part D — what every matrix
+  product in the repository can and cannot be used for
 - `reports/Survey_Matrices_Car_Bus_Rail_Report.docx` — **revision 2.1, 21 September 2026**: the
   current base in plain language (survey-only matrix, tests, segmented bus calibration,
   2022 layers, corridor potential movements and their peak hour, what changed since revision 1 and why)
