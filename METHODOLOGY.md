@@ -55,6 +55,12 @@ notes saying which of their conclusions are overtaken.
 | Car vs transit destination structure (survey PCA, superzones) | overlap 0.75 (0.83 on well-sampled origins) against transit repeatability 0.81 (0.86): the same dominant structure | §6s |
 | … where transit differs from car | less local (self-containment 0.45 vs 0.62), share moved to the Haifa core (+2–3 points; common direction p = 0.04 at superzones, p = 0.002 with TAZ origins) | §6s |
 | … by resolution | corridor areas: at transit's noise floor (0.57 vs 0.65); TAZ × superzone: 0.75 vs 0.89 — clearly different; TAZ × TAZ: 0.27 vs 0.55 — only the coarse geography shared | §6s |
+| V2 aggregation (25 areas, 174 TAZs): trips with both ends in the areas — car / bus / taxi-type / rail | 156,944 / 18,788 / 8,323 / 51 | §6v |
+| Busiest transit link per route, three hours (up / down) | T1 1,379 / 1,489; T2 1,391 / 1,629; T3 1,437 / 1,410 — all on the Haifa trunk (Ein Hayam – Bat Galim up, Matam – Hof Carmel down) | §6v |
+| Tree network (all 25 areas on their unique path): Bazan-Hutsot – Tsomet Kiryat Ata towards Haifa | 16,231 all layers / 2,898 transit in three hours; 9,956 / 1,711 in the peak hour | §6v |
+| Busiest single link of any route | Kiryat Haim – Kiryat Bialik Center (T2), 10,144 towards Haifa, transit share 10 % | §6v |
+| LRT `hf_lrt_3`: 24 stations, 18.74 km S01 → S24, mean spacing 815 m | end to end 73.5 min underground / 89.7 min ground (distance form); 45.1 / 55.0 min (section form); underground −18.1 % | §6w |
+| Generalized-cost first fill on the trunk pairs (trip-weighted): car door-to-door / bus fastest-path IVT / LRT IVT underground, ground | 14.5 / 12.5 / 20.6, 25.1 min; survey bus door-to-door 27.1 min (2.3 × the network IVT) | §6x |
 
 What these support: relative questions — ranking alignments and segments, sizing the
 market between line areas, locating the demand, and the design-hour scaling of that
@@ -71,6 +77,28 @@ purpose-blind allocation, and the peak-hour values are departure-hour potential
 movements between line areas with no station access, route choice or off-line trips.
 The forecast branch is rebuilt on this base by step 23 (§6u, `docs/FORECAST_METHODOLOGY_2040_2050.md`);
 the four scenario sets are produced once the LFS scenario files are pulled.
+
+**Update, 22 September 2026 (steps 24–26).** Three inputs were added — the **V2 corridor
+aggregation** (`Input/Corridor_TAZ_Agg_V2.xlsx`: 25 areas, 174 TAZs, three route orders
+T1 Nazareth / T2 Krayot / T3 Kiryat Yam sharing a twelve-area trunk), the **planned LRT
+geometry** (`Input/GeneralHalufa/`: alignment `hf_lrt_3` and 46 platform points) and the
+**May 2026 bus-speed street network** (`Input/BusSpeedData/`, LFS) — together with a
+calibrated stop-to-stop travel-time function
+(`docs/Transit_Travel_Time_Calibration_Report_Operator22.md`). Step 24 (§6v) re-analyses
+the corridor potential movements on the V2 areas per route and as a tree network; step 25
+(§6w) turns the geometry into a 24-station table and station-to-station times for an
+all-underground and an all-ground scenario; step 26 (§6x) inventories the
+generalized-cost components on the 25 areas, fills the skims that the data supports (car
+from the survey, bus from the speed network, LRT from step 25) and lists the gaps
+(`Output/gc/gc_data_inventory.csv`, task list section E). Headline additions to the table
+below: on the tree network the trunk link Bazan-Hutsot – Tsomet Kiryat Ata carries
+16,231 potential movements towards Haifa in three hours (2,898 transit; peak hour
+9,956 / 1,711); the Krayot branch link Kiryat Haim – Kiryat Bialik Center is the busiest
+single link at 10,144; the calibrated LRT function gives 73.5 min (underground) / 89.7 min
+(ground) end to end in distance form and 45 / 55 min in section form, and on the trunk pairs
+the LRT in-vehicle time (21–25 min) plus walk and wait is not shorter than today's surveyed
+bus door-to-door time (27 min) unless the section form holds — the LRT speed on this
+spacing is the decisive open input.
 
 Every published product, what it was built from, and its status:
 
@@ -94,6 +122,9 @@ Every published product, what it was built from, and its status:
 | `forecast_taz/{BU,HS}_{2040,2050}/*` (after the LFS scenario files are pulled; `forecast_taz/dry_run/` here) | step 23 | `final_2022/` layers × scenario zonal files | 778 TAZ / 36 SZ / 28 areas | car; transit; taxi-type; total | 2040 / 2050 | **current method — demographic reference; scenario sets pending the LFS run** |
 | `forecast/all_modes_area_*`, `share_*`, `nobuild_*`, `lrt_market_*`, `lrt_alignment_*` | forecast notebooks | `transit/all_adjusted_area_2022.csv` | 25 areas | composite | 2040 / 2050 | **historical** — superseded by step 23 |
 | `demographics/*` | scenario comparison | zonal forecast files (LFS) | 28 areas | — | 2040 / 2050 | current input analysis |
+| `corridor_v2/*` | step 24 | the step-16 TAZ layers × `Input/Corridor_TAZ_Agg_V2.xlsx`; step-20 peak factors | 25 V2 areas, 3 routes + tree network | car; bus; taxi-type; rail; transit; total | 2022 | **current** — three-hour and peak-hour potential movements |
+| `lrt_v2/*` | step 25 | `Input/GeneralHalufa/` geometry × the calibrated travel-time function | 24 stations; 10 trunk areas | LRT in-vehicle time, two scenarios × two forms | planned line | **current** — trunk only (no branches) |
+| `gc/*` | step 26 | survey car times, `Input/BusSpeedData/` (LFS), `lrt_v2/` | 25 V2 areas | car; bus; LRT (2 scenarios) — generalized-cost components with status | 2017/18 (car), May 2026 (bus), planned (LRT) | **current** — partial fill; money components missing |
 
 The 25 GS zones (`Input/TAZ_GSnew.csv`) and the 25 retained research areas of the
 forecast tables are different geographies with the same matrix dimension; files are
@@ -124,7 +155,10 @@ validation against counts.
 | `../TAZ_GSnew.csv` (in `Input/`) | TAZ → GS zoning | 781 TAZs → 25 GS zones; covers every study TAZ including 105 |
 | `../taz_keys_from_shapefile.csv` (in `Input/`, regular git) | Substitute for the keys table when only its LFS pointer is present | Built from `Input/TAZ_North/TAZ_North.shp` (`TAZ_NUMBER`, `SUPERZONE`, `ARZI_1270`): the same 778 TAZs, `SZ_NEW` identical for all of them, `TAZ_1270` identical except TAZ 3602, which the keys table places alone in zone 101000 (applied as an override). Verified: identical 396-zone set to `ths2017/tests/geh_scale_audit_1250.csv`, identical sibling partition to the committed cellular probability matrix, identical study-area trip filter (1,197 sampled / 116,473 weighted excluded). Steps 15, 16 and 18 fall back to it automatically |
 | `../sz_localities.csv` (in `Input/`) | Two main localities per superzone | Extracted from the keys table's `CITY` field (population-weighted) for labelling only |
-| `../trips_ths_2017.xlsx` (in `Input/`) | THS trips file: one row per activity per person per survey day | 146,394 rows, 16,401 persons (same panel as the activities file), `SurveyDay` 1/2; `placeno` orders activities per `PerID3`, `actTaz` locates them, `Dep_h` is the hour of departing the activity, `mode` is pre-aggregated (CAR/TRANSIT/RAIL/OTHER, `IRR` = first activity), `new_wf` carries the weight |
+| `../trips_ths_2017.xlsx` (in `Input/`) | THS trips file: one row per activity per person per survey day | 146,394 rows, 16,401 persons (same panel as the activities file), `SurveyDay` 1/2; `placeno` orders activities per `PerID3`, `actTaz` locates them, `Dep_h` is the hour of departing the activity, `mode` is pre-aggregated (CAR/TRANSIT/RAIL/OTHER, `IRR` = first activity), `new_wf` carries the weight; `TrvlTime` / `TrvlDist` are the reported door-to-door minutes and km (used by step 26) |
+| `../Corridor_TAZ_Agg_V2.xlsx` (in `Input/`, added 22 Sep 2026) | The V2 corridor aggregation | Sheet `AreaCodes`: 25 areas (`AggCode` 201–217 trunk + Nazareth branch, 101–104 Krayot branch, 301–304 Kiryat Yam branch) with three route orders `Order_T1` / `Order_T2` / `Order_T3` (0 = not on the route); sheet `TazAgg`: 174 TAZ → `AggCode` pairs, all present in the 778-TAZ matrices, none duplicated. TAZ 1509 (LRT station S13) is not listed |
+| `../GeneralHalufa/hf_lrt_3.shp`, `station_hf_lrt_3.geojson` (in `Input/`, added 22 Sep 2026) | Planned LRT alignment and stations | One WGS 84 polyline of 18.94 km from Hamifrats to Tirat Carmel; 46 platform points (`halufa` attribute 1 / 2 / 999 / null — all points lie within 80 m of the line and are used) forming 24 stations. Projected to Israel TM Grid (EPSG:2039) for all distances |
+| `../BusSpeedData/Streets/Streets.shp`, `std_202605.csv` (in `Input/`, CSV in LFS, added 22 Sep 2026) | Bus link speeds, May 2026 | 161,534 national street links (Israel TM Grid; `USERID`, `DIR` = 1 with / −1 against / 0 both directions); 157,618 speed records joined on `USERID` (99.9 % match), 336 columns `d_{weekday}_h_{hour}_{AB,BA}` in km/h with 0 = no bus observation. `Readme.txt`: weekday 3, 07:00–08:00 = `d_3_h_7_AB` / `d_3_h_7_BA`. 54,507 links (5,632 km) fall in the study area, 48,092 with a speed |
 
 **Data-version note.** The activities file currently in the repository contains more
 records than the file used by the original `THS_2018_MTX.ipynb` Colab run: identical
@@ -1227,6 +1261,132 @@ they will appear under `Output/forecast_taz/{BU_2040,BU_2050,HS_2040,HS_2050}/`.
 `corridor_link_flows_scenarios.csv`, `landuse_indices.csv`; figure
 `forecast_taz_profiles_{mode}.png`.
 
+## 6v. Step 24 — Corridor potential movements on the V2 aggregation, three routes (`Corridor_flow_profile_V2_routes.ipynb`)
+
+**Purpose.** Re-run the corridor profile (steps 17 and 20) on the new aggregation
+`Input/Corridor_TAZ_Agg_V2.xlsx`: 25 areas from 174 TAZs with three route orders — **T1**
+Tirat Carmel → Haifa → Tsomet Kiryat Ata → Kiryat Ata → Shefaram → Hamovil → Nazareth (17
+areas), **T2** the same trunk → Kiryat Haim → Kiryat Bialik Center → Kiryon → Tsur Shalom
+(16), **T3** the same trunk → Kiryat Haim West → Kiryat Yam B+C → Kiryat Yam A → Savyoney
+Yam (16). The twelve trunk areas (201–212) are common; the routes branch at Tsomet Kiryat Ata.
+
+**Method.** The step-16 TAZ layers are aggregated to the 25 areas (`{car,bus,taxi,rail,
+transit,total}_2022_area_v2.csv`). Per route, as in §6o: every OD pair with both ends on
+the route loads every link between them in its direction — **up** = away from Tirat Carmel
+(the old 1 → 23), **down** = towards it. Peak-hour factors of §6r applied per layer and
+direction unchanged (car 0.661 up / 0.626 down, bus 0.590, taxi-type 0.580, rail = bus).
+A fourth view loads every pair of the 25 areas on its unique path over the **tree** (trunk +
+three branches), so the trunk carries the trunk-to-branch trips of all three branches at once
+and branch-to-branch trips load the branch links. Same caveats as §6o / §6r: potential
+movements, not loads. The V2 TAZ set shares 143 TAZs with the earlier 28-area set, drops 62
+(Hadar Carmel, Neve Yosef, Kiryat Nahum, Kiryat Ata East, the influence areas …) and adds 31
+(all of Nazareth city, Shefaram, Neot Peres), so totals are not one-to-one comparable with
+§6o; the Haifa-segment link values are.
+
+**Results.** Trips with both ends in the 25 areas: 184,106 (car 156,944, bus 18,788,
+taxi-type 8,323, rail 51). Route-internal trips: T1 123,906 (transit 12,546), T2 73,964
+(7,711), T3 55,519 (7,054). Busiest transit link on every route is on the Haifa trunk —
+Ein Hayam – Bat Galim-Kiryat Eliezer up (1,379–1,437; peak hour 814–848) and Matam-Neot
+Peres – Hof Carmel-Neve David down (1,410–1,629; 833–962). The T1 branch is one-directional
+in the morning (Tsomet Kiryat Ata – Kiryat Ata North 5,809 down / 785 up; 1,174 transit down,
+share 20 %; Shefaram – Nazareth links 650–920 transit down at a 20–23 % share, the highest
+in the set). The Krayot branch holds the busiest single link of any route, Kiryat Haim –
+Kiryat Bialik Center at 10,144 down (peak hour 6,239) with a 10 % transit share; T3's branch
+peaks at 4,896 down on Tsomet Kiryat Ata – Kiryat Haim West (936 transit, 19 %). On the tree
+network the trunk link Bazan-Hutsot – Tsomet Kiryat Ata carries 16,231 down (peak hour 9,956)
+and 2,898 transit (1,711) — the inflow of all three branches — against 4,958 / 1,075 on the
+same link in the T1 profile alone; the Haifa-side trunk changes little between views (7,183
+up on Ein Hayam – Bat Galim vs 6,878–7,036 per route). The 14,688 branch-to-branch trips (8 %)
+load only branch links. Down dominates every link east of Bat Galim; up dominates only Tirat
+Carmel – Ein Hayam. Transit share of link flow on the trunk: 17–33 % down, 10–22 % up.
+Against the earlier 18-area profile (busiest transit link 1,661 / 1,650): per route
+1,379–1,437 / 1,410–1,629, network 1,518 / 2,898.
+
+**Outputs.** `Output/corridor_v2/area_legend_v2.csv`, `{layer}_2022_area_v2.csv`,
+`corridor_v2_link_flows_long.csv` (route × link × direction × layer, three-hour and
+peak-hour), `corridor_v2_link_flows_wide.csv`, `corridor_v2_route_summary.csv`,
+`corridor_v2_network_link_flows.csv`, `corridor_v2_vs_earlier_profile.csv`; figure
+`corridor_v2_route_profiles_2022.png`.
+
+## 6w. Step 25 — LRT line and stations: stop-to-stop times, underground vs ground level (`LRT_line_stations_travel_time.ipynb`)
+
+**Purpose.** Turn the planned geometry (`Input/GeneralHalufa/`) into a station table and
+station-to-station in-vehicle times under two scenarios — all stations underground, all at
+ground level — with the calibrated function of
+`docs/Transit_Travel_Time_Calibration_Report_Operator22.md` (OperatorRef 22, 132 Thursdays
+May 2023 – September 2026, 26,653 clean journeys):
+`T [min] = 1.960792 × N_UG + 2.392690 × N_Other` per 500 m section, i.e. 3.921585 min/km
+underground and 4.785381 min/km at ground level (15.30 / 12.54 km/h, dwell included). A
+section is underground only when both its stations are, so the two scenarios are the two
+pure regimes.
+
+**Method.** WGS 84 → Israel TM Grid; the 46 platform points are projected onto the
+alignment (all within 80 m) and grouped into stations where consecutive chainages are
+< 150 m apart (22 pairs + 2 singles = 24 stations, S01 at the Tirat Carmel end to S24 at
+Hamifrats); chainage runs from the Tirat Carmel end to match the V2 route order; TAZ by
+point-in-polygon on `TAZ_North.shp`, V2 area by the TazAgg key. Two forms of the function
+are kept: the **distance form** (report §6; time ∝ actual inter-station distance) as the
+primary value and the **section form** (one calibrated section per link) as the sensitivity,
+because the coefficients embody dwell at 500 m spacing and this line's spacing averages
+815 m. Area-to-area times for the ten trunk areas on the line use the station nearest each
+area's population + employment weighted centroid.
+
+**Results.** 18.94 km alignment; 24 stations spanning 18.74 km, spacing 354–1,396 m
+(mean 815). End to end S01 → S24: **73.5 min all underground / 89.7 min all ground** in the
+distance form (15.3 / 12.5 km/h), 45.1 / 55.0 min in the section form (24.9 / 20.4 km/h);
+underground saves 18.1 % on every pair in both forms. The plan's earlier 22–26 km/h assumption
+sits at the section-form end. Station S13 lies in TAZ 1509, which the V2 key does not list.
+Bazan-Hutsot (211), Tsomet Kiryat Ata (212) and the three branches have no station on this
+geometry.
+
+**Outputs.** `Output/lrt_v2/lrt_stations_hf_lrt_3.csv` / `.geojson`,
+`lrt_station_distances_km.csv`, `lrt_station_times_{all_underground,all_ground}.csv` and
+`…_section_form.csv`, `lrt_line_profile.csv`, `lrt_area_representative_station.csv`,
+`lrt_area_ivt_{all_underground,all_ground}.csv`; figure `lrt_line_profile_hf_lrt_3.png`.
+
+## 6x. Step 26 — Generalized cost on the V2 areas: data inventory, first-fill skims, gaps (`GC_data_inventory_and_skims.ipynb`)
+
+**Purpose.** For the capture model's formula (`docs/LRT_CAPTURE_PLAN.md`:
+`GC = IVT + 2·walk + 2·wait + 8·transfers + (fare + parking)/VOT`), establish component by
+component and mode by mode what exists, what can be derived now, what is assumed and what is
+missing, and fill a 25 × 25 matrix per component with the status recorded per cell.
+
+**Method.** *Car IVT*: AM car trips of the trips file with door-to-door `TrvlTime`,
+allocated to V2 area pairs with the population / employment split of §6r (2,387 sampled
+trips, 296 of 625 pairs, 35 with ≥ 10), smoothed by an empirical-Bayes blend (k = 5) with
+the weighted fit *t* = 7.0 + 1.85 × centroid km; intra-area 7.0 min. *Bus IVT*: the street
+network of `Input/BusSpeedData` clipped to the study area (54,507 links, 48,092 with a
+weekday-3 07:00–08:00 bus speed; `DIR` read as 1 = with, −1 = against, 0 = both — 99.9 % of
+the speed records agree), Dijkstra on bus-served links within the giant strongly-connected
+component (37,694 nodes) between the nearest served nodes to the area centroids, connector
+legs at 15 km/h — a lower bound with no wait, transfer or stops. *LRT*: step-25 area times
+on the ten trunk areas; walk access from every V2 TAZ centroid to the nearest station
+(straight line × 1.3 at 4.8 km/h), population-weighted for access and employment-weighted
+for egress per area; wait = half the plan's 6-minute headway; 0 transfers. *Assumed
+placeholders*: bus walk 8 min, bus headway 10 min, VOT 30 ILS/h; fares and parking enter at
+zero and are flagged missing.
+
+**Results.** Trip-weighted on the 90 trunk pairs: car door-to-door 14.5 min; bus fastest-path
+IVT 12.5 min against **27.1 min door-to-door in the survey** (2.26 ×; 2.12 × on all V2 pairs)
+— walk, wait, stops and detours double the running time; LRT IVT **20.6 min underground /
+25.1 min ground** (distance form; 13.3 / 16.2 section form), access + egress walk 13.6 min.
+Partial generalized cost (IVT + 2·walk + 2·wait): LRT 53.8 / 58.4, bus 38.5, car 14.5; the
+LRT beats the partial bus cost on 9 % of the trunk pairs. As door-to-door times the
+distance-form LRT (≈ 37 min) is slower than today's bus (27 min) and the section-form LRT
+(≈ 30 min) level with it: the LRT speed on this spacing (a 39 % swing in IVT) outweighs every
+missing money component, and is the first input to obtain (task E2), followed by the branch
+geometry (E1; 15 of 25 areas have no LRT time). Status of the fill: car IVT 35 measured /
+590 derived; bus IVT 600 derived; LRT IVT 100 derived / 525 missing per scenario; fare and
+parking missing everywhere; bus walk / wait assumed, bus transfers missing.
+
+**Outputs.** `Output/gc/car_ivt_survey_area_v2.csv` (+ `_n_sampled`,
+`car_dist_survey_area_v2.csv`), `bus_ivt_network_area_v2.csv`, `bus_path_km_area_v2.csv`,
+`bus_survey_vs_network_check.csv`, `lrt_access_taz_v2.csv`, `lrt_access_area_v2.csv`,
+`gc_components_area_v2_long.csv` (o, d, mode, component, value, unit, status, source),
+`gc_area_v2_{car,bus,lrt_all_underground,lrt_all_ground}.csv`, `gc_cell_status_area_v2.csv`,
+`gc_trunk_pairs_comparison.csv`, **`gc_data_inventory.csv`** (the gap table); figure
+`gc_first_fill_trunk_v2.png`.
+
 ---
 
 ## 7. Output inventory (`Output/`)
@@ -1276,6 +1436,9 @@ they will appear under `Output/forecast_taz/{BU_2040,BU_2050,HS_2040,HS_2050}/`.
 | `forecast/share_{car_other,bus,rail}_2022_{raw,smoothed}.csv`, `forecast/share_strata_2022.csv` | 25×25 / 12 strata | `Base_mode_shares_2022.ipynb` | Revealed 2022 modal shares per OD cell (components: car/other + RavKav bus + rail × 54.7/69) and EB-smoothed versions (k = 50, shrunk toward corridor-class × distance-band stratum shares, sum to 1 per cell); stratum behavioral baseline table |
 | `forecast/nobuild_{car_other,bus,rail}_{scenario}.csv`, `forecast/lrt_market_flag.csv`, `forecast/lrt_market_{scenario}.csv`, `forecast/lrt_market_summary.csv` | 25×25 ×12 / 25×25 / ×4 / 4 rows | `NoBuild_and_LRT_market.ipynb` | No-build modal matrices (smoothed 2022 shares pivoted onto scenario-year totals; cell shares frozen, aggregate share moves by composition only — falls 8.9% → 7.5–8.0%) and the LRT market: core (both ends corridor) and per-scenario market trips |
 | `forecast/lrt_market_tiers_{MainCorridor,FullLength}.csv`, `forecast/lrt_alignment_market_summary.csv` | 25×25 ×2 / 10 rows | `LRT_alignment_markets.ipynb` | Market tiers per OD (2 = core one-seat, 1 = transfer-influenced, 0 = outside) for the two alignment scenarios (`Input/lrt_alignment_flags.csv`: Main = areas 1–13 + influenced 24–28; Full = 1–19, 23), and market counts per alignment × scenario-year with the no-build transit conversion base |
+| `corridor_v2/*` | 25×25; link tables | Step 24 | V2 area matrices per layer, per-route and tree-network link flows (three-hour and peak-hour), route summary, comparison with the 18-area profile |
+| `lrt_v2/*` | 24 stations; 24×24; 10×10 | Step 25 | Station table (CSV + GeoJSON), station distances, station-to-station times for the two scenarios in distance and section form, line profile, representative stations and area IVT |
+| `gc/*` | 25×25; long | Step 26 | Car / bus / LRT skims, LRT access, generalized-cost component table with status, partial GC matrices, cell status, trunk-pair comparison, the data-gap inventory |
 | `figures/` | — | Steps 1b–3 | Scatter plots, CV curves, λ curves, R_AB heatmap |
 
 All matrices are indexed by origin zone (rows) × destination zone (columns). Probability
@@ -1401,7 +1564,7 @@ standardizes on the cell-based toolkit (GEH, %RMSE), which is precisely what str
 ## 9. Reproduction
 
 ```bash
-pip install pandas numpy scipy matplotlib jupyter openpyxl pyshp
+pip install pandas numpy scipy matplotlib jupyter openpyxl pyshp shapely pyproj
 git lfs pull            # optional — needed only for the historical cellular chain, the raw RavKav / train files and the 2040 / 2050 zonal forecasts
 
 # current chain (survey-only base; runs on committed inputs and the committed step-8/9/10 outputs)
@@ -1413,6 +1576,10 @@ jupyter nbconvert --to notebook --execute --inplace notebooks/current/Corridor_p
 jupyter nbconvert --to notebook --execute --inplace notebooks/current/Final_matrices_2022.ipynb
 # demographic reference 2040 / 2050 (needs git lfs pull --include="Input/Demographic_Forecast/Zonal_*.csv"; dry run otherwise)
 jupyter nbconvert --to notebook --execute --inplace notebooks/current/Forecast_matrices_TAZ_2040_2050.ipynb
+# V2 aggregation, LRT geometry and generalized cost (steps 24–26; step 26 needs git lfs pull --include="Input/BusSpeedData/std_202605.csv" and pip install shapely pyproj)
+jupyter nbconvert --to notebook --execute --inplace notebooks/current/Corridor_flow_profile_V2_routes.ipynb
+jupyter nbconvert --to notebook --execute --inplace notebooks/current/LRT_line_stations_travel_time.ipynb
+jupyter nbconvert --to notebook --execute --inplace notebooks/current/GC_data_inventory_and_skims.ipynb
 
 # regression test of the hybrid branch (committed outputs only)
 jupyter nbconvert --to notebook --execute --inplace notebooks/diagnostics/Hybrid_superzone_conservation_test.ipynb

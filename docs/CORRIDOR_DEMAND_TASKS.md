@@ -1,6 +1,6 @@
 # Corridor Demand — Task List
 
-*Status: open, agreed 2026-09-19; updated 2026-09-21 after the methodology review (`docs/Nofit_Demand_Methodology_Review.md`). Records what the base-year hybrid matrix still needs
+*Status: open, agreed 2026-09-19; updated 2026-09-22 with the generalized-cost inventory (section E); updated 2026-09-21 after the methodology review (`docs/Nofit_Demand_Methodology_Review.md`). Records what the base-year hybrid matrix still needs
 before it is fit for corridor demand estimation, and the 2050 growth step that follows.
 Ordered by how much each item changes the corridor answer. Tasks marked **[needs LFS
 data]** require the raw inputs held in Git LFS (`git lfs pull` on the data machine):
@@ -39,9 +39,14 @@ Key facts driving the list (2017 trips-file hybrid, `Output/ths2017/study_taz/`)
         available.
   - [ ] Alternative to keep open: run the corridor analysis at the 67-zone cellular
         resolution and disaggregate to TAZ only for station-catchment work.
-- [ ] **A2. Trip length / level of service per OD pair**
-  - [ ] Build network skims (walk, car, existing bus, rail, proposed LRT) for the corridor
-        TAZs; replace centroid-distance bands in `Base_mode_shares_2022.ipynb`.
+- [~] **A2. Trip length / level of service per OD pair** *(first pass 2026-09-22 on the
+      25 V2 areas, `GC_data_inventory_and_skims.ipynb`, METHODOLOGY §6x)*
+  - [~] Build network skims (walk, car, existing bus, rail, proposed LRT) for the corridor
+        TAZs; replace centroid-distance bands in `Base_mode_shares_2022.ipynb`. *Done at
+        area level: car door-to-door from the survey (smoothed), bus fastest-path IVT on the
+        May 2026 speed network (lower bound; survey door-to-door is 2.1–2.3 × it), LRT
+        station-to-station on `hf_lrt_3` (step 25) with walk access from the TAZs. Open: the
+        TAZ level, GTFS-based bus paths / headways / transfers, the LRT branches.*
   - [ ] Treat the diagonal explicitly: within-TAZ length distribution for intra-TAZ cells
         (the diagonal correction adds trips with a median reported length of 0.7 km), or
         exclude intra-TAZ cells from the LRT market with a documented rule.
@@ -112,7 +117,35 @@ Key facts driving the list (2017 trips-file hybrid, `Output/ths2017/study_taz/`)
 
 - [ ] **C1. Mode choice with level-of-service response** — incremental logit (or the
       generalized-cost model of `docs/LRT_CAPTURE_PLAN.md`) calibrated on existing bus and
-      rail shares, instead of frozen 2022 cell shares; depends on A2.
+      rail shares, instead of frozen 2022 cell shares; depends on A2 and on closing the
+      gaps in `Output/gc/gc_data_inventory.csv` (E1–E4 below).
+
+## E. Generalized cost — data still missing (inventory of 2026-09-22, `Output/gc/gc_data_inventory.csv`)
+
+- [ ] **E1. LRT geometry beyond the trunk** — alignment and stations from Hamifrats to
+      Tsomet Kiryat Ata and for the three V2 branches (T1 Kiryat Ata – Shefaram – Nazareth,
+      T2 Krayot, T3 Kiryat Yam); the underground / ground regime per section (the two
+      scenarios of step 25 are the pure bounds); the planned AM headway per branch and the
+      through-running pattern. Add TAZ 1509 (station S13) to the V2 aggregation.
+- [ ] **E2. LRT speed on this spacing** — the calibrated coefficients are elapsed times per
+      500 m section; on the 815 m spacing of `hf_lrt_3` the distance form (15.3 / 12.5 km/h)
+      and the section form (24.9 / 20.4 km/h) differ by 39 %. Under the distance form the
+      LRT in-vehicle time on the trunk pairs is 21–25 min (underground / ground) against a
+      survey bus door-to-door time of 27 min, i.e. no door-to-door gain once access and
+      waiting are added. Ask the calibration's authors for a
+      running-time / dwell decomposition (their own recommended refinement) or a
+      distance-weighted re-estimate.
+- [ ] **E3. Bus level of service from GTFS** — route paths per area pair (in-vehicle time
+      on actual services rather than the fastest bus-served path), AM headways (wait),
+      transfers, stop locations (walk access). The speed network stays as the source of
+      running speeds.
+- [ ] **E4. Money components** — fare tables (bus, LRT, integration), parking tariffs by
+      destination area (the survey's `parkType` gives the paid share as a proxy), car
+      operating cost per km, and the value of time from נוהל פר"ת by purpose. Confirm the
+      walk / wait / transfer weights against the same source.
+- [ ] **E5. Car skim vintage** — the survey door-to-door times are 2017 / 18; a small
+      Google Distance Matrix sample (≈ 40 pairs, Tuesday 07:30) or the national model's
+      car skim gives the 2026 uplift.
 - [ ] **C2. Segmentation** — car availability by zone (check the raw survey household
       file **[needs LFS data]**; otherwise census / zonal files).
 - [ ] **C3. Uncertainty** — carry as sensitivities into corridor numbers: survey

@@ -23,7 +23,14 @@ survey but transit is less local and more Haifa-bound** (PCA, METHODOLOGY §6s):
 transit market cannot be read off the car pattern by scaling, which is why the base keeps
 a transit-specific destination pattern. The plain-language account is
 [`reports/Survey_Matrices_Car_Bus_Rail_Report.docx`](reports/Survey_Matrices_Car_Bus_Rail_Report.docx)
-(revision 2.1). The external methodology review that prompted this
+(revision 2.1). **22 September 2026:** the corridor was re-analysed on the **V2 aggregation**
+(25 areas, three routes T1 Nazareth / T2 Krayot / T3 Kiryat Yam on a common trunk —
+[METHODOLOGY §6v](METHODOLOGY.md#6v-step-24--corridor-potential-movements-on-the-v2-aggregation-three-routes-corridor_flow_profile_v2_routesipynb));
+the planned **LRT line and its 24 stations** were given station-to-station times with a
+calibrated function for an all-underground and an all-ground scenario (73.5 / 89.7 min end to
+end in distance form, 45 / 55 min in section form — [§6w](METHODOLOGY.md#6w-step-25--lrt-line-and-stations-stop-to-stop-times-underground-vs-ground-level-lrt_line_stations_travel_timeipynb));
+and the **generalized-cost inputs** were inventoried and first-filled on the V2 areas, with
+the gaps listed in `Output/gc/gc_data_inventory.csv` ([§6x](METHODOLOGY.md#6x-step-26--generalized-cost-on-the-v2-areas-data-inventory-first-fill-skims-gaps-gc_data_inventory_and_skimsipynb)). The external methodology review that prompted this
 (`docs/Nofit_Demand_Methodology_Review.md`, 21 Sep 2026) and the response to it are recorded
 in [METHODOLOGY.md §8](METHODOLOGY.md#8-known-caveats-and-open-questions) and
 [CORRIDOR_DEMAND_TASKS.md](docs/CORRIDOR_DEMAND_TASKS.md).
@@ -69,6 +76,15 @@ flowchart LR
     FIN --> NB23[Forecast_matrices_TAZ_2040_2050.ipynb<br/>step 23: BU / HS × 2040 / 2050 demographic reference]
     DEM[Demographic_Forecast/Zonal_*.csv  LFS] --> NB23
     NB23 --> FOR[Output/forecast_taz/]
+    AGG[Corridor_TAZ_Agg_V2.xlsx] --> NB24[Corridor_flow_profile_V2_routes.ipynb<br/>step 24: three routes + tree network]
+    NB16 --> NB24
+    NB24 --> CV2[Output/corridor_v2/]
+    GEO[GeneralHalufa/ hf_lrt_3 + stations] --> NB25[LRT_line_stations_travel_time.ipynb<br/>step 25: stations, underground / ground times]
+    NB25 --> LV2[Output/lrt_v2/]
+    BSP[BusSpeedData/  LFS] --> NB26[GC_data_inventory_and_skims.ipynb<br/>step 26: generalized-cost inventory + skims]
+    THS --> NB26
+    LV2 --> NB26
+    NB26 --> GC[Output/gc/]
 ```
 
 Historical branches (kept, not consumed by the current base): the 2018 activities-file
@@ -127,6 +143,9 @@ anywhere inside the repository.
 | `Forecast_matrices_TAZ_2040_2050.ipynb` | **current** (dry run here) | Grows the final 2022 layers to BU / HS × 2040 / 2050 at TAZ level as a demographic reference: composite land-use indices, own-rate / superzone-rate margins with a small-base rule, own-pattern / superzone-pattern seed, Furness per layer (`docs/FORECAST_METHODOLOGY_2040_2050.md`); runs the four scenarios once the LFS zonal files are pulled |
 | `Final_matrices_2022.ipynb` | **current** | Assembles the deliverable 2022 TAZ matrices (car, transit = bus + rail, total = car + transit, taxi-inclusive variants, long format) from the step-16 layers with additivity checks and a manifest |
 | `Corridor_peak_hour_2022.ipynb` | **current** | Peak-hour factors from the survey's minute-level departure times (peak hour 07:00–08:00; PHF₃ₕ ≈ 0.59–0.66, i.e. 1.8 × an average hour; household-bootstrap ranges) and the 2022 link profiles in peak-departure-hour terms, with a sensitivity to the bus factor basis |
+| `Corridor_flow_profile_V2_routes.ipynb` | **current** | The corridor potential movements on the **V2 aggregation** (25 areas, 174 TAZs): per route (T1 Nazareth, T2 Krayot, T3 Kiryat Yam) and on the tree network, three-hour and peak-hour, all layers; the Krayot branch link Kiryat Haim – Kiryat Bialik Center is the busiest single link (10,144 towards Haifa), the trunk link Bazan-Hutsot – Tsomet Kiryat Ata carries 16,231 / 2,898 transit on the network (METHODOLOGY §6v) |
+| `LRT_line_stations_travel_time.ipynb` | **current** | The planned line `hf_lrt_3` and its 46 platform points → 24 stations with chainage, TAZ and V2 area; station-to-station in-vehicle times with the calibrated function (1.961 min per 500 m underground, 2.393 at ground level) for an all-underground and an all-ground scenario, distance and section forms; area-level times for the ten trunk areas (§6w) |
+| `GC_data_inventory_and_skims.ipynb` | **current** | Generalized-cost components on the V2 areas: car door-to-door from the survey, bus fastest-path IVT on the May 2026 speed network (2.1–2.3 × below the survey's door-to-door), LRT IVT + walk access from step 25; partial GC matrices with a status per cell and the data-gap inventory — LRT speed on this spacing and the branch geometry are the decisive open inputs (§6x) |
 | `THS_2017_trip_generation.ipynb` | current | Per-person AM-peak generation rates on the trips-file source (overall ≈ 0.83) |
 | `BusRavKav_matrix.ipynb` | current | RavKav bus data: stop → TAZ tagging, weekday-3 / 06–09 filter, average-Tuesday journey OD and per-TAZ boardings / alightings |
 | `BusOnBoard_matrix.ipynb` | current | OnBoard survey probability matrix + RavKav volumes × OnBoard destination pattern (the unit of the OnBoard rows — boarding leg or journey — is still to be confirmed) |
@@ -156,6 +175,14 @@ anywhere inside the repository.
   line and the comparison with the ticketing profile (§6o, §6p)
 - `ths2017/three_mode_2022/peak_hour_factors*.csv`, `corridor_link_flows_peak_hour_2022.csv`
   — peak-hour factors and the link profiles in peak-hour terms (§6r)
+- **`corridor_v2/`** — the V2-aggregation area matrices and the per-route / tree-network link
+  flows, three-hour and peak-hour (`corridor_v2_link_flows_long.csv`,
+  `corridor_v2_network_link_flows.csv`, `corridor_v2_route_summary.csv`; §6v)
+- **`lrt_v2/`** — the station table (`lrt_stations_hf_lrt_3.csv` / `.geojson`) and the
+  station-to-station times `lrt_station_times_{all_underground,all_ground}.csv` (§6w)
+- **`gc/`** — the generalized-cost skims and inventory: `gc_components_area_v2_long.csv`
+  (every component, mode and cell with its status), `gc_area_v2_*.csv`, and
+  `gc_data_inventory.csv`, the list of what is still missing (§6x)
 - `ths2017/two_mode/` — the 2018-base car / bus / transit matrices, the calibration tables
   (`bus_calibration_factors_segments.csv` is the segmented coverage rule;
   `bus_calibration_threshold_sensitivity.csv` the threshold sweep) and the variants (§6m)
@@ -190,11 +217,13 @@ the RavKav / train raw files, whose processed outputs are committed:
 
 ```bash
 git lfs pull                      # optional: cellular, RavKav, train and forecast zonal files
-pip install pandas numpy scipy matplotlib jupyter openpyxl pyshp
+pip install pandas numpy scipy matplotlib jupyter openpyxl pyshp shapely pyproj
 ```
 
 Run order for the current branch, all under `notebooks/current/`: `THS_2017_two_mode_matrix`
 → `THS_2017_three_mode_2022` → `Corridor_flow_profile_survey_2022` →
 `Corridor_profile_hybrid_vs_ticketing` → `Corridor_peak_hour_2022` → `Final_matrices_2022` →
-`Forecast_matrices_TAZ_2040_2050` (see METHODOLOGY §9).
+`Forecast_matrices_TAZ_2040_2050` (see METHODOLOGY §9); then, on the new inputs,
+`Corridor_flow_profile_V2_routes` → `LRT_line_stations_travel_time` → `GC_data_inventory_and_skims`
+(the last needs `git lfs pull --include="Input/BusSpeedData/std_202605.csv"`).
 `notebooks/diagnostics/Hybrid_superzone_conservation_test` runs on committed outputs alone.

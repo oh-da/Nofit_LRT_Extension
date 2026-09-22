@@ -23,7 +23,7 @@ GC_m = IVT + 2.0·walk + 2.0·wait + 8·transfers + (fare + parking)/VOT
 | wait | headway/2, capped ~10 min | |
 | transfer penalty | 8 generalized min | range 5–10; applies to the Main-alignment "influenced" tier (tier 1 in `Output/forecast/lrt_market_tiers_*.csv`) |
 | VOT, fares, parking | align with נוהל פר"ת | the study will be appraised against it |
-| LRT commercial speed | 22–26 km/h | Jerusalem ~19–20 observed; Tel Aviv Dankal ~24 design |
+| LRT commercial speed | **calibrated function** (22 Sep 2026): 1.961 min per 500 m section underground, 2.393 min at ground level — 15.3 / 12.5 km/h in distance form, 20–25 km/h in section form on the 815 m spacing of `hf_lrt_3` (`docs/Transit_Travel_Time_Calibration_Report_Operator22.md`, METHODOLOGY §6w) | replaces the earlier 22–26 km/h assumption; the two forms bracket the answer until running and dwell are separated |
 | LRT peak headway | ~6 min | |
 
 ## 2. Skims — mixed sourcing, not a single Google pull
@@ -40,11 +40,21 @@ GC_m = IVT + 2.0·walk + 2.0·wait + 8·transfers + (fare + parking)/VOT
   **Israeli national GTFS** (open, MOT) for scheduled in-vehicle times and
   headways between area centroids; free, storable, reproducible. Google transit
   mode is the fallback.
-- **LRT**: no external service — build from geometry already in the repo:
-  cumulative distance along the alignment between area centroids (computed in
-  `Base_mode_shares_2022.ipynb`) ÷ commercial speed + dwell; access/egress from
-  centroid-to-alignment distance. The assumptions reduce to three numbers:
-  speed, headway, dwell.
+- **LRT**: no external service — built from the planned geometry
+  (`Input/GeneralHalufa/hf_lrt_3.shp` + `station_hf_lrt_3.geojson`, 24 stations on
+  the Tirat Carmel – Hamifrats trunk) with the calibrated stop-to-stop function in
+  `LRT_line_stations_travel_time.ipynb` (step 25): station-to-station matrices for
+  an all-underground and an all-ground scenario; access / egress from TAZ centroid to
+  nearest station (step 26). Still needed: the alignment and stations of the segment
+  beyond Hamifrats and of the three V2 branches, the planned headway, and the
+  underground / ground regime per section.
+
+**Status (22 September 2026).** `GC_data_inventory_and_skims.ipynb` (step 26,
+METHODOLOGY §6x) holds the component-by-component inventory on the 25 V2 areas
+(`Output/gc/gc_data_inventory.csv`), the first-fill skims (car from the survey, bus
+from the May 2026 speed network, LRT from step 25) and the partial generalized-cost
+matrices with every cell's status. Money components (fare, parking, VOT) are missing
+throughout; bus walk / wait / transfers need GTFS.
 
 ## 3. Calibrate, then pivot
 

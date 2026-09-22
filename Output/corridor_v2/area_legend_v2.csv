@@ -1,0 +1,26 @@
+AggCode,n_TAZs,Order_T1,Order_T2,Order_T3,AggAreaName,population_2020,employment_2020,segment
+101,2,0,16,0,TsurShalom,12429,3359,branch T2
+102,3,0,15,0,Kiryon,10633,5582,branch T2
+103,9,0,14,0,KiryatBialik Center,32944,7897,branch T2
+104,5,0,13,0,KiryatHaim,20686,8036,branch T2
+201,14,1,1,1,TiratCarmel,26936,8424,trunk
+202,10,2,2,2,Matam-NeotPeres,4211,20090,trunk
+203,4,3,3,3,HofCarmel-NeveDavid,6867,2378,trunk
+204,3,4,4,4,Hecht-Shprintzak,12074,1714,trunk
+205,1,5,5,5,EinHayam,2048,139,trunk
+206,10,6,6,6,BatGalim-KiryatEliezer,15578,12331,trunk
+207,3,7,7,7,Hamoshava,4842,5973,trunk
+208,7,8,8,8,LowerCity,3221,19335,trunk
+209,6,9,9,9,Namal-Giborim,2348,7154,trunk
+210,6,10,10,10,Hamifrats,45,11462,trunk
+211,4,11,11,11,Bazan-Hutsot,0,11493,trunk
+212,3,12,12,12,TsometKiryatAta,0,9371,trunk
+213,7,13,0,0,KiryatAta North,10135,2453,branch T1
+214,7,14,0,0,KiryatAta North-East,9047,2844,branch T1
+215,10,15,0,0,Shefaram,47028,11595,branch T1
+216,3,16,0,0,Hamovil,18428,3270,branch T1
+217,38,17,0,0,Nazareth,197764,54162,branch T1
+301,4,0,0,16,SavyoneyYam,11846,1862,branch T3
+302,4,0,0,15,KiryatYam A,9442,1250,branch T3
+303,6,0,0,14,KiryatYam B+C,22489,6117,branch T3
+304,5,0,0,13,KiryatHaim West,11301,3092,branch T3

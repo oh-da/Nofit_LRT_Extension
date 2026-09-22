@@ -1,0 +1,510 @@
+{
+ "type": "FeatureCollection",
+ "name": "lrt_stations_hf_lrt_3",
+ "features": [
+  {
+   "type": "Feature",
+   "properties": {
+    "station_id": "S01",
+    "chainage_m": 164.8726731260722,
+    "dist_to_next_m": 1247.4437499905926,
+    "TAZ": 2413,
+    "AggCode": 201,
+    "AggAreaName": "TiratCarmel",
+    "n_points": 2,
+    "max_offset_m": 17.94706233233913,
+    "halufa": "999"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     34.9664315,
+     32.7495482
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "station_id": "S02",
+    "chainage_m": 1412.3164231166647,
+    "dist_to_next_m": 1058.142334120761,
+    "TAZ": 2421,
+    "AggCode": 201,
+    "AggAreaName": "TiratCarmel",
+    "n_points": 2,
+    "max_offset_m": 13.009263051511097,
+    "halufa": "1"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     34.9640274,
+     32.7604648
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "station_id": "S03",
+    "chainage_m": 2470.4587572374257,
+    "dist_to_next_m": 748.922378508888,
+    "TAZ": 2402,
+    "AggCode": 201,
+    "AggAreaName": "TiratCarmel",
+    "n_points": 2,
+    "max_offset_m": 36.449976145296475,
+    "halufa": "1"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     34.968379,
+     32.7676429
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "station_id": "S04",
+    "chainage_m": 3219.3811357463137,
+    "dist_to_next_m": 1102.140602075232,
+    "TAZ": 2408,
+    "AggCode": 201,
+    "AggAreaName": "TiratCarmel",
+    "n_points": 2,
+    "max_offset_m": 15.792463394057279,
+    "halufa": "999"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     34.9632307,
+     32.7727622
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "station_id": "S05",
+    "chainage_m": 4321.521737821546,
+    "dist_to_next_m": 778.0042684738319,
+    "TAZ": 2401,
+    "AggCode": 202,
+    "AggAreaName": "Matam-NeotPeres",
+    "n_points": 2,
+    "max_offset_m": 15.663939774106487,
+    "halufa": "999"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     34.962891,
+     32.782697
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "station_id": "S06",
+    "chainage_m": 5099.526006295378,
+    "dist_to_next_m": 620.6569138834802,
+    "TAZ": 1517,
+    "AggCode": 202,
+    "AggAreaName": "Matam-NeotPeres",
+    "n_points": 2,
+    "max_offset_m": 16.53340558677809,
+    "halufa": "999"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     34.9623507,
+     32.7896985
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "station_id": "S07",
+    "chainage_m": 5720.182920178858,
+    "dist_to_next_m": 510.8024649118561,
+    "TAZ": 1517,
+    "AggCode": 202,
+    "AggAreaName": "Matam-NeotPeres",
+    "n_points": 2,
+    "max_offset_m": 11.501393574065714,
+    "halufa": ""
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     34.960766,
+     32.7950932
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "station_id": "S08",
+    "chainage_m": 6230.985385090714,
+    "dist_to_next_m": 1172.9833319698164,
+    "TAZ": 1520,
+    "AggCode": 203,
+    "AggAreaName": "HofCarmel-NeveDavid",
+    "n_points": 2,
+    "max_offset_m": 25.524720252938053,
+    "halufa": ""
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     34.9612846,
+     32.7995517
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "station_id": "S09",
+    "chainage_m": 7403.96871706053,
+    "dist_to_next_m": 1396.285761553514,
+    "TAZ": 1514,
+    "AggCode": 203,
+    "AggAreaName": "HofCarmel-NeveDavid",
+    "n_points": 2,
+    "max_offset_m": 13.32955536825743,
+    "halufa": "2"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     34.959484,
+     32.8087178
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "station_id": "S10",
+    "chainage_m": 8800.254478614044,
+    "dist_to_next_m": 433.81344428733246,
+    "TAZ": 1512,
+    "AggCode": 204,
+    "AggAreaName": "Hecht-Shprintzak",
+    "n_points": 2,
+    "max_offset_m": 8.31126934946765,
+    "halufa": ""
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     34.9583374,
+     32.8188867
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "station_id": "S11",
+    "chainage_m": 9234.067922901377,
+    "dist_to_next_m": 540.5380224952114,
+    "TAZ": 1512,
+    "AggCode": 204,
+    "AggAreaName": "Hecht-Shprintzak",
+    "n_points": 2,
+    "max_offset_m": 26.492563685605173,
+    "halufa": ""
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     34.9567014,
+     32.822347
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "station_id": "S12",
+    "chainage_m": 9774.605945396588,
+    "dist_to_next_m": 1140.2041760041338,
+    "TAZ": 1510,
+    "AggCode": 205,
+    "AggAreaName": "EinHayam",
+    "n_points": 2,
+    "max_offset_m": 16.611090377701757,
+    "halufa": "2"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     34.9600407,
+     32.8262558
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "station_id": "S13",
+    "chainage_m": 10914.810121400722,
+    "dist_to_next_m": 632.9043570436279,
+    "TAZ": 1509,
+    "AggCode": null,
+    "AggAreaName": null,
+    "n_points": 2,
+    "max_offset_m": 8.86963173869158,
+    "halufa": ""
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     34.9703275,
+     32.8308058
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "station_id": "S14",
+    "chainage_m": 11547.71447844435,
+    "dist_to_next_m": 769.6500011972821,
+    "TAZ": 1503,
+    "AggCode": 206,
+    "AggAreaName": "BatGalim-KiryatEliezer",
+    "n_points": 2,
+    "max_offset_m": 26.257224807500936,
+    "halufa": ""
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     34.9770851,
+     32.830664
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "station_id": "S15",
+    "chainage_m": 12317.364479641632,
+    "dist_to_next_m": 354.1868579851125,
+    "TAZ": 1505,
+    "AggCode": 206,
+    "AggAreaName": "BatGalim-KiryatEliezer",
+    "n_points": 2,
+    "max_offset_m": 19.38856004863848,
+    "halufa": "2"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     34.9839703,
+     32.8281818
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "station_id": "S16",
+    "chainage_m": 12671.551337626744,
+    "dist_to_next_m": 754.1604650572626,
+    "TAZ": 1506,
+    "AggCode": 206,
+    "AggAreaName": "BatGalim-KiryatEliezer",
+    "n_points": 2,
+    "max_offset_m": 10.715142482777994,
+    "halufa": "2"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     34.9840727,
+     32.8250605
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "station_id": "S17",
+    "chainage_m": 13425.711802684007,
+    "dist_to_next_m": 451.10952784195797,
+    "TAZ": 1302,
+    "AggCode": 207,
+    "AggAreaName": "Hamoshava",
+    "n_points": 2,
+    "max_offset_m": 33.64416018686079,
+    "halufa": ""
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     34.9907129,
+     32.8216028
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "station_id": "S18",
+    "chainage_m": 13876.821330525965,
+    "dist_to_next_m": 509.4876049786726,
+    "TAZ": 1303,
+    "AggCode": 207,
+    "AggAreaName": "Hamoshava",
+    "n_points": 2,
+    "max_offset_m": 31.26178425601987,
+    "halufa": ""
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     34.9949662,
+     32.8196928
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "station_id": "S19",
+    "chainage_m": 14386.308935504638,
+    "dist_to_next_m": 812.0562048862012,
+    "TAZ": 1312,
+    "AggCode": 208,
+    "AggAreaName": "LowerCity",
+    "n_points": 2,
+    "max_offset_m": 14.764061375165952,
+    "halufa": "2"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     34.999636,
+     32.8173204
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "station_id": "S20",
+    "chainage_m": 15198.365140390839,
+    "dist_to_next_m": 1114.6088859698702,
+    "TAZ": 1309,
+    "AggCode": 208,
+    "AggAreaName": "LowerCity",
+    "n_points": 2,
+    "max_offset_m": 7.269990331303735,
+    "halufa": ""
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     35.0039269,
+     32.8112293
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "station_id": "S21",
+    "chainage_m": 16312.97402636071,
+    "dist_to_next_m": 857.8487386777051,
+    "TAZ": 1311,
+    "AggCode": 209,
+    "AggAreaName": "Namal-Giborim",
+    "n_points": 2,
+    "max_offset_m": 30.866577433881947,
+    "halufa": "2"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     35.0109727,
+     32.8032478
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "station_id": "S22",
+    "chainage_m": 17170.822765038414,
+    "dist_to_next_m": 749.6139403132947,
+    "TAZ": 1726,
+    "AggCode": 209,
+    "AggAreaName": "Namal-Giborim",
+    "n_points": 2,
+    "max_offset_m": 11.979473958906752,
+    "halufa": ""
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     35.0181593,
+     32.7986993
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "station_id": "S23",
+    "chainage_m": 17920.43670535171,
+    "dist_to_next_m": 987.937028845794,
+    "TAZ": 1218,
+    "AggCode": 210,
+    "AggAreaName": "Hamifrats",
+    "n_points": 1,
+    "max_offset_m": 43.69484587786321,
+    "halufa": ""
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     35.0249663,
+     32.7955991
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "station_id": "S24",
+    "chainage_m": 18908.373734197503,
+    "dist_to_next_m": null,
+    "TAZ": 1212,
+    "AggCode": 210,
+    "AggAreaName": "Hamifrats",
+    "n_points": 1,
+    "max_offset_m": 77.6718724491666,
+    "halufa": ""
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     35.035095,
+     32.7941871
+    ]
+   }
+  }
+ ]
+}
