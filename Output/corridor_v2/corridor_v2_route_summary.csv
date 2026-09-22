@@ -1,0 +1,31 @@
+route,layer,direction,route-internal trips (3 h),busiest link,busiest link 3 h,busiest link peak hour,branch max 3 h,branch max peak hour
+T1,total,up,123906,EinHayam – BatGalim-KiryatEliezer,6878,4331,1121,739
+T1,total,down,123906,TsometKiryatAta – KiryatAta North,5809,3576,5809,3576
+T1,transit,up,12546,EinHayam – BatGalim-KiryatEliezer,1379,814,64,38
+T1,transit,down,12546,Matam-NeotPeres – HofCarmel-NeveDavid,1489,879,1174,693
+T1,car,up,107229,BatGalim-KiryatEliezer – Hamoshava,4072,2690,1092,722
+T1,car,down,107229,BatGalim-KiryatEliezer – Hamoshava,4407,2757,4268,2670
+T1,bus,up,12546,EinHayam – BatGalim-KiryatEliezer,1379,814,64,38
+T1,bus,down,12546,Matam-NeotPeres – HofCarmel-NeveDavid,1489,879,1174,693
+T1,taxi,up,4130,EinHayam – BatGalim-KiryatEliezer,1440,835,24,14
+T1,taxi,down,4130,Hecht-Shprintzak – EinHayam,472,274,367,213
+T2,total,up,73964,EinHayam – BatGalim-KiryatEliezer,7036,4422,2497,1607
+T2,total,down,73964,KiryatHaim – KiryatBialik Center,10144,6239,10144,6239
+T2,transit,up,7711,EinHayam – BatGalim-KiryatEliezer,1391,821,349,206
+T2,transit,down,7711,Matam-NeotPeres – HofCarmel-NeveDavid,1629,962,1255,741
+T2,car,up,60364,EinHayam – BatGalim-KiryatEliezer,4059,2682,1934,1278
+T2,car,down,60364,KiryatHaim – KiryatBialik Center,7578,4741,7578,4741
+T2,bus,up,7673,EinHayam – BatGalim-KiryatEliezer,1391,821,349,206
+T2,bus,down,7673,Matam-NeotPeres – HofCarmel-NeveDavid,1597,943,1217,718
+T2,taxi,up,5889,EinHayam – BatGalim-KiryatEliezer,1586,920,343,199
+T2,taxi,down,5889,KiryatHaim – KiryatBialik Center,1601,928,1601,928
+T3,total,up,55519,EinHayam – BatGalim-KiryatEliezer,6956,4378,1166,751
+T3,total,down,55519,TsometKiryatAta – KiryatHaim West,4896,2988,4896,2988
+T3,transit,up,7054,EinHayam – BatGalim-KiryatEliezer,1437,848,274,162
+T3,transit,down,7054,Matam-NeotPeres – HofCarmel-NeveDavid,1410,833,936,553
+T3,car,up,44733,EinHayam – BatGalim-KiryatEliezer,4079,2695,892,590
+T3,car,down,44733,BatGalim-KiryatEliezer – Hamoshava,3482,2178,3050,1908
+T3,bus,up,7042,EinHayam – BatGalim-KiryatEliezer,1437,848,274,162
+T3,bus,down,7042,Matam-NeotPeres – HofCarmel-NeveDavid,1403,828,924,546
+T3,taxi,up,3732,EinHayam – BatGalim-KiryatEliezer,1440,835,14,8
+T3,taxi,down,3732,TsometKiryatAta – KiryatHaim West,910,527,910,527

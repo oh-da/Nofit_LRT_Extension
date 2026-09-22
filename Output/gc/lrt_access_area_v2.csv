@@ -1,0 +1,26 @@
+AggCode,access_walk_min_pop,egress_walk_min_emp,share_pop_walkable,share_emp_walkable,AggAreaName,served_by_hf_lrt_3
+201,12.026,10.921,0.780,0.822,TiratCarmel,True
+202,7.488,5.845,1.000,1.000,Matam-NeotPeres,True
+203,5.491,6.188,1.000,1.000,HofCarmel-NeveDavid,True
+204,6.099,6.307,1.000,1.000,Hecht-Shprintzak,True
+205,7.099,7.099,1.000,1.000,EinHayam,True
+206,4.851,6.967,1.000,1.000,BatGalim-KiryatEliezer,True
+207,3.014,3.162,1.000,1.000,Hamoshava,True
+208,3.825,5.209,1.000,1.000,LowerCity,True
+209,4.775,8.595,1.000,0.978,Namal-Giborim,True
+210,9.162,11.882,1.000,0.699,Hamifrats,True
+211,39.307,41.879,0.000,0.000,Bazan-Hutsot,False
+212,66.917,58.805,0.000,0.000,TsometKiryatAta,False
+213,114.245,113.271,0.000,0.000,KiryatAta North,False
+214,159.709,159.132,0.000,0.000,KiryatAta North-East,False
+215,212.261,209.562,0.000,0.000,Shefaram,False
+216,314.449,333.074,0.000,0.000,Hamovil,False
+217,448.191,446.959,0.000,0.000,Nazareth,False
+101,144.612,146.292,0.000,0.000,TsurShalom,False
+102,132.244,128.635,0.000,0.000,Kiryon,False
+103,107.040,105.567,0.000,0.000,KiryatBialik Center,False
+104,81.045,84.165,0.000,0.000,KiryatHaim,False
+301,131.723,127.486,0.000,0.000,SavyoneyYam,False
+302,113.745,113.415,0.000,0.000,KiryatYam A,False
+303,95.356,95.191,0.000,0.000,KiryatYam B+C,False
+304,72.956,70.661,0.000,0.000,KiryatHaim West,False
