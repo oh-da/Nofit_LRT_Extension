@@ -1,0 +1,15 @@
+origin area,name,segment,sampled transit trips (2 days),car self-containment,transit self-containment,car share to Haifa trunk areas,transit share to Haifa trunk areas,transit − car displacement
+201,TiratCarmel,trunk,12.0000,0.7773,0.1528,0.1977,0.7317,0.7234
+204,Hecht-Shprintzak,trunk,51.0000,0.3196,0.0068,0.8548,0.8929,0.5008
+205,EinHayam,trunk,41.0000,0.0551,0.0000,0.9321,0.5125,0.6155
+206,BatGalim-KiryatEliezer,trunk,35.0000,0.5442,0.1834,0.8862,0.8384,0.4667
+214,KiryatAta North-East,branch,17.0000,0.3581,0.7143,0.3176,0.0000,0.5181
+215,Shefaram,branch,20.0000,0.7441,0.7124,0.0932,0.1391,0.1876
+217,Nazareth,branch,83.0000,0.9566,0.8971,0.0220,0.0542,0.0838
+101,TsurShalom,branch,12.0000,0.3231,0.0000,0.1049,0.0084,0.4811
+102,Kiryon,branch,17.0000,0.3645,0.0255,0.0624,0.3465,0.5666
+103,KiryatBialik Center,branch,30.0000,0.4457,0.0444,0.0569,0.3014,0.4872
+104,KiryatHaim,branch,37.0000,0.2521,0.2602,0.2086,0.2488,0.2342
+301,SavyoneyYam,branch,17.0000,0.1337,0.0000,0.0979,0.1016,0.4555
+303,KiryatYam B+C,branch,19.0000,0.3511,0.3542,0.0843,0.3118,0.2534
+304,KiryatHaim West,branch,19.0000,0.2704,0.1231,0.1292,0.1059,0.3422

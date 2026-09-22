@@ -144,6 +144,8 @@ anywhere inside the repository.
 | `Final_matrices_2022.ipynb` | **current** | Assembles the deliverable 2022 TAZ matrices (car, transit = bus + rail, total = car + transit, taxi-inclusive variants, long format) from the step-16 layers with additivity checks and a manifest |
 | `Corridor_peak_hour_2022.ipynb` | **current** | Peak-hour factors from the survey's minute-level departure times (peak hour 07:00–08:00; PHF₃ₕ ≈ 0.59–0.66, i.e. 1.8 × an average hour; household-bootstrap ranges) and the 2022 link profiles in peak-departure-hour terms, with a sensitivity to the bus factor basis |
 | `Corridor_flow_profile_V2_routes.ipynb` | **current** | The corridor potential movements on the **V2 aggregation** (25 areas, 174 TAZs): per route (T1 Nazareth, T2 Krayot, T3 Kiryat Yam) and on the tree network, three-hour and peak-hour, all layers; the Krayot branch link Kiryat Haim – Kiryat Bialik Center is the busiest single link (10,144 towards Haifa), the trunk link Bazan-Hutsot – Tsomet Kiryat Ata carries 16,231 / 2,898 transit on the network (METHODOLOGY §6v) |
+| `Corridor_peak_hour_V2_routes.ipynb` | **current** | Peak-hour factors re-estimated on the V2 route sequences and the tree network (car by direction on every route, 0.62–0.65 up / 0.57–0.58 down, network 0.56 / 0.52; bus and taxi-type on the study-area factors); step 24 applies them (§6y) |
+| `Corridor_profile_V2_survey_vs_ticketing.ipynb` | **current** | The calibrated-survey vs ticketing-based transit profiles on the V2 routes and the tree network, from the TAZ-level products: up direction agrees (0.78–0.83), down direction route-specific (T2 0.92, T1 0.66), the Nazareth allocation and the alighting frame still the drivers (§6z) |
 | `LRT_line_stations_travel_time.ipynb` | **current** | The planned line `hf_lrt_3` and its 46 platform points → 24 stations with chainage, TAZ and V2 area; station-to-station in-vehicle times with the calibrated function (1.961 min per 500 m underground, 2.393 at ground level) for an all-underground and an all-ground scenario, distance and section forms; area-level times for the ten trunk areas (§6w) |
 | `GC_data_inventory_and_skims.ipynb` | **current** | Generalized-cost components on the V2 areas: car door-to-door from the survey, bus fastest-path IVT on the May 2026 speed network (2.1–2.3 × below the survey's door-to-door), LRT IVT + walk access from step 25; partial GC matrices with a status per cell and the data-gap inventory — LRT speed on this spacing and the branch geometry are the decisive open inputs (§6x) |
 | `THS_2017_trip_generation.ipynb` | current | Per-person AM-peak generation rates on the trips-file source (overall ≈ 0.83) |
@@ -177,7 +179,9 @@ anywhere inside the repository.
   — peak-hour factors and the link profiles in peak-hour terms (§6r)
 - **`corridor_v2/`** — the V2-aggregation area matrices and the per-route / tree-network link
   flows, three-hour and peak-hour (`corridor_v2_link_flows_long.csv`,
-  `corridor_v2_network_link_flows.csv`, `corridor_v2_route_summary.csv`; §6v)
+  `corridor_v2_network_link_flows.csv`, `corridor_v2_route_summary.csv`; §6v), the V2 peak-hour
+  factors (`peak_hour_factors_v2*.csv`; §6y) and the survey-vs-ticketing comparison
+  (`corridor_v2_survey_vs_ticketing*.csv`; §6z)
 - **`lrt_v2/`** — the station table (`lrt_stations_hf_lrt_3.csv` / `.geojson`) and the
   station-to-station times `lrt_station_times_{all_underground,all_ground}.csv` (§6w)
 - **`gc/`** — the generalized-cost skims and inventory: `gc_components_area_v2_long.csv`
@@ -196,6 +200,11 @@ anywhere inside the repository.
 
 ## Reports
 
+- `reports/V2_Corridor_LRT_Times_and_GC_Inputs_Report.docx` — **revision 1, 22 September 2026**: the
+  corridor on the V2 aggregation (three routes and the tree network, peak hour, survey vs
+  ticketing), the LRT line's station-to-station times under the underground and ground-level
+  scenarios, the generalized-cost inventory and first fill, and — Part D — what every matrix
+  product in the repository can and cannot be used for
 - `reports/Survey_Matrices_Car_Bus_Rail_Report.docx` — **revision 2.1, 21 September 2026**: the
   current base in plain language (survey-only matrix, tests, segmented bus calibration,
   2022 layers, corridor potential movements and their peak hour, what changed since revision 1 and why)
@@ -224,6 +233,7 @@ Run order for the current branch, all under `notebooks/current/`: `THS_2017_two_
 → `THS_2017_three_mode_2022` → `Corridor_flow_profile_survey_2022` →
 `Corridor_profile_hybrid_vs_ticketing` → `Corridor_peak_hour_2022` → `Final_matrices_2022` →
 `Forecast_matrices_TAZ_2040_2050` (see METHODOLOGY §9); then, on the new inputs,
-`Corridor_flow_profile_V2_routes` → `LRT_line_stations_travel_time` → `GC_data_inventory_and_skims`
+`Corridor_peak_hour_V2_routes` → `Corridor_flow_profile_V2_routes` → `Corridor_profile_V2_survey_vs_ticketing`
+→ `LRT_line_stations_travel_time` → `GC_data_inventory_and_skims`
 (the last needs `git lfs pull --include="Input/BusSpeedData/std_202605.csv"`).
 `notebooks/diagnostics/Hybrid_superzone_conservation_test` runs on committed outputs alone.

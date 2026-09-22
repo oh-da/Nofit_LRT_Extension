@@ -31,38 +31,38 @@ T1,13,213,214,KiryatAta North,KiryatAta North-East,branch,up,bus,50.8,0.6,30.0
 T1,14,214,215,KiryatAta North-East,Shefaram,branch,up,bus,14.9,0.6,8.8
 T1,15,215,216,Shefaram,Hamovil,branch,up,bus,10.0,0.6,5.9
 T1,16,216,217,Hamovil,Nazareth,branch,up,bus,5.6,0.6,3.3
-T1,1,201,202,TiratCarmel,Matam-NeotPeres,trunk,down,car,1004.2,0.6,628.2
-T1,2,202,203,Matam-NeotPeres,HofCarmel-NeveDavid,trunk,down,car,3190.6,0.6,1996.1
-T1,3,203,204,HofCarmel-NeveDavid,Hecht-Shprintzak,trunk,down,car,3163.1,0.6,1978.8
-T1,4,204,205,Hecht-Shprintzak,EinHayam,trunk,down,car,3082.8,0.6,1928.6
-T1,5,205,206,EinHayam,BatGalim-KiryatEliezer,trunk,down,car,2797.4,0.6,1750.1
-T1,6,206,207,BatGalim-KiryatEliezer,Hamoshava,trunk,down,car,4406.7,0.6,2756.8
-T1,7,207,208,Hamoshava,LowerCity,trunk,down,car,2872.8,0.6,1797.2
-T1,8,208,209,LowerCity,Namal-Giborim,trunk,down,car,3111.5,0.6,1946.6
-T1,9,209,210,Namal-Giborim,Hamifrats,trunk,down,car,3076.9,0.6,1924.9
-T1,10,210,211,Hamifrats,Bazan-Hutsot,trunk,down,car,3496.6,0.6,2187.5
-T1,11,211,212,Bazan-Hutsot,TsometKiryatAta,trunk,down,car,3515.8,0.6,2199.5
-T1,12,212,213,TsometKiryatAta,KiryatAta North,branch,down,car,4267.8,0.6,2669.9
-T1,13,213,214,KiryatAta North,KiryatAta North-East,branch,down,car,4157.8,0.6,2601.1
-T1,14,214,215,KiryatAta North-East,Shefaram,branch,down,car,3302.8,0.6,2066.2
-T1,15,215,216,Shefaram,Hamovil,branch,down,car,2270.9,0.6,1420.7
-T1,16,216,217,Hamovil,Nazareth,branch,down,car,1781.3,0.6,1114.4
-T1,1,201,202,TiratCarmel,Matam-NeotPeres,trunk,up,car,4012.7,0.7,2651.2
-T1,2,202,203,Matam-NeotPeres,HofCarmel-NeveDavid,trunk,up,car,2621.5,0.7,1732.1
-T1,3,203,204,HofCarmel-NeveDavid,Hecht-Shprintzak,trunk,up,car,2637.9,0.7,1742.9
-T1,4,204,205,Hecht-Shprintzak,EinHayam,trunk,up,car,3281.8,0.7,2168.3
-T1,5,205,206,EinHayam,BatGalim-KiryatEliezer,trunk,up,car,4058.8,0.7,2681.7
-T1,6,206,207,BatGalim-KiryatEliezer,Hamoshava,trunk,up,car,4071.9,0.7,2690.3
-T1,7,207,208,Hamoshava,LowerCity,trunk,up,car,2971.9,0.7,1963.5
-T1,8,208,209,LowerCity,Namal-Giborim,trunk,up,car,2511.2,0.7,1659.1
-T1,9,209,210,Namal-Giborim,Hamifrats,trunk,up,car,2221.4,0.7,1467.6
-T1,10,210,211,Hamifrats,Bazan-Hutsot,trunk,up,car,1360.4,0.7,898.8
-T1,11,211,212,Bazan-Hutsot,TsometKiryatAta,trunk,up,car,1335.2,0.7,882.2
-T1,12,212,213,TsometKiryatAta,KiryatAta North,branch,up,car,720.9,0.7,476.3
-T1,13,213,214,KiryatAta North,KiryatAta North-East,branch,up,car,756.5,0.7,499.8
-T1,14,214,215,KiryatAta North-East,Shefaram,branch,up,car,840.9,0.7,555.6
-T1,15,215,216,Shefaram,Hamovil,branch,up,car,957.1,0.7,632.4
-T1,16,216,217,Hamovil,Nazareth,branch,up,car,1092.3,0.7,721.7
+T1,1,201,202,TiratCarmel,Matam-NeotPeres,trunk,down,car,1004.2,0.6,580.3
+T1,2,202,203,Matam-NeotPeres,HofCarmel-NeveDavid,trunk,down,car,3190.6,0.6,1843.9
+T1,3,203,204,HofCarmel-NeveDavid,Hecht-Shprintzak,trunk,down,car,3163.1,0.6,1827.9
+T1,4,204,205,Hecht-Shprintzak,EinHayam,trunk,down,car,3082.8,0.6,1781.5
+T1,5,205,206,EinHayam,BatGalim-KiryatEliezer,trunk,down,car,2797.4,0.6,1616.6
+T1,6,206,207,BatGalim-KiryatEliezer,Hamoshava,trunk,down,car,4406.7,0.6,2546.6
+T1,7,207,208,Hamoshava,LowerCity,trunk,down,car,2872.8,0.6,1660.2
+T1,8,208,209,LowerCity,Namal-Giborim,trunk,down,car,3111.5,0.6,1798.1
+T1,9,209,210,Namal-Giborim,Hamifrats,trunk,down,car,3076.9,0.6,1778.1
+T1,10,210,211,Hamifrats,Bazan-Hutsot,trunk,down,car,3496.6,0.6,2020.7
+T1,11,211,212,Bazan-Hutsot,TsometKiryatAta,trunk,down,car,3515.8,0.6,2031.8
+T1,12,212,213,TsometKiryatAta,KiryatAta North,branch,down,car,4267.8,0.6,2466.3
+T1,13,213,214,KiryatAta North,KiryatAta North-East,branch,down,car,4157.8,0.6,2402.8
+T1,14,214,215,KiryatAta North-East,Shefaram,branch,down,car,3302.8,0.6,1908.7
+T1,15,215,216,Shefaram,Hamovil,branch,down,car,2270.9,0.6,1312.3
+T1,16,216,217,Hamovil,Nazareth,branch,down,car,1781.3,0.6,1029.4
+T1,1,201,202,TiratCarmel,Matam-NeotPeres,trunk,up,car,4012.7,0.6,2511.1
+T1,2,202,203,Matam-NeotPeres,HofCarmel-NeveDavid,trunk,up,car,2621.5,0.6,1640.6
+T1,3,203,204,HofCarmel-NeveDavid,Hecht-Shprintzak,trunk,up,car,2637.9,0.6,1650.8
+T1,4,204,205,Hecht-Shprintzak,EinHayam,trunk,up,car,3281.8,0.6,2053.7
+T1,5,205,206,EinHayam,BatGalim-KiryatEliezer,trunk,up,car,4058.8,0.6,2540.0
+T1,6,206,207,BatGalim-KiryatEliezer,Hamoshava,trunk,up,car,4071.9,0.6,2548.2
+T1,7,207,208,Hamoshava,LowerCity,trunk,up,car,2971.9,0.6,1859.8
+T1,8,208,209,LowerCity,Namal-Giborim,trunk,up,car,2511.2,0.6,1571.5
+T1,9,209,210,Namal-Giborim,Hamifrats,trunk,up,car,2221.4,0.6,1390.1
+T1,10,210,211,Hamifrats,Bazan-Hutsot,trunk,up,car,1360.4,0.6,851.4
+T1,11,211,212,Bazan-Hutsot,TsometKiryatAta,trunk,up,car,1335.2,0.6,835.6
+T1,12,212,213,TsometKiryatAta,KiryatAta North,branch,up,car,720.9,0.6,451.1
+T1,13,213,214,KiryatAta North,KiryatAta North-East,branch,up,car,756.5,0.6,473.4
+T1,14,214,215,KiryatAta North-East,Shefaram,branch,up,car,840.9,0.6,526.2
+T1,15,215,216,Shefaram,Hamovil,branch,up,car,957.1,0.6,599.0
+T1,16,216,217,Hamovil,Nazareth,branch,up,car,1092.3,0.6,683.6
 T1,1,201,202,TiratCarmel,Matam-NeotPeres,trunk,down,rail,0.0,0.6,0.0
 T1,2,202,203,Matam-NeotPeres,HofCarmel-NeveDavid,trunk,down,rail,0.0,0.6,0.0
 T1,3,203,204,HofCarmel-NeveDavid,Hecht-Shprintzak,trunk,down,rail,0.0,0.6,0.0
@@ -127,38 +127,38 @@ T1,13,213,214,KiryatAta North,KiryatAta North-East,branch,up,taxi,0.0,0.6,0.0
 T1,14,214,215,KiryatAta North-East,Shefaram,branch,up,taxi,0.0,0.6,0.0
 T1,15,215,216,Shefaram,Hamovil,branch,up,taxi,23.5,0.6,13.6
 T1,16,216,217,Hamovil,Nazareth,branch,up,taxi,23.5,0.6,13.6
-T1,1,201,202,TiratCarmel,Matam-NeotPeres,trunk,down,total,1315.0,,810.5
-T1,2,202,203,Matam-NeotPeres,HofCarmel-NeveDavid,trunk,down,total,5109.4,,3124.4
-T1,3,203,204,HofCarmel-NeveDavid,Hecht-Shprintzak,trunk,down,total,5093.1,,3113.4
-T1,4,204,205,Hecht-Shprintzak,EinHayam,trunk,down,total,4751.6,,2908.9
-T1,5,205,206,EinHayam,BatGalim-KiryatEliezer,trunk,down,total,4164.9,,2554.2
-T1,6,206,207,BatGalim-KiryatEliezer,Hamoshava,trunk,down,total,5737.3,,3538.5
-T1,7,207,208,Hamoshava,LowerCity,trunk,down,total,4319.4,,2647.2
-T1,8,208,209,LowerCity,Namal-Giborim,trunk,down,total,4865.4,,2977.5
-T1,9,209,210,Namal-Giborim,Hamifrats,trunk,down,total,4660.3,,2855.3
-T1,10,210,211,Hamifrats,Bazan-Hutsot,trunk,down,total,4894.1,,3008.1
-T1,11,211,212,Bazan-Hutsot,TsometKiryatAta,trunk,down,total,4958.3,,3047.2
-T1,12,212,213,TsometKiryatAta,KiryatAta North,branch,down,total,5808.9,,3575.9
-T1,13,213,214,KiryatAta North,KiryatAta North-East,branch,down,total,5679.8,,3495.8
-T1,14,214,215,KiryatAta North-East,Shefaram,branch,down,total,4588.2,,2821.3
-T1,15,215,216,Shefaram,Hamovil,branch,down,total,3287.8,,2017.2
-T1,16,216,217,Hamovil,Nazareth,branch,down,total,2798.4,,1711.0
-T1,1,201,202,TiratCarmel,Matam-NeotPeres,trunk,up,total,5127.0,,3302.9
-T1,2,202,203,Matam-NeotPeres,HofCarmel-NeveDavid,trunk,up,total,3710.6,,2368.9
-T1,3,203,204,HofCarmel-NeveDavid,Hecht-Shprintzak,trunk,up,total,3953.0,,2512.3
-T1,4,204,205,Hecht-Shprintzak,EinHayam,trunk,up,total,5574.0,,3510.0
-T1,5,205,206,EinHayam,BatGalim-KiryatEliezer,trunk,up,total,6877.7,,4330.7
-T1,6,206,207,BatGalim-KiryatEliezer,Hamoshava,trunk,up,total,5940.8,,3785.6
-T1,7,207,208,Hamoshava,LowerCity,trunk,up,total,4979.5,,3138.3
-T1,8,208,209,LowerCity,Namal-Giborim,trunk,up,total,3871.7,,2455.5
-T1,9,209,210,Namal-Giborim,Hamifrats,trunk,up,total,2987.2,,1917.1
-T1,10,210,211,Hamifrats,Bazan-Hutsot,trunk,up,total,1913.9,,1223.1
-T1,11,211,212,Bazan-Hutsot,TsometKiryatAta,trunk,up,total,1698.3,,1094.7
-T1,12,212,213,TsometKiryatAta,KiryatAta North,branch,up,total,785.2,,514.3
-T1,13,213,214,KiryatAta North,KiryatAta North-East,branch,up,total,807.3,,529.8
-T1,14,214,215,KiryatAta North-East,Shefaram,branch,up,total,855.8,,564.4
-T1,15,215,216,Shefaram,Hamovil,branch,up,total,990.7,,651.9
-T1,16,216,217,Hamovil,Nazareth,branch,up,total,1121.4,,738.6
+T1,1,201,202,TiratCarmel,Matam-NeotPeres,trunk,down,total,1315.0,,762.6
+T1,2,202,203,Matam-NeotPeres,HofCarmel-NeveDavid,trunk,down,total,5109.4,,2972.2
+T1,3,203,204,HofCarmel-NeveDavid,Hecht-Shprintzak,trunk,down,total,5093.1,,2962.5
+T1,4,204,205,Hecht-Shprintzak,EinHayam,trunk,down,total,4751.6,,2761.8
+T1,5,205,206,EinHayam,BatGalim-KiryatEliezer,trunk,down,total,4164.9,,2420.7
+T1,6,206,207,BatGalim-KiryatEliezer,Hamoshava,trunk,down,total,5737.3,,3328.3
+T1,7,207,208,Hamoshava,LowerCity,trunk,down,total,4319.4,,2510.2
+T1,8,208,209,LowerCity,Namal-Giborim,trunk,down,total,4865.4,,2829.1
+T1,9,209,210,Namal-Giborim,Hamifrats,trunk,down,total,4660.3,,2708.5
+T1,10,210,211,Hamifrats,Bazan-Hutsot,trunk,down,total,4894.1,,2841.3
+T1,11,211,212,Bazan-Hutsot,TsometKiryatAta,trunk,down,total,4958.3,,2879.5
+T1,12,212,213,TsometKiryatAta,KiryatAta North,branch,down,total,5808.9,,3372.3
+T1,13,213,214,KiryatAta North,KiryatAta North-East,branch,down,total,5679.8,,3297.5
+T1,14,214,215,KiryatAta North-East,Shefaram,branch,down,total,4588.2,,2663.7
+T1,15,215,216,Shefaram,Hamovil,branch,down,total,3287.8,,1908.9
+T1,16,216,217,Hamovil,Nazareth,branch,down,total,2798.4,,1626.0
+T1,1,201,202,TiratCarmel,Matam-NeotPeres,trunk,up,total,5127.0,,3162.9
+T1,2,202,203,Matam-NeotPeres,HofCarmel-NeveDavid,trunk,up,total,3710.6,,2277.4
+T1,3,203,204,HofCarmel-NeveDavid,Hecht-Shprintzak,trunk,up,total,3953.0,,2420.3
+T1,4,204,205,Hecht-Shprintzak,EinHayam,trunk,up,total,5574.0,,3395.5
+T1,5,205,206,EinHayam,BatGalim-KiryatEliezer,trunk,up,total,6877.7,,4189.0
+T1,6,206,207,BatGalim-KiryatEliezer,Hamoshava,trunk,up,total,5940.8,,3643.5
+T1,7,207,208,Hamoshava,LowerCity,trunk,up,total,4979.5,,3034.6
+T1,8,208,209,LowerCity,Namal-Giborim,trunk,up,total,3871.7,,2367.9
+T1,9,209,210,Namal-Giborim,Hamifrats,trunk,up,total,2987.2,,1839.6
+T1,10,210,211,Hamifrats,Bazan-Hutsot,trunk,up,total,1913.9,,1175.6
+T1,11,211,212,Bazan-Hutsot,TsometKiryatAta,trunk,up,total,1698.3,,1048.1
+T1,12,212,213,TsometKiryatAta,KiryatAta North,branch,up,total,785.2,,489.1
+T1,13,213,214,KiryatAta North,KiryatAta North-East,branch,up,total,807.3,,503.4
+T1,14,214,215,KiryatAta North-East,Shefaram,branch,up,total,855.8,,535.0
+T1,15,215,216,Shefaram,Hamovil,branch,up,total,990.7,,618.5
+T1,16,216,217,Hamovil,Nazareth,branch,up,total,1121.4,,700.5
 T1,1,201,202,TiratCarmel,Matam-NeotPeres,trunk,down,transit,188.7,,111.4
 T1,2,202,203,Matam-NeotPeres,HofCarmel-NeveDavid,trunk,down,transit,1488.9,,879.0
 T1,3,203,204,HofCarmel-NeveDavid,Hecht-Shprintzak,trunk,down,transit,1464.1,,864.4
@@ -221,49 +221,49 @@ T2,12,212,104,TsometKiryatAta,KiryatHaim,branch,up,bus,138.8,0.6,81.9
 T2,13,104,103,KiryatHaim,KiryatBialik Center,branch,up,bus,284.7,0.6,168.1
 T2,14,103,102,KiryatBialik Center,Kiryon,branch,up,bus,348.7,0.6,205.9
 T2,15,102,101,Kiryon,TsurShalom,branch,up,bus,66.3,0.6,39.1
-T2,1,201,202,TiratCarmel,Matam-NeotPeres,trunk,down,car,1104.2,0.6,690.8
-T2,2,202,203,Matam-NeotPeres,HofCarmel-NeveDavid,trunk,down,car,2669.4,0.6,1670.0
-T2,3,203,204,HofCarmel-NeveDavid,Hecht-Shprintzak,trunk,down,car,2641.9,0.6,1652.7
-T2,4,204,205,Hecht-Shprintzak,EinHayam,trunk,down,car,2561.5,0.6,1602.5
-T2,5,205,206,EinHayam,BatGalim-KiryatEliezer,trunk,down,car,2276.2,0.6,1424.0
-T2,6,206,207,BatGalim-KiryatEliezer,Hamoshava,trunk,down,car,4159.3,0.6,2602.1
-T2,7,207,208,Hamoshava,LowerCity,trunk,down,car,2625.4,0.6,1642.5
-T2,8,208,209,LowerCity,Namal-Giborim,trunk,down,car,2761.9,0.6,1727.9
-T2,9,209,210,Namal-Giborim,Hamifrats,trunk,down,car,2864.9,0.6,1792.3
-T2,10,210,211,Hamifrats,Bazan-Hutsot,trunk,down,car,4059.0,0.6,2539.3
-T2,11,211,212,Bazan-Hutsot,TsometKiryatAta,trunk,down,car,5230.9,0.6,3272.4
-T2,12,212,104,TsometKiryatAta,KiryatHaim,branch,down,car,6482.8,0.6,4055.6
-T2,13,104,103,KiryatHaim,KiryatBialik Center,branch,down,car,7577.7,0.6,4740.6
-T2,14,103,102,KiryatBialik Center,Kiryon,branch,down,car,3705.4,0.6,2318.1
-T2,15,102,101,Kiryon,TsurShalom,branch,down,car,2278.4,0.6,1425.4
-T2,1,201,202,TiratCarmel,Matam-NeotPeres,trunk,up,car,4012.7,0.7,2651.2
-T2,2,202,203,Matam-NeotPeres,HofCarmel-NeveDavid,trunk,up,car,2621.5,0.7,1732.1
-T2,3,203,204,HofCarmel-NeveDavid,Hecht-Shprintzak,trunk,up,car,2637.9,0.7,1742.9
-T2,4,204,205,Hecht-Shprintzak,EinHayam,trunk,up,car,3281.8,0.7,2168.3
-T2,5,205,206,EinHayam,BatGalim-KiryatEliezer,trunk,up,car,4058.8,0.7,2681.7
-T2,6,206,207,BatGalim-KiryatEliezer,Hamoshava,trunk,up,car,3970.2,0.7,2623.1
-T2,7,207,208,Hamoshava,LowerCity,trunk,up,car,2837.4,0.7,1874.6
-T2,8,208,209,LowerCity,Namal-Giborim,trunk,up,car,2202.1,0.7,1454.9
-T2,9,209,210,Namal-Giborim,Hamifrats,trunk,up,car,1926.4,0.7,1272.8
-T2,10,210,211,Hamifrats,Bazan-Hutsot,trunk,up,car,1095.7,0.7,723.9
-T2,11,211,212,Bazan-Hutsot,TsometKiryatAta,trunk,up,car,1186.8,0.7,784.1
-T2,12,212,104,TsometKiryatAta,KiryatHaim,branch,up,car,483.7,0.7,319.6
-T2,13,104,103,KiryatHaim,KiryatBialik Center,branch,up,car,1934.2,0.7,1277.9
-T2,14,103,102,KiryatBialik Center,Kiryon,branch,up,car,1205.0,0.7,796.1
-T2,15,102,101,Kiryon,TsurShalom,branch,up,car,998.3,0.7,659.6
+T2,1,201,202,TiratCarmel,Matam-NeotPeres,trunk,down,car,1104.2,0.6,628.6
+T2,2,202,203,Matam-NeotPeres,HofCarmel-NeveDavid,trunk,down,car,2669.4,0.6,1519.7
+T2,3,203,204,HofCarmel-NeveDavid,Hecht-Shprintzak,trunk,down,car,2641.9,0.6,1504.0
+T2,4,204,205,Hecht-Shprintzak,EinHayam,trunk,down,car,2561.5,0.6,1458.3
+T2,5,205,206,EinHayam,BatGalim-KiryatEliezer,trunk,down,car,2276.2,0.6,1295.8
+T2,6,206,207,BatGalim-KiryatEliezer,Hamoshava,trunk,down,car,4159.3,0.6,2367.9
+T2,7,207,208,Hamoshava,LowerCity,trunk,down,car,2625.4,0.6,1494.7
+T2,8,208,209,LowerCity,Namal-Giborim,trunk,down,car,2761.9,0.6,1572.4
+T2,9,209,210,Namal-Giborim,Hamifrats,trunk,down,car,2864.9,0.6,1631.0
+T2,10,210,211,Hamifrats,Bazan-Hutsot,trunk,down,car,4059.0,0.6,2310.8
+T2,11,211,212,Bazan-Hutsot,TsometKiryatAta,trunk,down,car,5230.9,0.6,2977.9
+T2,12,212,104,TsometKiryatAta,KiryatHaim,branch,down,car,6482.8,0.6,3690.6
+T2,13,104,103,KiryatHaim,KiryatBialik Center,branch,down,car,7577.7,0.6,4314.0
+T2,14,103,102,KiryatBialik Center,Kiryon,branch,down,car,3705.4,0.6,2109.5
+T2,15,102,101,Kiryon,TsurShalom,branch,down,car,2278.4,0.6,1297.1
+T2,1,201,202,TiratCarmel,Matam-NeotPeres,trunk,up,car,4012.7,0.6,2483.5
+T2,2,202,203,Matam-NeotPeres,HofCarmel-NeveDavid,trunk,up,car,2621.5,0.6,1622.5
+T2,3,203,204,HofCarmel-NeveDavid,Hecht-Shprintzak,trunk,up,car,2637.9,0.6,1632.6
+T2,4,204,205,Hecht-Shprintzak,EinHayam,trunk,up,car,3281.8,0.6,2031.1
+T2,5,205,206,EinHayam,BatGalim-KiryatEliezer,trunk,up,car,4058.8,0.6,2512.0
+T2,6,206,207,BatGalim-KiryatEliezer,Hamoshava,trunk,up,car,3970.2,0.6,2457.2
+T2,7,207,208,Hamoshava,LowerCity,trunk,up,car,2837.4,0.6,1756.0
+T2,8,208,209,LowerCity,Namal-Giborim,trunk,up,car,2202.1,0.6,1362.9
+T2,9,209,210,Namal-Giborim,Hamifrats,trunk,up,car,1926.4,0.6,1192.2
+T2,10,210,211,Hamifrats,Bazan-Hutsot,trunk,up,car,1095.7,0.6,678.1
+T2,11,211,212,Bazan-Hutsot,TsometKiryatAta,trunk,up,car,1186.8,0.6,734.5
+T2,12,212,104,TsometKiryatAta,KiryatHaim,branch,up,car,483.7,0.6,299.4
+T2,13,104,103,KiryatHaim,KiryatBialik Center,branch,up,car,1934.2,0.6,1197.1
+T2,14,103,102,KiryatBialik Center,Kiryon,branch,up,car,1205.0,0.6,745.7
+T2,15,102,101,Kiryon,TsurShalom,branch,up,car,998.3,0.6,617.8
 T2,1,201,202,TiratCarmel,Matam-NeotPeres,trunk,down,rail,0.0,0.6,0.0
-T2,2,202,203,Matam-NeotPeres,HofCarmel-NeveDavid,trunk,down,rail,32.1,0.6,18.9
-T2,3,203,204,HofCarmel-NeveDavid,Hecht-Shprintzak,trunk,down,rail,32.1,0.6,18.9
-T2,4,204,205,Hecht-Shprintzak,EinHayam,trunk,down,rail,32.1,0.6,18.9
-T2,5,205,206,EinHayam,BatGalim-KiryatEliezer,trunk,down,rail,32.1,0.6,18.9
-T2,6,206,207,BatGalim-KiryatEliezer,Hamoshava,trunk,down,rail,32.1,0.6,18.9
-T2,7,207,208,Hamoshava,LowerCity,trunk,down,rail,32.1,0.6,18.9
-T2,8,208,209,LowerCity,Namal-Giborim,trunk,down,rail,32.1,0.6,18.9
-T2,9,209,210,Namal-Giborim,Hamifrats,trunk,down,rail,34.4,0.6,20.3
-T2,10,210,211,Hamifrats,Bazan-Hutsot,trunk,down,rail,38.6,0.6,22.8
-T2,11,211,212,Bazan-Hutsot,TsometKiryatAta,trunk,down,rail,38.6,0.6,22.8
-T2,12,212,104,TsometKiryatAta,KiryatHaim,branch,down,rail,38.6,0.6,22.8
-T2,13,104,103,KiryatHaim,KiryatBialik Center,branch,down,rail,20.7,0.6,12.2
+T2,2,202,203,Matam-NeotPeres,HofCarmel-NeveDavid,trunk,down,rail,32.1,0.6,18.6
+T2,3,203,204,HofCarmel-NeveDavid,Hecht-Shprintzak,trunk,down,rail,32.1,0.6,18.6
+T2,4,204,205,Hecht-Shprintzak,EinHayam,trunk,down,rail,32.1,0.6,18.6
+T2,5,205,206,EinHayam,BatGalim-KiryatEliezer,trunk,down,rail,32.1,0.6,18.6
+T2,6,206,207,BatGalim-KiryatEliezer,Hamoshava,trunk,down,rail,32.1,0.6,18.6
+T2,7,207,208,Hamoshava,LowerCity,trunk,down,rail,32.1,0.6,18.6
+T2,8,208,209,LowerCity,Namal-Giborim,trunk,down,rail,32.1,0.6,18.6
+T2,9,209,210,Namal-Giborim,Hamifrats,trunk,down,rail,34.4,0.6,20.0
+T2,10,210,211,Hamifrats,Bazan-Hutsot,trunk,down,rail,38.6,0.6,22.4
+T2,11,211,212,Bazan-Hutsot,TsometKiryatAta,trunk,down,rail,38.6,0.6,22.4
+T2,12,212,104,TsometKiryatAta,KiryatHaim,branch,down,rail,38.6,0.6,22.4
+T2,13,104,103,KiryatHaim,KiryatBialik Center,branch,down,rail,20.7,0.6,12.0
 T2,14,103,102,KiryatBialik Center,Kiryon,branch,down,rail,0.0,0.6,0.0
 T2,15,102,101,Kiryon,TsurShalom,branch,down,rail,0.0,0.6,0.0
 T2,1,201,202,TiratCarmel,Matam-NeotPeres,trunk,up,rail,0.0,0.6,0.0
@@ -311,49 +311,49 @@ T2,12,212,104,TsometKiryatAta,KiryatHaim,branch,up,taxi,162.6,0.6,94.3
 T2,13,104,103,KiryatHaim,KiryatBialik Center,branch,up,taxi,278.1,0.6,161.2
 T2,14,103,102,KiryatBialik Center,Kiryon,branch,up,taxi,342.6,0.6,198.6
 T2,15,102,101,Kiryon,TsurShalom,branch,up,taxi,222.8,0.6,129.2
-T2,1,201,202,TiratCarmel,Matam-NeotPeres,trunk,down,total,1634.8,,1000.4
-T2,2,202,203,Matam-NeotPeres,HofCarmel-NeveDavid,trunk,down,total,4948.2,,3008.5
-T2,3,203,204,HofCarmel-NeveDavid,Hecht-Shprintzak,trunk,down,total,4938.3,,3001.3
-T2,4,204,205,Hecht-Shprintzak,EinHayam,trunk,down,total,4616.2,,2808.2
-T2,5,205,206,EinHayam,BatGalim-KiryatEliezer,trunk,down,total,4033.0,,2455.6
-T2,6,206,207,BatGalim-KiryatEliezer,Hamoshava,trunk,down,total,5587.8,,3443.1
-T2,7,207,208,Hamoshava,LowerCity,trunk,down,total,4116.0,,2520.0
-T2,8,208,209,LowerCity,Namal-Giborim,trunk,down,total,4985.5,,3032.0
-T2,9,209,210,Namal-Giborim,Hamifrats,trunk,down,total,5046.4,,3069.8
-T2,10,210,211,Hamifrats,Bazan-Hutsot,trunk,down,total,6094.2,,3730.4
-T2,11,211,212,Bazan-Hutsot,TsometKiryatAta,trunk,down,total,7372.0,,4526.2
-T2,12,212,104,TsometKiryatAta,KiryatHaim,branch,down,total,8756.9,,5387.5
-T2,13,104,103,KiryatHaim,KiryatBialik Center,branch,down,total,10144.4,,6239.0
-T2,14,103,102,KiryatBialik Center,Kiryon,branch,down,total,5161.4,,3167.2
-T2,15,102,101,Kiryon,TsurShalom,branch,down,total,2925.2,,1803.0
-T2,1,201,202,TiratCarmel,Matam-NeotPeres,trunk,up,total,5236.0,,3366.2
-T2,2,202,203,Matam-NeotPeres,HofCarmel-NeveDavid,trunk,up,total,3843.4,,2446.0
-T2,3,203,204,HofCarmel-NeveDavid,Hecht-Shprintzak,trunk,up,total,4086.5,,2589.8
-T2,4,204,205,Hecht-Shprintzak,EinHayam,trunk,up,total,5710.3,,3589.2
-T2,5,205,206,EinHayam,BatGalim-KiryatEliezer,trunk,up,total,7035.6,,4422.3
-T2,6,206,207,BatGalim-KiryatEliezer,Hamoshava,trunk,up,total,5999.5,,3811.6
-T2,7,207,208,Hamoshava,LowerCity,trunk,up,total,5015.1,,3148.3
-T2,8,208,209,LowerCity,Namal-Giborim,trunk,up,total,3744.5,,2357.2
-T2,9,209,210,Namal-Giborim,Hamifrats,trunk,up,total,2910.0,,1849.1
-T2,10,210,211,Hamifrats,Bazan-Hutsot,trunk,up,total,1881.6,,1183.7
-T2,11,211,212,Bazan-Hutsot,TsometKiryatAta,trunk,up,total,1784.2,,1133.2
-T2,12,212,104,TsometKiryatAta,KiryatHaim,branch,up,total,785.0,,495.7
-T2,13,104,103,KiryatHaim,KiryatBialik Center,branch,up,total,2496.9,,1607.2
-T2,14,103,102,KiryatBialik Center,Kiryon,branch,up,total,1896.3,,1200.6
-T2,15,102,101,Kiryon,TsurShalom,branch,up,total,1287.4,,827.9
+T2,1,201,202,TiratCarmel,Matam-NeotPeres,trunk,down,total,1634.8,,938.2
+T2,2,202,203,Matam-NeotPeres,HofCarmel-NeveDavid,trunk,down,total,4948.2,,2857.9
+T2,3,203,204,HofCarmel-NeveDavid,Hecht-Shprintzak,trunk,down,total,4938.3,,2852.2
+T2,4,204,205,Hecht-Shprintzak,EinHayam,trunk,down,total,4616.2,,2663.7
+T2,5,205,206,EinHayam,BatGalim-KiryatEliezer,trunk,down,total,4033.0,,2327.1
+T2,6,206,207,BatGalim-KiryatEliezer,Hamoshava,trunk,down,total,5587.8,,3208.6
+T2,7,207,208,Hamoshava,LowerCity,trunk,down,total,4116.0,,2371.8
+T2,8,208,209,LowerCity,Namal-Giborim,trunk,down,total,4985.5,,2876.2
+T2,9,209,210,Namal-Giborim,Hamifrats,trunk,down,total,5046.4,,2908.1
+T2,10,210,211,Hamifrats,Bazan-Hutsot,trunk,down,total,6094.2,,3501.4
+T2,11,211,212,Bazan-Hutsot,TsometKiryatAta,trunk,down,total,7372.0,,4231.3
+T2,12,212,104,TsometKiryatAta,KiryatHaim,branch,down,total,8756.9,,5022.1
+T2,13,104,103,KiryatHaim,KiryatBialik Center,branch,down,total,10144.4,,5812.2
+T2,14,103,102,KiryatBialik Center,Kiryon,branch,down,total,5161.4,,2958.6
+T2,15,102,101,Kiryon,TsurShalom,branch,down,total,2925.2,,1674.7
+T2,1,201,202,TiratCarmel,Matam-NeotPeres,trunk,up,total,5236.0,,3198.5
+T2,2,202,203,Matam-NeotPeres,HofCarmel-NeveDavid,trunk,up,total,3843.4,,2336.4
+T2,3,203,204,HofCarmel-NeveDavid,Hecht-Shprintzak,trunk,up,total,4086.5,,2479.5
+T2,4,204,205,Hecht-Shprintzak,EinHayam,trunk,up,total,5710.3,,3452.0
+T2,5,205,206,EinHayam,BatGalim-KiryatEliezer,trunk,up,total,7035.6,,4252.7
+T2,6,206,207,BatGalim-KiryatEliezer,Hamoshava,trunk,up,total,5999.5,,3645.6
+T2,7,207,208,Hamoshava,LowerCity,trunk,up,total,5015.1,,3029.7
+T2,8,208,209,LowerCity,Namal-Giborim,trunk,up,total,3744.5,,2265.1
+T2,9,209,210,Namal-Giborim,Hamifrats,trunk,up,total,2910.0,,1768.5
+T2,10,210,211,Hamifrats,Bazan-Hutsot,trunk,up,total,1881.6,,1137.9
+T2,11,211,212,Bazan-Hutsot,TsometKiryatAta,trunk,up,total,1784.2,,1083.6
+T2,12,212,104,TsometKiryatAta,KiryatHaim,branch,up,total,785.0,,475.5
+T2,13,104,103,KiryatHaim,KiryatBialik Center,branch,up,total,2496.9,,1526.4
+T2,14,103,102,KiryatBialik Center,Kiryon,branch,up,total,1896.3,,1150.3
+T2,15,102,101,Kiryon,TsurShalom,branch,up,total,1287.4,,786.2
 T2,1,201,202,TiratCarmel,Matam-NeotPeres,trunk,down,transit,188.2,,111.1
-T2,2,202,203,Matam-NeotPeres,HofCarmel-NeveDavid,trunk,down,transit,1628.7,,961.6
-T2,3,203,204,HofCarmel-NeveDavid,Hecht-Shprintzak,trunk,down,transit,1610.3,,950.7
-T2,4,204,205,Hecht-Shprintzak,EinHayam,trunk,down,transit,1362.6,,804.4
-T2,5,205,206,EinHayam,BatGalim-KiryatEliezer,trunk,down,transit,1227.7,,724.9
-T2,6,206,207,BatGalim-KiryatEliezer,Hamoshava,trunk,down,transit,1208.3,,713.4
-T2,7,207,208,Hamoshava,LowerCity,trunk,down,transit,1255.0,,740.9
-T2,8,208,209,LowerCity,Namal-Giborim,trunk,down,transit,1408.9,,831.8
-T2,9,209,210,Namal-Giborim,Hamifrats,trunk,down,transit,1196.6,,706.5
-T2,10,210,211,Hamifrats,Bazan-Hutsot,trunk,down,transit,1043.7,,616.2
-T2,11,211,212,Bazan-Hutsot,TsometKiryatAta,trunk,down,transit,1163.8,,687.1
-T2,12,212,104,TsometKiryatAta,KiryatHaim,branch,down,transit,1255.2,,741.0
-T2,13,104,103,KiryatHaim,KiryatBialik Center,branch,down,transit,966.1,,570.4
+T2,2,202,203,Matam-NeotPeres,HofCarmel-NeveDavid,trunk,down,transit,1628.7,,961.3
+T2,3,203,204,HofCarmel-NeveDavid,Hecht-Shprintzak,trunk,down,transit,1610.3,,950.4
+T2,4,204,205,Hecht-Shprintzak,EinHayam,trunk,down,transit,1362.6,,804.1
+T2,5,205,206,EinHayam,BatGalim-KiryatEliezer,trunk,down,transit,1227.7,,724.5
+T2,6,206,207,BatGalim-KiryatEliezer,Hamoshava,trunk,down,transit,1208.3,,713.0
+T2,7,207,208,Hamoshava,LowerCity,trunk,down,transit,1255.0,,740.6
+T2,8,208,209,LowerCity,Namal-Giborim,trunk,down,transit,1408.9,,831.5
+T2,9,209,210,Namal-Giborim,Hamifrats,trunk,down,transit,1196.6,,706.1
+T2,10,210,211,Hamifrats,Bazan-Hutsot,trunk,down,transit,1043.7,,615.8
+T2,11,211,212,Bazan-Hutsot,TsometKiryatAta,trunk,down,transit,1163.8,,686.7
+T2,12,212,104,TsometKiryatAta,KiryatHaim,branch,down,transit,1255.2,,740.6
+T2,13,104,103,KiryatHaim,KiryatBialik Center,branch,down,transit,966.1,,570.2
 T2,14,103,102,KiryatBialik Center,Kiryon,branch,down,transit,464.1,,274.0
 T2,15,102,101,Kiryon,TsurShalom,branch,down,transit,244.1,,144.1
 T2,1,201,202,TiratCarmel,Matam-NeotPeres,trunk,up,transit,542.2,,320.1
@@ -401,48 +401,48 @@ T3,12,212,304,TsometKiryatAta,KiryatHaim West,branch,up,bus,139.0,0.6,82.1
 T3,13,304,303,KiryatHaim West,KiryatYam B+C,branch,up,bus,273.9,0.6,161.7
 T3,14,303,302,KiryatYam B+C,KiryatYam A,branch,up,bus,77.6,0.6,45.8
 T3,15,302,301,KiryatYam A,SavyoneyYam,branch,up,bus,14.7,0.6,8.7
-T3,1,201,202,TiratCarmel,Matam-NeotPeres,trunk,down,car,973.4,0.6,609.0
-T3,2,202,203,Matam-NeotPeres,HofCarmel-NeveDavid,trunk,down,car,2435.8,0.6,1523.8
-T3,3,203,204,HofCarmel-NeveDavid,Hecht-Shprintzak,trunk,down,car,2432.6,0.6,1521.8
-T3,4,204,205,Hecht-Shprintzak,EinHayam,trunk,down,car,2352.3,0.6,1471.6
-T3,5,205,206,EinHayam,BatGalim-KiryatEliezer,trunk,down,car,2066.9,0.6,1293.1
-T3,6,206,207,BatGalim-KiryatEliezer,Hamoshava,trunk,down,car,3481.6,0.6,2178.1
-T3,7,207,208,Hamoshava,LowerCity,trunk,down,car,1947.7,0.6,1218.5
-T3,8,208,209,LowerCity,Namal-Giborim,trunk,down,car,2095.1,0.6,1310.7
-T3,9,209,210,Namal-Giborim,Hamifrats,trunk,down,car,1927.3,0.6,1205.7
-T3,10,210,211,Hamifrats,Bazan-Hutsot,trunk,down,car,2006.1,0.6,1255.0
-T3,11,211,212,Bazan-Hutsot,TsometKiryatAta,trunk,down,car,2634.6,0.6,1648.2
-T3,12,212,304,TsometKiryatAta,KiryatHaim West,branch,down,car,3050.0,0.6,1908.1
-T3,13,304,303,KiryatHaim West,KiryatYam B+C,branch,down,car,2582.2,0.6,1615.4
-T3,14,303,302,KiryatYam B+C,KiryatYam A,branch,down,car,2232.5,0.6,1396.7
-T3,15,302,301,KiryatYam A,SavyoneyYam,branch,down,car,1649.4,0.6,1031.9
-T3,1,201,202,TiratCarmel,Matam-NeotPeres,trunk,up,car,4012.7,0.7,2651.2
-T3,2,202,203,Matam-NeotPeres,HofCarmel-NeveDavid,trunk,up,car,2621.5,0.7,1732.1
-T3,3,203,204,HofCarmel-NeveDavid,Hecht-Shprintzak,trunk,up,car,2637.9,0.7,1742.9
-T3,4,204,205,Hecht-Shprintzak,EinHayam,trunk,up,car,3281.8,0.7,2168.3
-T3,5,205,206,EinHayam,BatGalim-KiryatEliezer,trunk,up,car,4078.5,0.7,2694.7
-T3,6,206,207,BatGalim-KiryatEliezer,Hamoshava,trunk,up,car,3985.3,0.7,2633.1
-T3,7,207,208,Hamoshava,LowerCity,trunk,up,car,2852.4,0.7,1884.6
-T3,8,208,209,LowerCity,Namal-Giborim,trunk,up,car,2162.6,0.7,1428.8
-T3,9,209,210,Namal-Giborim,Hamifrats,trunk,up,car,1889.4,0.7,1248.3
-T3,10,210,211,Hamifrats,Bazan-Hutsot,trunk,up,car,1049.3,0.7,693.3
-T3,11,211,212,Bazan-Hutsot,TsometKiryatAta,trunk,up,car,1159.8,0.7,766.3
-T3,12,212,304,TsometKiryatAta,KiryatHaim West,branch,up,car,386.9,0.7,255.6
-T3,13,304,303,KiryatHaim West,KiryatYam B+C,branch,up,car,892.4,0.7,589.6
-T3,14,303,302,KiryatYam B+C,KiryatYam A,branch,up,car,621.7,0.7,410.8
-T3,15,302,301,KiryatYam A,SavyoneyYam,branch,up,car,389.8,0.7,257.5
+T3,1,201,202,TiratCarmel,Matam-NeotPeres,trunk,down,car,973.4,0.6,554.4
+T3,2,202,203,Matam-NeotPeres,HofCarmel-NeveDavid,trunk,down,car,2435.8,0.6,1387.2
+T3,3,203,204,HofCarmel-NeveDavid,Hecht-Shprintzak,trunk,down,car,2432.6,0.6,1385.4
+T3,4,204,205,Hecht-Shprintzak,EinHayam,trunk,down,car,2352.3,0.6,1339.6
+T3,5,205,206,EinHayam,BatGalim-KiryatEliezer,trunk,down,car,2066.9,0.6,1177.1
+T3,6,206,207,BatGalim-KiryatEliezer,Hamoshava,trunk,down,car,3481.6,0.6,1982.7
+T3,7,207,208,Hamoshava,LowerCity,trunk,down,car,1947.7,0.6,1109.2
+T3,8,208,209,LowerCity,Namal-Giborim,trunk,down,car,2095.1,0.6,1193.1
+T3,9,209,210,Namal-Giborim,Hamifrats,trunk,down,car,1927.3,0.6,1097.6
+T3,10,210,211,Hamifrats,Bazan-Hutsot,trunk,down,car,2006.1,0.6,1142.5
+T3,11,211,212,Bazan-Hutsot,TsometKiryatAta,trunk,down,car,2634.6,0.6,1500.4
+T3,12,212,304,TsometKiryatAta,KiryatHaim West,branch,down,car,3050.0,0.6,1737.0
+T3,13,304,303,KiryatHaim West,KiryatYam B+C,branch,down,car,2582.2,0.6,1470.6
+T3,14,303,302,KiryatYam B+C,KiryatYam A,branch,down,car,2232.5,0.6,1271.4
+T3,15,302,301,KiryatYam A,SavyoneyYam,branch,down,car,1649.4,0.6,939.3
+T3,1,201,202,TiratCarmel,Matam-NeotPeres,trunk,up,car,4012.7,0.7,2614.7
+T3,2,202,203,Matam-NeotPeres,HofCarmel-NeveDavid,trunk,up,car,2621.5,0.7,1708.2
+T3,3,203,204,HofCarmel-NeveDavid,Hecht-Shprintzak,trunk,up,car,2637.9,0.7,1718.9
+T3,4,204,205,Hecht-Shprintzak,EinHayam,trunk,up,car,3281.8,0.7,2138.4
+T3,5,205,206,EinHayam,BatGalim-KiryatEliezer,trunk,up,car,4078.5,0.7,2657.6
+T3,6,206,207,BatGalim-KiryatEliezer,Hamoshava,trunk,up,car,3985.3,0.7,2596.8
+T3,7,207,208,Hamoshava,LowerCity,trunk,up,car,2852.4,0.7,1858.6
+T3,8,208,209,LowerCity,Namal-Giborim,trunk,up,car,2162.6,0.7,1409.2
+T3,9,209,210,Namal-Giborim,Hamifrats,trunk,up,car,1889.4,0.7,1231.1
+T3,10,210,211,Hamifrats,Bazan-Hutsot,trunk,up,car,1049.3,0.7,683.7
+T3,11,211,212,Bazan-Hutsot,TsometKiryatAta,trunk,up,car,1159.8,0.7,755.7
+T3,12,212,304,TsometKiryatAta,KiryatHaim West,branch,up,car,386.9,0.7,252.1
+T3,13,304,303,KiryatHaim West,KiryatYam B+C,branch,up,car,892.4,0.7,581.5
+T3,14,303,302,KiryatYam B+C,KiryatYam A,branch,up,car,621.7,0.7,405.1
+T3,15,302,301,KiryatYam A,SavyoneyYam,branch,up,car,389.8,0.7,254.0
 T3,1,201,202,TiratCarmel,Matam-NeotPeres,trunk,down,rail,0.0,0.6,0.0
-T3,2,202,203,Matam-NeotPeres,HofCarmel-NeveDavid,trunk,down,rail,7.7,0.6,4.5
-T3,3,203,204,HofCarmel-NeveDavid,Hecht-Shprintzak,trunk,down,rail,7.7,0.6,4.5
-T3,4,204,205,Hecht-Shprintzak,EinHayam,trunk,down,rail,7.7,0.6,4.5
-T3,5,205,206,EinHayam,BatGalim-KiryatEliezer,trunk,down,rail,7.7,0.6,4.5
-T3,6,206,207,BatGalim-KiryatEliezer,Hamoshava,trunk,down,rail,7.7,0.6,4.5
-T3,7,207,208,Hamoshava,LowerCity,trunk,down,rail,7.7,0.6,4.5
-T3,8,208,209,LowerCity,Namal-Giborim,trunk,down,rail,7.7,0.6,4.5
-T3,9,209,210,Namal-Giborim,Hamifrats,trunk,down,rail,9.3,0.6,5.5
-T3,10,210,211,Hamifrats,Bazan-Hutsot,trunk,down,rail,12.1,0.6,7.2
-T3,11,211,212,Bazan-Hutsot,TsometKiryatAta,trunk,down,rail,12.1,0.6,7.2
-T3,12,212,304,TsometKiryatAta,KiryatHaim West,branch,down,rail,12.1,0.6,7.2
+T3,2,202,203,Matam-NeotPeres,HofCarmel-NeveDavid,trunk,down,rail,7.7,0.6,4.4
+T3,3,203,204,HofCarmel-NeveDavid,Hecht-Shprintzak,trunk,down,rail,7.7,0.6,4.4
+T3,4,204,205,Hecht-Shprintzak,EinHayam,trunk,down,rail,7.7,0.6,4.4
+T3,5,205,206,EinHayam,BatGalim-KiryatEliezer,trunk,down,rail,7.7,0.6,4.4
+T3,6,206,207,BatGalim-KiryatEliezer,Hamoshava,trunk,down,rail,7.7,0.6,4.4
+T3,7,207,208,Hamoshava,LowerCity,trunk,down,rail,7.7,0.6,4.4
+T3,8,208,209,LowerCity,Namal-Giborim,trunk,down,rail,7.7,0.6,4.4
+T3,9,209,210,Namal-Giborim,Hamifrats,trunk,down,rail,9.3,0.6,5.4
+T3,10,210,211,Hamifrats,Bazan-Hutsot,trunk,down,rail,12.1,0.6,7.0
+T3,11,211,212,Bazan-Hutsot,TsometKiryatAta,trunk,down,rail,12.1,0.6,7.0
+T3,12,212,304,TsometKiryatAta,KiryatHaim West,branch,down,rail,12.1,0.6,7.0
 T3,13,304,303,KiryatHaim West,KiryatYam B+C,branch,down,rail,0.0,0.6,0.0
 T3,14,303,302,KiryatYam B+C,KiryatYam A,branch,down,rail,0.0,0.6,0.0
 T3,15,302,301,KiryatYam A,SavyoneyYam,branch,down,rail,0.0,0.6,0.0
@@ -491,48 +491,48 @@ T3,12,212,304,TsometKiryatAta,KiryatHaim West,branch,up,taxi,14.4,0.6,8.4
 T3,13,304,303,KiryatHaim West,KiryatYam B+C,branch,up,taxi,0.0,0.6,0.0
 T3,14,303,302,KiryatYam B+C,KiryatYam A,branch,up,taxi,0.0,0.6,0.0
 T3,15,302,301,KiryatYam A,SavyoneyYam,branch,up,taxi,0.0,0.6,0.0
-T3,1,201,202,TiratCarmel,Matam-NeotPeres,trunk,down,total,1290.0,,794.6
-T3,2,202,203,Matam-NeotPeres,HofCarmel-NeveDavid,trunk,down,total,4354.4,,2651.2
-T3,3,203,204,HofCarmel-NeveDavid,Hecht-Shprintzak,trunk,down,total,4357.1,,2652.3
-T3,4,204,205,Hecht-Shprintzak,EinHayam,trunk,down,total,3999.2,,2438.1
-T3,5,205,206,EinHayam,BatGalim-KiryatEliezer,trunk,down,total,3409.6,,2081.7
-T3,6,206,207,BatGalim-KiryatEliezer,Hamoshava,trunk,down,total,4535.8,,2797.8
-T3,7,207,208,Hamoshava,LowerCity,trunk,down,total,3051.4,,1867.3
-T3,8,208,209,LowerCity,Namal-Giborim,trunk,down,total,3485.5,,2127.1
-T3,9,209,210,Namal-Giborim,Hamifrats,trunk,down,total,3197.4,,1950.1
-T3,10,210,211,Hamifrats,Bazan-Hutsot,trunk,down,total,3167.1,,1935.0
-T3,11,211,212,Bazan-Hutsot,TsometKiryatAta,trunk,down,total,4184.8,,2555.4
-T3,12,212,304,TsometKiryatAta,KiryatHaim West,branch,down,total,4895.9,,2988.2
-T3,13,304,303,KiryatHaim West,KiryatYam B+C,branch,down,total,4005.7,,2447.1
-T3,14,303,302,KiryatYam B+C,KiryatYam A,branch,down,total,3325.1,,2035.8
-T3,15,302,301,KiryatYam A,SavyoneyYam,branch,down,total,2358.0,,1446.5
-T3,1,201,202,TiratCarmel,Matam-NeotPeres,trunk,up,total,5132.2,,3306.0
-T3,2,202,203,Matam-NeotPeres,HofCarmel-NeveDavid,trunk,up,total,3723.8,,2376.7
-T3,3,203,204,HofCarmel-NeveDavid,Hecht-Shprintzak,trunk,up,total,3973.1,,2524.2
-T3,4,204,205,Hecht-Shprintzak,EinHayam,trunk,up,total,5622.8,,3538.9
-T3,5,205,206,EinHayam,BatGalim-KiryatEliezer,trunk,up,total,6955.8,,4378.1
-T3,6,206,207,BatGalim-KiryatEliezer,Hamoshava,trunk,up,total,5937.6,,3777.6
-T3,7,207,208,Hamoshava,LowerCity,trunk,up,total,4944.4,,3109.2
-T3,8,208,209,LowerCity,Namal-Giborim,trunk,up,total,3608.7,,2275.7
-T3,9,209,210,Namal-Giborim,Hamifrats,trunk,up,total,2752.8,,1755.2
-T3,10,210,211,Hamifrats,Bazan-Hutsot,trunk,up,total,1693.7,,1071.1
-T3,11,211,212,Bazan-Hutsot,TsometKiryatAta,trunk,up,total,1613.1,,1031.9
-T3,12,212,304,TsometKiryatAta,KiryatHaim West,branch,up,total,540.3,,346.0
-T3,13,304,303,KiryatHaim West,KiryatYam B+C,branch,up,total,1166.3,,751.3
-T3,14,303,302,KiryatYam B+C,KiryatYam A,branch,up,total,699.3,,456.6
-T3,15,302,301,KiryatYam A,SavyoneyYam,branch,up,total,404.5,,266.2
+T3,1,201,202,TiratCarmel,Matam-NeotPeres,trunk,down,total,1290.0,,740.0
+T3,2,202,203,Matam-NeotPeres,HofCarmel-NeveDavid,trunk,down,total,4354.4,,2514.5
+T3,3,203,204,HofCarmel-NeveDavid,Hecht-Shprintzak,trunk,down,total,4357.1,,2515.7
+T3,4,204,205,Hecht-Shprintzak,EinHayam,trunk,down,total,3999.2,,2306.0
+T3,5,205,206,EinHayam,BatGalim-KiryatEliezer,trunk,down,total,3409.6,,1965.6
+T3,6,206,207,BatGalim-KiryatEliezer,Hamoshava,trunk,down,total,4535.8,,2602.4
+T3,7,207,208,Hamoshava,LowerCity,trunk,down,total,3051.4,,1758.0
+T3,8,208,209,LowerCity,Namal-Giborim,trunk,down,total,3485.5,,2009.5
+T3,9,209,210,Namal-Giborim,Hamifrats,trunk,down,total,3197.4,,1841.9
+T3,10,210,211,Hamifrats,Bazan-Hutsot,trunk,down,total,3167.1,,1822.3
+T3,11,211,212,Bazan-Hutsot,TsometKiryatAta,trunk,down,total,4184.8,,2407.5
+T3,12,212,304,TsometKiryatAta,KiryatHaim West,branch,down,total,4895.9,,2817.0
+T3,13,304,303,KiryatHaim West,KiryatYam B+C,branch,down,total,4005.7,,2302.2
+T3,14,303,302,KiryatYam B+C,KiryatYam A,branch,down,total,3325.1,,1910.6
+T3,15,302,301,KiryatYam A,SavyoneyYam,branch,down,total,2358.0,,1354.0
+T3,1,201,202,TiratCarmel,Matam-NeotPeres,trunk,up,total,5132.2,,3269.5
+T3,2,202,203,Matam-NeotPeres,HofCarmel-NeveDavid,trunk,up,total,3723.8,,2352.8
+T3,3,203,204,HofCarmel-NeveDavid,Hecht-Shprintzak,trunk,up,total,3973.1,,2500.2
+T3,4,204,205,Hecht-Shprintzak,EinHayam,trunk,up,total,5622.8,,3509.0
+T3,5,205,206,EinHayam,BatGalim-KiryatEliezer,trunk,up,total,6955.8,,4341.0
+T3,6,206,207,BatGalim-KiryatEliezer,Hamoshava,trunk,up,total,5937.6,,3741.4
+T3,7,207,208,Hamoshava,LowerCity,trunk,up,total,4944.4,,3083.2
+T3,8,208,209,LowerCity,Namal-Giborim,trunk,up,total,3608.7,,2256.0
+T3,9,209,210,Namal-Giborim,Hamifrats,trunk,up,total,2752.8,,1738.0
+T3,10,210,211,Hamifrats,Bazan-Hutsot,trunk,up,total,1693.7,,1061.6
+T3,11,211,212,Bazan-Hutsot,TsometKiryatAta,trunk,up,total,1613.1,,1021.3
+T3,12,212,304,TsometKiryatAta,KiryatHaim West,branch,up,total,540.3,,342.5
+T3,13,304,303,KiryatHaim West,KiryatYam B+C,branch,up,total,1166.3,,743.2
+T3,14,303,302,KiryatYam B+C,KiryatYam A,branch,up,total,699.3,,450.9
+T3,15,302,301,KiryatYam A,SavyoneyYam,branch,up,total,404.5,,262.7
 T3,1,201,202,TiratCarmel,Matam-NeotPeres,trunk,down,transit,194.4,,114.8
 T3,2,202,203,Matam-NeotPeres,HofCarmel-NeveDavid,trunk,down,transit,1410.5,,832.7
-T3,3,203,204,HofCarmel-NeveDavid,Hecht-Shprintzak,trunk,down,transit,1380.3,,814.9
-T3,4,204,205,Hecht-Shprintzak,EinHayam,trunk,down,transit,1096.7,,647.5
-T3,5,205,206,EinHayam,BatGalim-KiryatEliezer,trunk,down,transit,955.5,,564.1
-T3,6,206,207,BatGalim-KiryatEliezer,Hamoshava,trunk,down,transit,804.0,,474.7
-T3,7,207,208,Hamoshava,LowerCity,trunk,down,transit,838.1,,494.8
-T3,8,208,209,LowerCity,Namal-Giborim,trunk,down,transit,968.8,,572.0
-T3,9,209,210,Namal-Giborim,Hamifrats,trunk,down,transit,753.4,,444.8
-T3,10,210,211,Hamifrats,Bazan-Hutsot,trunk,down,transit,644.3,,380.4
-T3,11,211,212,Bazan-Hutsot,TsometKiryatAta,trunk,down,transit,795.5,,469.7
-T3,12,212,304,TsometKiryatAta,KiryatHaim West,branch,down,transit,936.3,,552.8
+T3,3,203,204,HofCarmel-NeveDavid,Hecht-Shprintzak,trunk,down,transit,1380.3,,814.8
+T3,4,204,205,Hecht-Shprintzak,EinHayam,trunk,down,transit,1096.7,,647.4
+T3,5,205,206,EinHayam,BatGalim-KiryatEliezer,trunk,down,transit,955.5,,564.0
+T3,6,206,207,BatGalim-KiryatEliezer,Hamoshava,trunk,down,transit,804.0,,474.6
+T3,7,207,208,Hamoshava,LowerCity,trunk,down,transit,838.1,,494.7
+T3,8,208,209,LowerCity,Namal-Giborim,trunk,down,transit,968.8,,571.9
+T3,9,209,210,Namal-Giborim,Hamifrats,trunk,down,transit,753.4,,444.7
+T3,10,210,211,Hamifrats,Bazan-Hutsot,trunk,down,transit,644.3,,380.2
+T3,11,211,212,Bazan-Hutsot,TsometKiryatAta,trunk,down,transit,795.5,,469.6
+T3,12,212,304,TsometKiryatAta,KiryatHaim West,branch,down,transit,936.3,,552.7
 T3,13,304,303,KiryatHaim West,KiryatYam B+C,branch,down,transit,595.2,,351.4
 T3,14,303,302,KiryatYam B+C,KiryatYam A,branch,down,transit,536.8,,316.9
 T3,15,302,301,KiryatYam A,SavyoneyYam,branch,down,transit,360.5,,212.9
