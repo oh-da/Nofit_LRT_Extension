@@ -38,8 +38,10 @@ in [METHODOLOGY.md §8](METHODOLOGY.md#8-known-caveats-and-open-questions) and
 See **[METHODOLOGY.md](METHODOLOGY.md)** for the full reasoning, methodology, inputs and
 outputs of every step, **[TRANSIT_DEMAND_PLAN.md](docs/TRANSIT_DEMAND_PLAN.md)** for the
 (historical) ticketing-substitution decision, **[CORRIDOR_DEMAND_TASKS.md](docs/CORRIDOR_DEMAND_TASKS.md)**
-for the open task list, and **[LRT_CAPTURE_PLAN.md](docs/LRT_CAPTURE_PLAN.md)** for the
-generalised-cost capture model still to be built.
+for the open task list, **[LRT_CAPTURE_PLAN.md](docs/LRT_CAPTURE_PLAN.md)** for the
+generalised-cost capture model, and **[PLAN_TIGHTENING_AND_SCENARIOS.md](docs/PLAN_TIGHTENING_AND_SCENARIOS.md)**
+for the plan of 22 September 2026: what moves the capture number, the work to tighten it and
+the scenarios to run next.
 
 ## Current pipeline (survey-only branch)
 
