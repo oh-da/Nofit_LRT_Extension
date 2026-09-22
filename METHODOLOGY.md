@@ -93,8 +93,10 @@ the corridor potential movements on the V2 areas per route and as a tree network
 all-underground and an all-ground scenario; step 26 (§6x) inventories the
 generalized-cost components on the 25 areas, fills the skims that the data supports (car
 from the survey, bus from the speed network, LRT from step 25) and lists the gaps
-(`Output/gc/gc_data_inventory.csv`, task list section E). Headline additions to the table
-below: on the tree network the trunk link Bazan-Hutsot – Tsomet Kiryat Ata carries
+(`Output/gc/gc_data_inventory.csv`, task list section E). The plain-language account of steps
+24–28 and of what every matrix product can be used for is
+`reports/V2_Corridor_LRT_Times_and_GC_Inputs_Report.docx` (revision 1, 22 September 2026).
+Headline additions to the table below: on the tree network the trunk link Bazan-Hutsot – Tsomet Kiryat Ata carries
 16,231 potential movements towards Haifa in three hours (2,898 transit; peak hour
 8,792 / 1,710 with the route-specific factors of step 27); the Krayot branch link Kiryat Haim – Kiryat Bialik Center is the busiest
 single link at 10,144; the calibrated LRT function gives 73.5 min (underground) / 89.7 min
