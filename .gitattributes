@@ -11,3 +11,6 @@ Input/lrt_alignment_flags.csv -filter -diff -merge -text
 Input/taz_keys_from_shapefile.csv -filter -diff -merge -text
 Input/sz_localities.csv -filter -diff -merge -text
 all filter=lfs diff=lfs merge=lfs -text
+/Input/GTFS filter=lfs diff=lfs merge=lfs -text
+Input/* filter=lfs diff=lfs merge=lfs -text
+Input/GTFS/*.zip filter=lfs diff=lfs merge=lfs -text
