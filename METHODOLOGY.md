@@ -57,7 +57,10 @@ notes saying which of their conclusions are overtaken.
 | … by resolution | corridor areas: at transit's noise floor (0.57 vs 0.65); TAZ × superzone: 0.75 vs 0.89 — clearly different; TAZ × TAZ: 0.27 vs 0.55 — only the coarse geography shared | §6s |
 | V2 aggregation (25 areas, 174 TAZs): trips with both ends in the areas — car / bus / taxi-type / rail | 156,944 / 18,788 / 8,323 / 51 | §6v |
 | Busiest transit link per route, three hours (up / down) | T1 1,379 / 1,489; T2 1,391 / 1,629; T3 1,437 / 1,410 — all on the Haifa trunk (Ein Hayam – Bat Galim up, Matam – Hof Carmel down) | §6v |
-| Tree network (all 25 areas on their unique path): Bazan-Hutsot – Tsomet Kiryat Ata towards Haifa | 16,231 all layers / 2,898 transit in three hours; 9,956 / 1,711 in the peak hour | §6v |
+| Tree network (all 25 areas on their unique path): Bazan-Hutsot – Tsomet Kiryat Ata towards Haifa | 16,231 all layers / 2,898 transit in three hours; 8,792 / 1,710 in the peak hour | §6v, §6y |
+| Peak-hour factors on the V2 routes (car, by direction): up / down | T1 0.626 / 0.578, T2 0.619 / 0.569, T3 0.652 / 0.569, network 0.556 / 0.522 (step 20: 0.661 / 0.626); bus and taxi-type stay at 0.590 / 0.580 | §6y |
+| Calibrated survey vs ticketing transit on the V2 routes (Haifa segment, survey ÷ ticketing) | up 0.78–0.83 per route; down T2 0.92, T3 0.73, T1 0.66, network 0.63; Nazareth origin 1,070 vs 2,402 | §6z |
+| Car vs transit PCA on the V2 areas | 14 origins (≥ 10 sampled transit trips): overlap 0.55 vs transit repeatability 0.76 (car 0.79); 7 origins (≥ 20): 0.76 vs 0.80 — sample-limited; the superzone / TAZ × superzone evidence stands | §6s |
 | Busiest single link of any route | Kiryat Haim – Kiryat Bialik Center (T2), 10,144 towards Haifa, transit share 10 % | §6v |
 | LRT `hf_lrt_3`: 24 stations, 18.74 km S01 → S24, mean spacing 815 m | end to end 73.5 min underground / 89.7 min ground (distance form); 45.1 / 55.0 min (section form); underground −18.1 % | §6w |
 | Generalized-cost first fill on the trunk pairs (trip-weighted): car door-to-door / bus fastest-path IVT / LRT IVT underground, ground | 14.5 / 12.5 / 20.6, 25.1 min; survey bus door-to-door 27.1 min (2.3 × the network IVT) | §6x |
@@ -93,7 +96,7 @@ from the survey, bus from the speed network, LRT from step 25) and lists the gap
 (`Output/gc/gc_data_inventory.csv`, task list section E). Headline additions to the table
 below: on the tree network the trunk link Bazan-Hutsot – Tsomet Kiryat Ata carries
 16,231 potential movements towards Haifa in three hours (2,898 transit; peak hour
-9,956 / 1,711); the Krayot branch link Kiryat Haim – Kiryat Bialik Center is the busiest
+8,792 / 1,710 with the route-specific factors of step 27); the Krayot branch link Kiryat Haim – Kiryat Bialik Center is the busiest
 single link at 10,144; the calibrated LRT function gives 73.5 min (underground) / 89.7 min
 (ground) end to end in distance form and 45 / 55 min in section form, and on the trunk pairs
 the LRT in-vehicle time (21–25 min) plus walk and wait is not shorter than today's surveyed
@@ -1198,6 +1201,19 @@ is warranted. Nothing follows at TAZ level or within Haifa from the survey's tra
 **Outputs.** `Output/ths2017/tests/pca_car_vs_transit_{summary,overlap,rcev,by_origin,levels,by_area}.csv`;
 figures `Output/figures/pca_cvt_{scree,subspace_overlap,component_match,divergence,levels}.png`.
 
+**Addendum, 22 September 2026 — the V2 corridor areas.** The same tests on the 25 V2 areas
+(`Input/Corridor_TAZ_Agg_V2.xlsx`; rows `V2 areas × areas` in `pca_car_vs_transit_levels.csv`,
+per-origin table `pca_car_vs_transit_by_area_v2.csv`): with 14 origins of ≥ 10 sampled transit
+trips the overlap is 0.55 (k = 6) against transit's repeatability 0.76 and car's 0.79; with the
+7 origins of ≥ 20 trips 0.76 against 0.80 / 0.97; on all 22 usable origins 0.59 against 0.62 /
+0.79. Self-containment 0.42 (car) vs 0.25 (transit); no common direction (p = 0.28–0.54); the
+12 trunk areas alone leave 4 usable origins. Which side of transit's noise floor the overlap
+falls on depends on which handful of origins is in — the level is sample-limited and adds no
+conclusion to the superzone and TAZ × superzone results. Per origin the Haifa pull repeats
+(Kiryon 35 % of transit trips to the Haifa trunk areas vs 6 % of car, Kiryat Bialik Center
+30 % vs 6 %, Kiryat Yam B+C 31 % vs 8 %); Nazareth (83 sampled) is 90 % self-contained in
+transit and 96 % in car.
+
 ## 6t. Step 22 — Final 2022 TAZ matrices: car, transit, total (`Final_matrices_2022.ipynb`)
 
 **Purpose.** The deliverable set, assembled from the step-16 layers without any further
@@ -1273,8 +1289,9 @@ Yam (16). The twelve trunk areas (201–212) are common; the routes branch at Ts
 **Method.** The step-16 TAZ layers are aggregated to the 25 areas (`{car,bus,taxi,rail,
 transit,total}_2022_area_v2.csv`). Per route, as in §6o: every OD pair with both ends on
 the route loads every link between them in its direction — **up** = away from Tirat Carmel
-(the old 1 → 23), **down** = towards it. Peak-hour factors of §6r applied per layer and
-direction unchanged (car 0.661 up / 0.626 down, bus 0.590, taxi-type 0.580, rail = bus).
+(the old 1 → 23), **down** = towards it. Peak-hour factors re-estimated on the V2 route sequences by step 27 (§6y) and applied per
+route / network, layer and direction (car 0.62–0.65 up, 0.57–0.58 down, network 0.556 / 0.522;
+bus 0.590, taxi-type 0.580, rail = bus); the step-20 factors are the fallback when that file is absent.
 A fourth view loads every pair of the 25 areas on its unique path over the **tree** (trunk +
 three branches), so the trunk carries the trunk-to-branch trips of all three branches at once
 and branch-to-branch trips load the branch links. Same caveats as §6o / §6r: potential
@@ -1291,10 +1308,10 @@ Peres – Hof Carmel-Neve David down (1,410–1,629; 833–962). The T1 branch i
 in the morning (Tsomet Kiryat Ata – Kiryat Ata North 5,809 down / 785 up; 1,174 transit down,
 share 20 %; Shefaram – Nazareth links 650–920 transit down at a 20–23 % share, the highest
 in the set). The Krayot branch holds the busiest single link of any route, Kiryat Haim –
-Kiryat Bialik Center at 10,144 down (peak hour 6,239) with a 10 % transit share; T3's branch
+Kiryat Bialik Center at 10,144 down (peak hour 5,812) with a 10 % transit share; T3's branch
 peaks at 4,896 down on Tsomet Kiryat Ata – Kiryat Haim West (936 transit, 19 %). On the tree
-network the trunk link Bazan-Hutsot – Tsomet Kiryat Ata carries 16,231 down (peak hour 9,956)
-and 2,898 transit (1,711) — the inflow of all three branches — against 4,958 / 1,075 on the
+network the trunk link Bazan-Hutsot – Tsomet Kiryat Ata carries 16,231 down (peak hour 8,792)
+and 2,898 transit (1,710) — the inflow of all three branches — against 4,958 / 1,075 on the
 same link in the T1 profile alone; the Haifa-side trunk changes little between views (7,183
 up on Ein Hayam – Bat Galim vs 6,878–7,036 per route). The 14,688 branch-to-branch trips (8 %)
 load only branch links. Down dominates every link east of Bat Galim; up dominates only Tirat
@@ -1387,6 +1404,62 @@ parking missing everywhere; bus walk / wait assumed, bus transfers missing.
 `gc_trunk_pairs_comparison.csv`, **`gc_data_inventory.csv`** (the gap table); figure
 `gc_first_fill_trunk_v2.png`.
 
+## 6y. Step 27 — Peak-hour factors on the V2 routes (`Corridor_peak_hour_V2_routes.ipynb`)
+
+**Purpose.** Step 24's first pass applied the step-20 factors of the 18-area line to the V2
+routes. This step re-estimates them on the V2 sequences themselves — per route (T1 / T2 / T3),
+direction (up = away from Tirat Carmel, down = towards it) and layer, and on the tree
+network (every pair of the 25 areas on its unique path, each link crossing counted in its
+direction) — with the construction of §6r (15-minute departure bins, link-crossing weights,
+200-replicate household bootstrap, direction-level factor applied where ≥ 100 sampled trips,
+otherwise the study-area factor; rail = bus). Step 24 reads the result
+(`Output/corridor_v2/peak_hour_factors_v2_applied.csv`) and runs after this step.
+
+**Results.** Car is identifiable on every route and direction (203–447 sampled trips; 777 /
+1,001 on the network): up T1 0.626, T2 0.619, T3 0.652 (peak hour 07:15–08:15); down 0.578 /
+0.569 / 0.569 (07:00–08:00; T2 07:15–08:15); network 0.556 up / 0.522 down — the long trips
+from Nazareth and the Krayot start earlier and flatten the pooled down profile. Against step
+20 (0.661 / 0.626) the up factors are 1–6 % lower, the down factors 8–9 % lower per route and
+16–17 % lower on the network; the peak-hour car and total values of step 24 fell by those
+margins (network trunk link Bazan-Hutsot – Tsomet Kiryat Ata 9,956 → 8,792; T2 branch link
+6,239 → 5,812). Bus (26–58 sampled per route-direction, 93–96 on the network) and taxi-type
+(17–48) stay on the study-area factors 0.590 / 0.580; the bus route values scatter 0.43–0.69
+(bootstrap 0.43–0.84) around 0.59, the taxi-type values (0.58–0.91) all sit above 0.58, so the
+corridor taxi-type peak may be under-stated. Caveats as §6r.
+
+**Outputs.** `Output/corridor_v2/peak_hour_factors_v2.csv`, `peak_hour_factors_v2_applied.csv`;
+figure `corridor_v2_peak_hour_profiles.png`.
+
+## 6z. Step 28 — Corridor transit profiles on the V2 routes: calibrated survey vs ticketing (`Corridor_profile_V2_survey_vs_ticketing.ipynb`)
+
+**Purpose.** Repeat §6p on the V2 geography, from the TAZ-level products (survey bus + rail of
+step 16; RavKav × OnBoard bus of step 9 and the station train matrix of step 10 × 0.793), per
+route and on the tree network, with the calibration steps (raw 2018 survey bus, all-RavKav
+variant) and taxi-type alongside.
+
+**Results.** In the 25 areas the survey set holds 18,839 transit trips against 16,363 ticketed,
+yet sits below the ticketing profile on almost every link: its transit is more local, the
+ticketing's more corridor-long. Up: survey ÷ ticketing 0.78–0.83 on the Haifa segment per
+route (network 0.82), same peak link (Ein Hayam – Bat Galim-Kiryat Eliezer, 1,379–1,437 vs
+1,556–1,646; network 1,518 vs 1,730); beyond Hamifrats T1 1.08, T2 / T3 0.57–0.58. Down:
+Haifa segment T2 0.92, T3 0.73, T1 0.66, network 0.63; beyond Hamifrats T2 / T3 0.79, T1
+0.43; ticketing peaks on Lower City – Namal-Giborim per route (2,073–2,903) and on
+Bazan-Hutsot – Tsomet Kiryat Ata on the network (4,476 vs survey 2,898), the survey further
+west on Matam-Neot Peres – Hof Carmel-Neve David. Drivers, as in §6p: Nazareth as origin
+(1,070 survey vs 2,402 ticketed corridor-bound trips, −13,020 link-trips; → Bat Galim-Kiryat
+Eliezer 87 vs 521, → Hecht-Shprintzak 22 vs 271, → Lower City 132 vs 431), Kiryat Yam B+C
+(568 vs 1,116), Tsur Shalom (290 vs 642), the Hamifrats hub (431 vs 1,049); by destination
+Bat Galim-Kiryat Eliezer (1,161 vs 2,064), Lower City (894 vs 1,764), Hecht-Shprintzak (279
+vs 1,035) — trunk-route alighting stops. The survey is higher from Kiryat Bialik Center, Ein
+Hayam and Hecht-Shprintzak and to Kiryat Ata North and Kiryat Yam B+C. The T2 route is where
+the frames nearly agree; on the T1 branch the ticketing set carries ≈ 2.3 × the survey's
+transit towards Haifa, so a Nazareth-branch market should be carried as a range (tasks A1,
+B1c, B2).
+
+**Outputs.** `Output/corridor_v2/corridor_v2_survey_vs_ticketing.csv`,
+`corridor_v2_survey_vs_ticketing_summary.csv`, `corridor_v2_survey_vs_ticketing_pairs.csv`;
+figure `corridor_v2_survey_vs_ticketing.png`.
+
 ---
 
 ## 7. Output inventory (`Output/`)
@@ -1436,7 +1509,7 @@ parking missing everywhere; bus walk / wait assumed, bus transfers missing.
 | `forecast/share_{car_other,bus,rail}_2022_{raw,smoothed}.csv`, `forecast/share_strata_2022.csv` | 25×25 / 12 strata | `Base_mode_shares_2022.ipynb` | Revealed 2022 modal shares per OD cell (components: car/other + RavKav bus + rail × 54.7/69) and EB-smoothed versions (k = 50, shrunk toward corridor-class × distance-band stratum shares, sum to 1 per cell); stratum behavioral baseline table |
 | `forecast/nobuild_{car_other,bus,rail}_{scenario}.csv`, `forecast/lrt_market_flag.csv`, `forecast/lrt_market_{scenario}.csv`, `forecast/lrt_market_summary.csv` | 25×25 ×12 / 25×25 / ×4 / 4 rows | `NoBuild_and_LRT_market.ipynb` | No-build modal matrices (smoothed 2022 shares pivoted onto scenario-year totals; cell shares frozen, aggregate share moves by composition only — falls 8.9% → 7.5–8.0%) and the LRT market: core (both ends corridor) and per-scenario market trips |
 | `forecast/lrt_market_tiers_{MainCorridor,FullLength}.csv`, `forecast/lrt_alignment_market_summary.csv` | 25×25 ×2 / 10 rows | `LRT_alignment_markets.ipynb` | Market tiers per OD (2 = core one-seat, 1 = transfer-influenced, 0 = outside) for the two alignment scenarios (`Input/lrt_alignment_flags.csv`: Main = areas 1–13 + influenced 24–28; Full = 1–19, 23), and market counts per alignment × scenario-year with the no-build transit conversion base |
-| `corridor_v2/*` | 25×25; link tables | Step 24 | V2 area matrices per layer, per-route and tree-network link flows (three-hour and peak-hour), route summary, comparison with the 18-area profile |
+| `corridor_v2/*` | 25×25; link tables | Steps 24, 27, 28 | V2 area matrices per layer, per-route and tree-network link flows (three-hour and peak-hour), route summary, comparison with the 18-area profile; the V2 peak-hour factors; the survey-vs-ticketing comparison on the V2 routes |
 | `lrt_v2/*` | 24 stations; 24×24; 10×10 | Step 25 | Station table (CSV + GeoJSON), station distances, station-to-station times for the two scenarios in distance and section form, line profile, representative stations and area IVT |
 | `gc/*` | 25×25; long | Step 26 | Car / bus / LRT skims, LRT access, generalized-cost component table with status, partial GC matrices, cell status, trunk-pair comparison, the data-gap inventory |
 | `figures/` | — | Steps 1b–3 | Scatter plots, CV curves, λ curves, R_AB heatmap |
@@ -1577,7 +1650,9 @@ jupyter nbconvert --to notebook --execute --inplace notebooks/current/Final_matr
 # demographic reference 2040 / 2050 (needs git lfs pull --include="Input/Demographic_Forecast/Zonal_*.csv"; dry run otherwise)
 jupyter nbconvert --to notebook --execute --inplace notebooks/current/Forecast_matrices_TAZ_2040_2050.ipynb
 # V2 aggregation, LRT geometry and generalized cost (steps 24–26; step 26 needs git lfs pull --include="Input/BusSpeedData/std_202605.csv" and pip install shapely pyproj)
+jupyter nbconvert --to notebook --execute --inplace notebooks/current/Corridor_peak_hour_V2_routes.ipynb          # step 27 first: step 24 reads its factors
 jupyter nbconvert --to notebook --execute --inplace notebooks/current/Corridor_flow_profile_V2_routes.ipynb
+jupyter nbconvert --to notebook --execute --inplace notebooks/current/Corridor_profile_V2_survey_vs_ticketing.ipynb
 jupyter nbconvert --to notebook --execute --inplace notebooks/current/LRT_line_stations_travel_time.ipynb
 jupyter nbconvert --to notebook --execute --inplace notebooks/current/GC_data_inventory_and_skims.ipynb
 
