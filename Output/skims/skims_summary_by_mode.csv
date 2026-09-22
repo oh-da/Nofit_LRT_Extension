@@ -5,7 +5,7 @@ Bus,all off-diagonal pairs,598,11649.0,0.999,21.4,5.8,2.4,0.1,38.5
 Bus,trunk pairs (10 station areas),90,4174.0,1.0,14.9,4.8,1.4,0.1,27.8
 Metronit (BRT),all off-diagonal pairs,278,7517.0,0.644,15.3,5.7,2.2,0.0,31.0
 Metronit (BRT),trunk pairs (10 station areas),72,3465.0,0.83,11.2,4.7,2.5,0.0,25.6
-LRT all underground,all off-diagonal pairs,600,11664.0,1.0,32.7,9.9,4.9,1.0,70.5
+LRT all underground,all off-diagonal pairs,600,11664.0,1.0,33.5,9.9,4.9,0.2,64.6
 LRT all underground,trunk pairs (10 station areas),90,4174.0,1.0,12.6,13.2,2.5,0.0,44.0
-LRT all ground,all off-diagonal pairs,600,11664.0,1.0,38.0,9.9,5.0,1.0,76.1
+LRT all ground,all off-diagonal pairs,600,11664.0,1.0,38.7,9.9,5.0,0.2,70.0
 LRT all ground,trunk pairs (10 station areas),90,4174.0,1.0,20.4,13.2,2.5,0.0,51.8
