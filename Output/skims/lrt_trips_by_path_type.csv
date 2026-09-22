@@ -1,0 +1,5 @@
+lrt_legs_ug,pairs,transit_2022,lrt_ug,lrt_ground,P_ug
+bus→LRT,150,2427.0,553.0,434.0,0.228
+bus→LRT→bus,210,4474.0,264.0,217.0,0.059
+directLRT,90,4174.0,1258.0,868.0,0.301
+directLRT→bus,150,590.0,182.0,144.0,0.308

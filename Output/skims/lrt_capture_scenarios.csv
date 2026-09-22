@@ -1,0 +1,7 @@
+scenario,case,λ,λ_T,LRT trips 06–09,of which from bus,of which from car,bus trips after,car trips after,transit share before,transit share after,LRT share of transit,LRT trips on trunk pairs,trunk pairs P_LRT|T (trip-wtd)
+LRT all underground,"central (λ = 0.03, λ_T = 0.06)",0.03,0.06,2257,2107,150,9992,55859,0.1713,0.1799,0.184,1258,0.277
+LRT all underground,"low (λ = 0.02, λ_T = 0.03)",0.02,0.03,3895,3421,473,9228,54986,0.1713,0.1927,0.297,1865,0.381
+LRT all underground,"high (λ = 0.05, λ_T = 0.10)",0.05,0.1,1289,1230,59,10682,56138,0.1713,0.1758,0.108,762,0.173
+LRT all ground,"central (λ = 0.03, λ_T = 0.06)",0.03,0.06,1664,1583,81,10418,56028,0.1713,0.1774,0.138,868,0.196
+LRT all ground,"low (λ = 0.02, λ_T = 0.03)",0.02,0.03,3390,3033,357,9524,55195,0.1713,0.1896,0.263,1566,0.328
+LRT all ground,"high (λ = 0.05, λ_T = 0.10)",0.05,0.1,748,727,21,11086,56275,0.1713,0.1737,0.063,394,0.092
