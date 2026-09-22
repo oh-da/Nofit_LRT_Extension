@@ -129,7 +129,7 @@ Key facts driving the list (2017 trips-file hybrid, `Output/ths2017/study_taz/`)
       through-running pattern. Add TAZ 1509 (station S13) to the V2 aggregation.
       **Interim, step 31 (22 September 2026):** for the fifteen V2 areas with no alignment
       of their own, `Mode_skims_and_flow_comparison.ipynb` (METHODOLOGY §6ac) skims the LRT
-      as a feeder-bus composite instead — the observed bus skim to the least-cost gateway
+      as a feeder composite (bus, or Metronit with a free transfer) instead — the observed bus skim to the least-cost gateway
       station area, an 8-minute transfer, then the LRT leg — which is what the capture
       numbers below currently rest on for the branch areas; it stands in for, not replaces,
       the actual branch geometry.
@@ -157,10 +157,12 @@ Key facts driving the list (2017 trips-file hybrid, `Output/ths2017/study_taz/`)
       trunk pairs) and the survey's reported 27.1 min as the bus calibration margin.
       *Observed running times done 2026-09-22 (step 30, METHODOLOGY §6ab): the trips routed over
       the May 2026 link speeds; the link speeds include dwell; step 26 uses the observed skim.*
-- [ ] **E4. Money components** — fare tables (bus, LRT, integration), parking tariffs by
-      destination area (the survey's `parkType` gives the paid share as a proxy), car
-      operating cost per km, and the value of time from נוהל פר"ת by purpose. Confirm the
-      walk / wait / transfer weights against the same source.
+- [x] **E4. Money components** — *closed by decision, 22 September 2026*: the transit fare
+      in the area is flat and integrated with a daily cap (two fares pay for the day), so it
+      is identical for bus, Metronit and LRT and for every pair and drops out of the transit
+      choice; against the car it is a constant per trip absorbed by the pivot. Car operating
+      cost and parking are excluded on the same decision (METHODOLOGY §6x addendum 4). Still
+      open from this item: confirm the walk / wait / transfer weights against נוהל פר"ת.
 - [ ] **E5. Car skim vintage** — the survey door-to-door times are 2017 / 18; a small
       Google Distance Matrix sample (≈ 40 pairs, Tuesday 07:30) or the national model's
       car skim gives the 2026 uplift.
@@ -171,12 +173,12 @@ Key facts driving the list (2017 trips-file hybrid, `Output/ths2017/study_taz/`)
       se 0.0005, ρ² 0.003); adding a constant per centroid-distance band still returns no
       usable cost sensitivity (λ = +0.0002, ρ² 0.036) — the pairs with the largest bus
       handicap are also the least car-available (captive riders, the northern-branch
-      localities) and the ones with charged destination parking, neither of which is in the
-      skims, so they dominate the cross-section and mask any genuine cost response.
+      localities); car availability is not in the skims, so it dominates the cross-section
+      and masks any genuine cost response.
       `docs/LRT_CAPTURE_PLAN.md` §3 currently runs on an assumed central λ = 0.03 per
       generalized minute (range 0.02–0.05, λ_T = 2λ). What closes it: either a segmented
       logit on the survey's person-level records (car availability, trip purpose, distance
-      band, so the captive-rider and parking confounds are held constant rather than
+      band, so the captive-rider confound is held constant rather than
       averaged over), or a transferred λ from the national transport model's own mode-choice
       calibration, with its source and estimation sample cited.
 - [ ] **C2. Segmentation** — car availability by zone (check the raw survey household

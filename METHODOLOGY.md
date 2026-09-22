@@ -70,11 +70,11 @@ notes saying which of their conclusions are overtaken.
 | GTFS-based bus door-to-door (observed running time + walk + wait) against the survey's reported time, same pairs | 24.3 vs 31.8 min (× 1.3): a fixed ≈ 7-minute overhead, 1.9 × under 3 km, 1.1–1.5 × at 3–20 km, 0.8 × beyond | §6x addenda 2–3 |
 | Observed bus in-vehicle time (trips routed over the May 2026 link speeds) ÷ scheduled | per trip 1.09 (Metronit 0.87); hops < 500 m 1.00, > 2 km 1.42 — the link speeds include dwell, the long arterial hops run slower than the timetable; trunk pairs 12.7 vs 10.4 min demand-weighted | §6ab |
 | Complete skims, trunk pairs, trip-weighted GC (generalized minutes): car / bus / Metronit (its 72 pairs) / LRT underground / LRT ground | 14.7 / 27.8 / 25.6 / 44.0 / 51.8 | §6ac |
-| Complete skims, all 600 off-diagonal pairs, trip-weighted GC: car / bus / Metronit (278 pairs, 64 % of transit trips) / LRT underground / LRT ground | 20.2 / 38.5 / 31.0 / 70.5 / 76.1 | §6ac |
+| Complete skims, all 600 off-diagonal pairs, trip-weighted GC: car / bus / Metronit (278 pairs, 64 % of transit trips) / LRT underground / LRT ground | 20.2 / 38.5 / 31.0 / 64.6 / 70.0 (LRT off the line by feeder, Metronit feeder with a free transfer on 378 of 510 pairs) | §6ac |
 | 2022 AM off-diagonal trips, 25 areas: car / transit (bus + rail) / taxi | 56,445 / 11,664 (share 0.171) / 6,982 | §6ac |
 | Cost sensitivity λ from the 2022 cross-section (binary logit, transit share vs `GC_bus − GC_car`, 573 pairs / 67,700 trips) | wrong sign (−0.011, ρ² 0.003); with distance-band constants +0.0002 (ρ² 0.036) — not identifiable; λ assumed 0.03 (range 0.02–0.05), λ_T = 2λ | §6ac |
-| LRT capture, central case, 06:00–09:00 within the 25 areas: underground / ground trips (of which from bus / from car) | 2,257 (2,107 / 150) / 1,664 (1,583 / 81); low–high range 1,289–3,895 (ug), 748–3,390 (ground) | §6ac |
-| LRT trunk-link loads, three hours, central underground vs today's bus | 62–594 per link-direction against bus 200–2,030 (a quarter to a third; half on Namal-Giborim→Hamifrats up); ground 34–353; peak hour ug 37–351 | §6ac |
+| LRT capture, central case (λ 0.03, λ_T 0.06, LRT premium 5, free LRT–Metronit transfer), 06:00–09:00 within the 25 areas: underground / ground trips (of which from bus / from car) | 3,332 (3,037 / 295) / 2,544 (2,375 / 169); λ range 2,357–4,855 (ug), 1,472–4,277 (ground); premium 0 / 10: 2,658 / 4,122 (ug) | §6ac |
+| LRT trunk-link loads, three hours, central underground vs today's bus | 79–995 per link-direction against bus 200–2,030 (a third to 45 %; 84 % on Namal-Giborim→Hamifrats up); ground 44–595; peak hour ug 47–588 | §6ac |
 
 What these support: relative questions — ranking alignments and segments, sizing the
 market between line areas, locating the demand, and the design-hour scaling of that
@@ -109,13 +109,15 @@ from the survey, bus from the speed network, LRT from step 25) and lists the gap
 (§6ab) routes the same trips over the measured May 2026 link speeds for an observed in-vehicle
 time, which §6x now uses. Step 31 (§6ac) turns these components into one complete skim set
 per mode (car, bus, Metronit, LRT underground / ground, the LRT extended to the fifteen
-off-line areas by a feeder-bus composite) and compares them with the observed 2022 flows: a
+off-line areas by a feeder composite — bus, or Metronit with a free transfer) and compares them with the observed 2022 flows: a
 logit fit of the cross-section fails to identify the cost sensitivity λ (wrong sign), so λ
-is assumed (0.03, range 0.02–0.05) and used to pivot an incremental-logit capture of LRT
-trips from bus and car, loaded onto the trunk links against today's bus movements. The
+is assumed (0.03, range 0.02–0.05), with an LRT premium of 5 generalized minutes and free
+LRT–Metronit transfers (assumptions of 22 September 2026), and used to pivot an
+incremental-logit capture of LRT trips from bus and car, loaded onto the trunk links against
+today's bus movements. The
 plain-language account of steps
 24–28 and of what every matrix product can be used for is
-`reports/V2_Corridor_LRT_Times_and_GC_Inputs_Report.docx` (revision 1.2, 22 September 2026).
+`reports/V2_Corridor_LRT_Times_and_GC_Inputs_Report.docx` (revision 1.3, 22 September 2026).
 Headline additions to the table below: on the tree network the trunk link Bazan-Hutsot – Tsomet Kiryat Ata carries
 16,231 potential movements towards Haifa in three hours (2,898 transit; peak hour
 8,792 / 1,710 with the route-specific factors of step 27); the Krayot branch link Kiryat Haim – Kiryat Bialik Center is the busiest
@@ -150,7 +152,7 @@ Every published product, what it was built from, and its status:
 | `corridor_v2/*` | step 24 | the step-16 TAZ layers × `Input/Corridor_TAZ_Agg_V2.xlsx`; step-20 peak factors | 25 V2 areas, 3 routes + tree network | car; bus; taxi-type; rail; transit; total | 2022 | **current** — three-hour and peak-hour potential movements |
 | `lrt_v2/*` | step 25 | `Input/GeneralHalufa/` geometry × the calibrated travel-time function | 24 stations; 10 trunk areas | LRT in-vehicle time, two scenarios × two forms | planned line | **current** — trunk only (no branches) |
 | `gc/*` | step 26 | survey car times, `Input/BusSpeedData/` (LFS), `lrt_v2/` | 25 V2 areas | car; bus; LRT (2 scenarios) — generalized-cost components with status | 2017/18 (car), May 2026 (bus), planned (LRT) | **current** — partial fill; money components missing |
-| `skims/*` | step 31 | `gc/*` components, feeder-bus composite for the LRT, 2022 corridor flows | 25 V2 areas, 9 trunk links | car; bus; Metronit; LRT (2 scenarios) — complete skims, logit calibration, LRT capture scenarios, trunk-link loads | 2022 (flows), May 2026 (bus), planned (LRT) | **current** — money components still missing; λ assumed |
+| `skims/*` | step 31 | `gc/*` components, feeder composite (bus or Metronit) for the LRT, 2022 corridor flows | 25 V2 areas, 9 trunk links | car; bus; Metronit; LRT (2 scenarios) — complete skims, logit calibration, LRT capture scenarios, trunk-link loads | 2022 (flows), May 2026 (bus), planned (LRT) | **current** — money components still missing; λ assumed |
 
 The 25 GS zones (`Input/TAZ_GSnew.csv`) and the 25 retained research areas of the
 forecast tables are different geographies with the same matrix dimension; files are
@@ -1494,6 +1496,18 @@ survey on the same pairs: 24.3 vs 31.8 min (× 1.3; trunk 20.0 vs 26.8), a fixed
 ≈ 7 minutes that is now transfer and the wait for the line actually needed, the running
 time being observed (`bus_gtfs_vs_survey_summary.csv`).
 
+**Addendum 4, 22 September 2026 — money is out of the comparison.** Decision of the study
+team: the transit fare in the area is flat and integrated — every bus, Metronit or LRT trip
+costs the same, and a daily cap (two fares pay for the day's rides) makes transfers and
+return trips free. The fare is therefore identical across the transit modes and across every
+pair and drops out of the transit choice entirely; against the car it is a constant per trip
+that the pivot on the observed 2022 shares absorbs. Car operating cost and parking are
+excluded on the same decision. The fare and parking cells of `gc_components_area_v2_long.csv`
+now carry the status `constant` (values zero) instead of `missing`, the inventory
+`gc_data_inventory.csv` lists nothing to obtain for them, and VOT is no longer needed. No
+generalized-cost value changes (money entered at zero before); task E4 of
+`docs/CORRIDOR_DEMAND_TASKS.md` closes.
+
 ## 6y. Step 27 — Peak-hour factors on the V2 routes (`Corridor_peak_hour_V2_routes.ipynb`)
 
 **Purpose.** Step 24's first pass applied the step-20 factors of the 18-area line to the V2
@@ -1657,32 +1671,37 @@ as `ivt_scheduled`).
 **Purpose.** Turn step 26's generalized-cost components (§6x, with the observed bus
 running times of §6ab) into one complete 25 × 25 skim set per mode — car, bus, Metronit
 (BRT), LRT all underground, LRT all ground — extending the LRT skim beyond the ten
-`hf_lrt_3` station areas with a feeder-bus composite, and use the skims to test whether
+`hf_lrt_3` station areas with a feeder composite (bus, or Metronit with a free transfer), and use the skims to test whether
 the 2022 car/transit split can identify the cost sensitivity λ that
 `docs/LRT_CAPTURE_PLAN.md` §3 needs, then run the plan's pivoted capture model for the two
 LRT scenarios and load the resulting trips onto the trunk links against today's bus
 movements.
 
 **Method.** Each mode's skim holds in-vehicle time, walk, wait, transfers and a partial
-generalized cost (`GC = IVT + 2·walk + 2·wait + 8·transfers`; money components still
-missing) with a status matrix beside it. Car and Metronit carry over step 26's fills
+generalized cost (`GC = IVT + 2·walk + 2·wait + 8·transfers`; money out of the comparison by
+decision — see §6x addendum 4) with a status matrix beside it. Car and Metronit carry over step 26's fills
 unchanged (Metronit direct-service only, 278 pairs, elsewhere not available); bus takes
 the observed in-vehicle time of §6ab on the 422 pairs with a direct service and, elsewhere,
 the fastest-path floor with one transfer assumed. For the fifteen areas off `hf_lrt_3` the
-LRT skim is a **feeder-bus composite**: the observed bus skim (in-vehicle time + 2·wait +
-2·access walk) to a gateway station area, an 8-minute transfer penalty, then the LRT leg
-(2.5-minute wait, station-to-station in-vehicle time, egress walk); both ends off the line
-combine two such legs. The gateway (or gateway pair) minimising the composite cost is
-chosen per origin–destination pair and recorded (`gateway_o`, `gateway_d`, `legs`).
+LRT skim is a **feeder composite**: a feeder leg to a gateway station area — the observed
+bus skim (in-vehicle time + 2·wait + 2·access walk) with an 8-minute transfer penalty, or,
+where a direct Metronit service reaches the gateway, the Metronit skim with **no transfer
+penalty** (LRT–Metronit transfers free by assumption, 22 September 2026), whichever is
+cheaper — then the LRT leg (2.5-minute wait, station-to-station in-vehicle time, egress
+walk); both ends off the line combine two such legs. The gateway pair and feeder modes
+minimising the composite cost are chosen per origin–destination pair and recorded
+(`gateway_o`, `gateway_d`, `legs`); `transfers` counts the penalised (bus ↔ LRT) transfers
+only.
 Intra-area cells are not skimmed for the transit modes and are excluded throughout. The
 flow comparison then (i) fits a volume-weighted binary logit of the observed 2022 transit
 share (bus + rail against car; taxi left out of the choice set) on `GC_bus − GC_car`, with
 and without a constant per centroid-distance band, to read off λ; (ii) runs a nested
 incremental logit pivoted on the observed 2022 transit share per pair
 (Empirical-Bayes-smoothed toward the study-area share, k = 20): within the transit nest
-`P_LRT|T = 1/(1+exp(λ_T(GC_LRT−GC_bus)))`, and the transit-nest logsum improvement Δ shifts
-car to transit by `S' = S·e^{−λΔ}/(S·e^{−λΔ}+1−S)`, for a central case (λ = 0.03,
-λ_T = 0.06) and a low/high range (λ = 0.02/λ_T = 0.03, λ = 0.05/λ_T = 0.10); with the LRT
+`P_LRT|T = 1/(1+exp(λ_T(GC_LRT − premium − GC_bus)))` with an **LRT premium** (rail bonus)
+of 5 generalized minutes, and the transit-nest logsum improvement Δ shifts car to transit
+by `S' = S·e^{−λΔ}/(S·e^{−λΔ}+1−S)`, for a central case (λ = 0.03, λ_T = 0.06, premium 5),
+a λ range (λ = 0.02/λ_T = 0.03, λ = 0.05/λ_T = 0.10) and a premium range (0, 10); with the LRT
 removed the model returns the 2022 flows exactly, and taxi trips are carried unchanged;
 (iii) loads every LRT trip onto the trunk between its gateway station areas, link by link
 along the `Order_T1` sequence 201 → 210 in its direction, against step 24's bus / transit /
@@ -1709,8 +1728,8 @@ generalized minute (se 0.0005, wrong sign, ρ² 0.003); adding distance-band con
 centroid-distance band: < 3 km 0.114, 3–6 km 0.249, 6–10 km 0.169, 10–20 km 0.161, > 20 km
 0.414 (mean `GC_bus − GC_car` 11, 16, 24, 29, 28 generalized minutes). The pairs where the
 bus is dearest relative to the car are also the least car-available (captive riders, the
-northern-branch localities) and the ones with charged destination parking — neither is in
-the skims — so the cross-section cannot identify λ, the plan's own caveat; λ is therefore
+northern-branch localities) — car availability is not in the skims — so the cross-section
+cannot identify λ, the plan's own caveat; λ is therefore
 **assumed**, central 0.03 per generalized minute (range 0.02–0.05), with λ_T = 2λ within
 the transit nest.
 
@@ -1718,26 +1737,29 @@ The pivoted capture (LRT trips 06:00–09:00 within the 25 areas; the incrementa
 factor `S'/S` on the Empirical-Bayes-smoothed share is applied to each pair's *observed*
 transit trips, so without the LRT the model returns 2022 exactly, and within the nest both
 the existing and the induced transit trips split by `P_LRT|T`): all underground, central
-2,257 (2,107 from bus, 150 from car; transit share of car + transit 0.171 → 0.180), low case
-(λ = 0.02, λ_T = 0.03) 3,895, high (λ = 0.05, λ_T = 0.10) 1,289; LRT all ground central
-1,664 (1,583 from bus, 81 from car), low 3,390, high 748. LRT share of transit: underground
-0.184 central (0.108–0.297 across the low / high cases), ground 0.138 (0.063–0.263). On the
-trunk pairs, trip-weighted P_LRT|T is 0.277 underground / 0.196 ground (1,258 / 868 LRT
-trips). By path type (underground, central): direct LRT 90 pairs, 4,174 transit trips →
-1,258 LRT trips; bus→LRT 150 pairs, 2,427 trips → 553; direct LRT→bus 150 pairs, 590 trips
-→ 182; bus→LRT→bus 210 pairs, 4,474 trips → 264 — pairs needing two feeder legs capture
-far less. Boardings by station area (underground / ground): Hamifrats 533 / 311,
-Namal-Giborim 493 / 402, Hecht-Shprintzak 304 / 232, Bat Galim 273 / 191, Tirat Carmel
-197 / 132; the largest pair flows are Bat Galim → Matam 97, Hecht-Shprintzak → Matam 92,
-Tirat Carmel → Matam 81 and Nazareth → Lower City 62 (by feeder bus).
+**3,332** (3,037 from bus, 295 from car; transit share of car + transit 0.171 → 0.185), λ
+range 2,357 (λ 0.05) – 4,855 (λ 0.02), premium 0 → 2,658, premium 10 → 4,122; all ground
+central **2,544** (2,375 from bus, 169 from car), λ range 1,472–4,277, premium 0 / 10 →
+1,999 / 3,200. Of the previous version's 2,257 (bus feeder only, no premium) the free
+Metronit transfer adds about 400 and the 5-minute premium about 670. LRT share of transit:
+underground 0.265 central (0.192–0.358 over λ), ground 0.206 (0.123–0.321). On the trunk
+pairs, trip-weighted P_LRT|T is 0.340 underground / 0.247 ground (1,580 / 1,112 LRT trips).
+By path type (underground, central; LRT trips ÷ 2022 transit trips): direct LRT 90 pairs,
+4,174 trips → 1,580 (0.38); Metronit→LRT 102 pairs, 1,611 → 570 (0.35); bus→LRT 48 pairs,
+815 → 283 (0.35); LRT→Metronit 81 pairs, 427 → 213 (0.50); Metronit→LRT→Metronit 110 pairs,
+3,386 → 425 (0.13); pairs needing a bus at both ends next to nothing. Boardings by station
+area (underground / ground): Hamifrats 995 / 595, Namal-Giborim 747 / 678, Hecht-Shprintzak
+391 / 303, Bat Galim 353 / 255, Tirat Carmel 251 / 161; the largest pair flows are Bat Galim
+→ Matam 122, Hecht-Shprintzak → Matam 116, Tirat Carmel → Matam 104, Nazareth → Lower City
+75 (by feeder bus) and Kiryat Bialik → Bat Galim 43 (by Metronit feeder).
 
-Loaded on the trunk links (three hours, central underground): 62–594 trips per
-link-direction, largest on LowerCity→Namal-Giborim down (594), Namal-Giborim→Hamifrats down
-(533) and Matam→HofCarmel down (510), against today's bus potential movements of 200–2,030
-on the same links — a quarter to a third of the bus movements, half on
-Namal-Giborim→Hamifrats up (379 against 759) because of the Krayot feeder trips; the ground
-scenario loads 34–353; the peak hour (step 27's factor) is 37–351 underground. The low case
-reaches 1,167 on Namal-Giborim→Hamifrats down.
+Loaded on the trunk links (three hours, central underground): 79–995 trips per
+link-direction, largest on Namal-Giborim→Hamifrats down (995), LowerCity→Namal-Giborim down
+(799) and Matam→HofCarmel down (678), against today's bus potential movements of 200–2,030
+on the same links — a third to 45 % of the bus movements, 84 % on Namal-Giborim→Hamifrats
+up (637 against 759) because of the Krayot feeder trips; the ground scenario loads 44–595;
+the peak hour (step 27's factor) is 47–588 underground. The low-λ case reaches 1,656 on
+Namal-Giborim→Hamifrats down.
 
 **Outputs.** `Output/skims/skim_{mode}_{component}.csv` (ivt, walk, wait, transfers, gc,
 status per mode, plus `ivt_scheduled` for bus and `ivt_lrt_only`, `gateway_o`, `gateway_d`,
@@ -1754,9 +1776,10 @@ plus an `areas` sheet), `skims_area_v2_long.csv`, `skims_summary_by_mode.csv`;
 **Limits.** Corridor-internal trips only (both ends among the 25 areas; no external trips,
 none to or from outside the study area); 2022 base year, not the 2040/2050 forecasts; no
 capacity and no route choice against the parallel bus services that would still run; money
-components (fare, parking) are still missing from GC; λ is assumed, not estimated — a
+is out of the comparison by decision (flat integrated fare, §6x addendum 4); λ is assumed, not estimated — a
 segmented logit on the survey's person-level records (car availability, purpose) is the
-next step (`docs/CORRIDOR_DEMAND_TASKS.md` E7); the feeder-bus access assumes the bus stops
+next step (`docs/CORRIDOR_DEMAND_TASKS.md` E7); the LRT premium (5 generalized minutes)
+and the free LRT–Metronit transfer are assumptions of the same standing; the feeder-bus access assumes the bus stops
 at the gateway station; station access / egress walk is the population-weighted
 nearest-station walk of §6x, not a per-trip routing.
 
