@@ -231,3 +231,9 @@ Key facts driving the list (2017 trips-file hybrid, `Output/ths2017/study_taz/`)
 
 A1 split rule from zonal files and RavKav; A2 skims; A3; A4 survey-side factors and the
 `Dep_h` check; B2; B3; C1 (once A2 exists); C3; D1 (on the 2022 hybrid as is).
+
+## F. Plan of 22 September 2026
+
+The ordered plan for tightening the capture and the scenarios to test is in
+`docs/PLAN_TIGHTENING_AND_SCENARIOS.md` (person-level λ, walking-network access, TAZ-level
+trunk capture, bus-cost overhead, realistic speed regime, headways; then S1–S9).
