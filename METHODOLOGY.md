@@ -64,6 +64,9 @@ notes saying which of their conclusions are overtaken.
 | Busiest single link of any route | Kiryat Haim – Kiryat Bialik Center (T2), 10,144 towards Haifa, transit share 10 % | §6v |
 | LRT `hf_lrt_3`: 24 stations, 18.74 km S01 → S24, mean spacing 815 m | end to end 73.5 min underground / 89.7 min ground (distance form); 45.1 / 55.0 min (section form); underground −18.1 % | §6w |
 | Generalized-cost first fill on the trunk pairs (trip-weighted): car door-to-door / bus fastest-path IVT / LRT IVT underground, ground | 14.5 / 12.5 / 20.6, 25.1 min; survey bus door-to-door 27.1 min (2.3 × the network IVT) | §6x |
+| Bus level of service from the GTFS (Tuesday 2 June 2026): TAZs with peak-hour service / best-line grade A–B / with a Metronit stop | 719 of 781 / 454 / 60 (41 in the V2 areas, 20 of 25 areas) | §6aa |
+| Direct-service skim, trunk pairs: bus scheduled IVT, combined headway; Metronit | 13.3 min at 1.7 min (82 of 90 pairs); 10.0 min at 6 min (72 pairs) | §6aa |
+| Generalized cost after the GTFS skim, trunk pairs, trip-weighted: car / bus / Metronit / LRT underground | 14.5 / 24.9 / 21.2 (on its pairs) / 53.8 — the LRT dearer than the bus on every trunk pair, 9 generalized minutes of it station access | §6x addendum |
 
 What these support: relative questions — ranking alignments and segments, sizing the
 market between line areas, locating the demand, and the design-hour scaling of that
@@ -93,8 +96,8 @@ the corridor potential movements on the V2 areas per route and as a tree network
 all-underground and an all-ground scenario; step 26 (§6x) inventories the
 generalized-cost components on the 25 areas, fills the skims that the data supports (car
 from the survey, bus from the speed network, LRT from step 25) and lists the gaps
-(`Output/gc/gc_data_inventory.csv`, task list section E). Step 29 (§6aa) adds the bus and BRT level of service per TAZ from the national GTFS
-(dry run until the LFS archive is pulled). The plain-language account of steps
+(`Output/gc/gc_data_inventory.csv`, task list section E). Step 29 (§6aa) adds the bus and Metronit level of service per TAZ from the national GTFS
+(feed of 22 May 2026) and the direct-service skim that now feeds the bus components of §6x. The plain-language account of steps
 24–28 and of what every matrix product can be used for is
 `reports/V2_Corridor_LRT_Times_and_GC_Inputs_Report.docx` (revision 1, 22 September 2026).
 Headline additions to the table below: on the tree network the trunk link Bazan-Hutsot – Tsomet Kiryat Ata carries
@@ -164,7 +167,7 @@ validation against counts.
 | `../trips_ths_2017.xlsx` (in `Input/`) | THS trips file: one row per activity per person per survey day | 146,394 rows, 16,401 persons (same panel as the activities file), `SurveyDay` 1/2; `placeno` orders activities per `PerID3`, `actTaz` locates them, `Dep_h` is the hour of departing the activity, `mode` is pre-aggregated (CAR/TRANSIT/RAIL/OTHER, `IRR` = first activity), `new_wf` carries the weight; `TrvlTime` / `TrvlDist` are the reported door-to-door minutes and km (used by step 26) |
 | `../Corridor_TAZ_Agg_V2.xlsx` (in `Input/`, added 22 Sep 2026) | The V2 corridor aggregation | Sheet `AreaCodes`: 25 areas (`AggCode` 201–217 trunk + Nazareth branch, 101–104 Krayot branch, 301–304 Kiryat Yam branch) with three route orders `Order_T1` / `Order_T2` / `Order_T3` (0 = not on the route); sheet `TazAgg`: 174 TAZ → `AggCode` pairs, all present in the 778-TAZ matrices, none duplicated. TAZ 1509 (LRT station S13) is not listed |
 | `../GeneralHalufa/hf_lrt_3.shp`, `station_hf_lrt_3.geojson` (in `Input/`, added 22 Sep 2026) | Planned LRT alignment and stations | One WGS 84 polyline of 18.94 km from Hamifrats to Tirat Carmel; 46 platform points (`halufa` attribute 1 / 2 / 999 / null — all points lie within 80 m of the line and are used) forming 24 stations. Projected to Israel TM Grid (EPSG:2039) for all distances |
-| `../GTFS/israel-public-transportation.zip` (in `Input/`, LFS, expected 22 Sep 2026) | The Ministry of Transport's national GTFS feed (https://gtfs.mot.gov.il/gtfsfiles/) | Standard GTFS (`stops`, `routes`, `trips`, `stop_times`, `calendar`, `agency` …); `route_desc` carries the route code (מק"ט), direction and alternative as `code-dir-alt`; the Metronit BRT lines are codes 83001–83005. Used by step 29 for the bus level of service per TAZ and the direct-service skim between the V2 areas; the notebook dry-runs on a synthetic feed while only the LFS pointer is present |
+| `../GTFS/israel-public-transportation.zip` (in `Input/`, LFS, added 22 Sep 2026; feed of 22 May 2026) | The Ministry of Transport's national GTFS feed (https://gtfs.mot.gov.il/gtfsfiles/) | Standard GTFS (`stops`, `routes`, `trips`, `stop_times`, `calendar`, `agency` …); `route_desc` carries the route code (מק"ט), direction and alternative as `code-dir-alt`; the Metronit BRT lines are codes 83001–83005. Used by step 29 for the bus level of service per TAZ and the direct-service skim between the V2 areas; the notebook dry-runs on a synthetic feed while only the LFS pointer is present. **Since 22 Sep 2026 every file directly under `Input/` is on LFS** (`Input/*` in `.gitattributes`): `git lfs pull --include="Input/*.xlsx,Input/*.csv"` is now required before any notebook runs |
 | `../BusSpeedData/Streets/Streets.shp`, `std_202605.csv` (in `Input/`, CSV in LFS, added 22 Sep 2026) | Bus link speeds, May 2026 | 161,534 national street links (Israel TM Grid; `USERID`, `DIR` = 1 with / −1 against / 0 both directions); 157,618 speed records joined on `USERID` (99.9 % match), 336 columns `d_{weekday}_h_{hour}_{AB,BA}` in km/h with 0 = no bus observation. `Readme.txt`: weekday 3, 07:00–08:00 = `d_3_h_7_AB` / `d_3_h_7_BA`. 54,507 links (5,632 km) fall in the study area, 48,092 with a speed |
 
 **Data-version note.** The activities file currently in the repository contains more
@@ -1408,6 +1411,24 @@ parking missing everywhere; bus walk / wait assumed, bus transfers missing.
 `gc_trunk_pairs_comparison.csv`, **`gc_data_inventory.csv`** (the gap table); figure
 `gc_first_fill_trunk_v2.png`.
 
+**Addendum, 22 September 2026 — the GTFS skim in the bus components.** With step 29's
+direct-service skim (§6aa) the bus in-vehicle time is the scheduled time of the direct
+services on the 422 pairs that have one (82 of the 90 trunk pairs, 89 % of their trips), the
+wait half their combined 07:00–08:00 headway capped at 10 min, the walk the TAZ-to-nearest-
+served-stop distance weighted by residents and jobs, and transfers 0; the other pairs keep
+the fastest-path floor × 1.12 (the median scheduled ÷ floor ratio), the placeholder wait
+and a missing transfer count. The Metronit is carried as its own mode (`brt`) on the 278
+pairs it connects directly. Trunk pairs, trip-weighted: bus IVT 12.3 min (floor 12.5), walk
+4.7, wait 1.6 → partial generalized cost 24.9 (was 38.5 on the placeholders); Metronit IVT
+7.8, wait 2.4, partial cost 21.2 on its 72 trunk pairs against 20.0 for all buses on the
+same pairs; LRT 53.8 / 58.4 — dearer than the bus on every trunk pair by 13–62 generalized
+minutes (median 28), 9 of which are access (6.8 min to a station against 2.4 min to a bus
+stop, trip-weighted). The timetable's best direct bus is 18.6 min door to door against the
+27.1 min bus users report in the survey: the 8-minute gap (transfers, the line actually
+needed, delay) is the calibration margin for the bus cost. Status of the fill after the
+addendum: bus IVT 422 derived / 178 assumed, walk 625 derived, wait 420 derived / 203
+assumed, transfers 422 derived / 203 missing; `gc_area_v2_brt.csv` added.
+
 ## 6y. Step 27 — Peak-hour factors on the V2 routes (`Corridor_peak_hour_V2_routes.ipynb`)
 
 **Purpose.** Step 24's first pass applied the step-20 factors of the 18-area line to the V2
@@ -1492,19 +1513,38 @@ the destination area; per pair the median over the morning-peak trips, the trips
 07:00–08:00 and the implied headway, for all buses and for BRT only; compared with the
 §6x floor where both exist.
 
-**Status.** The GTFS archive is Git-LFS-only and the MOT server is not reachable from the
-remote environment, so the notebook was executed as a **dry run** on a synthetic feed in
-the national format (16 stops, two bus lines and one line under code 83001, 120 trips);
-every step ran and the outputs under `Output/gtfs/dry_run/` are the mechanics test. The
-real run — `git lfs pull --include="Input/GTFS/israel-public-transportation.zip"`, then
-execute — writes `Output/gtfs/bus_los_taz.csv`, `Output/gtfs/bus_direct_skim_area_v2.csv`
-and `Output/figures/gtfs_bus_los_taz.png`. Its first reading should be the study-area trip
-count on the chosen Tuesday, the BRT-access table by V2 area, and the ratio of scheduled
-direct in-vehicle time to the §6x floor (the survey's door-to-door time was 2.1–2.3 × that
-floor).
+**Results (feed of 22 May 2026, Tuesday 2 June 2026, 13,596 active services).** 12,845 stops in
+730 of the 781 TAZs; 33,499 trips call at them, 7,324 departing a study-area stop in
+06:00–09:00 (267 Metronit). *Route codes:* of the five supplied (83001–83005) only 83001 is a
+Metronit line in the feed — 83003 and 83005 are local lines in Kiryat Malachi and Arara
+BaNegev, 83002 / 83004 do not exist; the Metronit lines are 83001 (line 1), 67002 (line 2,
+Bat Galim – Kiryat Ata), 67003 (line 3, Krayot loop), 62004 (line 4, Carmel tunnels) and
+52005 (line 5, Yagur), all Superbus, printed as an audit table in the notebook. *Per TAZ:*
+719 of 781 have a peak-hour bus departure, 62 none (59 without any stop, 18 of them in the
+V2 areas — Bazan, port, Matam fringe, Kiryat Ata industry); on the combined headway 639
+grade A, on the best single line 215 A / 239 B / 106 C / 97 D / 61 E; median centroid-to-stop
+distance 194 m (72 TAZs beyond 1 km); the median TAZ reaches 47 TAZs without a transfer,
+30 within 30 minutes. The Haifa trunk areas are A–B on the best line (3–7 min; Hamifrats
+97 lines, Bat Galim 52); the branches are weaker — Kiryat Ata North / North-East 18–20 min
+with 5 of 14 TAZs unserved and a direct reach of 10 TAZs, Shefaram 20 min, Hamovil 30 min,
+Nazareth 12 min with 2,438 departures across 38 TAZs but local reach, Tirat Carmel 8 lines
+at 12 min. *BRT access:* 60 TAZs, 41 in the V2 areas across 20 of the 25 areas (every trunk
+area Matam – Tsomet Kiryat Ata, the Krayot by lines 1 / 4, Kiryat Yam and Savyoney Yam by
+line 3, Kiryat Ata North by line 2); none in Tirat Carmel, Shefaram, Hamovil, Nazareth and
+Kiryat Ata North-East. *Skim:* 422 of 600 area pairs have a direct bus service (278 a direct
+Metronit); trunk 82 of 90 (72 Metronit) — Tirat Carmel to / from Bat Galim, Hamoshava,
+Lower City and Hamifrats need a change at Hof HaCarmel; trunk median scheduled IVT 13.3 min
+at a 1.7-minute combined headway (Metronit 10.0 min at 6 min); scheduled IVT ÷ the §6x floor
+1.12 at the median (p10 0.53, p90 1.85 — the floor was far too fast on the long Krayot
+pairs); from Nazareth 44–60 min to the trunk at 8–30-minute headways, from Shefaram 56 min,
+and the Kiryat Ata branch has direct service to 15 of its 45 trunk pairs. Step 26 now takes
+the bus IVT, wait and stop access from this skim where a direct service exists and carries
+the Metronit as its own mode (§6x addendum). Open: transfer paths for the 178 pairs without
+a direct service; observed (AVL) running times in place of the timetable. The earlier
+synthetic dry run remains under `Output/gtfs/dry_run/`.
 
 **Outputs.** `Output/gtfs/bus_los_taz.csv` (781 rows), `Output/gtfs/bus_direct_skim_area_v2.csv`,
-figure `gtfs_bus_los_taz.png` (under `dry_run/` and `_dry_run` until the real run).
+figure `gtfs_bus_los_taz.png`.
 
 ---
 
@@ -1685,6 +1725,7 @@ standardizes on the cell-based toolkit (GEH, %RMSE), which is precisely what str
 
 ```bash
 pip install pandas numpy scipy matplotlib jupyter openpyxl pyshp shapely pyproj
+git lfs pull --include="Input/*.xlsx,Input/*.csv"   # required since 22 Sep 2026: the top-level Input files are on LFS
 git lfs pull            # optional — needed only for the historical cellular chain, the raw RavKav / train files and the 2040 / 2050 zonal forecasts
 
 # current chain (survey-only base; runs on committed inputs and the committed step-8/9/10 outputs)
@@ -1702,7 +1743,7 @@ jupyter nbconvert --to notebook --execute --inplace notebooks/current/Corridor_f
 jupyter nbconvert --to notebook --execute --inplace notebooks/current/Corridor_profile_V2_survey_vs_ticketing.ipynb
 jupyter nbconvert --to notebook --execute --inplace notebooks/current/LRT_line_stations_travel_time.ipynb
 jupyter nbconvert --to notebook --execute --inplace notebooks/current/GC_data_inventory_and_skims.ipynb
-# bus level of service from the national GTFS (step 29; dry run on a synthetic feed unless git lfs pull --include="Input/GTFS/israel-public-transportation.zip")
+# bus level of service from the national GTFS (step 29; needs git lfs pull --include="Input/GTFS/israel-public-transportation.zip", else a dry run); run it BEFORE step 26, which reads its skim
 jupyter nbconvert --to notebook --execute --inplace notebooks/current/GTFS_bus_LOS_TAZ.ipynb
 
 # regression test of the hybrid branch (committed outputs only)

@@ -3,10 +3,11 @@ car,ivt,derived,"survey door-to-door times, 2017/18, smoothed",a 2026 congestion
 car,fare (operating cost),missing,—,per-km operating cost and the distance skim (survey TrvlDist is available per pair: car_dist_survey_area_v2.csv)
 car,parking,missing,survey parkType (paid / free) by destination area as a proxy,"parking tariffs by destination area (Haifa municipality; Matam, Lower City, Bat Galim)"
 car,VOT,missing,—,"נוהל פר""ת value of time by purpose (work / other), ILS per hour"
-bus,ivt,derived (lower bound),fastest bus-served path on the May 2026 speed network,GTFS route paths per pair so the IVT follows actual services; keep the speed network for the running speeds
-bus,walk,assumed,8 min,GTFS stop coordinates → TAZ access distance as done for the LRT
-bus,wait,assumed,headway 10 min / 2,GTFS AM-peak headways on the pair's best route
-bus,transfers,missing,—,"GTFS path building (or the OnBoard survey transfer field tfrs, 9 % of trips carry it)"
+bus,ivt,derived (direct services),GTFS scheduled IVT of direct services; fastest-path floor scaled elsewhere,transfer paths for the pairs without a direct service; observed (AVL) running times instead of the timetable
+bus,walk,derived,TAZ centroid → nearest served GTFS stop,a walking network instead of the 1.3 detour factor; stop-specific access for the routes actually used
+bus,wait,derived (direct services),half the GTFS combined headway of the direct services,headway of the best route rather than the combined headway where lines diverge
+bus,transfers,"derived where direct, missing elsewhere",0 on direct pairs,"GTFS path building (or the OnBoard survey transfer field tfrs, 9 % of trips carry it)"
+brt,ivt / wait / walk,derived (direct Metronit pairs),"GTFS Metronit lines 83001, 67002, 67003, 62004, 52005",BRT-stop-specific walk access; a bus + BRT nest in the capture model
 bus,fare,missing,—,fare tables of the metropolitan zones; integration with LRT
 lrt,ivt,derived (10 trunk areas),calibrated function on hf_lrt_3 stations,"alignment + stations of the segment Hamifrats → Tsomet Kiryat Ata and of the three branches (T1 Kiryat Ata – Nazareth, T2 Krayot, T3 Kiryat Yam); the regime (underground / ground) per section instead of the two pure scenarios; a running / dwell decomposition of the coefficients"
 lrt,walk,derived (10 trunk areas),TAZ centroid → nearest station,the same for the branch stations; a walking network instead of the 1.3 detour factor

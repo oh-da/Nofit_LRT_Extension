@@ -30,7 +30,7 @@ the planned **LRT line and its 24 stations** were given station-to-station times
 calibrated function for an all-underground and an all-ground scenario (73.5 / 89.7 min end to
 end in distance form, 45 / 55 min in section form — [§6w](METHODOLOGY.md#6w-step-25--lrt-line-and-stations-stop-to-stop-times-underground-vs-ground-level-lrt_line_stations_travel_timeipynb));
 and the **generalized-cost inputs** were inventoried and first-filled on the V2 areas, with
-the gaps listed in `Output/gc/gc_data_inventory.csv` ([§6x](METHODOLOGY.md#6x-step-26--generalized-cost-on-the-v2-areas-data-inventory-first-fill-skims-gaps-gc_data_inventory_and_skimsipynb)). The external methodology review that prompted this
+the gaps listed in `Output/gc/gc_data_inventory.csv` ([§6x](METHODOLOGY.md#6x-step-26--generalized-cost-on-the-v2-areas-data-inventory-first-fill-skims-gaps-gc_data_inventory_and_skimsipynb)); the **bus and Metronit level of service per TAZ** from the national GTFS of 22 May 2026 ([§6aa](METHODOLOGY.md#6aa-step-29--bus-level-of-service-per-taz-from-the-national-gtfs-bus-and-brt-gtfs_bus_los_tazipynb)) now supplies the bus in-vehicle time, wait and stop access of that inventory. The external methodology review that prompted this
 (`docs/Nofit_Demand_Methodology_Review.md`, 21 Sep 2026) and the response to it are recorded
 in [METHODOLOGY.md §8](METHODOLOGY.md#8-known-caveats-and-open-questions) and
 [CORRIDOR_DEMAND_TASKS.md](docs/CORRIDOR_DEMAND_TASKS.md).
@@ -146,7 +146,7 @@ anywhere inside the repository.
 | `Corridor_flow_profile_V2_routes.ipynb` | **current** | The corridor potential movements on the **V2 aggregation** (25 areas, 174 TAZs): per route (T1 Nazareth, T2 Krayot, T3 Kiryat Yam) and on the tree network, three-hour and peak-hour, all layers; the Krayot branch link Kiryat Haim – Kiryat Bialik Center is the busiest single link (10,144 towards Haifa), the trunk link Bazan-Hutsot – Tsomet Kiryat Ata carries 16,231 / 2,898 transit on the network (METHODOLOGY §6v) |
 | `Corridor_peak_hour_V2_routes.ipynb` | **current** | Peak-hour factors re-estimated on the V2 route sequences and the tree network (car by direction on every route, 0.62–0.65 up / 0.57–0.58 down, network 0.56 / 0.52; bus and taxi-type on the study-area factors); step 24 applies them (§6y) |
 | `Corridor_profile_V2_survey_vs_ticketing.ipynb` | **current** | The calibrated-survey vs ticketing-based transit profiles on the V2 routes and the tree network, from the TAZ-level products: up direction agrees (0.78–0.83), down direction route-specific (T2 0.92, T1 0.66), the Nazareth allocation and the alighting frame still the drivers (§6z) |
-| `GTFS_bus_LOS_TAZ.ipynb` | **current** (dry run here) | Bus level of service per TAZ from the national GTFS (stops, lines, peak-hour departures and combined headway with a TCQSM grade, direct reach, stop access) for all buses and for the **Metronit BRT** lines (codes 83001–83005) separately, with a BRT-access flag per TAZ; a direct-service in-vehicle time and headway skim between the V2 areas for the generalized cost (§6aa); runs on the real feed once `Input/GTFS/israel-public-transportation.zip` is pulled from LFS |
+| `GTFS_bus_LOS_TAZ.ipynb` | **current** | Bus level of service per TAZ from the national GTFS (stops, lines, peak-hour departures and combined headway with a TCQSM grade, direct reach, stop access) for all buses and for the **Metronit BRT** lines (codes 83001–83005) separately, with a BRT-access flag per TAZ; a direct-service in-vehicle time and headway skim between the V2 areas that now feeds the bus components of the generalized cost (§6aa); feed of 22 May 2026, Tuesday 2 June; 719 of 781 TAZs served in the peak hour, 60 with a Metronit stop; the Metronit codes in the feed are 83001, 67002, 67003, 62004, 52005 |
 | `LRT_line_stations_travel_time.ipynb` | **current** | The planned line `hf_lrt_3` and its 46 platform points → 24 stations with chainage, TAZ and V2 area; station-to-station in-vehicle times with the calibrated function (1.961 min per 500 m underground, 2.393 at ground level) for an all-underground and an all-ground scenario, distance and section forms; area-level times for the ten trunk areas (§6w) |
 | `GC_data_inventory_and_skims.ipynb` | **current** | Generalized-cost components on the V2 areas: car door-to-door from the survey, bus fastest-path IVT on the May 2026 speed network (2.1–2.3 × below the survey's door-to-door), LRT IVT + walk access from step 25; partial GC matrices with a status per cell and the data-gap inventory — LRT speed on this spacing and the branch geometry are the decisive open inputs (§6x) |
 | `THS_2017_trip_generation.ipynb` | current | Per-person AM-peak generation rates on the trips-file source (overall ≈ 0.83) |
@@ -222,12 +222,16 @@ anywhere inside the repository.
 
 ## Setup
 
-Most inputs are stored in Git LFS; the survey-only branch runs without them except for
-the RavKav / train raw files, whose processed outputs are committed:
+Since 22 September 2026 every file directly under `Input/` is stored in Git LFS (the
+survey workbook, the keys, the zonal files, the V2 aggregation), as are the GTFS and
+bus-speed archives, so a pull of the small inputs is required before any notebook runs:
 
 ```bash
-git lfs pull                      # optional: cellular, RavKav, train and forecast zonal files
 pip install pandas numpy scipy matplotlib jupyter openpyxl pyshp shapely pyproj
+git lfs pull --include="Input/*.xlsx,Input/*.csv"                       # required (≈ 22 MB)
+git lfs pull --include="Input/GTFS/israel-public-transportation.zip"   # step 29 (181 MB)
+git lfs pull --include="Input/BusSpeedData/std_202605.csv"             # step 26 (311 MB)
+git lfs pull                                                           # everything: cellular, RavKav, train, forecast zonal files
 ```
 
 Run order for the current branch, all under `notebooks/current/`: `THS_2017_two_mode_matrix`
@@ -235,7 +239,6 @@ Run order for the current branch, all under `notebooks/current/`: `THS_2017_two_
 `Corridor_profile_hybrid_vs_ticketing` → `Corridor_peak_hour_2022` → `Final_matrices_2022` →
 `Forecast_matrices_TAZ_2040_2050` (see METHODOLOGY §9); then, on the new inputs,
 `Corridor_peak_hour_V2_routes` → `Corridor_flow_profile_V2_routes` → `Corridor_profile_V2_survey_vs_ticketing`
-→ `LRT_line_stations_travel_time` → `GC_data_inventory_and_skims`
-(the last needs `git lfs pull --include="Input/BusSpeedData/std_202605.csv"`); `GTFS_bus_LOS_TAZ`
-runs on the real feed after `git lfs pull --include="Input/GTFS/israel-public-transportation.zip"`.
+→ `LRT_line_stations_travel_time` → `GTFS_bus_LOS_TAZ` → `GC_data_inventory_and_skims`
+(the last two need the GTFS and bus-speed LFS files; step 26 reads step 29's skim).
 `notebooks/diagnostics/Hybrid_superzone_conservation_test` runs on committed outputs alone.
