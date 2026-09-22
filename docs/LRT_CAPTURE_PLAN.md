@@ -27,6 +27,7 @@ GC_m = IVT + 2.0·walk + 2.0·wait + 8·transfers + (fare + parking)/VOT
 | VOT, fares, parking | **out of the comparison** (decision of 22 Sep 2026) | the transit fare in the area is flat and integrated with a daily cap (two fares pay for the day): identical for bus, Metronit and LRT and for every pair, so it drops out of the transit choice and is a constant per trip against the car, absorbed by the pivot; car operating cost and parking excluded on the same decision |
 | LRT commercial speed | **calibrated function** (Red Line, 22 Sep 2026) transferred through the Red Line's actual spacing: running 46 km/h + 49 s per stop underground, 31 km/h + 74 s at the surface, levelled to the observed means — 27.6 / 17.1 km/h on `hf_lrt_3`'s 815 m spacing (METHODOLOGY §6w rev. 2) | the report's 500 m reading (15.3 / 12.5 km/h) is superseded; `docs/Transit_Travel_Time_Calibration_Report_Operator22.md` |
 | LRT peak headway | 5 min (12 departures an hour) | assumption of 22 Sep 2026 |
+| LRT design regime (third scenario) | 50 km/h between stops + 10 s per stop, headway 5 min | specification of 22 Sep 2026; no acceleration allowance, a ceiling beside the two calibrated scenarios: 26.3 min end to end (42.7 km/h), central capture 3,970 trips in 2022 (METHODOLOGY §6w / §6ac addenda) |
 
 ## 2. Skims — mixed sourcing, not a single Google pull
 

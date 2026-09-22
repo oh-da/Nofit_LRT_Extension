@@ -75,6 +75,7 @@ notes saying which of their conclusions are overtaken.
 | Cost sensitivity λ from the 2022 cross-section (binary logit, transit share vs `GC_bus − GC_car`, 573 pairs / 67,700 trips) | wrong sign (−0.011, ρ² 0.003); with distance-band constants +0.0002 (ρ² 0.036) — not identifiable; λ assumed 0.03 (range 0.02–0.05), λ_T = 2λ | §6ac |
 | LRT capture, central case (λ 0.03, λ_T 0.06, LRT premium 5, free LRT–Metronit transfer), 06:00–09:00 within the 25 areas: underground / ground trips (of which from bus / from car) | 3,332 (3,037 / 295) / 2,544 (2,375 / 169); λ range 2,357–4,855 (ug), 1,472–4,277 (ground); premium 0 / 10: 2,658 / 4,122 (ug) | §6ac |
 | LRT trunk-link loads, three hours, central underground vs today's bus | 79–995 per link-direction against bus 200–2,030 (a third to 45 %; 84 % on Namal-Giborim→Hamifrats up); ground 44–595; peak hour ug 47–588 | §6ac |
+| LRT design regime (50 km/h + 10 s per stop, specified): end to end / trunk-pair IVT / central capture 2022 / on the forecast sets | 26.3 min (42.7 km/h) / 8.0 min / 3,970 trips (19 % above underground) / 4,930–6,432 | §6w, §6ac, §6ad addenda |
 | Forecast market growth on the V2 areas (2022 → BU_2040 / BU_2050 / HS_2040 / HS_2050) | transit ×1.27 / 1.40 / 1.38 / 1.57 (11,664 → 14,836 / 16,369 / 16,076 / 18,291); car ×1.32 / 1.53 / 1.38 / 1.59; no-build transit share of car + transit stays 0.16–0.17 | §6ad |
 | LRT trips, central case, by scenario-year: underground / ground | 3,332 / 2,544 (2022) → 4,114 / 3,105 (BU_2040) → 4,498 / 3,386 (BU_2050); 4,520 / 3,430 (HS_2040) → 5,354 / 4,047 (HS_2050); LRT share of no-build transit fixed at 0.28–0.29 ug / 0.21–0.22 ground (skims held fixed) | §6ad |
 | Busiest trunk link by scenario-year, underground central (Namal-Giborim → Hamifrats down) | three hours 995 (2022) → 1,216 / 1,367 (BU) → 1,426 / 1,717 (HS); peak hour 588 → 718 / 807 / 842 / 1,014 | §6ad |
@@ -1422,6 +1423,16 @@ three branches have no station on this geometry.
 `…_section_form.csv`, `lrt_line_profile.csv`, `lrt_area_representative_station.csv`,
 `lrt_area_ivt_{all_underground,all_ground}.csv`; figure `lrt_line_profile_hf_lrt_3.png`.
 
+**Addendum, 22 September 2026 — a third, specified regime.** At the study team's request a
+third scenario runs the line at a **design speed of 50 km/h between stops with 10 s per stop**
+(headway 5 minutes as before): section time = distance / 50 km/h + 10 s, with no acceleration
+or braking allowance. End to end S01 → S24: **26.3 min (42.7 km/h)**, 35 % below the calibrated
+underground case — the calibrated forms put 49–74 s per stop into the stop penalty, where
+dwell, acceleration and deceleration all sit, against 10 s here. It is a performance ceiling
+for the alignment, read beside the two calibrated scenarios rather than as a third observed
+regime. Outputs `lrt_station_times_design_50kmh.csv`, `lrt_area_ivt_design_50kmh.csv`, the
+row in `lrt_end_to_end_summary.csv` and the columns in `lrt_line_profile.csv`.
+
 ## 6x. Step 26 — Generalized cost on the V2 areas: data inventory, first-fill skims, gaps (`GC_data_inventory_and_skims.ipynb`)
 
 **Purpose.** For the capture model's formula (`docs/LRT_CAPTURE_PLAN.md`:
@@ -1526,6 +1537,12 @@ now carry the status `constant` (values zero) instead of `missing`, the inventor
 `gc_data_inventory.csv` lists nothing to obtain for them, and VOT is no longer needed. No
 generalized-cost value changes (money entered at zero before); task E4 of
 `docs/CORRIDOR_DEMAND_TASKS.md` closes.
+
+**Addendum 5, 22 September 2026 — the design-speed LRT regime.** Step 25's third scenario
+(50 km/h + 10 s per stop) enters as mode `lrt_design_50kmh` with the same walk, wait and
+transfer components as the two calibrated scenarios; `gc_area_v2_lrt_design_50kmh.csv` and
+a column in `gc_trunk_pairs_comparison.csv`. No section form (the regime is specified, not
+calibrated).
 
 ## 6y. Step 27 — Peak-hour factors on the V2 routes (`Corridor_peak_hour_V2_routes.ipynb`)
 
@@ -1804,6 +1821,18 @@ nearest-station walk of §6x, not a per-trip routing.
 
 ---
 
+**Addendum, 22 September 2026 — the design-speed regime in the skims and the capture.** The
+third LRT scenario (§6w addendum) runs through the same feeder composite and capture:
+in-vehicle time on the trunk pairs 8.0 min (12.6 underground, 20.4 ground), partial GC 39.4
+on the trunk pairs and 61.1 over all pairs; dearer than the bus on 494 of 598 pairs on
+physical cost (direct trunk pairs −8 to +26 generalized minutes, median 10.5), cheaper on
+192 pairs carrying 1,764 transit trips once the 5-minute premium is applied. Central
+capture **3,970** LRT trips 06:00–09:00 (3,534 from bus, 437 from car; 31 % of the transit
+trips, 40 % on the trunk pairs; λ range 3,227–5,272; premium 0 / 10 → 3,210 / 4,842); trunk
+links 108–1,237 (peak hour 64–730), busiest Namal-Giborim→Hamifrats down 1,237; boardings
+Hamifrats 1,237, Namal-Giborim 888, Hecht-Shprintzak 464, Bat Galim 428. The ceiling regime
+draws 19 % more than the calibrated underground case — less than the λ range.
+
 ## 6ad. Step 32 — LRT capture on the 2040 / 2050 forecast matrices (`LRT_capture_forecast_2040_2050.ipynb`)
 
 **Purpose.** Run step 31's pivoted capture model (§6ac: nested incremental logit pivoted
@@ -1876,6 +1905,13 @@ the zonal forecasts with the composite land-use indices; destination choice and 
 rates held at 2022); taxi carried unchanged.
 
 ---
+
+**Addendum, 22 September 2026 — the design-speed regime on the forecast sets.** Central
+case 3,970 (2022) → 4,930 / 5,404 (BU 2040 / 2050) → 5,416 / 6,432 (HS 2040 / 2050) LRT trips,
+a share of the no-build transit trips of 0.33–0.35 in every year; busiest link
+Namal-Giborim→Hamifrats down 1,503 / 1,693 (BU) and 1,749 / 2,104 (HS) in three hours, 1,242
+in the HS 2050 peak hour; Hamifrats boards 2,104 by HS 2050. About a fifth above the
+underground case in every scenario-year.
 
 ## 7. Output inventory (`Output/`)
 
