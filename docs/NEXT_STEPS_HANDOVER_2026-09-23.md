@@ -483,6 +483,26 @@ the journey origins of step 34 within 2 %. **Documents.** §6an, caveat 16 updat
 2025; the car layer would be grown to 2025 with the step-16 factors on `Zonal_BU_2025.csv`).
 Effort: one day; memory-bound (chunk the 1.6 GB file by date).
 
+**Status, 23 September 2026 — built as `RavKav_2025_own_alightings.ipynb` (§6ai, not §6an — the
+next free letter when this was written); the ≥ 85 % check fails, and the reason is itself the
+finding.** 6,015,350 located taps over the 42 representative Tuesdays; alighting resolved for
+**45.8 %** (not ≥ 85 %), because **72.2 % of card-date groups tap exactly once** in the
+06:00–08:59 window — one leg, no observed transfer or return, nothing for tap-chaining to work
+with regardless of the method. Caught and fixed during testing: an early version wrongly
+resolved single-tap cards against themselves (the return-home rule's distance-from-first-tap
+check is trivially 0 for a group of one), inflating the apparent resolution rate to 96.9% before
+the fix. The **chained transfer share (27.5%)**, which needs no alighting resolution at all,
+sits far closer to 2022's own rate (a third) than the file's tag (3.7%) — the single most
+useful, robust number this notebook produces. The OD's row sums are **not** within 2% of step
+34's journey origins (27,304/day allocated vs 103,889/day chained, since 54% are unallocated) —
+the check as written assumed near-complete resolution; report the shortfall rather than force
+it. Cosine similarity against the 2022 pattern is low (0.138), but not comparable: the resolved
+26.3% of journeys are systematically the ones with a transfer or a same-morning return, not a
+representative sample. **Recommendation:** do not read this as "the chaining method failed" —
+read it as evidence that an AM-only extract cannot supply a general alighting inference by
+tap-chaining, whatever refinements are added; a full-day extract or a proper AVL/schedule-
+matching method is what re-anchoring on 2025 actually needs.
+
 ### C10. Step 42 — All-or-nothing assignment link check of the car layer (task B1)
 
 **Goal.** A link-level comparison with the 3,241 counted links that the cordon test of step 36

@@ -123,6 +123,12 @@ the two structural gaps, and they are the two that need inputs from the client s
    *Road counts received 23 September (`Input/Network_with_Counts/`) and used in step 36 (§6ah):
    the car layer is validated to the order expected on the cordons that are mostly counted; a
    bus passenger count on the trunk and the Nazareth branch is still the missing item.*
+   *A 2025 alighting inference from the taps themselves tried 2026-09-23 (step 41, task C9,
+   METHODOLOGY §6ai): resolves only 45.8% of taps, since 72.2% of card-date groups tap once in
+   the AM-only window with nothing to chain against; the chained transfer share (27.5%) supports
+   the "nearer to legs" reading of the file's tag (3.7%) against 2022's rate (a third), but the
+   resolved OD is a biased subset, not a general alighting inference — a count remains the
+   decisive input, not this notebook.*
 10. **Parking and car policy** — not needed for the fare (flat, out of the comparison) but
     a destination-parking policy at Matam and the Lower City would enter as a car
     constant per destination in the 2040 / 2050 runs.

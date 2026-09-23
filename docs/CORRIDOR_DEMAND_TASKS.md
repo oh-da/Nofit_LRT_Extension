@@ -128,6 +128,13 @@ Key facts driving the list (2017 trips-file hybrid, `Output/ths2017/study_taz/`)
       gap towards Tirat Carmel and from Nazareth was the OnBoard pattern). Still open: the
       OnBoard unit itself, and the Nazareth branch, where the two alighting inferences
       disagree by 13 × and bracket the survey — a count decides (C3).
+      *2025 card-level chaining tried 2026-09-23 (step 41, task C9, METHODOLOGY §6ai): resolves
+      an alighting for 45.8% of taps (below the 85% target) because 72.2% of card-date groups
+      tap once in the AM-only window; its chained transfer share (27.5%) sits far closer to
+      2022's rate (a third) than the file's own tag (3.7%), supporting the "nearer to legs"
+      reading, but the resulting OD does not resemble 2022's (cosine 0.138) since the resolved
+      journeys are a biased subset. Re-anchoring still needs a general alighting inference this
+      file cannot supply by tap-chaining alone.*
 - [x] **B1e. Peak hour** *(done 2026-09-21, `Corridor_peak_hour_2022.ipynb`, METHODOLOGY
       §6r)*: peak-hour factors from survey departure times (07:00–08:00; PHF₃ₕ 0.59–0.66) and
       peak-hour link profiles. *Boarding-hour factor done 2026-09-23 from the RavKav 2025

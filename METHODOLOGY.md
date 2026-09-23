@@ -310,6 +310,17 @@ result is unchanged (checked exactly). A genuine finding about the placeholder, 
 branch drawings, likely with several stations through a city the size of Nazareth, would change
 this materially.
 
+**Update, 23 September 2026 (step 41 — RavKav 2025 journeys chained from the taps, task C9).**
+A card-level chaining of the 2025 taps (§6ai), in place of the `JourneyTransfer` tag: it
+resolves an alighting for 45.8 % of taps (below the ≥ 85 % target), almost entirely because
+72.2 % of card-date groups tap once in this AM-only window — one leg, nothing to chain against.
+The chained transfer share it does recover, 27.5 %, sits far closer to 2022's own rate (a third
+of legs) than the file's tag (3.7 %), supporting the standing reading that the tag marks a
+fare-rule transfer, not a physical one (§6af caveat 16). The resulting journey OD does not
+resemble 2022's (cosine 0.138) — the 26.3 % of journeys it resolves are systematically the ones
+with an observed transfer or return, not a representative morning sample. Re-anchoring the base
+on 2025 still needs a general alighting inference this file cannot supply by tap-chaining alone.
+
 Every published product, what it was built from, and its status:
 
 | Product (`Output/…`) | Built by | Base / inputs | Geography | Modes | Vintage | Status |
@@ -340,6 +351,7 @@ Every published product, what it was built from, and its status:
 | `skims/forecast/*` | step 32 | step-23 forecast sets (BU/HS × 2040/2050), step-31 skims (held fixed) | 25 V2 areas, 9 trunk links | car; transit; taxi — market; LRT (2 scenarios) — capture, boardings, trunk-link loads by scenario-year | 2040 / 2050 (market), 2026 skims (fixed) | **current** — skims fixed at step 31; λ assumed |
 | `mode_choice/*` | step 33 | `Input/THS_2017-2018/` trips, person and household tables × step-31 skims | 25 V2 areas, person-level rows | car vs transit (bus + Metronit + rail) — estimation sample, λ estimates by specification and segment, code check | 2017/18 (survey), May 2026 (skims) | **current** — λ estimated; supports the assumed 0.03; choice-rider λ not identified |
 | `ravkav_2025/*` | step 34 | `Input/BusRavKav/2025/*` (LFS) × the north stops file, `TAZ_North`, the OnBoard pattern, the GTFS stations | stops, 733 TAZ, 28 sub-areas, 25 V2 areas, 20 rail stations | bus + Metronit boardings (journey origins / transfer legs), bus + Metronit journey and leg OD, rail station OD, boarding-hour peak factors | 2025 (representative Tuesday) | **current input layer** — not yet consumed by steps 15–32 (§6af) |
+| `ravkav_2025/bus_od_taz_2025_own_alightings.csv`, `journeys_2025_summary.csv` | step 41 | `Input/BusRavKav/2025/{Buses,Metronit}_RavKav.csv` (LFS), card-level tap chaining | TAZ pairs (allocated journeys only) | bus + Metronit journeys on their own inferred alightings — 45.8 % of taps allocated | 2025 (representative Tuesday) | **diagnostic** — supports caveat 16, does not replace the OnBoard-pattern prior of `ravkav_2025/*` above |
 
 The 25 GS zones (`Input/TAZ_GSnew.csv`) and the 25 retained research areas of the
 forecast tables are different geographies with the same matrix dimension; files are
@@ -2685,6 +2697,17 @@ coverage rule re-applied, and steps 16–35 rerun. The products here are ready f
 then the 2025 layer is the **validation** of the 2022 anchor (§6ag: 2022 and 2025 boardings
 by area agree at cosine 0.98 and the rail matrices at 0.97), not its replacement.
 
+**Follow-on, 23 September 2026 (step 41, §6ai, task C9).** The card-level linking this
+paragraph called for was attempted, on the taps directly (no `bus_trip_id` to reproduce, so a
+tap-chaining rule instead): it resolves an alighting for 45.8 % of taps, not because the rule
+is wrong but because 72.2 % of card-date groups have exactly one located tap in this AM-only
+extract — one leg, nothing to chain against. The chained transfer share it does recover, 27.5 %,
+sits far closer to 2022's own rate (a third) than the file's 3.7 % tag, supporting reason (i)
+above on its own terms. None of this closes reason (iii) — there is still no 2025 car
+observation — or supplies the general alighting inference reason (ii) actually needs: that
+would take a full-day extract or a proper AVL/schedule-matching method, not tap-chaining on an
+AM-only file. The verdict stands: not re-anchored.
+
 ## 6ag. Step 35 — The matrix tests rerun: THS against RavKav 2022 and 2025, and the PCA (`THS_vs_RavKav_2025_tests.ipynb`, diagnostics)
 
 **Purpose.** Apply the test suite of steps 12–14 and 21 — cosine similarity and GEH,
@@ -2870,6 +2893,65 @@ area, so the through traffic from beyond it (Tel Aviv – Haifa – Acre on Road
 count and not in the demand; polygon boundaries that a road clips twice count two crossings that
 real trips do not make; no link-level comparison is possible without an assignment (task B1, C3).
 
+## 6ai. Step 41 — RavKav 2025: journeys chained from the taps, on their own inferred alightings (`RavKav_2025_own_alightings.ipynb`, diagnostics, task C9)
+
+**Purpose.** The 2025 extracts (step 34, §6af) carry boardings only — no alightings, and the
+`JourneyTransfer` tag flags only 3.7 % of taps as a transfer, far below 2022's own linked-journey
+rate (1.52 legs per journey, a third of boardings transfer legs, step 8). This step gives the
+2025 layer an alighting inference and a journey chaining of its own, on data that lacks the
+operator-supplied `bus_trip_id` field the 2022 extract had (§6af "Re-anchoring", reason (ii)).
+
+**Inputs.** `Input/BusRavKav/2025/Buses_RavKav.csv` (LFS, 1.6 GB) and `Metronit_RavKav_Data.csv`
+(LFS, 69 MB), read in 2-million-row chunks; step 34's own stop-location tables
+(`Output/ravkav_2025/stops_located_by_cluster_2025.csv`, `stops_north_file_taz.csv`) reused
+rather than rescanned; step 34's 42 representative Tuesdays
+(`Output/ravkav_2025/daily_totals_by_date.csv`, `kept (all three)`).
+
+**Method.** Per (card, date), sort taps by time (`PassengersNumber ≤ 0` refund rows dropped
+first, as elsewhere). A tap's alighting is the location of the card's *next* tap that day,
+accepted within 90 minutes and 20 km (the plan's own plausibility bounds; no separate
+fare-transfer-window figure exists elsewhere in this repository, so the same bound serves both
+the alighting inference and the chain decision below — a stated simplification; the plan's
+"same line direction" refinement is not built, there being no line-shape matching here). The
+last tap of the day takes the day's first tap's own stop under the same 20 km bound (the
+return-home rule) — but only when the group has more than one tap: a single-tap card has
+nothing to compare against, and an early version of this notebook wrongly "resolved" it against
+itself (distance 0 by construction) before this was caught in testing and fixed. Two consecutive
+taps chain into one journey under the same two bounds — a transfer is, by construction, always
+to the immediately preceding leg's own inferred alighting, so the bounds (not distance from the
+alighting) are what actually decide whether a chain continues.
+
+**Results.** 6,015,350 located bus + Metronit taps over the 42 representative Tuesdays (bus
+5,424,117, Metronit 591,233). **72.2 % of card-date groups have exactly one tap** in the
+06:00–08:59 window — one leg, no observed transfer or return, nothing to infer an alighting
+from, whatever the method; 19.2 % have two, 8.6 % three or more. Alighting resolved for **45.8 %
+of taps** (unallocated 54.2 %) — well below the ≥ 85 % this item's own check asked for, almost
+entirely because of the single-tap majority: of taps with a second tap to chain against, most do
+resolve (27.5 % by the next-tap rule, 18.3 % by return-home). **The chained transfer share,
+27.5 %, sits far closer to 2022's own linked-journey rate (a third of legs) than the file's own
+tag (3.4 %)** — this result does not depend on alighting resolution at all, only on the chain
+decision, and is the more robust finding here: it supports the standing hypothesis (§6af, caveat
+16) that the tag marks a fare-rule transfer, not a physical one. The resulting journey OD
+(103,889 journeys/day chained, 27,304 with an allocated destination, mean 1.38 legs/journey)
+does **not** resemble the 2022 pattern (cosine 0.138 against `bus_od_taz_avg.csv`) — but the two
+are not comparable populations: the 26.3 % of journeys that resolve here are systematically the
+ones with an observed transfer or same-morning return, not a representative sample of all AM
+travel the way 2022's provider-linked journeys are. This is not evidence against the chaining
+method or the 2025 data; it is evidence that single-morning-window tap chaining cannot supply a
+general alighting inference the way step 8's provider-supplied journey IDs could in 2022 — the
+finding the item set out to get, even though it is not the working substitute for re-anchoring
+that a positive result would have been.
+
+**Outputs.** `Output/ravkav_2025/bus_od_taz_2025_own_alightings.csv` (allocated journeys,
+average per representative Tuesday), `journeys_2025_summary.csv` (taps, journeys, allocated
+share, transfer shares); figure `ravkav_2025_own_alighting_distance.png`.
+
+**Limits.** AM-only extract (06:00–08:59), so a single-leg morning trip with no transfer and no
+same-morning return is invisible to this method by construction — a full alighting inference (a
+proper AVL/schedule-matching method, or a full-day extract) is still what re-anchoring on 2025
+would need (§6af); the 90-minute / 20 km bounds do double duty for two different decisions, for
+want of a separately stated transfer-window figure; no line-shape matching.
+
 ## 7. Output inventory (`Output/`)
 
 *Layout note (21 September 2026).* The products of steps 1–4 (the 2018 activities-file chain, listed first below with bare file names) now live under `Output/historical/ths2018/`; every other path is as written. Notebooks live under `notebooks/current/`, `notebooks/diagnostics/` and `notebooks/historical/` and anchor their working directory to the repository root, so the `Input/…` and `Output/…` paths in this document are unchanged.
@@ -3030,7 +3112,13 @@ Added 23 September 2026 (step 33):
     52,000 non-northern boardings a day in the area. The rail extract's station coordinates are
     wrong for several stations; the GTFS locations are used. Alightings for bus and Metronit
     are still the OnBoard pattern (caveat 7); the rail OD is measured from the exit taps, with an
-    expansion for the exits after 09:00. The chain is not yet re-anchored on this layer.
+    expansion for the exits after 09:00. The chain is not yet re-anchored on this layer. **Step
+    41 (23 September 2026, §6ai) tried a card-level chaining of the taps themselves in place of
+    the tag: it recovers a transfer share (27.5 %) close to 2022's (a third), supporting the
+    "nearer to legs" reading above, but resolves an alighting for only 45.8 % of taps, because
+    72.2 % of card-date groups tap once in this AM-only window — one leg, nothing to chain
+    against. Re-anchoring still needs a general alighting inference this file cannot supply
+    by tap-chaining alone.**
 17. **The OnBoard destination pattern is what separates the ticketing products from the
     survey** (§6ag). At superzone level the survey's bus matrix matches RavKav's own inferred
     alightings (step 8's `bus_od_taz_avg.csv`) as well as it matches itself between its two
