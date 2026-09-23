@@ -398,6 +398,29 @@ feeder composite as the comparison. Rerun 25 → 26 → 31 → 32.
 **Documents.** §6al, headline row, task E1 ticked "synthetic, flagged", plain-English 5.x. Effort:
 one day. When the planning team's drawings arrive, replace the polylines and rerun.
 
+**Status, 23 September 2026 — built; the plan's own "GC falls below feeder" check does NOT
+hold, and that is the finding.** Trunk-pair results are unchanged exactly (checked to 0.00e+00
+min in the notebook). Central-case capture: **3,639**, *lower* than the all-underground
+feeder-composite case (4,254) — because for 14 of the 15 off-trunk areas, the synthetic
+ground-level branch's generalized cost is *higher* than the feeder composite it replaces
+(`Output/lrt_v2/lrt_branches_vs_feeder_gc.csv`), from +5.9 minutes (Bazan-Hutsot) to +92.1
+minutes at Nazareth (114 → 206). This is not a bug: it is what "one station per area, ground
+level, no alignment yet" actually implies once run through the same generalized-cost formula
+as everything else — a real bus/Metronit feeder is often faster than a hypothetical
+ground-level LRT stopping once per area, and for a large, spread-out area like Nazareth (38
+TAZs) the single station's walk access dominates the comparison, not the running speed. Kiryat
+Ata North-East is the one area that comes out roughly even. Deviations from the method: no
+committed `Input/lrt_section_regime.csv`-style file was needed (the branches are ground level
+throughout, by the method's own instruction); output file names differ slightly from the
+method's suggestion (`lrt_area_ivt_branches_synthetic.csv` rather than
+`lrt_station_times_branches_synthetic.csv`, since the branches have no calibrated "section
+form" the way the trunk regimes do — one number per area pair is all there is). **Not done:**
+step 32's forecast-year rerun for this scenario. **Recommendation for whoever picks this up:**
+do not read 3,639 as "branches hurt the case for the LRT" — read it as evidence that the branch
+geometry, station count and placement (especially through Nazareth) matter more to the branch
+areas' own result than anything else tested so far, which is exactly why task E1's real
+drawings are worth obtaining.
+
 ### C7. Bus-network response (scenario S3; step-31 switch)
 
 Add `BUS_COMPETITION = 'full' | 'truncated'` to step 31: with `truncated`, the direct-bus

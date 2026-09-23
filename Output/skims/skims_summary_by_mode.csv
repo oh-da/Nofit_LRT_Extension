@@ -15,3 +15,5 @@ LRT design 50 km/h + accel/braking,all off-diagonal pairs,600,14133.0,1.0,31.9,1
 LRT design 50 km/h + accel/braking,trunk pairs (10 station areas),90,4567.0,1.0,13.5,13.9,2.5,0.0,46.3
 LRT mixed (Haifa core underground),all off-diagonal pairs,600,14133.0,1.0,35.8,10.2,4.7,0.1,66.5
 LRT mixed (Haifa core underground),trunk pairs (10 station areas),90,4567.0,1.0,17.9,13.9,2.5,0.0,50.7
+LRT + synthetic branches (task C6),all off-diagonal pairs,600,14133.0,1.0,24.1,17.2,4.2,0.0,66.8
+LRT + synthetic branches (task C6),trunk pairs (10 station areas),90,4567.0,1.0,13.8,13.9,2.5,0.0,46.6

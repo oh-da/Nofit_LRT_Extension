@@ -24,3 +24,8 @@ LRT mixed (Haifa core underground),"low λ (0.02 / 0.03, premium 5)",0.02,0.03,5
 LRT mixed (Haifa core underground),"high λ (0.05 / 0.10, premium 5)",0.05,0.1,5.0,2278,2142,136,12420,55881,0.2003,0.2082,0.155,931,0.191
 LRT mixed (Haifa core underground),"no premium (λ central, premium 0)",0.03,0.06,0.0,2788,2614,173,12088,55702,0.2003,0.2108,0.187,1156,0.235
 LRT mixed (Haifa core underground),premium 10 (λ central),0.03,0.06,10.0,4388,3955,433,10999,55192,0.2003,0.218,0.285,1840,0.357
+LRT + synthetic branches (task C6),"central (λ 0.03, λ_T 0.06, premium 5)",0.03,0.06,5.0,3639,3322,317,11578,55361,0.2003,0.2156,0.239,1767,0.345
+LRT + synthetic branches (task C6),"low λ (0.02 / 0.03, premium 5)",0.02,0.03,5.0,5639,4790,849,10834,54105,0.2003,0.2334,0.342,2315,0.419
+LRT + synthetic branches (task C6),"high λ (0.05 / 0.10, premium 5)",0.05,0.1,5.0,2314,2155,158,12464,55800,0.2003,0.2094,0.157,1298,0.26
+LRT + synthetic branches (task C6),"no premium (λ central, premium 0)",0.03,0.06,0.0,2870,2672,198,12094,55614,0.2003,0.212,0.192,1406,0.281
+LRT + synthetic branches (task C6),premium 10 (λ central),0.03,0.06,10.0,4555,4060,495,10981,55043,0.2003,0.2201,0.293,2187,0.414

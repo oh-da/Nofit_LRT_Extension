@@ -102,7 +102,11 @@ the two structural gaps, and they are the two that need inputs from the client s
 7. **Branch alignments and stations (E1)** — T1 Kiryat Ata → Nazareth, T2 Krayot, T3 Kiryat
    Yam, and Hamifrats → Tsomet Kiryat Ata; the regime (underground / ground) per section;
    the through-running pattern between branches. Until then: synthetic branch alignments
-   along the V2 route orders with the calibrated function, flagged as such.
+   along the V2 route orders with the calibrated function, flagged as such. *Built 2026-09-23
+   (scenario S4) — and it shows why this input matters: one ground-level station per area is
+   worse than today's bus feeder for 14 of 15 off-trunk areas, so the real drawings (station
+   count and placement, especially through Nazareth) will move the branch-area result more
+   than the trunk regime does.*
 8. **Bus network of the LRT year** — which lines are truncated to feeders and which keep
    running in parallel. Today's capture assumes full competition (conservative). *The other
    bound is now available without this input (scenario S3, done 2026-09-23): full competition
@@ -132,7 +136,7 @@ the two structural gaps, and they are the two that need inputs from the client s
 | S1 | Mixed alignment (core underground, rest ground) with the acceleration allowance | the realistic case | step 25 → 26 → 31 → 32 — **done 2026-09-23, central case 3,520** |
 | S2 | Headway 5 / 7.5 / 10 min | operating-plan sensitivity | step 26 constant — **done 2026-09-23, 7–8 % lost per step** |
 | S3 | Parallel buses kept vs truncated to feeders | bus-network response; upper bound on capture | step 31: remove the competing direct-bus alternative on trunk pairs — **done 2026-09-23, +21–64% by regime, `Output/skims/bus_truncated/`** |
-| S4 | Synthetic T2 / T3 branches (and T1 to Kiryat Ata) | what the branches add; replaces the feeder composite for 15 areas | step 25 geometry + step 31 |
+| S4 | Synthetic T2 / T3 branches (and T1 to Kiryat Ata) | what the branches add; replaces the feeder composite for 15 areas | step 25 geometry + step 31 — **done 2026-09-23: capture 3,639, lower than 4,254 — the synthetic branch is worse than today's feeder for 14 of 15 areas** |
 | S5 | Car congestion uplift 2040 / 2050 (+ 20–30 % on car IVT) and parking at Matam / Lower City | car side of the forecast years | step 32 |
 | S6 | Park-and-ride at Tirat Carmel and Hamifrats | access policy at the ends | step 31 access component |
 | S7 | Transit-oriented land use at stations (HS variant) | demographic side | step 23 margins |

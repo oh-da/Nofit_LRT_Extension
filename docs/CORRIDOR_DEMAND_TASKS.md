@@ -175,6 +175,13 @@ Key facts driving the list (2017 trips-file hybrid, `Output/ths2017/study_taz/`)
       station area, an 8-minute transfer, then the LRT leg — which is what the capture
       numbers below currently rest on for the branch areas; it stands in for, not replaces,
       the actual branch geometry.
+      *Synthetic branches done 2026-09-23, flagged (task C6, scenario S4, METHODOLOGY §6w /
+      §6ac addenda): one station per area, ground level, connected in the V2 route order —
+      central capture 3,639, lower than the feeder-composite 4,254, because for 14 of the 15
+      off-trunk areas the synthetic branch's GC is worse than today's bus/Metronit feeder
+      (`Output/lrt_v2/lrt_branches_vs_feeder_gc.csv`), up to 92 minutes worse at Nazareth —
+      mostly one station's walk access across 38 TAZs, not the running speed. A genuine
+      finding about the placeholder, not a bug; still open until real drawings arrive.*
 - [x] **E2. LRT speed on this spacing** *(resolved 2026-09-22, step 25 revision 2)* — the
       calibration report's 500 m section assumption was checked against the Red Line's
       timetable in the GTFS (underground sections 970 m, surface 577 m): the coefficients are

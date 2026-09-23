@@ -299,6 +299,17 @@ while the survey one does (0.549 up / 0.457 down), the trunk's peak-hour LRT loa
 opposite directions from the survey-based figure: up down to 0.865–0.866 of it, down up to
 1.041 of it. Step 32's forecast-year peak-hour outputs are not yet extended.
 
+**Update, 23 September 2026 (task C6 — synthetic branch alignments, scenario S4).** A
+placeholder for task E1's still-missing branch drawings: one station per area, ground level,
+connected in the V2 route order (§6w addendum). Central-case capture is **3,639** — *lower*
+than the all-underground case's 4,254, because for 14 of the 15 off-trunk areas the synthetic
+branch's generalized cost is *worse* than today's bus/Metronit feeder it replaces (§6ac
+addendum, `Output/lrt_v2/lrt_branches_vs_feeder_gc.csv`) — up to 92 minutes worse at Nazareth,
+mostly its one station's walk access across 38 TAZs, not the running speed. Every trunk-pair
+result is unchanged (checked exactly). A genuine finding about the placeholder, not a bug: real
+branch drawings, likely with several stations through a city the size of Nazareth, would change
+this materially.
+
 Every published product, what it was built from, and its status:
 
 | Product (`Output/…`) | Built by | Base / inputs | Geography | Modes | Vintage | Status |
@@ -1703,6 +1714,37 @@ both assumed, not given.
 `lrt_end_to_end_summary.csv` and `lrt_line_profile.csv` (the mixed scenario's `lrt_line_profile.csv`
 columns also carry the per-section regime actually used) and to the line profile figure.
 
+**Addendum, 23 September 2026 — synthetic branch alignments, until the client's drawings arrive
+(task C6, scenario S4).** Task E1's branch geometry (Hamifrats → Tsomet Kiryat Ata, and the
+three V2 branches) is still not supplied, so a placeholder: one station per area at its
+population + employment weighted representative point (`ac`, already computed above), connected
+in the V2 route order, entirely at ground level (the calibrated `section_time('ground')`
+function — a surface branch is the planning default absent other information). The three
+branches share a synthetic prefix **Hamifrats → Bazan-Hutsot → Tsomet Kiryat Ata** (also
+missing from `hf_lrt_3`) before diverging into T1 (Kiryat Ata North → Nazareth, 5 areas), T2
+(Kiryat Haim → Tsur Shalom, 4 areas) and T3 (Kiryat Haim West → Savyoney Yam, 4 areas) — 15
+off-trunk areas in total, matching the count the capture model's feeder composite has stood in
+for since step 31. Every trunk pair (both areas among the ten real `hf_lrt_3` stations)
+reproduces the real all-underground time **exactly** (checked in the notebook, max deviation
+0.00e+00 min) — the tree-distance construction (same-branch pairs by difference from the
+Tsomet Kiryat Ata junction, cross-branch pairs by sum through it) only supplies new numbers for
+pairs touching an off-trunk area. Branch-to-Hamifrats times range 0.2–68.1 min (Bazan-Hutsot
+nearest, Nazareth furthest); Tirat Carmel–Nazareth end to end is 106.4 min. Branch headway is a
+separate assumption, **10 minutes** against the trunk's 5 (`docs/PLAN_TIGHTENING_AND_SCENARIOS.md`
+item 3b.7), applied in step 26 to any pair touching a branch area.
+
+**Outputs.** `Output/lrt_v2/lrt_area_ivt_branches_synthetic.csv` (25 × 25, the only full-coverage
+IVT table among the LRT scenarios — every other one is 10 × 10, trunk only),
+`lrt_synthetic_branches.geojson` (25 station points + 3 polylines, `synthetic: true` on every
+feature).
+
+**Limits.** The polylines are straight lines between area representative points, not a real
+alignment; every area gets exactly one station regardless of size — a poor fit for a large,
+spread-out area (Nazareth, 38 TAZs), which §6ac's addendum below shows dominates that area's
+result far more than the running speed does. Replace with the client's actual drawings the day
+they exist (task E1), at which point this section and its outputs are superseded, not merely
+revised.
+
 ## 6x. Step 26 — Generalized cost on the V2 areas: data inventory, first-fill skims, gaps (`GC_data_inventory_and_skims.ipynb`)
 
 **Purpose.** For the capture model's formula (`docs/LRT_CAPTURE_PLAN.md`:
@@ -2270,6 +2312,37 @@ of the transit trips, 48 % on the trunk pairs; λ range 4,350–6,568; premium 0
 2,102; boardings Hamifrats 2,102, Namal-Giborim 729, Tirat Carmel 560, Bat Galim 470,
 Hecht-Shprintzak 408. The ceiling regime draws 20 % more than the calibrated underground
 case — less than the λ range.
+
+**Addendum, 23 September 2026 — the synthetic branches, and an honest check against the feeder
+composite (task C6, scenario S4).** `lrt_branches_synthetic` is added to `LRT_SCEN`; unlike
+every other scenario it needs no gateway/feeder loop at all — step 26 already gives a direct
+`ivt`/`walk`/`wait`/`transfers` for all 25 areas (§6w addendum), and the notebook special-cases
+this scenario to read them straight through (`gateway_o`/`gateway_d` are only set on the real
+trunk portion of a trip, for the trunk-link loading table below; a trip between two branches
+that never touches `hf_lrt_3` correctly gets none). Central case, 2022: **3,639 LRT trips**
+(3,322 from bus, 317 from car) — *lower* than the all-underground central case (4,254), because
+the synthetic branch is often **not** an improvement on today's bus/Metronit feeder: averaged
+over the ten trunk destinations, 14 of the 15 off-trunk areas have a *worse* generalized cost
+on the synthetic branch than on the feeder composite they replace (`Output/lrt_v2/
+lrt_branches_vs_feeder_gc.csv`; the "check" of the C6 method — "branch GC falls below feeder
+GC" — does not hold in general). Kiryat Ata North-East is roughly a wash (83.4 vs 84.0); every
+other branch area is worse, from +5.9 (Bazan-Hutsot) to **+92.1 minutes at Nazareth** (114 →
+206) — a ground-level LRT running at the calibrated Red Line surface speed is not obviously
+faster than a real bus once one station per area is the model, and for a large, spread-out area
+like Nazareth (38 TAZs) the single station's walk access (60 minutes, population-weighted)
+dominates the comparison far more than the 68-minute running time does. This is a genuine
+finding about the "one station per area" placeholder, not an error to fix: a real branch design
+would put several stations through a city the size of Nazareth, and a real bus network would
+very likely be truncated to feed the branch rather than compete with it end to end (task C7)
+once the branch actually exists — this scenario isolates what the branch geometry alone is
+worth against *today's* full-competition bus network, which is the conservative side of two
+things this synthetic exercise cannot yet answer together.
+
+**Outputs.** `Output/lrt_v2/lrt_branches_vs_feeder_gc.csv` (the 15-area comparison above);
+`lrt_branches_synthetic` rows throughout the usual step-31 outputs (`skim_lrt_branches_synthetic_*.csv`,
+`lrt_capture_scenarios.csv`, `lrt_trips_2022_lrt_branches_synthetic_central.csv`). The default
+rerun (every other scenario) reproduces its outputs exactly; step 32's forecast-year rerun is
+not extended to this scenario.
 
 ## 6ad. Step 32 — LRT capture on the 2040 / 2050 forecast matrices (`LRT_capture_forecast_2040_2050.ipynb`)
 
