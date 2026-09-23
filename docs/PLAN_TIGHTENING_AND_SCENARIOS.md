@@ -46,12 +46,17 @@ the two structural gaps, and they are the two that need inputs from the client s
 ### 3a. Needs no new inputs (start tomorrow)
 
 1. **λ from the person records (E7).** Binary logit car vs transit on the AM trips of
-   `Input/trips_ths_2017.xlsx` at person level, with car availability (household cars per
+   `Input/THS_2017-2018/trips_ths_2017.xlsx` at person level, with car availability (household cars per
    licence, from the household file if in LFS, else the survey's own fields), purpose,
    age / sex, and the pair's `GC_bus − GC_car` from the step 31 skims; distance-band constants.
    Report λ with its standard error; if the sign is right and the value plausible, replace
    the assumed 0.03 in steps 31 / 32. If not, the transferred value stands and the estimation
    goes in the report as the reason. Notebook: `Mode_choice_person_level.ipynb` (step 33).
+   *Done 23 September 2026 (METHODOLOGY §6ae): λ = 0.035 (0.002–0.068), right sign — the
+   central 0.03 stands, the range 0.02–0.05 is narrower than the estimate's interval, and the
+   choice-rider λ (licence holders in car-owning households) is not identified. Found on the
+   way: mode codes 4 / 5 are swapped in steps 15–32 (Matronit in the taxi layer) — the chain
+   is to be rerun with the corrected codes before any of the scenarios below.*
 2. **Walking network for access (E6).** Fetch OSM for the study area, route every V2 TAZ
    centroid (and, for the trunk, every TAZ) to its nearest station and nearest served bus stop
    on the footway network; replace the 1.3 detour factor. Same notebook as 3.

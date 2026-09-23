@@ -31,7 +31,7 @@ GC_m = IVT + 2.0·walk + 2.0·wait + 8·transfers + (fare + parking)/VOT
 
 ## 2. Skims — mixed sourcing, not a single Google pull
 
-- **Car**: survey-observed door-to-door times from `Input/trips_ths_2017.xlsx` —
+- **Car**: survey-observed door-to-door times from `Input/THS_2017-2018/trips_ths_2017.xlsx` —
   5,484 AM-peak car trips with 100%-complete `TrvlTime`/`TrvlDist` — smoothed
   per area pair (time ≈ a + b·distance where cells are thin). Internally
   consistent with the demand data and AM-peak by construction. Add a small
