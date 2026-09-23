@@ -83,8 +83,15 @@ Key facts driving the list (2017 trips-file hybrid, `Output/ths2017/study_taz/`)
         right still needs the cellular trip definition (next bullet).*
   - [ ] Obtain the cellular product's trip definition (dwell-time, minimum-distance
         thresholds).
-  - [ ] Car volumes vs screenline counts on the corridor, with an explicit assignment
-        link (transit vs RavKav already done at area level: ratio 0.91).
+  - [x] Car volumes vs screenline counts on the corridor, with an explicit assignment
+        link (transit vs RavKav already done at area level: ratio 0.91). *Done without an
+        assignment 2026-09-23 (step 36, METHODOLOGY §6ah, `Output/validation/`): on six closed
+        cordons the residents' car layer is 0.58–0.90 of the counted vehicles where the crossing
+        links are mostly counted (core 0.62 / 0.61, Tirat Carmel 0.58 / 0.70, Kiryat Ata 0.66 /
+        0.90), the directional split agrees within 0.08 except at Haifa city (survey 0.64 inbound
+        vs 0.47 counted), and the road peak hour is 0.38–0.43 of the three hours against the
+        survey's 0.62 (caveat 18). Still open: the link-level comparison, which needs an
+        assignment; count coverage on the Krayot and Nazareth cordons (75–85 % imputed).*
   - [ ] Resolve the TAZ → superzone key precedence between the 2017 and 2018 chains
         (`prob_sz_cellular.csv` vs the 2017 rebuild; ≤ 0.07 in a handful of cells).
 - [x] **B1b. Ticketing coverage — segmented rule** *(done 2026-09-21 in
@@ -127,8 +134,10 @@ Key facts driving the list (2017 trips-file hybrid, `Output/ths2017/study_taz/`)
       taps (step 34, METHODOLOGY §6af): bus 0.475, Metronit 0.433, trunk station areas 0.43
       of the three hours in the busiest 60 minutes (07:15–08:15), PHF₆₀ ≈ 0.9 — flatter
       than the survey's 0.589; the boarding-based value is the one to carry for the transit
-      layers.* Still open: a link-crossing (rather than departure or boarding) hour once
-      travel times exist (A2).
+      layers.* *Road counts 2026-09-23 (step 36, §6ah): the busiest clock hour on the cordon
+      links holds 0.38–0.43 of 06:00–09:00 for all traffic, against the survey's car 0.62 — the
+      step-20 / 27 factors are an upper bound (caveat 18); carry 0.42–0.48 for car.* Still open:
+      a link-crossing (rather than departure or boarding) hour once travel times exist (A2).
 - [ ] **B2. Population frames**
   - [ ] Reconcile the transit layer (RavKav journeys by boarding stop, incl. non-residents
         and transfers; Hamifrats 120 THS vs 1,079 RavKav) with the resident-household

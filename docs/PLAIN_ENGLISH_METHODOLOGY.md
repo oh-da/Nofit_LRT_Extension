@@ -4130,7 +4130,34 @@ readings (on-board pattern 2.5 × the survey, RavKav's alightings 0.36 ×) disag
 other by 13 × and bracket the survey. Only a passenger count on that branch settles it, and
 until then the Nazareth-branch market is carried as a range.
 
-### 5.7 Where things stand now
+### 5.7 The car layer against traffic counts (step 36)
+
+Later the same day a road network with hourly traffic counts arrived (in passenger-car
+equivalents, one column per hour, on 3,241 directional links counted between 2017 and 2023). It
+is the first thing the car layer has ever been checked against. The check needs no traffic
+assignment: draw a closed ring (a cordon) around a group of zones, and every trip with one end
+inside and one outside must cross it exactly once, whatever road it takes — and a trip passing
+straight through crosses it twice. So the car trips crossing each of six rings (Haifa city, the
+Krayot, Kiryat Ata, Nazareth, Tirat Carmel, and the whole metropolitan core), turned into vehicles
+with the survey's own 1.33 persons per car, can be set against the counts on every road link that
+crosses the ring. Where a crossing road has no count, its volume is estimated from the counted
+roads of the same type, and the result is flagged.
+
+The expected answer is *less than one*, because the counts hold everything on the road — trucks
+and vans, taxis, buses, visitors, and traffic from Tel Aviv or Acre passing through — while the
+survey layer holds residents' personal car trips only. On the rings that are mostly counted the
+car layer is **0.6–0.9 of the counted vehicles** (0.62 in and 0.61 out on the metropolitan core;
+0.58 / 0.70 at Tirat Carmel; 0.66 / 0.90 at Kiryat Ata), which is the order one would expect. The
+direction of the morning flows agrees with the counts within a few points everywhere except the
+Haifa city ring, where the survey is more Haifa-bound (64 % of crossings inbound) than the counted
+roads (47 %). The clearest finding is about the peak hour: on the road, the busiest clock hour
+carries only 38–43 % of the three morning hours (1.1–1.3 times an average hour), whereas the
+survey's reported departure times put 62 % of car trips in the best hour (1.9 times). The fare
+gates said the same thing for buses in step 34. The survey's departure profile is peakier than
+anything observed, so the peak-hour figures of Parts 3 and 4 are upper bounds; a factor of about
+0.42–0.48 is the safer value.
+
+### 5.8 Where things stand now
 
 The single most current answer to "how many riders will the LRT capture" is **about 4,250
 morning (06:00–09:00) corridor-internal trips in 2022** for the all-underground alignment
@@ -4140,6 +4167,7 @@ morning (06:00–09:00) corridor-internal trips in 2022** for the all-undergroun
 What has changed is the footing: the transit base is now calibrated to a ticketing source
 the survey agrees with, and the transit market the capture is applied to includes the Matronit
 riders it had been leaving out. Still open, in order of value: a passenger count on the Haifa
-trunk and the Nazareth branch; the meaning of the 2025 transfer tag; the branch alignments and
+trunk and the Nazareth branch (the road counts now in hand validate the car layer, not the
+buses); the meaning of the 2025 transfer tag; the branch alignments and
 operating plan; the walking network for station access; and a stated-preference survey for
 the choice riders' λ.
