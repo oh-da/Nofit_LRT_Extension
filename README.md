@@ -43,9 +43,12 @@ for the same content — every step's inputs, processing, formulas, outputs and 
 results — walked through in plain language), **[TRANSIT_DEMAND_PLAN.md](docs/TRANSIT_DEMAND_PLAN.md)** for the
 (historical) ticketing-substitution decision, **[CORRIDOR_DEMAND_TASKS.md](docs/CORRIDOR_DEMAND_TASKS.md)**
 for the open task list, **[LRT_CAPTURE_PLAN.md](docs/LRT_CAPTURE_PLAN.md)** for the
-generalised-cost capture model, and **[PLAN_TIGHTENING_AND_SCENARIOS.md](docs/PLAN_TIGHTENING_AND_SCENARIOS.md)**
+generalised-cost capture model, **[PLAN_TIGHTENING_AND_SCENARIOS.md](docs/PLAN_TIGHTENING_AND_SCENARIOS.md)**
 for the plan of 22 September 2026: what moves the capture number, the work to tighten it and
-the scenarios to run next.
+the scenarios to run next, **[RED_TEAM_RESPONSE_2026-09-23.md](docs/RED_TEAM_RESPONSE_2026-09-23.md)**
+for the response to the external methodology red-team review and the data-request sheet, and
+**[NEXT_STEPS_HANDOVER_2026-09-23.md](docs/NEXT_STEPS_HANDOVER_2026-09-23.md)** for repository
+conventions and the eleven next steps written up with exact inputs, method, outputs and checks.
 
 ## Current pipeline (survey-only branch)
 

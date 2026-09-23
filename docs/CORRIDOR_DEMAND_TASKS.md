@@ -293,3 +293,13 @@ the gate before any step 31 / 32 figure is reported as ridership (person-level �
 plus one independent trunk count), two parallel tracks (in-house work on LFS data; the data
 request), the rebuild order for steps 15–32, and the data-request sheet with priority and
 holder. It supersedes the "suggested order" above where they differ.
+
+## H. Handover of 23 September 2026
+
+`docs/NEXT_STEPS_HANDOVER_2026-09-23.md` collects repository conventions (how a step is
+documented, when to add a "Rerun"/"Rebuild" paragraph, the `tools/lfs_pull.py` LFS workaround
+for this environment) and writes up eleven next steps — spanning items already listed above
+(A2, E1, E3, E5, E6, E7-adjacent, B1, B1d, B1e) plus the uncertainty factorial of Track A item 7
+in `docs/RED_TEAM_RESPONSE_2026-09-23.md` §3 — each with exact inputs, method, outputs, checks
+and the documents to update, so any one of them can be started without re-reading the task
+history first.
