@@ -104,17 +104,21 @@ above. λ is therefore **assumed**: central 0.03 per generalized minute (range
 (the nested incremental logit, Empirical-Bayes-smoothed toward the study-area share) is
 implemented in step 31 and run on the 2022 corridor-internal flows for both LRT
 scenarios, with an LRT premium of 5 generalized minutes and free LRT–Metronit transfers, giving
-central-case captures of 3,332 (underground) / 2,544 (ground) LRT trips 06:00–09:00
-(λ range 2,357–4,855 / 1,472–4,277; without the premium 2,658 / 1,999). Segmented estimation on the survey's person-level records (car
-availability, purpose) is the next step to actually fit λ, rather than assume it
-(`docs/CORRIDOR_DEMAND_TASKS.md` E7). Step 32 (`LRT_capture_forecast_2040_2050.ipynb`,
-METHODOLOGY §6ad) reruns this same pivot on step 23's four 2040/2050 forecast sets
-(BU_2040, BU_2050, HS_2040, HS_2050), giving central-case underground LRT trips of 4,114
-/ 4,498 (BU) and 4,520 / 5,354 (HS) against 3,332 in 2022, and ground trips of 3,105 /
-3,386 (BU) and 3,430 / 4,047 (HS) against 2,544. The capture rate itself is unchanged
-across scenario-years — the LRT's share of no-build transit stays 0.28–0.29 underground
-and 0.21–0.22 ground in every year — because step 32 holds the step-31 skims fixed and
-only the demographic-reference market grows.
+central-case captures of 4,114 (underground) / 3,201 (ground) LRT trips 06:00–09:00
+(λ range 3,083–5,812 / 2,012–5,153; without the premium 3,307 / 2,535) — values of the
+23 September 2026 rerun with the corrected mode codes (METHODOLOGY §0 "Rerun"; the run of
+22 September gave 3,332 / 2,544 with the Metronit riders outside the transit nest).
+Segmented estimation on the survey's person-level records was then done in step 33
+(METHODOLOGY §6ae): λ = 0.035 (0.002–0.068) with car availability and purpose held constant,
+so the assumed 0.03 stands, while the licence holders in car-owning households give no
+identifiable λ (`docs/CORRIDOR_DEMAND_TASKS.md` E7). Step 32
+(`LRT_capture_forecast_2040_2050.ipynb`, METHODOLOGY §6ad) reruns this same pivot on step
+23's four 2040/2050 forecast sets (BU_2040, BU_2050, HS_2040, HS_2050), giving central-case
+underground LRT trips of 5,329 / 5,962 (BU) and 5,335 / 6,245 (HS) against 4,114 in 2022,
+and ground trips of 4,085 / 4,559 (BU) and 4,121 / 4,804 (HS) against 3,201. The capture
+rate itself is unchanged across scenario-years — the LRT's share of no-build transit stays
+0.29–0.30 underground and 0.22–0.23 ground in every year — because step 32 holds the
+step-31 skims fixed and only the demographic-reference market grows.
 
 ## 4. Sanity anchors and sensitivity
 

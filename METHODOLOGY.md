@@ -42,47 +42,47 @@ notes saying which of their conclusions are overtaken.
 
 | Quantity (2022 layers, 06:00–09:00 unless stated) | Value | Where |
 |---|---|---|
-| Corridor-to-corridor trips: car / bus / taxi-type / rail | 72,331 / 9,366 / 3,812 / 0 | §6n |
-| Bus share of corridor-to-corridor trips (bus + rail over all layers) | 11 % | §6n |
-| Bus base 2018 under the segmented coverage rule (survey / ticketing / binary rule) | 126,117 (116,083 / 92,713 / 110,654); threshold sweep 117,500–131,700 | §6m |
-| Busiest transit link, three hours (bus + rail) | 1,661 towards Nazareth (Ein Hayam – Bat Galim); 1,650 towards Tirat Carmel (Neot Peres – Neve David) | §6o |
-| Ticketing-based transit profile against it | ≈ 0.63–1.05 × towards Nazareth; ≈ 2 × (Haifa segment) to 3 × (Nazareth end) towards Tirat Carmel — frame and allocation, not coverage | §6p |
+| Corridor-to-corridor trips: car / bus / taxi-type / rail | 72,331 / 9,837 / 313 / 0 | §6n |
+| Bus share of corridor-to-corridor trips (bus + rail over all layers) | 12 % | §6n |
+| Bus base 2018 under the segmented coverage rule (survey / ticketing / binary rule) | 127,185 (125,439 / 92,713 / 111,818); threshold sweep 115,700–134,600 | §6m |
+| Busiest transit link, three hours (bus + rail) | 1,847 towards Nazareth (Ein Hayam – Bat Galim); 1,497 towards Tirat Carmel (Neot Peres – Neve David) | §6o |
+| Ticketing-based transit profile against it | ≈ 0.74–1.26 × towards Nazareth (0.97 over the Haifa segment); ≈ 2.5–3 × towards Tirat Carmel — frame and allocation, not coverage | §6p |
 | Peak hour (departures) | 07:00–08:00 for every layer; corridor car towards Nazareth 07:15–08:15 | §6r |
-| Share of the three hours in the peak hour (PHF₃ₕ) | car 0.62 (corridor by direction 0.66 / 0.63), bus 0.59, taxi-type 0.58 — ≈ 1.8 × an average hour | §6r |
-| Within-hour factor (PHF₆₀) | car 0.69, bus 0.75 | §6r |
-| Busiest transit link, peak hour | 981 towards Nazareth, 974 towards Tirat Carmel (average hour ≈ 550); ± 15 % on the bus factor basis | §6r |
-| Busiest link, all layers, peak hour | 4,609 towards Nazareth (Ein Hayam – Bat Galim); 4,205 towards Tirat Carmel (Bat Galim – Kiryat Eliezer) | §6r |
+| Share of the three hours in the peak hour (PHF₃ₕ) | car 0.62 (corridor by direction 0.66 / 0.63), bus 0.59, taxi-type 0.59 — ≈ 1.8 × an average hour | §6r |
+| Within-hour factor (PHF₆₀) | car 0.69, bus 0.77 | §6r |
+| Busiest transit link, peak hour | 1,088 towards Nazareth, 882 towards Tirat Carmel (average hour ≈ 500–620); ± 15 % on the bus factor basis | §6r |
+| Busiest link, all layers, peak hour | 3,971 towards Nazareth (Kiryat Eliezer – Hamoshava); 3,756 towards Tirat Carmel (Bat Galim – Kiryat Eliezer) | §6r |
 | Car vs transit destination structure (survey PCA, superzones) | overlap 0.75 (0.83 on well-sampled origins) against transit repeatability 0.81 (0.86): the same dominant structure | §6s |
 | … where transit differs from car | less local (self-containment 0.45 vs 0.62), share moved to the Haifa core (+2–3 points; common direction p = 0.04 at superzones, p = 0.002 with TAZ origins) | §6s |
 | … by resolution | corridor areas: at transit's noise floor (0.57 vs 0.65); TAZ × superzone: 0.75 vs 0.89 — clearly different; TAZ × TAZ: 0.27 vs 0.55 — only the coarse geography shared | §6s |
-| V2 aggregation (25 areas, 174 TAZs): trips with both ends in the areas — car / bus / taxi-type / rail | 156,944 / 18,788 / 8,323 / 51 | §6v |
-| Busiest transit link per route, three hours (up / down) | T1 1,379 / 1,489; T2 1,391 / 1,629; T3 1,437 / 1,410 — all on the Haifa trunk (Ein Hayam – Bat Galim up, Matam – Hof Carmel down) | §6v |
-| Tree network (all 25 areas on their unique path): Bazan-Hutsot – Tsomet Kiryat Ata towards Haifa | 16,231 all layers / 2,898 transit in three hours; 8,792 / 1,710 in the peak hour | §6v, §6y |
-| Peak-hour factors on the V2 routes (car, by direction): up / down | T1 0.626 / 0.578, T2 0.619 / 0.569, T3 0.652 / 0.569, network 0.556 / 0.522 (step 20: 0.661 / 0.626); bus and taxi-type stay at 0.590 / 0.580 | §6y |
-| Calibrated survey vs ticketing transit on the V2 routes (Haifa segment, survey ÷ ticketing) | up 0.78–0.83 per route; down T2 0.92, T3 0.73, T1 0.66, network 0.63; Nazareth origin 1,070 vs 2,402 | §6z |
+| V2 aggregation (25 areas, 174 TAZs): trips with both ends in the areas — car / bus / taxi-type / rail | 156,944 / 20,902 / 2,170 / 51 | §6v |
+| Busiest transit link per route, three hours (up / down) | T1 1,643 / 1,293; T2 1,773 / 2,116; T3 1,666 / 1,282 — up on the Haifa trunk (Ein Hayam – Bat Galim), down on the first branch link (T2 / T3) or Hof Carmel – Hecht-Shprintzak (T1) | §6v |
+| Tree network (all 25 areas on their unique path): Bazan-Hutsot – Tsomet Kiryat Ata towards Haifa | 15,628 all layers / 3,886 transit in three hours; 7,944 / 1,782 in the peak hour | §6v, §6y |
+| Peak-hour factors on the V2 routes (car, by direction): up / down | T1 0.626 / 0.578, T2 0.619 / 0.569, T3 0.652 / 0.569, network 0.556 / 0.522 (step 20: 0.661 / 0.626); bus network 0.549 / 0.457 and T2 up 0.592, otherwise 0.589; taxi-type 0.588 | §6y |
+| Calibrated survey vs ticketing transit on the V2 routes (Haifa segment, survey ÷ ticketing) | up 0.97–1.06 per route, network 1.07; down T2 0.92, T3 0.58, T1 0.51, network 0.62; Nazareth origin 962 vs 2,402 | §6z |
 | Car vs transit PCA on the V2 areas | 14 origins (≥ 10 sampled transit trips): overlap 0.55 vs transit repeatability 0.76 (car 0.79); 7 origins (≥ 20): 0.76 vs 0.80 — sample-limited; the superzone / TAZ × superzone evidence stands | §6s |
-| Busiest single link of any route | Kiryat Haim – Kiryat Bialik Center (T2), 10,144 towards Haifa, transit share 10 % | §6v |
+| Busiest single link of any route | Kiryat Haim – Kiryat Bialik Center (T2), 9,619 towards Haifa, transit share 17 % | §6v |
 | LRT `hf_lrt_3`: 24 stations, 18.74 km S01 → S24, mean spacing 815 m | end to end **40.7 min underground (27.6 km/h) / 65.8 min ground (17.1 km/h)** — calibrated function transferred through the Red Line's actual spacing (revision 2); section form 45.1 / 55.0; the revision-1 500 m reading 73.5 / 89.7 superseded; underground −38 % | §6w |
-| Generalized-cost first fill on the trunk pairs (trip-weighted): car door-to-door / bus fastest-path IVT / LRT IVT underground, ground | 14.5 / 12.5 / 20.6, 25.1 min; survey bus door-to-door 27.1 min (2.3 × the network IVT) | §6x |
+| Generalized-cost first fill on the trunk pairs (trip-weighted): car door-to-door / bus fastest-path IVT / LRT IVT underground, ground | 14.5 / 12.4 / 20.6, 25.1 min; survey bus door-to-door 30.0 min (2.4 × the network IVT, with the Metronit riders in the bus group) | §6x |
 | Bus level of service from the GTFS (Tuesday 2 June 2026): TAZs with peak-hour service / best-line grade A–B / with a Metronit stop | 719 of 781 / 454 / 60 (41 in the V2 areas, 20 of 25 areas) | §6aa |
 | Direct-service skim, trunk pairs: bus scheduled IVT, combined headway; Metronit | 13.3 min at 1.7 min (82 of 90 pairs); 10.0 min at 6 min (72 pairs) | §6aa |
 | Generalized cost after the GTFS skims and the corrected LRT function, trunk pairs, trip-weighted: car / bus (observed running times) / Metronit / LRT underground, ground | 14.5 / 27.0 / 22.1 (on its pairs) / 43.9, 51.1 — LRT in-vehicle time (11.7 min) 3 min below the observed bus (14.4); the LRT dearer than the bus on every trunk pair by 4–31 generalized minutes, 18 of them station access (13.6 vs 4.7 min walk) | §6x addenda |
-| GTFS-based bus door-to-door (observed running time + walk + wait) against the survey's reported time, same pairs | 24.3 vs 31.8 min (× 1.3): a fixed ≈ 7-minute overhead, 1.9 × under 3 km, 1.1–1.5 × at 3–20 km, 0.8 × beyond | §6x addenda 2–3 |
+| GTFS-based bus door-to-door (observed running time + walk + wait) against the survey's reported time, same pairs | 22.7 vs 32.2 min (× 1.4): a fixed ≈ 9-minute overhead, 1.9 × under 3 km, 1.3–1.5 × at 3–20 km, 0.8 × beyond | §6x addenda 2–3 |
 | Observed bus in-vehicle time (trips routed over the May 2026 link speeds) ÷ scheduled | per trip 1.09 (Metronit 0.87); hops < 500 m 1.00, > 2 km 1.42 — the link speeds include dwell, the long arterial hops run slower than the timetable; trunk pairs 12.7 vs 10.4 min demand-weighted | §6ab |
-| Complete skims, trunk pairs, trip-weighted GC (generalized minutes): car / bus / Metronit (its 72 pairs) / LRT underground / LRT ground | 14.7 / 27.8 / 25.6 / 44.0 / 51.8 | §6ac |
-| Complete skims, all 600 off-diagonal pairs, trip-weighted GC: car / bus / Metronit (278 pairs, 64 % of transit trips) / LRT underground / LRT ground | 20.2 / 38.5 / 31.0 / 64.6 / 70.0 (LRT off the line by feeder, Metronit feeder with a free transfer on 378 of 510 pairs) | §6ac |
-| 2022 AM off-diagonal trips, 25 areas: car / transit (bus + rail) / taxi | 56,445 / 11,664 (share 0.171) / 6,982 | §6ac |
-| Cost sensitivity λ from the 2022 cross-section (binary logit, transit share vs `GC_bus − GC_car`, 573 pairs / 67,700 trips) | wrong sign (−0.011, ρ² 0.003); with distance-band constants +0.0002 (ρ² 0.036) — not identifiable; λ assumed 0.03 (range 0.02–0.05), λ_T = 2λ | §6ac |
-| LRT capture, central case (λ 0.03, λ_T 0.06, LRT premium 5, free LRT–Metronit transfer), 06:00–09:00 within the 25 areas: underground / ground trips (of which from bus / from car) | 3,332 (3,037 / 295) / 2,544 (2,375 / 169); λ range 2,357–4,855 (ug), 1,472–4,277 (ground); premium 0 / 10: 2,658 / 4,122 (ug) | §6ac |
-| LRT trunk-link loads, three hours, central underground vs today's bus | 79–995 per link-direction against bus 200–2,030 (a third to 45 %; 84 % on Namal-Giborim→Hamifrats up); ground 44–595; peak hour ug 47–588 | §6ac |
-| LRT design regime (50 km/h + 10 s per stop, specified): end to end / trunk-pair IVT / central capture 2022 / on the forecast sets | 26.3 min (42.7 km/h) / 8.0 min / 3,970 trips (19 % above underground) / 4,930–6,432 | §6w, §6ac, §6ad addenda |
-| Forecast market growth on the V2 areas (2022 → BU_2040 / BU_2050 / HS_2040 / HS_2050) | transit ×1.27 / 1.40 / 1.38 / 1.57 (11,664 → 14,836 / 16,369 / 16,076 / 18,291); car ×1.32 / 1.53 / 1.38 / 1.59; no-build transit share of car + transit stays 0.16–0.17 | §6ad |
-| LRT trips, central case, by scenario-year: underground / ground | 3,332 / 2,544 (2022) → 4,114 / 3,105 (BU_2040) → 4,498 / 3,386 (BU_2050); 4,520 / 3,430 (HS_2040) → 5,354 / 4,047 (HS_2050); LRT share of no-build transit fixed at 0.28–0.29 ug / 0.21–0.22 ground (skims held fixed) | §6ad |
-| Busiest trunk link by scenario-year, underground central (Namal-Giborim → Hamifrats down) | three hours 995 (2022) → 1,216 / 1,367 (BU) → 1,426 / 1,717 (HS); peak hour 588 → 718 / 807 / 842 / 1,014 | §6ad |
+| Complete skims, trunk pairs, trip-weighted GC (generalized minutes): car / bus / Metronit (its 72 pairs) / LRT underground / LRT ground | 14.5 / 27.4 / 23.4 / 43.9 / 51.5 | §6ac |
+| Complete skims, all 600 off-diagonal pairs, trip-weighted GC: car / bus / Metronit (278 pairs, 68 % of transit trips) / LRT underground / LRT ground | 19.5 / 37.6 / 30.6 / 62.8 / 68.0 (LRT off the line by feeder, Metronit feeder with a free transfer) | §6ac |
+| 2022 AM off-diagonal trips, 25 areas: car / transit (bus + rail) / taxi | 56,445 / 13,778 (share 0.196) / 720 — (11,664 / 6,982 before the code correction) | §6ac |
+| Cost sensitivity λ from the 2022 cross-section (binary logit, transit share vs `GC_bus − GC_car`, 566 pairs / 69,800 trips) | wrong sign (−0.009, ρ² 0.002); with distance-band constants +0.006 (ρ² 0.025) — not identifiable; λ assumed 0.03 (range 0.02–0.05), λ_T = 2λ; person-level estimate in §6ae | §6ac |
+| LRT capture, central case (λ 0.03, λ_T 0.06, LRT premium 5, free LRT–Metronit transfer), 06:00–09:00 within the 25 areas: underground / ground trips (of which from bus / from car) | **4,114** (3,751 / 363) / **3,201** (2,987 / 214); λ range 3,083–5,812 (ug), 2,012–5,153 (ground); premium 0 / 10: 3,307 / 5,048 (ug) — (3,332 / 2,544 before the code correction) | §6ac |
+| LRT trunk-link loads, three hours, central underground vs today's bus | 190–1,452 per link-direction against bus 415–2,618 (40–55 %; 79 % on Namal-Giborim→Hamifrats up); ground 133–872; peak hour ug 87–663 on the network bus factors (0.549 up / 0.457 down) | §6ac |
+| LRT design regime (50 km/h + 10 s per stop, specified): end to end / trunk-pair IVT / central capture 2022 / on the forecast sets | 26.3 min (42.7 km/h) / 8.0 min / 4,814 trips (17 % above underground) / 6,281–7,386 | §6w, §6ac, §6ad addenda |
+| Forecast market growth on the V2 areas (2022 → BU_2040 / BU_2050 / HS_2040 / HS_2050) | transit ×1.31 / 1.47 / 1.34 / 1.51 (13,778 → 18,100 / 20,315 / 18,453 / 20,843); car ×1.32 / 1.53 / 1.38 / 1.59; no-build transit share of car + transit stays 0.19–0.20 | §6ad |
+| LRT trips, central case, by scenario-year: underground / ground | 4,114 / 3,201 (2022) → 5,329 / 4,085 (BU_2040) → 5,962 / 4,559 (BU_2050); 5,335 / 4,121 (HS_2040) → 6,245 / 4,804 (HS_2050); LRT share of no-build transit fixed at 0.29–0.30 ug / 0.22–0.23 ground (skims held fixed) | §6ad |
+| Busiest trunk link by scenario-year, underground central (Namal-Giborim → Hamifrats down) | three hours 1,452 (2022) → 1,816 / 2,035 (BU) → 1,856 / 2,170 (HS); peak hour 663 → 830 / 930 / 848 / 991 | §6ad |
 | Cost sensitivity λ, person level (THS 2017/18 AM trips within the 25 areas, car vs transit, `new_wf`-weighted, household-clustered): central / with Metronit as the transit cost / with area fixed effects / unweighted | **0.035 (0.002–0.068)** / 0.041 / 0.053 / 0.042 per generalized minute — right sign, ρ² 0.43; pair-level fit of step 31 had −0.011 | §6ae |
 | … by car-availability segment: no-car households / no licence / car competition / car available; licence holders in car-owning households pooled | 0.083 (p 0.001) / 0.027 (n.s.) / −0.006 (n.s.) / 0.053 (p 0.08); **0.008 ± 0.017 — not identified** | §6ae |
 | Transit share by segment (weighted): car available / competition / no licence / no-car household | 0.019 / 0.109 / 0.217 / 0.689 — the composition that hid λ at the pair level | §6ae |
-| Trips-file mode codes, confirmed against the activities file | 3 Public Bus, 4 group taxi, 5 Matronit, 7 train, 8 special taxi, 9 chartered bus; the chain's `BUS = [3, 4]` / `TAXI = [5, 8]` swaps 4 and 5 — within the 25 areas (2018 survey level, AM) transit 6,747 → 12,673 and taxi-type 6,650 → 723 once corrected | §6ae, §8 (14) |
+| Trips-file mode codes, confirmed against the activities file | 3 Public Bus, 4 group taxi, 5 Matronit, 7 train, 8 special taxi, 9 chartered bus; the chain's former `BUS = [3, 4]` / `TAXI = [5, 8]` swapped 4 and 5 — within the 25 areas (2018 survey level, AM) transit 6,747 → 12,673 and taxi-type 6,650 → 723 once corrected; steps 15–32 rerun with the corrected codes the same day | §6ae, §8 (14) |
 
 What these support: relative questions — ranking alignments and segments, sizing the
 market between line areas, locating the demand, and the design-hour scaling of that
@@ -138,7 +138,8 @@ Step 23's scenario sets were then produced (22 September 2026, after the LFS zon
 were pulled) and step 32 (§6ad) reran the step-31 capture on them with the skims held
 fixed, taking the central-case underground LRT capture from 3,332 (2022) to 4,114 / 4,498
 (BU 2040 / 2050) and 4,520 / 5,354 (HS 2040 / 2050) as the corridor-internal transit
-market grows ×1.27–1.57.
+market grows ×1.27–1.57 (the values of 22 September; the rerun paragraph below carries the
+current ones).
 
 **Update, 23 September 2026 (step 33).** The THS 2017/18 person and household tables and the
 survey's field metadata were added under `Input/THS_2017-2018/` (the trips file moved there
@@ -155,8 +156,28 @@ at all. Two corrections came out of the metadata: the trips file's mode codes ar
 4 group taxi, 5 Matronit, 8 special taxi** — the chain's `BUS = [3, 4]`, `TAXI = [5, 8]` has 4
 and 5 swapped, so the Metronit sits in the taxi-type layer of steps 15–32 (within the 25 V2
 areas the survey-level transit layer nearly doubles, 6,747 → 12,673, and the taxi layer falls
-6,650 → 723 when corrected; §8 caveat 14 — steps 15–32 are to be rerun); and the activity codes
-1–12 are confirmed one-to-one against the activities file (§6ae).
+6,650 → 723 when corrected; §8 caveat 14); and the activity codes 1–12 are confirmed
+one-to-one against the activities file (§6ae).
+
+**Rerun, 23 September 2026 (steps 15–32 with the corrected codes).** Every product from
+step 15 onward was rebuilt the same day with `BUS = [3, 5]`, `TAXI = [4, 8]` (steps 25, 29
+and 30 read no demand and were left as they were), and **every number in this document from
+§6m to §6ad, in the table below and in the README is from that rerun**; the pre-correction
+values are quoted in brackets where a section cites them, and remain in the git history. What
+moved: the 2018 survey bus layer 116,083 → 125,439 and the calibrated 2022 bus 129,653 →
+130,779 (the calibration had already taken RavKav volumes, which include the Metronit, on
+most corridor segments); taxi-type 19,359 → 9,451; the corridor-internal transit market on
+the 25 V2 areas 11,664 → **13,778** (share of car + transit 0.171 → 0.196) and its taxi layer
+6,982 → 720; the survey-to-ticketing ratio on the Haifa segment towards Haifa 0.78–0.83 →
+0.97–1.07 (parity), the down direction unchanged at ≈ 0.6; the bus peak-hour factor on the
+V2 network now identifiable (0.549 up / 0.457 down, from the study-area 0.590); the step-31
+central capture 3,332 → **4,114** underground, 2,544 → 3,201 ground, 3,970 → 4,814 design
+regime (the LRT share of the transit nest 0.27 → 0.28 underground: the market grew, the
+capture rate barely moved); the busiest trunk link 995 → 1,452 LRT trips in three hours
+(peak hour 588 → 663, on the lower network factor); and the 2040 / 2050 central underground
+captures 4,114 / 4,498 / 4,520 / 5,354 → **5,329 / 5,962 / 5,335 / 6,245**. Step 33's λ is
+unchanged (its skims did not move). The reports under `reports/` (revisions 2.1 and 1.3) and
+`docs/PLAIN_ENGLISH_METHODOLOGY.md` still carry the pre-correction values.
 
 Every published product, what it was built from, and its status:
 
@@ -943,7 +964,10 @@ ordering × pair with the term decomposition and off-diagonal MSSIM), `mssim_hea
 
 **Purpose.** A second base-year matrix built **entirely from the survey trips file**
 (days 1 / 2) — no cellular data in the chain — split into **car** (`mainmode` 10 / 11)
-and **transit** = bus (3 Public Bus, 4 Matronit) + taxi-type (5, 8) + rail (7), with the
+and **transit** = bus (3 Public Bus, 5 Matronit) + taxi-type (4 group taxi, 8 special taxi)
++ rail (7) — the codes as confirmed by step 33 (§6ae); until 23 September 2026 the chain
+read 4 as Matronit and 5 as taxi, and every number in this section is from the rerun with
+the corrected codes — with the
 bus part calibrated against the ticketing / on-board products of steps 8–9. OTHER (walk,
 bicycle, …; 645k trips) is excluded from the two-mode base and reported. From step 16 on,
 taxi-type is a separate layer, not part of bus.
@@ -963,8 +987,9 @@ where it is reliable:
    (`bus_od_taz_new.csv`) aggregated to superzones, `λ_A = n_A / (n_A + k)`.
    **`k` by household-split validation** (households split at random into halves,
    40 splits, the blend on one half predicts the other's rows, mean row JSD): interior
-   optimum **k\* = 5** (JSD 0.331 vs 0.353 for raw survey rows and 0.433 for pure
-   ticketing rows); λ = 0.29–0.97, trip-weighted 0.86. Cross-day validation — the
+   optimum **k\* = 2** (JSD 0.324 vs 0.340 for raw survey rows and 0.422 for pure
+   ticketing rows; k\* was 5 before the code correction); λ = 0.50–0.99, trip-weighted
+   0.94. Cross-day validation — the
    selector of the cellular hybrid — would give k = 0 because the two survey days are
    the same households repeating the same commutes; it is reported but not used. The
    dominant superzone of a 1250-zone (for the counts n_A, m_B) is the one with the
@@ -977,27 +1002,31 @@ where it is reliable:
    **below 0.5 the survey volume is kept** (coverage guard), otherwise the segment takes
    the RavKav volume; thinner segments inherit the origin-wide decision (the first
    version's binary rule). Within a segment the blended pattern `P*` distributes the
-   volume. Result: 28 guarded origin × segment cells — 17 local (the seven originally
-   guarded superzones Nazareth / Kafr Kanna, Shefa-'Amr / Tamra, Sakhnin, Ma'alot / Beit
-   Jann, Safed, Beit She'an, Daliyat al-Karmel / Isfiya, plus Haifa 14 and 16 at ratios
-   0.44–0.48, Tiberias 0.05, Afula, Migdal HaEmek, Nof HaGalil, Karmiel, Zichron, Kiryat
-   Shmona, Pardes Hanna, Hadera), 5 corridor-bound, 6 other. The Nazareth superzone's
-   corridor-bound segment (ratio 0.74) is *calibrated* to ticketing; its local segment
-   (0.08) and its other inter-superzone segment (0.13) keep the survey.
+   volume. Result: 31 guarded origin × segment cells — 18 local (the eight superzones the
+   binary rule guards — Nazareth / Kafr Kanna, Shefa-'Amr / Tamra, Sakhnin, Ma'alot /
+   Beit Jann, Safed, Beit She'an, Daliyat al-Karmel / Isfiya, Kiryat Bialik — plus Haifa
+   14 and 16 at ratios 0.47 and 0.44, Tiberias 0.05, Afula, Migdal HaEmek, Nof HaGalil,
+   Karmiel, Zichron, Kiryat Shmona, Pardes Hanna, Hadera), 7 corridor-bound, 6 other. The
+   Nazareth superzone's corridor-bound segment (ratio 0.99) is *calibrated* to ticketing;
+   its local segment (0.09) and its other inter-superzone segment (0.14) keep the survey.
 3. *TAZ detail* — origin split within a superzone = λ-blend of survey home-based
    departure shares and RavKav boarding shares; destination split = μ-blend of survey
    arrival shares and OnBoard alighting shares (`μ_B = m_B / (m_B + k)`).
 
-**Results.** Bus 116,083 (survey 2018) → **126,117** with the segmented rule (binary
-guard variant 110,654; all-RavKav variant 92,713); local segment 62,090 → 60,200 (ticketing
-23,277), inter-superzone 53,992 → 65,917 (ticketing 69,436). Transit total (bus + taxi +
-rail) 149,492; transit share of the car + transit base 9.8 % → 10.4 % (corridor-to-corridor
-12.7 % → 16.2 %). Threshold sweep: bus total 117,515 at 0.3, 122,160 at 0.4, 126,117 at
-0.5, 130,639 at 0.6, 131,650 at 0.7. Against the RavKav × OnBoard matrix the segmented
-bus scores cosine 0.601 at superzone level (survey 0.589, binary variant 0.658,
-all-RavKav 0.735) and 0.872 on the 28 sub-areas (survey 0.745, binary 0.882), with 64 %
-of sub-area flow within GEH 5 (survey 30 %; day-to-day 67 %); destination totals, never
-imposed, reach cosine 0.86 with OnBoard-informed alightings.
+**Results (rerun of 23 September 2026 with the corrected codes).** Bus 125,439 (survey
+2018; 116,083 under the swapped codes, the Matronit rows having sat in taxi-type) →
+**127,185** with the segmented rule (binary guard variant 111,818; all-RavKav variant
+92,713); local segment 63,878 → 60,766 (ticketing 23,277), inter-superzone 61,560 →
+66,420 (ticketing 69,436). Transit total (bus + taxi + rail) 141,204; transit share of
+the car + transit base 9.8 % → 9.9 % (corridor-to-corridor 12.7 % → 13.1 %). Threshold
+sweep: bus total 115,709 at 0.3, 122,224 at 0.4, 127,185 at 0.5, 130,580 at 0.6, 134,638
+at 0.7. Against the RavKav × OnBoard matrix the segmented bus scores cosine 0.599 at
+superzone level (survey 0.623, binary variant 0.646, all-RavKav 0.712) and 0.856 on the
+28 sub-areas (survey 0.771, binary 0.859), with 69 % of sub-area flow within GEH 5
+(survey 39 %; day-to-day 69 %); destination totals, never imposed, reach cosine 0.83
+with OnBoard-informed alightings. With the survey bus now 8 % larger, the calibrated
+total sits only 1.4 % above the survey (it was 9 % above), and the overall RavKav /
+survey ratio is 0.74.
 
 **The rule is asymmetric and the total shows it.** It adopts ticketing volumes wherever
 ticketing records at least half of the survey's trips — usually more than the survey,
@@ -1007,7 +1036,7 @@ whether ticketing misses trips (operators outside the extract, cash fares, un-ge
 stops) or the survey expansion overstates short local bus travel (review §8), so the
 threshold is a stated assumption and the variants are published beside the primary.
 The raw extract records ≈ 3,500 AM boarding legs in the Nazareth superzone against
-12,400 survey-expanded bus trips; the files carry route ids but no operator field, so
+11,600 survey-expanded bus trips; the files carry route ids but no operator field, so
 which operators the extract covers, and whether cash / unvalidated boardings are in it,
 is a question for the provider.
 
@@ -1036,10 +1065,10 @@ leg or journey) is unconfirmed (§8).
 
 **Purpose.** Moves the survey-only two-mode matrix (step 15) to the **2022 base** with
 the vintage conventions of step 11, at TAZ level, and splits it into four layers: **car**,
-**bus** (calibrated Public Bus + Matronit only), **taxi-type** (survey codes 5 / 8, its
-own layer since the review — the codes' exact meaning is unconfirmed and hired or shared
-taxis need not behave like scheduled bus) and **rail**. The output folder keeps its
-historical name.
+**bus** (calibrated Public Bus + Matronit only), **taxi-type** (survey codes 4 group
+taxi and 8 special taxi, its own layer since the review — hired or shared taxis need not
+behave like scheduled bus; the codes were confirmed by step 33 on 23 September 2026 and
+the layer rerun with them) and **rail**. The output folder keeps its historical name.
 
 **Method.** Growth factors `g = (X_2025 / X_2020)^(4/5)` per TAZ from
 `Input/Zonal_2020.csv` / `Input/Zonal_BU_2025.csv`, used where the 2020 base is ≥ 500
@@ -1057,11 +1086,14 @@ station-to-station matrix scaled the same way is saved beside it.
 | | 2018 base | 2022 base |
 |---|---|---|
 | Car | 1,283,589 | 1,353,798 (+5.5 %) |
-| Bus (calibrated, excl. taxi) | 126,117 | 129,653 (anchored cells 69,066 unchanged; guarded cells 57,051 → 60,587) |
-| Taxi-type | 18,266 | 19,359 |
+| Bus (calibrated, excl. taxi) | 127,185 | 130,779 (anchored cells 66,398 unchanged; guarded cells 60,788 → 64,381) |
+| Taxi-type | 8,910 | 9,451 |
 | Rail (survey, door-to-door) | 5,109 | 4,050 |
-| Bus / taxi / rail share, all | 8.8 % / 1.3 % / 0.4 % | 8.6 % / 1.3 % / 0.3 % |
-| Bus share, corridor → corridor | 11.7 % | 11.0 % |
+| Bus / taxi / rail share, all | 8.9 % / 0.6 % / 0.4 % | 8.7 % / 0.6 % / 0.3 % |
+| Bus share, corridor → corridor | 12.7 % | 11.9 % |
+
+(Values of the 23 September 2026 rerun with the corrected mode codes; under the swapped
+codes the bus layer was 126,117 → 129,653 and taxi-type 18,266 → 19,359.)
 
 Origin factors: median 1.050, car-trip-weighted 1.055 (largest ≈ 1.28 in Pardes
 Hanna-Karkur and Tirat Carmel TAZs); destination factors: weighted 1.135 before the
@@ -1091,14 +1123,16 @@ is a three-hour total of potential movements between line areas**, not a passeng
 it says nothing about station access, route choice against parallel services, peaking
 within the three hours, or trips with one end off the line.
 
-**Results.** Total: corridor-internal demand 71,113 trips (earlier matrix 101,004 — it
-included the walk / other modes and a different car source); peak link Bat Galim –
-Kiryat Eliezer, 6,852 towards Nazareth / 6,847 towards Tirat Carmel (earlier 7,671 /
-7,576); the Haifa-side profile matches the earlier one closely, the Krayot-to-Nazareth
-segment carries less in both directions. Transit (bus + rail): 8,622 corridor-internal
-trips, peak link Ein Hayam – Bat Galim 1,661 towards Nazareth / 1,650 Neot Peres – Neve
-David towards Tirat Carmel; taxi-type a further 3,606 corridor-internal trips, up to
-1,415 on Ein Hayam – Bat Galim. Transit is 16–37 % of link flow on the Haifa segment.
+**Results (rerun of 23 September 2026).** Total: corridor-internal demand 68,238 trips
+(earlier matrix 101,004 — it included the walk / other modes and a different car source);
+peak link Bat Galim – Kiryat Eliezer, 5,973 towards Nazareth / 6,077 towards Tirat Carmel
+(earlier 7,671 / 7,576); the Haifa-side profile matches the earlier one closely, the
+Krayot-to-Nazareth segment carries less in both directions. Transit (bus + rail): 9,039
+corridor-internal trips, peak link Ein Hayam – Bat Galim 1,847 towards Nazareth / 1,497
+Neot Peres – Neve David towards Tirat Carmel; taxi-type a further 313 corridor-internal
+trips, up to 178 on Hamoshava – Lower City. Transit is 18–39 % of link flow on the Haifa
+segment. (Under the swapped codes: transit 8,622 with a peak of 1,661 / 1,650 and
+taxi-type 3,606 — the difference is the Metronit.)
 
 **Outputs.** `Output/ths2017/three_mode_2022/corridor_link_flows_{total,transit,taxi}_2022.csv`,
 `corridor_link_flows_comparison_2022.csv` (all profiles, the earlier ones and the
@@ -1114,22 +1148,23 @@ intermediate steps (raw 2018 survey bus, all-RavKav variant), the area pairs tha
 the differences, the transit share of link flow in both matrix sets, and a
 local-vs-intercity split of the ticketing coverage in the guarded superzones.
 
-**Results.** Towards Nazareth (1 → 23) the calibrated-survey transit sits at 0.63–1.05 ×
-the ticketing transit along the Haifa segment (0.87 over the segment; raw survey 25–40 %
-lower); the earlier 1.5 × was the taxi-type layer, now separate. Towards Tirat Carmel
-(23 → 1) the ticketing profile is still ≈ 2 × from Bat Galim to Kiryat Bialik South and
-≈ 3 × at the Nazareth end, driven by journeys ticketed from the Nazareth Area (1,363 vs
-430 survey-based; −9,900 link-trips), Hamifrats (782 vs 561) and Neve Yosef (741 vs 296)
-into Haifa's western districts. **The segmented coverage rule did not close this gap,
-and could not**: at superzone level Nazareth's corridor-bound segment is calibrated to
-ticketing (ratio 0.74); the shortfall sits in the superzone-to-area allocation and the
-destination frame (survey trips land in Haifa TAZs by employment share, ticketed
-journeys at trunk-route alighting stops in the line areas) and in hub attribution.
-Coverage is the right diagnosis for the local market — Nazareth: ticketing records 8 %
-of the survey's intra-superzone bus trips, 34 % of inter-superzone, 74 % to the Haifa
-superzones; other guarded superzones local 0.05–0.24 — and the wrong one for the
-corridor-bound market. Transit share of link flow: 16–26 % (1 → 23) / 14–37 % (23 → 1)
-on the Haifa segment in the calibrated-survey set; 15–27 % / 18–55 % in the ticketing
+**Results (rerun of 23 September 2026).** Towards Nazareth (1 → 23) the calibrated-survey
+transit sits at 0.74–1.26 × the ticketing transit along the Haifa segment (0.97 over the
+segment — level, now that the Metronit is in the bus layer; 0.87 under the swapped codes);
+the earlier 1.5 × was the taxi-type layer, now separate. Towards Tirat Carmel (23 → 1) the
+ticketing profile is still ≈ 2.5–3 × from Bat Galim to Kiryat Bialik South (segment ratio
+0.60) and ≈ 2.8 × at the Nazareth end (0.36), driven by journeys ticketed from the
+Nazareth Area (1,363 vs 445 survey-based; −11,450 link-trips), Hamifrats (782 vs 212) and
+Neve Yosef (741 vs 275) into Haifa's western districts. **The segmented coverage rule did
+not close this gap, and could not**: at superzone level Nazareth's corridor-bound segment
+is calibrated to ticketing (ratio 0.99); the shortfall sits in the superzone-to-area
+allocation and the destination frame (survey trips land in Haifa TAZs by employment
+share, ticketed journeys at trunk-route alighting stops in the line areas) and in hub
+attribution. Coverage is the right diagnosis for the local market — Nazareth: ticketing
+records 9 % of the survey's intra-superzone bus trips, 36 % of inter-superzone, 74 % to
+the Haifa superzones; other guarded superzones local 0.05–0.24 — and the wrong one for
+the corridor-bound market. Transit share of link flow: 21–34 % (1 → 23) / 18–39 % (23 → 1)
+on the Haifa segment in the calibrated-survey set; 15–27 % / 18–50 % in the ticketing
 set, whose total includes walk / other modes.
 
 **Outputs.** `Output/ths2017/three_mode_2022/corridor_profile_hybrid_vs_ticketing.csv`,
@@ -1180,8 +1215,8 @@ Profiles are computed (a) study-area-wide per layer, (b) for the trips between l
 per direction and layer, weighted by links crossed, and (c) per link. A 200-replicate
 household bootstrap gives the sampling range of (b). The factor applied to the 2022 link
 profiles is the direction-level one where the corridor sample has at least 100 sampled
-trips (car: 194 / 236), otherwise the study-area factor of the layer (bus 1,636, taxi-type
-253 sampled trips; rail takes the bus factor). The factor is on departure time; the
+trips (car: 194 / 236), otherwise the study-area factor of the layer (bus 1,790, taxi-type
+99 sampled trips under the corrected codes; rail takes the bus factor). The factor is on departure time; the
 link-crossing hour lags it by the travel time to the link.
 
 **Results.**
@@ -1189,20 +1224,22 @@ link-crossing hour lags it by the travel time to the link.
 | Layer | Peak hour (study area) | PHF₃ₕ study area | PHF₆₀ study area | PHF₃ₕ corridor 1 → 23 (n) | PHF₃ₕ corridor 23 → 1 (n) | Applied |
 |---|---|---|---|---|---|---|
 | Car | 07:00–08:00 | 0.621 | 0.69 | 0.661 (194; bootstrap 0.51–0.81) | 0.626 (236; 0.47–0.75) | direction-level |
-| Bus | 07:00–08:00 | 0.590 | 0.75 | 0.655 (48; 0.54–0.84) | 0.435 (26; 0.43–0.79) | study area 0.590 |
-| Taxi-type | 07:00–08:00 | 0.580 | 0.68 | 0.784 (35) | 0.837 (25) | study area 0.580 |
+| Bus | 07:00–08:00 | 0.589 | 0.77 | 0.682 (83; 0.59–0.85) | 0.573 (44; 0.45–0.84) | study area 0.589 |
+| Taxi-type | 07:00–08:00 | 0.588 | 0.66 | — (0) | 0.931 (7) | study area 0.588 |
 | Walk / other | 07:00–08:00 | 0.793 | 0.64 | — | — | not in the profile |
 
-The peak hour carries ≈ 1.8 × an average hour. Per-link factors are identifiable only
-for car (19 link-directions with ≥ 30 sampled trips) and scatter −0.12 to +0.19 around
-the direction factor (mean +0.03); bus links have at most 25 sampled trips. Peak-hour
-potential movements (2022 layers): transit (bus + rail) 981 on Ein Hayam – Bat Galim
-towards Nazareth (three-hour 1,661, average hour 554) and 974 on Neot Peres – Neve David
-towards Tirat Carmel (1,650 / 550); all layers 4,609 towards Nazareth on Ein Hayam – Bat
-Galim and 4,205 towards Tirat Carmel on Bat Galim – Kiryat Eliezer. Sensitivity of the
-busiest transit link to the bus factor basis (study area / corridor pooled / corridor
-direction): 981 / 835 / 1,089 towards Nazareth, 974 / 829 / 718 towards Tirat Carmel.
-These remain potential movements in the peak departure hour, not loads.
+(Rerun of 23 September 2026 with the corrected codes; the bus row was 0.590 / 0.75 on
+1,636 sampled trips, the taxi-type row 0.580 / 0.68 on 253.) The peak hour carries ≈ 1.8 ×
+an average hour. Per-link factors are identifiable for car (19 link-directions with ≥ 30
+sampled trips) and four bus link-directions, and scatter −0.12 to +0.18 around the
+direction factor (mean +0.03). Peak-hour potential movements (2022 layers): transit
+(bus + rail) 1,088 on Ein Hayam – Bat Galim towards Nazareth (three-hour 1,847, average
+hour 616) and 882 on Neot Peres – Neve David towards Tirat Carmel (1,497 / 499); all
+layers 3,971 towards Nazareth on Kiryat Eliezer – Hamoshava and 3,756 towards Tirat
+Carmel on Bat Galim – Kiryat Eliezer. Sensitivity of the busiest transit link to the bus
+factor basis (study area / corridor pooled / corridor direction): 1,088 / 1,053 / 1,259
+towards Nazareth, 882 / 854 / 857 towards Tirat Carmel. These remain potential movements
+in the peak departure hour, not loads.
 
 **Outputs.** `Output/ths2017/three_mode_2022/peak_hour_factors.csv` (all levels, with
 hourly shares and bootstrap ranges), `peak_hour_factors_applied.csv`,
@@ -1290,13 +1327,15 @@ non-empty cells only, gzip) is written for SQL use, with a manifest and a summar
 | Layer | All | Corridor → corridor | Corridor → outside | Outside → corridor | Outside → outside |
 |---|---|---|---|---|---|
 | Car | 1,353,798 | 72,331 | 47,011 | 89,181 | 1,145,275 |
-| Transit (bus + rail) | 133,704 | 9,366 | 10,104 | 18,799 | 95,434 |
-| **Total (car + transit)** | **1,487,501** | 81,697 | 57,115 | 107,980 | 1,240,709 |
-| Taxi-type (variant) | 19,359 | 3,812 | 1,359 | 5,479 | 8,709 |
-| Transit share of total | 9.0 % | 11.5 % | 17.7 % | 17.4 % | 7.7 % |
+| Transit (bus + rail) | 134,829 | 9,837 | 9,084 | 21,609 | 94,298 |
+| **Total (car + transit)** | **1,488,627** | 82,168 | 56,095 | 110,790 | 1,239,573 |
+| Taxi-type (variant) | 9,451 | 313 | 573 | 1,020 | 7,545 |
+| Transit share of total | 9.1 % | 12.0 % | 16.2 % | 19.5 % | 7.6 % |
 
-Checks: the four layers add to `all_modes_2022_taz.csv` cell by cell; the long file's
-total equals the matrix total; 351,223 of 605,284 cells carry demand (the bus layer is
+(Rerun of 23 September 2026 with the corrected mode codes; the previous set had transit
+133,704 and taxi-type 19,359, the Metronit sitting in the latter.) Checks: the four
+layers add to `all_modes_2022_taz.csv` cell by cell; the long file's
+total equals the matrix total; 360,763 of 605,284 cells carry demand (the bus layer is
 dense because the calibration spreads each origin's volume over the blended
 destination pattern; car has 24,173 non-zero cells).
 
@@ -1311,8 +1350,8 @@ from the final 2022 layers (§6t), replacing the 25-area composite forecast of �
 
 **Method in brief.** (1) 2022 demographic level bridged as `X_2020 (X_2025/X_2020)^(2/5)`.
 (2) Composite land-use indices fitted once on total 2022 demand by non-negative least
-squares — production `I = 0.506·P + 0.124·E`, attraction `J = 0.264·P + 0.814·E` (R² ≈ 0.5
-at TAZ level) — because AM destinations are jobs *and* residents (schools, homes, shops).
+squares — production `I = 0.505·P + 0.120·E`, attraction `J = 0.266·P + 0.804·E` (R² ≈ 0.5
+at TAZ level; rerun of 23 September 2026) — because AM destinations are jobs *and* residents (schools, homes, shops).
 (3) Margins per layer: `O_i^y = O_i + ρ_i ΔI_i`, `D_j^y = D_j + σ_j ΔJ_j`, own rate where the
 TAZ is established (index ≥ 500 residents' worth, growth ≤ 3×), superzone rate on the
 increment otherwise; destinations rescaled to the origin total. (4) Seed: existing demand
@@ -1337,11 +1376,13 @@ in scenario mode, producing the four sets BU_2040, BU_2050, HS_2040, HS_2050 und
 `Output/forecast_taz/{scenario}/` (`{car,transit,taxi,total}_{scenario}_{taz,sz,area}.csv`,
 `margins_{scenario}.csv`) plus `checks.csv`, `summary_by_class.csv`, `by_area.csv`,
 `trip_rates_by_sz.csv`, `corridor_link_flows_scenarios.csv`, `landuse_indices.csv`.
-Convergence per `checks.csv`: car and transit margins met to 10⁻⁶ in 25–140 Furness
-iterations; taxi-type (sparse) stops at 500 iterations with 10–15 % maximum relative
-row-margin error (column margins exact). On the corridor-internal V2-area market (step
-32, §6ad), the resulting growth is transit ×1.27 (BU_2040) / ×1.40 (BU_2050) / ×1.38
-(HS_2040) / ×1.57 (HS_2050) and car ×1.32 / ×1.53 / ×1.38 / ×1.59 over the 2022 base.
+Convergence per `checks.csv` (rerun of 23 September 2026 on the corrected base): car and
+transit margins met to 10⁻⁶ in 82–138 Furness iterations; taxi-type (now a 9,451-trip
+layer, sparser still) stops at 500 iterations with 9–35 % maximum relative row-margin
+error (column margins exact) — the QA failure the red-team response lists for the step 23
+rebuild. Study-area growth: transit ×1.29 (BU_2040) / ×1.51 (BU_2050) / ×1.39 (HS_2040) /
+×1.66 (HS_2050), car ×1.31 / ×1.52 / ×1.37 / ×1.63; the corridor-internal V2-area growth
+is in §6ad.
 
 **Outputs (per scenario-year).** `{car,transit,taxi,total}_{scenario}_{taz,sz,area}.csv`,
 `margins_{scenario}.csv` (indices, targets and the rule each TAZ took); across scenarios
@@ -1372,24 +1413,28 @@ movements, not loads. The V2 TAZ set shares 143 TAZs with the earlier 28-area se
 (all of Nazareth city, Shefaram, Neot Peres), so totals are not one-to-one comparable with
 §6o; the Haifa-segment link values are.
 
-**Results.** Trips with both ends in the 25 areas: 184,106 (car 156,944, bus 18,788,
-taxi-type 8,323, rail 51). Route-internal trips: T1 123,906 (transit 12,546), T2 73,964
-(7,711), T3 55,519 (7,054). Busiest transit link on every route is on the Haifa trunk —
-Ein Hayam – Bat Galim-Kiryat Eliezer up (1,379–1,437; peak hour 814–848) and Matam-Neot
-Peres – Hof Carmel-Neve David down (1,410–1,629; 833–962). The T1 branch is one-directional
-in the morning (Tsomet Kiryat Ata – Kiryat Ata North 5,809 down / 785 up; 1,174 transit down,
-share 20 %; Shefaram – Nazareth links 650–920 transit down at a 20–23 % share, the highest
-in the set). The Krayot branch holds the busiest single link of any route, Kiryat Haim –
-Kiryat Bialik Center at 10,144 down (peak hour 5,812) with a 10 % transit share; T3's branch
-peaks at 4,896 down on Tsomet Kiryat Ata – Kiryat Haim West (936 transit, 19 %). On the tree
-network the trunk link Bazan-Hutsot – Tsomet Kiryat Ata carries 16,231 down (peak hour 8,792)
-and 2,898 transit (1,710) — the inflow of all three branches — against 4,958 / 1,075 on the
-same link in the T1 profile alone; the Haifa-side trunk changes little between views (7,183
-up on Ein Hayam – Bat Galim vs 6,878–7,036 per route). The 14,688 branch-to-branch trips (8 %)
-load only branch links. Down dominates every link east of Bat Galim; up dominates only Tirat
-Carmel – Ein Hayam. Transit share of link flow on the trunk: 17–33 % down, 10–22 % up.
-Against the earlier 18-area profile (busiest transit link 1,661 / 1,650): per route
-1,379–1,437 / 1,410–1,629, network 1,518 / 2,898.
+**Results (rerun of 23 September 2026 with the corrected codes).** Trips with both ends in
+the 25 areas: 180,066 (car 156,944, bus 20,902, taxi-type 2,170, rail 51; under the swapped
+codes bus 18,788 and taxi-type 8,323 — the Metronit riders moved layer). Route-internal
+trips: T1 121,513 (transit 12,320), T2 70,468 (9,948), T3 52,602 (7,559). Busiest transit
+link up is on the Haifa trunk on every route — Ein Hayam – Bat Galim-Kiryat Eliezer
+(1,643–1,773; peak hour 968–1,049); down it is now Hof Carmel-Neve David – Hecht-Shprintzak
+on T1 (1,293; 762) and the first branch link on T2 / T3 (Tsomet Kiryat Ata – Kiryat Haim
+2,116 / 1,246; – Kiryat Haim West 1,282 / 755). The T1 branch is one-directional in the
+morning (Tsomet Kiryat Ata – Kiryat Ata North 5,729 down on the route; 8,074 down / 1,563
+up on the network, 1,899 transit down, share 24 %). The Krayot branch holds the busiest
+single link of any route, Kiryat Haim – Kiryat Bialik Center at 9,619 down (peak hour
+5,516; 12,951 on the network) with a 17 % transit share; T3's branch peaks at 4,493 down on
+Tsomet Kiryat Ata – Kiryat Haim West (1,282 transit, 29 %). On the tree network the trunk
+link Bazan-Hutsot – Tsomet Kiryat Ata carries 15,628 down (peak hour 7,944) and 3,886
+transit (1,782) — the inflow of all three branches; the Haifa-side trunk changes little
+between views (5,975 up on Ein Hayam – Bat Galim, 1,897 transit). The 14,396
+branch-to-branch trips (8 %) load only branch links. Down dominates every link east of Bat
+Galim; up dominates only Tirat Carmel – Ein Hayam. Transit share of link flow on the trunk:
+25–32 % down, 17–32 % up. Against the earlier 18-area profile (busiest transit link 1,847 /
+1,497): per route 1,643–1,773 / 1,282–2,116, network 1,897 / 3,886. Peak-hour bus values use
+step 27's factors, which the corrected codes make identifiable on the network (0.549 up /
+0.457 down).
 
 **Outputs.** `Output/corridor_v2/area_legend_v2.csv`, `{layer}_2022_area_v2.csv`,
 `corridor_v2_link_flows_long.csv` (route × link × direction × layer, three-hour and
@@ -1564,6 +1609,17 @@ now carry the status `constant` (values zero) instead of `missing`, the inventor
 generalized-cost value changes (money entered at zero before); task E4 of
 `docs/CORRIDOR_DEMAND_TASKS.md` closes.
 
+**Rerun note, 23 September 2026 — the corrected mode codes.** The skim components are
+unchanged (car times from the car trips, bus from the network and the GTFS, LRT from step
+25), but the survey-side comparisons and the trip weights moved with the Metronit trips now
+in the bus group: the survey's reported bus door-to-door on the trunk pairs is 30.0 min
+(2.42 × the fastest-path IVT of 12.4; 33.5 min and 2.27 × on all V2 pairs), and against the
+GTFS door-to-door on the same pairs 32.2 vs 22.7 min (× 1.42; trunk-to-trunk 28.3 vs 17.7;
+1.9 × under 3 km, 1.3–1.5 × at 3–20 km, 0.8 × at 20–60 km — the ≈ 9-minute fixed overhead
+of addendum 2 stands). Trip-weighted partial generalized cost on the trunk pairs: car 14.5,
+bus 26.9, LRT 43.9 / 51.1 — within 0.1 of the values above. The addenda's numbers are
+otherwise left as written.
+
 **Addendum 5, 22 September 2026 — the design-speed LRT regime.** Step 25's third scenario
 (50 km/h + 10 s per stop) enters as mode `lrt_design_50kmh` with the same walk, wait and
 transfer components as the two calibrated scenarios; `gc_area_v2_lrt_design_50kmh.csv` and
@@ -1588,10 +1644,14 @@ from Nazareth and the Krayot start earlier and flatten the pooled down profile. 
 20 (0.661 / 0.626) the up factors are 1–6 % lower, the down factors 8–9 % lower per route and
 16–17 % lower on the network; the peak-hour car and total values of step 24 fell by those
 margins (network trunk link Bazan-Hutsot – Tsomet Kiryat Ata 9,956 → 8,792; T2 branch link
-6,239 → 5,812). Bus (26–58 sampled per route-direction, 93–96 on the network) and taxi-type
-(17–48) stay on the study-area factors 0.590 / 0.580; the bus route values scatter 0.43–0.69
-(bootstrap 0.43–0.84) around 0.59, the taxi-type values (0.58–0.91) all sit above 0.58, so the
-corridor taxi-type peak may be under-stated. Caveats as §6r.
+6,239 → 5,812). Bus, with the Metronit rows now in the layer (rerun of 23 September 2026),
+is identifiable on the network (143 up / 153 down sampled) and on T2 up (103): applied
+**network 0.549 up / 0.457 down** (peak hours 07:30–08:30 / 07:00–08:00; bootstrap
+0.46–0.73 / 0.43–0.62) and T2 up 0.592; the other route-directions (37–88 sampled, values
+0.50–0.74) stay on the study-area 0.589. Taxi-type (0–8 sampled per route-direction under
+the corrected codes) stays on 0.588 everywhere. The network down factor for bus is a
+quarter below the study-area value, and steps 31–32 apply it to the trunk's peak-hour LRT
+loads. Caveats as §6r.
 
 **Outputs.** `Output/corridor_v2/peak_hour_factors_v2.csv`, `peak_hour_factors_v2_applied.csv`;
 figure `corridor_v2_peak_hour_profiles.png`.
@@ -1603,24 +1663,25 @@ step 16; RavKav × OnBoard bus of step 9 and the station train matrix of step 10
 route and on the tree network, with the calibration steps (raw 2018 survey bus, all-RavKav
 variant) and taxi-type alongside.
 
-**Results.** In the 25 areas the survey set holds 18,839 transit trips against 16,363 ticketed,
-yet sits below the ticketing profile on almost every link: its transit is more local, the
-ticketing's more corridor-long. Up: survey ÷ ticketing 0.78–0.83 on the Haifa segment per
-route (network 0.82), same peak link (Ein Hayam – Bat Galim-Kiryat Eliezer, 1,379–1,437 vs
-1,556–1,646; network 1,518 vs 1,730); beyond Hamifrats T1 1.08, T2 / T3 0.57–0.58. Down:
-Haifa segment T2 0.92, T3 0.73, T1 0.66, network 0.63; beyond Hamifrats T2 / T3 0.79, T1
-0.43; ticketing peaks on Lower City – Namal-Giborim per route (2,073–2,903) and on
-Bazan-Hutsot – Tsomet Kiryat Ata on the network (4,476 vs survey 2,898), the survey further
-west on Matam-Neot Peres – Hof Carmel-Neve David. Drivers, as in §6p: Nazareth as origin
-(1,070 survey vs 2,402 ticketed corridor-bound trips, −13,020 link-trips; → Bat Galim-Kiryat
-Eliezer 87 vs 521, → Hecht-Shprintzak 22 vs 271, → Lower City 132 vs 431), Kiryat Yam B+C
-(568 vs 1,116), Tsur Shalom (290 vs 642), the Hamifrats hub (431 vs 1,049); by destination
-Bat Galim-Kiryat Eliezer (1,161 vs 2,064), Lower City (894 vs 1,764), Hecht-Shprintzak (279
-vs 1,035) — trunk-route alighting stops. The survey is higher from Kiryat Bialik Center, Ein
-Hayam and Hecht-Shprintzak and to Kiryat Ata North and Kiryat Yam B+C. The T2 route is where
-the frames nearly agree; on the T1 branch the ticketing set carries ≈ 2.3 × the survey's
-transit towards Haifa, so a Nazareth-branch market should be carried as a range (tasks A1,
-B1c, B2).
+**Results (rerun of 23 September 2026 with the corrected codes).** In the 25 areas the survey
+set holds 20,953 transit trips against 16,363 ticketed (18,839 under the swapped codes).
+Up, the two frames now agree on the Haifa segment: survey ÷ ticketing 0.97–1.06 per route
+(network 1.07; it was 0.78–0.83), same peak link (Ein Hayam – Bat Galim-Kiryat Eliezer,
+1,643–1,773 vs 1,556–1,646; network 1,897 vs 1,730); beyond Hamifrats T1 1.23, T2 0.97, T3
+0.65. Down the survey still sits below the ticketing profile: Haifa segment T2 0.92, T3
+0.58, T1 0.51, network 0.62; beyond Hamifrats T2 1.46, T3 1.10, T1 0.36; ticketing peaks on
+Lower City – Namal-Giborim per route (1,920–2,903) and on Bazan-Hutsot – Tsomet Kiryat Ata
+on the network (4,476 vs survey 3,886), the survey on the first branch links. Drivers, as
+in §6p: Nazareth as origin (962 survey vs 2,402 ticketed corridor-bound trips, −14,913
+link-trips; → Bat Galim-Kiryat Eliezer 46 vs 521, → Hecht-Shprintzak 9 vs 271, → Lower
+City 125 vs 431), Kiryat Yam B+C, Tsur Shalom and the Hamifrats hub, all towards the trunk's
+western alighting stops. The survey is higher from Kiryat Bialik Center, Ein Hayam and
+Tirat Carmel. The T2 route is where the frames nearly agree; on the T1 branch the ticketing
+set carries ≈ 2.5 × the survey's transit towards Haifa, so a Nazareth-branch market should
+be carried as a range (tasks A1, B1c, B2). The correction moved the up direction from a
+20 % shortfall to parity and left the down direction where it was: the Metronit riders
+the survey had in taxi-type travel up the trunk in the morning; the down shortfall is the
+Nazareth-branch frame, not coverage.
 
 **Outputs.** `Output/corridor_v2/corridor_v2_survey_vs_ticketing.csv`,
 `corridor_v2_survey_vs_ticketing_summary.csv`, `corridor_v2_survey_vs_ticketing_pairs.csv`;
@@ -1771,57 +1832,61 @@ car potential movements on the same nine links, the peak hour using step 27's ne
 factor. All flows are corridor-internal (both trip ends among the 25 areas), 06:00–09:00,
 2022.
 
-**Results.** The skim fill: car 625 of 625 cells (590 derived, 35 measured); bus 598 of
-625 (422 derived, 178 assumed, 25 not_skimmed on the diagonal); Metronit 278 of 625 (278
-derived, 322 not_available, 25 not_skimmed); LRT all underground 600 of 600 off-diagonal
-(90 derived direct, 402 derived_feeder, 108 assumed), LRT all ground 600 of 600 (90 / 370 /
-140). Transit-trip-weighted on the 90 trunk pairs (10 station areas, 4,174 transit trips):
-car 14.7 min, bus 27.8 (IVT 14.9, walk 4.8, wait 1.4), Metronit 25.6 on its 72 trunk pairs
-(83 % of trunk transit trips), LRT underground 44.0 (IVT 12.6, walk 13.2, wait 2.5), LRT
-ground 51.8 (IVT 20.4). On all 600 off-diagonal pairs (11,664 transit trips): car 20.2,
-bus 38.5, Metronit 31.0 on 278 pairs (64 % of transit trips), LRT underground 70.5 (IVT
-32.7 including the feeder bus, walk 9.9, wait 4.9, transfers 1.0), LRT ground 76.1.
+**Results (rerun of 23 September 2026 with the corrected mode codes; the pre-correction
+values are in the git history and, for the headline figures, in §0).** The skim fill: car
+625 of 625 cells (590 derived, 35 measured); bus 598 of 625 (422 derived, 178 assumed, 25
+not_skimmed on the diagonal); Metronit 278 of 625 (278 derived, 322 not_available, 25
+not_skimmed); LRT all underground 600 of 600 off-diagonal (90 derived direct, 435
+derived_feeder, 75 assumed), LRT all ground 600 of 600 (90 / 391 / 119).
+Transit-trip-weighted on the 90 trunk pairs (10 station areas, 4,289 transit trips): car
+14.5 min, bus 27.4 (IVT 14.3, walk 4.5, wait 1.7), Metronit 23.4 on its 72 trunk pairs
+(77 % of trunk transit trips), LRT underground 43.9 (IVT 12.3, walk 13.3, wait 2.5), LRT
+ground 51.5 (IVT 20.0). On all 600 off-diagonal pairs (13,778 transit trips): car 19.5, bus
+37.6, Metronit 30.6 on 278 pairs (68 % of transit trips), LRT underground 62.8 (IVT 32.7
+including the feeder bus, walk 9.7, wait 4.8, transfers 0.1), LRT ground 68.0.
 
 Against the 2022 AM (06:00–09:00) off-diagonal trips within the 25 areas — car 56,445,
-transit (bus + rail) 11,664 (share 0.171), taxi 6,982 — a trip-weighted binary logit of the
-transit share on `GC_bus − GC_car` (573 pairs, 67,700 trips) returns λ = −0.011 per
-generalized minute (se 0.0005, wrong sign, ρ² 0.003); adding distance-band constants gives
-λ = +0.0002 (ρ² 0.036) — no cost sensitivity is identifiable within bands. Transit share by
-centroid-distance band: < 3 km 0.114, 3–6 km 0.249, 6–10 km 0.169, 10–20 km 0.161, > 20 km
-0.414 (mean `GC_bus − GC_car` 11, 16, 24, 29, 28 generalized minutes). The pairs where the
+transit (bus + rail) 13,778 (share 0.196), taxi 720 — a trip-weighted binary logit of the
+transit share on `GC_bus − GC_car` (566 pairs, 69,800 trips) returns λ = −0.009 per
+generalized minute (se 0.0004, wrong sign, ρ² 0.002); adding distance-band constants gives
+λ = +0.006 (ρ² 0.025) — no cost sensitivity is identifiable within bands. Transit share by
+centroid-distance band: < 3 km 0.136, 3–6 km 0.254, 6–10 km 0.229, 10–20 km 0.204, > 20 km
+0.387 (mean `GC_bus − GC_car` 11, 16, 24, 29, 29 generalized minutes). The pairs where the
 bus is dearest relative to the car are also the least car-available (captive riders, the
 northern-branch localities) — car availability is not in the skims — so the cross-section
-cannot identify λ, the plan's own caveat; λ is therefore
-**assumed**, central 0.03 per generalized minute (range 0.02–0.05), with λ_T = 2λ within
-the transit nest.
+cannot identify λ, the plan's own caveat; λ is therefore **assumed**, central 0.03 per
+generalized minute (range 0.02–0.05), with λ_T = 2λ within the transit nest. Step 33 (§6ae)
+then estimated λ at the person level, with car availability held constant, at 0.035
+(0.002–0.068): the assumption stands as the central case.
 
 The pivoted capture (LRT trips 06:00–09:00 within the 25 areas; the incremental-logit growth
 factor `S'/S` on the Empirical-Bayes-smoothed share is applied to each pair's *observed*
 transit trips, so without the LRT the model returns 2022 exactly, and within the nest both
 the existing and the induced transit trips split by `P_LRT|T`): all underground, central
-**3,332** (3,037 from bus, 295 from car; transit share of car + transit 0.171 → 0.185), λ
-range 2,357 (λ 0.05) – 4,855 (λ 0.02), premium 0 → 2,658, premium 10 → 4,122; all ground
-central **2,544** (2,375 from bus, 169 from car), λ range 1,472–4,277, premium 0 / 10 →
-1,999 / 3,200. Of the previous version's 2,257 (bus feeder only, no premium) the free
-Metronit transfer adds about 400 and the 5-minute premium about 670. LRT share of transit:
-underground 0.265 central (0.192–0.358 over λ), ground 0.206 (0.123–0.321). On the trunk
-pairs, trip-weighted P_LRT|T is 0.340 underground / 0.247 ground (1,580 / 1,112 LRT trips).
-By path type (underground, central; LRT trips ÷ 2022 transit trips): direct LRT 90 pairs,
-4,174 trips → 1,580 (0.38); Metronit→LRT 102 pairs, 1,611 → 570 (0.35); bus→LRT 48 pairs,
-815 → 283 (0.35); LRT→Metronit 81 pairs, 427 → 213 (0.50); Metronit→LRT→Metronit 110 pairs,
-3,386 → 425 (0.13); pairs needing a bus at both ends next to nothing. Boardings by station
-area (underground / ground): Hamifrats 995 / 595, Namal-Giborim 747 / 678, Hecht-Shprintzak
-391 / 303, Bat Galim 353 / 255, Tirat Carmel 251 / 161; the largest pair flows are Bat Galim
-→ Matam 122, Hecht-Shprintzak → Matam 116, Tirat Carmel → Matam 104, Nazareth → Lower City
-75 (by feeder bus) and Kiryat Bialik → Bat Galim 43 (by Metronit feeder).
+**4,114** (3,751 from bus, 363 from car; transit share of car + transit 0.196 → 0.212), λ
+range 3,083 (λ 0.05) – 5,812 (λ 0.02), premium 0 → 3,307, premium 10 → 5,048; all ground
+central **3,201** (2,987 from bus, 214 from car), λ range 2,012–5,153, premium 0 / 10 →
+2,535 / 3,992. LRT share of transit: underground 0.277 central (0.212–0.364 over λ), ground
+0.220 (0.141–0.328). On the trunk pairs, trip-weighted P_LRT|T is 0.337 underground / 0.246
+ground (1,619 / 1,142 LRT trips). By path type (underground, central; LRT trips ÷ 2022
+transit trips): direct LRT 90 pairs, 4,289 trips → 1,619 (0.38); Metronit→LRT 102 pairs,
+2,568 → 1,100 (0.43); bus→LRT 48 pairs, 696 → 258 (0.37); LRT→Metronit 81 pairs, 639 → 328
+(0.51); Metronit→LRT→Metronit 110 pairs, 4,316 → 484 (0.11); pairs needing a bus at both
+ends next to nothing. Boardings by station area (underground / ground): Hamifrats 1,452 /
+872, Namal-Giborim 747 / 820, Tirat Carmel 393 / 243, Hecht-Shprintzak 376 / 290, Bat Galim
+355 / 256; the largest pair flows are Nazareth → Kiryat Haim 125 (bus feeder in, Metronit
+out), Bat Galim → Matam 107, Kiryat Bialik Center → Lower City 104 (Metronit feeder), Tirat
+Carmel → Matam 100 and Hecht-Shprintzak → Matam 96. Against the pre-correction run (3,332
+underground) the capture is 23 % higher because the transit nest is 18 % larger and the
+Metronit-fed pairs, now in it, take the LRT at 0.43; the capture *rate* moved from 0.265 to
+0.277.
 
-Loaded on the trunk links (three hours, central underground): 79–995 trips per
-link-direction, largest on Namal-Giborim→Hamifrats down (995), LowerCity→Namal-Giborim down
-(799) and Matam→HofCarmel down (678), against today's bus potential movements of 200–2,030
-on the same links — a third to 45 % of the bus movements, 84 % on Namal-Giborim→Hamifrats
-up (637 against 759) because of the Krayot feeder trips; the ground scenario loads 44–595;
-the peak hour (step 27's factor) is 47–588 underground. The low-λ case reaches 1,656 on
-Namal-Giborim→Hamifrats down.
+Loaded on the trunk links (three hours, central underground): 190–1,452 trips per
+link-direction, largest on Namal-Giborim→Hamifrats down (1,452), against today's bus
+potential movements of 415–2,618 on the same links — 40–55 % of the bus movements, 79 % on
+Namal-Giborim→Hamifrats up (738 against 939) because of the Krayot feeder trips; the ground
+scenario loads 133–872; the peak hour (step 27's network bus factors, 0.549 up / 0.457 down)
+is 87–663 underground. The low-λ case reaches 2,273 on Namal-Giborim→Hamifrats down.
 
 **Outputs.** `Output/skims/skim_{mode}_{component}.csv` (ivt, walk, wait, transfers, gc,
 status per mode, plus `ivt_scheduled` for bus and `ivt_lrt_only`, `gateway_o`, `gateway_d`,
@@ -1847,17 +1912,17 @@ nearest-station walk of §6x, not a per-trip routing.
 
 ---
 
-**Addendum, 22 September 2026 — the design-speed regime in the skims and the capture.** The
-third LRT scenario (§6w addendum) runs through the same feeder composite and capture:
-in-vehicle time on the trunk pairs 8.0 min (12.6 underground, 20.4 ground), partial GC 39.4
-on the trunk pairs and 61.1 over all pairs; dearer than the bus on 494 of 598 pairs on
-physical cost (direct trunk pairs −8 to +26 generalized minutes, median 10.5), cheaper on
-192 pairs carrying 1,764 transit trips once the 5-minute premium is applied. Central
-capture **3,970** LRT trips 06:00–09:00 (3,534 from bus, 437 from car; 31 % of the transit
-trips, 40 % on the trunk pairs; λ range 3,227–5,272; premium 0 / 10 → 3,210 / 4,842); trunk
-links 108–1,237 (peak hour 64–730), busiest Namal-Giborim→Hamifrats down 1,237; boardings
-Hamifrats 1,237, Namal-Giborim 888, Hecht-Shprintzak 464, Bat Galim 428. The ceiling regime
-draws 19 % more than the calibrated underground case — less than the λ range.
+**Addendum, 22 September 2026 (values of the 23 September rerun) — the design-speed regime
+in the skims and the capture.** The third LRT scenario (§6w addendum) runs through the same
+feeder composite and capture: in-vehicle time on the trunk pairs 7.9 min (12.3 underground,
+20.0 ground), partial GC 39.4 on the trunk pairs and 59.6 over all pairs; dearer than the bus
+on most pairs on physical cost, cheaper on a minority once the 5-minute premium is applied.
+Central capture **4,814** LRT trips 06:00–09:00 (4,294 from bus, 520 from car; 35 % of the
+transit trips, 40 % on the trunk pairs; λ range 4,050–6,267; premium 0 / 10 → 3,919 /
+5,831); trunk links 232–1,705 (peak hour 106–779), busiest Namal-Giborim→Hamifrats down
+1,705; boardings Hamifrats 1,705, Namal-Giborim 839, Tirat Carmel 512, Hecht-Shprintzak
+448. The ceiling regime draws 17 % more than the calibrated underground case — less than
+the λ range.
 
 ## 6ad. Step 32 — LRT capture on the 2040 / 2050 forecast matrices (`LRT_capture_forecast_2040_2050.ipynb`)
 
@@ -1882,37 +1947,36 @@ all ground), pivoting each pair's forecast no-build transit trips exactly as it 
 the 2022 trips in §6ac. All flows are corridor-internal (both trip ends among the 25 V2
 areas), 06:00–09:00, off-diagonal.
 
-**Results.** Market growth on the V2 areas: transit trips 11,664 (2022) → 14,836 BU_2040
-(×1.27), 16,369 BU_2050 (×1.40), 16,076 HS_2040 (×1.38), 18,291 HS_2050 (×1.57); car
-56,445 → ×1.32 / 1.53 / 1.38 / 1.59; the no-build transit share of car + transit stays
-0.16–0.17 in every year (2022 mode split by construction of step 23). Growth location:
-under BU, Tirat Carmel transit origins grow 553 → 1,299 (2040) / 1,324 (2050), Kiryat
-Bialik Center 902 → 1,363 / 1,690, Kiryat Haim West 750 → 1,200 / 1,370, and Tsur Shalom
-and Kiryon nearly double; under HS, Matam grows 229 → 617 / 869, Hof Carmel 276 → 541 /
-685, Bat Galim 811 → 1,077 / 1,410, Kiryat Haim West 750 → 1,955 / 2,317, Kiryat Ata North
-256 → 491 / 662; Nazareth grows 1,070 → 1,179 / 1,445 (BU) and 1,070 → 1,069 / 1,257 (HS,
-essentially flat in 2040).
+**Results (rerun of 23 September 2026 with the corrected mode codes).** Market growth on
+the V2 areas: transit trips 13,778 (2022) → 18,100 BU_2040 (×1.31), 20,315 BU_2050 (×1.47),
+18,453 HS_2040 (×1.34), 20,843 HS_2050 (×1.51); car 56,445 → ×1.32 / 1.53 / 1.38 / 1.59; the
+no-build transit share of car + transit stays 0.19–0.20 in every year (2022 mode split by
+construction of step 23). Growth location: under BU, Tirat Carmel transit origins grow 829
+→ 1,868 (2040) / 2,101 (2050) and Ein Hayam 641 → 830 / 918; under HS, Matam grows 232 →
+653 / 930, Hof Carmel 210 → 478 / 619, Bat Galim 803 → 1,091 / 1,413, Kiryat Ata North 280
+→ 573 / 802, Kiryat Haim West boards 190 → 442 / 558; Hecht-Shprintzak and Hamifrats stay
+flat in every scenario.
 
-LRT trips, central case, all underground: 3,332 (2022) → 4,114 (BU_2040) → 4,498
-(BU_2050); 4,520 (HS_2040) → 5,354 (HS_2050). All ground: 2,544 → 3,105 / 3,386; 3,430 /
-4,047. The LRT share of no-build transit stays fixed in every scenario-year — 0.28–0.29
-underground, 0.21–0.22 ground — because the skims (and so the capture rate) are held
+LRT trips, central case, all underground: 4,114 (2022) → 5,329 (BU_2040) → 5,962
+(BU_2050); 5,335 (HS_2040) → 6,245 (HS_2050). All ground: 3,201 → 4,085 / 4,559; 4,121 /
+4,804. The LRT share of no-build transit stays fixed in every scenario-year — 0.29–0.30
+underground, 0.22–0.23 ground — because the skims (and so the capture rate) are held
 fixed; only the market changes with the year. Over the λ range: BU_2040 underground
-2,889–6,093; HS_2050 underground 3,828–7,815; HS_2050 ground 2,362–6,840. From bus / from
-car, underground: BU_2040 3,732 / 382; BU_2050 4,055 / 444; HS_2040 4,050 / 470; HS_2050
-4,768 / 586. Trunk-pair LRT trips underground: 1,580 (2022) → 1,952 / 2,040 (BU) and 2,053
-/ 2,437 (HS).
+4,015–7,563; HS_2050 underground 4,648–8,920; HS_2050 ground 2,980–7,858. From bus / from
+car, underground: BU_2040 4,852 / 478; BU_2050 5,387 / 575; HS_2040 4,801 / 533; HS_2050
+5,591 / 654. Trunk-pair LRT trips underground: 1,619 (2022) → 2,120 / 2,305 (BU) and 2,135
+/ 2,558 (HS).
 
-Boardings by station area, underground central: Hamifrats 995 (2022) → 1,216 / 1,367 (BU
-2040 / 2050) and 1,426 / 1,717 (HS); Namal-Giborim 748 → 890 / 1,031 (BU), 886 / 1,015
-(HS); Tirat Carmel 251 → 591 / 623 (BU), 334 / 368 (HS); Bat Galim 353 → 364 / 385 (BU),
-468 / 617 (HS); Matam 118 → 139 / 151 (BU), 271 / 366 (HS); Hof Carmel 147 → 139 / 139
-(BU), 270 / 339 (HS); Hecht-Shprintzak 391 → 366 / 343 (BU), 389 / 400 (HS).
-Metronit-fed pairs grow fastest: Metronit→LRT trips go from 570 (2022) to 1,094 (HS_2050).
+Boardings by station area, underground central: Hamifrats 1,452 (2022) → 1,816 / 2,035 (BU
+2040 / 2050) and 1,856 / 2,170 (HS); Namal-Giborim 747 → 866 / 995 (BU), 846 / 982 (HS);
+Tirat Carmel 393 → 892 / 1,031 (BU), 497 / 549 (HS); Bat Galim 355 → 376 / 404 (BU), 482 /
+628 (HS); Matam 194 → 311 / 375 (BU), 354 / 460 (HS); Hof Carmel 106 → 101 / 101 (BU), 234
+/ 304 (HS); Hecht-Shprintzak 376 → 354 / 335 (BU), 372 / 382 (HS). Metronit-fed pairs grow
+fastest: Metronit→LRT trips go from 1,100 (2022) to 1,655 (BU_2050) and 1,587 (HS_2050).
 
 Trunk links, underground central: the busiest link in every year is Namal-Giborim →
-Hamifrats down: 995 (2022) → 1,216 / 1,367 (BU) → 1,426 / 1,717 (HS) trips in three hours;
-peak hour (step 27's network bus factor 0.590): 588 → 718 / 807 / 842 / 1,014.
+Hamifrats down: 1,452 (2022) → 1,816 / 2,035 (BU) → 1,856 / 2,170 (HS) trips in three
+hours; peak hour (step 27's network bus factor, 0.457 down): 663 → 830 / 930 / 848 / 991.
 
 **Outputs.** `Output/skims/forecast/{car,transit,taxi}_{scenario}_area_v2.csv`,
 `forecast_market_v2_growth.csv`, `forecast_transit_origins_v2.csv`,
@@ -1932,12 +1996,12 @@ rates held at 2022); taxi carried unchanged.
 
 ---
 
-**Addendum, 22 September 2026 — the design-speed regime on the forecast sets.** Central
-case 3,970 (2022) → 4,930 / 5,404 (BU 2040 / 2050) → 5,416 / 6,432 (HS 2040 / 2050) LRT trips,
-a share of the no-build transit trips of 0.33–0.35 in every year; busiest link
-Namal-Giborim→Hamifrats down 1,503 / 1,693 (BU) and 1,749 / 2,104 (HS) in three hours, 1,242
-in the HS 2050 peak hour; Hamifrats boards 2,104 by HS 2050. About a fifth above the
-underground case in every scenario-year.
+**Addendum, 22 September 2026 (values of the 23 September rerun) — the design-speed regime
+on the forecast sets.** Central case 4,814 (2022) → 6,281 / 7,041 (BU 2040 / 2050) → 6,289 /
+7,386 (HS 2040 / 2050) LRT trips, a share of the no-build transit trips of 0.34–0.35 in every
+year; busiest link Namal-Giborim→Hamifrats down 2,123 / 2,378 (BU) and 2,184 / 2,563 (HS) in
+three hours, 1,171 in the HS 2050 peak hour; Hamifrats boards 2,563 by HS 2050. About 17 %
+above the underground case in every scenario-year.
 
 ## 6ae. Step 33 — Person-level mode choice: the cost sensitivity λ with car availability held constant (`Mode_choice_person_level.ipynb`)
 
@@ -1963,9 +2027,10 @@ the study area the AM difference is 182 sampled rows / 11,406 expanded trips per
 taxi → bus and 26 / 2,006 moving bus → taxi; **within the 25 V2 areas, off-diagonal, at 2018
 survey level, the transit layer goes 6,747 → 12,673 and the taxi-type layer 6,650 → 723**
 (`Output/mode_choice/v2_area_layers_by_mode_code_mapping.csv`). Step 31's corridor market
-(transit 11,664 / taxi 6,982, the taxi left out of the choice set) therefore under-states the
-transit nest by roughly the Metronit riders, who are the natural LRT market. This step uses the
-corrected mapping; steps 15–32 have not yet been rerun with it.
+as it stood (transit 11,664 / taxi 6,982, the taxi left out of the choice set) therefore
+under-stated the transit nest by roughly the Metronit riders, who are the natural LRT market.
+This step uses the corrected mapping, and **steps 15–32 were rerun with it the same day**
+(§0): the corridor market became 13,778 / 720 and the central underground capture 4,114.
 
 **Estimation sample.** AM trips (departure hour 6–8) extracted by the step 5 / 15 rule, mode
 car (10, 11) or transit (3, 5, 7; taxi-type 4, 8 out of the choice set as in step 31, OTHER
@@ -2020,12 +2085,12 @@ segment.
 **Reading.** (i) With the composition held constant the cost sensitivity has the right sign and
 a magnitude of 0.035–0.053 per generalized minute; **the assumed central λ = 0.03 of steps 31 /
 32 is supported and stays**. (ii) The interval (0.002–0.068 on M1) is wider than the assumed
-range 0.02–0.05, so the capture band of §6ac (2,357–4,855 underground) is, if anything, too
-narrow. (iii) The pooled λ is carried by the no-car households, whose "choice" is between
+range 0.02–0.05, so the capture band of §6ac (3,083–5,812 underground after the rerun) is,
+if anything, too narrow. (iii) The pooled λ is carried by the no-car households, whose "choice" is between
 transit and a lift; **for the travellers who actually choose between their own car and
 transit, λ is not identified from this sample** (M4: 0.008 ± 0.017; M2's car-available 0.053 at
-p = 0.08). The 295 trips step 31 draws from the car (of 3,332) rest on that unidentified
-parameter; the 3,037 drawn from the bus rest on λ_T, which no revealed-preference data in the
+p = 0.08). The 363 trips step 31 draws from the car (of 4,114, after the rerun) rest on that
+unidentified parameter; the 3,751 drawn from the bus rest on λ_T, which no revealed-preference data in the
 repository can estimate because the LRT does not exist. The stated-preference survey of the
 red-team response (`docs/RED_TEAM_RESPONSE_2026-09-23.md` §4) remains the way to both. (iv) The
 sample is small — 353 transit rows — because the skims exist only between the 25 areas;
@@ -2178,11 +2243,13 @@ Added 23 September 2026 (step 33):
     within the 25 V2 areas (off-diagonal) the transit layer is 12,673 rather than 6,747 and the
     taxi-type layer 723 rather than 6,650. The calibrated bus product of step 15 absorbs part
     of this where it adopted RavKav volumes (which include Metronit boardings), but the taxi
-    layer that steps 22–32 carry unchanged and keep out of the choice set is mostly Metronit
-    riders. Steps 15–32 are to be rerun with `BUS = [3, 5]`, `TAXI = [4, 8]`; until then the
-    corridor transit market of §6ac–§6ad is understated and the taxi layer overstated. Caveat 9
-    is resolved by the same check: the taxi-type codes are 4 group taxi (sherut) and 8 special
-    taxi.
+    layer that steps 22–32 carried unchanged and kept out of the choice set was mostly Metronit
+    riders. **Steps 15–32 were rerun with `BUS = [3, 5]`, `TAXI = [4, 8]` on 23 September
+    2026** (§0, "Rerun"); every number in §6m–§6ad is from that rerun, and the products under
+    `Output/` are the corrected ones. Still carrying the pre-correction values: the two reports
+    under `reports/` (revisions 2.1 and 1.3) and `docs/PLAIN_ENGLISH_METHODOLOGY.md`, each
+    flagged as such. Caveat 9 is resolved by the same check: the taxi-type codes are 4 group
+    taxi (sherut) and 8 special taxi.
 15. **λ is estimated but the choice-rider λ is not identified** (§6ae): pooled 0.035
     (0.002–0.068) supports the assumed 0.03; for licence holders in car-owning households
     0.008 ± 0.017. λ_T and the LRT premium remain assumptions; a stated-preference survey is

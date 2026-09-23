@@ -55,9 +55,15 @@ person-level λ is 0.035 (0.002–0.068), right sign, and supports the assumed 0
 licence holders in car-owning households — the travellers the LRT would take from the car —
 give 0.008 ± 0.017, not identified, and λ_T is not estimable from revealed-preference data.
 The SP survey stays on the request list. Condition 2 is untouched. A correction surfaced on
-the way: the trips file's mode codes 4 (group taxi) and 5 (Matronit) are swapped in steps
-15–32, so the Metronit riders sit in the taxi layer that the capture leaves out of the choice
-set; the chain is to be rerun with the corrected codes before the rebuild order of §3.
+the way: the trips file's mode codes 4 (group taxi) and 5 (Matronit) were swapped in steps
+15–32, so the Metronit riders sat in the taxi layer that the capture left out of the choice
+set. The chain was rerun with the corrected codes the same day (METHODOLOGY §0 "Rerun"): the
+corridor transit market is 13,778 trips rather than 11,664, the central underground capture
+4,114 rather than 3,332, and the numbers quoted in §1 of this response are the
+pre-correction ones. The verdict does not change — the capture rate moved from 0.27 to 0.28
+and the λ band is as wide as before — but the survey-to-ticketing comparison towards Haifa
+on the Haifa segment moved from a 20 % shortfall to parity, which narrows the coverage
+question of §4 to the Nazareth branch and the down direction.
 
 ## 3. Next steps — two tracks in parallel
 

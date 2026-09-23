@@ -6,36 +6,39 @@ what to do about it, and which scenarios to run on top. Task numbers refer to
 
 ## 1. Where the capture stands
 
+*Updated 23 September 2026 after the rerun of steps 15–32 with the corrected mode codes
+(METHODOLOGY §0 "Rerun"); the values of 22 September are in the git history.*
+
 Corridor-internal market (both trip ends in the 25 V2 areas, 06:00–09:00, 2022): 56,445 car,
-11,664 transit (bus + rail), 6,982 taxi-type trips. Central case of steps 31 / 32 (λ = 0.03 per
-generalized minute, λ_T = 0.06, LRT premium 5 generalized minutes, free LRT–Metronit
-transfers, money out of the comparison, 5-minute headway):
+13,778 transit (bus + Metronit + rail), 720 taxi-type trips. Central case of steps 31 / 32
+(λ = 0.03 per generalized minute, λ_T = 0.06, LRT premium 5 generalized minutes, free
+LRT–Metronit transfers, money out of the comparison, 5-minute headway):
 
 | LRT scenario | IVT trunk pairs (min) | GC trunk pairs | LRT trips 2022 | share of transit | HS 2050 |
 |---|---|---|---|---|---|
-| all underground (calibrated) | 12.6 | 44.0 | 3,332 | 27 % | 5,354 |
-| all ground (calibrated) | 20.4 | 51.8 | 2,544 | 21 % | 4,047 |
-| design regime 50 km/h + 10 s (ceiling) | 8.0 | 39.4 | 3,970 | 31 % | 6,432 |
+| all underground (calibrated) | 12.3 | 43.9 | 4,114 | 28 % | 6,245 |
+| all ground (calibrated) | 20.0 | 51.5 | 3,201 | 22 % | 4,804 |
+| design regime 50 km/h + 10 s (ceiling) | 7.9 | 39.4 | 4,814 | 35 % | 7,386 |
 
 The capture rate is fixed by the skims, so the forecast years only scale the market
-(transit × 1.27–1.57). Busiest link Namal-Giborim → Hamifrats towards the Krayot: 995 trips in
-three hours today (588 peak hour), 1,717 by HS 2050.
+(transit × 1.31–1.51). Busiest link Namal-Giborim → Hamifrats towards the Krayot: 1,452 trips
+in three hours today (663 peak hour on the network bus factor of 0.457), 2,170 by HS 2050.
 
 ## 2. What moves the number, ranked
 
-Effect on the 2022 underground central figure (3,332):
+Effect on the 2022 underground central figure (4,114):
 
 | Driver | Range today | Status | What closes it |
 |---|---|---|---|
-| Cost sensitivity λ | 2,357–4,855 (λ 0.05–0.02) | **assumed** — the 2022 cross-section returns the wrong sign (car availability confounds it) | segmented logit on the survey's person records (E7) or a transferred value with its source |
+| Cost sensitivity λ | 3,083–5,812 (λ 0.05–0.02) | **assumed 0.03, now supported by the person-level estimate 0.035 (0.002–0.068), step 33** — the choice-rider λ is not identified | SP survey; TAZ-level skims to widen the estimation sample (E6) |
 | Station access | 18 of the 17-minute median LRT–bus gap on the trunk is the access difference (13.2 vs 4.8 min walk) | derived, but crude: straight-line × 1.3 walk, population-weighted per area, feeder to the gateway area centroid | walking network, feeder buses truncated at stations, TAZ-level capture on the trunk (E6) |
-| LRT premium | 2,658–4,122 (0–10 gen-min) | **assumed** | anchor on the Metronit's 2013 before / after ridership; Red Line first-year ridership vs forecast |
-| Free LRT–Metronit transfer | ≈ +400 trips (2,257 → 2,658 at premium 0) | decision | none needed; keep as a stated assumption |
+| LRT premium | 3,307–5,048 (0–10 gen-min) | **assumed** | anchor on the Metronit's 2013 before / after ridership; Red Line first-year ridership vs forecast |
+| Free LRT–Metronit transfer | material: the Metronit-fed pairs now carry 1,100 of the 4,114 | decision | none needed; keep as a stated assumption |
 | Bus generalized cost | not yet ranged | 7-minute overhead between the GTFS skim and reported door-to-door times not in the bus GC; 178 pairs without a direct service on a scaled floor | wait = headway of the line actually needed + transfer allowance; GTFS path building for the 178 pairs (E3) |
 | Branch geometry | 15 of 25 areas reach the LRT by feeder | **missing** | alignment and stations of the T1 / T2 / T3 branches and Hamifrats → Tsomet Kiryat Ata (E1) |
 | External and intra-area trips | corridor-internal market is 75,000 of 184,000 study-area trips; 109,000 intra-area trips excluded | scope | TAZ-level capture with station catchments (A2) |
 | Skims in the forecast years | held at 2026 | scope | congestion uplift on car times (E5); bus network of the LRT year |
-| 2022 transit base | survey vs ticketing differ by ≈ 2 × on the Nazareth branch | unvalidated against a count | Rav-Kav boardings by stop group on the trunk links; one car screenline (C3) |
+| 2022 transit base | survey vs ticketing at parity on the Haifa segment towards Haifa since the code correction; still ≈ 2.5 × apart on the Nazareth branch towards Haifa | unvalidated against a count | Rav-Kav boardings by stop group on the trunk links; one car screenline (C3) |
 
 The first three are perception parameters that no amount of skim precision fixes; the plan's
 own caveat (`docs/LRT_CAPTURE_PLAN.md` §3). The branch geometry and the external trips are
@@ -55,8 +58,8 @@ the two structural gaps, and they are the two that need inputs from the client s
    *Done 23 September 2026 (METHODOLOGY §6ae): λ = 0.035 (0.002–0.068), right sign — the
    central 0.03 stands, the range 0.02–0.05 is narrower than the estimate's interval, and the
    choice-rider λ (licence holders in car-owning households) is not identified. Found on the
-   way: mode codes 4 / 5 are swapped in steps 15–32 (Matronit in the taxi layer) — the chain
-   is to be rerun with the corrected codes before any of the scenarios below.*
+   way: mode codes 4 / 5 were swapped in steps 15–32 (Matronit in the taxi layer); the chain
+   was rerun with the corrected codes the same day, and §1 above carries the rerun values.*
 2. **Walking network for access (E6).** Fetch OSM for the study area, route every V2 TAZ
    centroid (and, for the trunk, every TAZ) to its nearest station and nearest served bus stop
    on the footway network; replace the 1.3 detour factor. Same notebook as 3.

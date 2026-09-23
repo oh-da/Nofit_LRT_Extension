@@ -1,5 +1,11 @@
 # Nofit LRT Extension — Full Project Documentation, in Plain English
 
+> **Status note, 23 September 2026.** The numbers in this companion predate two changes of
+> that day: the trips file's mode codes 4 (group taxi) and 5 (Matronit) were found swapped in
+> steps 15–32 and the chain was rerun with the corrected codes, and step 33 estimated the cost
+> sensitivity λ at the person level. Read the values here as the 22 September state; the
+> current ones are in `METHODOLOGY.md` §0 ("Rerun") and §6m–§6ae.
+
 *Written 23 September 2026, based on `METHODOLOGY.md` and the supporting `docs/` files as
 they stood on that date.*
 
