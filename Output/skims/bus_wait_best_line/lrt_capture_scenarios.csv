@@ -1,0 +1,16 @@
+scenario,case,λ,λ_T,LRT premium,LRT trips 06–09,of which from bus,of which from car,bus trips after,car trips after,transit share before,transit share after,LRT share of transit,LRT trips on trunk pairs,trunk pairs P_LRT|T (trip-wtd)
+LRT all underground,"central (λ 0.03, λ_T 0.06, premium 5)",0.03,0.06,5.0,4879,4314,565,10719,54980,0.2003,0.221,0.313,2133,0.402
+LRT all underground,"low λ (0.02 / 0.03, premium 5)",0.02,0.03,5.0,6501,5420,1081,10298,53779,0.2003,0.238,0.387,2540,0.45
+LRT all underground,"high λ (0.05 / 0.10, premium 5)",0.05,0.1,5.0,3918,3462,456,11355,55305,0.2003,0.2164,0.257,1825,0.346
+LRT all underground,"no premium (λ central, premium 0)",0.03,0.06,0.0,3931,3562,369,11341,55306,0.2003,0.2164,0.257,1720,0.334
+LRT all underground,premium 10 (λ central),0.03,0.06,10.0,5971,5132,839,10028,54579,0.2003,0.2267,0.373,2603,0.474
+LRT all ground,"central (λ 0.03, λ_T 0.06, premium 5)",0.03,0.06,5.0,3733,3396,337,11483,55361,0.2003,0.2156,0.245,1505,0.294
+LRT all ground,"low λ (0.02 / 0.03, premium 5)",0.02,0.03,5.0,5710,4868,842,10736,54133,0.2003,0.233,0.347,2129,0.389
+LRT all ground,"high λ (0.05 / 0.10, premium 5)",0.05,0.1,5.0,2489,2286,202,12329,55760,0.2003,0.21,0.168,1028,0.202
+LRT all ground,"no premium (λ central, premium 0)",0.03,0.06,0.0,2958,2744,213,12008,55612,0.2003,0.212,0.198,1189,0.238
+LRT all ground,premium 10 (λ central),0.03,0.06,10.0,4652,4134,518,10879,55047,0.2003,0.2201,0.3,1879,0.357
+LRT design 50 km/h,"central (λ 0.03, λ_T 0.06, premium 5)",0.03,0.06,5.0,5777,4975,802,10143,54658,0.2003,0.2256,0.363,2604,0.475
+LRT design 50 km/h,"low λ (0.02 / 0.03, premium 5)",0.02,0.03,5.0,7057,5787,1270,9995,53525,0.2003,0.2416,0.414,2812,0.487
+LRT design 50 km/h,"high λ (0.05 / 0.10, premium 5)",0.05,0.1,5.0,5239,4424,815,10510,54829,0.2003,0.2231,0.333,2565,0.46
+LRT design 50 km/h,"no premium (λ central, premium 0)",0.03,0.06,0.0,4723,4182,541,10813,55041,0.2003,0.2201,0.304,2137,0.403
+LRT design 50 km/h,premium 10 (λ central),0.03,0.06,10.0,6965,5812,1153,9418,54196,0.2003,0.2321,0.425,3121,0.548

@@ -36,7 +36,7 @@ Effect on the 2022 underground central figure (4,250):
 | Station access | 18 of the 17-minute median LRT–bus gap on the trunk is the access difference (13.2 vs 4.8 min walk) | derived, but crude: straight-line × 1.3 walk, population-weighted per area, feeder to the gateway area centroid | walking network, feeder buses truncated at stations, TAZ-level capture on the trunk (E6) |
 | LRT premium | 3,406–5,232 (0–10 gen-min) | **assumed** | anchor on the Metronit's 2013 before / after ridership; Red Line first-year ridership vs forecast |
 | Free LRT–Metronit transfer | material: the Metronit-fed pairs now carry 1,336 of the 4,250 | decision | none needed; keep as a stated assumption |
-| Bus generalized cost | not yet ranged | 7-minute overhead between the GTFS skim and reported door-to-door times not in the bus GC; 178 pairs without a direct service on a scaled floor | wait = headway of the line actually needed + transfer allowance; GTFS path building for the 178 pairs (E3) |
+| Bus generalized cost | **ranged 2026-09-23: 4,250–4,879 underground (13–16 % across the three regimes) under the best-line wait rule** | 178 pairs without a direct service now state 1 transfer (matches step 31); the 7-minute door-to-door overhead itself still not in the bus GC | GTFS path building for the 178 pairs, so the wait/transfer figures are derived rather than assumed there (E3) |
 | Branch geometry | 15 of 25 areas reach the LRT by feeder | **missing** | alignment and stations of the T1 / T2 / T3 branches and Hamifrats → Tsomet Kiryat Ata (E1) |
 | External and intra-area trips | corridor-internal market is 75,000 of 184,000 study-area trips; 109,000 intra-area trips excluded | scope | TAZ-level capture with station catchments (A2) |
 | Skims in the forecast years | held at 2026 | scope | congestion uplift on car times (E5); bus network of the LRT year |
@@ -75,7 +75,14 @@ the two structural gaps, and they are the two that need inputs from the client s
 4. **Bus GC with the survey overhead (E3).** Add the 7-minute door-to-door overhead as a
    wait / transfer allowance in the bus skim, or set the wait to the headway of the best
    single line rather than half the pooled headway; rerun steps 31 / 32. Small change in
-   step 26's GTFS block.
+   step 26's GTFS block. *Done 2026-09-23 (METHODOLOGY §6x addendum 6): the best-line-headway
+   half of this item is now a `BUS_WAIT_RULE` switch (`'half_headway'` default / `'best_line'`)
+   — central-case LRT capture rises 4,250 → 4,879 underground, 3,207 → 3,733 ground, 5,095 →
+   5,777 design regime (13–16 %) under `'best_line'`, reported as an alternative
+   (`Output/skims/bus_wait_best_line/`), not adopted as the default. The 178 non-direct pairs'
+   transfer count was also fixed to match what step 31 already assumed (no capture change).
+   The door-to-door overhead itself (as a wait/transfer addition, distinct from the headway
+   rule) is not yet built.*
 5. **Realistic speed regime (§6w).** Design speed with a 30–40 s acceleration and braking
    allowance per stop (constant in step 25), and a **mixed alignment** with the Haifa core
    underground (about S05–S14) and the rest at ground level. This is the case a decision

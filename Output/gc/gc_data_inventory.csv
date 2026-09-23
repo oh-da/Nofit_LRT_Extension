@@ -5,8 +5,8 @@ car,parking,constant (decision 22 Sep 2026),excluded by the same decision,nothin
 car,VOT,not needed,no money term left to convert,nothing
 bus,ivt,derived (direct services),GTFS scheduled IVT of direct services; fastest-path floor scaled elsewhere,transfer paths for the pairs without a direct service; observed (AVL) running times instead of the timetable
 bus,walk,derived,TAZ centroid → nearest served GTFS stop,a walking network instead of the 1.3 detour factor; stop-specific access for the routes actually used
-bus,wait,derived (direct services),half the GTFS combined headway of the direct services,headway of the best route rather than the combined headway where lines diverge
-bus,transfers,"derived where direct, missing elsewhere",0 on direct pairs,"GTFS path building (or the OnBoard survey transfer field tfrs, 9 % of trips carry it)"
+bus,wait,derived (direct services),half the GTFS combined headway of the direct services,nothing further for this rule; BUS_WAIT_RULE = 'best_line' is the alternative to the combined-headway default (task E3 / C4)
+bus,transfers,"derived where direct, assumed elsewhere","0 on direct pairs, 1 assumed otherwise","GTFS path building (or the OnBoard survey transfer field tfrs, 9 % of trips carry it)"
 brt,ivt / wait / walk,derived (direct Metronit pairs),"GTFS Metronit lines 83001, 67002, 67003, 62004, 52005",BRT-stop-specific walk access; a bus + BRT nest in the capture model
 bus,fare,constant (decision 22 Sep 2026),"flat integrated fare with a daily cap — identical for bus, Metronit and LRT and for every pair; drops out of the transit choice",nothing
 lrt,ivt,derived (10 trunk areas),calibrated function on hf_lrt_3 stations,"alignment + stations of the segment Hamifrats → Tsomet Kiryat Ata and of the three branches (T1 Kiryat Ata – Nazareth, T2 Krayot, T3 Kiryat Yam); the regime (underground / ground) per section instead of the two pure scenarios; a running / dwell decomposition of the coefficients"

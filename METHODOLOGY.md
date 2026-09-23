@@ -258,6 +258,17 @@ holds 0.38–0.43 of 06:00–09:00 on the road against 0.62 of departures in the
 finding the RavKav boarding profiles gave for transit (§6af); the step-20 peak-hour factors are
 an upper bound (§8 caveat 18).
 
+**Update, 23 September 2026 (task E3 / C4 — bus wait and the non-direct transfer allowance).**
+`docs/NEXT_STEPS_HANDOVER_2026-09-23.md`'s item C4, worked in full: step 29 now carries a
+best-single-line headway beside the pooled one (§6aa addendum); step 26 fixes the 178
+non-direct pairs' transfer count to state the same one-transfer assumption step 31 already
+enforced (no change to any capture number — confirmed by an exact rerun), and gains a
+`BUS_WAIT_RULE` switch, `'half_headway'` (default) or `'best_line'` (§6x addendum 6); step 31
+gains a matching `GC_SOURCE_DIR` switch to compare scenarios (§6ac addendum). Under
+`'best_line'`, central-case LRT trips 06:00–09:00 rise from 4,250 to 4,879 underground (+15%),
+3,207 to 3,733 ground (+16%), 5,095 to 5,777 design regime (+13%) — reported as an alternative
+under `Output/skims/bus_wait_best_line/`, not adopted as the central case.
+
 Every published product, what it was built from, and its status:
 
 | Product (`Output/…`) | Built by | Base / inputs | Geography | Modes | Vintage | Status |
@@ -284,6 +295,7 @@ Every published product, what it was built from, and its status:
 | `lrt_v2/*` | step 25 | `Input/GeneralHalufa/` geometry × the calibrated travel-time function | 24 stations; 10 trunk areas | LRT in-vehicle time, two scenarios × two forms | planned line | **current** — trunk only (no branches) |
 | `gc/*` | step 26 | survey car times, `Input/BusSpeedData/` (LFS), `lrt_v2/` | 25 V2 areas | car; bus; LRT (2 scenarios) — generalized-cost components with status | 2017/18 (car), May 2026 (bus), planned (LRT) | **current** — partial fill; money components missing |
 | `skims/*` | step 31 | `gc/*` components, feeder composite (bus or Metronit) for the LRT, 2022 corridor flows | 25 V2 areas, 9 trunk links | car; bus; Metronit; LRT (2 scenarios) — complete skims, logit calibration, LRT capture scenarios, trunk-link loads | 2022 (flows), May 2026 (bus), planned (LRT) | **current** — money components still missing; λ assumed |
+| `skims/bus_wait_best_line/*` | steps 26 + 31, `BUS_WAIT_RULE='best_line'` / `GC_SOURCE_DIR` | same as `gc/*` and `skims/*`, bus wait from the single busiest line's own headway instead of the pooled one | 25 V2 areas, 9 trunk links | as `skims/*` | 2022 (flows), May 2026 (bus), planned (LRT) | **alternative scenario** (task E3 / C4) — not the central case |
 | `skims/forecast/*` | step 32 | step-23 forecast sets (BU/HS × 2040/2050), step-31 skims (held fixed) | 25 V2 areas, 9 trunk links | car; transit; taxi — market; LRT (2 scenarios) — capture, boardings, trunk-link loads by scenario-year | 2040 / 2050 (market), 2026 skims (fixed) | **current** — skims fixed at step 31; λ assumed |
 | `mode_choice/*` | step 33 | `Input/THS_2017-2018/` trips, person and household tables × step-31 skims | 25 V2 areas, person-level rows | car vs transit (bus + Metronit + rail) — estimation sample, λ estimates by specification and segment, code check | 2017/18 (survey), May 2026 (skims) | **current** — λ estimated; supports the assumed 0.03; choice-rider λ not identified |
 | `ravkav_2025/*` | step 34 | `Input/BusRavKav/2025/*` (LFS) × the north stops file, `TAZ_North`, the OnBoard pattern, the GTFS stations | stops, 733 TAZ, 28 sub-areas, 25 V2 areas, 20 rail stations | bus + Metronit boardings (journey origins / transfer legs), bus + Metronit journey and leg OD, rail station OD, boarding-hour peak factors | 2025 (representative Tuesday) | **current input layer** — not yet consumed by steps 15–32 (§6af) |
@@ -1752,6 +1764,38 @@ transfer components as the two calibrated scenarios; `gc_area_v2_lrt_design_50km
 a column in `gc_trunk_pairs_comparison.csv`. No section form (the regime is specified, not
 calibrated).
 
+**Addendum 6, 23 September 2026 — bus wait rule and the non-direct transfer allowance (task
+E3 / C4, `docs/NEXT_STEPS_HANDOVER_2026-09-23.md`).** Two fixes, one a correction and one a
+switch. **The correction** (unconditional, applied by default): the 178 area pairs without a
+direct GTFS service (8 of the 90 trunk pairs) had their transfer count set to a missing value
+that a later `fillna(0)` turned into an uncounted transfer — inconsistent with step 31, which
+already assumes one transfer on these pairs when it reads this table
+(`bus_tr.where(direct, 1.0)`, unchanged by this fix). `bus_tr_final` now states the same
+assumption directly, so `gc_area_v2_bus.csv` and `gc_trunk_pairs_comparison.csv` agree with
+what the capture pivot has always used: exactly 178 cells move by +8.0 generalized minutes
+(one `TRANSFER_PEN`), 8 of them trunk pairs (TiratCarmel's four trunk pairs each way); no
+other cell changes, and the capture (step 31/32) is unaffected because it already forced this
+value — confirmed by an exact rerun of steps 26 → 31 reproducing `lrt_capture_scenarios.csv`
+to the last decimal. **The switch**, `BUS_WAIT_RULE` (`'half_headway'`, default, unchanged; or
+`'best_line'`): step 29's GTFS skim (§6aa) now also carries, per area pair, the headway of the
+single busiest line-direction actually serving it in the peak hour, beside the existing
+combined headway pooling every line together. Under `'best_line'` the wait term uses that
+narrower figure instead — median wait on direct pairs rises from the combined figure to a
+noticeably higher one (`bus_best_line_headway_0708_min` median 6.0 min against the combined
+headway's 3.75 min area-pair-wide). The alternative writes to
+`Output/skims/bus_wait_best_line/` rather than the default `Output/gc/` and `Output/skims/`,
+so the default chain is untouched (confirmed by the same exact rerun above). Trip-weighted
+trunk-pair bus GC: 30.7 (default) → 34.9 generalized minutes (`'best_line'`, +14%). Central-case
+LRT capture, 06:00–09:00, 2022: underground 4,250 → 4,879 (+15%), ground 3,207 → 3,733 (+16%),
+design regime 5,095 → 5,777 (+13%) — worse bus wait draws more of the transit market to the
+LRT, as expected, but does not change which regime is largest. `Output/skims/bus_wait_best_line/
+lrt_capture_scenarios.csv` carries the same five λ/premium cases as the default
+`Output/skims/lrt_capture_scenarios.csv` for the full comparison. Both notebooks read the rule
+from the `BUS_WAIT_RULE` / `GC_SOURCE_DIR` environment variables (default when unset), so the
+comparison reruns without editing the notebooks. Not yet done: step 32's forecast-year rerun
+under `'best_line'` — the 2022 comparison above is the only one currently available for this
+alternative.
+
 ## 6y. Step 27 — Peak-hour factors on the V2 routes (`Corridor_peak_hour_V2_routes.ipynb`)
 
 **Purpose.** Step 24's first pass applied the step-20 factors of the 18-area line to the V2
@@ -1874,6 +1918,16 @@ the bus IVT, wait and stop access from this skim where a direct service exists a
 the Metronit as its own mode (§6x addendum). Open: transfer paths for the 178 pairs without
 a direct service; observed (AVL) running times in place of the timetable. The earlier
 synthetic dry run remains under `Output/gtfs/dry_run/`.
+
+**Addendum, 23 September 2026 — the best single line's own headway, per area pair (task
+E3 / C4).** `bus_direct_skim_area_v2.csv` (and the BRT columns alongside it) now also carries
+`bus_best_line_headway_0708_min` / `brt_best_line_headway_0708_min`: the headway of the single
+busiest line-direction actually serving the pair in the peak hour, grouping the same
+morning-peak trips by `(o, d, route_code)` instead of pooling every line together as the
+existing `bus_headway_0708_min` does. Median on the 422 direct pairs: 6.0 min for the best
+single line against 3.75 min combined — pooling several lines together understates the wait a
+rider on any one of them actually faces. Consumed by step 26 (§6x addendum 6) under
+`BUS_WAIT_RULE = 'best_line'`.
 
 **Outputs.** `Output/gtfs/bus_los_taz.csv` (781 rows), `Output/gtfs/bus_direct_skim_area_v2.csv`,
 figure `gtfs_bus_los_taz.png`.
@@ -2046,6 +2100,19 @@ next step (`docs/CORRIDOR_DEMAND_TASKS.md` E7); the LRT premium (5 generalized m
 and the free LRT–Metronit transfer are assumptions of the same standing; the feeder-bus access assumes the bus stops
 at the gateway station; station access / egress walk is the population-weighted
 nearest-station walk of §6x, not a per-trip routing.
+
+**Addendum, 23 September 2026 — reading an alternate GC source (task E3 / C4).** This
+notebook now reads its step-26 components from `GC_SOURCE_DIR` (environment variable,
+default `Output/gc`), and writes to `Output/skims` only when that default is in force —
+otherwise to `GC_SOURCE_DIR` itself, so an alternate scenario never touches the default
+outputs. Rerun with `GC_SOURCE_DIR=Output/skims/bus_wait_best_line` (step 26's
+`BUS_WAIT_RULE='best_line'` output, §6x addendum 6) to compare the capture under the
+best-single-line bus wait rule: central-case LRT trips 06:00–09:00 rise from 4,250 to 4,879
+underground, 3,207 to 3,733 ground, 5,095 to 5,777 in the design regime — a worse bus wait
+draws more of the transit market to the LRT in every scenario and case, without changing
+which regime is largest. The default rerun (`GC_SOURCE_DIR` unset) reproduces
+`lrt_capture_scenarios.csv` and every other output to the last decimal, confirming the
+change is isolated to the alternative.
 
 ---
 

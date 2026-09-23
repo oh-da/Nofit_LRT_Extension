@@ -194,6 +194,14 @@ Key facts driving the list (2017 trips-file hybrid, `Output/ths2017/study_taz/`)
       trunk pairs) and the survey's reported 27.1 min as the bus calibration margin.
       *Observed running times done 2026-09-22 (step 30, METHODOLOGY §6ab): the trips routed over
       the May 2026 link speeds; the link speeds include dwell; step 26 uses the observed skim.*
+      *Bus wait and the non-direct transfer allowance done 2026-09-23 (METHODOLOGY §6x addendum
+      6, §6aa addendum, §6ac addendum): the transfer count on the 178 non-direct pairs now
+      states the one-transfer assumption step 31 already enforced (no capture change); a
+      `BUS_WAIT_RULE` switch compares the pooled headway (default) against the single busiest
+      line's own headway — central-case LRT capture rises 13–16 % under the latter
+      (`Output/skims/bus_wait_best_line/`), reported as an alternative, not adopted as the
+      central case. Still open: transfer paths for the 178 pairs (a real route rather than the
+      floor's assumption).*
 - [x] **E4. Money components** — *closed by decision, 22 September 2026*: the transit fare
       in the area is flat and integrated with a daily cap (two fares pay for the day), so it
       is identical for bus, Metronit and LRT and for every pair and drops out of the transit

@@ -178,7 +178,7 @@ variable `GOOGLE_MAPS_API_KEY` (never in the repository).
    Do not make `google` the default until the user decides; save the alternative outputs under
    `Output/skims/car_google/` rather than overwriting.
 
-**Outputs.** `Output/gc/google_dm_area_points.csv`, `google_dm_raw/*.json`,
+**Outputs.** `Output/gc/google_dm_area_points.csv`,
 `car_ivt_google_area_v2.csv`, `car_ivt_google_freeflow_area_v2.csv`, `car_km_google_area_v2.csv`,
 `car_google_vs_survey_pairs.csv`, `car_google_vs_survey_summary.csv`; the alternative-skim run
 under `Output/skims/car_google/` (same file names as step 31 / 32); figure
@@ -190,6 +190,22 @@ survey is reported with the survey's sample size beside it.
 
 **Documents.** §6ai; §0 update paragraph and a headline row "car time uplift 2017/18 → 2026";
 §6x addendum stating the switch; task E5 ticked; plain-English 5.x. Effort: half a day.
+
+**Status, 23 September 2026 — attempted, blocked and partly amended.** No `GOOGLE_MAPS_API_KEY`
+is available in this environment and none was fabricated; the user decided to skip the API
+queries for now rather than substitute another source. Part 1 (representative points) was
+built and verified without the key — 25 areas, 174 TAZs join cleanly against `TAZ_North.shp`
+and `Zonal_2020.csv` with no missing geometry or population/employment; TsometKiryatAta (212)
+has zero resident and zero job population (a junction area) and falls back to an unweighted
+centroid of its 3 TAZs, flagged in the output rather than silently weighted by zero — but the
+points were not committed, since the step is not otherwise executable and a partial output would
+misstate progress. **The raw-response caching in step 2 above is superseded by the user's
+decision the same day: do not commit raw Google API JSON to this public repository (Maps
+Platform ToS restricts storing/redistributing raw results) — keep only the derived aggregates
+(`car_ivt_google_area_v2.csv` etc.) in `Output/gc/`, and drop `google_dm_raw/*.json` from the
+outputs list above.** Resume once a key with the Distance Matrix API enabled and billing on is
+available; the representative-point script is reusable (not yet in the repository — see the
+person who resumes this item for it, or rebuild it from this method paragraph, it is short).
 
 ### C2. Step 38 — Walking-network access to stations and stops from OpenStreetMap (task E6)
 
@@ -294,6 +310,27 @@ change. Keep the current rule as the default until the user decides.
 
 **Outputs.** Alternative run under `Output/skims/bus_wait_best_line/`. **Documents.** §6x
 addendum, §6ac addendum with the capture change, task E3 ticked. Effort: two hours.
+
+**Status, 23 September 2026 — the wait-rule half done; the overhead itself still open.** Step
+29 was extended to carry a best-single-line headway per area pair alongside the existing
+pooled one (grouping the same peak-hour trips by `(o, d, route_code)`; §6aa addendum). Step 26
+gained the `BUS_WAIT_RULE` switch reading from an environment variable, and — found while
+implementing it — the 178 non-direct pairs' transfer count was silently defaulting to 0 via a
+`fillna`, inconsistent with step 31, which already assumes 1 transfer on these pairs when it
+reads this table; step 26 now states that assumption directly (`gc_area_v2_bus.csv` and
+`gc_trunk_pairs_comparison.csv` move on exactly those 178 cells, +8.0 generalized minutes
+each; the capture is unaffected, since step 31 already forced this value — confirmed by an
+exact rerun). Step 31 gained a matching `GC_SOURCE_DIR` switch so the comparison reruns
+without editing either notebook. Results: trip-weighted trunk-pair bus GC 30.7 → 34.9 minutes
+under `'best_line'`; central-case LRT capture 4,250 → 4,879 underground (+15%), 3,207 → 3,733
+ground (+16%), 5,095 → 5,777 design regime (+13%) (`Output/skims/bus_wait_best_line/`, all
+five λ/premium cases). The default chain (`BUS_WAIT_RULE` unset) reproduces every prior output
+to the last decimal — confirmed, not just asserted. **Not done:** the door-to-door overhead
+itself (the ≈ 9-minute gap this item's Goal names) as a wait/transfer *addition* on top of the
+GTFS skim — the two "changes" turned out to be the headway rule and a data-consistency fix,
+not the overhead; and step 32's forecast-year rerun under `'best_line'` (only the 2022 central
+case was compared). Full detail in `METHODOLOGY.md` §6x addendum 6, §6aa addendum, §6ac
+addendum.
 
 ### C5. Realistic LRT regime and headway sensitivities (scenarios S1, S2; steps 25 / 26 changes)
 
