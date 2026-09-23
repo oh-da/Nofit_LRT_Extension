@@ -1,9 +1,9 @@
 direction,link,bus factor basis,PHF3h bus,transit peak-hour trips
-1→23,Ein Hayam – Bat Galim,study area (applied),0.590,980.587
-1→23,Ein Hayam – Bat Galim,corridor pooled,0.503,834.873
-1→23,Ein Hayam – Bat Galim,corridor direction,0.655,1088.715
-1→23,Ein Hayam – Bat Galim,average hour (÷ 3),0.333,553.667
-23→1,Neot Peres – Neve David,study area (applied),0.590,974.093
-23→1,Neot Peres – Neve David,corridor pooled,0.503,829.344
-23→1,Neot Peres – Neve David,corridor direction,0.435,718.061
-23→1,Neot Peres – Neve David,average hour (÷ 3),0.333,550.000
+1→23,Ein Hayam – Bat Galim,study area (applied),0.589,1087.880
+1→23,Ein Hayam – Bat Galim,corridor pooled,0.570,1053.484
+1→23,Ein Hayam – Bat Galim,corridor direction,0.682,1259.088
+1→23,Ein Hayam – Bat Galim,average hour (÷ 3),0.333,615.667
+23→1,Neot Peres – Neve David,study area (applied),0.589,881.730
+23→1,Neot Peres – Neve David,corridor pooled,0.570,853.853
+23→1,Neot Peres – Neve David,corridor direction,0.573,857.419
+23→1,Neot Peres – Neve David,average hour (÷ 3),0.333,499.000

@@ -1,7 +1,7 @@
 layer,direction,PHF3h applied,basis,corridor direction value,corridor pooled value,study-area value
 CAR,1→23,0.6607,"corridor, direction (194 sampled)",0.6607,0.5759,0.6209
 CAR,23→1,0.6256,"corridor, direction (236 sampled)",0.6256,0.5759,0.6209
-BUS,1→23,0.5904,"study area, all trips (1636 sampled)",0.6555,0.5026,0.5904
-BUS,23→1,0.5904,"study area, all trips (1636 sampled)",0.4352,0.5026,0.5904
-TAXI,1→23,0.5798,"study area, all trips (253 sampled)",0.7838,0.7736,0.5798
-TAXI,23→1,0.5798,"study area, all trips (253 sampled)",0.8367,0.7736,0.5798
+BUS,1→23,0.5890,"study area, all trips (1790 sampled)",0.6817,0.5704,0.5890
+BUS,23→1,0.5890,"study area, all trips (1790 sampled)",0.5728,0.5704,0.5890
+TAXI,1→23,0.5879,"study area, all trips (99 sampled)",,0.9313,0.5879
+TAXI,23→1,0.5879,"study area, all trips (99 sampled)",0.9313,0.9313,0.5879

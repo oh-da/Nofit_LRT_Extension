@@ -1,307 +1,307 @@
 origin,destination,direction,links crossed,hybrid trips,ticketing trips,diff trips,diff link-trips
-TiratCarmel,Matam,1→23,1,124.8,31.0,93.8,93.8
-TiratCarmel,Neot Peres,1→23,2,98.5,155.8,-57.3,-114.6
-TiratCarmel,Neve David,1→23,3,30.5,18.0,12.6,37.7
-TiratCarmel,Ein Hayam,1→23,4,23.7,9.2,14.5,58.1
-TiratCarmel,Bat Galim,1→23,5,83.5,99.4,-15.9,-79.5
-TiratCarmel,Kiryat Eliezer,1→23,6,68.6,45.3,23.3,139.7
-TiratCarmel,Hamoshava,1→23,7,21.5,119.7,-98.2,-687.2
-TiratCarmel,Lower City,1→23,8,38.4,60.0,-21.7,-173.3
-TiratCarmel,Hadar Carmel,1→23,9,134.6,118.2,16.4,147.6
-TiratCarmel,Namal,1→23,10,2.8,21.4,-18.6,-186.2
-TiratCarmel,Neve Yosef,1→23,11,19.5,42.6,-23.1,-254.3
-TiratCarmel,Hamifrats,1→23,12,8.1,46.9,-38.8,-465.3
-TiratCarmel,Hutzot,1→23,13,5.6,7.2,-1.5,-20.1
-TiratCarmel,Kiryat Ata Center,1→23,14,1.2,0.0,1.2,17.4
-TiratCarmel,Kiryat Bialik South,1→23,15,0.7,1.4,-0.7,-10.2
+TiratCarmel,Matam,1→23,1,109.5,31.0,78.5,78.5
+TiratCarmel,Neot Peres,1→23,2,91.7,155.8,-64.1,-128.2
+TiratCarmel,Neve David,1→23,3,26.1,18.0,8.2,24.5
+TiratCarmel,Ein Hayam,1→23,4,26.3,9.2,17.1,68.5
+TiratCarmel,Bat Galim,1→23,5,87.2,99.4,-12.2,-61.2
+TiratCarmel,Kiryat Eliezer,1→23,6,75.2,45.3,29.9,179.3
+TiratCarmel,Hamoshava,1→23,7,45.0,119.7,-74.7,-522.6
+TiratCarmel,Lower City,1→23,8,134.6,60.0,74.5,596.3
+TiratCarmel,Hadar Carmel,1→23,9,114.5,118.2,-3.6,-32.7
+TiratCarmel,Namal,1→23,10,1.0,21.4,-20.4,-204.0
+TiratCarmel,Neve Yosef,1→23,11,52.6,42.6,10.0,109.8
+TiratCarmel,Hamifrats,1→23,12,2.3,46.9,-44.6,-535.7
+TiratCarmel,Hutzot,1→23,13,2.0,7.2,-5.1,-66.6
+TiratCarmel,Kiryat Ata Center,1→23,14,0.4,0.0,0.4,5.6
+TiratCarmel,Kiryat Bialik South,1→23,15,0.8,1.4,-0.6,-8.3
 TiratCarmel,Shefaram,1→23,16,0.0,0.0,0.0,0.0
-TiratCarmel,Nazareth Area,1→23,17,0.2,0.0,0.2,3.1
-Matam,TiratCarmel,23→1,1,15.6,33.7,-18.0,-18.0
-Matam,Neot Peres,1→23,1,42.6,34.5,8.0,8.0
-Matam,Neve David,1→23,2,13.2,176.0,-162.8,-325.6
-Matam,Ein Hayam,1→23,3,10.2,0.0,10.2,30.7
-Matam,Bat Galim,1→23,4,36.8,24.0,12.8,51.2
-Matam,Kiryat Eliezer,1→23,5,29.6,4.4,25.2,126.1
-Matam,Hamoshava,1→23,6,15.7,0.0,15.7,94.3
-Matam,Lower City,1→23,7,28.2,12.1,16.2,113.2
-Matam,Hadar Carmel,1→23,8,30.8,41.5,-10.7,-85.3
-Matam,Namal,1→23,9,4.0,0.0,4.0,36.3
-Matam,Neve Yosef,1→23,10,15.0,0.0,15.0,150.0
-Matam,Hamifrats,1→23,11,11.7,6.4,5.3,58.2
-Matam,Hutzot,1→23,12,8.1,3.3,4.8,57.1
-Matam,Kiryat Ata Center,1→23,13,5.3,0.0,5.3,68.4
-Matam,Kiryat Bialik South,1→23,14,0.1,0.0,0.1,0.8
+TiratCarmel,Nazareth Area,1→23,17,0.0,0.0,0.0,0.6
+Matam,TiratCarmel,23→1,1,15.9,33.7,-17.8,-17.8
+Matam,Neot Peres,1→23,1,28.2,34.5,-6.3,-6.3
+Matam,Neve David,1→23,2,8.0,176.0,-167.9,-335.9
+Matam,Ein Hayam,1→23,3,8.1,0.0,8.1,24.3
+Matam,Bat Galim,1→23,4,27.2,24.0,3.2,12.9
+Matam,Kiryat Eliezer,1→23,5,23.1,4.4,18.7,93.6
+Matam,Hamoshava,1→23,6,8.3,0.0,8.3,50.1
+Matam,Lower City,1→23,7,25.1,12.1,13.0,91.0
+Matam,Hadar Carmel,1→23,8,18.2,41.5,-23.3,-186.3
+Matam,Namal,1→23,9,2.5,0.0,2.5,22.7
+Matam,Neve Yosef,1→23,10,11.1,0.0,11.1,111.1
+Matam,Hamifrats,1→23,11,5.6,6.4,-0.8,-9.2
+Matam,Hutzot,1→23,12,5.0,3.3,1.7,20.3
+Matam,Kiryat Ata Center,1→23,13,5.6,0.0,5.6,73.3
+Matam,Kiryat Bialik South,1→23,14,0.8,0.0,0.8,10.7
 Matam,Shefaram,1→23,15,0.0,0.0,0.0,0.0
-Matam,Nazareth Area,1→23,16,0.0,0.0,0.0,0.1
-Neot Peres,TiratCarmel,23→1,2,0.5,15.9,-15.4,-30.8
-Neot Peres,Matam,23→1,1,1.9,0.0,1.9,1.9
-Neot Peres,Neve David,1→23,1,0.5,85.3,-84.8,-84.8
-Neot Peres,Ein Hayam,1→23,2,0.4,0.5,-0.2,-0.3
-Neot Peres,Bat Galim,1→23,3,1.3,13.0,-11.7,-35.0
-Neot Peres,Kiryat Eliezer,1→23,4,1.1,16.4,-15.4,-61.5
-Neot Peres,Hamoshava,1→23,5,0.6,7.3,-6.7,-33.5
-Neot Peres,Lower City,1→23,6,1.0,11.8,-10.8,-64.8
-Neot Peres,Hadar Carmel,1→23,7,1.1,5.5,-4.4,-30.9
-Neot Peres,Namal,1→23,8,0.1,0.0,0.1,1.2
-Neot Peres,Neve Yosef,1→23,9,0.5,0.0,0.5,4.9
-Neot Peres,Hamifrats,1→23,10,0.4,28.7,-28.3,-283.2
-Neot Peres,Hutzot,1→23,11,0.3,11.7,-11.4,-125.2
-Neot Peres,Kiryat Ata Center,1→23,12,0.2,0.0,0.2,2.3
-Neot Peres,Kiryat Bialik South,1→23,13,0.0,0.0,0.0,0.0
+Matam,Nazareth Area,1→23,16,0.0,0.0,0.0,0.0
+Neot Peres,TiratCarmel,23→1,2,5.9,15.9,-10.0,-20.0
+Neot Peres,Matam,23→1,1,12.5,0.0,12.5,12.5
+Neot Peres,Neve David,1→23,1,3.0,85.3,-82.2,-82.2
+Neot Peres,Ein Hayam,1→23,2,3.0,0.5,2.5,5.0
+Neot Peres,Bat Galim,1→23,3,10.2,13.0,-2.8,-8.4
+Neot Peres,Kiryat Eliezer,1→23,4,8.7,16.4,-7.8,-31.0
+Neot Peres,Hamoshava,1→23,5,3.1,7.3,-4.1,-20.7
+Neot Peres,Lower City,1→23,6,9.4,11.8,-2.4,-14.6
+Neot Peres,Hadar Carmel,1→23,7,6.8,5.5,1.3,9.1
+Neot Peres,Namal,1→23,8,1.0,0.0,1.0,7.6
+Neot Peres,Neve Yosef,1→23,9,4.2,0.0,4.2,37.5
+Neot Peres,Hamifrats,1→23,10,2.1,28.7,-26.6,-266.4
+Neot Peres,Hutzot,1→23,11,1.9,11.7,-9.8,-107.6
+Neot Peres,Kiryat Ata Center,1→23,12,2.1,0.0,2.1,25.5
+Neot Peres,Kiryat Bialik South,1→23,13,0.3,0.0,0.3,3.7
 Neot Peres,Shefaram,1→23,14,0.0,0.0,0.0,0.0
 Neot Peres,Nazareth Area,1→23,15,0.0,0.0,0.0,0.0
-Neve David,TiratCarmel,23→1,3,46.5,8.8,37.7,113.1
-Neve David,Matam,23→1,2,164.2,106.8,57.4,114.8
-Neve David,Neot Peres,23→1,1,131.8,14.2,117.5,117.5
-Neve David,Ein Hayam,1→23,1,31.7,74.4,-42.7,-42.7
-Neve David,Bat Galim,1→23,2,113.9,134.3,-20.5,-40.9
-Neve David,Kiryat Eliezer,1→23,3,91.8,201.7,-109.9,-329.7
-Neve David,Hamoshava,1→23,4,48.8,19.6,29.2,117.0
-Neve David,Lower City,1→23,5,87.7,172.1,-84.4,-422.0
-Neve David,Hadar Carmel,1→23,6,94.8,118.3,-23.5,-141.1
-Neve David,Namal,1→23,7,12.5,0.0,12.5,87.8
-Neve David,Neve Yosef,1→23,8,46.6,43.6,3.0,23.8
-Neve David,Hamifrats,1→23,9,36.4,86.5,-50.0,-450.3
-Neve David,Hutzot,1→23,10,25.2,23.5,1.7,17.2
-Neve David,Kiryat Ata Center,1→23,11,16.4,0.0,16.4,180.3
-Neve David,Kiryat Bialik South,1→23,12,0.2,0.0,0.2,1.9
+Neve David,TiratCarmel,23→1,3,59.6,8.8,50.8,152.5
+Neve David,Matam,23→1,2,126.5,106.8,19.7,39.4
+Neve David,Neot Peres,23→1,1,106.8,14.2,92.6,92.6
+Neve David,Ein Hayam,1→23,1,30.7,74.4,-43.8,-43.8
+Neve David,Bat Galim,1→23,2,103.0,134.3,-31.3,-62.7
+Neve David,Kiryat Eliezer,1→23,3,87.6,201.7,-114.1,-342.2
+Neve David,Hamoshava,1→23,4,31.5,19.6,12.0,47.9
+Neve David,Lower City,1→23,5,94.7,172.1,-77.4,-387.1
+Neve David,Hadar Carmel,1→23,6,68.7,118.3,-49.6,-297.6
+Neve David,Namal,1→23,7,9.6,0.0,9.6,67.1
+Neve David,Neve Yosef,1→23,8,42.0,43.6,-1.6,-12.8
+Neve David,Hamifrats,1→23,9,21.2,86.5,-65.3,-587.4
+Neve David,Hutzot,1→23,10,19.1,23.5,-4.4,-43.6
+Neve David,Kiryat Ata Center,1→23,11,21.5,0.0,21.5,236.1
+Neve David,Kiryat Bialik South,1→23,12,2.9,0.0,2.9,34.9
 Neve David,Shefaram,1→23,13,0.0,0.0,0.0,0.0
-Neve David,Nazareth Area,1→23,14,0.0,0.0,0.0,0.2
-Ein Hayam,TiratCarmel,23→1,4,41.3,22.2,19.0,76.1
-Ein Hayam,Matam,23→1,3,145.7,0.0,145.7,437.1
-Ein Hayam,Neot Peres,23→1,2,116.9,22.2,94.7,189.4
-Ein Hayam,Neve David,23→1,1,36.3,49.9,-13.6,-13.6
-Ein Hayam,Bat Galim,1→23,1,101.0,46.3,54.8,54.8
-Ein Hayam,Kiryat Eliezer,1→23,2,81.5,111.3,-29.8,-59.7
-Ein Hayam,Hamoshava,1→23,3,43.3,6.1,37.2,111.5
-Ein Hayam,Lower City,1→23,4,77.8,25.8,52.0,208.0
-Ein Hayam,Hadar Carmel,1→23,5,84.1,36.3,47.8,238.9
-Ein Hayam,Namal,1→23,6,11.1,23.6,-12.4,-74.5
-Ein Hayam,Neve Yosef,1→23,7,41.4,0.0,41.4,289.5
-Ein Hayam,Hamifrats,1→23,8,32.3,56.3,-24.0,-191.7
-Ein Hayam,Hutzot,1→23,9,22.3,0.0,22.3,201.1
-Ein Hayam,Kiryat Ata Center,1→23,10,14.5,0.0,14.5,145.5
-Ein Hayam,Kiryat Bialik South,1→23,11,0.1,0.0,0.1,1.6
+Neve David,Nazareth Area,1→23,14,0.0,0.0,0.0,0.0
+Ein Hayam,TiratCarmel,23→1,4,76.9,22.2,54.7,218.7
+Ein Hayam,Matam,23→1,3,163.2,0.0,163.2,489.7
+Ein Hayam,Neot Peres,23→1,2,137.9,22.2,115.6,231.3
+Ein Hayam,Neve David,23→1,1,39.3,49.9,-10.6,-10.6
+Ein Hayam,Bat Galim,1→23,1,132.9,46.3,86.6,86.6
+Ein Hayam,Kiryat Eliezer,1→23,2,113.1,111.3,1.8,3.6
+Ein Hayam,Hamoshava,1→23,3,40.7,6.1,34.5,103.6
+Ein Hayam,Lower City,1→23,4,122.2,25.8,96.3,385.4
+Ein Hayam,Hadar Carmel,1→23,5,88.7,36.3,52.3,261.5
+Ein Hayam,Namal,1→23,6,12.4,23.6,-11.2,-67.2
+Ein Hayam,Neve Yosef,1→23,7,54.2,0.0,54.2,379.5
+Ein Hayam,Hamifrats,1→23,8,27.3,56.3,-28.9,-231.6
+Ein Hayam,Hutzot,1→23,9,24.7,0.0,24.7,221.9
+Ein Hayam,Kiryat Ata Center,1→23,10,27.7,0.0,27.7,277.0
+Ein Hayam,Kiryat Bialik South,1→23,11,3.7,0.0,3.7,41.2
 Ein Hayam,Shefaram,1→23,12,0.0,0.0,0.0,0.0
-Ein Hayam,Nazareth Area,1→23,13,0.0,0.0,0.0,0.1
-Bat Galim,TiratCarmel,23→1,5,19.5,1.4,18.2,90.9
-Bat Galim,Matam,23→1,4,69.0,29.3,39.7,158.6
-Bat Galim,Neot Peres,23→1,3,55.4,0.8,54.6,163.9
-Bat Galim,Neve David,23→1,2,17.2,143.4,-126.3,-252.5
-Bat Galim,Ein Hayam,23→1,1,13.3,3.1,10.2,10.2
-Bat Galim,Kiryat Eliezer,1→23,1,38.6,10.3,28.3,28.3
-Bat Galim,Hamoshava,1→23,2,20.5,9.2,11.3,22.6
-Bat Galim,Lower City,1→23,3,36.9,45.0,-8.2,-24.5
-Bat Galim,Hadar Carmel,1→23,4,39.8,25.6,14.3,57.2
-Bat Galim,Namal,1→23,5,5.3,0.0,5.3,26.4
-Bat Galim,Neve Yosef,1→23,6,19.6,6.5,13.1,78.4
-Bat Galim,Hamifrats,1→23,7,15.3,17.7,-2.4,-16.9
-Bat Galim,Hutzot,1→23,8,10.6,4.1,6.5,51.7
-Bat Galim,Kiryat Ata Center,1→23,9,6.9,1.3,5.6,50.1
-Bat Galim,Kiryat Bialik South,1→23,10,0.1,0.0,0.1,0.7
+Ein Hayam,Nazareth Area,1→23,13,0.0,0.0,0.0,0.0
+Bat Galim,TiratCarmel,23→1,5,24.8,1.4,23.4,117.0
+Bat Galim,Matam,23→1,4,52.6,29.3,23.2,92.9
+Bat Galim,Neot Peres,23→1,3,44.4,0.8,43.6,130.9
+Bat Galim,Neve David,23→1,2,12.7,143.4,-130.8,-261.6
+Bat Galim,Ein Hayam,23→1,1,12.7,3.1,9.6,9.6
+Bat Galim,Kiryat Eliezer,1→23,1,36.4,10.3,26.1,26.1
+Bat Galim,Hamoshava,1→23,2,13.1,9.2,3.9,7.8
+Bat Galim,Lower City,1→23,3,39.3,45.0,-5.7,-17.0
+Bat Galim,Hadar Carmel,1→23,4,28.5,25.6,3.0,12.0
+Bat Galim,Namal,1→23,5,4.0,0.0,4.0,19.9
+Bat Galim,Neve Yosef,1→23,6,17.5,6.5,10.9,65.6
+Bat Galim,Hamifrats,1→23,7,8.8,17.7,-8.9,-62.4
+Bat Galim,Hutzot,1→23,8,7.9,4.1,3.8,30.5
+Bat Galim,Kiryat Ata Center,1→23,9,8.9,1.3,7.6,68.3
+Bat Galim,Kiryat Bialik South,1→23,10,1.2,0.0,1.2,12.1
 Bat Galim,Shefaram,1→23,11,0.0,0.0,0.0,0.0
-Bat Galim,Nazareth Area,1→23,12,0.0,0.0,0.0,0.1
-Kiryat Eliezer,TiratCarmel,23→1,6,38.5,53.6,-15.0,-90.2
-Kiryat Eliezer,Matam,23→1,5,136.0,16.1,119.9,599.5
-Kiryat Eliezer,Neot Peres,23→1,4,109.2,144.7,-35.5,-142.1
-Kiryat Eliezer,Neve David,23→1,3,33.9,117.4,-83.6,-250.7
-Kiryat Eliezer,Ein Hayam,23→1,2,26.3,7.0,19.3,38.7
-Kiryat Eliezer,Bat Galim,23→1,1,94.3,72.9,21.5,21.5
-Kiryat Eliezer,Hamoshava,1→23,1,40.4,18.8,21.6,21.6
-Kiryat Eliezer,Lower City,1→23,2,72.7,64.7,7.9,15.9
-Kiryat Eliezer,Hadar Carmel,1→23,3,78.5,163.2,-84.7,-254.1
-Kiryat Eliezer,Namal,1→23,4,10.4,15.4,-5.0,-20.1
-Kiryat Eliezer,Neve Yosef,1→23,5,38.6,5.1,33.5,167.5
-Kiryat Eliezer,Hamifrats,1→23,6,30.2,12.6,17.6,105.6
-Kiryat Eliezer,Hutzot,1→23,7,20.9,7.6,13.3,92.9
-Kiryat Eliezer,Kiryat Ata Center,1→23,8,13.6,0.0,13.6,108.7
-Kiryat Eliezer,Kiryat Bialik South,1→23,9,0.1,0.0,0.1,1.2
+Bat Galim,Nazareth Area,1→23,12,0.0,0.0,0.0,0.0
+Kiryat Eliezer,TiratCarmel,23→1,6,61.4,53.6,7.9,47.2
+Kiryat Eliezer,Matam,23→1,5,130.4,16.1,114.2,571.1
+Kiryat Eliezer,Neot Peres,23→1,4,110.1,144.7,-34.6,-138.5
+Kiryat Eliezer,Neve David,23→1,3,31.4,117.4,-86.1,-258.2
+Kiryat Eliezer,Ein Hayam,23→1,2,31.6,7.0,24.6,49.3
+Kiryat Eliezer,Bat Galim,23→1,1,106.1,72.9,33.3,33.3
+Kiryat Eliezer,Hamoshava,1→23,1,32.5,18.8,13.7,13.7
+Kiryat Eliezer,Lower City,1→23,2,97.6,64.7,32.8,65.7
+Kiryat Eliezer,Hadar Carmel,1→23,3,70.8,163.2,-92.4,-277.3
+Kiryat Eliezer,Namal,1→23,4,9.9,15.4,-5.6,-22.2
+Kiryat Eliezer,Neve Yosef,1→23,5,43.3,5.1,38.2,190.9
+Kiryat Eliezer,Hamifrats,1→23,6,21.8,12.6,9.3,55.5
+Kiryat Eliezer,Hutzot,1→23,7,19.7,7.6,12.1,84.6
+Kiryat Eliezer,Kiryat Ata Center,1→23,8,22.1,0.0,22.1,177.0
+Kiryat Eliezer,Kiryat Bialik South,1→23,9,3.0,0.0,3.0,26.9
 Kiryat Eliezer,Shefaram,1→23,10,0.0,0.0,0.0,0.0
-Kiryat Eliezer,Nazareth Area,1→23,11,0.0,0.0,0.0,0.1
-Hamoshava,TiratCarmel,23→1,7,6.4,12.5,-6.1,-42.6
-Hamoshava,Matam,23→1,6,35.5,11.4,24.1,144.7
-Hamoshava,Neot Peres,23→1,5,28.6,0.0,28.6,142.8
-Hamoshava,Neve David,23→1,4,8.9,18.3,-9.5,-37.8
-Hamoshava,Ein Hayam,23→1,3,6.9,0.0,6.9,20.6
-Hamoshava,Bat Galim,23→1,2,25.7,116.9,-91.2,-182.4
-Hamoshava,Kiryat Eliezer,23→1,1,19.9,26.4,-6.5,-6.5
-Hamoshava,Lower City,1→23,1,22.3,28.6,-6.4,-6.4
-Hamoshava,Hadar Carmel,1→23,2,24.4,8.0,16.4,32.7
-Hamoshava,Namal,1→23,3,7.1,0.0,7.1,21.4
-Hamoshava,Neve Yosef,1→23,4,16.8,4.1,12.7,50.9
-Hamoshava,Hamifrats,1→23,5,20.7,22.6,-1.9,-9.3
-Hamoshava,Hutzot,1→23,6,14.3,24.3,-9.9,-59.7
-Hamoshava,Kiryat Ata Center,1→23,7,0.3,0.0,0.3,2.1
-Hamoshava,Kiryat Bialik South,1→23,8,0.6,0.0,0.6,5.0
+Kiryat Eliezer,Nazareth Area,1→23,11,0.0,0.0,0.0,0.0
+Hamoshava,TiratCarmel,23→1,7,4.4,12.5,-8.1,-56.9
+Hamoshava,Matam,23→1,6,38.3,11.4,26.9,161.3
+Hamoshava,Neot Peres,23→1,5,32.5,0.0,32.5,162.3
+Hamoshava,Neve David,23→1,4,9.3,18.3,-9.1,-36.2
+Hamoshava,Ein Hayam,23→1,3,9.3,0.0,9.3,28.0
+Hamoshava,Bat Galim,23→1,2,33.8,116.9,-83.2,-166.3
+Hamoshava,Kiryat Eliezer,23→1,1,26.6,26.4,0.2,0.2
+Hamoshava,Lower City,1→23,1,116.6,28.6,88.0,88.0
+Hamoshava,Hadar Carmel,1→23,2,46.2,8.0,38.2,76.4
+Hamoshava,Namal,1→23,3,17.7,0.0,17.7,53.0
+Hamoshava,Neve Yosef,1→23,4,55.8,4.1,51.8,207.2
+Hamoshava,Hamifrats,1→23,5,39.1,22.6,16.5,82.3
+Hamoshava,Hutzot,1→23,6,35.2,24.3,10.9,65.6
+Hamoshava,Kiryat Ata Center,1→23,7,0.2,0.0,0.2,1.3
+Hamoshava,Kiryat Bialik South,1→23,8,2.5,0.0,2.5,19.8
 Hamoshava,Shefaram,1→23,9,0.0,0.0,0.0,0.2
-Hamoshava,Nazareth Area,1→23,10,0.0,0.0,0.0,0.1
-Lower City,TiratCarmel,23→1,8,6.6,31.5,-25.0,-199.7
-Lower City,Matam,23→1,7,36.3,18.1,18.1,126.9
-Lower City,Neot Peres,23→1,6,29.1,2.8,26.3,157.8
-Lower City,Neve David,23→1,5,9.0,26.9,-17.9,-89.3
-Lower City,Ein Hayam,23→1,4,7.0,0.0,7.0,28.1
-Lower City,Bat Galim,23→1,3,26.3,85.2,-58.9,-176.7
-Lower City,Kiryat Eliezer,23→1,2,20.3,56.0,-35.7,-71.4
-Lower City,Hamoshava,23→1,1,12.4,0.0,12.4,12.4
-Lower City,Hadar Carmel,1→23,1,24.9,53.1,-28.2,-28.2
-Lower City,Namal,1→23,2,7.3,0.0,7.3,14.6
-Lower City,Neve Yosef,1→23,3,17.1,0.0,17.1,51.4
-Lower City,Hamifrats,1→23,4,21.1,27.5,-6.4,-25.6
-Lower City,Hutzot,1→23,5,14.6,43.1,-28.5,-142.6
-Lower City,Kiryat Ata Center,1→23,6,0.3,0.0,0.3,1.8
-Lower City,Kiryat Bialik South,1→23,7,0.6,9.9,-9.2,-64.5
-Lower City,Shefaram,1→23,8,0.0,0.0,0.0,0.2
-Lower City,Nazareth Area,1→23,9,0.0,0.0,0.0,0.1
-Hadar Carmel,TiratCarmel,23→1,9,5.8,9.3,-3.5,-31.7
-Hadar Carmel,Matam,23→1,8,46.8,0.0,46.8,374.4
-Hadar Carmel,Neot Peres,23→1,7,37.6,57.1,-19.5,-136.5
-Hadar Carmel,Neve David,23→1,6,11.7,13.4,-1.7,-10.2
-Hadar Carmel,Ein Hayam,23→1,5,9.1,31.2,-22.1,-110.5
-Hadar Carmel,Bat Galim,23→1,4,34.4,90.1,-55.7,-222.8
-Hadar Carmel,Kiryat Eliezer,23→1,3,26.2,44.5,-18.3,-54.9
-Hadar Carmel,Hamoshava,23→1,2,18.3,3.2,15.1,30.1
-Hadar Carmel,Lower City,23→1,1,33.4,8.6,24.8,24.8
-Hadar Carmel,Namal,1→23,1,11.5,0.0,11.5,11.5
-Hadar Carmel,Neve Yosef,1→23,2,23.0,42.2,-19.1,-38.2
-Hadar Carmel,Hamifrats,1→23,3,33.2,74.5,-41.2,-123.6
-Hadar Carmel,Hutzot,1→23,4,23.0,0.0,23.0,91.9
-Hadar Carmel,Kiryat Ata Center,1→23,5,0.3,1.6,-1.3,-6.5
-Hadar Carmel,Kiryat Bialik South,1→23,6,0.7,1.6,-0.8,-5.0
+Hamoshava,Nazareth Area,1→23,10,0.0,0.0,0.0,0.0
+Lower City,TiratCarmel,23→1,8,2.4,31.5,-29.1,-232.8
+Lower City,Matam,23→1,7,21.3,18.1,3.2,22.3
+Lower City,Neot Peres,23→1,6,18.1,2.8,15.2,91.4
+Lower City,Neve David,23→1,5,5.1,26.9,-21.8,-108.8
+Lower City,Ein Hayam,23→1,4,5.2,0.0,5.2,20.7
+Lower City,Bat Galim,23→1,3,18.8,85.2,-66.4,-199.2
+Lower City,Kiryat Eliezer,23→1,2,14.8,56.0,-41.2,-82.4
+Lower City,Hamoshava,23→1,1,21.6,0.0,21.6,21.6
+Lower City,Hadar Carmel,1→23,1,25.7,53.1,-27.4,-27.4
+Lower City,Namal,1→23,2,9.8,0.0,9.8,19.6
+Lower City,Neve Yosef,1→23,3,31.1,0.0,31.1,93.2
+Lower City,Hamifrats,1→23,4,21.7,27.5,-5.8,-23.2
+Lower City,Hutzot,1→23,5,19.6,43.1,-23.6,-117.8
+Lower City,Kiryat Ata Center,1→23,6,0.1,0.0,0.1,0.6
+Lower City,Kiryat Bialik South,1→23,7,1.4,9.9,-8.5,-59.3
+Lower City,Shefaram,1→23,8,0.0,0.0,0.0,0.1
+Lower City,Nazareth Area,1→23,9,0.0,0.0,0.0,0.0
+Hadar Carmel,TiratCarmel,23→1,9,3.4,9.3,-5.9,-53.5
+Hadar Carmel,Matam,23→1,8,39.5,0.0,39.5,315.9
+Hadar Carmel,Neot Peres,23→1,7,33.5,57.1,-23.7,-165.6
+Hadar Carmel,Neve David,23→1,6,9.5,13.4,-3.8,-23.0
+Hadar Carmel,Ein Hayam,23→1,5,9.6,31.2,-21.5,-107.7
+Hadar Carmel,Bat Galim,23→1,4,34.2,90.1,-55.9,-223.7
+Hadar Carmel,Kiryat Eliezer,23→1,3,27.4,44.5,-17.1,-51.2
+Hadar Carmel,Hamoshava,23→1,2,22.4,3.2,19.2,38.4
+Hadar Carmel,Lower City,23→1,1,67.6,8.6,59.0,59.0
+Hadar Carmel,Namal,1→23,1,14.6,0.0,14.6,14.6
+Hadar Carmel,Neve Yosef,1→23,2,34.3,42.2,-7.9,-15.7
+Hadar Carmel,Hamifrats,1→23,3,32.2,74.5,-42.2,-126.6
+Hadar Carmel,Hutzot,1→23,4,29.1,0.0,29.1,116.3
+Hadar Carmel,Kiryat Ata Center,1→23,5,0.1,1.6,-1.5,-7.4
+Hadar Carmel,Kiryat Bialik South,1→23,6,2.0,1.6,0.5,2.9
 Hadar Carmel,Shefaram,1→23,7,0.0,0.0,0.0,0.1
-Hadar Carmel,Nazareth Area,1→23,8,1.2,0.0,1.2,9.4
-Namal,TiratCarmel,23→1,10,0.9,0.2,0.8,7.7
-Namal,Matam,23→1,9,32.6,0.0,32.6,293.5
-Namal,Neot Peres,23→1,8,26.3,0.5,25.8,206.4
-Namal,Neve David,23→1,7,8.1,0.0,8.1,57.0
-Namal,Ein Hayam,23→1,6,6.3,0.0,6.3,37.9
-Namal,Bat Galim,23→1,5,22.1,23.3,-1.2,-6.1
-Namal,Kiryat Eliezer,23→1,4,18.3,0.0,18.3,73.1
-Namal,Hamoshava,23→1,3,55.8,0.0,55.8,167.5
-Namal,Lower City,23→1,2,99.0,22.1,77.0,154.0
-Namal,Hadar Carmel,23→1,1,146.6,0.0,146.6,146.6
-Namal,Neve Yosef,1→23,1,47.8,0.0,47.8,47.8
+Hadar Carmel,Nazareth Area,1→23,8,2.3,0.0,2.3,18.5
+Namal,TiratCarmel,23→1,10,0.4,0.2,0.2,1.9
+Namal,Matam,23→1,9,10.8,0.0,10.8,97.4
+Namal,Neot Peres,23→1,8,9.2,0.5,8.7,69.7
+Namal,Neve David,23→1,7,2.6,0.0,2.6,18.3
+Namal,Ein Hayam,23→1,6,2.6,0.0,2.6,15.8
+Namal,Bat Galim,23→1,5,8.7,23.3,-14.6,-73.0
+Namal,Kiryat Eliezer,23→1,4,7.5,0.0,7.5,30.1
+Namal,Hamoshava,23→1,3,42.0,0.0,42.0,126.0
+Namal,Lower City,23→1,2,125.5,22.1,103.5,206.9
+Namal,Hadar Carmel,23→1,1,159.9,0.0,159.9,159.9
+Namal,Neve Yosef,1→23,1,49.8,0.0,49.8,49.8
 Namal,Hamifrats,1→23,2,0.0,0.3,-0.3,-0.5
 Namal,Hutzot,1→23,3,0.0,13.3,-13.3,-39.8
-Namal,Kiryat Ata Center,1→23,4,0.5,0.0,0.5,2.2
-Namal,Kiryat Bialik South,1→23,5,2.8,0.0,2.8,13.8
-Namal,Shefaram,1→23,6,0.9,0.0,0.9,5.6
-Namal,Nazareth Area,1→23,7,0.2,0.0,0.2,1.3
-Neve Yosef,TiratCarmel,23→1,11,33.7,0.0,33.7,370.7
-Neve Yosef,Matam,23→1,10,32.6,7.1,25.5,255.1
-Neve Yosef,Neot Peres,23→1,9,26.0,54.7,-28.7,-258.4
-Neve Yosef,Neve David,23→1,8,8.0,119.8,-111.7,-893.7
-Neve Yosef,Ein Hayam,23→1,7,6.3,0.0,6.3,43.8
-Neve Yosef,Bat Galim,23→1,6,23.7,97.1,-73.4,-440.4
-Neve Yosef,Kiryat Eliezer,23→1,5,18.1,65.1,-47.0,-235.2
-Neve Yosef,Hamoshava,23→1,4,16.7,72.7,-56.0,-223.9
-Neve Yosef,Lower City,23→1,3,30.4,108.0,-77.6,-232.8
-Neve Yosef,Hadar Carmel,23→1,2,51.1,87.5,-36.4,-72.9
-Neve Yosef,Namal,23→1,1,7.9,72.6,-64.7,-64.7
-Neve Yosef,Hamifrats,1→23,1,22.8,46.2,-23.4,-23.4
-Neve Yosef,Hutzot,1→23,2,15.8,10.7,5.1,10.2
-Neve Yosef,Kiryat Ata Center,1→23,3,1.9,0.0,1.9,5.7
-Neve Yosef,Kiryat Bialik South,1→23,4,0.8,0.0,0.8,3.1
-Neve Yosef,Shefaram,1→23,5,0.0,0.0,0.0,0.1
+Namal,Kiryat Ata Center,1→23,4,0.2,0.0,0.2,0.8
+Namal,Kiryat Bialik South,1→23,5,3.6,0.0,3.6,18.2
+Namal,Shefaram,1→23,6,0.4,0.0,0.4,2.3
+Namal,Nazareth Area,1→23,7,0.1,0.0,0.1,0.4
+Neve Yosef,TiratCarmel,23→1,11,26.6,0.0,26.6,292.5
+Neve Yosef,Matam,23→1,10,18.1,7.1,11.0,109.8
+Neve Yosef,Neot Peres,23→1,9,15.1,54.7,-39.5,-355.8
+Neve Yosef,Neve David,23→1,8,4.3,119.8,-115.5,-923.6
+Neve Yosef,Ein Hayam,23→1,7,4.3,0.0,4.3,30.4
+Neve Yosef,Bat Galim,23→1,6,16.1,97.1,-81.0,-486.1
+Neve Yosef,Kiryat Eliezer,23→1,5,12.4,65.1,-52.7,-263.6
+Neve Yosef,Hamoshava,23→1,4,18.8,72.7,-53.9,-215.7
+Neve Yosef,Lower City,23→1,3,56.6,108.0,-51.3,-153.9
+Neve Yosef,Hadar Carmel,23→1,2,43.8,87.5,-43.8,-87.6
+Neve Yosef,Namal,23→1,1,10.5,72.6,-62.0,-62.0
+Neve Yosef,Hamifrats,1→23,1,23.3,46.2,-22.9,-22.9
+Neve Yosef,Hutzot,1→23,2,21.0,10.7,10.3,20.7
+Neve Yosef,Kiryat Ata Center,1→23,3,1.4,0.0,1.4,4.2
+Neve Yosef,Kiryat Bialik South,1→23,4,2.3,0.0,2.3,9.2
+Neve Yosef,Shefaram,1→23,5,0.0,0.0,0.0,0.0
 Neve Yosef,Nazareth Area,1→23,6,0.0,0.0,0.0,0.0
-Hamifrats,TiratCarmel,23→1,12,1.1,0.0,1.1,13.4
-Hamifrats,Matam,23→1,11,39.0,23.3,15.7,172.8
-Hamifrats,Neot Peres,23→1,10,31.4,3.9,27.5,275.2
-Hamifrats,Neve David,23→1,9,9.7,158.1,-148.4,-1335.2
-Hamifrats,Ein Hayam,23→1,8,7.6,71.1,-63.5,-508.3
-Hamifrats,Bat Galim,23→1,7,26.4,109.6,-83.2,-582.1
-Hamifrats,Kiryat Eliezer,23→1,6,21.9,23.7,-1.8,-10.7
-Hamifrats,Hamoshava,23→1,5,66.8,13.0,53.8,269.1
-Hamifrats,Lower City,23→1,4,118.6,310.4,-191.8,-767.1
-Hamifrats,Hadar Carmel,23→1,3,175.5,4.7,170.8,512.4
+Hamifrats,TiratCarmel,23→1,12,0.2,0.0,0.2,2.1
+Hamifrats,Matam,23→1,11,5.4,23.3,-17.9,-197.2
+Hamifrats,Neot Peres,23→1,10,4.6,3.9,0.7,6.7
+Hamifrats,Neve David,23→1,9,1.3,158.1,-156.8,-1411.1
+Hamifrats,Ein Hayam,23→1,8,1.3,71.1,-69.8,-558.3
+Hamifrats,Bat Galim,23→1,7,4.4,109.6,-105.2,-736.7
+Hamifrats,Kiryat Eliezer,23→1,6,3.8,23.7,-19.9,-119.5
+Hamifrats,Hamoshava,23→1,5,21.0,13.0,8.0,39.9
+Hamifrats,Lower City,23→1,4,62.7,310.4,-247.6,-990.5
+Hamifrats,Hadar Carmel,23→1,3,79.9,4.7,75.3,225.9
 Hamifrats,Namal,23→1,2,0.0,0.0,0.0,0.0
-Hamifrats,Neve Yosef,23→1,1,57.2,61.4,-4.1,-4.1
+Hamifrats,Neve Yosef,23→1,1,24.9,61.4,-36.5,-36.5
 Hamifrats,Hutzot,1→23,1,0.0,3.3,-3.3,-3.3
-Hamifrats,Kiryat Ata Center,1→23,2,0.7,0.0,0.7,1.3
-Hamifrats,Kiryat Bialik South,1→23,3,3.3,0.0,3.3,9.9
-Hamifrats,Shefaram,1→23,4,1.1,0.0,1.1,4.5
-Hamifrats,Nazareth Area,1→23,5,0.2,0.0,0.2,1.1
-Hutzot,TiratCarmel,23→1,13,0.1,2.8,-2.6,-34.0
-Hutzot,Matam,23→1,12,4.8,10.3,-5.5,-65.7
-Hutzot,Neot Peres,23→1,11,3.9,0.0,3.9,42.7
-Hutzot,Neve David,23→1,10,1.2,1.8,-0.5,-5.5
-Hutzot,Ein Hayam,23→1,9,0.9,1.2,-0.3,-2.8
-Hutzot,Bat Galim,23→1,8,3.3,22.5,-19.2,-153.9
-Hutzot,Kiryat Eliezer,23→1,7,2.7,4.8,-2.0,-14.3
-Hutzot,Hamoshava,23→1,6,8.3,0.8,7.5,45.1
-Hutzot,Lower City,23→1,5,14.7,20.5,-5.9,-29.3
-Hutzot,Hadar Carmel,23→1,4,21.7,5.2,16.4,65.8
+Hamifrats,Kiryat Ata Center,1→23,2,0.1,0.0,0.1,0.2
+Hamifrats,Kiryat Bialik South,1→23,3,1.8,0.0,1.8,5.4
+Hamifrats,Shefaram,1→23,4,0.2,0.0,0.2,0.8
+Hamifrats,Nazareth Area,1→23,5,0.0,0.0,0.0,0.1
+Hutzot,TiratCarmel,23→1,13,0.0,2.8,-2.7,-35.1
+Hutzot,Matam,23→1,12,1.5,10.3,-8.8,-105.6
+Hutzot,Neot Peres,23→1,11,1.3,0.0,1.3,14.0
+Hutzot,Neve David,23→1,10,0.4,1.8,-1.4,-13.9
+Hutzot,Ein Hayam,23→1,9,0.4,1.2,-0.9,-8.0
+Hutzot,Bat Galim,23→1,8,1.2,22.5,-21.3,-170.3
+Hutzot,Kiryat Eliezer,23→1,7,1.0,4.8,-3.7,-25.9
+Hutzot,Hamoshava,23→1,6,5.8,0.8,5.1,30.5
+Hutzot,Lower City,23→1,5,17.4,20.5,-3.1,-15.5
+Hutzot,Hadar Carmel,23→1,4,22.2,5.2,16.9,67.8
 Hutzot,Namal,23→1,3,0.0,1.8,-1.8,-5.2
-Hutzot,Neve Yosef,23→1,2,7.1,22.0,-14.9,-29.8
+Hutzot,Neve Yosef,23→1,2,6.9,22.0,-15.1,-30.1
 Hutzot,Hamifrats,23→1,1,0.0,34.2,-34.2,-34.2
-Hutzot,Kiryat Ata Center,1→23,1,0.1,0.5,-0.4,-0.4
-Hutzot,Kiryat Bialik South,1→23,2,0.4,0.0,0.4,0.8
-Hutzot,Shefaram,1→23,3,0.1,0.0,0.1,0.4
-Hutzot,Nazareth Area,1→23,4,0.0,0.5,-0.5,-1.9
-Kiryat Ata Center,TiratCarmel,23→1,14,0.4,0.0,0.4,5.6
-Kiryat Ata Center,Matam,23→1,13,1.6,32.7,-31.1,-404.9
-Kiryat Ata Center,Neot Peres,23→1,12,1.3,0.0,1.3,15.1
-Kiryat Ata Center,Neve David,23→1,11,0.4,0.0,0.4,4.3
-Kiryat Ata Center,Ein Hayam,23→1,10,0.3,0.0,0.3,3.0
-Kiryat Ata Center,Bat Galim,23→1,9,4.3,16.7,-12.3,-111.1
-Kiryat Ata Center,Kiryat Eliezer,23→1,8,0.9,0.0,0.9,7.0
-Kiryat Ata Center,Hamoshava,23→1,7,1.9,21.5,-19.6,-136.9
-Kiryat Ata Center,Lower City,23→1,6,4.6,57.3,-52.7,-316.0
-Kiryat Ata Center,Hadar Carmel,23→1,5,9.3,60.7,-51.5,-257.5
-Kiryat Ata Center,Namal,23→1,4,13.4,5.5,7.9,31.6
-Kiryat Ata Center,Neve Yosef,23→1,3,10.0,0.0,10.0,30.0
-Kiryat Ata Center,Hamifrats,23→1,2,39.0,49.6,-10.6,-21.2
-Kiryat Ata Center,Hutzot,23→1,1,27.0,21.2,5.7,5.7
-Kiryat Ata Center,Kiryat Bialik South,1→23,1,7.2,18.1,-10.8,-10.8
-Kiryat Ata Center,Shefaram,1→23,2,0.0,0.0,0.0,0.1
-Kiryat Ata Center,Nazareth Area,1→23,3,0.0,0.0,0.0,0.1
-Kiryat Bialik South,TiratCarmel,23→1,15,0.0,0.0,0.0,0.1
-Kiryat Bialik South,Matam,23→1,14,1.4,6.0,-4.6,-64.3
-Kiryat Bialik South,Neot Peres,23→1,13,1.1,1.5,-0.3,-4.3
-Kiryat Bialik South,Neve David,23→1,12,0.3,0.0,0.3,4.2
-Kiryat Bialik South,Ein Hayam,23→1,11,0.3,0.0,0.3,3.0
-Kiryat Bialik South,Bat Galim,23→1,10,1.5,0.0,1.5,14.6
-Kiryat Bialik South,Kiryat Eliezer,23→1,9,0.8,0.0,0.8,7.0
-Kiryat Bialik South,Hamoshava,23→1,8,0.4,2.8,-2.3,-18.6
-Kiryat Bialik South,Lower City,23→1,7,1.0,2.7,-1.7,-12.2
-Kiryat Bialik South,Hadar Carmel,23→1,6,0.5,2.0,-1.5,-9.1
-Kiryat Bialik South,Namal,23→1,5,2.1,0.0,2.1,10.7
-Kiryat Bialik South,Neve Yosef,23→1,4,0.4,0.0,0.4,1.4
-Kiryat Bialik South,Hamifrats,23→1,3,6.2,0.0,6.2,18.6
-Kiryat Bialik South,Hutzot,23→1,2,4.3,0.0,4.3,8.6
-Kiryat Bialik South,Kiryat Ata Center,23→1,1,0.2,0.0,0.2,0.2
+Hutzot,Kiryat Ata Center,1→23,1,0.0,0.5,-0.5,-0.5
+Hutzot,Kiryat Bialik South,1→23,2,0.5,0.0,0.5,1.0
+Hutzot,Shefaram,1→23,3,0.1,0.0,0.1,0.2
+Hutzot,Nazareth Area,1→23,4,0.0,0.5,-0.5,-2.0
+Kiryat Ata Center,TiratCarmel,23→1,14,0.1,0.0,0.1,1.5
+Kiryat Ata Center,Matam,23→1,13,13.1,32.7,-19.6,-254.4
+Kiryat Ata Center,Neot Peres,23→1,12,11.2,0.0,11.2,133.8
+Kiryat Ata Center,Neve David,23→1,11,3.2,0.0,3.2,35.0
+Kiryat Ata Center,Ein Hayam,23→1,10,3.2,0.0,3.2,32.0
+Kiryat Ata Center,Bat Galim,23→1,9,12.9,16.7,-3.7,-33.4
+Kiryat Ata Center,Kiryat Eliezer,23→1,8,9.1,0.0,9.1,73.2
+Kiryat Ata Center,Hamoshava,23→1,7,4.8,21.5,-16.7,-117.0
+Kiryat Ata Center,Lower City,23→1,6,14.9,57.3,-42.3,-254.0
+Kiryat Ata Center,Hadar Carmel,23→1,5,6.5,60.7,-54.2,-271.1
+Kiryat Ata Center,Namal,23→1,4,14.1,5.5,8.6,34.4
+Kiryat Ata Center,Neve Yosef,23→1,3,10.3,0.0,10.3,30.8
+Kiryat Ata Center,Hamifrats,23→1,2,31.3,49.6,-18.3,-36.6
+Kiryat Ata Center,Hutzot,23→1,1,28.2,21.2,6.9,6.9
+Kiryat Ata Center,Kiryat Bialik South,1→23,1,13.7,18.1,-4.3,-4.3
+Kiryat Ata Center,Shefaram,1→23,2,0.0,0.0,0.0,0.0
+Kiryat Ata Center,Nazareth Area,1→23,3,0.0,0.0,0.0,0.0
+Kiryat Bialik South,TiratCarmel,23→1,15,37.1,0.0,37.1,555.8
+Kiryat Bialik South,Matam,23→1,14,4.2,6.0,-1.8,-25.5
+Kiryat Bialik South,Neot Peres,23→1,13,3.2,1.5,1.8,23.3
+Kiryat Bialik South,Neve David,23→1,12,0.9,0.0,0.9,11.1
+Kiryat Bialik South,Ein Hayam,23→1,11,0.9,0.0,0.9,10.2
+Kiryat Bialik South,Bat Galim,23→1,10,5.2,0.0,5.2,51.7
+Kiryat Bialik South,Kiryat Eliezer,23→1,9,2.7,0.0,2.7,23.9
+Kiryat Bialik South,Hamoshava,23→1,8,18.0,2.8,15.3,122.0
+Kiryat Bialik South,Lower City,23→1,7,54.5,2.7,51.8,362.3
+Kiryat Bialik South,Hadar Carmel,23→1,6,10.0,2.0,8.0,48.1
+Kiryat Bialik South,Namal,23→1,5,12.5,0.0,12.5,62.5
+Kiryat Bialik South,Neve Yosef,23→1,4,23.2,0.0,23.2,92.8
+Kiryat Bialik South,Hamifrats,23→1,3,27.7,0.0,27.7,83.0
+Kiryat Bialik South,Hutzot,23→1,2,24.9,0.0,24.9,49.9
+Kiryat Bialik South,Kiryat Ata Center,23→1,1,0.3,0.0,0.3,0.3
 Kiryat Bialik South,Shefaram,1→23,1,0.0,0.0,0.0,0.0
-Kiryat Bialik South,Nazareth Area,1→23,2,0.0,0.0,0.0,0.0
-Shefaram,TiratCarmel,23→1,16,0.1,0.0,0.1,2.4
-Shefaram,Matam,23→1,15,0.3,0.0,0.3,4.5
-Shefaram,Neot Peres,23→1,14,0.2,0.0,0.2,3.3
-Shefaram,Neve David,23→1,13,0.1,0.0,0.1,1.0
-Shefaram,Ein Hayam,23→1,12,0.1,0.0,0.1,0.7
-Shefaram,Bat Galim,23→1,11,2.6,0.0,2.6,28.6
-Shefaram,Kiryat Eliezer,23→1,10,0.2,0.0,0.2,1.7
-Shefaram,Hamoshava,23→1,9,1.7,0.0,1.7,15.3
-Shefaram,Lower City,23→1,8,3.9,0.0,3.9,31.0
-Shefaram,Hadar Carmel,23→1,7,1.6,13.1,-11.5,-80.6
-Shefaram,Namal,23→1,6,9.9,6.0,4.0,23.8
-Shefaram,Neve Yosef,23→1,5,1.8,1.7,0.1,0.6
-Shefaram,Hamifrats,23→1,4,28.8,12.7,16.2,64.7
-Shefaram,Hutzot,23→1,3,19.9,0.0,19.9,59.8
-Shefaram,Kiryat Ata Center,23→1,2,0.6,0.0,0.6,1.1
+Kiryat Bialik South,Nazareth Area,1→23,2,0.0,0.0,0.0,0.1
+Shefaram,TiratCarmel,23→1,16,0.1,0.0,0.1,1.0
+Shefaram,Matam,23→1,15,0.1,0.0,0.1,1.6
+Shefaram,Neot Peres,23→1,14,0.1,0.0,0.1,1.3
+Shefaram,Neve David,23→1,13,0.0,0.0,0.0,0.3
+Shefaram,Ein Hayam,23→1,12,0.0,0.0,0.0,0.3
+Shefaram,Bat Galim,23→1,11,1.9,0.0,1.9,20.6
+Shefaram,Kiryat Eliezer,23→1,10,0.1,0.0,0.1,0.7
+Shefaram,Hamoshava,23→1,9,1.1,0.0,1.1,10.1
+Shefaram,Lower City,23→1,8,3.8,0.0,3.8,30.8
+Shefaram,Hadar Carmel,23→1,7,0.8,13.1,-12.2,-85.7
+Shefaram,Namal,23→1,6,10.7,6.0,4.7,28.1
+Shefaram,Neve Yosef,23→1,5,1.8,1.7,0.1,0.3
+Shefaram,Hamifrats,23→1,4,23.6,12.7,10.9,43.7
+Shefaram,Hutzot,23→1,3,21.2,0.0,21.2,63.7
+Shefaram,Kiryat Ata Center,23→1,2,0.2,0.0,0.2,0.4
 Shefaram,Kiryat Bialik South,23→1,1,0.1,0.0,0.1,0.1
 Shefaram,Nazareth Area,1→23,1,0.0,0.0,0.0,0.0
 Nazareth Area,TiratCarmel,23→1,17,0.0,0.0,0.0,0.0
-Nazareth Area,Matam,23→1,16,57.9,0.0,57.9,926.6
-Nazareth Area,Neot Peres,23→1,15,46.6,168.1,-121.5,-1822.0
-Nazareth Area,Neve David,23→1,14,14.5,235.7,-221.3,-3097.5
-Nazareth Area,Ein Hayam,23→1,13,11.2,0.0,11.2,146.0
-Nazareth Area,Bat Galim,23→1,12,42.6,479.9,-437.3,-5247.3
-Nazareth Area,Kiryat Eliezer,23→1,11,32.5,4.4,28.1,308.6
-Nazareth Area,Hamoshava,23→1,10,16.4,0.0,16.4,163.9
-Nazareth Area,Lower City,23→1,9,30.3,101.4,-71.1,-640.2
-Nazareth Area,Hadar Carmel,23→1,8,20.9,0.0,20.9,167.0
-Nazareth Area,Namal,23→1,7,14.1,0.0,14.1,98.5
-Nazareth Area,Neve Yosef,23→1,6,14.9,1.0,13.9,83.6
-Nazareth Area,Hamifrats,23→1,5,40.9,207.2,-166.3,-831.4
-Nazareth Area,Hutzot,23→1,4,28.2,36.1,-7.9,-31.4
-Nazareth Area,Kiryat Ata Center,23→1,3,3.0,0.0,3.0,8.9
-Nazareth Area,Kiryat Bialik South,23→1,2,55.9,129.3,-73.4,-146.7
-Nazareth Area,Shefaram,23→1,1,0.1,0.0,0.1,0.1
+Nazareth Area,Matam,23→1,16,25.5,0.0,25.5,408.5
+Nazareth Area,Neot Peres,23→1,15,21.7,168.1,-146.4,-2196.6
+Nazareth Area,Neve David,23→1,14,6.2,235.7,-229.5,-3213.5
+Nazareth Area,Ein Hayam,23→1,13,6.2,0.0,6.2,80.8
+Nazareth Area,Bat Galim,23→1,12,22.9,479.9,-457.0,-5484.4
+Nazareth Area,Kiryat Eliezer,23→1,11,17.8,4.4,13.3,146.6
+Nazareth Area,Hamoshava,23→1,10,5.9,0.0,5.9,58.7
+Nazareth Area,Lower City,23→1,9,18.2,101.4,-83.3,-749.4
+Nazareth Area,Hadar Carmel,23→1,8,8.9,0.0,8.9,70.9
+Nazareth Area,Namal,23→1,7,13.8,0.0,13.8,96.9
+Nazareth Area,Neve Yosef,23→1,6,7.8,1.0,6.8,40.8
+Nazareth Area,Hamifrats,23→1,5,30.6,207.2,-176.5,-882.7
+Nazareth Area,Hutzot,23→1,4,27.6,36.1,-8.5,-34.0
+Nazareth Area,Kiryat Ata Center,23→1,3,1.4,0.0,1.4,4.2
+Nazareth Area,Kiryat Bialik South,23→1,2,230.6,129.3,101.3,202.6
+Nazareth Area,Shefaram,23→1,1,0.0,0.0,0.0,0.0
