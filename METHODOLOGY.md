@@ -79,6 +79,10 @@ notes saying which of their conclusions are overtaken.
 | Forecast market growth on the V2 areas (2022 → BU_2040 / BU_2050 / HS_2040 / HS_2050) | transit ×1.27 / 1.40 / 1.38 / 1.57 (11,664 → 14,836 / 16,369 / 16,076 / 18,291); car ×1.32 / 1.53 / 1.38 / 1.59; no-build transit share of car + transit stays 0.16–0.17 | §6ad |
 | LRT trips, central case, by scenario-year: underground / ground | 3,332 / 2,544 (2022) → 4,114 / 3,105 (BU_2040) → 4,498 / 3,386 (BU_2050); 4,520 / 3,430 (HS_2040) → 5,354 / 4,047 (HS_2050); LRT share of no-build transit fixed at 0.28–0.29 ug / 0.21–0.22 ground (skims held fixed) | §6ad |
 | Busiest trunk link by scenario-year, underground central (Namal-Giborim → Hamifrats down) | three hours 995 (2022) → 1,216 / 1,367 (BU) → 1,426 / 1,717 (HS); peak hour 588 → 718 / 807 / 842 / 1,014 | §6ad |
+| Cost sensitivity λ, person level (THS 2017/18 AM trips within the 25 areas, car vs transit, `new_wf`-weighted, household-clustered): central / with Metronit as the transit cost / with area fixed effects / unweighted | **0.035 (0.002–0.068)** / 0.041 / 0.053 / 0.042 per generalized minute — right sign, ρ² 0.43; pair-level fit of step 31 had −0.011 | §6ae |
+| … by car-availability segment: no-car households / no licence / car competition / car available; licence holders in car-owning households pooled | 0.083 (p 0.001) / 0.027 (n.s.) / −0.006 (n.s.) / 0.053 (p 0.08); **0.008 ± 0.017 — not identified** | §6ae |
+| Transit share by segment (weighted): car available / competition / no licence / no-car household | 0.019 / 0.109 / 0.217 / 0.689 — the composition that hid λ at the pair level | §6ae |
+| Trips-file mode codes, confirmed against the activities file | 3 Public Bus, 4 group taxi, 5 Matronit, 7 train, 8 special taxi, 9 chartered bus; the chain's `BUS = [3, 4]` / `TAXI = [5, 8]` swaps 4 and 5 — within the 25 areas (2018 survey level, AM) transit 6,747 → 12,673 and taxi-type 6,650 → 723 once corrected | §6ae, §8 (14) |
 
 What these support: relative questions — ranking alignments and segments, sizing the
 market between line areas, locating the demand, and the design-hour scaling of that
@@ -136,6 +140,24 @@ fixed, taking the central-case underground LRT capture from 3,332 (2022) to 4,11
 (BU 2040 / 2050) and 4,520 / 5,354 (HS 2040 / 2050) as the corridor-internal transit
 market grows ×1.27–1.57.
 
+**Update, 23 September 2026 (step 33).** The THS 2017/18 person and household tables and the
+survey's field metadata were added under `Input/THS_2017-2018/` (the trips file moved there
+with them; **`new_wf` of the trips file is the only weight used**). Step 33 (§6ae) estimates
+the cost sensitivity λ at the **person level**, with car availability, licence, purpose, age,
+sector and distance held constant — the remedy task E7 named after step 31's pair-level fit
+failed. Result: **λ = 0.035 per generalized minute (95 % interval 0.002–0.068)** in the central
+specification, 0.041–0.053 across the variants, all of the right sign; the assumed 0.03 (range
+0.02–0.05) is therefore supported and stays the central case, but the interval is wider than
+the assumed range, and **for the licence holders in car-owning households — the segment the LRT
+would draw from the car — λ is not identified (0.008 ± 0.017)**; the pooled estimate is carried
+by the no-car households (0.083). λ_T within the transit nest is not estimable from these data
+at all. Two corrections came out of the metadata: the trips file's mode codes are **3 Public Bus,
+4 group taxi, 5 Matronit, 8 special taxi** — the chain's `BUS = [3, 4]`, `TAXI = [5, 8]` has 4
+and 5 swapped, so the Metronit sits in the taxi-type layer of steps 15–32 (within the 25 V2
+areas the survey-level transit layer nearly doubles, 6,747 → 12,673, and the taxi layer falls
+6,650 → 723 when corrected; §8 caveat 14 — steps 15–32 are to be rerun); and the activity codes
+1–12 are confirmed one-to-one against the activities file (§6ae).
+
 Every published product, what it was built from, and its status:
 
 | Product (`Output/…`) | Built by | Base / inputs | Geography | Modes | Vintage | Status |
@@ -145,7 +167,7 @@ Every published product, what it was built from, and its status:
 | `ths2017/three_mode_2022/rail_station_smartcard_2022_taz.csv` | step 16 | `train/train_od_taz_6_9.csv` × 0.793 | 19 station TAZs | rail, station-to-station, all riders | 2022 | current (separate frame) |
 | `ths2017/three_mode_2022/corridor_link_flows_{total,transit,taxi}_2022.csv`, `corridor_profile_*.csv` | steps 17–18 | the row above | 18 line areas | as above | 2022 | current — three-hour potential movements |
 | `ths2017/three_mode_2022/peak_hour_factors*.csv`, `corridor_link_flows_peak_hour_2022.csv`, `peak_hour_sensitivity.csv` | step 20 | survey departure times × the row above | 18 line areas | car, bus, taxi-type, rail | 2022 | current — peak-departure-hour potential movements |
-| `ths2017/two_mode/car_*`, `bus_calibrated_*`, `transit_*`, `taxi_survey_*`, `rail_survey_*`, calibration tables | step 15 | `Input/trips_ths_2017.xlsx`, `bus/bus_od_taz_new.csv`, `bus/bus_boardings_alightings_taz.csv`, zonal 2020 | 778 / 36 / 28 | car; bus; taxi-type; rail | 2018 (bus cells with RavKav volumes: 2022) | current intermediate |
+| `ths2017/two_mode/car_*`, `bus_calibrated_*`, `transit_*`, `taxi_survey_*`, `rail_survey_*`, calibration tables | step 15 | `Input/THS_2017-2018/trips_ths_2017.xlsx`, `bus/bus_od_taz_new.csv`, `bus/bus_boardings_alightings_taz.csv`, zonal 2020 | 778 / 36 / 28 | car; bus; taxi-type; rail | 2018 (bus cells with RavKav volumes: 2022) | current intermediate |
 | `bus/bus_od_taz_avg.csv`, `bus/bus_boardings_alightings_taz.csv` | step 8 | RavKav May 2022 Tuesdays (LFS) | 722–730 TAZ | bus journeys (first boarding → final alighting), all riders | 2022 | current input |
 | `bus/bus_od_taz_new.csv`, `bus_od_area_new*.csv` | step 9 | step 8 × OnBoard probabilities | 722 TAZ / 28 areas | bus; **unit of the OnBoard rows (leg or journey) unconfirmed** | 2022 | current input, open question |
 | `train/train_od_taz_6_9.csv`, `train_od_area.csv` | step 10 | 2019 smartcards (LFS) | 19 stations | rail, station pairs | 2019 | current input |
@@ -163,6 +185,7 @@ Every published product, what it was built from, and its status:
 | `gc/*` | step 26 | survey car times, `Input/BusSpeedData/` (LFS), `lrt_v2/` | 25 V2 areas | car; bus; LRT (2 scenarios) — generalized-cost components with status | 2017/18 (car), May 2026 (bus), planned (LRT) | **current** — partial fill; money components missing |
 | `skims/*` | step 31 | `gc/*` components, feeder composite (bus or Metronit) for the LRT, 2022 corridor flows | 25 V2 areas, 9 trunk links | car; bus; Metronit; LRT (2 scenarios) — complete skims, logit calibration, LRT capture scenarios, trunk-link loads | 2022 (flows), May 2026 (bus), planned (LRT) | **current** — money components still missing; λ assumed |
 | `skims/forecast/*` | step 32 | step-23 forecast sets (BU/HS × 2040/2050), step-31 skims (held fixed) | 25 V2 areas, 9 trunk links | car; transit; taxi — market; LRT (2 scenarios) — capture, boardings, trunk-link loads by scenario-year | 2040 / 2050 (market), 2026 skims (fixed) | **current** — skims fixed at step 31; λ assumed |
+| `mode_choice/*` | step 33 | `Input/THS_2017-2018/` trips, person and household tables × step-31 skims | 25 V2 areas, person-level rows | car vs transit (bus + Metronit + rail) — estimation sample, λ estimates by specification and segment, code check | 2017/18 (survey), May 2026 (skims) | **current** — λ estimated; supports the assumed 0.03; choice-rider λ not identified |
 
 The 25 GS zones (`Input/TAZ_GSnew.csv`) and the 25 retained research areas of the
 forecast tables are different geographies with the same matrix dimension; files are
@@ -193,7 +216,10 @@ validation against counts.
 | `../TAZ_GSnew.csv` (in `Input/`) | TAZ → GS zoning | 781 TAZs → 25 GS zones; covers every study TAZ including 105 |
 | `../taz_keys_from_shapefile.csv` (in `Input/`, regular git) | Substitute for the keys table when only its LFS pointer is present | Built from `Input/TAZ_North/TAZ_North.shp` (`TAZ_NUMBER`, `SUPERZONE`, `ARZI_1270`): the same 778 TAZs, `SZ_NEW` identical for all of them, `TAZ_1270` identical except TAZ 3602, which the keys table places alone in zone 101000 (applied as an override). Verified: identical 396-zone set to `ths2017/tests/geh_scale_audit_1250.csv`, identical sibling partition to the committed cellular probability matrix, identical study-area trip filter (1,197 sampled / 116,473 weighted excluded). Steps 15, 16 and 18 fall back to it automatically |
 | `../sz_localities.csv` (in `Input/`) | Two main localities per superzone | Extracted from the keys table's `CITY` field (population-weighted) for labelling only |
-| `../trips_ths_2017.xlsx` (in `Input/`) | THS trips file: one row per activity per person per survey day | 146,394 rows, 16,401 persons (same panel as the activities file), `SurveyDay` 1/2; `placeno` orders activities per `PerID3`, `actTaz` locates them, `Dep_h` is the hour of departing the activity, `mode` is pre-aggregated (CAR/TRANSIT/RAIL/OTHER, `IRR` = first activity), `new_wf` carries the weight; `TrvlTime` / `TrvlDist` are the reported door-to-door minutes and km (used by step 26) |
+| `../THS_2017-2018/trips_ths_2017.xlsx` (moved from `Input/` on 23 Sep 2026; LFS) | THS trips file: one row per activity per person per survey day | 146,394 rows, 16,401 persons (same panel as the activities file), `SurveyDay` 1/2; `placeno` orders activities per `PerID3`, `actTaz` locates them, `Dep_h` is the hour of departing the activity, `mode` is pre-aggregated (CAR/TRANSIT/RAIL/OTHER, `IRR` = first activity), **`new_wf` carries the weight — the only weight used from 23 Sep 2026 on** (`wf3` is not used); `TrvlTime` / `TrvlDist` are the reported door-to-door minutes and km (used by step 26). `mainmode` codes, confirmed against the activities file by step 33: 1 pedestrian, 2 bicycle, **3 Public Bus, 4 group taxi, 5 Matronit**, 7 train, **8 special taxi**, 9 chartered / school bus, 10 car driver, 11 car passenger, 12 motorcycle, 13 other, 0 / 99 default. `mainActivity` 1–12: Home, Work, Work-related business, Education, Shopping, Personal errands / prayer, Social visit, Medical, Entertainment / meals out, Sports, Transport / accompany someone, Other |
+| `../THS_2017-2018/PersonsFin2.csv`, `HHfinal.csv` (LFS, added 23 Sep 2026) | THS person and household tables | 16,388 persons (`INDIVID` = `HHID` × 100 + `personid`; `Age`, `Gender`, `license_car`, `HHnCars`, `employment`, `education`, `workparking`, `Hhtype`) and 5,098 households (`HHID`, `TAZ`, `lon` / `lat`, `migzar` = sector 1–5, `HHTYPE`, `HHSIZE`, `HHVEHICLE`). 99.96 % of the trips file's rows find their person. Used by step 33 for car availability, licence, age, gender, sector and student status; no weight is taken from them |
+| `../THS_2017-2018/ACTIVITIES_DEC18_corrected.csv` (LFS; the same file as the `Matrices/` copy) | The activities file beside the trips file | Used by step 33 to confirm the trips file's `mainActivity` and `mainmode` codes (join on household, person, day, stop order and start time) |
+| `../THS_2017-2018/activities_tables_fields.xlsx`, `dictionary_for_categorical_fields.csv` (LFS) | Field lists and the code dictionary of the activity diary | The dictionary gives the text values of the diary's categorical fields (modes, activities, parking, bus and taxi types); the numeric codes of the trips file are not in it and were established by the join above |
 | `../Corridor_TAZ_Agg_V2.xlsx` (in `Input/`, added 22 Sep 2026) | The V2 corridor aggregation | Sheet `AreaCodes`: 25 areas (`AggCode` 201–217 trunk + Nazareth branch, 101–104 Krayot branch, 301–304 Kiryat Yam branch) with three route orders `Order_T1` / `Order_T2` / `Order_T3` (0 = not on the route); sheet `TazAgg`: 174 TAZ → `AggCode` pairs, all present in the 778-TAZ matrices, none duplicated. TAZ 1509 (LRT station S13) is not listed |
 | `../GeneralHalufa/hf_lrt_3.shp`, `station_hf_lrt_3.geojson` (in `Input/`, added 22 Sep 2026) | Planned LRT alignment and stations | One WGS 84 polyline of 18.94 km from Hamifrats to Tirat Carmel; 46 platform points (`halufa` attribute 1 / 2 / 999 / null — all points lie within 80 m of the line and are used) forming 24 stations. Projected to Israel TM Grid (EPSG:2039) for all distances |
 | `../GTFS/israel-public-transportation.zip` (in `Input/`, LFS, added 22 Sep 2026; feed of 22 May 2026) | The Ministry of Transport's national GTFS feed (https://gtfs.mot.gov.il/gtfsfiles/) | Standard GTFS (`stops`, `routes`, `trips`, `stop_times`, `calendar`, `agency` …); `route_desc` carries the route code (מק"ט), direction and alternative as `code-dir-alt`; the Metronit BRT lines are codes 83001–83005. Used by step 29 for the bus level of service per TAZ and the direct-service skim between the V2 areas; the notebook dry-runs on a synthetic feed while only the LFS pointer is present. **Since 22 Sep 2026 every file directly under `Input/` is on LFS** (`Input/*` in `.gitattributes`): `git lfs pull --include="Input/*.xlsx,Input/*.csv"` is now required before any notebook runs |
@@ -510,7 +536,7 @@ through GS instead of superzones).
 
 ## 6c. Step 5 — Matrices from the THS 2017 trips file (`THS_2017_trips_matrices.ipynb`)
 
-**Method.** An independent trip extraction from `Input/trips_ths_2017.xlsx`: within each
+**Method.** An independent trip extraction from `Input/THS_2017-2018/trips_ths_2017.xlsx`: within each
 person (`PerID3`) and survey day, activities ordered by `placeno` form trips from the
 previous activity's `actTaz` to the current one's; the trip's departure hour is the
 *origin* row's `Dep_h` (kept for `Dep_h` ∈ {6,7,8}); its mode is the *destination* row's
@@ -1913,6 +1939,112 @@ Namal-Giborim→Hamifrats down 1,503 / 1,693 (BU) and 1,749 / 2,104 (HS) in thre
 in the HS 2050 peak hour; Hamifrats boards 2,104 by HS 2050. About a fifth above the
 underground case in every scenario-year.
 
+## 6ae. Step 33 — Person-level mode choice: the cost sensitivity λ with car availability held constant (`Mode_choice_person_level.ipynb`)
+
+**Purpose.** Step 31 could not read λ off the 2022 cross-section of area pairs (§6ac: wrong
+sign, −0.011), because the pairs where the bus is dearest relative to the car are also the
+least car-available and car availability is not in the skims. Task E7 named the remedy: a
+logit on the survey's person-level records, where car availability, licence, purpose, age and
+sector are held constant. The THS person and household tables and the field metadata arrived
+on 23 September 2026 (`Input/THS_2017-2018/`, §1) and this step runs that estimation. **The only
+weight used is `new_wf`** of the trips file, by instruction; no weight is taken from the person
+or household tables.
+
+**Codes confirmed first.** The trips file's numeric codes were checked against the activities
+file's text codes by joining the two on household, person, survey day and stop order and keeping
+the 117,410 stops whose start times agree to within two minutes. `mainActivity` 1–12 map
+one-to-one (Home, Work, Work-related business, Education, Shopping, Personal errands, Social
+visit, Medical, Entertainment, Sports, Transport / accompany, Other — 99.8–100 % on the modal
+meaning). `mainmode` likewise, and the result corrects the chain: **3 Public Bus (2,048 matched
+stops), 4 group taxi (46), 5 Matronit (57), 7 train, 8 special taxi (340), 9 chartered bus**.
+Steps 15–16 use `BUS = [3, 4]` and `TAXI = [5, 8]`, so the Matronit rows have been in the
+taxi-type layer and the group-taxi rows in the bus layer since step 15 (§8 caveat 14). Across
+the study area the AM difference is 182 sampled rows / 11,406 expanded trips per day moving
+taxi → bus and 26 / 2,006 moving bus → taxi; **within the 25 V2 areas, off-diagonal, at 2018
+survey level, the transit layer goes 6,747 → 12,673 and the taxi-type layer 6,650 → 723**
+(`Output/mode_choice/v2_area_layers_by_mode_code_mapping.csv`). Step 31's corridor market
+(transit 11,664 / taxi 6,982, the taxi left out of the choice set) therefore under-states the
+transit nest by roughly the Metronit riders, who are the natural LRT market. This step uses the
+corrected mapping; steps 15–32 have not yet been rerun with it.
+
+**Estimation sample.** AM trips (departure hour 6–8) extracted by the step 5 / 15 rule, mode
+car (10, 11) or transit (3, 5, 7; taxi-type 4, 8 out of the choice set as in step 31, OTHER
+out), joined to the person table (99.96 % matched). Zones: `actTaz` → 1250-zone → study TAZ
+split by 2020 population (origins) and employment (destinations) exactly as step 15, then TAZ →
+V2 area by `TazAgg`; a trip lands on an area pair with the product of its two shares, so the
+sample holds one row per trip × pair with weight `new_wf × share` (1,647 sampled trips → 2,325
+rows, 1.41 per trip; 67,470 expanded trips per average weekday, against step 31's 67,700 on the
+2022 flows). Both ends in the 25 areas, off the diagonal. Skims from step 31: `dGC = GC_bus −
+GC_car`, `dGC_best` with the cheaper of bus and Metronit, distance bands as §6ac. Person
+variables: **car-availability segment** — `no_car_hh` (no car in the household), `no_licence`
+(car in the household, traveller without a licence or a child), `competition` (licence, fewer
+cars than licensed drivers), `car_available` (licence, a car per licensed driver); **purpose**
+home-based on the non-home end (HBW = work / work-related, HBE = education, HBO, NHB); age
+group, gender, student, sector (`migzar` 4–5 = the Arab-sector households, 1–3 the rest).
+Transit rows: 353 (220 bus, 126 Matronit, 7 rail); 543 households.
+
+| segment | rows | expanded / day | transit share (weighted) | mean dGC |
+|---|---|---|---|---|
+| car available | 807 | 22,526 | **0.019** | 18.4 |
+| competition | 636 | 20,334 | 0.109 | 18.5 |
+| no licence | 556 | 13,872 | 0.217 | 11.2 |
+| no-car household | 319 | 10,283 | **0.689** | 16.3 |
+| all | 2,319 | 67,059 | 0.190 | 16.6 |
+
+The composition alone explains the pair-level failure: the transit share runs from 2 % to 69 %
+across the segments while the mean cost difference barely moves, and the segments are not
+spread evenly over the pairs. By purpose: HBW 0.29, HBE 0.29, HBO 0.10, NHB 0.10.
+
+**Models.** Weighted binary logits (`new_wf`-based weights rescaled to the row count so the
+standard errors reflect the sample, IRLS via statsmodels), standard errors clustered by
+household (the two survey days of one household are not independent). λ is the negative of the
+coefficient on `dGC`, per generalized minute.
+
+| model | λ | 95 % interval | ρ² | note |
+|---|---|---|---|---|
+| M0: `dGC` only | 0.013 (se 0.012) | — | 0.003 | the person-level counterpart of step 31's fit: right sign now, but nothing identified |
+| **M1: `dGC` + car-availability segment, purpose, age, gender, student, sector, distance band** | **0.035** | **0.002–0.068** | 0.43 | the central specification |
+| M1b: M1 with `dGC_best` (Metronit where it runs) | 0.041 | 0.010–0.071 | 0.44 | |
+| M3: M1 + origin- and destination-area fixed effects | 0.053 | 0.012–0.093 | 0.55 | λ from the pair-specific cost only |
+| M1u: M1 unweighted | 0.042 | 0.018–0.066 | 0.39 | |
+| M2: λ by segment — no-car household / no licence / competition / car available | 0.083 (p 0.001) / 0.027 (n.s.) / −0.006 (n.s.) / 0.053 (p 0.08) | | 0.44 | |
+| **M4: licence holders in car-owning households only** (1,443 rows, 424 households) | **0.008** | **−0.025–0.041** | 0.20 | the segment the LRT would draw from the car: not identified |
+
+M1's other coefficients (log-odds of transit): no-car household +5.5, no licence +4.2, car
+competition +2.1 against car available; HBO −2.0 and NHB −1.6 against HBW (HBE +0.4, n.s.); age
+0–17 −2.2; Arab-sector household −1.9; pairs under 3 km −1.0. Figure
+`Output/figures/mode_choice_person_level_by_segment.png` shows the observed share against the
+cost difference by segment: four separate levels, and a visible slope only inside the no-car
+segment.
+
+**Reading.** (i) With the composition held constant the cost sensitivity has the right sign and
+a magnitude of 0.035–0.053 per generalized minute; **the assumed central λ = 0.03 of steps 31 /
+32 is supported and stays**. (ii) The interval (0.002–0.068 on M1) is wider than the assumed
+range 0.02–0.05, so the capture band of §6ac (2,357–4,855 underground) is, if anything, too
+narrow. (iii) The pooled λ is carried by the no-car households, whose "choice" is between
+transit and a lift; **for the travellers who actually choose between their own car and
+transit, λ is not identified from this sample** (M4: 0.008 ± 0.017; M2's car-available 0.053 at
+p = 0.08). The 295 trips step 31 draws from the car (of 3,332) rest on that unidentified
+parameter; the 3,037 drawn from the bus rest on λ_T, which no revealed-preference data in the
+repository can estimate because the LRT does not exist. The stated-preference survey of the
+red-team response (`docs/RED_TEAM_RESPONSE_2026-09-23.md` §4) remains the way to both. (iv) The
+sample is small — 353 transit rows — because the skims exist only between the 25 areas;
+TAZ-level skims (task E6 / plan 3a.3) would let the whole study area's 28,060 AM trips into the
+estimation.
+
+**Outputs** (`Output/mode_choice/`): `estimation_sample_person_level.csv` (the trip × pair rows
+with attributes, skims and weights), `sample_by_car_segment.csv`, `lambda_estimates.csv` (every
+model and segment), `lambda_summary.csv` (point estimates and intervals against the assumed
+value), `coefficients_all_models.csv`, `trips_file_code_check.csv` (the code mapping and its
+purity), `v2_area_layers_by_mode_code_mapping.csv`; figure
+`Output/figures/mode_choice_person_level_by_segment.png`.
+
+**Limits.** Area-level skims on person-level records (the cost varies by pair, not by
+traveller); the 25-area, off-diagonal restriction; the Metronit is in the transit nest but has
+no alternative-specific term of its own; no income (not in the tables); no money components
+(§6x addendum 4); the weight is the trips file's `new_wf` by instruction, whose construction is
+not documented in the repository. λ_T and the LRT premium are untouched by this step.
+
 ## 7. Output inventory (`Output/`)
 
 *Layout note (21 September 2026).* The products of steps 1–4 (the 2018 activities-file chain, listed first below with bare file names) now live under `Output/historical/ths2018/`; every other path is as written. Notebooks live under `notebooks/current/`, `notebooks/diagnostics/` and `notebooks/historical/` and anchor their working directory to the repository root, so the `Input/…` and `Output/…` paths in this document are unchanged.
@@ -1966,6 +2098,7 @@ underground case in every scenario-year.
 | `gc/*` | 25×25; long | Step 26 | Car / bus / LRT skims, LRT access, generalized-cost component table with status, partial GC matrices, cell status, trunk-pair comparison, the data-gap inventory |
 | `skims/*` | 25×25 per mode × component; long; 9 trunk links | Step 31 | Complete per-mode skims (car, bus, Metronit, LRT underground / ground) with status, `skims_area_v2.xlsx` and long-format table, the summary by mode; the logit calibration of the cost sensitivity λ against the 2022 flows; the LRT capture scenarios and pair-level flows; the trunk-link loads against today's bus movements |
 | `skims/forecast/*` | 25×25 per mode; 9 trunk links; per scenario-year | Step 32 | The four step-23 forecast sets aggregated to the V2 areas (car, transit, taxi); the market-growth and transit-origin summaries; the LRT capture scenarios, trip counts, boardings, path-type and origin-area breakdowns and trunk-link loads by scenario-year, on the step-31 skims held fixed |
+| `mode_choice/*` | person-level rows (trip × area pair) | Step 33 | The estimation sample (attributes, skims, `new_wf`-based weights), the sample by car-availability segment, λ by model and segment with intervals, all coefficients, the trips-file code check, and the corridor-internal layers under the corrected and the current mode codes |
 | `figures/` | — | Steps 1b–3 | Scatter plots, CV curves, λ curves, R_AB heatmap |
 
 All matrices are indexed by origin zone (rows) × destination zone (columns). Probability
@@ -2034,6 +2167,26 @@ Added after the methodology review of 21 September 2026:
     construction); a better fit to RavKav after calibrating to RavKav is not validation.
     External counts (Haifa-segment bus loads, Nazareth local vs Haifa-bound services,
     Hamifrats transfers, road screenlines, station boardings) are still absent.
+
+Added 23 September 2026 (step 33):
+
+14. **The trips file's mode codes 4 and 5 are swapped in steps 15–32.** Confirmed against
+    the activities file (§6ae): 4 is group taxi and 5 is Matronit, while the chain's
+    `COMP = {'BUS': [3, 4], 'TAXI': [5, 8]}` puts the Matronit in the taxi-type layer and the
+    group taxi in the bus layer. Effect at 2018 survey level, AM: study-area-wide 11,406
+    expanded trips per day belong in bus rather than taxi-type and 2,006 the other way;
+    within the 25 V2 areas (off-diagonal) the transit layer is 12,673 rather than 6,747 and the
+    taxi-type layer 723 rather than 6,650. The calibrated bus product of step 15 absorbs part
+    of this where it adopted RavKav volumes (which include Metronit boardings), but the taxi
+    layer that steps 22–32 carry unchanged and keep out of the choice set is mostly Metronit
+    riders. Steps 15–32 are to be rerun with `BUS = [3, 5]`, `TAXI = [4, 8]`; until then the
+    corridor transit market of §6ac–§6ad is understated and the taxi layer overstated. Caveat 9
+    is resolved by the same check: the taxi-type codes are 4 group taxi (sherut) and 8 special
+    taxi.
+15. **λ is estimated but the choice-rider λ is not identified** (§6ae): pooled 0.035
+    (0.002–0.068) supports the assumed 0.03; for licence holders in car-owning households
+    0.008 ± 0.017. λ_T and the LRT premium remain assumptions; a stated-preference survey is
+    the way to both.
 
 ## 8b. Related work — PCA-based analysis and structural comparison of OD matrices
 
@@ -2115,6 +2268,9 @@ jupyter nbconvert --to notebook --execute --inplace notebooks/current/GTFS_bus_L
 jupyter nbconvert --to notebook --execute --inplace notebooks/current/GTFS_bus_observed_times.ipynb   # step 30: needs step 29's intermediates and the bus-speed LFS file; run before step 26
 jupyter nbconvert --to notebook --execute --inplace notebooks/current/Mode_skims_and_flow_comparison.ipynb   # step 31: needs steps 24, 26, 27, 29, 30
 jupyter nbconvert --to notebook --execute --inplace notebooks/current/LRT_capture_forecast_2040_2050.ipynb   # step 32: needs step 23's scenario sets (git lfs pull --include="Input/Demographic_Forecast/Zonal_*.csv" first) and step 31
+
+# person-level mode choice (step 33; needs git lfs pull --include="Input/THS_2017-2018/*" and pip install statsmodels; reads step 31's skims)
+jupyter nbconvert --to notebook --execute --inplace notebooks/current/Mode_choice_person_level.ipynb
 
 # regression test of the hybrid branch (committed outputs only)
 jupyter nbconvert --to notebook --execute --inplace notebooks/diagnostics/Hybrid_superzone_conservation_test.ipynb

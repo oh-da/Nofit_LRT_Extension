@@ -1,0 +1,6 @@
+,"corrected codes (3, 5 bus; 4, 8 taxi)","chain as it stands (3, 4 bus; 5, 8 taxi)",change
+CAR,54732.0,54732.0,0.0
+BUS,12673.0,6747.0,5926.0
+TAXI,723.0,6650.0,-5927.0
+RAIL,64.0,64.0,0.0
+OTHER,10655.0,10655.0,0.0

@@ -990,7 +990,7 @@ from a different survey data file (the "trips file," `trips_ths_2017.xlsx`) rath
 the activity-diary file used in Steps 1–4. This gives a cross-check of the whole
 approach and, from Step 6 onward, becomes the primary survey source.
 
-**Inputs.** `Input/trips_ths_2017.xlsx` — one row per activity per person per survey day,
+**Inputs.** `Input/THS_2017-2018/trips_ths_2017.xlsx` — one row per activity per person per survey day,
 with a person identifier (`PerID3`), an ordering field (`placeno`), the activity's zone
 (`actTaz`), departure hour (`Dep_h`), a pre-aggregated travel mode (CAR / TRANSIT / RAIL /
 OTHER, plus `IRR` marking the very first activity of the day), and the expansion weight

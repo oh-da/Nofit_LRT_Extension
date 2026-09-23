@@ -50,6 +50,15 @@ No number from steps 31 or 32 goes into a report as ridership until:
 Until then every LRT figure is labelled *"scenario result under assumed behavioural
 parameters"*, with the λ and premium whiskers attached.
 
+*Status, 23 September 2026 (step 33, METHODOLOGY §6ae).* Condition 1 is half met: the pooled
+person-level λ is 0.035 (0.002–0.068), right sign, and supports the assumed 0.03; but the
+licence holders in car-owning households — the travellers the LRT would take from the car —
+give 0.008 ± 0.017, not identified, and λ_T is not estimable from revealed-preference data.
+The SP survey stays on the request list. Condition 2 is untouched. A correction surfaced on
+the way: the trips file's mode codes 4 (group taxi) and 5 (Matronit) are swapped in steps
+15–32, so the Metronit riders sit in the taxi layer that the capture leaves out of the choice
+set; the chain is to be rerun with the corrected codes before the rebuild order of §3.
+
 ## 3. Next steps — two tracks in parallel
 
 The review's sequence is right in logic, but several items wait on data the project does not
@@ -60,7 +69,7 @@ sent on day one because it gates the longest path.
 
 | # | Work | What it closes | Depends on | Output |
 |---|---|---|---|---|
-| A1 | **Person-level mode choice (step 33).** Binary car vs transit logit on the survey's AM trip records: car availability from the household file, purpose, age / sex, the step 31 pair skims, distance-band constants. Report λ with its standard error. | E7; the identification test the review asks for. If λ fails again, that result is the documented reason SP data are needed. | `households_with_weights.csv` (LFS), THS codebook | `Mode_choice_person_level.ipynb`; λ replaces 0.03 or the failure is reported |
+| A1 | **Person-level mode choice (step 33).** Binary car vs transit logit on the survey's AM trip records: car availability from the household file, purpose, age / sex, the step 31 pair skims, distance-band constants. Report λ with its standard error. | E7; the identification test the review asks for. If λ fails again, that result is the documented reason SP data are needed. | `households_with_weights.csv` (LFS), THS codebook | `Mode_choice_person_level.ipynb`; λ replaces 0.03 or the failure is reported. **Done 23 Sep 2026** on `PersonsFin2.csv` / `HHfinal.csv` with `new_wf` as the only weight: λ = 0.035 (0.002–0.068); the assumed 0.03 stands; choice-rider λ not identified (METHODOLOGY §6ae) |
 | A2 | **RavKav leg-level segment loads on the trunk.** Aggregate every leg's physical boarding / alighting stop by stop group along the trunk, by direction and `bus_trip_hour`, weighted by `total_boardings`. | Bus loads per link, direction and hour; the boarding-hour peak factor (B1e); a direct test of the 2–3 × Nazareth-end discrepancy (§6p). Not fully independent of the calibration (RavKav volumes enter step 15), but the leg-level link profile is different information from the journey OD totals. | `Input/BusRavKav/*.csv` (LFS) | `RavKav_trunk_segment_loads.ipynb`; link loads vs step 24 / 31 profiles |
 | A3 | **Trip-universe definition, one page.** Person trip, PT journey, boarding leg, transfer; the frame of each source (THS residents door-to-door; RavKav all riders, journey; OnBoard unit pending; rail station-to-station); how external trip ends and the one-end-in-corridor market enter; external zones. | Review blocker on definitions; B1d, B2, B3. Precedes any rebuild of step 15. | nothing | `docs/TRIP_UNIVERSE.md` |
 | A4 | **Purpose-segmented fine-zone allocation.** HBW / HBE / other split per superzone pair from the trips file's activity codes; destination proxies per purpose (employment; school enrolment; retail / services) instead of total employment. | Review blocker on the TAZ allocation; A3 in the task list. | THS activity codebook | revised step 15 zone conversion; corridor profiles retested |

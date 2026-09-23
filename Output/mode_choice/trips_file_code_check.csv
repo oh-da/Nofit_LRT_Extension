@@ -1,0 +1,27 @@
+field,code,meaning,matched rows,share on the modal meaning
+mainActivity,1,Home,55495,0.9979
+mainActivity,2,Work,10769,0.9998
+mainActivity,3,Work Related business,6718,1.0000
+mainActivity,4,Education,9903,0.9992
+mainActivity,5,Shopping,5095,1.0000
+mainActivity,6,Personal Errands/Prayer,8093,0.9999
+mainActivity,7,Social visit with friends or family,6685,1.0000
+mainActivity,8,Medical/Dentist,1177,1.0000
+mainActivity,9,Entertainment/Meals Out,2454,1.0000
+mainActivity,10,Sports/Exercise,1005,1.0000
+mainActivity,11,Transport/Accompany Someone,9148,0.9997
+mainActivity,12,Other,868,1.0000
+mainmode,0,Default,21145,0.9657
+mainmode,1,Pedestrian,23404,1.0000
+mainmode,2,Bicycle or other personal means,510,1.0000
+mainmode,3,Public Bus,2048,0.9985
+mainmode,4,Group Taxi,46,1.0000
+mainmode,5,Matronit,57,1.0000
+mainmode,7,Train,28,0.9643
+mainmode,8,Special Taxi,340,1.0000
+mainmode,9,Chartered Bus,4411,1.0000
+mainmode,10,Vehicle as Driver,44308,0.9990
+mainmode,11,Vehicle as Passenger,20774,1.0000
+mainmode,12,Motorcycle/Moped,175,1.0000
+mainmode,13,Other,114,0.9825
+mainmode,99,Default,50,1.0000

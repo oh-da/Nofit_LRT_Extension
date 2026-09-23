@@ -56,7 +56,12 @@ Key facts driving the list (2017 trips-file hybrid, `Output/ths2017/study_taz/`)
       version is published. The hybrids are historical; the replicated cellular mapping
       inside them (A1) is still open.
 - [ ] **A3. Trip purpose**
-  - [ ] Obtain the THS activity codebook (`mainActivity` codes 2, 4, 11 …).
+  - [x] Obtain the THS activity codebook (`mainActivity` codes 2, 4, 11 …). *Done
+        2026-09-23: the field metadata under `Input/THS_2017-2018/` plus step 33's join to
+        the activities file fix `mainActivity` 1–12 (Home, Work, Work-related, Education,
+        Shopping, Errands, Social, Medical, Entertainment, Sports, Transport / accompany,
+        Other) and `mainmode` (3 Public Bus, 4 group taxi, 5 Matronit, 7 train, 8 special
+        taxi) — the latter corrects steps 15–32 (METHODOLOGY §8, caveat 14).*
   - [ ] Purpose shares per superzone pair from the trips file (HBW / HBE / other), applied
         to the hybrid, or three purpose-specific hybrids.
 - [ ] **A4. Time of day and direction**
@@ -166,7 +171,15 @@ Key facts driving the list (2017 trips-file hybrid, `Output/ths2017/study_taz/`)
 - [ ] **E5. Car skim vintage** — the survey door-to-door times are 2017 / 18; a small
       Google Distance Matrix sample (≈ 40 pairs, Tuesday 07:30) or the national model's
       car skim gives the 2026 uplift.
-- [ ] **E7. Cost sensitivity λ** — open. What was tried (22 September 2026, step 31,
+- [~] **E7. Cost sensitivity λ** — *person-level estimate done 2026-09-23 (step 33,
+      `Mode_choice_person_level.ipynb`, METHODOLOGY §6ae), on the THS person and household
+      tables with `new_wf` as the only weight: with car availability, purpose, age and sector
+      held constant, λ = 0.035 per generalized minute (95 % 0.002–0.068), 0.041–0.053 across the
+      variants — the assumed 0.03 stands as the central case. Still open: for the licence
+      holders in car-owning households λ is not identified (0.008 ± 0.017); λ_T and the LRT
+      premium are untouched. Closing those needs the SP survey
+      (`docs/RED_TEAM_RESPONSE_2026-09-23.md` §4) or TAZ-level skims that admit the whole
+      study area's trips (E6).* What was tried before (22 September 2026, step 31,
       `Mode_skims_and_flow_comparison.ipynb`, METHODOLOGY §6ac): a volume-weighted binary
       logit of the observed 2022 transit share on `GC_bus − GC_car` across the 573 sampled
       area pairs (67,700 trips) returns the wrong sign (λ = −0.011 per generalized minute,
@@ -181,8 +194,11 @@ Key facts driving the list (2017 trips-file hybrid, `Output/ths2017/study_taz/`)
       band, so the captive-rider confound is held constant rather than
       averaged over), or a transferred λ from the national transport model's own mode-choice
       calibration, with its source and estimation sample cited.
-- [ ] **C2. Segmentation** — car availability by zone (check the raw survey household
-      file **[needs LFS data]**; otherwise census / zonal files).
+- [~] **C2. Segmentation** — car availability by zone (check the raw survey household
+      file **[needs LFS data]**; otherwise census / zonal files). *Person-level car
+      availability (licence, cars per licensed driver) is now in hand from
+      `Input/THS_2017-2018/PersonsFin2.csv` and used by step 33; the by-zone segmentation of
+      the matrices is still to do.*
 - [ ] **C3. Uncertainty** — carry as sensitivities into corridor numbers: survey
       correction within its bootstrap spread (self-containment 0.67–0.70, outbound
       TV ± 0.02), a cellular short-trip under-detection scenario, and the A1 allocation
