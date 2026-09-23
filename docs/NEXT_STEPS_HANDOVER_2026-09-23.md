@@ -530,6 +530,25 @@ count, GEH), `car_aon_fit_by_type.csv`, `car_aon_screenlines.csv`; figure
 `Output/figures/car_aon_vs_counts.png` (scatter, log axes). **Documents.** §6ao, task B1 ticked,
 caveat on the assignment's limits. Effort: one day.
 
+**Status, 23 September 2026 — done; landed as §6aj (the next free letter when this was written,
+not §6ao); used `scipy.sparse.csgraph.dijkstra` rather than `networkx` (already a repository
+dependency, and its multi-source mode with `return_predecessors=True` gives everything the
+tree-loading algorithm needs in one call).** `DATA1`/`DATA2`/`UL1` were checked and ruled out
+(§6aj) — `DATA1` is a class.subclass code, not a speed. Free-flow speed assumed: 90/70/60/50/40
+km/h for TYPE 1–5, 30 for TYPE 8 (the network's actual car-carrying types are 1–5, 8 and the
+TYPE-9 connectors — not a clean 1–6 the way the method above guessed), 20 for connectors. The
+network's own centroid convention (node id = TAZ number) matched all 778 TAZs directly, so no
+nearest-node snapping was needed. **Aggregate ratio 1.037** (essentially exact) over the 3,231
+counted links; **GEH ≤ 10 on only 20 %** of links, as expected for an unrestrained assignment.
+The six screenlines recomputed from the assignment do **not** uniformly track step 36's own
+0.58–0.90 range: three (Kiryat Ata, Krayot, Nazareth) run well above 1 (up to 1.84), most
+plausibly route concentration onto a single shortest path rather than a base-demand problem,
+since the aggregate figure holds up — flagged as a genuine finding, not smoothed over. A caught
+mistake worth naming for whoever runs the next version: the first screenline recomputation
+merged the wrong column and silently produced "counted" values in the tens (a link count, not a
+vehicle count) rather than erroring — always sanity-check a merged column's own magnitude, not
+just that the merge ran without error.
+
 ### C11. Design-hour factors on the observed profiles (caveat 18; steps 20 / 27 / 31 / 32 switch)
 
 **Goal.** Carry the count-based car factor and the boarding-based transit factor into the

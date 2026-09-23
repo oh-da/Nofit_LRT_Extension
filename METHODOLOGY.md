@@ -321,6 +321,17 @@ resemble 2022's (cosine 0.138) — the 26.3 % of journeys it resolves are system
 with an observed transfer or return, not a representative morning sample. Re-anchoring the base
 on 2025 still needs a general alighting inference this file cannot supply by tap-chaining alone.
 
+**Update, 23 September 2026 (task C10 — all-or-nothing assignment of the car layer, step 42).**
+The link-level check step 36 could not give: an assignment on the same counted network, free-flow
+speed assumed by link `TYPE` since no usable speed field exists without the client's codebook
+(the same gap task E5 is blocked on). Aggregate: **1.037** assigned ÷ counted vehicles over the
+3,231 counted links — essentially exact. Link by link: GEH ≤ 10 on only 20 % of links, as an
+unrestrained assignment is expected to give. The six screenlines recomputed from the assignment
+sit above step 36's own 0.58–0.90 range on three of six cordons (Kiryat Ata, Krayot, Nazareth,
+up to 1.84) — likely route concentration onto a single shortest path, not a base-demand problem,
+since the aggregate figure holds up. A genuine link-by-link validation still needs a real,
+capacity-restrained, calibrated-speed assignment.
+
 Every published product, what it was built from, and its status:
 
 | Product (`Output/…`) | Built by | Base / inputs | Geography | Modes | Vintage | Status |
@@ -352,6 +363,7 @@ Every published product, what it was built from, and its status:
 | `mode_choice/*` | step 33 | `Input/THS_2017-2018/` trips, person and household tables × step-31 skims | 25 V2 areas, person-level rows | car vs transit (bus + Metronit + rail) — estimation sample, λ estimates by specification and segment, code check | 2017/18 (survey), May 2026 (skims) | **current** — λ estimated; supports the assumed 0.03; choice-rider λ not identified |
 | `ravkav_2025/*` | step 34 | `Input/BusRavKav/2025/*` (LFS) × the north stops file, `TAZ_North`, the OnBoard pattern, the GTFS stations | stops, 733 TAZ, 28 sub-areas, 25 V2 areas, 20 rail stations | bus + Metronit boardings (journey origins / transfer legs), bus + Metronit journey and leg OD, rail station OD, boarding-hour peak factors | 2025 (representative Tuesday) | **current input layer** — not yet consumed by steps 15–32 (§6af) |
 | `ravkav_2025/bus_od_taz_2025_own_alightings.csv`, `journeys_2025_summary.csv` | step 41 | `Input/BusRavKav/2025/{Buses,Metronit}_RavKav.csv` (LFS), card-level tap chaining | TAZ pairs (allocated journeys only) | bus + Metronit journeys on their own inferred alightings — 45.8 % of taps allocated | 2025 (representative Tuesday) | **diagnostic** — supports caveat 16, does not replace the OnBoard-pattern prior of `ravkav_2025/*` above |
+| `validation/car_aon_link_flows.csv`, `car_aon_fit_by_type.csv`, `car_aon_screenlines.csv` | step 42 | `Output/ths2017/three_mode_2022/car_2022_taz.csv` × the Emme network, all-or-nothing assignment, assumed free-flow speed by TYPE | every car-mode link | assigned vs counted vehicles 06:00–09:00 — aggregate ratio 1.037, link-level GEH ≤ 10 on 20 % | 2022 (demand), mixed years (counts, as step 36) | **diagnostic** — the link-level check step 36 could not give |
 
 The 25 GS zones (`Input/TAZ_GSnew.csv`) and the 25 retained research areas of the
 forecast tables are different geographies with the same matrix dimension; files are
@@ -2892,6 +2904,10 @@ cordons; the desire-line proxy for through trips sees only trips with both ends 
 area, so the through traffic from beyond it (Tel Aviv – Haifa – Acre on Roads 2 and 4) is in the
 count and not in the demand; polygon boundaries that a road clips twice count two crossings that
 real trips do not make; no link-level comparison is possible without an assignment (task B1, C3).
+**Done 23 September 2026, step 42, §6aj:** an all-or-nothing assignment on the same network
+gives an aggregate ratio of 1.037 against the counted links (essentially exact) but a poor
+link-by-link fit (GEH ≤ 10 on 20 % of links) and screenline ratios that run both above and below
+this section's own range — see §6aj for the full comparison.
 
 ## 6ai. Step 41 — RavKav 2025: journeys chained from the taps, on their own inferred alightings (`RavKav_2025_own_alightings.ipynb`, diagnostics, task C9)
 
@@ -2951,6 +2967,65 @@ same-morning return is invisible to this method by construction — a full aligh
 proper AVL/schedule-matching method, or a full-day extract) is still what re-anchoring on 2025
 would need (§6af); the 90-minute / 20 km bounds do double duty for two different decisions, for
 want of a separately stated transfer-window figure; no line-shape matching.
+
+## 6aj. Step 42 — All-or-nothing assignment of the car layer onto the Emme network (`Car_AON_assignment_2022.ipynb`, diagnostics, task C10)
+
+**Purpose.** Step 36 (§6ah) checked the 2022 car layer against the road counts of
+`Input/Network_with_Counts/` on six closed cordons **without an assignment** — a desire-line
+proxy that cannot give a link-level comparison. This step assigns the same car layer onto the
+network's actual links, all-or-nothing (every trip loaded entirely onto its single shortest
+free-flow-time path, no capacity restraint) — the link-level comparison task B1/C3 asked for
+and step 36 flagged as still needed.
+
+**Inputs.** `Input/Network_with_Counts/Emme_Links_Final_Res 2026-09-23.{shp,shx,dbf}` (LFS; the
+same network step 36 used, now including its shapefile geometry files, which were still LFS
+pointers when this step started); `Output/ths2017/three_mode_2022/car_2022_taz.csv` (778 × 778,
+the residents' 2022 car layer); step 36's own AM occupancy (1.33) and PCE-to-vehicle factor
+(1.10), reused for comparability; `Output/validation/car_cordon_crossing_links.csv` (step 36's
+own screenline links, with its already-imputed `pce_imputed` column) for the screenline
+recomputation.
+
+**Method.** `DATA1`/`DATA2`/`UL1` were checked first, as task C10 asked, and ruled out: `DATA1`
+takes a class.subclass pattern (1.1–1.5, 2.1–2.4, …, 15.3–15.5), not a speed or a time (the
+implied speed if it were minutes is a median 4 km/h on ordinary streets — not plausible); `UL1`
+is a 0/1 flag. Free-flow speed is therefore **assumed by link `TYPE`**: 90 / 70 / 60 / 50 / 40
+km/h for TYPE 1–5, 30 for TYPE 8, 20 for the TAZ connectors (TYPE 9) — the same kind of gap task
+E5 (the car GC uplift) is blocked on. The car-mode graph (`MODES` containing `a`) has 27,441
+directed links over 11,245 nodes; `DIR` carries a single value across the whole network, so any
+one-way restriction rests on whether a link's reverse-direction row is present in the export, not
+an explicit flag. **The network's centroid convention is that a TAZ's node id equals its TAZ
+number** — confirmed for all 778 TAZs in the car matrix, no nearest-node snapping needed (unlike
+step 26's bus skim). A multi-source Dijkstra (`scipy.sparse.csgraph.dijkstra`, 778 sources, under
+2 seconds) gives the shortest-path tree from every TAZ; the vehicle OD (survey car trips ÷ 1.33
+occupancy) is loaded onto each tree by processing destinations in decreasing order of distance
+from the source and accumulating flow up through each node's predecessor edge — the standard
+all-or-nothing tree-loading algorithm, run once per source (18 seconds for all 778).
+
+**Results.** Against the 3,231 counted, car-mode, non-connector links (06:00–09:00): **summed,
+4,973,762 assigned vehicles against 4,795,770 counted — a ratio of 1.037**, essentially exact in
+aggregate, and by `TYPE` similarly close (0.79 underground-class TYPE 1 to 1.21 TYPE 3). Link by
+link the fit is poor, as an unrestrained assignment is expected to be: **GEH ≤ 10 on only 20 % of
+links** (20 % flow-weighted), GEH ≤ 5 on 9 % — route concentration onto a single shortest path
+per OD pair over- or under-loads parallel routes in a way real, congestion-aware driving would
+not. The six screenlines of step 36, recomputed from the assignment: Haifa city 1.09 / 0.85
+(in/out), metropolitan core 0.74 / 0.86, Tirat Carmel 0.76 / 0.76 sit close to or cross-check
+step 36's own 0.58–0.90 survey-based range, but Kiryat Ata (1.51 / 1.84), the Krayot
+(1.30 / 1.70) and Nazareth (1.62 / 1.80) run well **above** 1 — where step 36's method never
+exceeded 0.90 — most plausibly the assignment's own route-concentration tendency landing more of
+the corridor's demand on these cordons' specific (and, per step 36, more heavily imputed)
+counted links than real driving would. This is the link-level check task B1/C3 asked for: the
+base's aggregate scale holds up, but a genuine link-by-link validation still needs a real,
+capacity-restrained, calibrated-speed assignment, not this one.
+
+**Outputs.** `Output/validation/car_aon_link_flows.csv` (every car-mode link: assigned vehicles,
+counted vehicles, TYPE), `car_aon_fit_by_type.csv`, `car_aon_screenlines.csv`; figure
+`car_aon_vs_counts.png`.
+
+**Limits.** All-or-nothing (no capacity restraint, no congestion, no route diversity); no
+traffic from outside the study area's own survey-recorded trips, on top of step 36's own
+through-traffic gap; assumed free-flow speed by TYPE, not a calibrated or client-supplied value;
+`DIR`'s single value means one-way restrictions are only as good as the export's own row
+presence, not an explicit check.
 
 ## 7. Output inventory (`Output/`)
 

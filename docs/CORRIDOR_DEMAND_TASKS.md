@@ -92,6 +92,14 @@ Key facts driving the list (2017 trips-file hybrid, `Output/ths2017/study_taz/`)
         vs 0.47 counted), and the road peak hour is 0.38–0.43 of the three hours against the
         survey's 0.62 (caveat 18). Still open: the link-level comparison, which needs an
         assignment; count coverage on the Krayot and Nazareth cordons (75–85 % imputed).*
+        *Link-level check done 2026-09-23 (step 42, task C10, METHODOLOGY §6aj): an
+        all-or-nothing assignment (free-flow speed assumed by link TYPE — no usable speed field
+        exists without the client's network codebook) gives an essentially exact aggregate ratio
+        (1.037, 3,231 counted links) but a poor link-by-link fit (GEH ≤ 10 on 20%), and the six
+        screenlines recomputed from it run above step 36's own range on three of six cordons
+        (Kiryat Ata, Krayot, Nazareth) — likely route concentration, not a base-demand problem. A
+        real, capacity-restrained, calibrated-speed assignment is still what a genuine link-level
+        validation needs.*
   - [ ] Resolve the TAZ → superzone key precedence between the 2017 and 2018 chains
         (`prob_sz_cellular.csv` vs the 2017 rebuild; ≤ 0.07 in a handful of cells).
 - [x] **B1b. Ticketing coverage — segmented rule** *(done 2026-09-21 in
