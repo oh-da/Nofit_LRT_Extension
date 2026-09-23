@@ -179,6 +179,16 @@ Key facts driving the list (2017 trips-file hybrid, `Output/ths2017/study_taz/`)
       levelled fit against a year-specific calibration. The LRT's open question is now
       **station access** (13.6 min walk on the trunk pairs against 4.7 to a bus stop): an
       access / feeder model (feeder buses, walking network, park-and-ride) — added as E6.
+      *Acceleration allowance and a mixed alignment done 2026-09-23 (task C5, METHODOLOGY §6w
+      addendum, §6ac addendum): a 35-second accel/braking allowance on the design regime (10 s
+      dwell alone had none) brings its end-to-end time to 39.7 min, close to the calibrated
+      underground case (40.7 min); a mixed alignment (Haifa core S05–S14 underground, rest at
+      ground level, using the same calibrated function section by section) gives 56.1 min,
+      between the two pure regimes. Central-case captures and a headway sensitivity (5 / 7.5 /
+      10 min) for both, and for the two pure regimes, are in
+      `Output/skims/lrt_capture_regime_headway_matrix.csv`. Still open: which sections the
+      client's actual design puts underground (the core boundary here is assumed), and the
+      accel allowance's true value (30–40 s is the stated range).*
 - [ ] **E6. LRT access model** — replace the centroid-to-nearest-station walk with a walking
       network, feeder-bus access from the GTFS (bus to the nearest station + transfer) and
       park-and-ride where the station plan allows; this is what the generalized-cost

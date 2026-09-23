@@ -87,8 +87,15 @@ the two structural gaps, and they are the two that need inputs from the client s
    allowance per stop (constant in step 25), and a **mixed alignment** with the Haifa core
    underground (about S05–S14) and the rest at ground level. This is the case a decision
    would be made on; the two pure regimes and the 50 km/h ceiling bracket it.
+   *Done 2026-09-23 (task C5, METHODOLOGY §6w / §6ac addenda): 35 s accel/braking (midpoint of
+   the range) added to the design regime brings it to 39.7 min end to end (close to the
+   calibrated 40.7 min underground); the mixed alignment (S05–S14 underground) gives 56.1 min,
+   between the two pure regimes — central-case captures 4,300 and 3,520 respectively at the
+   default headway. The core boundary and the accel value are both assumed pending the
+   client's design.*
 6. **Headway 7.5 and 10 minutes** (step 26 constant), to show the dependence on the 5-minute
-   assumption.
+   assumption. *Done 2026-09-23: every regime loses 7–8 % of its central-case capture per
+   2.5-minute headway step (`Output/skims/lrt_capture_regime_headway_matrix.csv`).*
 
 ### 3b. Needs inputs from the client side
 
@@ -119,8 +126,8 @@ the two structural gaps, and they are the two that need inputs from the client s
 
 | # | Scenario | Purpose | Where |
 |---|---|---|---|
-| S1 | Mixed alignment (core underground, rest ground) with the acceleration allowance | the realistic case | step 25 → 26 → 31 → 32 |
-| S2 | Headway 5 / 7.5 / 10 min | operating-plan sensitivity | step 26 constant |
+| S1 | Mixed alignment (core underground, rest ground) with the acceleration allowance | the realistic case | step 25 → 26 → 31 → 32 — **done 2026-09-23, central case 3,520** |
+| S2 | Headway 5 / 7.5 / 10 min | operating-plan sensitivity | step 26 constant — **done 2026-09-23, 7–8 % lost per step** |
 | S3 | Parallel buses kept vs truncated to feeders | bus-network response; upper bound on capture | step 31: remove the competing direct-bus alternative on trunk pairs |
 | S4 | Synthetic T2 / T3 branches (and T1 to Kiryat Ata) | what the branches add; replaces the feeder composite for 15 areas | step 25 geometry + step 31 |
 | S5 | Car congestion uplift 2040 / 2050 (+ 20–30 % on car IVT) and parking at Matam / Lower City | car side of the forecast years | step 32 |

@@ -269,6 +269,18 @@ gains a matching `GC_SOURCE_DIR` switch to compare scenarios (§6ac addendum). U
 3,207 to 3,733 ground (+16%), 5,095 to 5,777 design regime (+13%) — reported as an alternative
 under `Output/skims/bus_wait_best_line/`, not adopted as the central case.
 
+**Update, 23 September 2026 (task C5 — realistic LRT regime and headway sensitivities).**
+Two new LRT regimes, both derived from step 25's existing calibrated function with no new
+inputs (§6w addendum): `design_50kmh_accel` (the 50 km/h design speed with a 35-second
+acceleration/braking allowance added to its 10-second dwell) ends at 39.7 min, close to the
+calibrated all-underground case (40.7 min); `mixed_core_underground` (the Haifa core, S05–S14,
+underground, the rest at ground level) ends at 56.1 min, between the two pure regimes. Central-
+case capture at the default 5-minute headway: 4,300 (design + accel) and 3,520 (mixed), against
+4,254 underground / 3,206 ground / 5,095 design-no-accel (§6ac addendum). A headway sensitivity
+(`LRT_HEADWAY` = 7.5 / 10 min) loses 7–8 % of the central-case capture per 2.5-minute step for
+every regime (`Output/skims/lrt_capture_regime_headway_matrix.csv`). None of this changes which
+regime is largest or smallest.
+
 Every published product, what it was built from, and its status:
 
 | Product (`Output/…`) | Built by | Base / inputs | Geography | Modes | Vintage | Status |
@@ -1642,6 +1654,30 @@ for the alignment, read beside the two calibrated scenarios rather than as a thi
 regime. Outputs `lrt_station_times_design_50kmh.csv`, `lrt_area_ivt_design_50kmh.csv`, the
 row in `lrt_end_to_end_summary.csv` and the columns in `lrt_line_profile.csv`.
 
+**Addendum, 23 September 2026 — the acceleration/braking allowance and a mixed alignment
+(task C5, `docs/NEXT_STEPS_HANDOVER_2026-09-23.md`).** Two more scenarios, both derived from
+machinery already in this notebook, no new inputs. **`design_50kmh_accel`** adds a stated
+`ACCEL_ALLOWANCE_S = 35` seconds per stop (the midpoint of the usual 30–40 s range; still
+open which value the client's design implies, `docs/PLAN_TIGHTENING_AND_SCENARIOS.md` §6) on
+top of the existing 10 s dwell — the calibrated regimes need no such addition, since their
+fitted stop penalty already comes from the Red Line's own observed acceleration, braking and
+dwell. End to end: **39.7 min (28.3 km/h)** — 3 % above the calibrated all-underground case
+(40.7 min), showing that most of the gap between the unrealistic 50 km/h ceiling (26.3 min)
+and the calibrated regime was exactly this missing allowance, not the running speed itself.
+**`mixed_core_underground`** applies the same calibrated `section_time` function used for the
+two pure regimes, section by section: the Haifa core (**S05–S14**, the ten stations from
+Matam-NeotPeres through Bat Galim-Kiryat Eliezer) underground, the rest — including the two
+Tirat Carmel sections and the run out to Hamifrats — at ground level, since neither end of the
+line sits under the city. 9 of the line's 23 sections fall inside the core. End to end:
+**56.1 min (20.1 km/h)**, between the two pure regimes as expected. Both are flagged pending
+the client's actual design (task E1): the core's boundary and the accel allowance's value are
+both assumed, not given.
+
+**Outputs.** `lrt_station_times_design_50kmh_accel.csv`, `lrt_station_times_mixed_core_underground.csv`,
+`lrt_area_ivt_design_50kmh_accel.csv`, `lrt_area_ivt_mixed_core_underground.csv`; both added to
+`lrt_end_to_end_summary.csv` and `lrt_line_profile.csv` (the mixed scenario's `lrt_line_profile.csv`
+columns also carry the per-section regime actually used) and to the line profile figure.
+
 ## 6x. Step 26 — Generalized cost on the V2 areas: data inventory, first-fill skims, gaps (`GC_data_inventory_and_skims.ipynb`)
 
 **Purpose.** For the capture model's formula (`docs/LRT_CAPTURE_PLAN.md`:
@@ -2113,6 +2149,38 @@ draws more of the transit market to the LRT in every scenario and case, without 
 which regime is largest. The default rerun (`GC_SOURCE_DIR` unset) reproduces
 `lrt_capture_scenarios.csv` and every other output to the last decimal, confirming the
 change is isolated to the alternative.
+
+**Addendum, 23 September 2026 — the two new LRT regimes and the headway sensitivity (task
+C5).** `LRT_SCEN` now picks up `lrt_design_50kmh_accel` and `lrt_mixed_core_underground`
+whenever step 26 produced them (§6w addendum), and `HEADWAY_LRT` reads from the `LRT_HEADWAY`
+environment variable (default 5 min), with `OUT` tagged on either or both when they move from
+default — `Output/skims/lrt_headway_{value}` for a headway-only rerun, `GC_SOURCE_DIR` itself
+when that also points elsewhere. Central case, 2022, 06:00–09:00, by regime × headway:
+
+| Regime | 5 min (default) | 7.5 min | 10 min |
+|---|---|---|---|
+| All underground | 4,254 | 3,815 | 3,410 |
+| All ground | 3,206 | 2,851 | 2,528 |
+| Design 50 km/h (no accel) | 5,095 | 4,603 | 4,144 |
+| Design 50 km/h + accel/braking | 4,300 | 3,858 | 3,449 |
+| Mixed (Haifa core underground) | 3,520 | 3,137 | 2,788 |
+
+(`Output/skims/lrt_capture_regime_headway_matrix.csv`, assembled from the individual runs
+above — every LRT scenario is present in every headway run, so this is one table read off
+five files, not a new computation.) The mixed regime sits between the two pure ones as its
+in-vehicle time does (§6w addendum); the accelerated design regime sits just above the
+calibrated underground case, for the same reason its end-to-end time does. Every regime loses
+7–8 % of its central-case capture per 2.5-minute step of headway, roughly linearly over the
+range tested — wait enters the generalized cost at weight 2.0, so this is the expected order
+of the effect, not a new finding. **Note on reproducibility:** rerunning the unchanged default
+case (headway 5, `GC_SOURCE_DIR` unset) during this work reproduced 4,254 rather than the
+4,250 quoted elsewhere in this document and in `docs/PLAN_TIGHTENING_AND_SCENARIOS.md` — a
+5-trip (0.1 %) drift traced to floating-point evaluation order upstream of this step (not to
+any change made here; the car and pure-regime LRT code paths are untouched by this addendum),
+already present before task C5. It is well inside the λ and premium ranges already carried as
+whiskers and does not change any conclusion; the round-number 4,250 is left standing elsewhere
+in this document rather than chasing a 0.1 % rerun-to-rerun tolerance through every quoted
+figure.
 
 ---
 

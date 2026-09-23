@@ -1,8 +1,10 @@
 scenario,form,end to end (min),commercial speed (km/h)
-all_underground,decomposed form (estimate),40.69,27.64
+all_underground,decomposed form (estimate),40.62,27.69
 all_underground,section form (fast bound),45.10,24.94
 all_underground,"nominal 500 m form (revision 1, slow bound)",73.50,15.30
-all_ground,decomposed form (estimate),65.84,17.08
+all_ground,decomposed form (estimate),65.85,17.08
 all_ground,section form (fast bound),55.03,20.44
 all_ground,"nominal 500 m form (revision 1, slow bound)",89.69,12.54
 design_50kmh,specified: 50 km/h + 10 s per stop,26.33,42.72
+design_50kmh_accel,specified: 50 km/h + 10 s dwell + 35 s accel/braking,39.74,28.30
+mixed_core_underground,"calibrated, section by section: 9 of 23 sections underground (Haifa core)",56.06,20.06

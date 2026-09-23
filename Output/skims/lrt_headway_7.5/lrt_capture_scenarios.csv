@@ -1,0 +1,26 @@
+scenario,case,λ,λ_T,LRT premium,LRT trips 06–09,of which from bus,of which from car,bus trips after,car trips after,transit share before,transit share after,LRT share of transit,LRT trips on trunk pairs,trunk pairs P_LRT|T (trip-wtd)
+LRT all underground,"central (λ 0.03, λ_T 0.06, premium 5)",0.03,0.06,5.0,3815,3482,332,11382,55381,0.2003,0.2153,0.251,1579,0.312
+LRT all underground,"low λ (0.02 / 0.03, premium 5)",0.02,0.03,5.0,5707,4883,824,10693,54178,0.2003,0.2324,0.348,2193,0.401
+LRT all underground,"high λ (0.05 / 0.10, premium 5)",0.05,0.1,5.0,2641,2449,192,12166,55771,0.2003,0.2098,0.178,1061,0.216
+LRT all underground,"no premium (λ central, premium 0)",0.03,0.06,0.0,3038,2827,210,11914,55626,0.2003,0.2118,0.203,1248,0.252
+LRT all underground,premium 10 (λ central),0.03,0.06,10.0,4728,4217,511,10776,55074,0.2003,0.2197,0.305,1970,0.379
+LRT all ground,"central (λ 0.03, λ_T 0.06, premium 5)",0.03,0.06,5.0,2851,2666,185,12049,55678,0.2003,0.2111,0.191,1064,0.217
+LRT all ground,"low λ (0.02 / 0.03, premium 5)",0.02,0.03,5.0,4978,4349,629,11107,54494,0.2003,0.2279,0.309,1815,0.342
+LRT all ground,"high λ (0.05 / 0.10, premium 5)",0.05,0.1,5.0,1599,1526,73,12915,56064,0.2003,0.2056,0.11,531,0.112
+LRT all ground,"no premium (λ central, premium 0)",0.03,0.06,0.0,2235,2122,113,12482,55860,0.2003,0.2085,0.152,825,0.171
+LRT all ground,premium 10 (λ central),0.03,0.06,10.0,3594,3301,294,11538,55445,0.2003,0.2144,0.238,1356,0.271
+LRT design 50 km/h,"central (λ 0.03, λ_T 0.06, premium 5)",0.03,0.06,5.0,4603,4101,502,10856,55119,0.2003,0.219,0.298,1987,0.38
+LRT design 50 km/h,"low λ (0.02 / 0.03, premium 5)",0.02,0.03,5.0,6226,5242,984,10403,53949,0.2003,0.2356,0.374,2445,0.438
+LRT design 50 km/h,"high λ (0.05 / 0.10, premium 5)",0.05,0.1,5.0,3699,3297,402,11447,55432,0.2003,0.2146,0.244,1626,0.314
+LRT design 50 km/h,"no premium (λ central, premium 0)",0.03,0.06,0.0,3718,3389,328,11446,55415,0.2003,0.2148,0.245,1597,0.314
+LRT design 50 km/h,premium 10 (λ central),0.03,0.06,10.0,5619,4874,745,10203,54756,0.2003,0.2242,0.355,2432,0.451
+LRT design 50 km/h + accel/braking,"central (λ 0.03, λ_T 0.06, premium 5)",0.03,0.06,5.0,3858,3517,341,11354,55367,0.2003,0.2155,0.254,1601,0.316
+LRT design 50 km/h + accel/braking,"low λ (0.02 / 0.03, premium 5)",0.02,0.03,5.0,5737,4904,833,10677,54165,0.2003,0.2326,0.35,2207,0.403
+LRT design 50 km/h + accel/braking,"high λ (0.05 / 0.10, premium 5)",0.05,0.1,5.0,2693,2493,200,12130,55755,0.2003,0.21,0.182,1088,0.221
+LRT design 50 km/h + accel/braking,"no premium (λ central, premium 0)",0.03,0.06,0.0,3074,2858,216,11889,55615,0.2003,0.212,0.205,1266,0.256
+LRT design 50 km/h + accel/braking,premium 10 (λ central),0.03,0.06,10.0,4777,4255,523,10744,55057,0.2003,0.2199,0.308,1995,0.383
+LRT mixed (Haifa core underground),"central (λ 0.03, λ_T 0.06, premium 5)",0.03,0.06,5.0,3137,2917,220,11845,55596,0.2003,0.2123,0.209,1305,0.262
+LRT mixed (Haifa core underground),"low λ (0.02 / 0.03, premium 5)",0.02,0.03,5.0,5197,4514,683,10976,54405,0.2003,0.2292,0.321,2003,0.372
+LRT mixed (Haifa core underground),"high λ (0.05 / 0.10, premium 5)",0.05,0.1,5.0,1871,1780,91,12712,55995,0.2003,0.2066,0.128,751,0.156
+LRT mixed (Haifa core underground),"no premium (λ central, premium 0)",0.03,0.06,0.0,2470,2334,136,12312,55796,0.2003,0.2094,0.167,1020,0.209
+LRT mixed (Haifa core underground),premium 10 (λ central),0.03,0.06,10.0,3936,3589,348,11300,55342,0.2003,0.2159,0.258,1647,0.324

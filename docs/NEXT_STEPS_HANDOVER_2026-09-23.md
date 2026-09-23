@@ -359,6 +359,24 @@ headway lowers the capture (wait enters GC at weight 2). **Documents.** §6w add
 §6ad addenda, headline rows, `docs/PLAN_TIGHTENING_AND_SCENARIOS.md` §4 rows S1 / S2 ticked.
 Effort: half a day.
 
+**Status, 23 September 2026 — done for 2022, two method choices worth flagging.** Both
+scenarios built and run (25 → 26 → 31): `design_50kmh_accel` (39.7 min end to end, central
+capture 4,300) and `mixed_core_underground` (56.1 min, central capture 3,520), plus the
+headway sensitivity for every regime, not just the new ones
+(`Output/skims/lrt_capture_regime_headway_matrix.csv`). Two deviations from the method above,
+both deliberate: (1) no `Input/lrt_section_regime.csv` was added — the core boundary (S05–S14)
+is a hardcoded set in the notebook, since a committed per-section file for one assumed rule
+seemed like the wrong kind of permanence before the client's actual design exists; trivial to
+replace once real per-section data arrives. (2) the acceleration/braking allowance was added
+**only** to the design_50kmh scenario, not to all three regimes as "a variant of each regime"
+could be read to mean — the two calibrated regimes (all_underground, all_ground) already carry
+real acceleration, braking and dwell inside their fitted Red Line stop penalty, so adding a
+further allowance to them would double-count it. **Not done:** the per-(regime, headway) loop
+inside `lrt_capture_scenarios.csv` itself (each combination instead lives in its own directory
+under `Output/skims/`, assembled into the matrix above by reading the five files together, not
+by a new loop inside step 31); step 32's forecast-year rerun for either new scenario or for the
+headway sensitivity (2022 central case only, matching the precedent set by C4).
+
 ### C6. Synthetic branch alignments T1 / T2 / T3 (task E1, scenario S4) — until drawings arrive
 
 **Goal.** Replace the feeder composite for the 15 off-trunk areas with an LRT service along the

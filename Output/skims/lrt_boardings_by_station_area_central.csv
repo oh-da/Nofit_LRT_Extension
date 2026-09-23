@@ -1,11 +1,11 @@
-,area,LRT all underground,LRT all ground,LRT design 50 km/h
-201,TiratCarmel,427.0,267.0,560.0
-202,Matam-NeotPeres,236.0,188.0,224.0
-203,HofCarmel-NeveDavid,138.0,190.0,149.0
-204,Hecht-Shprintzak,340.0,268.0,408.0
-205,EinHayam,114.0,91.0,136.0
-206,BatGalim-KiryatEliezer,386.0,276.0,470.0
-207,Hamoshava,138.0,111.0,158.0
-208,LowerCity,134.0,188.0,157.0
-209,Namal-Giborim,666.0,813.0,729.0
-210,Hamifrats,1671.0,816.0,2102.0
+,area,LRT all underground,LRT all ground,LRT design 50 km/h,LRT design 50 km/h + accel/braking,LRT mixed (Haifa core underground)
+201,TiratCarmel,428.0,266.0,560.0,435.0,338.0
+202,Matam-NeotPeres,236.0,188.0,224.0,238.0,225.0
+203,HofCarmel-NeveDavid,138.0,190.0,149.0,140.0,222.0
+204,Hecht-Shprintzak,340.0,268.0,408.0,344.0,325.0
+205,EinHayam,114.0,91.0,136.0,114.0,109.0
+206,BatGalim-KiryatEliezer,386.0,276.0,470.0,391.0,327.0
+207,Hamoshava,138.0,111.0,158.0,139.0,120.0
+208,LowerCity,134.0,188.0,157.0,135.0,198.0
+209,Namal-Giborim,666.0,812.0,729.0,671.0,826.0
+210,Hamifrats,1673.0,816.0,2102.0,1693.0,829.0
