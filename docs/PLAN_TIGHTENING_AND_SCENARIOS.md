@@ -47,6 +47,14 @@ The first three are perception parameters that no amount of skim precision fixes
 own caveat (`docs/LRT_CAPTURE_PLAN.md` §3). The branch geometry and the external trips are
 the two structural gaps, and they are the two that need inputs from the client side.
 
+**Cross-check, 23 September 2026 (task C8, step 40, METHODOLOGY §6ak):** a 155-row factorial
+over regime, headway, λ/premium and bus competition confirms this table's ranking of the
+factors it could vary — headway moves the central case least (range 844 of the 4,254 trips),
+then bus competition's explicit ceiling (1,500, not a plausible range), then LRT regime (1,889),
+then λ/premium (2,865, widest, consistent with the row above). Coverage threshold, walk access
+and car source are not in this factorial — they need a rerun from step 15, or are blocked as
+elsewhere in this document and in `docs/NEXT_STEPS_HANDOVER_2026-09-23.md` item C1.
+
 ## 3. Tightening — the work, in order
 
 ### 3a. Needs no new inputs (start tomorrow)

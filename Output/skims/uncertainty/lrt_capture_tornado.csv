@@ -1,0 +1,5 @@
+factor,low_label,low,high_label,high,range
+LRT headway (min),10,3410.0,5,4254.0,844.0
+Bus competition on trunk,full,4254.0,truncated,5754.0,1500.0
+LRT regime,LRT all ground,3206.0,LRT design 50 km/h,5095.0,1889.0
+λ / LRT premium (5 cases),"high λ (0.05 / 0.10, premium 5)",3166.0,"low λ (0.02 / 0.03, premium 5)",6031.0,2865.0

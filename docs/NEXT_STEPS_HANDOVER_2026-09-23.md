@@ -207,6 +207,19 @@ outputs list above.** Resume once a key with the Distance Matrix API enabled and
 available; the representative-point script is reusable (not yet in the repository — see the
 person who resumes this item for it, or rebuild it from this method paragraph, it is short).
 
+**Further update, 23 September 2026 — blocked structurally, not just by the missing key.** The
+user clarified that a key would not actually unblock this step: Google's Distance Matrix
+`departure_time` parameter only accepts a *future* timestamp and returns a traffic-aware
+*prediction* for it (`traffic_model=best_guess`) — it has no mode for retrieving *historical*
+traffic for a date that has already passed. The car uplift this step needs is specifically for
+May 2026 (chosen to avoid the July–September holiday/vacation travel-pattern distortion), and
+that period is now in the past, so there is no way to query Google for it at all, key or no key.
+**The user will instead supply a real car-network skim from a separate model network later**;
+until then, no substitute (including `Input/BusSpeedData/std_202605.csv`, which is bus-only speed
+data, confirmed explicitly not usable as a stand-in) should be treated as answering this need —
+see task C10 (§6aj) for a clearly-labelled, lower-stakes, *assumed*-free-flow-speed exercise that
+is not a substitute for this item, and item 8 of §D's standing data requests below.
+
 ### C2. Step 38 — Walking-network access to stations and stops from OpenStreetMap (task E6)
 
 **Goal.** Replace the straight-line × 1.3 walk in the LRT and bus skims with a walking-network
@@ -451,6 +464,25 @@ alternative skims produced by C1–C7 and writes one row per combination:
 trunk-pair share and busiest link; a tornado figure by factor. **Documents.** §6am, headline
 row "capture range across the design", task C3 ticked. Effort: half a day after C1–C7.
 
+**Status, 23 September 2026 — built as `LRT_capture_uncertainty.ipynb` (§6ak, not §6am — the
+next free letter), reduced to 5 of the plan's 8 factors.** Coverage threshold, walk access source
+and car source are held fixed, not varied: coverage needs a rerun from step 15 (not just a
+re-read of steps 26/31's saved skims), and walk/car source are the same OSM-egress and
+historical-Google gaps items C1–C3 already flagged as blocked this session. The other five
+factors (regime, headway, λ, LRT premium, bus competition) *are* a genuine factorial, assembled
+from runs steps 31/32 already made across C4–C7, plus two `truncated`-competition combinations
+(headway 7.5 and 10) run once, one-off, specifically for this notebook — worth flagging for
+whoever runs the next version: step 31's `OUT`-tagging (tasks C5/C7) only composes one alternate
+dimension at a time (`GC_SOURCE_DIR` non-default makes `OUT` follow it exactly), so setting
+`BUS_COMPETITION='truncated'` on top of a headway-alternate `GC_SOURCE_DIR` silently overwrites
+that directory's existing `full`-competition results rather than tagging alongside them; this was
+worked around by running with `git checkout` afterward and hand-copying just the new
+`lrt_capture_scenarios.csv` into a fresh directory, not by fixing the notebook. 155-row factorial
+(`Output/skims/uncertainty/lrt_capture_factorial.csv`); tornado ranked by range on the central
+case (4,254 LRT trips): headway (844) < bus competition's explicit ceiling (1,500) < regime
+(1,889) < λ/premium (2,865, widest). None of the four is small enough to set aside in a future
+full design — see the tornado figure (`Output/figures/lrt_capture_tornado.png`) and §6ak.
+
 ### C9. Step 41 — RavKav 2025 journeys on their own alightings (caveat 16; prerequisite for re-anchoring)
 
 **Goal.** Give the 2025 layer an alighting inference of its own, so that it can be compared with
@@ -614,6 +646,14 @@ committed and pushed on its own, with its documents, before the next starts.
 6. CBS population and employment by statistical area for 2018 and 2022 (medium).
 7. The OnBoard survey codebook — unit per row and expansion (lower priority since the chain no
    longer depends on its pattern).
+8. **A car-network skim from the client's own model network** (added 23 September 2026) —
+   confirmed the only route to the car uplift task C1/E5 needs: Google's Distance Matrix API
+   cannot supply *historical* traffic for the target May-2026 period now that it has passed (it
+   only predicts a future `departure_time`), and `Input/BusSpeedData/std_202605.csv` is
+   confirmed bus-only, not usable as a general car speed source. Task C10 (§6aj) assigned the
+   2022 car layer onto the Emme network with an *assumed* free-flow speed by link `TYPE` as a
+   separate, lower-stakes exercise — it is not a substitute for a real skim. Both the GC/capture
+   pivot's car uplift (C1) and any future car-network assignment work are waiting on this item.
 
 Not needed / not coming, by the user's decision on 23 September 2026: Metronit 2013 ridership,
 a stated-preference survey, parking supply, the cellular product's trip definition.

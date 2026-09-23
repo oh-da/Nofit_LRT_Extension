@@ -332,6 +332,14 @@ up to 1.84) — likely route concentration onto a single shortest path, not a ba
 since the aggregate figure holds up. A genuine link-by-link validation still needs a real,
 capacity-restrained, calibrated-speed assignment.
 
+**Update, 23 September 2026 (task C8 — LRT capture uncertainty, step 40).** A factorial over
+five of the plan's eight factors (§6ak) — coverage threshold, walk access source and car GC
+source are held fixed, blocked by the same gaps as tasks C1–C3/E5 (this document's next
+paragraph and item C1 of `docs/NEXT_STEPS_HANDOVER_2026-09-23.md`). Ranked by range on the
+central case (4,254 LRT trips 06:00–09:00): headway (844) < bus competition's explicit ceiling
+(1,500) < LRT regime (1,889) < λ/the LRT premium (2,865, the widest). None of the four factors
+this session could vary is small enough to drop from a future full design.
+
 Every published product, what it was built from, and its status:
 
 | Product (`Output/…`) | Built by | Base / inputs | Geography | Modes | Vintage | Status |
@@ -364,6 +372,7 @@ Every published product, what it was built from, and its status:
 | `ravkav_2025/*` | step 34 | `Input/BusRavKav/2025/*` (LFS) × the north stops file, `TAZ_North`, the OnBoard pattern, the GTFS stations | stops, 733 TAZ, 28 sub-areas, 25 V2 areas, 20 rail stations | bus + Metronit boardings (journey origins / transfer legs), bus + Metronit journey and leg OD, rail station OD, boarding-hour peak factors | 2025 (representative Tuesday) | **current input layer** — not yet consumed by steps 15–32 (§6af) |
 | `ravkav_2025/bus_od_taz_2025_own_alightings.csv`, `journeys_2025_summary.csv` | step 41 | `Input/BusRavKav/2025/{Buses,Metronit}_RavKav.csv` (LFS), card-level tap chaining | TAZ pairs (allocated journeys only) | bus + Metronit journeys on their own inferred alightings — 45.8 % of taps allocated | 2025 (representative Tuesday) | **diagnostic** — supports caveat 16, does not replace the OnBoard-pattern prior of `ravkav_2025/*` above |
 | `validation/car_aon_link_flows.csv`, `car_aon_fit_by_type.csv`, `car_aon_screenlines.csv` | step 42 | `Output/ths2017/three_mode_2022/car_2022_taz.csv` × the Emme network, all-or-nothing assignment, assumed free-flow speed by TYPE | every car-mode link | assigned vs counted vehicles 06:00–09:00 — aggregate ratio 1.037, link-level GEH ≤ 10 on 20 % | 2022 (demand), mixed years (counts, as step 36) | **diagnostic** — the link-level check step 36 could not give |
+| `skims/uncertainty/lrt_capture_factorial.csv`, `lrt_capture_tornado.csv` | step 40 | steps 31/32's own runs across tasks C4–C7, plus two one-off `truncated`-competition reruns at headway 7.5/10 | 25 areas, aggregated to 06:00–09:00 totals | LRT trips by regime × headway × λ/premium × bus competition (155 rows) | 2022 | **diagnostic** — a factorial over 5 of the plan's 8 factors; coverage/walk/car source fixed |
 
 The 25 GS zones (`Input/TAZ_GSnew.csv`) and the 25 retained research areas of the
 forecast tables are different geographies with the same matrix dimension; files are
@@ -3026,6 +3035,56 @@ traffic from outside the study area's own survey-recorded trips, on top of step 
 through-traffic gap; assumed free-flow speed by TYPE, not a calibrated or client-supplied value;
 `DIR`'s single value means one-way restrictions are only as good as the export's own row
 presence, not an explicit check.
+
+## 6ak. Step 40 — LRT capture: a designed uncertainty experiment, reduced to the available factors (`LRT_capture_uncertainty.ipynb`, task C8)
+
+**Purpose.** Task C3's full factorial over coverage threshold, LRT regime, headway, λ, LRT
+premium, bus competition, walk access source and car GC source, wrapping steps 31/32 as a
+function of a parameter dict. Walk access source (tasks C2/C3, OSM) and car GC source (tasks
+C1/E5, a Google or client-supplied uplift) are both blocked this session (§0); coverage threshold
+requires a rerun from step 15, not just a re-read of step 26/31's saved skims. This step runs the
+factorial over the five remaining factors instead, built from runs steps 31/32 already made
+across tasks C4–C7 (plus two combinations run once, one-off, for this notebook), and documents
+the three factors left fixed rather than silently dropping them.
+
+**Method.** `Mode_skims_and_flow_comparison.ipynb`'s own `OUT`-tagging (tasks C5, C7) composes
+only one alternate dimension at a time: pointing `GC_SOURCE_DIR` at an alternate step-26 headway
+directory makes `OUT` follow it exactly, so setting `BUS_COMPETITION='truncated'` on top of that
+would silently overwrite that directory's existing `full`-competition results rather than tag
+alongside them. Four of the six headway × bus-competition cells (headway 5/7.5/10 at `full`;
+headway 5 at `truncated`) were already on disk from tasks C4/C5/C7; the two `truncated` cells at
+headway 7.5 and 10 were produced by one-off runs of the unmodified notebook (`LRT_HEADWAY` and
+`BUS_COMPETITION` both set, `GC_SOURCE_DIR` pointed at that headway's step-26 directory), with
+only the resulting `lrt_capture_scenarios.csv` copied out to a new, non-colliding directory
+(`Output/skims/lrt_headway_{7.5,10}_truncated/`) — the shared `Output/skims/lrt_headway_{7.5,10}/`
+directories and the notebook itself were left untouched (`git checkout` after each run). The
+`OUT`-tagging gap is left as found; fixing a shared default code path for the sake of two cells
+this notebook already has by other means was judged not worth the regression risk. The six
+sources are concatenated, tagged with `headway_min` and `bus_competition`, into one 155-row
+factorial table (5 regimes × up to 6 headway/competition cells × 5 λ/premium cases each, minus
+the synthetic-branches regime — task C6 — which only exists at headway 5 / full, since its GC
+comes from step 26 directly rather than through the shared feeder/gateway loop). A tornado is
+built by varying one factor at a time around the central case (`LRT all underground`, headway 5,
+full competition, central λ/premium — 4,254 LRT trips 06:00–09:00), the other three held fixed.
+
+**Results.** Ranked by range on the central case, smallest to largest: **headway**
+(5 → 10 min: 4,254 → 3,410, range 844), **bus competition on trunk** (full → truncated:
+4,254 → 5,754, range 1,500 — task C7's explicit upper bound, not a plausible band), **LRT regime**
+(all-ground → design 50 km/h: 3,206 → 5,095, range 1,889) and **λ / the LRT premium**
+(high λ → low λ: 3,166 → 6,031, range 2,865, the widest of the four). Excluding bus competition's
+ceiling, regime and λ/premium move the central case by a comparable, larger amount than headway;
+none of the four is small enough to drop from a future full design.
+
+**Outputs.** `Output/skims/uncertainty/lrt_capture_factorial.csv` (155 rows),
+`lrt_capture_tornado.csv`; figure `Output/figures/lrt_capture_tornado.png`; two new committed data
+directories, `Output/skims/lrt_headway_{7.5,10}_truncated/lrt_capture_scenarios.csv`.
+
+**Limits.** A factorial over five of the plan's eight factors, not all eight — coverage
+threshold, walk access source and car GC source are each held at their single available value
+(§0). The λ/premium sweep is a one-factor-at-a-time design around the centre (five cases), not a
+full λ × premium cross. The synthetic-branches regime (task C6) is central-case only. The
+`OUT`-tagging gap that made two cells need a one-off, hand-copied run is a real (if minor)
+maintenance gap in step 31, left unfixed (see Method).
 
 ## 7. Output inventory (`Output/`)
 

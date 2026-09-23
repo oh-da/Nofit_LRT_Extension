@@ -348,3 +348,11 @@ for this environment) and writes up eleven next steps — spanning items already
 in `docs/RED_TEAM_RESPONSE_2026-09-23.md` §3 — each with exact inputs, method, outputs, checks
 and the documents to update, so any one of them can be started without re-reading the task
 history first.
+
+*Uncertainty factorial done 2026-09-23 (step 40, task C8, METHODOLOGY §6ak):* reduced to 5 of
+the plan's 8 factors — coverage threshold, walk access source and car GC source stay fixed,
+blocked by the same OSM-egress and historical-Google-traffic gaps as tasks C1–C3/E5 above. The
+other five (regime, headway, λ, LRT premium, bus competition) form a 155-row factorial; ranked
+by range on the central case, headway (844) < bus competition's explicit ceiling (1,500) <
+regime (1,889) < λ/premium (2,865, widest) — see `Output/skims/uncertainty/` and
+`Output/figures/lrt_capture_tornado.png`.
