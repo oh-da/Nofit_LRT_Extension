@@ -136,8 +136,13 @@ Key facts driving the list (2017 trips-file hybrid, `Output/ths2017/study_taz/`)
       than the survey's 0.589; the boarding-based value is the one to carry for the transit
       layers.* *Road counts 2026-09-23 (step 36, §6ah): the busiest clock hour on the cordon
       links holds 0.38–0.43 of 06:00–09:00 for all traffic, against the survey's car 0.62 — the
-      step-20 / 27 factors are an upper bound (caveat 18); carry 0.42–0.48 for car.* Still open:
-      a link-crossing (rather than departure or boarding) hour once travel times exist (A2).
+      step-20 / 27 factors are an upper bound (caveat 18); carry 0.42–0.48 for car.* **Carried
+      through done 2026-09-23 (task C11, METHODOLOGY §6y / §6v / §6ac addenda):** steps 27, 24
+      and 31 now publish an observed-factor column (car 0.435, transit 0.4755) beside every
+      survey-departure peak-hour column, not in place of it — the trunk's peak-hour LRT loads
+      move to 0.865–1.041 of the survey-based figure depending on direction, since the observed
+      transit factor does not split by direction the way the survey one does. Still open: a
+      link-crossing hour once an assignment exists (A2, C10); step 32's forecast-year outputs.
 - [ ] **B2. Population frames**
   - [ ] Reconcile the transit layer (RavKav journeys by boarding stop, incl. non-residents
         and transfers; Hamifrats 120 THS vs 1,079 RavKav) with the resident-household

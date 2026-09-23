@@ -504,6 +504,21 @@ publish both peak-hour sets side by side (`corridor_v2_link_flows_long.csv` gain
 **Documents.** §6r / §6y / §6ac / §6ad addenda, the §0 headline rows for peak-hour quantities
 carrying both values, caveat 18 updated, the reports' next revision note. Effort: half a day.
 
+**Status, 23 September 2026 — done for steps 24/27/31; step 32 and a PHF_SOURCE switch not
+built.** Implemented as side-by-side columns rather than a `PHF_SOURCE` switch with a rerun, per
+the Method's own "publish both peak-hour sets side by side" — one execution of each notebook
+now carries both factors, so there was nothing to gate behind an environment variable. Car
+observed = mean of the 12 cordon-direction `count PHF3h` values (step 36) + the stated 0.03
+sliding-window correction = 0.435, applied uniformly (the six cordons do not map onto
+individual V2 routes). Transit observed = the RavKav study-area boarding factor (step 34,
+bus, all boardings) = 0.4755, applied to bus, Metronit/rail and taxi alike (no independent
+observed source for taxi). Because the transit observed factor is one number for both
+directions while the survey factor splits 0.549 up / 0.457 down, the trunk's peak-hour LRT
+loads move to 0.865–0.866 (up) / 1.041 (down) of the survey-based figure — not a uniform
+correction. **Not done:** step 32's forecast-year peak-hour outputs; a car observed factor
+split by cordon/direction (one representative number was used instead, matching the existing
+study-area-fallback simplification already in step 27).
+
 ### C12. Housekeeping that goes with the above
 
 - When C1–C7 add switches, the default run of the chain must still reproduce today's numbers

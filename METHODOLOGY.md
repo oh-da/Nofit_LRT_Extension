@@ -289,6 +289,16 @@ regime (e.g. 4,254 → 5,754 underground), reported under `Output/skims/bus_trun
 the full-competition case, not adopted as it — the actual opening-year bus plan is still a
 client-side request.
 
+**Update, 23 September 2026 (task C11 — observed design-hour factors, caveat 18).** Steps 27,
+24 and 31 gain `PHF3h observed` / `flow_peak_hour_observed` columns beside every existing
+survey-departure peak-hour column, not in place of them: car 0.435 (step 36's cordon counts +
+the stated sliding-window correction), transit 0.4755 (step 34's RavKav study-area boarding
+factor) against the survey's 0.55–0.66 (car) and 0.55–0.74 (bus) — both markedly flatter, as
+§6ah and §6af already found. Because the observed transit factor does not split by direction
+while the survey one does (0.549 up / 0.457 down), the trunk's peak-hour LRT loads move in
+opposite directions from the survey-based figure: up down to 0.865–0.866 of it, down up to
+1.041 of it. Step 32's forecast-year peak-hour outputs are not yet extended.
+
 Every published product, what it was built from, and its status:
 
 | Product (`Output/…`) | Built by | Base / inputs | Geography | Modes | Vintage | Status |
@@ -1600,6 +1610,13 @@ peak-hour), `corridor_v2_link_flows_wide.csv`, `corridor_v2_route_summary.csv`,
 `corridor_v2_network_link_flows.csv`, `corridor_v2_vs_earlier_profile.csv`; figure
 `corridor_v2_route_profiles_2022.png`.
 
+**Addendum, 23 September 2026 — the observed design-hour factor (task C11).** When step 27
+provides its `PHF3h observed` column (§6y addendum), `corridor_v2_link_flows_long.csv` gains
+`PHF3h_observed` and `flow_peak_hour_observed` beside the existing survey-based columns, and
+`corridor_v2_route_summary.csv` a `busiest link peak hour observed` column — the same
+three-hour flows, scaled by the flatter observed factor instead of the survey's departure-time
+one.
+
 ## 6w. Step 25 — LRT line and stations: stop-to-stop times, underground vs ground level (`LRT_line_stations_travel_time.ipynb`)
 
 **Purpose.** Turn the planned geometry (`Input/GeneralHalufa/`) into a station table and
@@ -1869,6 +1886,25 @@ loads. Caveats as §6r.
 
 **Outputs.** `Output/corridor_v2/peak_hour_factors_v2.csv`, `peak_hour_factors_v2_applied.csv`;
 figure `corridor_v2_peak_hour_profiles.png`.
+
+**Addendum, 23 September 2026 — the observed design-hour factor, beside the survey-departure
+one (task C11, caveat 18).** `peak_hour_factors_v2_applied.csv` gains two columns, `PHF3h
+observed` and `observed basis`, computed alongside — not in place of — everything above.
+**Car:** the mean of the 12 cordon-direction `count PHF3h` values of step 36
+(`Output/validation/car_cordon_counts.csv`), 0.405, plus the stated sliding-window correction
+of 0.03 (§6ah: "a sliding 60-minute window sits 5–10 % above the best clock hour") = **0.435**,
+applied to every route and direction alike (the six cordons do not map onto individual V2
+routes, so this is one representative figure, the same simplification the study-area fallback
+above already makes for undersampled route-directions). **Transit:** the RavKav boarding-hour
+factor of step 34, study-area scope, all boardings, bus (`Output/ravkav_2025/
+boarding_hour_peak_factors_2025.csv`) = **0.4755**, applied to bus, Metronit/rail and taxi
+alike (no independent observed source exists for taxi peaking; this is the same borrowing the
+survey-based rail = bus convention above already does). Both observed figures are markedly
+flatter than every survey-departure factor on this page (car 0.55–0.66, bus 0.55–0.74): the
+survey's departure-time profile overstates real peaking on both modes, as §6ah and §6af
+already found independently. Steps 24 and 31 carry the observed factor through to a matching
+`flow_peak_hour_observed` / `..._peak_hour_observed` column beside their existing peak-hour
+outputs; step 32's forecast-year peak-hour outputs are not yet extended.
 
 ## 6z. Step 28 — Corridor transit profiles on the V2 routes: calibrated survey vs ticketing (`Corridor_profile_V2_survey_vs_ticketing.ipynb`)
 
@@ -2208,6 +2244,18 @@ regimes gain the most, since a competing bus was previously closer to those regi
 than to underground's, so removing it changes more of the choice. Reported as the upper bound
 under `Output/skims/bus_truncated/`, beside the full-competition central case, not in place of
 it.
+
+**Addendum, 23 September 2026 — the observed design-hour factor on the trunk-link peak-hour
+loads (task C11).** `trunk_link_flows_bus_vs_lrt.csv` gains a `..._peak_hour_observed` column
+for every LRT scenario tag, alongside the existing survey-based `..._peak_hour` — the same
+three-hour central-case LRT loads, scaled by the RavKav study-area boarding factor of §6y
+(0.4755, the same figure both directions) instead of the survey's departure-time network
+factor (0.549 up / 0.457 down). Because the observed factor does not split by direction while
+the survey one does, the two move in *opposite* directions from the survey-based figure: up
+loads fall to 0.865–0.866 of it (busiest link, Namal-Giborim → Hamifrats up, 406 → 352), down
+loads rise to 1.041 of it (the same link down, 764 → 796) — not a uniform correction, since the
+survey's own up/down split (which the observed single factor does not carry) is itself part of
+what step 36 and step 34 found overstated.
 
 ---
 
