@@ -37,6 +37,8 @@ the gaps listed in `Output/gc/gc_data_inventory.csv` ([§6x](METHODOLOGY.md#6x-s
 in [METHODOLOGY.md §8](METHODOLOGY.md#8-known-caveats-and-open-questions) and
 [CORRIDOR_DEMAND_TASKS.md](docs/CORRIDOR_DEMAND_TASKS.md).
 
+**Next steps**, specified for hand-over (inputs, method, outputs, checks and documents per step, plus the repository conventions): [`docs/NEXT_STEPS_HANDOVER_2026-09-23.md`](docs/NEXT_STEPS_HANDOVER_2026-09-23.md). LFS inputs can be pulled without the git-lfs client with `tools/lfs_pull.py`.
+
 See **[METHODOLOGY.md](METHODOLOGY.md)** for the full reasoning, methodology, inputs and
 outputs of every step (and **[docs/PLAIN_ENGLISH_METHODOLOGY.md](docs/PLAIN_ENGLISH_METHODOLOGY.md)**
 for the same content — every step's inputs, processing, formulas, outputs and test
