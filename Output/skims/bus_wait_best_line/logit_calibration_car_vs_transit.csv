@@ -1,0 +1,3 @@
+fit,pairs,trips,lambda (per gen-min),se,rho2 vs constant-only,observed transit share
+constant + λ,597,70168,-0.0002,0.0004,0.0000,0.2012
+distance-band constants + λ,597,70168,0.0204,0.0004,0.0325,0.2012

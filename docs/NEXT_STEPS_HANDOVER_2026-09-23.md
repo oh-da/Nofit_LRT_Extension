@@ -178,7 +178,7 @@ variable `GOOGLE_MAPS_API_KEY` (never in the repository).
    Do not make `google` the default until the user decides; save the alternative outputs under
    `Output/skims/car_google/` rather than overwriting.
 
-**Outputs.** `Output/gc/google_dm_area_points.csv`, `google_dm_raw/*.json`,
+**Outputs.** `Output/gc/google_dm_area_points.csv`,
 `car_ivt_google_area_v2.csv`, `car_ivt_google_freeflow_area_v2.csv`, `car_km_google_area_v2.csv`,
 `car_google_vs_survey_pairs.csv`, `car_google_vs_survey_summary.csv`; the alternative-skim run
 under `Output/skims/car_google/` (same file names as step 31 / 32); figure
@@ -190,6 +190,35 @@ survey is reported with the survey's sample size beside it.
 
 **Documents.** §6ai; §0 update paragraph and a headline row "car time uplift 2017/18 → 2026";
 §6x addendum stating the switch; task E5 ticked; plain-English 5.x. Effort: half a day.
+
+**Status, 23 September 2026 — attempted, blocked and partly amended.** No `GOOGLE_MAPS_API_KEY`
+is available in this environment and none was fabricated; the user decided to skip the API
+queries for now rather than substitute another source. Part 1 (representative points) was
+built and verified without the key — 25 areas, 174 TAZs join cleanly against `TAZ_North.shp`
+and `Zonal_2020.csv` with no missing geometry or population/employment; TsometKiryatAta (212)
+has zero resident and zero job population (a junction area) and falls back to an unweighted
+centroid of its 3 TAZs, flagged in the output rather than silently weighted by zero — but the
+points were not committed, since the step is not otherwise executable and a partial output would
+misstate progress. **The raw-response caching in step 2 above is superseded by the user's
+decision the same day: do not commit raw Google API JSON to this public repository (Maps
+Platform ToS restricts storing/redistributing raw results) — keep only the derived aggregates
+(`car_ivt_google_area_v2.csv` etc.) in `Output/gc/`, and drop `google_dm_raw/*.json` from the
+outputs list above.** Resume once a key with the Distance Matrix API enabled and billing on is
+available; the representative-point script is reusable (not yet in the repository — see the
+person who resumes this item for it, or rebuild it from this method paragraph, it is short).
+
+**Further update, 23 September 2026 — blocked structurally, not just by the missing key.** The
+user clarified that a key would not actually unblock this step: Google's Distance Matrix
+`departure_time` parameter only accepts a *future* timestamp and returns a traffic-aware
+*prediction* for it (`traffic_model=best_guess`) — it has no mode for retrieving *historical*
+traffic for a date that has already passed. The car uplift this step needs is specifically for
+May 2026 (chosen to avoid the July–September holiday/vacation travel-pattern distortion), and
+that period is now in the past, so there is no way to query Google for it at all, key or no key.
+**The user will instead supply a real car-network skim from a separate model network later**;
+until then, no substitute (including `Input/BusSpeedData/std_202605.csv`, which is bus-only speed
+data, confirmed explicitly not usable as a stand-in) should be treated as answering this need —
+see task C10 (§6aj) for a clearly-labelled, lower-stakes, *assumed*-free-flow-speed exercise that
+is not a substitute for this item, and item 8 of §D's standing data requests below.
 
 ### C2. Step 38 — Walking-network access to stations and stops from OpenStreetMap (task E6)
 
@@ -295,6 +324,27 @@ change. Keep the current rule as the default until the user decides.
 **Outputs.** Alternative run under `Output/skims/bus_wait_best_line/`. **Documents.** §6x
 addendum, §6ac addendum with the capture change, task E3 ticked. Effort: two hours.
 
+**Status, 23 September 2026 — the wait-rule half done; the overhead itself still open.** Step
+29 was extended to carry a best-single-line headway per area pair alongside the existing
+pooled one (grouping the same peak-hour trips by `(o, d, route_code)`; §6aa addendum). Step 26
+gained the `BUS_WAIT_RULE` switch reading from an environment variable, and — found while
+implementing it — the 178 non-direct pairs' transfer count was silently defaulting to 0 via a
+`fillna`, inconsistent with step 31, which already assumes 1 transfer on these pairs when it
+reads this table; step 26 now states that assumption directly (`gc_area_v2_bus.csv` and
+`gc_trunk_pairs_comparison.csv` move on exactly those 178 cells, +8.0 generalized minutes
+each; the capture is unaffected, since step 31 already forced this value — confirmed by an
+exact rerun). Step 31 gained a matching `GC_SOURCE_DIR` switch so the comparison reruns
+without editing either notebook. Results: trip-weighted trunk-pair bus GC 30.7 → 34.9 minutes
+under `'best_line'`; central-case LRT capture 4,250 → 4,879 underground (+15%), 3,207 → 3,733
+ground (+16%), 5,095 → 5,777 design regime (+13%) (`Output/skims/bus_wait_best_line/`, all
+five λ/premium cases). The default chain (`BUS_WAIT_RULE` unset) reproduces every prior output
+to the last decimal — confirmed, not just asserted. **Not done:** the door-to-door overhead
+itself (the ≈ 9-minute gap this item's Goal names) as a wait/transfer *addition* on top of the
+GTFS skim — the two "changes" turned out to be the headway rule and a data-consistency fix,
+not the overhead; and step 32's forecast-year rerun under `'best_line'` (only the 2022 central
+case was compared). Full detail in `METHODOLOGY.md` §6x addendum 6, §6aa addendum, §6ac
+addendum.
+
 ### C5. Realistic LRT regime and headway sensitivities (scenarios S1, S2; steps 25 / 26 changes)
 
 **Goal.** The case a decision would be made on: the Haifa core underground (stations S05–S14,
@@ -322,6 +372,24 @@ headway lowers the capture (wait enters GC at weight 2). **Documents.** §6w add
 §6ad addenda, headline rows, `docs/PLAN_TIGHTENING_AND_SCENARIOS.md` §4 rows S1 / S2 ticked.
 Effort: half a day.
 
+**Status, 23 September 2026 — done for 2022, two method choices worth flagging.** Both
+scenarios built and run (25 → 26 → 31): `design_50kmh_accel` (39.7 min end to end, central
+capture 4,300) and `mixed_core_underground` (56.1 min, central capture 3,520), plus the
+headway sensitivity for every regime, not just the new ones
+(`Output/skims/lrt_capture_regime_headway_matrix.csv`). Two deviations from the method above,
+both deliberate: (1) no `Input/lrt_section_regime.csv` was added — the core boundary (S05–S14)
+is a hardcoded set in the notebook, since a committed per-section file for one assumed rule
+seemed like the wrong kind of permanence before the client's actual design exists; trivial to
+replace once real per-section data arrives. (2) the acceleration/braking allowance was added
+**only** to the design_50kmh scenario, not to all three regimes as "a variant of each regime"
+could be read to mean — the two calibrated regimes (all_underground, all_ground) already carry
+real acceleration, braking and dwell inside their fitted Red Line stop penalty, so adding a
+further allowance to them would double-count it. **Not done:** the per-(regime, headway) loop
+inside `lrt_capture_scenarios.csv` itself (each combination instead lives in its own directory
+under `Output/skims/`, assembled into the matrix above by reading the five files together, not
+by a new loop inside step 31); step 32's forecast-year rerun for either new scenario or for the
+headway sensitivity (2022 central case only, matching the precedent set by C4).
+
 ### C6. Synthetic branch alignments T1 / T2 / T3 (task E1, scenario S4) — until drawings arrive
 
 **Goal.** Replace the feeder composite for the 15 off-trunk areas with an LRT service along the
@@ -343,12 +411,45 @@ feeder composite as the comparison. Rerun 25 → 26 → 31 → 32.
 **Documents.** §6al, headline row, task E1 ticked "synthetic, flagged", plain-English 5.x. Effort:
 one day. When the planning team's drawings arrive, replace the polylines and rerun.
 
+**Status, 23 September 2026 — built; the plan's own "GC falls below feeder" check does NOT
+hold, and that is the finding.** Trunk-pair results are unchanged exactly (checked to 0.00e+00
+min in the notebook). Central-case capture: **3,639**, *lower* than the all-underground
+feeder-composite case (4,254) — because for 14 of the 15 off-trunk areas, the synthetic
+ground-level branch's generalized cost is *higher* than the feeder composite it replaces
+(`Output/lrt_v2/lrt_branches_vs_feeder_gc.csv`), from +5.9 minutes (Bazan-Hutsot) to +92.1
+minutes at Nazareth (114 → 206). This is not a bug: it is what "one station per area, ground
+level, no alignment yet" actually implies once run through the same generalized-cost formula
+as everything else — a real bus/Metronit feeder is often faster than a hypothetical
+ground-level LRT stopping once per area, and for a large, spread-out area like Nazareth (38
+TAZs) the single station's walk access dominates the comparison, not the running speed. Kiryat
+Ata North-East is the one area that comes out roughly even. Deviations from the method: no
+committed `Input/lrt_section_regime.csv`-style file was needed (the branches are ground level
+throughout, by the method's own instruction); output file names differ slightly from the
+method's suggestion (`lrt_area_ivt_branches_synthetic.csv` rather than
+`lrt_station_times_branches_synthetic.csv`, since the branches have no calibrated "section
+form" the way the trunk regimes do — one number per area pair is all there is). **Not done:**
+step 32's forecast-year rerun for this scenario. **Recommendation for whoever picks this up:**
+do not read 3,639 as "branches hurt the case for the LRT" — read it as evidence that the branch
+geometry, station count and placement (especially through Nazareth) matter more to the branch
+areas' own result than anything else tested so far, which is exactly why task E1's real
+drawings are worth obtaining.
+
 ### C7. Bus-network response (scenario S3; step-31 switch)
 
 Add `BUS_COMPETITION = 'full' | 'truncated'` to step 31: with `truncated`, the direct-bus
 alternative is removed on the trunk pairs (bus GC set to the feeder-to-LRT GC), an upper bound
 on capture. Rerun 31 → 32; report both. **Outputs.** `Output/skims/bus_truncated/`. **Documents.**
 §6ac addendum, S3 ticked. Effort: two hours.
+
+**Status, 23 September 2026 — done for 2022; step 32 not rerun.** Implemented literally as
+specified: on the 90 trunk pairs, `bus_gc_eff` is overwritten with that LRT scenario's own GC
+(`SK[sc]['gc']`) before the `dL` pivot, per scenario per λ/premium case — off-trunk pairs keep
+the real bus GC, since the bus is already only a feeder there. Central case, `'full'` →
+`'truncated'`: underground 4,254 → 5,754 (+35%), ground 3,206 → 5,270 (+64%), design (no accel)
+5,095 → 6,159 (+21%), design + accel 4,300 → 5,776 (+34%), mixed 3,520 → 5,318 (+51%) — the
+regimes whose bus alternative was previously closest to competitive gain the most. **Not
+done:** step 32's forecast-year rerun under `'truncated'` (2022 central case only, matching the
+precedent set by C4 and C5).
 
 ### C8. Designed uncertainty experiment (task C3)
 
@@ -362,6 +463,25 @@ alternative skims produced by C1–C7 and writes one row per combination:
 `Output/skims/uncertainty/lrt_capture_factorial.csv` with central, low, high LRT boardings,
 trunk-pair share and busiest link; a tornado figure by factor. **Documents.** §6am, headline
 row "capture range across the design", task C3 ticked. Effort: half a day after C1–C7.
+
+**Status, 23 September 2026 — built as `LRT_capture_uncertainty.ipynb` (§6ak, not §6am — the
+next free letter), reduced to 5 of the plan's 8 factors.** Coverage threshold, walk access source
+and car source are held fixed, not varied: coverage needs a rerun from step 15 (not just a
+re-read of steps 26/31's saved skims), and walk/car source are the same OSM-egress and
+historical-Google gaps items C1–C3 already flagged as blocked this session. The other five
+factors (regime, headway, λ, LRT premium, bus competition) *are* a genuine factorial, assembled
+from runs steps 31/32 already made across C4–C7, plus two `truncated`-competition combinations
+(headway 7.5 and 10) run once, one-off, specifically for this notebook — worth flagging for
+whoever runs the next version: step 31's `OUT`-tagging (tasks C5/C7) only composes one alternate
+dimension at a time (`GC_SOURCE_DIR` non-default makes `OUT` follow it exactly), so setting
+`BUS_COMPETITION='truncated'` on top of a headway-alternate `GC_SOURCE_DIR` silently overwrites
+that directory's existing `full`-competition results rather than tagging alongside them; this was
+worked around by running with `git checkout` afterward and hand-copying just the new
+`lrt_capture_scenarios.csv` into a fresh directory, not by fixing the notebook. 155-row factorial
+(`Output/skims/uncertainty/lrt_capture_factorial.csv`); tornado ranked by range on the central
+case (4,254 LRT trips): headway (844) < bus competition's explicit ceiling (1,500) < regime
+(1,889) < λ/premium (2,865, widest). None of the four is small enough to set aside in a future
+full design — see the tornado figure (`Output/figures/lrt_capture_tornado.png`) and §6ak.
 
 ### C9. Step 41 — RavKav 2025 journeys on their own alightings (caveat 16; prerequisite for re-anchoring)
 
@@ -395,6 +515,26 @@ the journey origins of step 34 within 2 %. **Documents.** §6an, caveat 16 updat
 2025; the car layer would be grown to 2025 with the step-16 factors on `Zonal_BU_2025.csv`).
 Effort: one day; memory-bound (chunk the 1.6 GB file by date).
 
+**Status, 23 September 2026 — built as `RavKav_2025_own_alightings.ipynb` (§6ai, not §6an — the
+next free letter when this was written); the ≥ 85 % check fails, and the reason is itself the
+finding.** 6,015,350 located taps over the 42 representative Tuesdays; alighting resolved for
+**45.8 %** (not ≥ 85 %), because **72.2 % of card-date groups tap exactly once** in the
+06:00–08:59 window — one leg, no observed transfer or return, nothing for tap-chaining to work
+with regardless of the method. Caught and fixed during testing: an early version wrongly
+resolved single-tap cards against themselves (the return-home rule's distance-from-first-tap
+check is trivially 0 for a group of one), inflating the apparent resolution rate to 96.9% before
+the fix. The **chained transfer share (27.5%)**, which needs no alighting resolution at all,
+sits far closer to 2022's own rate (a third) than the file's tag (3.7%) — the single most
+useful, robust number this notebook produces. The OD's row sums are **not** within 2% of step
+34's journey origins (27,304/day allocated vs 103,889/day chained, since 54% are unallocated) —
+the check as written assumed near-complete resolution; report the shortfall rather than force
+it. Cosine similarity against the 2022 pattern is low (0.138), but not comparable: the resolved
+26.3% of journeys are systematically the ones with a transfer or a same-morning return, not a
+representative sample. **Recommendation:** do not read this as "the chaining method failed" —
+read it as evidence that an AM-only extract cannot supply a general alighting inference by
+tap-chaining, whatever refinements are added; a full-day extract or a proper AVL/schedule-
+matching method is what re-anchoring on 2025 actually needs.
+
 ### C10. Step 42 — All-or-nothing assignment link check of the car layer (task B1)
 
 **Goal.** A link-level comparison with the 3,241 counted links that the cordon test of step 36
@@ -422,6 +562,25 @@ count, GEH), `car_aon_fit_by_type.csv`, `car_aon_screenlines.csv`; figure
 `Output/figures/car_aon_vs_counts.png` (scatter, log axes). **Documents.** §6ao, task B1 ticked,
 caveat on the assignment's limits. Effort: one day.
 
+**Status, 23 September 2026 — done; landed as §6aj (the next free letter when this was written,
+not §6ao); used `scipy.sparse.csgraph.dijkstra` rather than `networkx` (already a repository
+dependency, and its multi-source mode with `return_predecessors=True` gives everything the
+tree-loading algorithm needs in one call).** `DATA1`/`DATA2`/`UL1` were checked and ruled out
+(§6aj) — `DATA1` is a class.subclass code, not a speed. Free-flow speed assumed: 90/70/60/50/40
+km/h for TYPE 1–5, 30 for TYPE 8 (the network's actual car-carrying types are 1–5, 8 and the
+TYPE-9 connectors — not a clean 1–6 the way the method above guessed), 20 for connectors. The
+network's own centroid convention (node id = TAZ number) matched all 778 TAZs directly, so no
+nearest-node snapping was needed. **Aggregate ratio 1.037** (essentially exact) over the 3,231
+counted links; **GEH ≤ 10 on only 20 %** of links, as expected for an unrestrained assignment.
+The six screenlines recomputed from the assignment do **not** uniformly track step 36's own
+0.58–0.90 range: three (Kiryat Ata, Krayot, Nazareth) run well above 1 (up to 1.84), most
+plausibly route concentration onto a single shortest path rather than a base-demand problem,
+since the aggregate figure holds up — flagged as a genuine finding, not smoothed over. A caught
+mistake worth naming for whoever runs the next version: the first screenline recomputation
+merged the wrong column and silently produced "counted" values in the tens (a link count, not a
+vehicle count) rather than erroring — always sanity-check a merged column's own magnitude, not
+just that the merge ran without error.
+
 ### C11. Design-hour factors on the observed profiles (caveat 18; steps 20 / 27 / 31 / 32 switch)
 
 **Goal.** Carry the count-based car factor and the boarding-based transit factor into the
@@ -438,6 +597,21 @@ publish both peak-hour sets side by side (`corridor_v2_link_flows_long.csv` gain
 
 **Documents.** §6r / §6y / §6ac / §6ad addenda, the §0 headline rows for peak-hour quantities
 carrying both values, caveat 18 updated, the reports' next revision note. Effort: half a day.
+
+**Status, 23 September 2026 — done for steps 24/27/31; step 32 and a PHF_SOURCE switch not
+built.** Implemented as side-by-side columns rather than a `PHF_SOURCE` switch with a rerun, per
+the Method's own "publish both peak-hour sets side by side" — one execution of each notebook
+now carries both factors, so there was nothing to gate behind an environment variable. Car
+observed = mean of the 12 cordon-direction `count PHF3h` values (step 36) + the stated 0.03
+sliding-window correction = 0.435, applied uniformly (the six cordons do not map onto
+individual V2 routes). Transit observed = the RavKav study-area boarding factor (step 34,
+bus, all boardings) = 0.4755, applied to bus, Metronit/rail and taxi alike (no independent
+observed source for taxi). Because the transit observed factor is one number for both
+directions while the survey factor splits 0.549 up / 0.457 down, the trunk's peak-hour LRT
+loads move to 0.865–0.866 (up) / 1.041 (down) of the survey-based figure — not a uniform
+correction. **Not done:** step 32's forecast-year peak-hour outputs; a car observed factor
+split by cordon/direction (one representative number was used instead, matching the existing
+study-area-fallback simplification already in step 27).
 
 ### C12. Housekeeping that goes with the above
 
@@ -472,6 +646,14 @@ committed and pushed on its own, with its documents, before the next starts.
 6. CBS population and employment by statistical area for 2018 and 2022 (medium).
 7. The OnBoard survey codebook — unit per row and expansion (lower priority since the chain no
    longer depends on its pattern).
+8. **A car-network skim from the client's own model network** (added 23 September 2026) —
+   confirmed the only route to the car uplift task C1/E5 needs: Google's Distance Matrix API
+   cannot supply *historical* traffic for the target May-2026 period now that it has passed (it
+   only predicts a future `departure_time`), and `Input/BusSpeedData/std_202605.csv` is
+   confirmed bus-only, not usable as a general car speed source. Task C10 (§6aj) assigned the
+   2022 car layer onto the Emme network with an *assumed* free-flow speed by link `TYPE` as a
+   separate, lower-stakes exercise — it is not a substitute for a real skim. Both the GC/capture
+   pivot's car uplift (C1) and any future car-network assignment work are waiting on this item.
 
 Not needed / not coming, by the user's decision on 23 September 2026: Metronit 2013 ridership,
 a stated-preference survey, parking supply, the cellular product's trip definition.

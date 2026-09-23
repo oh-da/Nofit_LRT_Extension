@@ -1,0 +1,13 @@
+mode,scope,pairs skimmed,transit trips covered,share of transit trips covered,ivt,walk,wait,transfers,gc
+Car,all off-diagonal pairs,600,14133.0,1.0,19.2,0.0,0.0,0.0,19.2
+Car,trunk pairs (10 station areas),90,4567.0,1.0,15.4,0.0,0.0,0.0,15.4
+Bus,all off-diagonal pairs,598,14117.0,0.999,20.2,5.9,4.2,0.1,41.1
+Bus,trunk pairs (10 station areas),90,4567.0,1.0,16.1,5.1,3.8,0.1,34.9
+Metronit (BRT),all off-diagonal pairs,278,9561.0,0.676,16.2,5.8,2.1,0.0,31.9
+Metronit (BRT),trunk pairs (10 station areas),72,3367.0,0.737,11.2,4.9,2.4,0.0,25.8
+LRT all underground,all off-diagonal pairs,600,14133.0,1.0,32.2,10.2,4.8,0.1,63.1
+LRT all underground,trunk pairs (10 station areas),90,4567.0,1.0,13.8,13.9,2.5,0.0,46.6
+LRT all ground,all off-diagonal pairs,600,14133.0,1.0,37.6,10.2,4.9,0.1,68.8
+LRT all ground,trunk pairs (10 station areas),90,4567.0,1.0,22.4,13.9,2.5,0.0,55.2
+LRT design 50 km/h,all off-diagonal pairs,600,14133.0,1.0,28.7,10.2,4.8,0.1,59.4
+LRT design 50 km/h,trunk pairs (10 station areas),90,4567.0,1.0,8.8,13.9,2.5,0.0,41.6

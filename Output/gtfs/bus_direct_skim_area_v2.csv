@@ -1,423 +1,423 @@
-o,o_name,d,d_name,bus_ivt_min,bus_trips_0609,bus_trips_0708,bus_headway_0708_min,brt_ivt_min,brt_trips_0609,brt_trips_0708,brt_headway_0708_min,step26_fastest_path_min
-101,TsurShalom,102,Kiryon,4.98,221,87,0.69,4.98,59.00,21.00,2.86,5.41
-101,TsurShalom,103,KiryatBialik Center,10.18,215,85,0.71,10.18,57.00,21.00,2.86,11.52
-101,TsurShalom,104,KiryatHaim,12.98,177,72,0.83,12.98,56.00,21.00,2.86,8.75
-101,TsurShalom,202,Matam-NeotPeres,42.93,43,20,3.00,42.93,43.00,20.00,3.00,28.20
-101,TsurShalom,203,HofCarmel-NeveDavid,58.57,21,11,5.45,58.57,21.00,11.00,5.45,32.73
-101,TsurShalom,204,Hecht-Shprintzak,56.98,21,11,5.45,56.98,21.00,11.00,5.45,32.28
-101,TsurShalom,205,EinHayam,54.98,21,11,5.45,54.98,21.00,11.00,5.45,29.69
-101,TsurShalom,206,BatGalim-KiryatEliezer,50.30,22,11,5.45,50.30,22.00,11.00,5.45,30.65
-101,TsurShalom,207,Hamoshava,48.33,22,11,5.45,48.33,22.00,11.00,5.45,25.00
-101,TsurShalom,208,LowerCity,43.98,23,11,5.45,43.98,23.00,11.00,5.45,22.90
-101,TsurShalom,209,Namal-Giborim,38.98,53,27,2.22,38.98,53.00,27.00,2.22,19.65
-101,TsurShalom,210,Hamifrats,30.98,143,63,0.95,30.98,80.00,37.00,1.62,25.80
-101,TsurShalom,211,Bazan-Hutsot,22.63,179,78,0.77,22.63,85.00,37.00,1.62,13.16
-101,TsurShalom,212,TsometKiryatAta,20.00,191,81,0.74,20.00,86.00,37.00,1.62,12.89
-101,TsurShalom,213,KiryatAta North,44.07,18,8,7.50,,,,,16.31
-101,TsurShalom,214,KiryatAta North-East,38.00,7,3,20.00,,,,,30.81
-101,TsurShalom,215,Shefaram,15.60,3,2,30.00,,,,,19.29
-101,TsurShalom,216,Hamovil,17.55,1,1,60.00,,,,,22.42
-101,TsurShalom,217,Nazareth,22.80,1,1,60.00,,,,,38.04
-101,TsurShalom,301,SavyoneyYam,1.63,115,47,1.28,1.35,35.00,16.00,3.75,11.63
-101,TsurShalom,302,KiryatYam A,6.98,114,47,1.28,6.98,34.00,16.00,3.75,10.70
-101,TsurShalom,303,KiryatYam B+C,11.23,124,52,1.15,9.98,34.00,16.00,3.75,14.38
-101,TsurShalom,304,KiryatHaim West,19.47,85,38,1.58,13.32,33.00,16.00,3.75,16.64
-102,Kiryon,101,TsurShalom,4.32,184,67,0.90,4.47,50.00,20.00,3.00,4.98
-102,Kiryon,103,KiryatBialik Center,2.80,248,91,0.66,5.20,58.00,20.00,3.00,8.85
-102,Kiryon,104,KiryatHaim,8.00,201,77,0.78,8.00,57.00,20.00,3.00,6.08
-102,Kiryon,202,Matam-NeotPeres,37.95,44,20,3.00,37.95,44.00,20.00,3.00,25.53
-102,Kiryon,203,HofCarmel-NeveDavid,53.58,21,10,6.00,53.58,21.00,10.00,6.00,30.06
-102,Kiryon,204,Hecht-Shprintzak,52.00,21,10,6.00,52.00,21.00,10.00,6.00,29.61
-102,Kiryon,205,EinHayam,50.00,21,10,6.00,50.00,21.00,10.00,6.00,27.02
-102,Kiryon,206,BatGalim-KiryatEliezer,45.32,22,10,6.00,45.32,22.00,10.00,6.00,27.98
-102,Kiryon,207,Hamoshava,43.35,22,10,6.00,43.35,22.00,10.00,6.00,22.33
-102,Kiryon,208,LowerCity,39.00,23,10,6.00,39.00,23.00,10.00,6.00,20.23
-102,Kiryon,209,Namal-Giborim,32.00,24,10,6.00,32.00,24.00,10.00,6.00,16.98
-102,Kiryon,210,Hamifrats,17.00,136,56,1.07,26.00,51.00,20.00,3.00,23.03
-102,Kiryon,211,Bazan-Hutsot,16.23,153,61,0.98,17.65,54.00,20.00,3.00,10.49
-102,Kiryon,212,TsometKiryatAta,10.48,172,66,0.91,15.02,55.00,20.00,3.00,10.22
-102,Kiryon,213,KiryatAta North,24.22,7,2,30.00,,,,,13.64
-102,Kiryon,214,KiryatAta North-East,9.32,15,3,20.00,,,,,27.09
-102,Kiryon,215,Shefaram,7.92,18,6,10.00,,,,,15.57
-102,Kiryon,216,Hamovil,16.75,9,5,12.00,,,,,18.70
-102,Kiryon,217,Nazareth,25.00,9,5,12.00,,,,,34.32
-102,Kiryon,301,SavyoneyYam,21.12,32,13,4.62,,,,,13.04
-102,Kiryon,302,KiryatYam A,12.17,34,13,4.62,,,,,12.13
-102,Kiryon,303,KiryatYam B+C,21.82,44,17,3.53,,,,,12.75
-102,Kiryon,304,KiryatHaim West,18.00,28,11,5.45,,,,,14.19
-103,KiryatBialik Center,101,TsurShalom,7.53,188,74,0.81,7.17,49.00,20.00,3.00,7.42
-103,KiryatBialik Center,102,Kiryon,3.00,216,81,0.74,2.55,51.00,20.00,3.00,4.75
-103,KiryatBialik Center,104,KiryatHaim,3.00,216,82,0.73,2.80,57.00,20.00,3.00,3.66
-103,KiryatBialik Center,202,Matam-NeotPeres,32.75,44,20,3.00,32.75,44.00,20.00,3.00,23.11
-103,KiryatBialik Center,203,HofCarmel-NeveDavid,48.38,21,10,6.00,48.38,21.00,10.00,6.00,27.63
-103,KiryatBialik Center,204,Hecht-Shprintzak,46.80,21,10,6.00,46.80,21.00,10.00,6.00,27.18
-103,KiryatBialik Center,205,EinHayam,44.80,21,10,6.00,44.80,21.00,10.00,6.00,24.59
-103,KiryatBialik Center,206,BatGalim-KiryatEliezer,40.12,22,10,6.00,40.12,22.00,10.00,6.00,25.56
-103,KiryatBialik Center,207,Hamoshava,38.15,22,10,6.00,38.15,22.00,10.00,6.00,19.90
-103,KiryatBialik Center,208,LowerCity,33.80,23,10,6.00,33.80,23.00,10.00,6.00,17.80
-103,KiryatBialik Center,209,Namal-Giborim,26.80,24,10,6.00,26.80,24.00,10.00,6.00,14.56
-103,KiryatBialik Center,210,Hamifrats,15.15,137,55,1.09,20.80,51.00,20.00,3.00,20.71
-103,KiryatBialik Center,211,Bazan-Hutsot,12.45,154,60,1.00,12.45,54.00,20.00,3.00,8.07
-103,KiryatBialik Center,212,TsometKiryatAta,7.43,173,66,0.91,9.82,55.00,20.00,3.00,7.79
-103,KiryatBialik Center,213,KiryatAta North,20.73,7,3,20.00,,,,,11.22
-103,KiryatBialik Center,214,KiryatAta North-East,31.00,13,3,20.00,,,,,26.35
-103,KiryatBialik Center,215,Shefaram,10.72,15,5,12.00,,,,,18.63
-103,KiryatBialik Center,216,Hamovil,18.36,8,5,12.00,,,,,21.76
-103,KiryatBialik Center,217,Nazareth,26.08,8,5,12.00,,,,,37.38
-103,KiryatBialik Center,301,SavyoneyYam,16.25,34,13,4.62,,,,,10.61
-103,KiryatBialik Center,302,KiryatYam A,9.38,36,13,4.62,,,,,12.55
-103,KiryatBialik Center,303,KiryatYam B+C,22.60,46,17,3.53,,,,,10.32
-103,KiryatBialik Center,304,KiryatHaim West,16.00,28,11,5.45,,,,,11.76
-104,KiryatHaim,101,TsurShalom,14.68,146,58,1.03,14.62,49.00,20.00,3.00,11.94
-104,KiryatHaim,102,Kiryon,9.05,174,66,0.91,10.00,51.00,20.00,3.00,9.26
-104,KiryatHaim,103,KiryatBialik Center,5.98,201,75,0.80,7.45,51.00,20.00,3.00,8.55
-104,KiryatHaim,202,Matam-NeotPeres,29.95,45,20,3.00,29.95,45.00,20.00,3.00,20.78
-104,KiryatHaim,203,HofCarmel-NeveDavid,45.58,22,10,6.00,45.58,22.00,10.00,6.00,25.31
-104,KiryatHaim,204,Hecht-Shprintzak,44.00,22,10,6.00,44.00,22.00,10.00,6.00,24.86
-104,KiryatHaim,205,EinHayam,42.00,22,10,6.00,42.00,22.00,10.00,6.00,22.27
-104,KiryatHaim,206,BatGalim-KiryatEliezer,31.16,46,20,3.00,31.16,46.00,20.00,3.00,23.23
-104,KiryatHaim,207,Hamoshava,29.38,46,20,3.00,29.38,46.00,20.00,3.00,17.58
-104,KiryatHaim,208,LowerCity,25.85,48,20,3.00,25.85,48.00,20.00,3.00,15.48
-104,KiryatHaim,209,Namal-Giborim,24.00,49,20,3.00,24.00,49.00,20.00,3.00,12.23
-104,KiryatHaim,210,Hamifrats,10.57,166,63,0.95,18.00,77.00,30.00,2.00,18.38
-104,KiryatHaim,211,Bazan-Hutsot,6.45,183,68,0.88,9.65,81.00,30.00,2.00,5.74
-104,KiryatHaim,212,TsometKiryatAta,4.50,225,82,0.73,7.02,82.00,30.00,2.00,5.47
-104,KiryatHaim,213,KiryatAta North,6.27,44,16,3.75,6.27,25.00,9.00,6.67,8.95
-104,KiryatHaim,214,KiryatAta North-East,28.00,13,2,30.00,,,,,24.08
-104,KiryatHaim,215,Shefaram,13.55,15,5,12.00,,,,,20.25
-104,KiryatHaim,216,Hamovil,21.90,8,5,12.00,,,,,23.60
-104,KiryatHaim,217,Nazareth,29.98,8,5,12.00,,,,,39.22
-104,KiryatHaim,301,SavyoneyYam,23.13,9,3,20.00,,,,,15.13
-104,KiryatHaim,302,KiryatYam A,12.70,10,3,20.00,,,,,17.06
-104,KiryatHaim,303,KiryatYam B+C,14.15,22,7,8.57,,,,,14.84
-104,KiryatHaim,304,KiryatHaim West,4.55,34,12,5.00,,,,,9.44
-201,TiratCarmel,202,Matam-NeotPeres,10.73,84,32,1.88,,,,,11.66
-201,TiratCarmel,203,HofCarmel-NeveDavid,13.47,13,6,10.00,,,,,17.63
-201,TiratCarmel,204,Hecht-Shprintzak,16.98,13,6,10.00,,,,,16.92
-201,TiratCarmel,205,EinHayam,18.23,13,6,10.00,,,,,16.77
-201,TiratCarmel,209,Namal-Giborim,37.75,4,2,30.00,,,,,34.57
-202,Matam-NeotPeres,101,TsurShalom,41.60,43,20,3.00,41.60,43.00,20.00,3.00,37.96
-202,Matam-NeotPeres,102,Kiryon,36.98,45,21,2.86,36.98,45.00,21.00,2.86,35.29
-202,Matam-NeotPeres,103,KiryatBialik Center,34.43,45,21,2.86,34.43,45.00,21.00,2.86,34.51
-202,Matam-NeotPeres,104,KiryatHaim,26.98,49,21,2.86,26.98,49.00,21.00,2.86,30.23
-202,Matam-NeotPeres,201,TiratCarmel,6.10,78,34,1.76,,,,,8.55
-202,Matam-NeotPeres,203,HofCarmel-NeveDavid,5.02,132,48,1.25,5.02,30.00,11.00,5.45,10.17
-202,Matam-NeotPeres,204,Hecht-Shprintzak,8.58,127,48,1.25,8.58,29.00,11.00,5.45,9.46
-202,Matam-NeotPeres,205,EinHayam,8.98,98,38,1.58,8.98,29.00,11.00,5.45,9.31
-202,Matam-NeotPeres,206,BatGalim-KiryatEliezer,15.98,70,28,2.14,10.98,29.00,11.00,5.45,11.82
-202,Matam-NeotPeres,207,Hamoshava,21.98,75,30,2.00,15.98,28.00,11.00,5.45,14.92
-202,Matam-NeotPeres,208,LowerCity,23.98,73,30,2.00,18.13,27.00,11.00,5.45,18.81
-202,Matam-NeotPeres,209,Namal-Giborim,30.98,82,35,1.71,23.98,27.00,11.00,5.45,27.14
-202,Matam-NeotPeres,210,Hamifrats,32.98,91,39,1.54,12.98,53.00,21.00,2.86,30.43
-202,Matam-NeotPeres,211,Bazan-Hutsot,17.98,53,21,2.86,17.98,51.00,21.00,2.86,28.28
-202,Matam-NeotPeres,212,TsometKiryatAta,24.98,51,21,2.86,24.98,49.00,21.00,2.86,25.92
-203,HofCarmel-NeveDavid,101,TsurShalom,56.97,20,10,6.00,56.97,20.00,10.00,6.00,40.51
-203,HofCarmel-NeveDavid,102,Kiryon,52.65,21,10,6.00,52.65,21.00,10.00,6.00,37.84
-203,HofCarmel-NeveDavid,103,KiryatBialik Center,49.97,21,10,6.00,49.97,21.00,10.00,6.00,37.06
-203,HofCarmel-NeveDavid,104,KiryatHaim,42.28,23,10,6.00,42.28,23.00,10.00,6.00,32.78
-203,HofCarmel-NeveDavid,201,TiratCarmel,5.50,14,5,12.00,,,,,15.36
-203,HofCarmel-NeveDavid,202,Matam-NeotPeres,4.02,123,44,1.36,3.42,24.00,10.00,6.00,7.80
-203,HofCarmel-NeveDavid,204,Hecht-Shprintzak,3.82,166,61,0.98,3.57,29.00,10.00,6.00,5.26
-203,HofCarmel-NeveDavid,205,EinHayam,4.97,110,41,1.46,3.97,29.00,10.00,6.00,6.86
-203,HofCarmel-NeveDavid,206,BatGalim-KiryatEliezer,11.97,99,37,1.62,5.97,29.00,10.00,6.00,9.37
-203,HofCarmel-NeveDavid,207,Hamoshava,15.15,77,30,2.00,10.97,28.00,10.00,6.00,12.47
-203,HofCarmel-NeveDavid,208,LowerCity,17.15,92,35,1.71,13.12,27.00,10.00,6.00,16.36
-203,HofCarmel-NeveDavid,209,Namal-Giborim,24.28,58,23,2.61,18.97,27.00,10.00,6.00,25.95
-203,HofCarmel-NeveDavid,210,Hamifrats,27.97,54,21,2.86,27.97,25.00,10.00,6.00,33.05
-203,HofCarmel-NeveDavid,211,Bazan-Hutsot,33.45,32,13,4.62,33.45,24.00,10.00,6.00,30.83
-203,HofCarmel-NeveDavid,212,TsometKiryatAta,40.25,23,10,6.00,40.25,23.00,10.00,6.00,28.47
-203,HofCarmel-NeveDavid,303,KiryatYam B+C,30.50,10,4,15.00,,,,,40.10
-203,HofCarmel-NeveDavid,304,KiryatHaim West,27.50,8,3,20.00,,,,,34.14
-204,Hecht-Shprintzak,101,TsurShalom,53.40,20,10,6.00,53.40,20.00,10.00,6.00,36.92
-204,Hecht-Shprintzak,102,Kiryon,49.08,21,10,6.00,49.08,21.00,10.00,6.00,34.24
-204,Hecht-Shprintzak,103,KiryatBialik Center,46.40,21,10,6.00,46.40,21.00,10.00,6.00,33.46
-204,Hecht-Shprintzak,104,KiryatHaim,38.72,23,10,6.00,38.72,23.00,10.00,6.00,29.18
-204,Hecht-Shprintzak,201,TiratCarmel,7.03,14,5,12.00,,,,,20.08
-204,Hecht-Shprintzak,202,Matam-NeotPeres,5.67,123,47,1.28,5.00,24.00,10.00,6.00,12.52
-204,Hecht-Shprintzak,203,HofCarmel-NeveDavid,1.65,155,56,1.07,1.58,25.00,10.00,6.00,5.86
-204,Hecht-Shprintzak,205,EinHayam,1.25,131,50,1.20,0.40,29.00,10.00,6.00,3.26
-204,Hecht-Shprintzak,206,BatGalim-KiryatEliezer,8.15,103,42,1.43,2.40,29.00,10.00,6.00,5.77
-204,Hecht-Shprintzak,207,Hamoshava,16.15,92,35,1.71,7.40,28.00,10.00,6.00,8.87
-204,Hecht-Shprintzak,208,LowerCity,18.15,90,35,1.71,9.55,27.00,10.00,6.00,12.77
-204,Hecht-Shprintzak,209,Namal-Giborim,20.77,59,24,2.50,15.40,27.00,10.00,6.00,22.36
-204,Hecht-Shprintzak,210,Hamifrats,24.40,41,17,3.53,24.40,25.00,10.00,6.00,29.46
-204,Hecht-Shprintzak,211,Bazan-Hutsot,29.88,24,10,6.00,29.88,24.00,10.00,6.00,27.24
-204,Hecht-Shprintzak,212,TsometKiryatAta,36.68,23,10,6.00,36.68,23.00,10.00,6.00,24.88
-205,EinHayam,101,TsurShalom,53.00,20,10,6.00,53.00,20.00,10.00,6.00,34.69
-205,EinHayam,102,Kiryon,48.68,21,10,6.00,48.68,21.00,10.00,6.00,32.02
-205,EinHayam,103,KiryatBialik Center,46.00,21,10,6.00,46.00,21.00,10.00,6.00,31.24
-205,EinHayam,104,KiryatHaim,38.32,23,10,6.00,38.32,23.00,10.00,6.00,26.96
-205,EinHayam,201,TiratCarmel,9.03,14,5,12.00,,,,,18.63
-205,EinHayam,202,Matam-NeotPeres,7.33,98,38,1.58,7.00,24.00,10.00,6.00,11.07
-205,EinHayam,203,HofCarmel-NeveDavid,3.58,112,42,1.43,3.58,25.00,10.00,6.00,8.31
-205,EinHayam,204,Hecht-Shprintzak,2.00,131,50,1.20,2.00,25.00,10.00,6.00,4.51
-205,EinHayam,206,BatGalim-KiryatEliezer,2.80,91,34,1.76,2.00,29.00,10.00,6.00,3.54
-205,EinHayam,207,Hamoshava,7.00,80,29,2.07,7.00,28.00,10.00,6.00,6.65
-205,EinHayam,208,LowerCity,9.15,78,29,2.07,9.15,27.00,10.00,6.00,10.54
-205,EinHayam,209,Namal-Giborim,15.00,42,17,3.53,15.00,27.00,10.00,6.00,20.13
-205,EinHayam,210,Hamifrats,24.00,25,10,6.00,24.00,25.00,10.00,6.00,27.23
-205,EinHayam,211,Bazan-Hutsot,29.48,24,10,6.00,29.48,24.00,10.00,6.00,25.01
-205,EinHayam,212,TsometKiryatAta,36.28,23,10,6.00,36.28,23.00,10.00,6.00,22.65
-206,BatGalim-KiryatEliezer,101,TsurShalom,51.00,21,10,6.00,51.00,21.00,10.00,6.00,31.64
-206,BatGalim-KiryatEliezer,102,Kiryon,46.68,22,10,6.00,46.68,22.00,10.00,6.00,28.96
-206,BatGalim-KiryatEliezer,103,KiryatBialik Center,44.00,22,10,6.00,44.00,22.00,10.00,6.00,28.19
-206,BatGalim-KiryatEliezer,104,KiryatHaim,36.32,46,21,2.86,36.32,46.00,21.00,2.86,23.90
-206,BatGalim-KiryatEliezer,202,Matam-NeotPeres,17.67,71,31,1.94,11.68,24.00,10.00,6.00,11.24
-206,BatGalim-KiryatEliezer,203,HofCarmel-NeveDavid,13.23,102,41,1.46,8.27,25.00,10.00,6.00,10.40
-206,BatGalim-KiryatEliezer,204,Hecht-Shprintzak,10.65,104,43,1.40,6.68,25.00,10.00,6.00,6.60
-206,BatGalim-KiryatEliezer,205,EinHayam,7.73,93,38,1.58,4.68,25.00,10.00,6.00,4.01
-206,BatGalim-KiryatEliezer,207,Hamoshava,5.88,177,68,0.88,5.00,55.00,21.00,2.86,3.60
-206,BatGalim-KiryatEliezer,208,LowerCity,8.18,144,56,1.07,7.15,54.00,21.00,2.86,7.49
-206,BatGalim-KiryatEliezer,209,Namal-Giborim,14.23,82,37,1.62,13.00,53.00,21.00,2.86,17.08
-206,BatGalim-KiryatEliezer,210,Hamifrats,22.67,80,35,1.71,22.00,50.00,21.00,2.86,24.18
-206,BatGalim-KiryatEliezer,211,Bazan-Hutsot,28.18,66,29,2.07,27.48,48.00,21.00,2.86,21.96
-206,BatGalim-KiryatEliezer,212,TsometKiryatAta,35.68,57,26,2.31,34.28,47.00,21.00,2.86,19.60
-206,BatGalim-KiryatEliezer,213,KiryatAta North,43.98,22,11,5.45,43.98,22.00,11.00,5.45,28.32
-206,BatGalim-KiryatEliezer,217,Nazareth,52.85,5,3,20.00,,,,,53.88
-206,BatGalim-KiryatEliezer,303,KiryatYam B+C,24.00,10,4,15.00,,,,,31.23
-206,BatGalim-KiryatEliezer,304,KiryatHaim West,21.00,8,3,20.00,,,,,25.27
-207,Hamoshava,101,TsurShalom,46.00,21,10,6.00,46.00,21.00,10.00,6.00,30.09
-207,Hamoshava,102,Kiryon,41.68,22,10,6.00,41.68,22.00,10.00,6.00,27.41
-207,Hamoshava,103,KiryatBialik Center,39.00,22,10,6.00,39.00,22.00,10.00,6.00,26.64
-207,Hamoshava,104,KiryatHaim,31.32,46,20,3.00,31.32,46.00,20.00,3.00,22.35
-207,Hamoshava,202,Matam-NeotPeres,19.00,76,33,1.82,13.65,24.00,10.00,6.00,13.11
-207,Hamoshava,203,HofCarmel-NeveDavid,14.98,79,33,1.82,10.23,25.00,10.00,6.00,12.27
-207,Hamoshava,204,Hecht-Shprintzak,13.33,91,38,1.58,8.65,25.00,10.00,6.00,8.47
-207,Hamoshava,205,EinHayam,11.50,80,33,1.82,6.65,25.00,10.00,6.00,5.88
-207,Hamoshava,206,BatGalim-KiryatEliezer,1.97,189,73,0.82,1.97,51.00,19.00,3.16,6.15
-207,Hamoshava,208,LowerCity,2.15,150,54,1.11,2.15,54.00,20.00,3.00,6.32
-207,Hamoshava,209,Namal-Giborim,8.00,74,30,2.00,8.00,53.00,20.00,3.00,15.53
-207,Hamoshava,210,Hamifrats,17.35,60,25,2.40,17.00,50.00,20.00,3.00,22.63
-207,Hamoshava,211,Bazan-Hutsot,22.90,58,25,2.40,22.48,48.00,20.00,3.00,20.41
-207,Hamoshava,212,TsometKiryatAta,29.70,57,25,2.40,29.28,47.00,20.00,3.00,18.05
-207,Hamoshava,213,KiryatAta North,38.00,22,10,6.00,38.00,22.00,10.00,6.00,26.77
-207,Hamoshava,217,Nazareth,49.87,5,3,20.00,,,,,52.33
-208,LowerCity,101,TsurShalom,43.85,21,10,6.00,43.85,21.00,10.00,6.00,27.92
-208,LowerCity,102,Kiryon,39.53,22,10,6.00,39.53,22.00,10.00,6.00,25.24
-208,LowerCity,103,KiryatBialik Center,36.85,22,10,6.00,36.85,22.00,10.00,6.00,24.47
-208,LowerCity,104,KiryatHaim,29.17,47,20,3.00,29.17,47.00,20.00,3.00,20.18
-208,LowerCity,202,Matam-NeotPeres,21.53,75,33,1.82,18.00,23.00,10.00,6.00,14.46
-208,LowerCity,203,HofCarmel-NeveDavid,14.58,95,39,1.54,14.58,24.00,10.00,6.00,13.63
-208,LowerCity,204,Hecht-Shprintzak,15.92,89,38,1.58,13.00,24.00,10.00,6.00,9.83
-208,LowerCity,205,EinHayam,13.00,77,33,1.82,11.00,24.00,10.00,6.00,7.24
-208,LowerCity,206,BatGalim-KiryatEliezer,5.00,151,57,1.05,5.31,50.00,20.00,3.00,9.52
-208,LowerCity,207,Hamoshava,2.70,159,62,0.97,3.52,50.00,20.00,3.00,3.86
-208,LowerCity,209,Namal-Giborim,5.85,85,36,1.67,5.85,54.00,20.00,3.00,13.36
-208,LowerCity,210,Hamifrats,14.85,65,26,2.31,14.85,51.00,20.00,3.00,20.46
-208,LowerCity,211,Bazan-Hutsot,20.33,57,24,2.50,20.33,49.00,20.00,3.00,18.24
-208,LowerCity,212,TsometKiryatAta,27.13,48,20,3.00,27.13,48.00,20.00,3.00,15.88
-208,LowerCity,213,KiryatAta North,35.60,23,10,6.00,35.60,23.00,10.00,6.00,24.60
-208,LowerCity,217,Nazareth,48.18,9,5,12.00,,,,,50.16
-208,LowerCity,303,KiryatYam B+C,20.00,10,5,12.00,,,,,27.51
-208,LowerCity,304,KiryatHaim West,17.00,8,4,15.00,,,,,21.55
-209,Namal-Giborim,101,TsurShalom,38.00,43,22,2.73,38.00,43.00,22.00,2.73,25.27
-209,Namal-Giborim,102,Kiryon,33.68,23,10,6.00,33.68,23.00,10.00,6.00,22.59
-209,Namal-Giborim,103,KiryatBialik Center,31.00,23,10,6.00,31.00,23.00,10.00,6.00,21.82
-209,Namal-Giborim,104,KiryatHaim,23.32,48,20,3.00,23.32,48.00,20.00,3.00,17.53
-209,Namal-Giborim,201,TiratCarmel,25.27,13,5,12.00,,,,,25.50
-209,Namal-Giborim,202,Matam-NeotPeres,28.00,105,49,1.22,25.00,23.00,10.00,6.00,17.94
-209,Namal-Giborim,203,HofCarmel-NeveDavid,22.32,74,34,1.76,21.58,24.00,10.00,6.00,22.46
-209,Namal-Giborim,204,Hecht-Shprintzak,20.00,74,34,1.76,20.00,24.00,10.00,6.00,19.22
-209,Namal-Giborim,205,EinHayam,18.00,58,25,2.40,18.00,24.00,10.00,6.00,16.63
-209,Namal-Giborim,206,BatGalim-KiryatEliezer,10.33,93,39,1.54,11.48,50.00,20.00,3.00,17.59
-209,Namal-Giborim,207,Hamoshava,9.00,84,35,1.71,9.70,50.00,20.00,3.00,11.94
-209,Namal-Giborim,208,LowerCity,5.35,94,38,1.58,6.17,52.00,20.00,3.00,9.84
-209,Namal-Giborim,210,Hamifrats,9.00,133,51,1.18,9.10,82.00,32.00,1.88,17.73
-209,Namal-Giborim,211,Bazan-Hutsot,14.65,81,34,1.76,14.65,79.00,32.00,1.88,15.59
-209,Namal-Giborim,212,TsometKiryatAta,21.45,78,34,1.76,21.45,76.00,32.00,1.88,13.23
-209,Namal-Giborim,213,KiryatAta North,29.75,23,10,6.00,29.75,23.00,10.00,6.00,21.95
-209,Namal-Giborim,217,Nazareth,41.38,10,4,15.00,,,,,47.43
-209,Namal-Giborim,301,SavyoneyYam,52.00,23,12,5.00,52.00,23.00,12.00,5.00,26.77
-209,Namal-Giborim,302,KiryatYam A,48.37,24,12,5.00,48.37,24.00,12.00,5.00,28.49
-209,Namal-Giborim,303,KiryatYam B+C,44.37,25,12,5.00,44.37,25.00,12.00,5.00,24.86
-209,Namal-Giborim,304,KiryatHaim West,39.00,26,12,5.00,39.00,26.00,12.00,5.00,18.90
-210,Hamifrats,101,TsurShalom,28.62,100,45,1.33,29.00,67.00,31.00,1.94,18.00
-210,Hamifrats,102,Kiryon,19.27,106,43,1.40,24.00,47.00,20.00,3.00,15.32
-210,Hamifrats,103,KiryatBialik Center,16.58,110,43,1.40,21.45,47.00,20.00,3.00,14.55
-210,Hamifrats,104,KiryatHaim,14.00,139,53,1.13,14.32,75.00,30.00,2.00,10.26
-210,Hamifrats,202,Matam-NeotPeres,32.00,96,46,1.30,11.95,48.00,20.00,3.00,14.42
-210,Hamifrats,203,HofCarmel-NeveDavid,27.58,56,26,2.31,27.58,23.00,10.00,6.00,18.94
-210,Hamifrats,204,Hecht-Shprintzak,26.00,40,20,3.00,26.00,23.00,10.00,6.00,19.43
-210,Hamifrats,205,EinHayam,24.00,23,10,6.00,24.00,23.00,10.00,6.00,16.84
-210,Hamifrats,206,BatGalim-KiryatEliezer,19.32,92,40,1.50,17.16,48.00,20.00,3.00,17.80
-210,Hamifrats,207,Hamoshava,17.35,68,30,2.00,15.38,48.00,20.00,3.00,12.14
-210,Hamifrats,208,LowerCity,10.70,74,29,2.07,11.85,50.00,20.00,3.00,10.04
-210,Hamifrats,209,Namal-Giborim,6.00,151,63,0.95,6.00,83.00,32.00,1.88,12.09
-210,Hamifrats,211,Bazan-Hutsot,5.00,205,79,0.76,5.55,108.00,42.00,1.43,8.32
-210,Hamifrats,212,TsometKiryatAta,12.00,196,79,0.76,12.35,104.00,42.00,1.43,5.96
-210,Hamifrats,213,KiryatAta North,20.65,35,16,3.75,20.65,24.00,10.00,6.00,14.68
-210,Hamifrats,214,KiryatAta North-East,25.98,15,7,8.57,,,,,29.81
-210,Hamifrats,215,Shefaram,26.05,35,16,3.75,,,,,25.98
-210,Hamifrats,216,Hamovil,25.33,26,14,4.29,,,,,25.97
-210,Hamifrats,217,Nazareth,35.54,34,18,3.33,,,,,41.58
-210,Hamifrats,301,SavyoneyYam,58.63,27,13,4.62,58.63,24.00,12.00,5.00,19.50
-210,Hamifrats,302,KiryatYam A,55.00,28,13,4.62,55.00,25.00,12.00,5.00,21.22
-210,Hamifrats,303,KiryatYam B+C,51.00,40,17,3.53,51.00,26.00,12.00,5.00,17.59
-210,Hamifrats,304,KiryatHaim West,45.63,42,16,3.75,45.63,27.00,12.00,5.00,11.63
-211,Bazan-Hutsot,101,TsurShalom,23.62,140,59,1.02,23.62,70.00,29.00,2.07,26.06
-211,Bazan-Hutsot,102,Kiryon,14.48,123,48,1.25,19.00,49.00,20.00,3.00,23.38
-211,Bazan-Hutsot,103,KiryatBialik Center,12.43,136,53,1.13,16.45,49.00,20.00,3.00,22.61
-211,Bazan-Hutsot,104,KiryatHaim,7.05,157,58,1.03,8.83,78.00,30.00,2.00,18.32
-211,Bazan-Hutsot,202,Matam-NeotPeres,39.35,59,26,2.31,20.30,47.00,20.00,3.00,15.93
-211,Bazan-Hutsot,203,HofCarmel-NeveDavid,35.93,30,13,4.62,35.93,23.00,10.00,6.00,20.46
-211,Bazan-Hutsot,204,Hecht-Shprintzak,34.35,23,10,6.00,34.35,23.00,10.00,6.00,20.01
-211,Bazan-Hutsot,205,EinHayam,32.35,23,10,6.00,32.35,23.00,10.00,6.00,17.42
-211,Bazan-Hutsot,206,BatGalim-KiryatEliezer,27.67,66,27,2.22,23.32,47.00,20.00,3.00,18.38
-211,Bazan-Hutsot,207,Hamoshava,25.70,58,24,2.50,21.35,47.00,20.00,3.00,12.73
-211,Bazan-Hutsot,208,LowerCity,16.52,57,23,2.61,17.00,49.00,20.00,3.00,10.63
-211,Bazan-Hutsot,209,Namal-Giborim,14.35,93,39,1.54,14.35,81.00,33.00,1.82,7.38
-211,Bazan-Hutsot,210,Hamifrats,4.57,259,96,0.62,8.35,111.00,43.00,1.40,18.52
-211,Bazan-Hutsot,212,TsometKiryatAta,4.15,244,96,0.62,7.00,108.00,43.00,1.40,14.02
-211,Bazan-Hutsot,213,KiryatAta North,15.10,59,25,2.40,15.10,25.00,10.00,6.00,22.74
-211,Bazan-Hutsot,214,KiryatAta North-East,19.98,13,4,15.00,,,,,37.87
-211,Bazan-Hutsot,215,Shefaram,21.56,24,9,6.67,,,,,34.04
-211,Bazan-Hutsot,216,Hamovil,28.38,11,5,12.00,,,,,32.61
-211,Bazan-Hutsot,217,Nazareth,36.02,11,5,12.00,,,,,48.23
-211,Bazan-Hutsot,301,SavyoneyYam,69.47,36,15,4.00,69.47,25.00,11.00,5.45,27.56
-211,Bazan-Hutsot,302,KiryatYam A,20.12,48,21,2.86,65.83,26.00,12.00,5.00,29.28
-211,Bazan-Hutsot,303,KiryatYam B+C,15.08,59,25,2.40,61.83,27.00,13.00,4.62,25.65
-211,Bazan-Hutsot,304,KiryatHaim West,8.27,63,25,2.40,56.47,28.00,13.00,4.62,19.69
-212,TsometKiryatAta,101,TsurShalom,16.72,153,62,0.97,16.72,70.00,29.00,2.07,12.33
-212,TsometKiryatAta,102,Kiryon,12.00,142,54,1.11,12.00,49.00,20.00,3.00,9.66
-212,TsometKiryatAta,103,KiryatBialik Center,9.45,156,59,1.02,9.45,49.00,20.00,3.00,8.88
-212,TsometKiryatAta,104,KiryatHaim,2.72,204,74,0.81,2.03,78.00,30.00,2.00,4.60
-212,TsometKiryatAta,202,Matam-NeotPeres,41.98,57,26,2.31,22.93,46.00,20.00,3.00,17.70
-212,TsometKiryatAta,203,HofCarmel-NeveDavid,38.57,22,10,6.00,38.57,22.00,10.00,6.00,22.22
-212,TsometKiryatAta,204,Hecht-Shprintzak,36.98,22,10,6.00,36.98,22.00,10.00,6.00,21.77
-212,TsometKiryatAta,205,EinHayam,34.98,22,10,6.00,34.98,22.00,10.00,6.00,19.18
-212,TsometKiryatAta,206,BatGalim-KiryatEliezer,30.30,56,25,2.40,26.23,46.00,20.00,3.00,20.14
-212,TsometKiryatAta,207,Hamoshava,28.33,56,25,2.40,24.44,46.00,20.00,3.00,14.49
-212,TsometKiryatAta,208,LowerCity,20.92,48,20,3.00,20.92,48.00,20.00,3.00,12.39
-212,TsometKiryatAta,209,Namal-Giborim,16.98,91,39,1.54,16.98,80.00,33.00,1.82,9.15
-212,TsometKiryatAta,210,Hamifrats,8.00,257,102,0.59,10.98,110.00,43.00,1.40,15.29
-212,TsometKiryatAta,211,Bazan-Hutsot,2.63,301,114,0.53,1.33,116.00,43.00,1.40,2.65
-212,TsometKiryatAta,213,KiryatAta North,11.35,79,31,1.94,8.30,25.00,10.00,6.00,9.01
-212,TsometKiryatAta,214,KiryatAta North-East,18.33,22,7,8.57,,,,,24.14
-212,TsometKiryatAta,215,Shefaram,18.45,24,10,6.00,,,,,20.31
-212,TsometKiryatAta,216,Hamovil,25.48,11,6,10.00,,,,,23.66
-212,TsometKiryatAta,217,Nazareth,33.57,11,6,10.00,,,,,39.28
-212,TsometKiryatAta,301,SavyoneyYam,70.05,36,15,4.00,70.05,25.00,11.00,5.45,14.78
-212,TsometKiryatAta,302,KiryatYam A,66.42,37,16,3.75,66.42,26.00,12.00,5.00,16.50
-212,TsometKiryatAta,303,KiryatYam B+C,62.42,40,17,3.53,62.42,27.00,13.00,4.62,12.87
-212,TsometKiryatAta,304,KiryatHaim West,9.82,54,22,2.73,57.05,28.00,13.00,4.62,6.91
-213,KiryatAta North,101,TsurShalom,23.17,20,9,6.67,,,,,15.03
-213,KiryatAta North,102,Kiryon,20.15,11,5,12.00,,,,,12.35
-213,KiryatAta North,103,KiryatBialik Center,17.15,11,5,12.00,,,,,11.57
-213,KiryatAta North,104,KiryatHaim,14.15,52,20,3.00,7.93,25.00,10.00,6.00,7.29
-213,KiryatAta North,206,BatGalim-KiryatEliezer,32.93,22,10,6.00,32.93,22.00,10.00,6.00,26.48
-213,KiryatAta North,207,Hamoshava,31.33,22,10,6.00,31.33,22.00,10.00,6.00,20.83
-213,KiryatAta North,208,LowerCity,28.63,23,10,6.00,28.63,23.00,10.00,6.00,18.73
-213,KiryatAta North,209,Namal-Giborim,23.28,23,10,6.00,23.28,23.00,10.00,6.00,15.48
-213,KiryatAta North,210,Hamifrats,17.93,47,19,3.16,17.93,24.00,10.00,6.00,17.92
-213,KiryatAta North,211,Bazan-Hutsot,12.45,69,27,2.22,12.12,25.00,10.00,6.00,8.99
-213,KiryatAta North,212,TsometKiryatAta,10.78,96,37,1.62,10.78,25.00,10.00,6.00,8.72
-213,KiryatAta North,214,KiryatAta North-East,7.63,14,6,10.00,,,,,18.04
-213,KiryatAta North,215,Shefaram,7.05,9,4,15.00,,,,,15.15
-213,KiryatAta North,216,Hamovil,16.32,3,1,60.00,,,,,18.50
-213,KiryatAta North,217,Nazareth,21.77,3,1,60.00,,,,,34.12
-213,KiryatAta North,301,SavyoneyYam,36.25,10,4,15.00,,,,,18.21
-213,KiryatAta North,302,KiryatYam A,32.57,10,4,15.00,,,,,20.15
-213,KiryatAta North,303,KiryatYam B+C,21.15,12,4,15.00,,,,,17.92
-213,KiryatAta North,304,KiryatHaim West,24.00,25,9,6.67,,,,,12.72
-214,KiryatAta North-East,101,TsurShalom,50.00,16,7,8.57,,,,,30.98
-214,KiryatAta North-East,102,Kiryon,7.30,38,17,3.53,,,,,26.66
-214,KiryatAta North-East,103,KiryatBialik Center,8.03,33,14,4.29,,,,,28.93
-214,KiryatAta North-East,104,KiryatHaim,12.00,33,14,4.29,,,,,24.64
-214,KiryatAta North-East,210,Hamifrats,22.00,60,25,2.40,,,,,35.28
-214,KiryatAta North-East,211,Bazan-Hutsot,17.83,45,19,3.16,,,,,26.35
-214,KiryatAta North-East,212,TsometKiryatAta,15.00,66,26,2.31,,,,,26.07
-214,KiryatAta North-East,213,KiryatAta North,2.38,39,14,4.29,,,,,18.10
-214,KiryatAta North-East,215,Shefaram,2.06,20,8,7.50,,,,,29.33
-215,Shefaram,101,TsurShalom,14.80,4,2,30.00,,,,,24.02
-215,Shefaram,102,Kiryon,13.85,16,8,7.50,,,,,19.70
-215,Shefaram,103,KiryatBialik Center,18.43,12,6,10.00,,,,,27.90
-215,Shefaram,104,KiryatHaim,22.27,12,6,10.00,,,,,23.97
-215,Shefaram,206,BatGalim-KiryatEliezer,55.64,2,0,,,,,,43.17
-215,Shefaram,207,Hamoshava,52.48,2,0,,,,,,37.51
-215,Shefaram,210,Hamifrats,29.58,30,13,4.62,,,,,27.25
-215,Shefaram,211,Bazan-Hutsot,28.24,20,9,6.67,,,,,25.67
-215,Shefaram,212,TsometKiryatAta,25.83,20,9,6.67,,,,,25.40
-215,Shefaram,213,KiryatAta North,16.74,8,3,20.00,,,,,20.71
-215,Shefaram,214,KiryatAta North-East,8.82,42,17,3.53,,,,,33.70
-215,Shefaram,216,Hamovil,9.00,27,13,4.62,,,,,18.10
-215,Shefaram,217,Nazareth,16.12,22,10,6.00,,,,,33.72
-216,Hamovil,101,TsurShalom,21.00,3,1,60.00,,,,,27.91
-216,Hamovil,102,Kiryon,20.17,11,5,12.00,,,,,23.58
-216,Hamovil,103,KiryatBialik Center,22.38,8,4,15.00,,,,,31.78
-216,Hamovil,104,KiryatHaim,25.81,8,4,15.00,,,,,28.69
-216,Hamovil,210,Hamifrats,33.50,20,9,6.67,,,,,29.88
-216,Hamovil,211,Bazan-Hutsot,31.97,11,5,12.00,,,,,30.39
-216,Hamovil,212,TsometKiryatAta,28.00,11,5,12.00,,,,,30.12
-216,Hamovil,213,KiryatAta North,16.12,3,1,60.00,,,,,25.43
-216,Hamovil,214,KiryatAta North-East,13.00,22,8,7.50,,,,,38.42
-216,Hamovil,215,Shefaram,6.72,40,14,4.29,,,,,16.00
-216,Hamovil,217,Nazareth,7.38,43,16,3.75,,,,,25.21
-217,Nazareth,101,TsurShalom,41.98,3,1,60.00,,,,,48.39
-217,Nazareth,102,Kiryon,43.98,8,4,15.00,,,,,44.06
-217,Nazareth,103,KiryatBialik Center,50.98,5,3,20.00,,,,,52.26
-217,Nazareth,104,KiryatHaim,54.98,5,3,20.00,,,,,49.17
-217,Nazareth,206,BatGalim-KiryatEliezer,54.00,4,2,30.00,,,,,64.66
-217,Nazareth,207,Hamoshava,53.27,4,2,30.00,,,,,59.00
-217,Nazareth,208,LowerCity,59.48,8,4,15.00,,,,,56.90
-217,Nazareth,209,Namal-Giborim,44.48,9,4,15.00,,,,,53.66
-217,Nazareth,210,Hamifrats,54.98,17,7,8.57,,,,,48.40
-217,Nazareth,211,Bazan-Hutsot,59.75,7,4,15.00,,,,,50.87
-217,Nazareth,212,TsometKiryatAta,56.13,7,4,15.00,,,,,50.60
-217,Nazareth,213,KiryatAta North,46.13,2,1,60.00,,,,,45.91
-217,Nazareth,214,KiryatAta North-East,39.91,10,5,12.00,,,,,58.90
-217,Nazareth,215,Shefaram,33.43,15,7,8.57,,,,,36.48
-217,Nazareth,216,Hamovil,20.98,23,9,6.67,,,,,29.57
-301,SavyoneyYam,101,TsurShalom,7.53,75,27,2.22,94.73,25.00,9.00,6.67,7.49
-301,SavyoneyYam,102,Kiryon,20.48,28,11,5.45,,,,,9.12
-301,SavyoneyYam,103,KiryatBialik Center,16.00,29,11,5.45,,,,,15.23
-301,SavyoneyYam,104,KiryatHaim,24.30,13,5,12.00,,,,,11.88
-301,SavyoneyYam,209,Namal-Giborim,37.63,29,15,4.00,37.63,29.00,15.00,4.00,22.26
-301,SavyoneyYam,210,Hamifrats,31.00,39,18,3.33,31.00,30.00,15.00,4.00,27.88
-301,SavyoneyYam,211,Bazan-Hutsot,20.17,55,24,2.50,20.17,32.00,15.00,4.00,15.76
-301,SavyoneyYam,212,TsometKiryatAta,19.58,46,20,3.00,19.58,32.00,15.00,4.00,13.88
-301,SavyoneyYam,213,KiryatAta North,42.43,13,5,12.00,,,,,19.44
-301,SavyoneyYam,302,KiryatYam A,5.35,102,38,1.58,5.63,34.00,15.00,4.00,3.76
-301,SavyoneyYam,303,KiryatYam B+C,9.35,102,38,1.58,8.63,34.00,15.00,4.00,7.43
-301,SavyoneyYam,304,KiryatHaim West,14.57,68,27,2.22,11.97,33.00,15.00,4.00,9.70
-302,KiryatYam A,101,TsurShalom,17.90,85,32,1.88,89.10,24.00,9.00,6.67,12.56
-302,KiryatYam A,102,Kiryon,20.75,41,15,4.00,,,,,11.02
-302,KiryatYam A,103,KiryatBialik Center,10.00,42,15,4.00,,,,,14.68
-302,KiryatYam A,104,KiryatHaim,18.95,14,5,12.00,,,,,10.22
-302,KiryatYam A,209,Namal-Giborim,32.00,29,15,4.00,32.00,29.00,15.00,4.00,20.59
-302,KiryatYam A,210,Hamifrats,25.37,39,19,3.16,25.37,30.00,15.00,4.00,26.21
-302,KiryatYam A,211,Bazan-Hutsot,14.53,56,25,2.40,14.53,32.00,15.00,4.00,14.10
-302,KiryatYam A,212,TsometKiryatAta,13.95,46,21,2.86,13.95,32.00,15.00,4.00,12.21
-302,KiryatYam A,213,KiryatAta North,37.08,13,6,10.00,,,,,17.78
-302,KiryatYam A,301,SavyoneyYam,10.37,75,28,2.14,84.00,26.00,11.00,5.45,7.03
-302,KiryatYam A,303,KiryatYam B+C,3.00,141,53,1.13,3.00,34.00,15.00,4.00,5.77
-302,KiryatYam A,304,KiryatHaim West,10.00,69,29,2.07,6.33,33.00,15.00,4.00,8.03
-303,KiryatYam B+C,101,TsurShalom,19.33,96,36,1.67,86.10,24.00,8.00,7.50,14.23
-303,KiryatYam B+C,102,Kiryon,24.00,51,20,3.00,,,,,12.68
-303,KiryatYam B+C,103,KiryatBialik Center,6.00,53,20,3.00,,,,,16.34
-303,KiryatYam B+C,104,KiryatHaim,14.95,25,10,6.00,,,,,11.88
-303,KiryatYam B+C,203,HofCarmel-NeveDavid,31.00,12,5,12.00,,,,,28.70
-303,KiryatYam B+C,206,BatGalim-KiryatEliezer,24.00,13,5,12.00,,,,,29.38
-303,KiryatYam B+C,208,LowerCity,19.00,13,5,12.00,,,,,21.63
-303,KiryatYam B+C,209,Namal-Giborim,29.00,30,14,4.29,29.00,30.00,14.00,4.29,18.38
-303,KiryatYam B+C,210,Hamifrats,22.37,54,23,2.61,22.37,31.00,14.00,4.29,24.01
-303,KiryatYam B+C,211,Bazan-Hutsot,11.53,67,27,2.22,11.53,33.00,14.00,4.29,11.89
-303,KiryatYam B+C,212,TsometKiryatAta,10.95,48,20,3.00,10.95,33.00,14.00,4.29,10.01
-303,KiryatYam B+C,213,KiryatAta North,32.83,14,6,10.00,,,,,18.25
-303,KiryatYam B+C,301,SavyoneyYam,10.42,64,23,2.61,81.00,26.00,10.00,6.00,8.70
-303,KiryatYam B+C,302,KiryatYam A,5.00,117,43,1.40,77.37,27.00,11.00,5.45,10.42
-303,KiryatYam B+C,304,KiryatHaim West,7.67,93,36,1.67,3.33,34.00,14.00,4.29,5.83
-304,KiryatHaim West,101,TsurShalom,26.28,59,22,2.73,82.77,24.00,8.00,7.50,17.27
-304,KiryatHaim West,102,Kiryon,20.20,23,9,6.67,,,,,15.73
-304,KiryatHaim West,103,KiryatBialik Center,14.03,25,9,6.67,,,,,16.24
-304,KiryatHaim West,104,KiryatHaim,7.18,29,10,6.00,,,,,11.95
-304,KiryatHaim West,203,HofCarmel-NeveDavid,28.00,7,3,20.00,,,,,26.82
-304,KiryatHaim West,206,BatGalim-KiryatEliezer,22.00,8,3,20.00,,,,,27.51
-304,KiryatHaim West,208,LowerCity,17.00,8,3,20.00,,,,,19.75
-304,KiryatHaim West,209,Namal-Giborim,25.67,30,14,4.29,25.67,30.00,14.00,4.29,16.51
-304,KiryatHaim West,210,Hamifrats,19.03,55,24,2.50,19.03,31.00,14.00,4.29,22.13
-304,KiryatHaim West,211,Bazan-Hutsot,8.20,74,30,2.00,8.20,33.00,14.00,4.29,10.01
-304,KiryatHaim West,212,TsometKiryatAta,7.62,68,28,2.14,7.62,33.00,14.00,4.29,8.13
-304,KiryatHaim West,213,KiryatAta North,20.97,26,11,5.45,,,,,16.37
-304,KiryatHaim West,301,SavyoneyYam,20.00,40,15,4.00,77.67,26.00,10.00,6.00,11.74
-304,KiryatHaim West,302,KiryatYam A,16.32,52,20,3.00,74.03,27.00,11.00,5.45,13.47
-304,KiryatHaim West,303,KiryatYam B+C,6.82,78,28,2.14,70.03,28.00,12.00,5.00,9.84
+o,o_name,d,d_name,bus_ivt_min,bus_trips_0609,bus_trips_0708,bus_headway_0708_min,bus_best_line_headway_0708_min,brt_ivt_min,brt_trips_0609,brt_trips_0708,brt_headway_0708_min,brt_best_line_headway_0708_min,step26_fastest_path_min
+101,TsurShalom,102,Kiryon,4.98,221,87,0.69,5.45,4.98,59.00,21.00,2.86,5.45,5.41
+101,TsurShalom,103,KiryatBialik Center,10.18,215,85,0.71,5.45,10.18,57.00,21.00,2.86,5.45,11.52
+101,TsurShalom,104,KiryatHaim,12.98,177,72,0.83,5.45,12.98,56.00,21.00,2.86,5.45,8.75
+101,TsurShalom,202,Matam-NeotPeres,42.93,43,20,3.00,6.00,42.93,43.00,20.00,3.00,6.00,28.20
+101,TsurShalom,203,HofCarmel-NeveDavid,58.57,21,11,5.45,5.45,58.57,21.00,11.00,5.45,5.45,32.73
+101,TsurShalom,204,Hecht-Shprintzak,56.98,21,11,5.45,5.45,56.98,21.00,11.00,5.45,5.45,32.28
+101,TsurShalom,205,EinHayam,54.98,21,11,5.45,5.45,54.98,21.00,11.00,5.45,5.45,29.69
+101,TsurShalom,206,BatGalim-KiryatEliezer,50.30,22,11,5.45,5.45,50.30,22.00,11.00,5.45,5.45,30.65
+101,TsurShalom,207,Hamoshava,48.33,22,11,5.45,5.45,48.33,22.00,11.00,5.45,5.45,25.00
+101,TsurShalom,208,LowerCity,43.98,23,11,5.45,5.45,43.98,23.00,11.00,5.45,5.45,22.90
+101,TsurShalom,209,Namal-Giborim,38.98,53,27,2.22,3.75,38.98,53.00,27.00,2.22,3.75,19.65
+101,TsurShalom,210,Hamifrats,30.98,143,63,0.95,3.75,30.98,80.00,37.00,1.62,3.75,25.80
+101,TsurShalom,211,Bazan-Hutsot,22.63,179,78,0.77,3.75,22.63,85.00,37.00,1.62,3.75,13.16
+101,TsurShalom,212,TsometKiryatAta,20.00,191,81,0.74,3.75,20.00,86.00,37.00,1.62,3.75,12.89
+101,TsurShalom,213,KiryatAta North,44.07,18,8,7.50,10.00,,,,,,16.31
+101,TsurShalom,214,KiryatAta North-East,38.00,7,3,20.00,30.00,,,,,,30.81
+101,TsurShalom,215,Shefaram,15.60,3,2,30.00,60.00,,,,,,19.29
+101,TsurShalom,216,Hamovil,17.55,1,1,60.00,60.00,,,,,,22.42
+101,TsurShalom,217,Nazareth,22.80,1,1,60.00,60.00,,,,,,38.04
+101,TsurShalom,301,SavyoneyYam,1.63,115,47,1.28,3.75,1.35,35.00,16.00,3.75,3.75,11.63
+101,TsurShalom,302,KiryatYam A,6.98,114,47,1.28,3.75,6.98,34.00,16.00,3.75,3.75,10.70
+101,TsurShalom,303,KiryatYam B+C,11.23,124,52,1.15,3.75,9.98,34.00,16.00,3.75,3.75,14.38
+101,TsurShalom,304,KiryatHaim West,19.47,85,38,1.58,3.75,13.32,33.00,16.00,3.75,3.75,16.64
+102,Kiryon,101,TsurShalom,4.32,184,67,0.90,5.45,4.47,50.00,20.00,3.00,6.00,4.98
+102,Kiryon,103,KiryatBialik Center,2.80,248,91,0.66,6.00,5.20,58.00,20.00,3.00,6.00,8.85
+102,Kiryon,104,KiryatHaim,8.00,201,77,0.78,6.00,8.00,57.00,20.00,3.00,6.00,6.08
+102,Kiryon,202,Matam-NeotPeres,37.95,44,20,3.00,6.00,37.95,44.00,20.00,3.00,6.00,25.53
+102,Kiryon,203,HofCarmel-NeveDavid,53.58,21,10,6.00,6.00,53.58,21.00,10.00,6.00,6.00,30.06
+102,Kiryon,204,Hecht-Shprintzak,52.00,21,10,6.00,6.00,52.00,21.00,10.00,6.00,6.00,29.61
+102,Kiryon,205,EinHayam,50.00,21,10,6.00,6.00,50.00,21.00,10.00,6.00,6.00,27.02
+102,Kiryon,206,BatGalim-KiryatEliezer,45.32,22,10,6.00,6.00,45.32,22.00,10.00,6.00,6.00,27.98
+102,Kiryon,207,Hamoshava,43.35,22,10,6.00,6.00,43.35,22.00,10.00,6.00,6.00,22.33
+102,Kiryon,208,LowerCity,39.00,23,10,6.00,6.00,39.00,23.00,10.00,6.00,6.00,20.23
+102,Kiryon,209,Namal-Giborim,32.00,24,10,6.00,6.00,32.00,24.00,10.00,6.00,6.00,16.98
+102,Kiryon,210,Hamifrats,17.00,136,56,1.07,6.00,26.00,51.00,20.00,3.00,6.00,23.03
+102,Kiryon,211,Bazan-Hutsot,16.23,153,61,0.98,6.00,17.65,54.00,20.00,3.00,6.00,10.49
+102,Kiryon,212,TsometKiryatAta,10.48,172,66,0.91,6.00,15.02,55.00,20.00,3.00,6.00,10.22
+102,Kiryon,213,KiryatAta North,24.22,7,2,30.00,30.00,,,,,,13.64
+102,Kiryon,214,KiryatAta North-East,9.32,15,3,20.00,30.00,,,,,,27.09
+102,Kiryon,215,Shefaram,7.92,18,6,10.00,30.00,,,,,,15.57
+102,Kiryon,216,Hamovil,16.75,9,5,12.00,30.00,,,,,,18.70
+102,Kiryon,217,Nazareth,25.00,9,5,12.00,30.00,,,,,,34.32
+102,Kiryon,301,SavyoneyYam,21.12,32,13,4.62,12.00,,,,,,13.04
+102,Kiryon,302,KiryatYam A,12.17,34,13,4.62,12.00,,,,,,12.13
+102,Kiryon,303,KiryatYam B+C,21.82,44,17,3.53,12.00,,,,,,12.75
+102,Kiryon,304,KiryatHaim West,18.00,28,11,5.45,15.00,,,,,,14.19
+103,KiryatBialik Center,101,TsurShalom,7.53,188,74,0.81,5.45,7.17,49.00,20.00,3.00,6.00,7.42
+103,KiryatBialik Center,102,Kiryon,3.00,216,81,0.74,6.00,2.55,51.00,20.00,3.00,6.00,4.75
+103,KiryatBialik Center,104,KiryatHaim,3.00,216,82,0.73,6.00,2.80,57.00,20.00,3.00,6.00,3.66
+103,KiryatBialik Center,202,Matam-NeotPeres,32.75,44,20,3.00,6.00,32.75,44.00,20.00,3.00,6.00,23.11
+103,KiryatBialik Center,203,HofCarmel-NeveDavid,48.38,21,10,6.00,6.00,48.38,21.00,10.00,6.00,6.00,27.63
+103,KiryatBialik Center,204,Hecht-Shprintzak,46.80,21,10,6.00,6.00,46.80,21.00,10.00,6.00,6.00,27.18
+103,KiryatBialik Center,205,EinHayam,44.80,21,10,6.00,6.00,44.80,21.00,10.00,6.00,6.00,24.59
+103,KiryatBialik Center,206,BatGalim-KiryatEliezer,40.12,22,10,6.00,6.00,40.12,22.00,10.00,6.00,6.00,25.56
+103,KiryatBialik Center,207,Hamoshava,38.15,22,10,6.00,6.00,38.15,22.00,10.00,6.00,6.00,19.90
+103,KiryatBialik Center,208,LowerCity,33.80,23,10,6.00,6.00,33.80,23.00,10.00,6.00,6.00,17.80
+103,KiryatBialik Center,209,Namal-Giborim,26.80,24,10,6.00,6.00,26.80,24.00,10.00,6.00,6.00,14.56
+103,KiryatBialik Center,210,Hamifrats,15.15,137,55,1.09,6.00,20.80,51.00,20.00,3.00,6.00,20.71
+103,KiryatBialik Center,211,Bazan-Hutsot,12.45,154,60,1.00,6.00,12.45,54.00,20.00,3.00,6.00,8.07
+103,KiryatBialik Center,212,TsometKiryatAta,7.43,173,66,0.91,6.00,9.82,55.00,20.00,3.00,6.00,7.79
+103,KiryatBialik Center,213,KiryatAta North,20.73,7,3,20.00,20.00,,,,,,11.22
+103,KiryatBialik Center,214,KiryatAta North-East,31.00,13,3,20.00,20.00,,,,,,26.35
+103,KiryatBialik Center,215,Shefaram,10.72,15,5,12.00,20.00,,,,,,18.63
+103,KiryatBialik Center,216,Hamovil,18.36,8,5,12.00,20.00,,,,,,21.76
+103,KiryatBialik Center,217,Nazareth,26.08,8,5,12.00,20.00,,,,,,37.38
+103,KiryatBialik Center,301,SavyoneyYam,16.25,34,13,4.62,12.00,,,,,,10.61
+103,KiryatBialik Center,302,KiryatYam A,9.38,36,13,4.62,12.00,,,,,,12.55
+103,KiryatBialik Center,303,KiryatYam B+C,22.60,46,17,3.53,12.00,,,,,,10.32
+103,KiryatBialik Center,304,KiryatHaim West,16.00,28,11,5.45,15.00,,,,,,11.76
+104,KiryatHaim,101,TsurShalom,14.68,146,58,1.03,6.00,14.62,49.00,20.00,3.00,6.00,11.94
+104,KiryatHaim,102,Kiryon,9.05,174,66,0.91,6.00,10.00,51.00,20.00,3.00,6.00,9.26
+104,KiryatHaim,103,KiryatBialik Center,5.98,201,75,0.80,6.00,7.45,51.00,20.00,3.00,6.00,8.55
+104,KiryatHaim,202,Matam-NeotPeres,29.95,45,20,3.00,6.00,29.95,45.00,20.00,3.00,6.00,20.78
+104,KiryatHaim,203,HofCarmel-NeveDavid,45.58,22,10,6.00,6.00,45.58,22.00,10.00,6.00,6.00,25.31
+104,KiryatHaim,204,Hecht-Shprintzak,44.00,22,10,6.00,6.00,44.00,22.00,10.00,6.00,6.00,24.86
+104,KiryatHaim,205,EinHayam,42.00,22,10,6.00,6.00,42.00,22.00,10.00,6.00,6.00,22.27
+104,KiryatHaim,206,BatGalim-KiryatEliezer,31.16,46,20,3.00,6.00,31.16,46.00,20.00,3.00,6.00,23.23
+104,KiryatHaim,207,Hamoshava,29.38,46,20,3.00,6.00,29.38,46.00,20.00,3.00,6.00,17.58
+104,KiryatHaim,208,LowerCity,25.85,48,20,3.00,6.00,25.85,48.00,20.00,3.00,6.00,15.48
+104,KiryatHaim,209,Namal-Giborim,24.00,49,20,3.00,6.00,24.00,49.00,20.00,3.00,6.00,12.23
+104,KiryatHaim,210,Hamifrats,10.57,166,63,0.95,6.00,18.00,77.00,30.00,2.00,6.00,18.38
+104,KiryatHaim,211,Bazan-Hutsot,6.45,183,68,0.88,6.00,9.65,81.00,30.00,2.00,6.00,5.74
+104,KiryatHaim,212,TsometKiryatAta,4.50,225,82,0.73,6.00,7.02,82.00,30.00,2.00,6.00,5.47
+104,KiryatHaim,213,KiryatAta North,6.27,44,16,3.75,6.67,6.27,25.00,9.00,6.67,6.67,8.95
+104,KiryatHaim,214,KiryatAta North-East,28.00,13,2,30.00,30.00,,,,,,24.08
+104,KiryatHaim,215,Shefaram,13.55,15,5,12.00,20.00,,,,,,20.25
+104,KiryatHaim,216,Hamovil,21.90,8,5,12.00,20.00,,,,,,23.60
+104,KiryatHaim,217,Nazareth,29.98,8,5,12.00,20.00,,,,,,39.22
+104,KiryatHaim,301,SavyoneyYam,23.13,9,3,20.00,20.00,,,,,,15.13
+104,KiryatHaim,302,KiryatYam A,12.70,10,3,20.00,20.00,,,,,,17.06
+104,KiryatHaim,303,KiryatYam B+C,14.15,22,7,8.57,15.00,,,,,,14.84
+104,KiryatHaim,304,KiryatHaim West,4.55,34,12,5.00,12.00,,,,,,9.44
+201,TiratCarmel,202,Matam-NeotPeres,10.73,84,32,1.88,15.00,,,,,,11.66
+201,TiratCarmel,203,HofCarmel-NeveDavid,13.47,13,6,10.00,15.00,,,,,,17.63
+201,TiratCarmel,204,Hecht-Shprintzak,16.98,13,6,10.00,15.00,,,,,,16.92
+201,TiratCarmel,205,EinHayam,18.23,13,6,10.00,15.00,,,,,,16.77
+201,TiratCarmel,209,Namal-Giborim,37.75,4,2,30.00,30.00,,,,,,34.57
+202,Matam-NeotPeres,101,TsurShalom,41.60,43,20,3.00,6.00,41.60,43.00,20.00,3.00,6.00,37.96
+202,Matam-NeotPeres,102,Kiryon,36.98,45,21,2.86,5.45,36.98,45.00,21.00,2.86,5.45,35.29
+202,Matam-NeotPeres,103,KiryatBialik Center,34.43,45,21,2.86,5.45,34.43,45.00,21.00,2.86,5.45,34.51
+202,Matam-NeotPeres,104,KiryatHaim,26.98,49,21,2.86,5.45,26.98,49.00,21.00,2.86,5.45,30.23
+202,Matam-NeotPeres,201,TiratCarmel,6.10,78,34,1.76,12.00,,,,,,8.55
+202,Matam-NeotPeres,203,HofCarmel-NeveDavid,5.02,132,48,1.25,5.45,5.02,30.00,11.00,5.45,5.45,10.17
+202,Matam-NeotPeres,204,Hecht-Shprintzak,8.58,127,48,1.25,5.45,8.58,29.00,11.00,5.45,5.45,9.46
+202,Matam-NeotPeres,205,EinHayam,8.98,98,38,1.58,5.45,8.98,29.00,11.00,5.45,5.45,9.31
+202,Matam-NeotPeres,206,BatGalim-KiryatEliezer,15.98,70,28,2.14,5.45,10.98,29.00,11.00,5.45,5.45,11.82
+202,Matam-NeotPeres,207,Hamoshava,21.98,75,30,2.00,5.45,15.98,28.00,11.00,5.45,5.45,14.92
+202,Matam-NeotPeres,208,LowerCity,23.98,73,30,2.00,5.45,18.13,27.00,11.00,5.45,5.45,18.81
+202,Matam-NeotPeres,209,Namal-Giborim,30.98,82,35,1.71,5.45,23.98,27.00,11.00,5.45,5.45,27.14
+202,Matam-NeotPeres,210,Hamifrats,32.98,91,39,1.54,5.45,12.98,53.00,21.00,2.86,5.45,30.43
+202,Matam-NeotPeres,211,Bazan-Hutsot,17.98,53,21,2.86,5.45,17.98,51.00,21.00,2.86,5.45,28.28
+202,Matam-NeotPeres,212,TsometKiryatAta,24.98,51,21,2.86,5.45,24.98,49.00,21.00,2.86,5.45,25.92
+203,HofCarmel-NeveDavid,101,TsurShalom,56.97,20,10,6.00,6.00,56.97,20.00,10.00,6.00,6.00,40.51
+203,HofCarmel-NeveDavid,102,Kiryon,52.65,21,10,6.00,6.00,52.65,21.00,10.00,6.00,6.00,37.84
+203,HofCarmel-NeveDavid,103,KiryatBialik Center,49.97,21,10,6.00,6.00,49.97,21.00,10.00,6.00,6.00,37.06
+203,HofCarmel-NeveDavid,104,KiryatHaim,42.28,23,10,6.00,6.00,42.28,23.00,10.00,6.00,6.00,32.78
+203,HofCarmel-NeveDavid,201,TiratCarmel,5.50,14,5,12.00,15.00,,,,,,15.36
+203,HofCarmel-NeveDavid,202,Matam-NeotPeres,4.02,123,44,1.36,6.00,3.42,24.00,10.00,6.00,6.00,7.80
+203,HofCarmel-NeveDavid,204,Hecht-Shprintzak,3.82,166,61,0.98,6.00,3.57,29.00,10.00,6.00,6.00,5.26
+203,HofCarmel-NeveDavid,205,EinHayam,4.97,110,41,1.46,6.00,3.97,29.00,10.00,6.00,6.00,6.86
+203,HofCarmel-NeveDavid,206,BatGalim-KiryatEliezer,11.97,99,37,1.62,6.00,5.97,29.00,10.00,6.00,6.00,9.37
+203,HofCarmel-NeveDavid,207,Hamoshava,15.15,77,30,2.00,6.00,10.97,28.00,10.00,6.00,6.00,12.47
+203,HofCarmel-NeveDavid,208,LowerCity,17.15,92,35,1.71,6.00,13.12,27.00,10.00,6.00,6.00,16.36
+203,HofCarmel-NeveDavid,209,Namal-Giborim,24.28,58,23,2.61,6.00,18.97,27.00,10.00,6.00,6.00,25.95
+203,HofCarmel-NeveDavid,210,Hamifrats,27.97,54,21,2.86,6.00,27.97,25.00,10.00,6.00,6.00,33.05
+203,HofCarmel-NeveDavid,211,Bazan-Hutsot,33.45,32,13,4.62,6.00,33.45,24.00,10.00,6.00,6.00,30.83
+203,HofCarmel-NeveDavid,212,TsometKiryatAta,40.25,23,10,6.00,6.00,40.25,23.00,10.00,6.00,6.00,28.47
+203,HofCarmel-NeveDavid,303,KiryatYam B+C,30.50,10,4,15.00,60.00,,,,,,40.10
+203,HofCarmel-NeveDavid,304,KiryatHaim West,27.50,8,3,20.00,60.00,,,,,,34.14
+204,Hecht-Shprintzak,101,TsurShalom,53.40,20,10,6.00,6.00,53.40,20.00,10.00,6.00,6.00,36.92
+204,Hecht-Shprintzak,102,Kiryon,49.08,21,10,6.00,6.00,49.08,21.00,10.00,6.00,6.00,34.24
+204,Hecht-Shprintzak,103,KiryatBialik Center,46.40,21,10,6.00,6.00,46.40,21.00,10.00,6.00,6.00,33.46
+204,Hecht-Shprintzak,104,KiryatHaim,38.72,23,10,6.00,6.00,38.72,23.00,10.00,6.00,6.00,29.18
+204,Hecht-Shprintzak,201,TiratCarmel,7.03,14,5,12.00,15.00,,,,,,20.08
+204,Hecht-Shprintzak,202,Matam-NeotPeres,5.67,123,47,1.28,6.00,5.00,24.00,10.00,6.00,6.00,12.52
+204,Hecht-Shprintzak,203,HofCarmel-NeveDavid,1.65,155,56,1.07,5.45,1.58,25.00,10.00,6.00,6.00,5.86
+204,Hecht-Shprintzak,205,EinHayam,1.25,131,50,1.20,5.45,0.40,29.00,10.00,6.00,6.00,3.26
+204,Hecht-Shprintzak,206,BatGalim-KiryatEliezer,8.15,103,42,1.43,5.45,2.40,29.00,10.00,6.00,6.00,5.77
+204,Hecht-Shprintzak,207,Hamoshava,16.15,92,35,1.71,5.45,7.40,28.00,10.00,6.00,6.00,8.87
+204,Hecht-Shprintzak,208,LowerCity,18.15,90,35,1.71,5.45,9.55,27.00,10.00,6.00,6.00,12.77
+204,Hecht-Shprintzak,209,Namal-Giborim,20.77,59,24,2.50,6.00,15.40,27.00,10.00,6.00,6.00,22.36
+204,Hecht-Shprintzak,210,Hamifrats,24.40,41,17,3.53,6.00,24.40,25.00,10.00,6.00,6.00,29.46
+204,Hecht-Shprintzak,211,Bazan-Hutsot,29.88,24,10,6.00,6.00,29.88,24.00,10.00,6.00,6.00,27.24
+204,Hecht-Shprintzak,212,TsometKiryatAta,36.68,23,10,6.00,6.00,36.68,23.00,10.00,6.00,6.00,24.88
+205,EinHayam,101,TsurShalom,53.00,20,10,6.00,6.00,53.00,20.00,10.00,6.00,6.00,34.69
+205,EinHayam,102,Kiryon,48.68,21,10,6.00,6.00,48.68,21.00,10.00,6.00,6.00,32.02
+205,EinHayam,103,KiryatBialik Center,46.00,21,10,6.00,6.00,46.00,21.00,10.00,6.00,6.00,31.24
+205,EinHayam,104,KiryatHaim,38.32,23,10,6.00,6.00,38.32,23.00,10.00,6.00,6.00,26.96
+205,EinHayam,201,TiratCarmel,9.03,14,5,12.00,15.00,,,,,,18.63
+205,EinHayam,202,Matam-NeotPeres,7.33,98,38,1.58,6.00,7.00,24.00,10.00,6.00,6.00,11.07
+205,EinHayam,203,HofCarmel-NeveDavid,3.58,112,42,1.43,6.00,3.58,25.00,10.00,6.00,6.00,8.31
+205,EinHayam,204,Hecht-Shprintzak,2.00,131,50,1.20,6.00,2.00,25.00,10.00,6.00,6.00,4.51
+205,EinHayam,206,BatGalim-KiryatEliezer,2.80,91,34,1.76,6.00,2.00,29.00,10.00,6.00,6.00,3.54
+205,EinHayam,207,Hamoshava,7.00,80,29,2.07,6.00,7.00,28.00,10.00,6.00,6.00,6.65
+205,EinHayam,208,LowerCity,9.15,78,29,2.07,6.00,9.15,27.00,10.00,6.00,6.00,10.54
+205,EinHayam,209,Namal-Giborim,15.00,42,17,3.53,6.00,15.00,27.00,10.00,6.00,6.00,20.13
+205,EinHayam,210,Hamifrats,24.00,25,10,6.00,6.00,24.00,25.00,10.00,6.00,6.00,27.23
+205,EinHayam,211,Bazan-Hutsot,29.48,24,10,6.00,6.00,29.48,24.00,10.00,6.00,6.00,25.01
+205,EinHayam,212,TsometKiryatAta,36.28,23,10,6.00,6.00,36.28,23.00,10.00,6.00,6.00,22.65
+206,BatGalim-KiryatEliezer,101,TsurShalom,51.00,21,10,6.00,6.00,51.00,21.00,10.00,6.00,6.00,31.64
+206,BatGalim-KiryatEliezer,102,Kiryon,46.68,22,10,6.00,6.00,46.68,22.00,10.00,6.00,6.00,28.96
+206,BatGalim-KiryatEliezer,103,KiryatBialik Center,44.00,22,10,6.00,6.00,44.00,22.00,10.00,6.00,6.00,28.19
+206,BatGalim-KiryatEliezer,104,KiryatHaim,36.32,46,21,2.86,5.45,36.32,46.00,21.00,2.86,5.45,23.90
+206,BatGalim-KiryatEliezer,202,Matam-NeotPeres,17.67,71,31,1.94,6.00,11.68,24.00,10.00,6.00,6.00,11.24
+206,BatGalim-KiryatEliezer,203,HofCarmel-NeveDavid,13.23,102,41,1.46,6.00,8.27,25.00,10.00,6.00,6.00,10.40
+206,BatGalim-KiryatEliezer,204,Hecht-Shprintzak,10.65,104,43,1.40,6.00,6.68,25.00,10.00,6.00,6.00,6.60
+206,BatGalim-KiryatEliezer,205,EinHayam,7.73,93,38,1.58,6.00,4.68,25.00,10.00,6.00,6.00,4.01
+206,BatGalim-KiryatEliezer,207,Hamoshava,5.88,177,68,0.88,5.45,5.00,55.00,21.00,2.86,5.45,3.60
+206,BatGalim-KiryatEliezer,208,LowerCity,8.18,144,56,1.07,5.45,7.15,54.00,21.00,2.86,5.45,7.49
+206,BatGalim-KiryatEliezer,209,Namal-Giborim,14.23,82,37,1.62,5.45,13.00,53.00,21.00,2.86,5.45,17.08
+206,BatGalim-KiryatEliezer,210,Hamifrats,22.67,80,35,1.71,5.45,22.00,50.00,21.00,2.86,5.45,24.18
+206,BatGalim-KiryatEliezer,211,Bazan-Hutsot,28.18,66,29,2.07,5.45,27.48,48.00,21.00,2.86,5.45,21.96
+206,BatGalim-KiryatEliezer,212,TsometKiryatAta,35.68,57,26,2.31,5.45,34.28,47.00,21.00,2.86,5.45,19.60
+206,BatGalim-KiryatEliezer,213,KiryatAta North,43.98,22,11,5.45,5.45,43.98,22.00,11.00,5.45,5.45,28.32
+206,BatGalim-KiryatEliezer,217,Nazareth,52.85,5,3,20.00,20.00,,,,,,53.88
+206,BatGalim-KiryatEliezer,303,KiryatYam B+C,24.00,10,4,15.00,60.00,,,,,,31.23
+206,BatGalim-KiryatEliezer,304,KiryatHaim West,21.00,8,3,20.00,60.00,,,,,,25.27
+207,Hamoshava,101,TsurShalom,46.00,21,10,6.00,6.00,46.00,21.00,10.00,6.00,6.00,30.09
+207,Hamoshava,102,Kiryon,41.68,22,10,6.00,6.00,41.68,22.00,10.00,6.00,6.00,27.41
+207,Hamoshava,103,KiryatBialik Center,39.00,22,10,6.00,6.00,39.00,22.00,10.00,6.00,6.00,26.64
+207,Hamoshava,104,KiryatHaim,31.32,46,20,3.00,6.00,31.32,46.00,20.00,3.00,6.00,22.35
+207,Hamoshava,202,Matam-NeotPeres,19.00,76,33,1.82,6.00,13.65,24.00,10.00,6.00,6.00,13.11
+207,Hamoshava,203,HofCarmel-NeveDavid,14.98,79,33,1.82,6.00,10.23,25.00,10.00,6.00,6.00,12.27
+207,Hamoshava,204,Hecht-Shprintzak,13.33,91,38,1.58,6.00,8.65,25.00,10.00,6.00,6.00,8.47
+207,Hamoshava,205,EinHayam,11.50,80,33,1.82,6.00,6.65,25.00,10.00,6.00,6.00,5.88
+207,Hamoshava,206,BatGalim-KiryatEliezer,1.97,189,73,0.82,6.00,1.97,51.00,19.00,3.16,6.00,6.15
+207,Hamoshava,208,LowerCity,2.15,150,54,1.11,6.00,2.15,54.00,20.00,3.00,6.00,6.32
+207,Hamoshava,209,Namal-Giborim,8.00,74,30,2.00,6.00,8.00,53.00,20.00,3.00,6.00,15.53
+207,Hamoshava,210,Hamifrats,17.35,60,25,2.40,6.00,17.00,50.00,20.00,3.00,6.00,22.63
+207,Hamoshava,211,Bazan-Hutsot,22.90,58,25,2.40,6.00,22.48,48.00,20.00,3.00,6.00,20.41
+207,Hamoshava,212,TsometKiryatAta,29.70,57,25,2.40,6.00,29.28,47.00,20.00,3.00,6.00,18.05
+207,Hamoshava,213,KiryatAta North,38.00,22,10,6.00,6.00,38.00,22.00,10.00,6.00,6.00,26.77
+207,Hamoshava,217,Nazareth,49.87,5,3,20.00,20.00,,,,,,52.33
+208,LowerCity,101,TsurShalom,43.85,21,10,6.00,6.00,43.85,21.00,10.00,6.00,6.00,27.92
+208,LowerCity,102,Kiryon,39.53,22,10,6.00,6.00,39.53,22.00,10.00,6.00,6.00,25.24
+208,LowerCity,103,KiryatBialik Center,36.85,22,10,6.00,6.00,36.85,22.00,10.00,6.00,6.00,24.47
+208,LowerCity,104,KiryatHaim,29.17,47,20,3.00,6.00,29.17,47.00,20.00,3.00,6.00,20.18
+208,LowerCity,202,Matam-NeotPeres,21.53,75,33,1.82,6.00,18.00,23.00,10.00,6.00,6.00,14.46
+208,LowerCity,203,HofCarmel-NeveDavid,14.58,95,39,1.54,6.00,14.58,24.00,10.00,6.00,6.00,13.63
+208,LowerCity,204,Hecht-Shprintzak,15.92,89,38,1.58,6.00,13.00,24.00,10.00,6.00,6.00,9.83
+208,LowerCity,205,EinHayam,13.00,77,33,1.82,6.00,11.00,24.00,10.00,6.00,6.00,7.24
+208,LowerCity,206,BatGalim-KiryatEliezer,5.00,151,57,1.05,6.00,5.31,50.00,20.00,3.00,6.00,9.52
+208,LowerCity,207,Hamoshava,2.70,159,62,0.97,6.00,3.52,50.00,20.00,3.00,6.00,3.86
+208,LowerCity,209,Namal-Giborim,5.85,85,36,1.67,6.00,5.85,54.00,20.00,3.00,6.00,13.36
+208,LowerCity,210,Hamifrats,14.85,65,26,2.31,6.00,14.85,51.00,20.00,3.00,6.00,20.46
+208,LowerCity,211,Bazan-Hutsot,20.33,57,24,2.50,6.00,20.33,49.00,20.00,3.00,6.00,18.24
+208,LowerCity,212,TsometKiryatAta,27.13,48,20,3.00,6.00,27.13,48.00,20.00,3.00,6.00,15.88
+208,LowerCity,213,KiryatAta North,35.60,23,10,6.00,6.00,35.60,23.00,10.00,6.00,6.00,24.60
+208,LowerCity,217,Nazareth,48.18,9,5,12.00,20.00,,,,,,50.16
+208,LowerCity,303,KiryatYam B+C,20.00,10,5,12.00,60.00,,,,,,27.51
+208,LowerCity,304,KiryatHaim West,17.00,8,4,15.00,60.00,,,,,,21.55
+209,Namal-Giborim,101,TsurShalom,38.00,43,22,2.73,5.00,38.00,43.00,22.00,2.73,5.00,25.27
+209,Namal-Giborim,102,Kiryon,33.68,23,10,6.00,6.00,33.68,23.00,10.00,6.00,6.00,22.59
+209,Namal-Giborim,103,KiryatBialik Center,31.00,23,10,6.00,6.00,31.00,23.00,10.00,6.00,6.00,21.82
+209,Namal-Giborim,104,KiryatHaim,23.32,48,20,3.00,6.00,23.32,48.00,20.00,3.00,6.00,17.53
+209,Namal-Giborim,201,TiratCarmel,25.27,13,5,12.00,15.00,,,,,,25.50
+209,Namal-Giborim,202,Matam-NeotPeres,28.00,105,49,1.22,6.00,25.00,23.00,10.00,6.00,6.00,17.94
+209,Namal-Giborim,203,HofCarmel-NeveDavid,22.32,74,34,1.76,6.00,21.58,24.00,10.00,6.00,6.00,22.46
+209,Namal-Giborim,204,Hecht-Shprintzak,20.00,74,34,1.76,6.00,20.00,24.00,10.00,6.00,6.00,19.22
+209,Namal-Giborim,205,EinHayam,18.00,58,25,2.40,6.00,18.00,24.00,10.00,6.00,6.00,16.63
+209,Namal-Giborim,206,BatGalim-KiryatEliezer,10.33,93,39,1.54,6.00,11.48,50.00,20.00,3.00,6.00,17.59
+209,Namal-Giborim,207,Hamoshava,9.00,84,35,1.71,6.00,9.70,50.00,20.00,3.00,6.00,11.94
+209,Namal-Giborim,208,LowerCity,5.35,94,38,1.58,6.00,6.17,52.00,20.00,3.00,6.00,9.84
+209,Namal-Giborim,210,Hamifrats,9.00,133,51,1.18,5.00,9.10,82.00,32.00,1.88,5.00,17.73
+209,Namal-Giborim,211,Bazan-Hutsot,14.65,81,34,1.76,5.00,14.65,79.00,32.00,1.88,5.00,15.59
+209,Namal-Giborim,212,TsometKiryatAta,21.45,78,34,1.76,5.00,21.45,76.00,32.00,1.88,5.00,13.23
+209,Namal-Giborim,213,KiryatAta North,29.75,23,10,6.00,6.00,29.75,23.00,10.00,6.00,6.00,21.95
+209,Namal-Giborim,217,Nazareth,41.38,10,4,15.00,30.00,,,,,,47.43
+209,Namal-Giborim,301,SavyoneyYam,52.00,23,12,5.00,5.00,52.00,23.00,12.00,5.00,5.00,26.77
+209,Namal-Giborim,302,KiryatYam A,48.37,24,12,5.00,5.00,48.37,24.00,12.00,5.00,5.00,28.49
+209,Namal-Giborim,303,KiryatYam B+C,44.37,25,12,5.00,5.00,44.37,25.00,12.00,5.00,5.00,24.86
+209,Namal-Giborim,304,KiryatHaim West,39.00,26,12,5.00,5.00,39.00,26.00,12.00,5.00,5.00,18.90
+210,Hamifrats,101,TsurShalom,28.62,100,45,1.33,5.45,29.00,67.00,31.00,1.94,5.45,18.00
+210,Hamifrats,102,Kiryon,19.27,106,43,1.40,6.00,24.00,47.00,20.00,3.00,6.00,15.32
+210,Hamifrats,103,KiryatBialik Center,16.58,110,43,1.40,6.00,21.45,47.00,20.00,3.00,6.00,14.55
+210,Hamifrats,104,KiryatHaim,14.00,139,53,1.13,6.00,14.32,75.00,30.00,2.00,6.00,10.26
+210,Hamifrats,202,Matam-NeotPeres,32.00,96,46,1.30,6.00,11.95,48.00,20.00,3.00,6.00,14.42
+210,Hamifrats,203,HofCarmel-NeveDavid,27.58,56,26,2.31,6.00,27.58,23.00,10.00,6.00,6.00,18.94
+210,Hamifrats,204,Hecht-Shprintzak,26.00,40,20,3.00,6.00,26.00,23.00,10.00,6.00,6.00,19.43
+210,Hamifrats,205,EinHayam,24.00,23,10,6.00,6.00,24.00,23.00,10.00,6.00,6.00,16.84
+210,Hamifrats,206,BatGalim-KiryatEliezer,19.32,92,40,1.50,6.00,17.16,48.00,20.00,3.00,6.00,17.80
+210,Hamifrats,207,Hamoshava,17.35,68,30,2.00,6.00,15.38,48.00,20.00,3.00,6.00,12.14
+210,Hamifrats,208,LowerCity,10.70,74,29,2.07,6.00,11.85,50.00,20.00,3.00,6.00,10.04
+210,Hamifrats,209,Namal-Giborim,6.00,151,63,0.95,5.00,6.00,83.00,32.00,1.88,5.00,12.09
+210,Hamifrats,211,Bazan-Hutsot,5.00,205,79,0.76,5.00,5.55,108.00,42.00,1.43,5.00,8.32
+210,Hamifrats,212,TsometKiryatAta,12.00,196,79,0.76,5.00,12.35,104.00,42.00,1.43,5.00,5.96
+210,Hamifrats,213,KiryatAta North,20.65,35,16,3.75,6.00,20.65,24.00,10.00,6.00,6.00,14.68
+210,Hamifrats,214,KiryatAta North-East,25.98,15,7,8.57,30.00,,,,,,29.81
+210,Hamifrats,215,Shefaram,26.05,35,16,3.75,20.00,,,,,,25.98
+210,Hamifrats,216,Hamovil,25.33,26,14,4.29,20.00,,,,,,25.97
+210,Hamifrats,217,Nazareth,35.54,34,18,3.33,20.00,,,,,,41.58
+210,Hamifrats,301,SavyoneyYam,58.63,27,13,4.62,5.00,58.63,24.00,12.00,5.00,5.00,19.50
+210,Hamifrats,302,KiryatYam A,55.00,28,13,4.62,5.00,55.00,25.00,12.00,5.00,5.00,21.22
+210,Hamifrats,303,KiryatYam B+C,51.00,40,17,3.53,5.00,51.00,26.00,12.00,5.00,5.00,17.59
+210,Hamifrats,304,KiryatHaim West,45.63,42,16,3.75,5.00,45.63,27.00,12.00,5.00,5.00,11.63
+211,Bazan-Hutsot,101,TsurShalom,23.62,140,59,1.02,6.00,23.62,70.00,29.00,2.07,6.00,26.06
+211,Bazan-Hutsot,102,Kiryon,14.48,123,48,1.25,6.00,19.00,49.00,20.00,3.00,6.00,23.38
+211,Bazan-Hutsot,103,KiryatBialik Center,12.43,136,53,1.13,6.00,16.45,49.00,20.00,3.00,6.00,22.61
+211,Bazan-Hutsot,104,KiryatHaim,7.05,157,58,1.03,6.00,8.83,78.00,30.00,2.00,6.00,18.32
+211,Bazan-Hutsot,202,Matam-NeotPeres,39.35,59,26,2.31,6.00,20.30,47.00,20.00,3.00,6.00,15.93
+211,Bazan-Hutsot,203,HofCarmel-NeveDavid,35.93,30,13,4.62,6.00,35.93,23.00,10.00,6.00,6.00,20.46
+211,Bazan-Hutsot,204,Hecht-Shprintzak,34.35,23,10,6.00,6.00,34.35,23.00,10.00,6.00,6.00,20.01
+211,Bazan-Hutsot,205,EinHayam,32.35,23,10,6.00,6.00,32.35,23.00,10.00,6.00,6.00,17.42
+211,Bazan-Hutsot,206,BatGalim-KiryatEliezer,27.67,66,27,2.22,6.00,23.32,47.00,20.00,3.00,6.00,18.38
+211,Bazan-Hutsot,207,Hamoshava,25.70,58,24,2.50,6.00,21.35,47.00,20.00,3.00,6.00,12.73
+211,Bazan-Hutsot,208,LowerCity,16.52,57,23,2.61,6.00,17.00,49.00,20.00,3.00,6.00,10.63
+211,Bazan-Hutsot,209,Namal-Giborim,14.35,93,39,1.54,4.62,14.35,81.00,33.00,1.82,4.62,7.38
+211,Bazan-Hutsot,210,Hamifrats,4.57,259,96,0.62,4.62,8.35,111.00,43.00,1.40,4.62,18.52
+211,Bazan-Hutsot,212,TsometKiryatAta,4.15,244,96,0.62,4.62,7.00,108.00,43.00,1.40,4.62,14.02
+211,Bazan-Hutsot,213,KiryatAta North,15.10,59,25,2.40,6.00,15.10,25.00,10.00,6.00,6.00,22.74
+211,Bazan-Hutsot,214,KiryatAta North-East,19.98,13,4,15.00,60.00,,,,,,37.87
+211,Bazan-Hutsot,215,Shefaram,21.56,24,9,6.67,30.00,,,,,,34.04
+211,Bazan-Hutsot,216,Hamovil,28.38,11,5,12.00,30.00,,,,,,32.61
+211,Bazan-Hutsot,217,Nazareth,36.02,11,5,12.00,30.00,,,,,,48.23
+211,Bazan-Hutsot,301,SavyoneyYam,69.47,36,15,4.00,5.45,69.47,25.00,11.00,5.45,5.45,27.56
+211,Bazan-Hutsot,302,KiryatYam A,20.12,48,21,2.86,5.00,65.83,26.00,12.00,5.00,5.00,29.28
+211,Bazan-Hutsot,303,KiryatYam B+C,15.08,59,25,2.40,4.62,61.83,27.00,13.00,4.62,4.62,25.65
+211,Bazan-Hutsot,304,KiryatHaim West,8.27,63,25,2.40,4.62,56.47,28.00,13.00,4.62,4.62,19.69
+212,TsometKiryatAta,101,TsurShalom,16.72,153,62,0.97,6.00,16.72,70.00,29.00,2.07,6.00,12.33
+212,TsometKiryatAta,102,Kiryon,12.00,142,54,1.11,6.00,12.00,49.00,20.00,3.00,6.00,9.66
+212,TsometKiryatAta,103,KiryatBialik Center,9.45,156,59,1.02,6.00,9.45,49.00,20.00,3.00,6.00,8.88
+212,TsometKiryatAta,104,KiryatHaim,2.72,204,74,0.81,6.00,2.03,78.00,30.00,2.00,6.00,4.60
+212,TsometKiryatAta,202,Matam-NeotPeres,41.98,57,26,2.31,6.00,22.93,46.00,20.00,3.00,6.00,17.70
+212,TsometKiryatAta,203,HofCarmel-NeveDavid,38.57,22,10,6.00,6.00,38.57,22.00,10.00,6.00,6.00,22.22
+212,TsometKiryatAta,204,Hecht-Shprintzak,36.98,22,10,6.00,6.00,36.98,22.00,10.00,6.00,6.00,21.77
+212,TsometKiryatAta,205,EinHayam,34.98,22,10,6.00,6.00,34.98,22.00,10.00,6.00,6.00,19.18
+212,TsometKiryatAta,206,BatGalim-KiryatEliezer,30.30,56,25,2.40,6.00,26.23,46.00,20.00,3.00,6.00,20.14
+212,TsometKiryatAta,207,Hamoshava,28.33,56,25,2.40,6.00,24.44,46.00,20.00,3.00,6.00,14.49
+212,TsometKiryatAta,208,LowerCity,20.92,48,20,3.00,6.00,20.92,48.00,20.00,3.00,6.00,12.39
+212,TsometKiryatAta,209,Namal-Giborim,16.98,91,39,1.54,4.62,16.98,80.00,33.00,1.82,4.62,9.15
+212,TsometKiryatAta,210,Hamifrats,8.00,257,102,0.59,4.62,10.98,110.00,43.00,1.40,4.62,15.29
+212,TsometKiryatAta,211,Bazan-Hutsot,2.63,301,114,0.53,4.62,1.33,116.00,43.00,1.40,4.62,2.65
+212,TsometKiryatAta,213,KiryatAta North,11.35,79,31,1.94,6.00,8.30,25.00,10.00,6.00,6.00,9.01
+212,TsometKiryatAta,214,KiryatAta North-East,18.33,22,7,8.57,30.00,,,,,,24.14
+212,TsometKiryatAta,215,Shefaram,18.45,24,10,6.00,20.00,,,,,,20.31
+212,TsometKiryatAta,216,Hamovil,25.48,11,6,10.00,20.00,,,,,,23.66
+212,TsometKiryatAta,217,Nazareth,33.57,11,6,10.00,20.00,,,,,,39.28
+212,TsometKiryatAta,301,SavyoneyYam,70.05,36,15,4.00,5.45,70.05,25.00,11.00,5.45,5.45,14.78
+212,TsometKiryatAta,302,KiryatYam A,66.42,37,16,3.75,5.00,66.42,26.00,12.00,5.00,5.00,16.50
+212,TsometKiryatAta,303,KiryatYam B+C,62.42,40,17,3.53,4.62,62.42,27.00,13.00,4.62,4.62,12.87
+212,TsometKiryatAta,304,KiryatHaim West,9.82,54,22,2.73,4.62,57.05,28.00,13.00,4.62,4.62,6.91
+213,KiryatAta North,101,TsurShalom,23.17,20,9,6.67,12.00,,,,,,15.03
+213,KiryatAta North,102,Kiryon,20.15,11,5,12.00,12.00,,,,,,12.35
+213,KiryatAta North,103,KiryatBialik Center,17.15,11,5,12.00,12.00,,,,,,11.57
+213,KiryatAta North,104,KiryatHaim,14.15,52,20,3.00,6.00,7.93,25.00,10.00,6.00,6.00,7.29
+213,KiryatAta North,206,BatGalim-KiryatEliezer,32.93,22,10,6.00,6.00,32.93,22.00,10.00,6.00,6.00,26.48
+213,KiryatAta North,207,Hamoshava,31.33,22,10,6.00,6.00,31.33,22.00,10.00,6.00,6.00,20.83
+213,KiryatAta North,208,LowerCity,28.63,23,10,6.00,6.00,28.63,23.00,10.00,6.00,6.00,18.73
+213,KiryatAta North,209,Namal-Giborim,23.28,23,10,6.00,6.00,23.28,23.00,10.00,6.00,6.00,15.48
+213,KiryatAta North,210,Hamifrats,17.93,47,19,3.16,6.00,17.93,24.00,10.00,6.00,6.00,17.92
+213,KiryatAta North,211,Bazan-Hutsot,12.45,69,27,2.22,6.00,12.12,25.00,10.00,6.00,6.00,8.99
+213,KiryatAta North,212,TsometKiryatAta,10.78,96,37,1.62,6.00,10.78,25.00,10.00,6.00,6.00,8.72
+213,KiryatAta North,214,KiryatAta North-East,7.63,14,6,10.00,30.00,,,,,,18.04
+213,KiryatAta North,215,Shefaram,7.05,9,4,15.00,60.00,,,,,,15.15
+213,KiryatAta North,216,Hamovil,16.32,3,1,60.00,60.00,,,,,,18.50
+213,KiryatAta North,217,Nazareth,21.77,3,1,60.00,60.00,,,,,,34.12
+213,KiryatAta North,301,SavyoneyYam,36.25,10,4,15.00,15.00,,,,,,18.21
+213,KiryatAta North,302,KiryatYam A,32.57,10,4,15.00,15.00,,,,,,20.15
+213,KiryatAta North,303,KiryatYam B+C,21.15,12,4,15.00,15.00,,,,,,17.92
+213,KiryatAta North,304,KiryatHaim West,24.00,25,9,6.67,12.00,,,,,,12.72
+214,KiryatAta North-East,101,TsurShalom,50.00,16,7,8.57,15.00,,,,,,30.98
+214,KiryatAta North-East,102,Kiryon,7.30,38,17,3.53,15.00,,,,,,26.66
+214,KiryatAta North-East,103,KiryatBialik Center,8.03,33,14,4.29,15.00,,,,,,28.93
+214,KiryatAta North-East,104,KiryatHaim,12.00,33,14,4.29,15.00,,,,,,24.64
+214,KiryatAta North-East,210,Hamifrats,22.00,60,25,2.40,30.00,,,,,,35.28
+214,KiryatAta North-East,211,Bazan-Hutsot,17.83,45,19,3.16,30.00,,,,,,26.35
+214,KiryatAta North-East,212,TsometKiryatAta,15.00,66,26,2.31,15.00,,,,,,26.07
+214,KiryatAta North-East,213,KiryatAta North,2.38,39,14,4.29,15.00,,,,,,18.10
+214,KiryatAta North-East,215,Shefaram,2.06,20,8,7.50,20.00,,,,,,29.33
+215,Shefaram,101,TsurShalom,14.80,4,2,30.00,60.00,,,,,,24.02
+215,Shefaram,102,Kiryon,13.85,16,8,7.50,30.00,,,,,,19.70
+215,Shefaram,103,KiryatBialik Center,18.43,12,6,10.00,30.00,,,,,,27.90
+215,Shefaram,104,KiryatHaim,22.27,12,6,10.00,30.00,,,,,,23.97
+215,Shefaram,206,BatGalim-KiryatEliezer,55.64,2,0,,,,,,,,43.17
+215,Shefaram,207,Hamoshava,52.48,2,0,,,,,,,,37.51
+215,Shefaram,210,Hamifrats,29.58,30,13,4.62,30.00,,,,,,27.25
+215,Shefaram,211,Bazan-Hutsot,28.24,20,9,6.67,30.00,,,,,,25.67
+215,Shefaram,212,TsometKiryatAta,25.83,20,9,6.67,30.00,,,,,,25.40
+215,Shefaram,213,KiryatAta North,16.74,8,3,20.00,30.00,,,,,,20.71
+215,Shefaram,214,KiryatAta North-East,8.82,42,17,3.53,30.00,,,,,,33.70
+215,Shefaram,216,Hamovil,9.00,27,13,4.62,30.00,,,,,,18.10
+215,Shefaram,217,Nazareth,16.12,22,10,6.00,30.00,,,,,,33.72
+216,Hamovil,101,TsurShalom,21.00,3,1,60.00,60.00,,,,,,27.91
+216,Hamovil,102,Kiryon,20.17,11,5,12.00,60.00,,,,,,23.58
+216,Hamovil,103,KiryatBialik Center,22.38,8,4,15.00,60.00,,,,,,31.78
+216,Hamovil,104,KiryatHaim,25.81,8,4,15.00,60.00,,,,,,28.69
+216,Hamovil,210,Hamifrats,33.50,20,9,6.67,30.00,,,,,,29.88
+216,Hamovil,211,Bazan-Hutsot,31.97,11,5,12.00,60.00,,,,,,30.39
+216,Hamovil,212,TsometKiryatAta,28.00,11,5,12.00,60.00,,,,,,30.12
+216,Hamovil,213,KiryatAta North,16.12,3,1,60.00,60.00,,,,,,25.43
+216,Hamovil,214,KiryatAta North-East,13.00,22,8,7.50,30.00,,,,,,38.42
+216,Hamovil,215,Shefaram,6.72,40,14,4.29,30.00,,,,,,16.00
+216,Hamovil,217,Nazareth,7.38,43,16,3.75,30.00,,,,,,25.21
+217,Nazareth,101,TsurShalom,41.98,3,1,60.00,60.00,,,,,,48.39
+217,Nazareth,102,Kiryon,43.98,8,4,15.00,30.00,,,,,,44.06
+217,Nazareth,103,KiryatBialik Center,50.98,5,3,20.00,30.00,,,,,,52.26
+217,Nazareth,104,KiryatHaim,54.98,5,3,20.00,30.00,,,,,,49.17
+217,Nazareth,206,BatGalim-KiryatEliezer,54.00,4,2,30.00,30.00,,,,,,64.66
+217,Nazareth,207,Hamoshava,53.27,4,2,30.00,30.00,,,,,,59.00
+217,Nazareth,208,LowerCity,59.48,8,4,15.00,30.00,,,,,,56.90
+217,Nazareth,209,Namal-Giborim,44.48,9,4,15.00,30.00,,,,,,53.66
+217,Nazareth,210,Hamifrats,54.98,17,7,8.57,30.00,,,,,,48.40
+217,Nazareth,211,Bazan-Hutsot,59.75,7,4,15.00,30.00,,,,,,50.87
+217,Nazareth,212,TsometKiryatAta,56.13,7,4,15.00,30.00,,,,,,50.60
+217,Nazareth,213,KiryatAta North,46.13,2,1,60.00,60.00,,,,,,45.91
+217,Nazareth,214,KiryatAta North-East,39.91,10,5,12.00,30.00,,,,,,58.90
+217,Nazareth,215,Shefaram,33.43,15,7,8.57,30.00,,,,,,36.48
+217,Nazareth,216,Hamovil,20.98,23,9,6.67,30.00,,,,,,29.57
+301,SavyoneyYam,101,TsurShalom,7.53,75,27,2.22,5.45,94.73,25.00,9.00,6.67,6.67,7.49
+301,SavyoneyYam,102,Kiryon,20.48,28,11,5.45,10.00,,,,,,9.12
+301,SavyoneyYam,103,KiryatBialik Center,16.00,29,11,5.45,10.00,,,,,,15.23
+301,SavyoneyYam,104,KiryatHaim,24.30,13,5,12.00,12.00,,,,,,11.88
+301,SavyoneyYam,209,Namal-Giborim,37.63,29,15,4.00,4.00,37.63,29.00,15.00,4.00,4.00,22.26
+301,SavyoneyYam,210,Hamifrats,31.00,39,18,3.33,4.00,31.00,30.00,15.00,4.00,4.00,27.88
+301,SavyoneyYam,211,Bazan-Hutsot,20.17,55,24,2.50,4.00,20.17,32.00,15.00,4.00,4.00,15.76
+301,SavyoneyYam,212,TsometKiryatAta,19.58,46,20,3.00,4.00,19.58,32.00,15.00,4.00,4.00,13.88
+301,SavyoneyYam,213,KiryatAta North,42.43,13,5,12.00,12.00,,,,,,19.44
+301,SavyoneyYam,302,KiryatYam A,5.35,102,38,1.58,4.00,5.63,34.00,15.00,4.00,4.00,3.76
+301,SavyoneyYam,303,KiryatYam B+C,9.35,102,38,1.58,4.00,8.63,34.00,15.00,4.00,4.00,7.43
+301,SavyoneyYam,304,KiryatHaim West,14.57,68,27,2.22,4.00,11.97,33.00,15.00,4.00,4.00,9.70
+302,KiryatYam A,101,TsurShalom,17.90,85,32,1.88,5.45,89.10,24.00,9.00,6.67,6.67,12.56
+302,KiryatYam A,102,Kiryon,20.75,41,15,4.00,10.00,,,,,,11.02
+302,KiryatYam A,103,KiryatBialik Center,10.00,42,15,4.00,10.00,,,,,,14.68
+302,KiryatYam A,104,KiryatHaim,18.95,14,5,12.00,12.00,,,,,,10.22
+302,KiryatYam A,209,Namal-Giborim,32.00,29,15,4.00,4.00,32.00,29.00,15.00,4.00,4.00,20.59
+302,KiryatYam A,210,Hamifrats,25.37,39,19,3.16,4.00,25.37,30.00,15.00,4.00,4.00,26.21
+302,KiryatYam A,211,Bazan-Hutsot,14.53,56,25,2.40,4.00,14.53,32.00,15.00,4.00,4.00,14.10
+302,KiryatYam A,212,TsometKiryatAta,13.95,46,21,2.86,4.00,13.95,32.00,15.00,4.00,4.00,12.21
+302,KiryatYam A,213,KiryatAta North,37.08,13,6,10.00,10.00,,,,,,17.78
+302,KiryatYam A,301,SavyoneyYam,10.37,75,28,2.14,5.45,84.00,26.00,11.00,5.45,5.45,7.03
+302,KiryatYam A,303,KiryatYam B+C,3.00,141,53,1.13,4.00,3.00,34.00,15.00,4.00,4.00,5.77
+302,KiryatYam A,304,KiryatHaim West,10.00,69,29,2.07,4.00,6.33,33.00,15.00,4.00,4.00,8.03
+303,KiryatYam B+C,101,TsurShalom,19.33,96,36,1.67,5.45,86.10,24.00,8.00,7.50,7.50,14.23
+303,KiryatYam B+C,102,Kiryon,24.00,51,20,3.00,10.00,,,,,,12.68
+303,KiryatYam B+C,103,KiryatBialik Center,6.00,53,20,3.00,10.00,,,,,,16.34
+303,KiryatYam B+C,104,KiryatHaim,14.95,25,10,6.00,12.00,,,,,,11.88
+303,KiryatYam B+C,203,HofCarmel-NeveDavid,31.00,12,5,12.00,60.00,,,,,,28.70
+303,KiryatYam B+C,206,BatGalim-KiryatEliezer,24.00,13,5,12.00,60.00,,,,,,29.38
+303,KiryatYam B+C,208,LowerCity,19.00,13,5,12.00,60.00,,,,,,21.63
+303,KiryatYam B+C,209,Namal-Giborim,29.00,30,14,4.29,4.29,29.00,30.00,14.00,4.29,4.29,18.38
+303,KiryatYam B+C,210,Hamifrats,22.37,54,23,2.61,4.29,22.37,31.00,14.00,4.29,4.29,24.01
+303,KiryatYam B+C,211,Bazan-Hutsot,11.53,67,27,2.22,4.29,11.53,33.00,14.00,4.29,4.29,11.89
+303,KiryatYam B+C,212,TsometKiryatAta,10.95,48,20,3.00,4.29,10.95,33.00,14.00,4.29,4.29,10.01
+303,KiryatYam B+C,213,KiryatAta North,32.83,14,6,10.00,10.00,,,,,,18.25
+303,KiryatYam B+C,301,SavyoneyYam,10.42,64,23,2.61,6.00,81.00,26.00,10.00,6.00,6.00,8.70
+303,KiryatYam B+C,302,KiryatYam A,5.00,117,43,1.40,5.45,77.37,27.00,11.00,5.45,5.45,10.42
+303,KiryatYam B+C,304,KiryatHaim West,7.67,93,36,1.67,4.29,3.33,34.00,14.00,4.29,4.29,5.83
+304,KiryatHaim West,101,TsurShalom,26.28,59,22,2.73,7.50,82.77,24.00,8.00,7.50,7.50,17.27
+304,KiryatHaim West,102,Kiryon,20.20,23,9,6.67,12.00,,,,,,15.73
+304,KiryatHaim West,103,KiryatBialik Center,14.03,25,9,6.67,12.00,,,,,,16.24
+304,KiryatHaim West,104,KiryatHaim,7.18,29,10,6.00,12.00,,,,,,11.95
+304,KiryatHaim West,203,HofCarmel-NeveDavid,28.00,7,3,20.00,60.00,,,,,,26.82
+304,KiryatHaim West,206,BatGalim-KiryatEliezer,22.00,8,3,20.00,60.00,,,,,,27.51
+304,KiryatHaim West,208,LowerCity,17.00,8,3,20.00,60.00,,,,,,19.75
+304,KiryatHaim West,209,Namal-Giborim,25.67,30,14,4.29,4.29,25.67,30.00,14.00,4.29,4.29,16.51
+304,KiryatHaim West,210,Hamifrats,19.03,55,24,2.50,4.29,19.03,31.00,14.00,4.29,4.29,22.13
+304,KiryatHaim West,211,Bazan-Hutsot,8.20,74,30,2.00,4.29,8.20,33.00,14.00,4.29,4.29,10.01
+304,KiryatHaim West,212,TsometKiryatAta,7.62,68,28,2.14,4.29,7.62,33.00,14.00,4.29,4.29,8.13
+304,KiryatHaim West,213,KiryatAta North,20.97,26,11,5.45,10.00,,,,,,16.37
+304,KiryatHaim West,301,SavyoneyYam,20.00,40,15,4.00,6.00,77.67,26.00,10.00,6.00,6.00,11.74
+304,KiryatHaim West,302,KiryatYam A,16.32,52,20,3.00,5.45,74.03,27.00,11.00,5.45,5.45,13.47
+304,KiryatHaim West,303,KiryatYam B+C,6.82,78,28,2.14,5.00,70.03,28.00,12.00,5.00,5.00,9.84

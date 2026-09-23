@@ -36,16 +36,24 @@ Effect on the 2022 underground central figure (4,250):
 | Station access | 18 of the 17-minute median LRT–bus gap on the trunk is the access difference (13.2 vs 4.8 min walk) | derived, but crude: straight-line × 1.3 walk, population-weighted per area, feeder to the gateway area centroid | walking network, feeder buses truncated at stations, TAZ-level capture on the trunk (E6) |
 | LRT premium | 3,406–5,232 (0–10 gen-min) | **assumed** | anchor on the Metronit's 2013 before / after ridership; Red Line first-year ridership vs forecast |
 | Free LRT–Metronit transfer | material: the Metronit-fed pairs now carry 1,336 of the 4,250 | decision | none needed; keep as a stated assumption |
-| Bus generalized cost | not yet ranged | 7-minute overhead between the GTFS skim and reported door-to-door times not in the bus GC; 178 pairs without a direct service on a scaled floor | wait = headway of the line actually needed + transfer allowance; GTFS path building for the 178 pairs (E3) |
+| Bus generalized cost | **ranged 2026-09-23: 4,250–4,879 underground (13–16 % across the three regimes) under the best-line wait rule** | 178 pairs without a direct service now state 1 transfer (matches step 31); the 7-minute door-to-door overhead itself still not in the bus GC | GTFS path building for the 178 pairs, so the wait/transfer figures are derived rather than assumed there (E3) |
 | Branch geometry | 15 of 25 areas reach the LRT by feeder | **missing** | alignment and stations of the T1 / T2 / T3 branches and Hamifrats → Tsomet Kiryat Ata (E1) |
 | External and intra-area trips | corridor-internal market is 75,000 of 184,000 study-area trips; 109,000 intra-area trips excluded | scope | TAZ-level capture with station catchments (A2) |
 | Skims in the forecast years | held at 2026 | scope | congestion uplift on car times (E5); bus network of the LRT year |
-| 2022 car base | on closed cordons the residents' car layer is 0.6–0.9 of the counted vehicles where the crossings are mostly counted; direction agrees except at Haifa city; the road peak hour is 0.38–0.43 of the three hours against the survey's 0.62 (step 36, §6ah) | validated to the order expected; the peak-hour factor is the open item | link-level check with an assignment; count coverage on the Krayot and Nazareth cordons |
+| 2022 car base | on closed cordons the residents' car layer is 0.6–0.9 of the counted vehicles where the crossings are mostly counted; direction agrees except at Haifa city; the road peak hour is 0.38–0.43 of the three hours against the survey's 0.62 (step 36, §6ah) | validated to the order expected; the peak-hour factor is the open item | link-level check with an assignment — **done 2026-09-23 (step 42, §6aj): aggregate ratio 1.037, but GEH ≤ 10 on only 20% of links and three screenlines run above step 36's range (route concentration)**; count coverage on the Krayot and Nazareth cordons |
 | 2022 transit base | survey vs ticketing within ± 15 % along the whole line since step 15 was rebuilt on RavKav's own alightings; on the Nazareth branch the two ticketing readings (OnBoard pattern 2.5 × the survey, RavKav alightings 0.36 ×) bracket it | unvalidated against a count | Rav-Kav boardings by stop group on the trunk links; one car screenline (C3) |
 
 The first three are perception parameters that no amount of skim precision fixes; the plan's
 own caveat (`docs/LRT_CAPTURE_PLAN.md` §3). The branch geometry and the external trips are
 the two structural gaps, and they are the two that need inputs from the client side.
+
+**Cross-check, 23 September 2026 (task C8, step 40, METHODOLOGY §6ak):** a 155-row factorial
+over regime, headway, λ/premium and bus competition confirms this table's ranking of the
+factors it could vary — headway moves the central case least (range 844 of the 4,254 trips),
+then bus competition's explicit ceiling (1,500, not a plausible range), then LRT regime (1,889),
+then λ/premium (2,865, widest, consistent with the row above). Coverage threshold, walk access
+and car source are not in this factorial — they need a rerun from step 15, or are blocked as
+elsewhere in this document and in `docs/NEXT_STEPS_HANDOVER_2026-09-23.md` item C1.
 
 ## 3. Tightening — the work, in order
 
@@ -75,22 +83,43 @@ the two structural gaps, and they are the two that need inputs from the client s
 4. **Bus GC with the survey overhead (E3).** Add the 7-minute door-to-door overhead as a
    wait / transfer allowance in the bus skim, or set the wait to the headway of the best
    single line rather than half the pooled headway; rerun steps 31 / 32. Small change in
-   step 26's GTFS block.
+   step 26's GTFS block. *Done 2026-09-23 (METHODOLOGY §6x addendum 6): the best-line-headway
+   half of this item is now a `BUS_WAIT_RULE` switch (`'half_headway'` default / `'best_line'`)
+   — central-case LRT capture rises 4,250 → 4,879 underground, 3,207 → 3,733 ground, 5,095 →
+   5,777 design regime (13–16 %) under `'best_line'`, reported as an alternative
+   (`Output/skims/bus_wait_best_line/`), not adopted as the default. The 178 non-direct pairs'
+   transfer count was also fixed to match what step 31 already assumed (no capture change).
+   The door-to-door overhead itself (as a wait/transfer addition, distinct from the headway
+   rule) is not yet built.*
 5. **Realistic speed regime (§6w).** Design speed with a 30–40 s acceleration and braking
    allowance per stop (constant in step 25), and a **mixed alignment** with the Haifa core
    underground (about S05–S14) and the rest at ground level. This is the case a decision
    would be made on; the two pure regimes and the 50 km/h ceiling bracket it.
+   *Done 2026-09-23 (task C5, METHODOLOGY §6w / §6ac addenda): 35 s accel/braking (midpoint of
+   the range) added to the design regime brings it to 39.7 min end to end (close to the
+   calibrated 40.7 min underground); the mixed alignment (S05–S14 underground) gives 56.1 min,
+   between the two pure regimes — central-case captures 4,300 and 3,520 respectively at the
+   default headway. The core boundary and the accel value are both assumed pending the
+   client's design.*
 6. **Headway 7.5 and 10 minutes** (step 26 constant), to show the dependence on the 5-minute
-   assumption.
+   assumption. *Done 2026-09-23: every regime loses 7–8 % of its central-case capture per
+   2.5-minute headway step (`Output/skims/lrt_capture_regime_headway_matrix.csv`).*
 
 ### 3b. Needs inputs from the client side
 
 7. **Branch alignments and stations (E1)** — T1 Kiryat Ata → Nazareth, T2 Krayot, T3 Kiryat
    Yam, and Hamifrats → Tsomet Kiryat Ata; the regime (underground / ground) per section;
    the through-running pattern between branches. Until then: synthetic branch alignments
-   along the V2 route orders with the calibrated function, flagged as such.
+   along the V2 route orders with the calibrated function, flagged as such. *Built 2026-09-23
+   (scenario S4) — and it shows why this input matters: one ground-level station per area is
+   worse than today's bus feeder for 14 of 15 off-trunk areas, so the real drawings (station
+   count and placement, especially through Nazareth) will move the branch-area result more
+   than the trunk regime does.*
 8. **Bus network of the LRT year** — which lines are truncated to feeders and which keep
-   running in parallel. Today's capture assumes full competition (conservative).
+   running in parallel. Today's capture assumes full competition (conservative). *The other
+   bound is now available without this input (scenario S3, done 2026-09-23): full competition
+   vs full truncation on the trunk brackets the real (partial) truncation the client's plan
+   will fall between.*
 9. **Rav-Kav boardings by stop group on the trunk (C3)** — to validate the 2022 transit base
    and the ticketing / survey factor on the Nazareth branch; one car screenline count.
    *Boardings by stop and TAZ for 2025 are now in hand (step 34, `Output/ravkav_2025/
@@ -102,6 +131,12 @@ the two structural gaps, and they are the two that need inputs from the client s
    *Road counts received 23 September (`Input/Network_with_Counts/`) and used in step 36 (§6ah):
    the car layer is validated to the order expected on the cordons that are mostly counted; a
    bus passenger count on the trunk and the Nazareth branch is still the missing item.*
+   *A 2025 alighting inference from the taps themselves tried 2026-09-23 (step 41, task C9,
+   METHODOLOGY §6ai): resolves only 45.8% of taps, since 72.2% of card-date groups tap once in
+   the AM-only window with nothing to chain against; the chained transfer share (27.5%) supports
+   the "nearer to legs" reading of the file's tag (3.7%) against 2022's rate (a third), but the
+   resolved OD is a biased subset, not a general alighting inference — a count remains the
+   decisive input, not this notebook.*
 10. **Parking and car policy** — not needed for the fare (flat, out of the comparison) but
     a destination-parking policy at Matam and the Lower City would enter as a car
     constant per destination in the 2040 / 2050 runs.
@@ -112,10 +147,10 @@ the two structural gaps, and they are the two that need inputs from the client s
 
 | # | Scenario | Purpose | Where |
 |---|---|---|---|
-| S1 | Mixed alignment (core underground, rest ground) with the acceleration allowance | the realistic case | step 25 → 26 → 31 → 32 |
-| S2 | Headway 5 / 7.5 / 10 min | operating-plan sensitivity | step 26 constant |
-| S3 | Parallel buses kept vs truncated to feeders | bus-network response; upper bound on capture | step 31: remove the competing direct-bus alternative on trunk pairs |
-| S4 | Synthetic T2 / T3 branches (and T1 to Kiryat Ata) | what the branches add; replaces the feeder composite for 15 areas | step 25 geometry + step 31 |
+| S1 | Mixed alignment (core underground, rest ground) with the acceleration allowance | the realistic case | step 25 → 26 → 31 → 32 — **done 2026-09-23, central case 3,520** |
+| S2 | Headway 5 / 7.5 / 10 min | operating-plan sensitivity | step 26 constant — **done 2026-09-23, 7–8 % lost per step** |
+| S3 | Parallel buses kept vs truncated to feeders | bus-network response; upper bound on capture | step 31: remove the competing direct-bus alternative on trunk pairs — **done 2026-09-23, +21–64% by regime, `Output/skims/bus_truncated/`** |
+| S4 | Synthetic T2 / T3 branches (and T1 to Kiryat Ata) | what the branches add; replaces the feeder composite for 15 areas | step 25 geometry + step 31 — **done 2026-09-23: capture 3,639, lower than 4,254 — the synthetic branch is worse than today's feeder for 14 of 15 areas** |
 | S5 | Car congestion uplift 2040 / 2050 (+ 20–30 % on car IVT) and parking at Matam / Lower City | car side of the forecast years | step 32 |
 | S6 | Park-and-ride at Tirat Carmel and Hamifrats | access policy at the ends | step 31 access component |
 | S7 | Transit-oriented land use at stations (HS variant) | demographic side | step 23 margins |
