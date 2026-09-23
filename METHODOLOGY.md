@@ -34,8 +34,9 @@ series). It is fit for exploratory corridor screening with the caveats of §8; i
 yet an externally validated estimate of corridor demand, and its corridor profiles are
 potential movements — three-hour totals (§6o) and peak-departure-hour values (§6r) —
 not passenger loads. The plain-language account of this base, its tests and its
-corridor results is `reports/Survey_Matrices_Car_Bus_Rail_Report.docx` (revision 2.1,
-21 September 2026); the older reports under `reports/historical/` carry dated status
+corridor results is `reports/Survey_Matrices_Car_Bus_Rail_Report.docx` (revision 2.2,
+23 September 2026: body at the 21 September state plus a dated revision note with the
+current values); the older reports under `reports/historical/` carry dated status
 notes saying which of their conclusions are overtaken.
 
 **Conclusions for the corridor, as the base stands (21 September 2026).**
@@ -187,8 +188,8 @@ Step 34 (§6af) turns them into a **2025 boarding layer on a representative Tues
 average of the 42 Tuesdays common to the three files after dropping the holiday, June-war and
 data-gap dates — by stop and TAZ with journey origins (non-transfer taps) and transfer legs
 apart: **bus 88,728 journey origins + 2,911 transfer boardings, Metronit 13,078 + 1,029**;
-a **bus + Metronit journey OD** on the OnBoard pattern (101,680 journeys, both ends in the
-study area — the step-9 construction on 2025 volumes); a **rail station-to-station OD measured
+a **bus + Metronit journey OD** on the 2022 RavKav alighting pattern (101,680 journeys, both
+ends in the study area; the OnBoard-patterned variant of the morning kept beside it); a **rail station-to-station OD measured
 from the entry and exit taps** (the zero-passenger rail rows are exit gates: 20 northern
 stations, 23,408 entries a day, 9,437 trips between northern stations, cell correlation 0.97
 with the 2019 matrix); the operator clusters actually in the extract (task B1c); and
@@ -2233,14 +2234,16 @@ no alternative-specific term of its own; no income (not in the tables); no money
 (§6x addendum 4); the weight is the trips file's `new_wf` by instruction, whose construction is
 not documented in the repository. λ_T and the LRT premium are untouched by this step.
 
-## 6af. Step 34 — RavKav 2025: boardings by stop and TAZ, bus + Metronit OD on the OnBoard pattern, rail OD from entry and exit taps (`RavKav_2025_boardings_matrix.ipynb`)
+## 6af. Step 34 — RavKav 2025: boardings by stop and TAZ, bus + Metronit OD on the 2022 RavKav alighting pattern, rail OD from entry and exit taps (`RavKav_2025_boardings_matrix.ipynb`)
 
 **Purpose.** Turn the three 2025 smart-card extracts (§1: the Metronit, every rail station, a
 national all-modes file) into a boarding layer for the study area on one representative
 Tuesday, 06:00–09:00, and from it the bus + Metronit OD and the rail OD that a re-anchored
 base would use. The extracts hold boardings only — no alightings and no linked journeys, unlike
-the May 2022 files of step 8 — so the bus destinations still come from the OnBoard survey's
-pattern, while the rail destinations come from the extract itself.
+the May 2022 files of step 8 — so the bus destinations have to be borrowed: **since the rebuild
+of 23 September 2026 from the May 2022 RavKav journeys on RavKav's own inferred alightings**
+(step 8, `bus_od_taz_avg.csv`; the OnBoard survey's pattern until then, kept as a variant),
+while the rail destinations come from the extract itself.
 
 **Stops keyed by (cluster, code).** `StopCode` is not unique across operator clusters: on the
 rows that carry coordinates, the Tel Aviv cluster taps "northern" codes at places outside the
@@ -2290,18 +2293,23 @@ the 2022 journeys are, and a 2025-to-2022 comparison of journeys is a comparison
 (§8 caveat 16). Hamifrats, the transfer hub, shows it: 2,266 journey origins a day in 2025
 against 1,079 journeys in 2022.
 
-**Bus + Metronit OD.** As in step 9, each TAZ's journey origins (bus + Metronit) are distributed
-over the destinations by the OnBoard survey's P(alight | board), renormalised over the known
-destinations; origins the OnBoard survey does not cover take the May 2022 RavKav journey
-pattern from the same TAZ (`bus_od_taz_avg.csv`); the rest is reported. Result: 101,806
-journey origins → 101,680 allocated (OnBoard pattern 92.9 %, 2022 pattern 6.9 %, unallocated
-127 in 14 TAZs); a leg-level matrix from all boardings (105,618) beside it. On the 28 sub-areas,
-both ends inside: RavKav 2022 journeys 23,995 → 2025 journey origins 25,677 (legs 27,082),
-against the survey-based 2022 bus layer 25,858; cell correlation of the two RavKav area
-matrices 0.968 (the same OnBoard pattern on both). On the 25 V2 areas: 16,062 → 18,615
-(× 1.16). By area, 2025 ÷ 2022: Kiryat Motzkin-Bialik 1.14 (6,115 origins), Kiryat Yam 0.80,
-Hamifrats 2.10, Kiryat Ata South 0.93, Nazareth Area 1.00, Neve Yosef 1.45, Matam 2.22, Neot
-Peres 1.88, Tirat Carmel 0.80; Namal 82 → 3 (a stop-tagging or service change to check).
+**Bus + Metronit OD.** Each TAZ's journey origins (bus + Metronit) are distributed over the
+destinations by the row pattern of the May 2022 RavKav journey matrix on RavKav's own
+alightings (`bus_od_taz_avg.csv`), renormalised over the known destinations; origins that
+matrix does not cover take the OnBoard survey's P(alight | board) from the same TAZ; the rest
+is reported. Result: 101,806 journey origins → 101,680 allocated (2022 RavKav pattern 99.9 %,
+OnBoard 13 journeys, unallocated 127 in 14 TAZs); a leg-level matrix from all boardings
+(105,618) beside it, and the OnBoard-patterned variant (the construction of step 9: OnBoard
+92.9 %, 2022 pattern 6.9 %) saved as `*_onboard.csv` for comparison. Both ends in the study
+area: 2022 journeys 94,203 → 2025 101,680 (× 1.08). On the 28 sub-areas, both ends inside:
+RavKav 2022 journeys 24,818 → 2025 journey origins 26,319 (legs 27,696), against the
+survey-based 2022 bus layer 26,775. On the 25 V2 areas: 18,540 → 20,836 (× 1.12; legs 21,911).
+By area, 2025 ÷ 2022 journey origins: Kiryat Motzkin-Bialik 1.14 (6,346 origins), Kiryat Yam
+0.80, Kiryat Ata South 0.92, Nazareth Area 1.01, Hamifrats 2.17, Kiryat Ata Center 0.97, Tirat
+Carmel 0.88, Neve Yosef 1.47, Matam 2.20, Kiryat Nahum 2.20, Ein Hayam 0.94; against the
+survey-based 2022 bus origins the 2025 ticketing is at 0.81–1.05 in the residential areas and
+2.7–4.0 at the hubs and employment ends (Hamifrats, Matam, Kiryat Nahum) — the boarding /
+resident frame difference, not growth.
 
 **Rail OD from the taps.** On the rail rows `PassengersNumber` is 1 on 59 % of the taps and 0 on
 41 %; the 0-taps are the exit gates: on the representative Tuesdays 64.5 % of the cards with an
@@ -2346,8 +2354,9 @@ Metronit × non-transfer / transfer / all), `bus_od_taz_2025.csv` (journeys),
 `boarding_hour_peak_factors_2025.csv`, `boarding_profile_15min_2025.csv`; figures
 `ravkav_2025_daily_totals.png`, `ravkav_2025_vs_2022_area_origins.png`.
 
-**Limits.** Bus and Metronit destinations are the OnBoard pattern, whose unit is unconfirmed
-(§8 caveat 7); the journey-origin unit differs from the 2022 linked journeys (above); the rail
+**Limits.** Bus and Metronit destinations are borrowed from the 2022 alighting inference (the
+2025 extract has no alightings), so 2022-vs-2025 comparisons of the OD test the boardings
+only; the journey-origin unit differs from the 2022 linked journeys (above); the rail
 expansion assumes the after-09:00 exits spread like the matched ones; the representative day
 averages the retained Tuesdays, July inside it; taps that could not be placed are dropped, not
 imputed; the bus clusters' non-northern lines that do enter the area (Tel Aviv–Haifa intercity)
@@ -2364,10 +2373,10 @@ chain was **not** re-anchored when step 15 was rebuilt, for three reasons that s
 answered: (i) the 2025 "journey origins" are nearer to legs than to journeys (caveat 16), so
 the coverage ratios of §6m — RavKav ÷ survey — would move by the journey / leg difference
 and the 0.5 threshold would guard different cells for a reason that is not coverage; (ii)
-the 2025 bus + Metronit destinations exist only on the OnBoard pattern, which step 35 and the
-rebuilt step 15 have just retired as the prior (caveat 17) — a 2025 prior on RavKav's own
-alightings needs the 2025 taps chained into journeys the way step 8 chained the 2022 legs,
-which the boarding-only extract does not allow; (iii) there is no 2025 car observation, so
+the 2025 bus + Metronit destinations are borrowed from 2022 (RavKav's own alightings since
+the rebuild; the OnBoard pattern before) — a 2025 prior of its own needs the 2025 taps chained
+into journeys by card the way step 8 chained the 2022 legs, which the extract's card IDs allow
+but which has not been done; (iii) there is no 2025 car observation, so
 the car layer would be grown 2018 → 2025 on the BU-2025 zonal file alone. What it would
 take: the provider's answer on the transfer tag (or a card-level linking of the 2025 taps
 that reproduces step 8's journey definition), a 2025 alighting inference from the linked
@@ -2387,14 +2396,17 @@ survey matrices and the May 2022 RavKav products of steps 8–9. The car matrix 
 days, rebuilt with the corrected codes, are the repeatability reference throughout; a permuted
 geography is the chance level.
 
-**Matrices** (06:00–09:00, both ends in the 778 study TAZs): `THS bus 2018` (survey Public Bus
-+ Matronit, 125,439; days 1 / 2 127,653 / 123,225), `THS bus 2018 calibrated` (127,185), `THS bus
-2022` (130,779), `THS transit 2022` (134,829), `RavKav 2022 raw` (step 8's linked journeys on
-RavKav's own inferred alightings, 92,440), `RavKav 2022` (the same volumes on the OnBoard
-pattern, step 9, 92,713), `RavKav 2025` (step 34's journey origins on the OnBoard pattern,
-99,896 within the 778 TAZs), `RavKav 2025 legs` (103,777), `car 2022` (1,353,798); rail: the
-survey's door-to-door 2022 layer, the 2019 station matrix × 0.793, the 2025 station matrix.
-Levels: TAZ, 36 superzones, 28 sub-areas, 25 V2 areas.
+**Matrices** (06:00–09:00, both ends in the 778 study TAZs; values of the rebuild of 23
+September 2026, the morning's OnBoard-prior run in brackets): `THS bus 2018` (survey Public Bus
++ Matronit, 125,439; days 1 / 2 127,653 / 123,225), `THS bus 2018 calibrated` (115,430
+[127,185]), `THS bus 2022` (117,961 [130,779]), `THS transit 2022` (122,011 [134,829]), `RavKav
+2022 raw` (step 8's linked journeys on RavKav's own inferred alightings, 92,440), `RavKav 2022`
+(the same volumes on the OnBoard pattern, step 9, 92,713), `RavKav 2025` (step 34's journey
+origins on the **2022 RavKav-alightings pattern** — the step-34 headline since the rebuild;
+99,464 within the 778 TAZs; its OnBoard-patterned variant, 99,896, is saved beside it), `RavKav
+2025 legs` (103,352), `car 2022` (1,353,798); rail: the survey's door-to-door 2022 layer, the
+2019 station matrix × 0.793, the 2025 station matrix. Levels: TAZ, 36 superzones, 28
+sub-areas, 25 V2 areas.
 
 **Results — the survey against the ticketing.**
 
@@ -2402,42 +2414,52 @@ Levels: TAZ, 36 superzones, 28 sub-areas, 25 V2 areas.
 |---|---|---|---|---|---|---|---|
 | survey day 1 vs day 2 (reference) | 0.97 | **0.89** | 0.91 | 0.46 | 0.04 | 0.77 | **0.83** (p 0.002) |
 | THS bus 2018 vs RavKav 2022 (OnBoard pattern) | 0.74 | 0.62 | 0.62 | 0.21 | 0.21 | 0.22 | 0.62 (p 0.13, at the null) |
-| THS bus 2022 vs RavKav 2025 (OnBoard pattern) | 0.76 | 0.59 | 0.65 | 0.29 | 0.18 | 0.44 | 0.60 (p 0.27, at the null) |
 | **THS bus 2018 vs RavKav 2022 raw (RavKav's own alightings)** | 0.74 | **0.89** | 0.85 | 0.31 | **0.05** (bootstrap band 0.03–0.10) | 0.50 | **0.81** (p 0.002) |
-| RavKav 2022 vs RavKav 2025 (both OnBoard pattern) | 1.08 | 0.98 | 0.99 | 0.91 | 0.01 | 0.97 | 0.98 |
-| RavKav 2022 raw vs RavKav 2025 | 1.08 | 0.73 | 0.73 | 0.50 | 0.20 | 0.50 | 0.65 (p 0.03) |
+| THS bus 2018 vs RavKav 2025 (RavKav pattern) | 0.79 | 0.88 | 0.86 | 0.29 | 0.05 (0.03–0.10) | 0.24 | — |
+| **THS bus 2022 (calibrated, rebuilt) vs RavKav 2025** | 0.84 | **0.87** | **0.93** | **0.58** | 0.11 | **0.77** | **0.87** (p 0.002) |
+| RavKav 2022 (OnBoard pattern) vs RavKav 2025 | 1.07 | 0.71 | 0.74 | 0.47 | 0.21 | 0.52 | 0.64 (p 0.06) |
+| RavKav 2022 raw vs RavKav 2025 (same pattern by construction) | 1.08 | 0.99 | 0.99 | 0.84 | 0.02 | 0.97 | 0.97 |
 
-On the 28 sub-areas the same order holds with higher values (THS bus 2022 vs RavKav 2025:
-cosine 0.83, GEH < 5 flow-weighted 0.62 against the survey's own 0.69, PCA overlap 0.42 at
-p 0.008; totals within 1 %: 25,858 vs 25,677 both ends inside). On the 25 V2 areas the cosines
-fall to 0.46–0.52 for the OnBoard-patterned pairs and 0.96 for the survey against RavKav raw.
-Trip lengths (centroid km, mean / median): survey bus 2018 6.7 / 3.2, survey bus 2022 8.5 / 4.9,
-**RavKav 2022 raw 7.1 / 3.6**, **RavKav 2022 on the OnBoard pattern 13.8 / 6.4**, RavKav 2025
-14.0 / 6.4, car 6.0 / 2.2.
+(Before the rebuild, with the 2025 layer on the OnBoard pattern, `THS bus 2022 vs RavKav 2025`
+scored cosine 0.59, GEH < 5 0.29, KS D 0.18, MSSIM 0.44, PCA 0.60 at p 0.27 — at the null.)
+On the 28 sub-areas the rebuilt calibrated layer against the 2025 ticketing scores cosine 0.97,
+GEH < 5 flow-weighted 0.91 against the survey's own day-to-day 0.69, PCA overlap 0.67 (p 0.002)
+against 0.69 — the calibrated 2022 layer now reproduces the 2025 boarding pattern between
+sub-areas better than the survey reproduces itself; totals within 2 % (both ends inside). On
+the 25 V2 areas the cosine is 0.99 (row-normalised 0.82) against 0.44–0.46 for the pairs that
+involve the OnBoard pattern. Trip lengths (centroid km, mean / median): survey bus 2018 6.7 /
+3.2, survey bus 2022 (calibrated) 8.3 / 4.7, **RavKav 2022 raw 7.1 / 3.6**, **RavKav 2022 on the
+OnBoard pattern 13.8 / 6.4**, RavKav 2025 6.7 / 3.5, car 6.0 / 2.2. The calibrated 2022 layer is
+longer than the raw survey (KS D 0.11 against the 2025 ticketing, where the raw survey scores
+0.05) because the coverage rule takes the ticketing volumes on the inter-superzone segments
+and keeps the survey's on the guarded local ones, so the local share falls from 0.48 to 0.35
+below 3 km.
 
 **The reading.** The three tests that look at structure rather than volume agree: **the
 survey's bus matrix and RavKav's own inferred alightings share the same destination structure
 at superzone level, to within the survey's day-to-day noise** (cosine 0.89 against 0.89, PCA
 overlap 0.81 against 0.83, KS D 0.05 inside the household bootstrap band), while **the
-RavKav matrices built on the OnBoard pattern — the step-9 product and the 2025 layer alike —
-share no destination structure with the survey beyond chance** (PCA p 0.13 and 0.27) and carry
-trips twice as long (median 6.4 km against 3.2–3.6). The OnBoard pattern, not the ticketing
-volume, is what separates the ticketing products from the survey; the corridor-profile gap of
-§6p / §6z (ticketing "more corridor-long") is the same effect seen link by link. Two readings
-are possible and the data here cannot choose: the OnBoard survey over-represents the long
-lines (its rows are per boarding on sampled routes, §8 caveat 7), or RavKav's inferred
-alightings truncate journeys at the next boarding and the survey's residents under-report
-long bus trips in the same way. The 2019-vs-2025 rail check, where the destinations are
-measured at both ends, says the ticketing frame itself is sound (below). The consequence for
-the chain: step 9's substitution of the OnBoard pattern for RavKav's alightings (§6g) rests on
-a fine-grain correlation of 0.09 that was read as OnBoard being the better source; these tests
-say the opposite at every level above the TAZ. **Rebuilding the calibrated bus layer with
-RavKav's own alightings as the destination pattern is the first thing to test** (task B1d).
+RavKav matrix built on the OnBoard pattern shares no destination structure with the survey
+beyond chance** (PCA p 0.13) and carries trips twice as long (median 6.4 km against 3.2–3.6).
+The OnBoard pattern, not the ticketing volume, is what separates the ticketing products from
+the survey; the corridor-profile gap of §6p / §6z (ticketing "more corridor-long") was the same
+effect seen link by link, and disappeared once steps 15, 18 and 28 moved to RavKav's own
+alightings the same afternoon. Two readings remain possible and the data here cannot choose:
+the OnBoard survey over-represents the long lines (its rows are per boarding on sampled routes,
+§8 caveat 7), or RavKav's inferred alightings truncate journeys at the next boarding and the
+survey's residents under-report long bus trips in the same way. The 2019-vs-2025 rail check,
+where the destinations are measured at both ends, says the ticketing frame itself is sound
+(below). The consequence for the chain, now acted on: step 9's substitution of the OnBoard
+pattern for RavKav's alightings (§6g) rested on a fine-grain correlation of 0.09 that was read
+as OnBoard being the better source; these tests say the opposite at every level above the
+TAZ, and the rebuilt step 15's held-out validation (§6m: pure RavKav rows 0.267 JSD against
+0.422 for OnBoard rows) says the same on the survey's own households.
 
-**RavKav 2022 against 2025.** On the OnBoard pattern the two years are the same matrix scaled
-(cosine 0.98, GEH < 5 0.91): the pattern is shared by construction, only the volumes differ
-(× 1.08 study-wide, × 1.16 on the V2 areas). Against RavKav 2022 raw the 2025 layer scores
-0.73, the same distance as the survey does.
+**RavKav 2022 against 2025.** On RavKav's own alightings the two years are the same matrix
+scaled (cosine 0.99, GEH < 5 0.84; the 2025 layer takes the 2022 alighting pattern by
+construction, so this is a check of the boardings: × 1.08 study-wide, × 1.12 on the V2 areas).
+Against the OnBoard-patterned 2022 matrix the 2025 layer scores 0.71 — the same distance as the
+survey does from it.
 
 **Rail.** The 2019 station matrix (× 0.793) and the 2025 station matrix agree on their 14
 common station TAZs at cosine 0.97 (row-normalised 0.97, GEH < 5 flow-weighted 0.71) with
