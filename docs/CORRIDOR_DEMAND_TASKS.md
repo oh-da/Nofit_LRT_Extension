@@ -113,7 +113,14 @@ Key facts driving the list (2017 trips-file hybrid, `Output/ths2017/study_taz/`)
       well as it matches itself between days (cosine 0.89, PCA overlap 0.81, KS D 0.05), while
       the OnBoard-patterned matrices (step 9, the 2025 layer) match it no better than chance
       and carry trips twice as long. First test: rebuild step 15 with the RavKav alightings as
-      the prior and rerun the corridor profiles of §6p / §6z.*
+      the prior and rerun the corridor profiles of §6p / §6z.* **Done 2026-09-23 (METHODOLOGY
+      §0 "Rebuild", §6m, §6p, §6z):** step 15 rebuilt on `bus_od_taz_avg.csv` — the
+      household-split validation prefers it outright (k\* 2 → 100, pure-prior JSD 0.267 vs
+      0.422), the bus base is 115,430 / 117,961 (2018 / 2022) instead of 127,185 / 130,779,
+      and the survey and ticketing corridor profiles agree along the whole line (the 2.5–3 ×
+      gap towards Tirat Carmel and from Nazareth was the OnBoard pattern). Still open: the
+      OnBoard unit itself, and the Nazareth branch, where the two alighting inferences
+      disagree by 13 × and bracket the survey — a count decides (C3).
 - [x] **B1e. Peak hour** *(done 2026-09-21, `Corridor_peak_hour_2022.ipynb`, METHODOLOGY
       §6r)*: peak-hour factors from survey departure times (07:00–08:00; PHF₃ₕ 0.59–0.66) and
       peak-hour link profiles. *Boarding-hour factor done 2026-09-23 from the RavKav 2025

@@ -60,7 +60,10 @@ the way: the trips file's mode codes 4 (group taxi) and 5 (Matronit) were swappe
 set. The chain was rerun with the corrected codes the same day (METHODOLOGY §0 "Rerun"): the
 corridor transit market is 13,778 trips rather than 11,664, the central underground capture
 4,114 rather than 3,332, and the numbers quoted in §1 of this response are the
-pre-correction ones. The verdict does not change — the capture rate moved from 0.27 to 0.28
+pre-correction ones. (Later the same day step 15 was rebuilt on RavKav's own alightings in
+place of the OnBoard pattern — the "OnBoard unit" blocker of §1 turned out to be the
+chain's own choice of prior, which step 35 showed the survey does not share — and the
+market / capture became 14,133 / 4,250; METHODOLOGY §0 "Rebuild".) The verdict does not change — the capture rate moved from 0.27 to 0.28
 and the λ band is as wide as before — but the survey-to-ticketing comparison towards Haifa
 on the Haifa segment moved from a 20 % shortfall to parity, which narrows the coverage
 question of §4 to the Nazareth branch and the down direction.
@@ -90,7 +93,8 @@ the branch geometry and operating plan; the national model's mode-choice paramet
 
 1. **Rebuild step 15** with a coverage model in place of the 0.5 threshold, using the
    provider's answer on operators and cash fares (B1c). Publish low / base / high bus
-   matrices, not one.
+   matrices, not one. *Partly done 23 September 2026: the prior is now RavKav's own
+   alightings (METHODOLOGY §6m); the threshold and the provider's answer remain.*
 2. **Rerun steps 16–22** with a direct 2018 → 2022 demographic change where the CBS data allow
    it, and rail scaled to Haifa station boardings rather than the national series.
 3. **Validate the rebuilt base** against the track-B counts. Do not tune to them.

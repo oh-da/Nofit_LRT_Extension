@@ -1,141 +1,141 @@
-scope,link,from_area,to_area,segment,direction,survey: bus (calibrated),survey: rail,survey: taxi-type,ticketing: bus (RavKav × OnBoard),ticketing: train (station),step: survey bus 2018 (raw),"step: bus, all-RavKav volumes",survey: total (car + bus + taxi + rail),survey transit,ticketing transit,ratio survey / ticketing,transit share (survey set)
-T1,1,TiratCarmel,Matam-NeotPeres,trunk,up,733.18,0.00,0.00,654.29,0.00,837.87,848.53,4745.88,733.18,654.29,1.12,0.15
-T1,1,TiratCarmel,Matam-NeotPeres,trunk,down,248.82,0.00,0.00,193.41,0.00,269.95,239.92,1253.01,248.82,193.41,1.29,0.20
-T1,2,Matam-NeotPeres,HofCarmel-NeveDavid,trunk,up,709.82,0.00,0.00,847.63,22.99,613.83,772.88,3331.37,709.82,870.62,0.82,0.21
-T1,2,Matam-NeotPeres,HofCarmel-NeveDavid,trunk,down,1283.00,0.00,96.02,772.30,32.66,664.49,1061.37,4569.66,1283.00,804.96,1.59,0.28
-T1,3,HofCarmel-NeveDavid,Hecht-Shprintzak,trunk,up,811.00,0.00,0.00,1170.85,22.99,737.58,860.29,3448.94,811.00,1193.84,0.68,0.24
-T1,3,HofCarmel-NeveDavid,Hecht-Shprintzak,trunk,down,1293.07,0.00,61.36,961.40,32.66,800.09,1065.63,4517.51,1293.07,994.06,1.30,0.29
-T1,4,Hecht-Shprintzak,EinHayam,trunk,up,1341.50,0.00,0.00,1483.20,22.99,1851.71,1335.36,4623.26,1341.50,1506.19,0.89,0.29
-T1,4,Hecht-Shprintzak,EinHayam,trunk,down,1032.80,0.00,39.52,1469.20,32.66,716.25,837.43,4155.08,1032.80,1501.86,0.69,0.25
-T1,5,EinHayam,BatGalim-KiryatEliezer,trunk,up,1643.34,0.00,0.00,1533.41,22.99,2139.27,1609.87,5702.18,1643.34,1556.40,1.06,0.29
-T1,5,EinHayam,BatGalim-KiryatEliezer,trunk,down,806.03,0.00,0.00,1530.85,32.66,510.86,644.02,3603.45,806.03,1563.51,0.52,0.22
-T1,6,BatGalim-KiryatEliezer,Hamoshava,trunk,up,1292.72,0.00,0.00,1070.98,27.11,1320.44,1314.96,5364.60,1292.72,1098.10,1.18,0.24
-T1,6,BatGalim-KiryatEliezer,Hamoshava,trunk,down,634.73,0.00,345.74,2158.66,77.53,212.30,473.67,5387.17,634.73,2236.19,0.28,0.12
-T1,7,Hamoshava,LowerCity,trunk,up,1415.02,0.00,0.00,1007.73,27.11,1518.77,1377.36,4386.88,1415.02,1034.84,1.37,0.32
-T1,7,Hamoshava,LowerCity,trunk,down,642.19,0.00,360.21,2060.06,77.53,212.30,520.68,3875.22,642.19,2137.59,0.30,0.17
-T1,8,LowerCity,Namal-Giborim,trunk,up,868.54,0.00,0.00,668.71,21.01,921.62,796.78,3379.72,868.54,689.72,1.26,0.26
-T1,8,LowerCity,Namal-Giborim,trunk,down,938.11,0.00,354.42,2832.92,69.68,328.43,824.39,4404.04,938.11,2902.61,0.32,0.21
-T1,9,Namal-Giborim,Hamifrats,trunk,up,554.27,0.00,0.00,561.15,21.01,428.01,479.51,2775.62,554.27,582.16,0.95,0.20
-T1,9,Namal-Giborim,Hamifrats,trunk,down,778.18,0.00,345.74,2622.34,69.68,323.59,589.22,4200.79,778.18,2692.02,0.29,0.19
-T1,10,Hamifrats,Bazan-Hutsot,trunk,up,382.14,0.00,0.00,246.03,11.34,254.54,338.73,1742.58,382.14,257.37,1.48,0.22
-T1,10,Hamifrats,Bazan-Hutsot,trunk,down,820.05,0.00,345.74,2353.14,23.94,203.67,495.65,4662.43,820.05,2377.08,0.34,0.18
-T1,11,Bazan-Hutsot,TsometKiryatAta,trunk,up,226.38,0.00,0.00,118.81,0.00,145.95,206.93,1561.62,226.38,118.81,1.91,0.14
-T1,11,Bazan-Hutsot,TsometKiryatAta,trunk,down,943.21,0.00,345.74,2333.57,0.00,235.56,533.31,4804.74,943.21,2333.57,0.40,0.20
-T1,12,TsometKiryatAta,KiryatAta North,branch,up,76.57,0.00,0.00,53.73,0.00,0.00,75.99,797.46,76.57,53.73,1.43,0.10
-T1,12,TsometKiryatAta,KiryatAta North,branch,down,1115.88,0.00,345.74,2394.44,0.00,347.12,662.85,5729.38,1115.88,2394.44,0.47,0.19
-T1,13,KiryatAta North,KiryatAta North-East,branch,up,43.62,0.00,0.00,52.48,0.00,0.00,50.26,800.08,43.62,52.48,0.83,0.05
-T1,13,KiryatAta North,KiryatAta North-East,branch,down,1033.63,0.00,345.74,2230.38,0.00,362.98,627.89,5537.19,1033.63,2230.38,0.46,0.19
-T1,14,KiryatAta North-East,Shefaram,branch,up,3.53,0.00,0.00,52.64,0.00,0.00,4.45,844.46,3.53,52.64,0.07,0.00
-T1,14,KiryatAta North-East,Shefaram,branch,down,718.04,0.00,345.74,2096.90,0.00,235.56,328.30,4366.56,718.04,2096.90,0.34,0.16
-T1,15,Shefaram,Hamovil,branch,up,2.54,0.00,22.80,41.43,0.00,0.00,2.58,982.46,2.54,41.43,0.06,0.00
-T1,15,Shefaram,Hamovil,branch,down,445.36,0.00,345.74,2039.26,0.00,137.34,211.50,3061.97,445.36,2039.26,0.22,0.15
-T1,16,Hamovil,Nazareth,branch,up,1.87,0.00,22.80,22.86,0.00,0.00,1.98,1116.98,1.87,22.86,0.08,0.00
-T1,16,Hamovil,Nazareth,branch,down,445.39,0.00,345.74,2021.97,0.00,137.34,210.67,2572.47,445.39,2021.97,0.22,0.17
-T2,1,TiratCarmel,Matam-NeotPeres,trunk,up,824.74,0.00,0.00,679.59,0.00,970.16,948.73,4837.44,824.74,679.59,1.21,0.17
-T2,1,TiratCarmel,Matam-NeotPeres,trunk,down,411.76,0.00,0.00,205.03,0.00,452.21,299.75,1515.96,411.76,205.03,2.01,0.27
-T2,2,Matam-NeotPeres,HofCarmel-NeveDavid,trunk,up,806.63,0.00,0.00,892.43,22.99,767.56,881.08,3428.17,806.63,915.42,0.88,0.24
-T2,2,Matam-NeotPeres,HofCarmel-NeveDavid,trunk,down,1483.38,32.07,96.02,836.36,32.66,1059.78,1164.54,4280.90,1515.45,869.02,1.74,0.35
-T2,3,HofCarmel-NeveDavid,Hecht-Shprintzak,trunk,up,911.35,0.00,0.00,1215.65,22.99,891.32,973.93,3549.29,911.35,1238.64,0.74,0.26
-T2,3,HofCarmel-NeveDavid,Hecht-Shprintzak,trunk,down,1496.36,32.07,61.36,1062.47,32.66,1195.38,1172.27,4231.65,1528.43,1095.13,1.40,0.36
-T2,4,Hecht-Shprintzak,EinHayam,trunk,up,1460.15,0.00,0.00,1572.47,22.99,2106.08,1477.05,4741.90,1460.15,1595.46,0.92,0.31
-T2,4,Hecht-Shprintzak,EinHayam,trunk,down,1242.55,32.07,39.52,1381.54,32.66,1111.54,951.75,3875.68,1274.63,1414.20,0.90,0.33
-T2,5,EinHayam,BatGalim-KiryatEliezer,trunk,up,1772.72,0.00,0.00,1622.68,22.99,2453.25,1768.03,5831.56,1772.72,1645.67,1.08,0.30
-T2,5,EinHayam,BatGalim-KiryatEliezer,trunk,down,1017.85,32.07,0.00,1452.32,32.66,906.15,760.80,3326.12,1049.92,1484.98,0.71,0.32
-T2,6,BatGalim-KiryatEliezer,Hamoshava,trunk,up,1438.97,0.00,0.00,1168.49,27.11,1634.42,1499.00,5409.18,1438.97,1195.60,1.20,0.27
-T2,6,BatGalim-KiryatEliezer,Hamoshava,trunk,down,879.91,32.07,0.00,1579.72,77.53,607.59,628.57,5071.30,911.98,1657.25,0.55,0.18
-T2,7,Hamoshava,LowerCity,trunk,up,1569.73,0.00,0.00,1101.09,27.11,1832.75,1568.23,4407.09,1569.73,1128.20,1.39,0.36
-T2,7,Hamoshava,LowerCity,trunk,down,997.66,32.07,14.47,1547.84,77.53,607.59,762.00,3669.64,1029.73,1625.37,0.63,0.28
-T2,8,LowerCity,Namal-Giborim,trunk,up,1028.98,0.00,0.00,791.58,21.01,1239.65,992.26,3231.09,1028.98,812.59,1.27,0.32
-T2,8,LowerCity,Namal-Giborim,trunk,down,1641.89,32.07,8.68,2003.26,69.68,1269.80,1338.63,4444.55,1673.96,2072.95,0.81,0.38
-T2,9,Namal-Giborim,Hamifrats,trunk,up,733.15,0.00,0.00,744.65,21.01,769.32,705.00,2659.55,733.15,765.66,0.96,0.28
-T2,9,Namal-Giborim,Hamifrats,trunk,down,1649.71,34.44,0.00,1603.32,69.68,1387.94,1235.10,4549.06,1684.14,1673.01,1.01,0.37
-T2,10,Hamifrats,Bazan-Hutsot,trunk,up,570.57,0.00,0.00,553.07,11.34,595.84,583.07,1666.23,570.57,564.41,1.01,0.34
-T2,10,Hamifrats,Bazan-Hutsot,trunk,down,1741.97,38.62,0.00,1117.33,23.94,1284.41,1180.85,5839.61,1780.59,1141.28,1.56,0.30
-T2,11,Bazan-Hutsot,TsometKiryatAta,trunk,up,417.46,0.00,0.00,440.73,0.00,487.25,456.50,1604.24,417.46,440.73,0.95,0.26
-T2,11,Bazan-Hutsot,TsometKiryatAta,trunk,down,1910.56,38.62,0.00,1233.28,0.00,1270.40,1253.96,7180.07,1949.18,1233.28,1.58,0.27
-T2,12,TsometKiryatAta,KiryatHaim,branch,up,268.92,0.00,0.00,366.49,0.00,341.31,327.82,752.60,268.92,366.49,0.73,0.36
-T2,12,TsometKiryatAta,KiryatHaim,branch,down,2077.36,38.62,0.00,1364.29,0.00,1639.62,1349.69,8598.77,2115.98,1364.29,1.55,0.25
-T2,13,KiryatHaim,KiryatBialik Center,branch,up,503.83,0.00,0.00,654.22,0.00,384.11,433.71,2438.03,503.83,654.22,0.77,0.21
-T2,13,KiryatHaim,KiryatBialik Center,branch,down,2020.52,20.71,0.00,1241.63,0.00,1991.47,1138.45,9618.92,2041.23,1241.63,1.64,0.21
-T2,14,KiryatBialik Center,Kiryon,branch,up,558.19,0.00,0.00,391.72,0.00,401.28,367.70,1763.14,558.19,391.72,1.42,0.32
-T2,14,KiryatBialik Center,Kiryon,branch,down,1059.38,0.00,0.00,996.36,0.00,1181.25,554.32,4764.78,1059.38,996.36,1.06,0.22
-T2,15,Kiryon,TsurShalom,branch,up,143.21,0.00,0.00,120.26,0.00,220.58,143.88,1141.50,143.21,120.26,1.19,0.13
-T2,15,Kiryon,TsurShalom,branch,down,592.34,0.00,0.00,553.99,0.00,481.62,262.96,2870.72,592.34,553.99,1.07,0.21
-T3,1,TiratCarmel,Matam-NeotPeres,trunk,up,735.06,0.00,0.00,671.28,0.00,837.87,850.53,4747.76,735.06,671.28,1.10,0.15
-T3,1,TiratCarmel,Matam-NeotPeres,trunk,down,249.70,0.00,0.00,227.47,0.00,269.95,240.70,1223.11,249.70,227.47,1.10,0.20
-T3,2,Matam-NeotPeres,HofCarmel-NeveDavid,trunk,up,714.55,0.00,0.00,871.46,24.81,613.83,780.44,3336.10,714.55,896.28,0.80,0.21
-T3,2,Matam-NeotPeres,HofCarmel-NeveDavid,trunk,down,1219.79,7.65,96.02,826.94,74.84,730.71,1027.32,3759.25,1227.44,901.77,1.36,0.33
-T3,3,HofCarmel-NeveDavid,Hecht-Shprintzak,trunk,up,817.70,0.00,0.00,1194.68,24.81,737.58,871.70,3455.64,817.70,1219.49,0.67,0.24
-T3,3,HofCarmel-NeveDavid,Hecht-Shprintzak,trunk,down,1224.69,7.65,61.36,1039.31,74.84,866.32,1028.77,3726.30,1232.34,1114.15,1.11,0.33
-T3,4,Hecht-Shprintzak,EinHayam,trunk,up,1358.35,0.00,0.00,1502.68,24.81,1915.52,1366.57,4640.10,1358.35,1527.50,0.89,0.29
-T3,4,Hecht-Shprintzak,EinHayam,trunk,down,952.92,7.65,39.52,1265.10,74.84,782.47,794.31,3352.36,960.57,1339.94,0.72,0.29
-T3,5,EinHayam,BatGalim-KiryatEliezer,trunk,up,1666.14,0.00,0.00,1552.89,24.81,2226.88,1652.70,5744.68,1666.14,1577.71,1.06,0.29
-T3,5,EinHayam,BatGalim-KiryatEliezer,trunk,down,722.46,7.65,0.00,1326.75,74.84,577.09,598.90,2797.06,730.12,1401.59,0.52,0.26
-T3,6,BatGalim-KiryatEliezer,Hamoshava,trunk,up,1324.88,0.00,0.00,1198.88,30.60,1408.05,1376.05,5310.16,1324.88,1229.48,1.08,0.25
-T3,6,BatGalim-KiryatEliezer,Hamoshava,trunk,down,509.60,7.65,160.71,1471.29,174.33,278.53,414.86,4159.53,517.26,1645.62,0.31,0.12
-T3,7,Hamoshava,LowerCity,trunk,up,1448.09,0.00,0.00,1127.24,30.60,1606.38,1439.28,4300.52,1448.09,1157.84,1.25,0.34
-T3,7,Hamoshava,LowerCity,trunk,down,494.82,7.65,175.18,1371.09,174.33,278.53,467.32,2625.34,502.47,1545.41,0.33,0.19
-T3,8,LowerCity,Namal-Giborim,trunk,up,902.24,0.00,0.00,801.84,25.53,1009.23,859.26,3064.86,902.24,827.37,1.09,0.29
-T3,8,LowerCity,Namal-Giborim,trunk,down,723.81,7.65,169.39,1720.08,199.69,395.19,792.39,2995.91,731.46,1919.78,0.38,0.24
-T3,9,Namal-Giborim,Hamifrats,trunk,up,609.52,0.00,0.00,701.44,25.53,530.28,588.65,2498.93,609.52,726.97,0.84,0.24
-T3,9,Namal-Giborim,Hamifrats,trunk,down,573.68,9.27,160.71,1266.33,199.69,452.78,622.32,2670.95,582.95,1466.03,0.40,0.22
-T3,10,Hamifrats,Bazan-Hutsot,trunk,up,452.43,0.00,0.00,541.04,16.33,356.80,481.60,1501.75,452.43,557.37,0.81,0.30
-T3,10,Hamifrats,Bazan-Hutsot,trunk,down,761.22,12.13,160.71,771.32,166.80,398.26,725.52,2940.17,773.35,938.12,0.82,0.26
-T3,11,Bazan-Hutsot,TsometKiryatAta,trunk,up,300.85,0.00,0.00,414.58,5.15,248.21,359.16,1460.68,300.85,419.73,0.72,0.21
-T3,11,Bazan-Hutsot,TsometKiryatAta,trunk,down,1015.70,12.13,160.71,798.69,146.74,640.04,940.57,3823.15,1027.82,945.43,1.09,0.27
-T3,12,TsometKiryatAta,KiryatHaim West,branch,up,152.84,0.00,0.00,405.50,5.15,102.26,232.22,539.75,152.84,410.65,0.37,0.28
-T3,12,TsometKiryatAta,KiryatHaim West,branch,down,1270.37,12.13,160.71,1108.31,146.74,1185.91,1167.92,4493.23,1282.50,1255.04,1.02,0.29
-T3,13,KiryatHaim West,KiryatYam B+C,branch,up,299.36,0.00,0.00,300.65,0.00,171.08,399.99,1191.79,299.36,300.65,1.00,0.25
-T3,13,KiryatHaim West,KiryatYam B+C,branch,down,888.16,0.00,160.71,1017.59,0.00,875.65,846.39,3631.11,888.16,1017.59,0.87,0.24
-T3,14,KiryatYam B+C,KiryatYam A,branch,up,74.23,0.00,0.00,198.99,0.00,91.83,98.25,695.94,74.23,198.99,0.37,0.11
-T3,14,KiryatYam B+C,KiryatYam A,branch,down,843.83,0.00,0.00,490.05,0.00,1239.62,985.84,3076.37,843.83,490.05,1.72,0.27
-T3,15,KiryatYam A,SavyoneyYam,branch,up,32.65,0.00,0.00,135.73,0.00,6.42,48.08,422.45,32.65,135.73,0.24,0.08
-T3,15,KiryatYam A,SavyoneyYam,branch,down,556.47,0.00,0.00,240.63,0.00,811.08,675.69,2205.86,556.47,240.63,2.31,0.25
-network,1,TiratCarmel,Matam-NeotPeres,trunk,up,828.59,0.00,0.00,696.58,0.00,970.16,953.00,4841.28,828.59,696.58,1.19,0.17
-network,1,TiratCarmel,Matam-NeotPeres,trunk,down,414.89,0.00,0.00,239.09,0.00,452.21,302.64,1607.07,414.89,239.09,1.74,0.26
-network,2,Matam-NeotPeres,HofCarmel-NeveDavid,trunk,up,826.88,0.00,0.00,916.26,24.81,767.56,904.18,3448.43,826.88,941.08,0.88,0.24
-network,2,Matam-NeotPeres,HofCarmel-NeveDavid,trunk,down,1622.35,39.73,96.02,1334.32,74.84,1126.00,1270.06,5798.88,1662.08,1409.15,1.18,0.29
-network,3,HofCarmel-NeveDavid,Hecht-Shprintzak,trunk,up,942.90,0.00,0.00,1239.48,24.81,891.32,1009.99,3580.84,942.90,1264.29,0.75,0.26
-network,3,HofCarmel-NeveDavid,Hecht-Shprintzak,trunk,down,1646.31,39.73,61.36,1583.69,74.84,1261.60,1286.07,5784.98,1686.04,1658.53,1.02,0.29
-network,4,Hecht-Shprintzak,EinHayam,trunk,up,1550.04,0.00,0.00,1607.63,24.81,2169.89,1580.06,4831.80,1550.04,1632.44,0.95,0.32
-network,4,Hecht-Shprintzak,EinHayam,trunk,down,1416.88,39.73,39.52,2188.90,74.84,1177.76,1083.97,5453.39,1456.61,2263.74,0.64,0.27
-network,5,EinHayam,BatGalim-KiryatEliezer,trunk,up,1896.86,0.00,0.00,1657.84,24.81,2540.86,1910.33,5975.40,1896.86,1682.65,1.13,0.32
-network,5,EinHayam,BatGalim-KiryatEliezer,trunk,down,1199.98,39.73,0.00,2259.68,74.84,972.37,898.91,4911.63,1239.70,2334.52,0.53,0.25
-network,6,BatGalim-KiryatEliezer,Hamoshava,trunk,up,1616.89,0.00,0.00,1321.70,30.60,1722.03,1703.00,5774.79,1616.89,1352.31,1.20,0.28
-network,6,BatGalim-KiryatEliezer,Hamoshava,trunk,down,1211.59,39.73,506.45,3040.26,174.33,673.81,881.36,8479.77,1251.32,3214.59,0.39,0.15
-network,7,Hamoshava,LowerCity,trunk,up,1749.24,0.00,0.00,1262.70,30.60,1920.36,1773.51,4807.13,1749.24,1293.30,1.35,0.36
-network,7,Hamoshava,LowerCity,trunk,down,1414.48,39.73,520.92,3013.09,174.33,673.81,1064.53,7163.25,1454.20,3187.42,0.46,0.20
-network,8,LowerCity,Namal-Giborim,trunk,up,1209.56,0.00,0.00,966.81,25.53,1327.26,1198.40,3861.33,1209.56,992.34,1.22,0.31
-network,8,LowerCity,Namal-Giborim,trunk,down,2337.45,39.73,515.13,4085.00,199.69,1519.15,1806.34,9317.53,2377.18,4284.69,0.55,0.26
-network,9,Namal-Giborim,Hamifrats,trunk,up,938.75,0.00,0.00,927.05,25.53,871.58,962.14,3331.43,938.75,952.57,0.99,0.28
-network,9,Namal-Giborim,Hamifrats,trunk,down,2618.11,43.70,506.45,4001.57,199.69,1814.26,1894.74,9923.60,2661.81,4201.26,0.63,0.27
-network,10,Hamifrats,Bazan-Hutsot,trunk,up,793.03,0.00,0.00,922.25,16.33,698.10,876.56,2395.25,793.03,938.58,0.84,0.33
-network,10,Hamifrats,Bazan-Hutsot,trunk,down,3213.54,50.75,506.45,4028.72,166.80,1776.13,2242.94,12737.35,3264.29,4195.52,0.78,0.26
-network,11,Bazan-Hutsot,TsometKiryatAta,trunk,up,644.61,0.00,0.00,813.66,5.15,589.51,760.08,2473.65,644.61,818.82,0.79,0.26
-network,11,Bazan-Hutsot,TsometKiryatAta,trunk,down,3835.72,50.75,506.45,4329.63,146.74,2146.00,2678.85,15627.48,3886.47,4476.37,0.87,0.25
-network,12,TsometKiryatAta,KiryatAta North,branch,up,244.04,0.00,0.00,113.59,0.00,191.43,233.94,1562.69,244.04,113.59,2.15,0.16
-network,12,TsometKiryatAta,KiryatAta North,branch,down,1899.21,0.00,345.74,3021.65,0.00,697.12,1216.22,8073.94,1899.21,3021.65,0.63,0.24
-network,13,KiryatAta North,KiryatAta North-East,branch,up,93.56,0.00,0.00,70.35,0.00,0.00,97.24,1280.29,93.56,70.35,1.33,0.07
-network,13,KiryatAta North,KiryatAta North-East,branch,down,1713.24,0.00,345.74,2635.77,0.00,712.98,1101.30,7643.00,1713.24,2635.77,0.65,0.22
-network,14,KiryatAta North-East,Shefaram,branch,up,5.31,0.00,0.00,63.66,0.00,0.00,5.96,1172.23,5.31,63.66,0.08,0.00
-network,14,KiryatAta North-East,Shefaram,branch,down,1236.05,0.00,345.74,2490.74,0.00,585.56,677.13,6031.77,1236.05,2490.74,0.50,0.20
-network,15,Shefaram,Hamovil,branch,up,4.19,0.00,22.80,50.94,0.00,0.00,4.03,1310.10,4.19,50.94,0.08,0.00
-network,15,Shefaram,Hamovil,branch,down,961.56,0.00,345.74,2421.81,0.00,487.34,559.59,3631.45,961.56,2421.81,0.40,0.26
-network,16,Hamovil,Nazareth,branch,up,3.51,0.00,22.80,24.72,0.00,0.00,3.43,1369.12,3.51,24.72,0.14,0.00
-network,16,Hamovil,Nazareth,branch,down,961.58,0.00,345.74,2401.73,0.00,487.34,558.69,3088.66,961.58,2401.73,0.40,0.31
-network,17,TsometKiryatAta,KiryatHaim,branch,up,1552.48,0.00,40.45,1729.74,0.00,1330.48,1295.51,9450.25,1552.48,1729.74,0.90,0.16
-network,17,TsometKiryatAta,KiryatHaim,branch,down,2454.93,38.62,0.00,1846.66,0.00,2066.17,1732.47,13986.19,2493.55,1846.66,1.35,0.18
-network,18,KiryatHaim,KiryatBialik Center,branch,up,1225.72,0.00,16.39,1595.79,0.00,1057.80,943.02,8488.73,1225.72,1595.79,0.77,0.14
-network,18,KiryatHaim,KiryatBialik Center,branch,down,2179.74,20.71,0.00,1589.37,0.00,2250.87,1269.02,12950.77,2200.45,1589.37,1.38,0.17
-network,19,KiryatBialik Center,Kiryon,branch,up,956.69,0.00,0.00,906.04,0.00,880.53,649.50,5297.26,956.69,906.04,1.06,0.18
-network,19,KiryatBialik Center,Kiryon,branch,down,1126.73,0.00,0.00,1152.27,0.00,1386.58,607.74,6631.24,1126.73,1152.27,0.98,0.17
-network,20,Kiryon,TsurShalom,branch,up,248.95,0.00,0.00,269.51,0.00,295.50,218.16,2695.59,248.95,269.51,0.92,0.09
-network,20,Kiryon,TsurShalom,branch,down,620.19,0.00,0.00,642.25,0.00,640.75,284.15,4007.14,620.19,642.25,0.97,0.15
-network,21,TsometKiryatAta,KiryatHaim West,branch,up,598.82,0.00,0.00,924.94,5.15,528.81,658.04,5473.33,598.82,930.10,0.64,0.11
-network,21,TsometKiryatAta,KiryatHaim West,branch,down,2006.47,12.13,201.16,1941.30,146.74,2016.51,1783.23,11157.70,2018.60,2088.04,0.97,0.18
-network,22,KiryatHaim West,KiryatYam B+C,branch,up,634.92,0.00,0.00,703.65,0.00,495.92,716.73,4533.79,634.92,703.65,0.90,0.14
-network,22,KiryatHaim West,KiryatYam B+C,branch,down,1419.47,0.00,201.16,1776.19,0.00,1526.62,1243.56,8816.56,1419.47,1776.19,0.80,0.16
-network,23,KiryatYam B+C,KiryatYam A,branch,up,118.97,0.00,0.00,414.45,0.00,196.55,136.61,1300.19,118.97,414.45,0.29,0.09
-network,23,KiryatYam B+C,KiryatYam A,branch,down,1220.72,0.00,0.00,852.09,0.00,1656.10,1256.75,5279.42,1220.72,852.09,1.43,0.23
-network,24,KiryatYam A,SavyoneyYam,branch,up,45.46,0.00,0.00,213.86,0.00,22.65,59.07,775.29,45.46,213.86,0.21,0.06
-network,24,KiryatYam A,SavyoneyYam,branch,down,785.42,0.00,0.00,421.62,0.00,1036.14,840.26,3814.83,785.42,421.62,1.86,0.21
+scope,link,from_area,to_area,segment,direction,survey: bus (calibrated),survey: rail,survey: taxi-type,"ticketing: bus (RavKav, own alightings)",ticketing: train (station),step: survey bus 2018 (raw),"step: bus, all-RavKav volumes",survey: total (car + bus + taxi + rail),survey transit,ticketing transit,ratio survey / ticketing,transit share (survey set)
+T1,1,TiratCarmel,Matam-NeotPeres,trunk,up,888.80,0.00,0.00,924.00,0.00,837.87,906.36,4901.49,888.80,924.00,0.96,0.18
+T1,1,TiratCarmel,Matam-NeotPeres,trunk,down,373.63,0.00,0.00,488.75,0.00,269.95,350.08,1377.82,373.63,488.75,0.76,0.27
+T1,2,Matam-NeotPeres,HofCarmel-NeveDavid,trunk,up,869.06,0.00,0.00,788.50,22.99,613.83,853.74,3490.61,869.06,811.49,1.07,0.25
+T1,2,Matam-NeotPeres,HofCarmel-NeveDavid,trunk,down,1342.13,0.00,96.02,1047.00,32.66,664.49,1284.11,4628.80,1342.13,1079.66,1.24,0.29
+T1,3,HofCarmel-NeveDavid,Hecht-Shprintzak,trunk,up,1020.36,0.00,0.00,984.50,22.99,737.58,993.82,3658.30,1020.36,1007.49,1.01,0.28
+T1,3,HofCarmel-NeveDavid,Hecht-Shprintzak,trunk,down,1352.39,0.00,61.36,1111.50,32.66,800.09,1295.36,4576.83,1352.39,1144.16,1.18,0.30
+T1,4,Hecht-Shprintzak,EinHayam,trunk,up,1497.23,0.00,0.00,1366.75,22.99,1851.71,1437.99,4778.98,1497.23,1389.74,1.08,0.31
+T1,4,Hecht-Shprintzak,EinHayam,trunk,down,1141.32,0.00,39.52,921.75,32.66,716.25,1095.56,4263.59,1141.32,954.41,1.20,0.27
+T1,5,EinHayam,BatGalim-KiryatEliezer,trunk,up,1688.92,0.00,0.00,1406.75,22.99,2139.27,1616.78,5747.75,1688.92,1429.74,1.18,0.29
+T1,5,EinHayam,BatGalim-KiryatEliezer,trunk,down,1018.06,0.00,0.00,913.75,32.66,510.86,978.16,3815.48,1018.06,946.41,1.08,0.27
+T1,6,BatGalim-KiryatEliezer,Hamoshava,trunk,up,1338.28,0.00,0.00,1293.00,27.11,1320.44,1252.73,5410.15,1338.28,1320.11,1.01,0.25
+T1,6,BatGalim-KiryatEliezer,Hamoshava,trunk,down,971.77,0.00,345.74,1038.75,77.53,212.30,936.75,5724.21,971.77,1116.28,0.87,0.17
+T1,7,Hamoshava,LowerCity,trunk,up,1367.30,0.00,0.00,1260.75,27.11,1518.77,1233.10,4339.16,1367.30,1287.86,1.06,0.32
+T1,7,Hamoshava,LowerCity,trunk,down,997.82,0.00,360.21,1061.75,77.53,212.30,916.71,4230.85,997.82,1139.28,0.88,0.24
+T1,8,LowerCity,Namal-Giborim,trunk,up,876.58,0.00,0.00,888.50,21.01,921.62,798.22,3387.76,876.58,909.51,0.96,0.26
+T1,8,LowerCity,Namal-Giborim,trunk,down,1218.43,0.00,354.42,1140.75,69.68,328.43,1035.26,4684.36,1218.43,1210.43,1.01,0.26
+T1,9,Namal-Giborim,Hamifrats,trunk,up,685.06,0.00,0.00,931.75,21.01,428.01,658.51,2906.41,685.06,952.76,0.72,0.24
+T1,9,Namal-Giborim,Hamifrats,trunk,down,1034.74,0.00,345.74,946.25,69.68,323.59,879.51,4457.35,1034.74,1015.93,1.02,0.23
+T1,10,Hamifrats,Bazan-Hutsot,trunk,up,384.51,0.00,0.00,437.50,11.34,254.54,427.31,1744.95,384.51,448.84,0.86,0.22
+T1,10,Hamifrats,Bazan-Hutsot,trunk,down,966.10,0.00,345.74,813.50,23.94,203.67,656.51,4808.48,966.10,837.44,1.15,0.20
+T1,11,Bazan-Hutsot,TsometKiryatAta,trunk,up,263.97,0.00,0.00,296.00,0.00,145.95,287.45,1599.21,263.97,296.00,0.89,0.17
+T1,11,Bazan-Hutsot,TsometKiryatAta,trunk,down,1037.19,0.00,345.74,761.00,0.00,235.56,658.86,4898.71,1037.19,761.00,1.36,0.21
+T1,12,TsometKiryatAta,KiryatAta North,branch,up,108.51,0.00,0.00,82.50,0.00,0.00,105.27,829.41,108.51,82.50,1.32,0.13
+T1,12,TsometKiryatAta,KiryatAta North,branch,down,1153.57,0.00,345.74,803.50,0.00,347.12,700.89,5767.08,1153.57,803.50,1.44,0.20
+T1,13,KiryatAta North,KiryatAta North-East,branch,up,70.38,0.00,0.00,70.00,0.00,0.00,72.06,826.84,70.38,70.00,1.01,0.09
+T1,13,KiryatAta North,KiryatAta North-East,branch,down,917.95,0.00,345.74,426.00,0.00,362.98,498.04,5421.50,917.95,426.00,2.15,0.17
+T1,14,KiryatAta North-East,Shefaram,branch,up,42.30,0.00,0.00,70.75,0.00,0.00,41.36,883.22,42.30,70.75,0.60,0.05
+T1,14,KiryatAta North-East,Shefaram,branch,down,688.89,0.00,345.74,345.25,0.00,235.56,279.77,4337.42,688.89,345.25,2.00,0.16
+T1,15,Shefaram,Hamovil,branch,up,45.15,0.00,22.80,62.75,0.00,0.00,39.02,1025.06,45.15,62.75,0.72,0.04
+T1,15,Shefaram,Hamovil,branch,down,383.39,0.00,345.74,220.75,0.00,137.34,168.89,3000.01,383.39,220.75,1.74,0.13
+T1,16,Hamovil,Nazareth,branch,up,43.26,0.00,22.80,54.75,0.00,0.00,43.02,1158.37,43.26,54.75,0.79,0.04
+T1,16,Hamovil,Nazareth,branch,down,390.00,0.00,345.74,181.50,0.00,137.34,149.88,2517.08,390.00,181.50,2.15,0.15
+T2,1,TiratCarmel,Matam-NeotPeres,trunk,up,915.91,0.00,0.00,942.75,0.00,970.16,935.51,4928.61,915.91,942.75,0.97,0.19
+T2,1,TiratCarmel,Matam-NeotPeres,trunk,down,468.11,0.00,0.00,541.75,0.00,452.21,395.81,1572.30,468.11,541.75,0.86,0.30
+T2,2,Matam-NeotPeres,HofCarmel-NeveDavid,trunk,up,906.73,0.00,0.00,832.00,22.99,767.56,896.73,3528.28,906.73,854.99,1.06,0.26
+T2,2,Matam-NeotPeres,HofCarmel-NeveDavid,trunk,down,1616.93,32.07,96.02,1272.25,32.66,1059.78,1473.57,4414.45,1649.00,1304.91,1.26,0.37
+T2,3,HofCarmel-NeveDavid,Hecht-Shprintzak,trunk,up,1066.21,0.00,0.00,1042.25,22.99,891.32,1047.57,3704.15,1066.21,1065.24,1.00,0.29
+T2,3,HofCarmel-NeveDavid,Hecht-Shprintzak,trunk,down,1648.34,32.07,61.36,1358.25,32.66,1195.38,1502.11,4383.64,1680.42,1390.91,1.21,0.38
+T2,4,Hecht-Shprintzak,EinHayam,trunk,up,1567.69,0.00,0.00,1442.25,22.99,2106.08,1524.12,4849.45,1567.69,1465.24,1.07,0.32
+T2,4,Hecht-Shprintzak,EinHayam,trunk,down,1467.25,32.07,39.52,1179.25,32.66,1111.54,1326.82,4100.38,1499.33,1211.91,1.24,0.37
+T2,5,EinHayam,BatGalim-KiryatEliezer,trunk,up,1769.30,0.00,0.00,1484.00,22.99,2453.25,1715.96,5828.14,1769.30,1506.99,1.17,0.30
+T2,5,EinHayam,BatGalim-KiryatEliezer,trunk,down,1351.26,32.07,0.00,1178.25,32.66,906.15,1215.36,3659.54,1383.34,1210.91,1.14,0.38
+T2,6,BatGalim-KiryatEliezer,Hamoshava,trunk,up,1445.81,0.00,0.00,1412.75,27.11,1634.42,1387.64,5416.03,1445.81,1439.86,1.00,0.27
+T2,6,BatGalim-KiryatEliezer,Hamoshava,trunk,down,1474.57,32.07,0.00,1464.75,77.53,607.59,1313.10,5665.96,1506.64,1542.28,0.98,0.27
+T2,7,Hamoshava,LowerCity,trunk,up,1479.48,0.00,0.00,1387.25,27.11,1832.75,1371.49,4316.85,1479.48,1414.36,1.05,0.34
+T2,7,Hamoshava,LowerCity,trunk,down,1572.69,32.07,14.47,1489.50,77.53,607.59,1354.29,4244.68,1604.77,1567.03,1.02,0.38
+T2,8,LowerCity,Namal-Giborim,trunk,up,994.64,0.00,0.00,1017.00,21.01,1239.65,941.01,3196.76,994.64,1038.01,0.96,0.31
+T2,8,LowerCity,Namal-Giborim,trunk,down,2044.66,32.07,8.68,1785.00,69.68,1269.80,1686.47,4847.32,2076.73,1854.68,1.12,0.43
+T2,9,Namal-Giborim,Hamifrats,trunk,up,809.50,0.00,0.00,1090.00,21.01,769.32,810.41,2735.91,809.50,1111.01,0.73,0.30
+T2,9,Namal-Giborim,Hamifrats,trunk,down,1949.64,34.44,0.00,1632.25,69.68,1387.94,1608.00,4848.99,1984.08,1701.93,1.17,0.41
+T2,10,Hamifrats,Bazan-Hutsot,trunk,up,507.70,0.00,0.00,622.75,11.34,595.84,615.75,1603.37,507.70,634.09,0.80,0.32
+T2,10,Hamifrats,Bazan-Hutsot,trunk,down,2004.36,38.62,0.00,1721.00,23.94,1284.41,1511.10,6102.00,2042.98,1744.94,1.17,0.33
+T2,11,Bazan-Hutsot,TsometKiryatAta,trunk,up,386.97,0.00,0.00,489.00,0.00,487.25,481.44,1573.75,386.97,489.00,0.79,0.25
+T2,11,Bazan-Hutsot,TsometKiryatAta,trunk,down,2122.15,38.62,0.00,1723.50,0.00,1270.40,1561.18,7391.66,2160.77,1723.50,1.25,0.29
+T2,12,TsometKiryatAta,KiryatHaim,branch,up,233.46,0.00,0.00,298.00,0.00,341.31,306.69,717.14,233.46,298.00,0.78,0.33
+T2,12,TsometKiryatAta,KiryatHaim,branch,down,2259.13,38.62,0.00,1821.00,0.00,1639.62,1603.20,8780.54,2297.75,1821.00,1.26,0.26
+T2,13,KiryatHaim,KiryatBialik Center,branch,up,485.19,0.00,0.00,502.50,0.00,384.11,426.98,2419.39,485.19,502.50,0.97,0.20
+T2,13,KiryatHaim,KiryatBialik Center,branch,down,1959.74,20.71,0.00,1529.25,0.00,1991.47,1256.95,9558.14,1980.45,1529.25,1.30,0.21
+T2,14,KiryatBialik Center,Kiryon,branch,up,686.24,0.00,0.00,455.25,0.00,401.28,466.55,1891.20,686.24,455.25,1.51,0.36
+T2,14,KiryatBialik Center,Kiryon,branch,down,1262.64,0.00,0.00,1067.75,0.00,1181.25,809.62,4968.03,1262.64,1067.75,1.18,0.25
+T2,15,Kiryon,TsurShalom,branch,up,264.32,0.00,0.00,222.00,0.00,220.58,206.91,1262.62,264.32,222.00,1.19,0.21
+T2,15,Kiryon,TsurShalom,branch,down,782.70,0.00,0.00,584.00,0.00,481.62,454.07,3061.09,782.70,584.00,1.34,0.26
+T3,1,TiratCarmel,Matam-NeotPeres,trunk,up,899.19,0.00,0.00,930.75,0.00,837.87,917.55,4911.89,899.19,930.75,0.97,0.18
+T3,1,TiratCarmel,Matam-NeotPeres,trunk,down,406.20,0.00,0.00,534.50,0.00,269.95,383.58,1379.61,406.20,534.50,0.76,0.29
+T3,2,Matam-NeotPeres,HofCarmel-NeveDavid,trunk,up,882.09,0.00,0.00,811.75,24.81,613.83,869.69,3503.64,882.09,836.56,1.05,0.25
+T3,2,Matam-NeotPeres,HofCarmel-NeveDavid,trunk,down,1489.31,7.65,96.02,1279.75,74.84,730.71,1437.56,4028.76,1496.96,1354.59,1.11,0.37
+T3,3,HofCarmel-NeveDavid,Hecht-Shprintzak,trunk,up,1035.41,0.00,0.00,1009.00,24.81,737.58,1013.45,3673.35,1035.41,1033.81,1.00,0.28
+T3,3,HofCarmel-NeveDavid,Hecht-Shprintzak,trunk,down,1513.41,7.65,61.36,1364.50,74.84,866.32,1463.30,4015.03,1521.07,1439.34,1.06,0.38
+T3,4,Hecht-Shprintzak,EinHayam,trunk,up,1518.35,0.00,0.00,1392.25,24.81,1915.52,1468.72,4800.11,1518.35,1417.06,1.07,0.32
+T3,4,Hecht-Shprintzak,EinHayam,trunk,down,1321.97,7.65,39.52,1181.00,74.84,782.47,1284.06,3721.42,1329.63,1255.84,1.06,0.36
+T3,5,EinHayam,BatGalim-KiryatEliezer,trunk,up,1712.49,0.00,0.00,1432.75,24.81,2226.88,1651.98,5791.03,1712.49,1457.56,1.17,0.30
+T3,5,EinHayam,BatGalim-KiryatEliezer,trunk,down,1203.47,7.65,0.00,1175.75,74.84,577.09,1171.64,3278.07,1211.13,1250.59,0.97,0.37
+T3,6,BatGalim-KiryatEliezer,Hamoshava,trunk,up,1368.56,0.00,0.00,1321.00,30.60,1408.05,1300.17,5353.83,1368.56,1351.60,1.01,0.26
+T3,6,BatGalim-KiryatEliezer,Hamoshava,trunk,down,1267.61,7.65,160.71,1600.50,174.33,278.53,1248.60,4917.53,1275.26,1774.83,0.72,0.26
+T3,7,Hamoshava,LowerCity,trunk,up,1395.66,0.00,0.00,1288.00,30.60,1606.38,1278.37,4248.09,1395.66,1318.60,1.06,0.33
+T3,7,Hamoshava,LowerCity,trunk,down,1291.84,7.65,175.18,1610.00,174.33,278.53,1249.68,3422.36,1299.50,1784.33,0.73,0.38
+T3,8,LowerCity,Namal-Giborim,trunk,up,902.53,0.00,0.00,909.75,25.53,1009.23,840.76,3065.15,902.53,935.28,0.96,0.29
+T3,8,LowerCity,Namal-Giborim,trunk,down,1506.35,7.65,169.39,1859.00,199.69,395.19,1442.58,3778.46,1514.00,2058.69,0.74,0.40
+T3,9,Namal-Giborim,Hamifrats,trunk,up,708.55,0.00,0.00,951.50,25.53,530.28,701.09,2597.96,708.55,977.03,0.73,0.27
+T3,9,Namal-Giborim,Hamifrats,trunk,down,1323.68,9.27,160.71,1666.25,199.69,452.78,1327.20,3420.95,1332.94,1865.94,0.71,0.39
+T3,10,Hamifrats,Bazan-Hutsot,trunk,up,391.53,0.00,0.00,444.75,16.33,356.80,479.77,1440.85,391.53,461.08,0.85,0.27
+T3,10,Hamifrats,Bazan-Hutsot,trunk,down,1303.96,12.13,160.71,1600.75,166.80,398.26,1297.52,3482.92,1316.09,1767.55,0.74,0.38
+T3,11,Bazan-Hutsot,TsometKiryatAta,trunk,up,268.49,0.00,0.00,313.00,5.15,248.21,341.42,1428.32,268.49,318.15,0.84,0.19
+T3,11,Bazan-Hutsot,TsometKiryatAta,trunk,down,1393.57,12.13,160.71,1608.75,146.74,640.04,1373.06,4201.02,1405.70,1755.49,0.80,0.33
+T3,12,TsometKiryatAta,KiryatHaim West,branch,up,108.96,0.00,0.00,110.50,5.15,102.26,159.88,495.87,108.96,115.65,0.94,0.22
+T3,12,TsometKiryatAta,KiryatHaim West,branch,down,1492.59,12.13,160.71,1718.50,146.74,1185.91,1443.26,4715.44,1504.71,1865.24,0.81,0.32
+T3,13,KiryatHaim West,KiryatYam B+C,branch,up,160.16,0.00,0.00,132.00,0.00,171.08,206.68,1052.59,160.16,132.00,1.21,0.15
+T3,13,KiryatHaim West,KiryatYam B+C,branch,down,1173.19,0.00,160.71,1487.75,0.00,875.65,1143.83,3916.14,1173.19,1487.75,0.79,0.30
+T3,14,KiryatYam B+C,KiryatYam A,branch,up,130.73,0.00,0.00,146.50,0.00,91.83,145.06,752.44,130.73,146.50,0.89,0.17
+T3,14,KiryatYam B+C,KiryatYam A,branch,down,687.99,0.00,0.00,582.25,0.00,1239.62,691.32,2920.54,687.99,582.25,1.18,0.24
+T3,15,KiryatYam A,SavyoneyYam,branch,up,76.32,0.00,0.00,92.25,0.00,6.42,85.26,466.13,76.32,92.25,0.83,0.16
+T3,15,KiryatYam A,SavyoneyYam,branch,down,402.09,0.00,0.00,330.50,0.00,811.08,408.96,2051.48,402.09,330.50,1.22,0.20
+network,1,TiratCarmel,Matam-NeotPeres,trunk,up,930.75,0.00,0.00,952.50,0.00,970.16,951.16,4943.45,930.75,952.50,0.98,0.19
+network,1,TiratCarmel,Matam-NeotPeres,trunk,down,521.21,0.00,0.00,618.50,0.00,452.21,444.83,1713.39,521.21,618.50,0.84,0.30
+network,2,Matam-NeotPeres,HofCarmel-NeveDavid,trunk,up,937.42,0.00,0.00,859.75,24.81,767.56,929.29,3558.97,937.42,884.56,1.06,0.26
+network,2,Matam-NeotPeres,HofCarmel-NeveDavid,trunk,down,1896.92,39.73,96.02,1620.00,74.84,1126.00,1731.68,6073.45,1936.65,1694.84,1.14,0.32
+network,3,HofCarmel-NeveDavid,Hecht-Shprintzak,trunk,up,1109.36,0.00,0.00,1073.25,24.81,891.32,1093.45,3747.31,1109.36,1098.06,1.01,0.30
+network,3,HofCarmel-NeveDavid,Hecht-Shprintzak,trunk,down,1955.92,39.73,61.36,1736.75,74.84,1261.60,1785.64,6094.59,1995.65,1811.59,1.10,0.33
+network,4,Hecht-Shprintzak,EinHayam,trunk,up,1648.38,0.00,0.00,1482.25,24.81,2169.89,1610.09,4930.13,1648.38,1507.06,1.09,0.33
+network,4,Hecht-Shprintzak,EinHayam,trunk,down,1813.92,39.73,39.52,1573.00,74.84,1177.76,1646.39,5850.43,1853.65,1647.84,1.12,0.32
+network,5,EinHayam,BatGalim-KiryatEliezer,trunk,up,1865.11,0.00,0.00,1524.50,24.81,2540.86,1818.08,5943.65,1865.11,1549.31,1.20,0.31
+network,5,EinHayam,BatGalim-KiryatEliezer,trunk,down,1707.41,39.73,0.00,1579.25,74.84,972.37,1543.66,5419.07,1747.14,1654.09,1.06,0.32
+network,6,BatGalim-KiryatEliezer,Hamoshava,trunk,up,1583.02,0.00,0.00,1479.25,30.60,1722.03,1533.97,5740.92,1583.02,1509.85,1.05,0.28
+network,6,BatGalim-KiryatEliezer,Hamoshava,trunk,down,2063.51,39.73,506.45,2352.50,174.33,673.81,1853.83,9331.69,2103.24,2526.83,0.83,0.23
+network,7,Hamoshava,LowerCity,trunk,up,1625.92,0.00,0.00,1456.50,30.60,1920.36,1526.34,4683.81,1625.92,1487.10,1.09,0.35
+network,7,Hamoshava,LowerCity,trunk,down,2256.51,39.73,520.92,2445.25,174.33,673.81,1963.58,8005.28,2296.24,2619.58,0.88,0.29
+network,8,LowerCity,Namal-Giborim,trunk,up,1152.72,0.00,0.00,1108.75,25.53,1327.26,1106.62,3804.50,1152.72,1134.28,1.02,0.30
+network,8,LowerCity,Namal-Giborim,trunk,down,3062.04,39.73,515.13,3097.25,199.69,1519.15,2536.97,10042.12,3101.77,3296.94,0.94,0.31
+network,9,Namal-Giborim,Hamifrats,trunk,up,982.02,0.00,0.00,1198.25,25.53,871.58,992.62,3374.71,982.02,1223.78,0.80,0.29
+network,9,Namal-Giborim,Hamifrats,trunk,down,3144.52,43.70,506.45,3042.25,199.69,1814.26,2590.65,10450.01,3188.22,3241.94,0.98,0.31
+network,10,Hamifrats,Bazan-Hutsot,trunk,up,710.91,0.00,0.00,770.50,16.33,698.10,856.60,2313.12,710.91,786.83,0.90,0.31
+network,10,Hamifrats,Bazan-Hutsot,trunk,down,3962.35,50.75,506.45,3753.25,166.80,1776.13,3088.08,13486.17,4013.10,3920.05,1.02,0.30
+network,11,Bazan-Hutsot,TsometKiryatAta,trunk,up,594.84,0.00,0.00,653.50,5.15,589.51,731.19,2423.88,594.84,658.65,0.90,0.25
+network,11,Bazan-Hutsot,TsometKiryatAta,trunk,down,4369.04,50.75,506.45,3901.25,146.74,2146.00,3363.18,16160.80,4419.79,4047.99,1.09,0.27
+network,12,TsometKiryatAta,KiryatAta North,branch,up,258.95,0.00,0.00,150.50,0.00,191.43,229.46,1577.60,258.95,150.50,1.72,0.16
+network,12,TsometKiryatAta,KiryatAta North,branch,down,1509.62,0.00,345.74,980.00,0.00,697.12,955.07,7684.34,1509.62,980.00,1.54,0.20
+network,13,KiryatAta North,KiryatAta North-East,branch,up,123.43,0.00,0.00,112.75,0.00,0.00,110.01,1310.16,123.43,112.75,1.09,0.09
+network,13,KiryatAta North,KiryatAta North-East,branch,down,1162.02,0.00,345.74,464.75,0.00,712.98,649.36,7091.77,1162.02,464.75,2.50,0.16
+network,14,KiryatAta North-East,Shefaram,branch,up,70.09,0.00,0.00,105.50,0.00,0.00,56.95,1237.02,70.09,105.50,0.66,0.06
+network,14,KiryatAta North-East,Shefaram,branch,down,856.84,0.00,345.74,373.00,0.00,585.56,361.16,5652.56,856.84,373.00,2.30,0.15
+network,15,Shefaram,Hamovil,branch,up,68.80,0.00,22.80,92.25,0.00,0.00,52.50,1374.71,68.80,92.25,0.75,0.05
+network,15,Shefaram,Hamovil,branch,down,512.75,0.00,345.74,229.75,0.00,487.34,237.74,3182.64,512.75,229.75,2.23,0.16
+network,16,Hamovil,Nazareth,branch,up,65.97,0.00,22.80,74.25,0.00,0.00,55.80,1431.58,65.97,74.25,0.89,0.05
+network,16,Hamovil,Nazareth,branch,down,517.18,0.00,345.74,185.25,0.00,487.34,217.30,2644.27,517.18,185.25,2.79,0.20
+network,17,TsometKiryatAta,KiryatHaim,branch,up,1163.58,0.00,40.45,983.75,0.00,1330.48,1148.10,9061.35,1163.58,983.75,1.18,0.13
+network,17,TsometKiryatAta,KiryatHaim,branch,down,2738.51,38.62,0.00,2190.50,0.00,2066.17,2068.67,14269.78,2777.13,2190.50,1.27,0.19
+network,18,KiryatHaim,KiryatBialik Center,branch,up,1089.26,0.00,16.39,998.00,0.00,1057.80,944.19,8352.28,1089.26,998.00,1.09,0.13
+network,18,KiryatHaim,KiryatBialik Center,branch,down,2251.84,20.71,0.00,1772.00,0.00,2250.87,1522.56,13022.87,2272.55,1772.00,1.28,0.17
+network,19,KiryatBialik Center,Kiryon,branch,up,1068.33,0.00,0.00,779.75,0.00,880.53,792.49,5408.90,1068.33,779.75,1.37,0.20
+network,19,KiryatBialik Center,Kiryon,branch,down,1417.82,0.00,0.00,1205.50,0.00,1386.58,951.31,6922.33,1417.82,1205.50,1.18,0.20
+network,20,Kiryon,TsurShalom,branch,up,390.43,0.00,0.00,367.75,0.00,295.50,316.44,2837.07,390.43,367.75,1.06,0.14
+network,20,Kiryon,TsurShalom,branch,down,858.39,0.00,0.00,659.00,0.00,640.75,521.73,4245.34,858.39,659.00,1.30,0.20
+network,21,TsometKiryatAta,KiryatHaim West,branch,up,583.80,0.00,0.00,483.50,5.15,528.81,633.56,5458.30,583.80,488.65,1.19,0.11
+network,21,TsometKiryatAta,KiryatHaim West,branch,down,2212.54,12.13,201.16,2299.25,146.74,2016.51,2162.88,11363.77,2224.67,2445.99,0.91,0.20
+network,22,KiryatHaim West,KiryatYam B+C,branch,up,520.10,0.00,0.00,424.75,0.00,495.92,570.62,4418.97,520.10,424.75,1.22,0.12
+network,22,KiryatHaim West,KiryatYam B+C,branch,down,1748.50,0.00,201.16,1955.00,0.00,1526.62,1708.31,9145.59,1748.50,1955.00,0.89,0.19
+network,23,KiryatYam B+C,KiryatYam A,branch,up,233.08,0.00,0.00,253.00,0.00,196.55,246.12,1414.30,233.08,253.00,0.92,0.16
+network,23,KiryatYam B+C,KiryatYam A,branch,down,968.49,0.00,0.00,840.00,0.00,1656.10,960.31,5027.19,968.49,840.00,1.15,0.19
+network,24,KiryatYam A,SavyoneyYam,branch,up,117.90,0.00,0.00,130.50,0.00,22.65,126.30,847.72,117.90,130.50,0.90,0.14
+network,24,KiryatYam A,SavyoneyYam,branch,down,550.47,0.00,0.00,432.00,0.00,1036.14,551.25,3579.89,550.47,432.00,1.27,0.15

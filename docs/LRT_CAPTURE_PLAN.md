@@ -104,18 +104,20 @@ above. λ is therefore **assumed**: central 0.03 per generalized minute (range
 (the nested incremental logit, Empirical-Bayes-smoothed toward the study-area share) is
 implemented in step 31 and run on the 2022 corridor-internal flows for both LRT
 scenarios, with an LRT premium of 5 generalized minutes and free LRT–Metronit transfers, giving
-central-case captures of 4,114 (underground) / 3,201 (ground) LRT trips 06:00–09:00
-(λ range 3,083–5,812 / 2,012–5,153; without the premium 3,307 / 2,535) — values of the
-23 September 2026 rerun with the corrected mode codes (METHODOLOGY §0 "Rerun"; the run of
-22 September gave 3,332 / 2,544 with the Metronit riders outside the transit nest).
+central-case captures of 4,250 (underground) / 3,207 (ground) LRT trips 06:00–09:00
+(λ range 3,161–6,028 / 1,952–5,272; without the premium 3,406 / 2,528) — values of the
+23 September 2026 rebuild (corrected mode codes and step 15's prior on RavKav's own
+alightings; METHODOLOGY §0 "Rerun" and "Rebuild"; the morning's OnBoard-prior rerun gave
+4,114 / 3,201 and the run of 22 September 3,332 / 2,544 with the Metronit riders outside the
+transit nest).
 Segmented estimation on the survey's person-level records was then done in step 33
 (METHODOLOGY §6ae): λ = 0.035 (0.002–0.068) with car availability and purpose held constant,
 so the assumed 0.03 stands, while the licence holders in car-owning households give no
 identifiable λ (`docs/CORRIDOR_DEMAND_TASKS.md` E7). Step 32
 (`LRT_capture_forecast_2040_2050.ipynb`, METHODOLOGY §6ad) reruns this same pivot on step
 23's four 2040/2050 forecast sets (BU_2040, BU_2050, HS_2040, HS_2050), giving central-case
-underground LRT trips of 5,329 / 5,962 (BU) and 5,335 / 6,245 (HS) against 4,114 in 2022,
-and ground trips of 4,085 / 4,559 (BU) and 4,121 / 4,804 (HS) against 3,201. The capture
+underground LRT trips of 5,390 / 6,094 (BU) and 5,598 / 6,516 (HS) against 4,250 in 2022,
+and ground trips of 4,014 / 4,501 (BU) and 4,199 / 4,868 (HS) against 3,207. The capture
 rate itself is unchanged across scenario-years — the LRT's share of no-build transit stays
 0.29–0.30 underground and 0.22–0.23 ground in every year — because step 32 holds the
 step-31 skims fixed and only the demographic-reference market grows.
