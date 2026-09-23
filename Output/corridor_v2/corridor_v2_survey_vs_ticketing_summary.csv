@@ -1,9 +1,9 @@
 scope,direction,survey peak,survey peak link,ticketing peak,ticketing peak link,Haifa segment survey / ticketing,beyond Hamifrats survey / ticketing
-T1,up,1378.675,EinHayam – BatGalim-KiryatEliezer,1556.404,EinHayam – BatGalim-KiryatEliezer,0.830,1.083
-T1,down,1488.904,Matam-NeotPeres – HofCarmel-NeveDavid,2902.607,LowerCity – Namal-Giborim,0.659,0.426
-T2,up,1390.565,EinHayam – BatGalim-KiryatEliezer,1645.673,EinHayam – BatGalim-KiryatEliezer,0.782,0.585
-T2,down,1628.740,Matam-NeotPeres – HofCarmel-NeveDavid,2072.947,LowerCity – Namal-Giborim,0.916,0.787
-T3,up,1437.055,EinHayam – BatGalim-KiryatEliezer,1577.706,EinHayam – BatGalim-KiryatEliezer,0.824,0.574
-T3,down,1410.484,Matam-NeotPeres – HofCarmel-NeveDavid,1919.777,LowerCity – Namal-Giborim,0.727,0.792
-network,up,1518.098,EinHayam – BatGalim-KiryatEliezer,1729.736,TsometKiryatAta – KiryatHaim,0.820,0.744
-network,down,2897.647,Bazan-Hutsot – TsometKiryatAta,4476.371,Bazan-Hutsot – TsometKiryatAta,0.628,0.652
+T1,up,1643.338,EinHayam – BatGalim-KiryatEliezer,1556.404,EinHayam – BatGalim-KiryatEliezer,1.020,1.229
+T1,down,1293.069,HofCarmel-NeveDavid – Hecht-Shprintzak,2902.607,LowerCity – Namal-Giborim,0.510,0.356
+T2,up,1772.722,EinHayam – BatGalim-KiryatEliezer,1645.673,EinHayam – BatGalim-KiryatEliezer,1.057,0.970
+T2,down,2115.982,TsometKiryatAta – KiryatHaim,2072.947,LowerCity – Namal-Giborim,0.916,1.461
+T3,up,1666.141,EinHayam – BatGalim-KiryatEliezer,1577.706,EinHayam – BatGalim-KiryatEliezer,0.974,0.649
+T3,down,1282.500,TsometKiryatAta – KiryatHaim West,1919.777,LowerCity – Namal-Giborim,0.582,1.099
+network,up,1896.862,EinHayam – BatGalim-KiryatEliezer,1729.736,TsometKiryatAta – KiryatHaim,1.070,0.811
+network,down,3886.474,Bazan-Hutsot – TsometKiryatAta,4476.371,Bazan-Hutsot – TsometKiryatAta,0.623,0.806
