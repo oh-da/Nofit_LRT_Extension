@@ -1,0 +1,4 @@
+comparison,n,total A,total B,cosine,cosine row-normalised,cells,GEH<5,GEH<5 (flow-wtd),GEH<10 (flow-wtd),median GEH
+"station 2019 × 0.793 vs rail 2025, common station TAZs",14,1799.4722,3651.5929,0.9723,0.9655,175,0.9714,0.7050,1.0000,0.6313
+"THS rail 2022 (door-to-door) vs rail 2025 (station), superzones",36,4050.2509,9437.1058,0.5819,0.2562,200,0.7200,0.2367,0.6752,2.5203
+"THS rail 2022 vs station 2019 × 0.793, superzones",36,4050.2509,4387.8925,0.3890,0.2035,173,0.8150,0.3122,0.7568,1.7807

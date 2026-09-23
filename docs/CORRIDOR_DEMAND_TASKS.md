@@ -108,6 +108,12 @@ Key facts driving the list (2017 trips-file hybrid, `Output/ths2017/study_taz/`)
       P(alight | board) rows are per boarding leg or per journey; test whether bus-to-rail
       travellers sit in both the RavKav bus OD and the station matrix; keep person-journey
       and boarding products separate until an access / transfer allocation links them.
+      *New evidence 2026-09-23 (step 35, METHODOLOGY §6ag, caveat 17): the survey's bus matrix
+      matches RavKav's own inferred alightings (`bus_od_taz_avg.csv`) at superzone level as
+      well as it matches itself between days (cosine 0.89, PCA overlap 0.81, KS D 0.05), while
+      the OnBoard-patterned matrices (step 9, the 2025 layer) match it no better than chance
+      and carry trips twice as long. First test: rebuild step 15 with the RavKav alightings as
+      the prior and rerun the corridor profiles of §6p / §6z.*
 - [x] **B1e. Peak hour** *(done 2026-09-21, `Corridor_peak_hour_2022.ipynb`, METHODOLOGY
       §6r)*: peak-hour factors from survey departure times (07:00–08:00; PHF₃ₕ 0.59–0.66) and
       peak-hour link profiles. *Boarding-hour factor done 2026-09-23 from the RavKav 2025
