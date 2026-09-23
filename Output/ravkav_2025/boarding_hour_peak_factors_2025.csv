@@ -1,0 +1,19 @@
+scope,mode,boardings,per day,PHF3h,start,PHF60,peak hour
+study area,bus,all boardings,3848846,0.4755,7.2500,0.9116,07:15–08:15
+study area,bus,non-transfer,3726581,0.4769,7.2500,0.9100,07:15–08:15
+study area,metronit,all boardings,592491,0.4326,7.2500,0.9376,07:15–08:15
+study area,metronit,non-transfer,549289,0.4330,7.2500,0.9363,07:15–08:15
+study area,bus + metronit,all boardings,4441337,0.4698,7.2500,0.9147,07:15–08:15
+study area,bus + metronit,non-transfer,4275870,0.4713,7.2500,0.9130,07:15–08:15
+V2 corridor TAZs,bus,all boardings,974446,0.4591,7.2500,0.8639,07:15–08:15
+V2 corridor TAZs,bus,non-transfer,931063,0.4608,7.2500,0.8598,07:15–08:15
+V2 corridor TAZs,metronit,all boardings,508399,0.4326,7.2500,0.9415,07:15–08:15
+V2 corridor TAZs,metronit,non-transfer,470803,0.4334,7.2500,0.9403,07:15–08:15
+V2 corridor TAZs,bus + metronit,all boardings,1482845,0.4500,7.2500,0.8880,07:15–08:15
+V2 corridor TAZs,bus + metronit,non-transfer,1401866,0.4516,7.2500,0.8842,07:15–08:15
+trunk station areas 201–210,bus,all boardings,426003,0.4301,7.5000,0.9086,07:30–08:30
+trunk station areas 201–210,bus,non-transfer,399887,0.4286,7.5000,0.9086,07:30–08:30
+trunk station areas 201–210,metronit,all boardings,228824,0.4380,7.2500,0.9402,07:15–08:15
+trunk station areas 201–210,metronit,non-transfer,207005,0.4389,7.2500,0.9405,07:15–08:15
+trunk station areas 201–210,bus + metronit,all boardings,654827,0.4323,7.2500,0.9274,07:15–08:15
+trunk station areas 201–210,bus + metronit,non-transfer,606892,0.4319,7.2500,0.9255,07:15–08:15

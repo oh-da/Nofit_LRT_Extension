@@ -55,9 +55,18 @@ person-level λ is 0.035 (0.002–0.068), right sign, and supports the assumed 0
 licence holders in car-owning households — the travellers the LRT would take from the car —
 give 0.008 ± 0.017, not identified, and λ_T is not estimable from revealed-preference data.
 The SP survey stays on the request list. Condition 2 is untouched. A correction surfaced on
-the way: the trips file's mode codes 4 (group taxi) and 5 (Matronit) are swapped in steps
-15–32, so the Metronit riders sit in the taxi layer that the capture leaves out of the choice
-set; the chain is to be rerun with the corrected codes before the rebuild order of §3.
+the way: the trips file's mode codes 4 (group taxi) and 5 (Matronit) were swapped in steps
+15–32, so the Metronit riders sat in the taxi layer that the capture left out of the choice
+set. The chain was rerun with the corrected codes the same day (METHODOLOGY §0 "Rerun"): the
+corridor transit market is 13,778 trips rather than 11,664, the central underground capture
+4,114 rather than 3,332, and the numbers quoted in §1 of this response are the
+pre-correction ones. (Later the same day step 15 was rebuilt on RavKav's own alightings in
+place of the OnBoard pattern — the "OnBoard unit" blocker of §1 turned out to be the
+chain's own choice of prior, which step 35 showed the survey does not share — and the
+market / capture became 14,133 / 4,250; METHODOLOGY §0 "Rebuild".) The verdict does not change — the capture rate moved from 0.27 to 0.28
+and the λ band is as wide as before — but the survey-to-ticketing comparison towards Haifa
+on the Haifa segment moved from a 20 % shortfall to parity, which narrows the coverage
+question of §4 to the Nazareth branch and the down direction.
 
 ## 3. Next steps — two tracks in parallel
 
@@ -70,7 +79,7 @@ sent on day one because it gates the longest path.
 | # | Work | What it closes | Depends on | Output |
 |---|---|---|---|---|
 | A1 | **Person-level mode choice (step 33).** Binary car vs transit logit on the survey's AM trip records: car availability from the household file, purpose, age / sex, the step 31 pair skims, distance-band constants. Report λ with its standard error. | E7; the identification test the review asks for. If λ fails again, that result is the documented reason SP data are needed. | `households_with_weights.csv` (LFS), THS codebook | `Mode_choice_person_level.ipynb`; λ replaces 0.03 or the failure is reported. **Done 23 Sep 2026** on `PersonsFin2.csv` / `HHfinal.csv` with `new_wf` as the only weight: λ = 0.035 (0.002–0.068); the assumed 0.03 stands; choice-rider λ not identified (METHODOLOGY §6ae) |
-| A2 | **RavKav leg-level segment loads on the trunk.** Aggregate every leg's physical boarding / alighting stop by stop group along the trunk, by direction and `bus_trip_hour`, weighted by `total_boardings`. | Bus loads per link, direction and hour; the boarding-hour peak factor (B1e); a direct test of the 2–3 × Nazareth-end discrepancy (§6p). Not fully independent of the calibration (RavKav volumes enter step 15), but the leg-level link profile is different information from the journey OD totals. | `Input/BusRavKav/*.csv` (LFS) | `RavKav_trunk_segment_loads.ipynb`; link loads vs step 24 / 31 profiles |
+| A2 | **RavKav leg-level segment loads on the trunk.** Aggregate every leg's physical boarding / alighting stop by stop group along the trunk, by direction and `bus_trip_hour`, weighted by `total_boardings`. | Bus loads per link, direction and hour; the boarding-hour peak factor (B1e); a direct test of the 2–3 × Nazareth-end discrepancy (§6p). Not fully independent of the calibration (RavKav volumes enter step 15), but the leg-level link profile is different information from the journey OD totals. | `Input/BusRavKav/*.csv` (LFS) | `RavKav_trunk_segment_loads.ipynb`; link loads vs step 24 / 31 profiles. **Partly done 23 Sep 2026** by step 34 on the 2025 extracts (boardings by stop and TAZ with the transfer tag, boarding-hour peak factors 0.43–0.48, rail OD from the exit taps); the 2025 files carry no alightings, so the leg-level *link* loads still need the May 2022 legs or a count (METHODOLOGY §6af) |
 | A3 | **Trip-universe definition, one page.** Person trip, PT journey, boarding leg, transfer; the frame of each source (THS residents door-to-door; RavKav all riders, journey; OnBoard unit pending; rail station-to-station); how external trip ends and the one-end-in-corridor market enter; external zones. | Review blocker on definitions; B1d, B2, B3. Precedes any rebuild of step 15. | nothing | `docs/TRIP_UNIVERSE.md` |
 | A4 | **Purpose-segmented fine-zone allocation.** HBW / HBE / other split per superzone pair from the trips file's activity codes; destination proxies per purpose (employment; school enrolment; retail / services) instead of total employment. | Review blocker on the TAZ allocation; A3 in the task list. | THS activity codebook | revised step 15 zone conversion; corridor profiles retested |
 | A5 | **TAZ-level capture on the trunk with a walking network** (plan items 3a.2, 3a.3). | E6, A2. The logit is nonlinear in access time, so the area-level average biases the result. | A1 first, so the rerun is done once | `LRT_capture_TAZ_trunk.ipynb` |
@@ -84,7 +93,8 @@ the branch geometry and operating plan; the national model's mode-choice paramet
 
 1. **Rebuild step 15** with a coverage model in place of the 0.5 threshold, using the
    provider's answer on operators and cash fares (B1c). Publish low / base / high bus
-   matrices, not one.
+   matrices, not one. *Partly done 23 September 2026: the prior is now RavKav's own
+   alightings (METHODOLOGY §6m); the threshold and the provider's answer remain.*
 2. **Rerun steps 16–22** with a direct 2018 → 2022 demographic change where the CBS data allow
    it, and rail scaled to Haifa station boardings rather than the national series.
 3. **Validate the rebuilt base** against the track-B counts. Do not tune to them.

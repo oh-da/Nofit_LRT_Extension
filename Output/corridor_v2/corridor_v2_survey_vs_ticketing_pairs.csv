@@ -1,601 +1,601 @@
 origin,destination,origin segment,destination segment,links crossed,links down,survey trips,ticketing trips,diff trips,diff link-trips
-TiratCarmel,Matam-NeotPeres,trunk,trunk,1,0,219.5,186.8,32.7,32.7
-TiratCarmel,HofCarmel-NeveDavid,trunk,trunk,2,0,12.8,9.6,3.2,6.4
-TiratCarmel,Hecht-Shprintzak,trunk,trunk,3,0,38.9,17.6,21.3,63.8
-TiratCarmel,EinHayam,trunk,trunk,4,0,6.9,0.0,6.9,27.7
-TiratCarmel,BatGalim-KiryatEliezer,trunk,trunk,5,0,147.8,140.9,6.9,34.6
-TiratCarmel,Hamoshava,trunk,trunk,6,0,21.5,119.7,-98.1,-588.8
-TiratCarmel,LowerCity,trunk,trunk,7,0,42.3,61.6,-19.4,-135.5
-TiratCarmel,Namal-Giborim,trunk,trunk,8,0,24.6,64.0,-39.5,-315.7
-TiratCarmel,Hamifrats,trunk,trunk,9,0,8.2,46.9,-38.8,-348.8
-TiratCarmel,Bazan-Hutsot,trunk,trunk,10,0,5.6,7.2,-1.5,-15.4
-TiratCarmel,TsometKiryatAta,trunk,trunk,11,0,4.8,0.0,4.8,52.9
-TiratCarmel,KiryatAta North,trunk,T1,12,0,0.8,0.0,0.8,9.2
-TiratCarmel,KiryatAta North-East,trunk,T1,13,0,0.3,0.0,0.3,4.0
+TiratCarmel,Matam-NeotPeres,trunk,trunk,1,0,283.6,418.5,-134.9,-134.9
+TiratCarmel,HofCarmel-NeveDavid,trunk,trunk,2,0,33.5,49.5,-16.0,-32.0
+TiratCarmel,Hecht-Shprintzak,trunk,trunk,3,0,47.5,31.0,16.5,49.4
+TiratCarmel,EinHayam,trunk,trunk,4,0,11.5,3.2,8.3,33.0
+TiratCarmel,BatGalim-KiryatEliezer,trunk,trunk,5,0,265.7,167.8,97.9,489.6
+TiratCarmel,Hamoshava,trunk,trunk,6,0,26.3,10.8,15.6,93.5
+TiratCarmel,LowerCity,trunk,trunk,7,0,91.9,104.0,-12.1,-84.9
+TiratCarmel,Namal-Giborim,trunk,trunk,8,0,34.5,11.8,22.8,182.1
+TiratCarmel,Hamifrats,trunk,trunk,9,0,51.7,97.0,-45.3,-407.3
+TiratCarmel,Bazan-Hutsot,trunk,trunk,10,0,19.6,10.0,9.6,95.9
+TiratCarmel,TsometKiryatAta,trunk,trunk,11,0,20.8,19.0,1.8,19.9
+TiratCarmel,KiryatAta North,trunk,T1,12,0,1.0,0.8,0.3,3.2
+TiratCarmel,KiryatAta North-East,trunk,T1,13,0,0.3,0.0,0.3,3.4
 TiratCarmel,Shefaram,trunk,T1,14,0,0.0,0.0,0.0,0.0
-TiratCarmel,Hamovil,trunk,T1,15,0,0.0,0.0,0.0,0.0
-TiratCarmel,Nazareth,trunk,T1,16,0,1.7,0.0,1.7,26.7
-TiratCarmel,TsurShalom,trunk,T2,15,0,0.6,0.0,0.6,8.5
-TiratCarmel,Kiryon,trunk,T2,14,0,3.0,0.0,3.0,41.9
-TiratCarmel,KiryatBialik Center,trunk,T2,13,0,2.7,15.9,-13.2,-172.1
-TiratCarmel,KiryatHaim,trunk,T2,12,0,3.2,9.4,-6.2,-74.9
-TiratCarmel,SavyoneyYam,trunk,T3,15,0,0.2,13.3,-13.1,-196.4
-TiratCarmel,KiryatYam A,trunk,T3,14,0,1.1,3.7,-2.6,-36.6
-TiratCarmel,KiryatYam B+C,trunk,T3,13,0,5.3,0.0,5.3,68.8
-TiratCarmel,KiryatHaim West,trunk,T3,12,0,1.4,0.0,1.4,16.6
-Matam-NeotPeres,TiratCarmel,trunk,trunk,1,1,16.4,54.8,-38.4,-38.4
-Matam-NeotPeres,HofCarmel-NeveDavid,trunk,trunk,1,0,5.7,59.7,-54.0,-54.0
-Matam-NeotPeres,Hecht-Shprintzak,trunk,trunk,2,0,17.3,202.1,-184.8,-369.6
-Matam-NeotPeres,EinHayam,trunk,trunk,3,0,3.1,0.0,3.1,9.3
-Matam-NeotPeres,BatGalim-KiryatEliezer,trunk,trunk,4,0,66.6,58.5,8.2,32.6
-Matam-NeotPeres,Hamoshava,trunk,trunk,5,0,16.2,7.5,8.8,43.9
-Matam-NeotPeres,LowerCity,trunk,trunk,6,0,32.1,25.2,6.9,41.1
-Matam-NeotPeres,Namal-Giborim,trunk,trunk,7,0,20.1,0.0,20.1,140.4
-Matam-NeotPeres,Hamifrats,trunk,trunk,8,0,12.1,35.2,-23.1,-184.4
-Matam-NeotPeres,Bazan-Hutsot,trunk,trunk,9,0,8.4,15.0,-6.6,-59.8
-Matam-NeotPeres,TsometKiryatAta,trunk,trunk,10,0,7.9,0.0,7.9,78.5
-Matam-NeotPeres,KiryatAta North,trunk,T1,11,0,3.4,0.0,3.4,37.0
-Matam-NeotPeres,KiryatAta North-East,trunk,T1,12,0,1.4,0.0,1.4,16.2
-Matam-NeotPeres,Shefaram,trunk,T1,13,0,0.0,0.0,0.0,0.0
-Matam-NeotPeres,Hamovil,trunk,T1,14,0,0.0,0.0,0.0,0.0
-Matam-NeotPeres,Nazareth,trunk,T1,15,0,0.0,0.0,0.0,0.7
-Matam-NeotPeres,TsurShalom,trunk,T2,14,0,0.0,0.0,0.0,0.3
-Matam-NeotPeres,Kiryon,trunk,T2,13,0,0.2,19.5,-19.3,-250.8
-Matam-NeotPeres,KiryatBialik Center,trunk,T2,12,0,0.1,0.0,0.1,1.1
-Matam-NeotPeres,KiryatHaim,trunk,T2,11,0,5.2,0.0,5.2,57.7
-Matam-NeotPeres,SavyoneyYam,trunk,T3,14,0,0.0,0.0,0.0,0.1
-Matam-NeotPeres,KiryatYam A,trunk,T3,13,0,0.0,0.0,0.0,0.5
-Matam-NeotPeres,KiryatYam B+C,trunk,T3,12,0,7.8,6.8,0.9,11.0
-Matam-NeotPeres,KiryatHaim West,trunk,T3,11,0,4.9,1.8,3.1,33.9
-HofCarmel-NeveDavid,TiratCarmel,trunk,trunk,2,2,13.6,0.0,13.6,27.2
-HofCarmel-NeveDavid,Matam-NeotPeres,trunk,trunk,1,1,83.7,89.1,-5.4,-5.4
-HofCarmel-NeveDavid,Hecht-Shprintzak,trunk,trunk,1,0,15.0,87.0,-72.0,-72.0
-HofCarmel-NeveDavid,EinHayam,trunk,trunk,2,0,2.7,0.0,2.7,5.3
-HofCarmel-NeveDavid,BatGalim-KiryatEliezer,trunk,trunk,3,0,57.5,103.6,-46.1,-138.2
-HofCarmel-NeveDavid,Hamoshava,trunk,trunk,4,0,14.1,5.5,8.6,34.4
-HofCarmel-NeveDavid,LowerCity,trunk,trunk,5,0,27.8,119.2,-91.4,-457.0
-HofCarmel-NeveDavid,Namal-Giborim,trunk,trunk,6,0,17.4,8.6,8.8,52.6
-HofCarmel-NeveDavid,Hamifrats,trunk,trunk,7,0,10.5,57.8,-47.3,-331.1
-HofCarmel-NeveDavid,Bazan-Hutsot,trunk,trunk,8,0,7.3,10.8,-3.6,-28.7
-HofCarmel-NeveDavid,TsometKiryatAta,trunk,trunk,9,0,6.8,0.0,6.8,61.3
-HofCarmel-NeveDavid,KiryatAta North,trunk,T1,10,0,2.9,0.0,2.9,29.2
-HofCarmel-NeveDavid,KiryatAta North-East,trunk,T1,11,0,1.2,0.0,1.2,12.9
-HofCarmel-NeveDavid,Shefaram,trunk,T1,12,0,0.0,0.0,0.0,0.0
-HofCarmel-NeveDavid,Hamovil,trunk,T1,13,0,0.0,0.0,0.0,0.0
-HofCarmel-NeveDavid,Nazareth,trunk,T1,14,0,0.0,0.0,0.0,0.5
-HofCarmel-NeveDavid,TsurShalom,trunk,T2,13,0,0.0,0.0,0.0,0.2
-HofCarmel-NeveDavid,Kiryon,trunk,T2,12,0,0.2,0.0,0.2,2.0
-HofCarmel-NeveDavid,KiryatBialik Center,trunk,T2,11,0,0.1,0.0,0.1,0.8
-HofCarmel-NeveDavid,KiryatHaim,trunk,T2,10,0,4.6,0.0,4.6,45.5
-HofCarmel-NeveDavid,SavyoneyYam,trunk,T3,13,0,0.0,0.0,0.0,0.1
-HofCarmel-NeveDavid,KiryatYam A,trunk,T3,12,0,0.0,0.0,0.0,0.4
-HofCarmel-NeveDavid,KiryatYam B+C,trunk,T3,11,0,6.7,0.0,6.7,74.1
-HofCarmel-NeveDavid,KiryatHaim West,trunk,T3,10,0,4.3,0.0,4.3,42.6
-Hecht-Shprintzak,TiratCarmel,trunk,trunk,3,3,56.7,31.0,25.7,77.0
-Hecht-Shprintzak,Matam-NeotPeres,trunk,trunk,2,2,348.3,54.1,294.2,588.3
-Hecht-Shprintzak,HofCarmel-NeveDavid,trunk,trunk,1,1,20.5,38.4,-17.9,-17.9
-Hecht-Shprintzak,EinHayam,trunk,trunk,1,0,11.1,0.0,11.1,11.1
-Hecht-Shprintzak,BatGalim-KiryatEliezer,trunk,trunk,2,0,239.5,373.1,-133.6,-267.3
-Hecht-Shprintzak,Hamoshava,trunk,trunk,3,0,58.5,20.2,38.3,115.0
-Hecht-Shprintzak,LowerCity,trunk,trunk,4,0,115.6,85.9,29.7,118.8
-Hecht-Shprintzak,Namal-Giborim,trunk,trunk,5,0,72.3,35.6,36.7,183.5
-Hecht-Shprintzak,Hamifrats,trunk,trunk,6,0,43.7,80.0,-36.3,-217.9
-Hecht-Shprintzak,Bazan-Hutsot,trunk,trunk,7,0,30.2,12.6,17.6,123.2
-Hecht-Shprintzak,TsometKiryatAta,trunk,trunk,8,0,28.4,3.7,24.7,197.5
-Hecht-Shprintzak,KiryatAta North,trunk,T1,9,0,12.2,0.0,12.2,109.5
-Hecht-Shprintzak,KiryatAta North-East,trunk,T1,10,0,4.9,7.8,-3.0,-29.6
-Hecht-Shprintzak,Shefaram,trunk,T1,11,0,0.0,0.0,0.0,0.0
-Hecht-Shprintzak,Hamovil,trunk,T1,12,0,0.0,0.0,0.0,0.1
-Hecht-Shprintzak,Nazareth,trunk,T1,13,0,0.1,0.0,0.1,1.8
-Hecht-Shprintzak,TsurShalom,trunk,T2,12,0,0.1,0.0,0.1,0.7
-Hecht-Shprintzak,Kiryon,trunk,T2,11,0,0.7,52.3,-51.6,-567.6
-Hecht-Shprintzak,KiryatBialik Center,trunk,T2,10,0,0.3,0.0,0.3,3.0
-Hecht-Shprintzak,KiryatHaim,trunk,T2,9,0,19.0,0.0,19.0,170.6
-Hecht-Shprintzak,SavyoneyYam,trunk,T3,12,0,0.0,0.0,0.0,0.3
-Hecht-Shprintzak,KiryatYam A,trunk,T3,11,0,0.1,0.0,0.1,1.5
-Hecht-Shprintzak,KiryatYam B+C,trunk,T3,10,0,28.0,0.0,28.0,280.3
-Hecht-Shprintzak,KiryatHaim West,trunk,T3,9,0,17.7,3.5,14.2,128.2
-EinHayam,TiratCarmel,trunk,trunk,4,4,18.9,0.0,18.9,75.7
-EinHayam,Matam-NeotPeres,trunk,trunk,3,3,116.3,0.0,116.3,348.8
-EinHayam,HofCarmel-NeveDavid,trunk,trunk,2,2,6.8,0.0,6.8,13.7
-EinHayam,Hecht-Shprintzak,trunk,trunk,1,1,20.8,10.2,10.6,10.6
-EinHayam,BatGalim-KiryatEliezer,trunk,trunk,1,0,79.9,16.8,63.1,63.1
-EinHayam,Hamoshava,trunk,trunk,2,0,19.5,0.0,19.5,39.1
-EinHayam,LowerCity,trunk,trunk,3,0,38.6,9.1,29.5,88.5
-EinHayam,Namal-Giborim,trunk,trunk,4,0,24.1,14.2,10.0,39.9
-EinHayam,Hamifrats,trunk,trunk,5,0,14.6,4.9,9.7,48.3
-EinHayam,Bazan-Hutsot,trunk,trunk,6,0,10.1,0.0,10.1,60.5
-EinHayam,TsometKiryatAta,trunk,trunk,7,0,9.5,5.2,4.3,29.8
-EinHayam,KiryatAta North,trunk,T1,8,0,4.1,0.0,4.1,32.5
-EinHayam,KiryatAta North-East,trunk,T1,9,0,1.6,0.0,1.6,14.7
-EinHayam,Shefaram,trunk,T1,10,0,0.0,0.0,0.0,0.0
-EinHayam,Hamovil,trunk,T1,11,0,0.0,0.0,0.0,0.0
-EinHayam,Nazareth,trunk,T1,12,0,0.0,0.0,0.0,0.6
-EinHayam,TsurShalom,trunk,T2,11,0,0.0,0.0,0.0,0.2
-EinHayam,Kiryon,trunk,T2,10,0,0.2,0.0,0.2,2.4
-EinHayam,KiryatBialik Center,trunk,T2,9,0,0.1,0.0,0.1,0.9
-EinHayam,KiryatHaim,trunk,T2,8,0,6.3,0.0,6.3,50.6
-EinHayam,SavyoneyYam,trunk,T3,11,0,0.0,0.0,0.0,0.1
-EinHayam,KiryatYam A,trunk,T3,10,0,0.0,0.0,0.0,0.5
-EinHayam,KiryatYam B+C,trunk,T3,9,0,9.4,0.0,9.4,84.2
-EinHayam,KiryatHaim West,trunk,T3,8,0,5.9,0.0,5.9,47.4
-BatGalim-KiryatEliezer,TiratCarmel,trunk,trunk,5,5,49.4,54.9,-5.6,-27.8
-BatGalim-KiryatEliezer,Matam-NeotPeres,trunk,trunk,4,4,303.3,186.7,116.6,466.4
-BatGalim-KiryatEliezer,HofCarmel-NeveDavid,trunk,trunk,3,3,17.8,75.9,-58.0,-174.1
-BatGalim-KiryatEliezer,Hecht-Shprintzak,trunk,trunk,2,2,54.2,173.4,-119.2,-238.4
-BatGalim-KiryatEliezer,EinHayam,trunk,trunk,1,1,9.7,0.0,9.7,9.7
-BatGalim-KiryatEliezer,Hamoshava,trunk,trunk,1,0,51.0,28.0,23.0,23.0
-BatGalim-KiryatEliezer,LowerCity,trunk,trunk,2,0,100.7,109.7,-9.0,-18.0
-BatGalim-KiryatEliezer,Namal-Giborim,trunk,trunk,3,0,63.0,27.1,35.9,107.7
-BatGalim-KiryatEliezer,Hamifrats,trunk,trunk,4,0,38.1,30.3,7.7,31.0
-BatGalim-KiryatEliezer,Bazan-Hutsot,trunk,trunk,5,0,26.3,11.7,14.6,73.0
-BatGalim-KiryatEliezer,TsometKiryatAta,trunk,trunk,6,0,24.7,22.9,1.8,10.7
-BatGalim-KiryatEliezer,KiryatAta North,trunk,T1,7,0,10.6,0.0,10.6,74.1
-BatGalim-KiryatEliezer,KiryatAta North-East,trunk,T1,8,0,4.3,0.0,4.3,34.0
-BatGalim-KiryatEliezer,Shefaram,trunk,T1,9,0,0.0,0.0,0.0,0.0
-BatGalim-KiryatEliezer,Hamovil,trunk,T1,10,0,0.0,0.0,0.0,0.1
-BatGalim-KiryatEliezer,Nazareth,trunk,T1,11,0,0.1,4.8,-4.7,-51.7
-BatGalim-KiryatEliezer,TsurShalom,trunk,T2,10,0,0.1,0.0,0.1,0.5
-BatGalim-KiryatEliezer,Kiryon,trunk,T2,9,0,0.6,1.0,-0.4,-3.7
-BatGalim-KiryatEliezer,KiryatBialik Center,trunk,T2,8,0,0.3,4.1,-3.9,-31.0
-BatGalim-KiryatEliezer,KiryatHaim,trunk,T2,7,0,16.5,7.9,8.6,60.3
-BatGalim-KiryatEliezer,SavyoneyYam,trunk,T3,10,0,0.0,41.3,-41.3,-413.2
-BatGalim-KiryatEliezer,KiryatYam A,trunk,T3,9,0,0.1,6.0,-5.8,-52.6
-BatGalim-KiryatEliezer,KiryatYam B+C,trunk,T3,8,0,24.4,62.0,-37.6,-300.8
-BatGalim-KiryatEliezer,KiryatHaim West,trunk,T3,7,0,15.4,5.6,9.9,69.0
-Hamoshava,TiratCarmel,trunk,trunk,6,6,6.6,12.5,-6.0,-35.9
-Hamoshava,Matam-NeotPeres,trunk,trunk,5,5,62.9,11.4,51.5,257.3
-Hamoshava,HofCarmel-NeveDavid,trunk,trunk,4,4,3.7,2.1,1.6,6.4
-Hamoshava,Hecht-Shprintzak,trunk,trunk,3,3,11.2,16.2,-5.0,-14.9
-Hamoshava,EinHayam,trunk,trunk,2,2,2.0,0.0,2.0,4.0
-Hamoshava,BatGalim-KiryatEliezer,trunk,trunk,1,1,44.3,143.4,-99.0,-99.0
-Hamoshava,LowerCity,trunk,trunk,1,0,24.4,28.6,-4.2,-4.2
-Hamoshava,Namal-Giborim,trunk,trunk,2,0,18.7,4.1,14.6,29.2
-Hamoshava,Hamifrats,trunk,trunk,3,0,20.7,22.6,-1.9,-5.6
-Hamoshava,Bazan-Hutsot,trunk,trunk,4,0,14.3,24.3,-9.9,-39.8
-Hamoshava,TsometKiryatAta,trunk,trunk,5,0,11.7,29.7,-18.0,-90.0
-Hamoshava,KiryatAta North,trunk,T1,6,0,0.2,0.0,0.2,1.1
-Hamoshava,KiryatAta North-East,trunk,T1,7,0,0.1,0.0,0.1,0.5
-Hamoshava,Shefaram,trunk,T1,8,0,0.1,0.5,-0.5,-3.7
-Hamoshava,Hamovil,trunk,T1,9,0,0.2,7.8,-7.7,-69.0
-Hamoshava,Nazareth,trunk,T1,10,0,0.1,0.0,0.1,0.6
-Hamoshava,TsurShalom,trunk,T2,9,0,0.8,0.0,0.8,7.1
-Hamoshava,Kiryon,trunk,T2,8,0,3.0,4.2,-1.3,-10.2
-Hamoshava,KiryatBialik Center,trunk,T2,7,0,3.6,0.0,3.6,25.5
-Hamoshava,KiryatHaim,trunk,T2,6,0,3.0,0.0,3.0,17.9
-Hamoshava,SavyoneyYam,trunk,T3,9,0,0.0,0.0,0.0,0.0
-Hamoshava,KiryatYam A,trunk,T3,8,0,0.0,0.0,0.0,0.0
-Hamoshava,KiryatYam B+C,trunk,T3,7,0,0.9,0.0,0.9,6.2
-Hamoshava,KiryatHaim West,trunk,T3,6,0,0.7,0.0,0.7,4.0
-LowerCity,TiratCarmel,trunk,trunk,7,7,7.9,33.5,-25.6,-179.3
-LowerCity,Matam-NeotPeres,trunk,trunk,6,6,75.7,21.0,54.7,328.3
-LowerCity,HofCarmel-NeveDavid,trunk,trunk,5,5,4.5,2.2,2.2,11.1
-LowerCity,Hecht-Shprintzak,trunk,trunk,4,4,13.5,26.9,-13.4,-53.5
-LowerCity,EinHayam,trunk,trunk,3,3,2.4,0.0,2.4,7.2
-LowerCity,BatGalim-KiryatEliezer,trunk,trunk,2,2,53.3,144.2,-90.8,-181.7
-LowerCity,Hamoshava,trunk,trunk,1,1,14.7,0.0,14.7,14.7
-LowerCity,Namal-Giborim,trunk,trunk,1,0,22.5,4.9,17.6,17.6
-LowerCity,Hamifrats,trunk,trunk,2,0,24.9,29.0,-4.1,-8.1
-LowerCity,Bazan-Hutsot,trunk,trunk,3,0,17.2,43.1,-25.9,-77.7
-LowerCity,TsometKiryatAta,trunk,trunk,4,0,14.0,17.3,-3.3,-13.0
-LowerCity,KiryatAta North,trunk,T1,5,0,0.2,0.0,0.2,1.1
-LowerCity,KiryatAta North-East,trunk,T1,6,0,0.1,0.0,0.1,0.5
-LowerCity,Shefaram,trunk,T1,7,0,0.1,0.0,0.1,0.6
-LowerCity,Hamovil,trunk,T1,8,0,0.2,0.0,0.2,1.7
-LowerCity,Nazareth,trunk,T1,9,0,0.1,0.0,0.1,0.7
-LowerCity,TsurShalom,trunk,T2,8,0,1.0,0.0,1.0,7.6
-LowerCity,Kiryon,trunk,T2,7,0,3.6,0.0,3.6,25.0
-LowerCity,KiryatBialik Center,trunk,T2,6,0,4.4,13.3,-8.9,-53.2
-LowerCity,KiryatHaim,trunk,T2,5,0,3.6,16.3,-12.7,-63.4
-LowerCity,SavyoneyYam,trunk,T3,8,0,0.0,0.0,0.0,0.0
-LowerCity,KiryatYam A,trunk,T3,7,0,0.0,0.0,0.0,0.0
-LowerCity,KiryatYam B+C,trunk,T3,6,0,1.1,13.6,-12.6,-75.4
-LowerCity,KiryatHaim West,trunk,T3,5,0,0.8,1.0,-0.2,-1.1
-Namal-Giborim,TiratCarmel,trunk,trunk,8,8,15.8,3.9,11.9,95.4
-Namal-Giborim,Matam-NeotPeres,trunk,trunk,7,7,108.3,39.1,69.2,484.2
-Namal-Giborim,HofCarmel-NeveDavid,trunk,trunk,6,6,6.4,0.0,6.4,38.2
-Namal-Giborim,Hecht-Shprintzak,trunk,trunk,5,5,19.4,119.8,-100.4,-502.0
-Namal-Giborim,EinHayam,trunk,trunk,4,4,3.5,0.0,3.5,13.8
-Namal-Giborim,BatGalim-KiryatEliezer,trunk,trunk,3,3,75.3,135.1,-59.8,-179.5
-Namal-Giborim,Hamoshava,trunk,trunk,2,2,53.1,70.1,-17.0,-33.9
-Namal-Giborim,LowerCity,trunk,trunk,1,1,104.5,141.7,-37.3,-37.3
-Namal-Giborim,Hamifrats,trunk,trunk,1,0,23.7,37.5,-13.8,-13.8
-Namal-Giborim,Bazan-Hutsot,trunk,trunk,2,0,16.4,13.3,3.1,6.3
-Namal-Giborim,TsometKiryatAta,trunk,trunk,3,0,13.5,0.0,13.5,40.6
-Namal-Giborim,KiryatAta North,trunk,T1,4,0,0.7,0.0,0.7,2.9
-Namal-Giborim,KiryatAta North-East,trunk,T1,5,0,0.3,0.0,0.3,1.4
-Namal-Giborim,Shefaram,trunk,T1,6,0,1.8,0.0,1.8,11.0
-Namal-Giborim,Hamovil,trunk,T1,7,0,1.4,0.0,1.4,9.7
-Namal-Giborim,Nazareth,trunk,T1,8,0,0.5,0.0,0.5,4.2
-Namal-Giborim,TsurShalom,trunk,T2,7,0,1.4,0.0,1.4,10.0
-Namal-Giborim,Kiryon,trunk,T2,6,0,10.3,0.3,10.1,60.3
-Namal-Giborim,KiryatBialik Center,trunk,T2,5,0,6.8,60.4,-53.5,-267.7
-Namal-Giborim,KiryatHaim,trunk,T2,4,0,5.4,0.0,5.4,21.6
-Namal-Giborim,SavyoneyYam,trunk,T3,7,0,0.0,0.0,0.0,0.0
-Namal-Giborim,KiryatYam A,trunk,T3,6,0,0.0,0.0,0.0,0.0
-Namal-Giborim,KiryatYam B+C,trunk,T3,5,0,1.3,0.0,1.3,6.7
-Namal-Giborim,KiryatHaim West,trunk,T3,4,0,1.0,7.2,-6.2,-24.8
-Hamifrats,TiratCarmel,trunk,trunk,9,9,1.1,0.0,1.1,10.2
-Hamifrats,Matam-NeotPeres,trunk,trunk,8,8,69.1,27.2,41.9,335.0
-Hamifrats,HofCarmel-NeveDavid,trunk,trunk,7,7,4.1,158.1,-154.0,-1078.2
-Hamifrats,Hecht-Shprintzak,trunk,trunk,6,6,12.4,0.0,12.4,74.3
-Hamifrats,EinHayam,trunk,trunk,5,5,2.2,71.1,-68.9,-344.5
-Hamifrats,BatGalim-KiryatEliezer,trunk,trunk,4,4,46.9,133.3,-86.4,-345.5
-Hamifrats,Hamoshava,trunk,trunk,3,3,66.8,13.0,53.8,161.5
-Hamifrats,LowerCity,trunk,trunk,2,2,130.5,310.4,-179.8,-359.7
-Hamifrats,Namal-Giborim,trunk,trunk,1,1,69.8,5.6,64.2,64.2
-Hamifrats,Bazan-Hutsot,trunk,trunk,1,0,0.0,3.3,-3.3,-3.3
-Hamifrats,TsometKiryatAta,trunk,trunk,2,0,0.1,0.2,-0.1,-0.1
-Hamifrats,KiryatAta North,trunk,T1,3,0,0.4,0.0,0.4,1.2
-Hamifrats,KiryatAta North-East,trunk,T1,4,0,0.2,0.0,0.2,0.7
-Hamifrats,Shefaram,trunk,T1,5,0,3.1,3.7,-0.7,-3.4
-Hamifrats,Hamovil,trunk,T1,6,0,2.1,12.3,-10.2,-61.2
-Hamifrats,Nazareth,trunk,T1,7,0,0.8,0.0,0.8,5.6
-Hamifrats,TsurShalom,trunk,T2,6,0,1.0,0.0,1.0,5.9
-Hamifrats,Kiryon,trunk,T2,5,0,12.1,75.5,-63.5,-317.3
-Hamifrats,KiryatBialik Center,trunk,T2,4,0,4.9,64.1,-59.2,-236.6
-Hamifrats,KiryatHaim,trunk,T2,3,0,3.3,0.0,3.3,9.9
-Hamifrats,SavyoneyYam,trunk,T3,6,0,0.0,58.8,-58.8,-352.9
-Hamifrats,KiryatYam A,trunk,T3,5,0,0.0,0.0,0.0,0.0
-Hamifrats,KiryatYam B+C,trunk,T3,4,0,0.0,0.0,0.0,0.0
-Hamifrats,KiryatHaim West,trunk,T3,3,0,0.0,112.4,-112.4,-337.2
-Bazan-Hutsot,TiratCarmel,trunk,trunk,10,10,0.1,2.8,-2.6,-26.1
-Bazan-Hutsot,Matam-NeotPeres,trunk,trunk,9,9,8.5,10.3,-1.8,-15.8
-Bazan-Hutsot,HofCarmel-NeveDavid,trunk,trunk,8,8,0.5,1.5,-1.0,-8.0
-Bazan-Hutsot,Hecht-Shprintzak,trunk,trunk,7,7,1.5,0.8,0.8,5.5
-Bazan-Hutsot,EinHayam,trunk,trunk,6,6,0.3,0.8,-0.5,-2.9
-Bazan-Hutsot,BatGalim-KiryatEliezer,trunk,trunk,5,5,5.8,27.3,-21.5,-107.3
-Bazan-Hutsot,Hamoshava,trunk,trunk,4,4,8.3,0.8,7.5,30.1
-Bazan-Hutsot,LowerCity,trunk,trunk,3,3,16.1,20.5,-4.4,-13.2
-Bazan-Hutsot,Namal-Giborim,trunk,trunk,2,2,8.6,13.7,-5.1,-10.2
-Bazan-Hutsot,Hamifrats,trunk,trunk,1,1,0.0,34.2,-34.2,-34.2
-Bazan-Hutsot,TsometKiryatAta,trunk,trunk,1,0,0.0,1.2,-1.2,-1.2
-Bazan-Hutsot,KiryatAta North,trunk,T1,2,0,0.1,0.5,-0.4,-0.9
-Bazan-Hutsot,KiryatAta North-East,trunk,T1,3,0,0.0,0.0,0.0,0.1
-Bazan-Hutsot,Shefaram,trunk,T1,4,0,0.4,0.0,0.4,1.5
-Bazan-Hutsot,Hamovil,trunk,T1,5,0,0.3,0.0,0.3,1.3
-Bazan-Hutsot,Nazareth,trunk,T1,6,0,0.1,1.0,-0.9,-5.4
-Bazan-Hutsot,TsurShalom,trunk,T2,5,0,0.1,1.2,-1.1,-5.6
-Bazan-Hutsot,Kiryon,trunk,T2,4,0,1.5,0.5,1.0,4.0
-Bazan-Hutsot,KiryatBialik Center,trunk,T2,3,0,0.6,13.9,-13.3,-39.8
-Bazan-Hutsot,KiryatHaim,trunk,T2,2,0,0.4,0.8,-0.3,-0.7
-Bazan-Hutsot,SavyoneyYam,trunk,T3,5,0,0.0,0.8,-0.8,-3.8
-Bazan-Hutsot,KiryatYam A,trunk,T3,4,0,0.0,0.2,-0.2,-1.0
-Bazan-Hutsot,KiryatYam B+C,trunk,T3,3,0,0.0,0.8,-0.8,-2.2
-Bazan-Hutsot,KiryatHaim West,trunk,T3,2,0,0.0,0.7,-0.7,-1.3
-TsometKiryatAta,TiratCarmel,trunk,trunk,11,11,0.2,0.0,0.2,2.1
-TsometKiryatAta,Matam-NeotPeres,trunk,trunk,10,10,11.7,5.7,6.0,59.7
-TsometKiryatAta,HofCarmel-NeveDavid,trunk,trunk,9,9,0.7,0.0,0.7,6.2
-TsometKiryatAta,Hecht-Shprintzak,trunk,trunk,8,8,2.1,0.0,2.1,16.8
-TsometKiryatAta,EinHayam,trunk,trunk,7,7,0.4,0.0,0.4,2.6
-TsometKiryatAta,BatGalim-KiryatEliezer,trunk,trunk,6,6,7.9,12.2,-4.3,-25.7
-TsometKiryatAta,Hamoshava,trunk,trunk,5,5,11.3,0.0,11.3,56.5
-TsometKiryatAta,LowerCity,trunk,trunk,4,4,22.1,0.0,22.1,88.2
-TsometKiryatAta,Namal-Giborim,trunk,trunk,3,3,11.8,0.0,11.8,35.5
-TsometKiryatAta,Hamifrats,trunk,trunk,2,2,0.2,0.0,0.2,0.3
-TsometKiryatAta,Bazan-Hutsot,trunk,trunk,1,1,0.1,0.0,0.1,0.1
-TsometKiryatAta,KiryatAta North,trunk,T1,1,0,0.3,1.2,-0.9,-0.9
-TsometKiryatAta,KiryatAta North-East,trunk,T1,2,0,0.1,0.0,0.1,0.2
-TsometKiryatAta,Shefaram,trunk,T1,3,0,0.5,13.9,-13.4,-40.1
-TsometKiryatAta,Hamovil,trunk,T1,4,0,0.4,0.0,0.4,1.4
-TsometKiryatAta,Nazareth,trunk,T1,5,0,0.1,0.0,0.1,0.7
-TsometKiryatAta,TsurShalom,trunk,T2,4,0,0.2,0.0,0.2,0.8
-TsometKiryatAta,Kiryon,trunk,T2,3,0,2.2,0.0,2.2,6.7
-TsometKiryatAta,KiryatBialik Center,trunk,T2,2,0,1.0,6.0,-5.0,-10.1
-TsometKiryatAta,KiryatHaim,trunk,T2,1,0,0.7,0.0,0.7,0.7
-TsometKiryatAta,SavyoneyYam,trunk,T3,4,0,0.0,0.0,0.0,0.0
-TsometKiryatAta,KiryatYam A,trunk,T3,3,0,0.0,0.0,0.0,0.0
-TsometKiryatAta,KiryatYam B+C,trunk,T3,2,0,0.2,47.4,-47.2,-94.5
-TsometKiryatAta,KiryatHaim West,trunk,T3,1,0,0.1,23.7,-23.6,-23.6
-KiryatAta North,TiratCarmel,T1,trunk,12,12,0.3,0.0,0.3,3.8
-KiryatAta North,Matam-NeotPeres,T1,trunk,11,11,2.1,32.7,-30.6,-336.5
-KiryatAta North,HofCarmel-NeveDavid,T1,trunk,10,10,0.1,0.0,0.1,1.3
-KiryatAta North,Hecht-Shprintzak,T1,trunk,9,9,0.4,0.0,0.4,3.4
-KiryatAta North,EinHayam,T1,trunk,8,8,0.1,0.0,0.1,0.5
-KiryatAta North,BatGalim-KiryatEliezer,T1,trunk,7,7,4.0,16.7,-12.7,-88.9
-KiryatAta North,Hamoshava,T1,trunk,6,6,1.5,0.0,1.5,8.9
-KiryatAta North,LowerCity,T1,trunk,5,5,3.8,57.3,-53.5,-267.3
-KiryatAta North,Namal-Giborim,T1,trunk,4,4,9.7,22.6,-12.9,-51.5
-KiryatAta North,Hamifrats,T1,trunk,3,3,30.1,46.2,-16.0,-48.1
-KiryatAta North,Bazan-Hutsot,T1,trunk,2,2,20.8,21.2,-0.4,-0.9
-KiryatAta North,TsometKiryatAta,T1,trunk,1,1,34.4,47.3,-12.9,-12.9
-KiryatAta North,KiryatAta North-East,T1,T1,1,0,22.0,0.0,22.0,22.0
-KiryatAta North,Shefaram,T1,T1,2,0,0.1,0.0,0.1,0.2
-KiryatAta North,Hamovil,T1,T1,3,0,0.0,0.0,0.0,0.0
-KiryatAta North,Nazareth,T1,T1,4,0,0.2,0.5,-0.3,-1.3
-KiryatAta North,TsurShalom,T1,T2,5,1,3.5,0.0,3.5,17.3
-KiryatAta North,Kiryon,T1,T2,4,1,22.3,51.1,-28.7,-114.9
-KiryatAta North,KiryatBialik Center,T1,T2,3,1,16.3,91.9,-75.6,-226.7
-KiryatAta North,KiryatHaim,T1,T2,2,1,32.1,32.7,-0.6,-1.2
-KiryatAta North,SavyoneyYam,T1,T3,5,1,0.0,46.2,-46.1,-230.6
-KiryatAta North,KiryatYam A,T1,T3,4,1,0.3,0.0,0.3,1.2
-KiryatAta North,KiryatYam B+C,T1,T3,3,1,32.3,0.0,32.3,96.9
-KiryatAta North,KiryatHaim West,T1,T3,2,1,20.1,0.0,20.1,40.1
-KiryatAta North-East,TiratCarmel,T1,trunk,13,13,0.5,0.0,0.5,6.1
-KiryatAta North-East,Matam-NeotPeres,T1,trunk,12,12,3.1,7.6,-4.4,-53.0
-KiryatAta North-East,HofCarmel-NeveDavid,T1,trunk,11,11,0.2,0.0,0.2,2.0
-KiryatAta North-East,Hecht-Shprintzak,T1,trunk,10,10,0.6,0.0,0.6,5.6
-KiryatAta North-East,EinHayam,T1,trunk,9,9,0.1,0.0,0.1,0.9
-KiryatAta North-East,BatGalim-KiryatEliezer,T1,trunk,8,8,5.8,2.7,3.2,25.4
-KiryatAta North-East,Hamoshava,T1,trunk,7,7,2.2,0.0,2.2,15.4
-KiryatAta North-East,LowerCity,T1,trunk,6,6,5.6,15.6,-10.0,-60.0
-KiryatAta North-East,Namal-Giborim,T1,trunk,5,5,14.3,1.2,13.1,65.4
-KiryatAta North-East,Hamifrats,T1,trunk,4,4,44.5,5.9,38.6,154.3
-KiryatAta North-East,Bazan-Hutsot,T1,trunk,3,3,30.8,5.4,25.4,76.2
-KiryatAta North-East,TsometKiryatAta,T1,trunk,2,2,50.8,18.1,32.7,65.4
-KiryatAta North-East,KiryatAta North,T1,T1,1,1,81.0,78.3,2.7,2.7
-KiryatAta North-East,Shefaram,T1,T1,1,0,0.1,6.8,-6.6,-6.6
+TiratCarmel,Hamovil,trunk,T1,15,0,0.1,0.8,-0.6,-9.3
+TiratCarmel,Nazareth,trunk,T1,16,0,0.8,0.0,0.8,12.9
+TiratCarmel,TsurShalom,trunk,T2,15,0,4.7,1.0,3.7,56.2
+TiratCarmel,Kiryon,trunk,T2,14,0,6.0,5.8,0.2,3.3
+TiratCarmel,KiryatBialik Center,trunk,T2,13,0,7.4,1.5,5.9,76.9
+TiratCarmel,KiryatHaim,trunk,T2,12,0,11.2,12.0,-0.8,-9.8
+TiratCarmel,SavyoneyYam,trunk,T3,15,0,0.4,0.8,-0.4,-5.7
+TiratCarmel,KiryatYam A,trunk,T3,14,0,0.5,0.0,0.5,7.5
+TiratCarmel,KiryatYam B+C,trunk,T3,13,0,6.5,7.5,-1.0,-12.6
+TiratCarmel,KiryatHaim West,trunk,T3,12,0,5.2,0.0,5.2,62.1
+Matam-NeotPeres,TiratCarmel,trunk,trunk,1,1,36.9,136.0,-99.1,-99.1
+Matam-NeotPeres,HofCarmel-NeveDavid,trunk,trunk,1,0,11.3,60.0,-48.7,-48.7
+Matam-NeotPeres,Hecht-Shprintzak,trunk,trunk,2,0,16.1,20.2,-4.2,-8.3
+Matam-NeotPeres,EinHayam,trunk,trunk,3,0,3.9,0.8,3.1,9.4
+Matam-NeotPeres,BatGalim-KiryatEliezer,trunk,trunk,4,0,90.2,77.9,12.3,49.0
+Matam-NeotPeres,Hamoshava,trunk,trunk,5,0,15.1,5.8,9.4,46.8
+Matam-NeotPeres,LowerCity,trunk,trunk,6,0,52.7,51.8,0.9,5.4
+Matam-NeotPeres,Namal-Giborim,trunk,trunk,7,0,19.4,2.8,16.7,116.6
+Matam-NeotPeres,Hamifrats,trunk,trunk,8,0,25.8,62.2,-36.4,-291.6
+Matam-NeotPeres,Bazan-Hutsot,trunk,trunk,9,0,9.8,12.1,-2.3,-21.0
+Matam-NeotPeres,TsometKiryatAta,trunk,trunk,10,0,13.1,11.8,1.3,13.1
+Matam-NeotPeres,KiryatAta North,trunk,T1,11,0,4.6,0.8,3.9,42.4
+Matam-NeotPeres,KiryatAta North-East,trunk,T1,12,0,1.2,0.0,1.2,14.3
+Matam-NeotPeres,Shefaram,trunk,T1,13,0,0.0,0.0,0.0,0.6
+Matam-NeotPeres,Hamovil,trunk,T1,14,0,0.0,0.0,0.0,0.5
+Matam-NeotPeres,Nazareth,trunk,T1,15,0,0.7,0.0,0.7,11.0
+Matam-NeotPeres,TsurShalom,trunk,T2,14,0,2.2,5.5,-3.3,-45.5
+Matam-NeotPeres,Kiryon,trunk,T2,13,0,3.3,11.0,-7.7,-100.6
+Matam-NeotPeres,KiryatBialik Center,trunk,T2,12,0,3.6,5.0,-1.4,-16.5
+Matam-NeotPeres,KiryatHaim,trunk,T2,11,0,8.0,4.0,4.0,44.3
+Matam-NeotPeres,SavyoneyYam,trunk,T3,14,0,0.1,0.0,0.1,0.8
+Matam-NeotPeres,KiryatYam A,trunk,T3,13,0,0.1,1.0,-0.9,-11.9
+Matam-NeotPeres,KiryatYam B+C,trunk,T3,12,0,5.1,14.0,-8.9,-107.0
+Matam-NeotPeres,KiryatHaim West,trunk,T3,11,0,4.0,4.1,-0.1,-0.6
+HofCarmel-NeveDavid,TiratCarmel,trunk,trunk,2,2,28.3,48.2,-19.9,-39.9
+HofCarmel-NeveDavid,Matam-NeotPeres,trunk,trunk,1,1,73.4,89.5,-16.1,-16.1
+HofCarmel-NeveDavid,Hecht-Shprintzak,trunk,trunk,1,0,12.4,28.2,-15.8,-15.8
+HofCarmel-NeveDavid,EinHayam,trunk,trunk,2,0,3.0,3.5,-0.5,-1.0
+HofCarmel-NeveDavid,BatGalim-KiryatEliezer,trunk,trunk,3,0,69.6,105.2,-35.6,-106.9
+HofCarmel-NeveDavid,Hamoshava,trunk,trunk,4,0,11.8,17.0,-5.2,-20.8
+HofCarmel-NeveDavid,LowerCity,trunk,trunk,5,0,41.1,59.5,-18.4,-91.9
+HofCarmel-NeveDavid,Namal-Giborim,trunk,trunk,6,0,15.1,10.0,5.1,30.8
+HofCarmel-NeveDavid,Hamifrats,trunk,trunk,7,0,20.0,46.0,-26.0,-181.8
+HofCarmel-NeveDavid,Bazan-Hutsot,trunk,trunk,8,0,7.6,16.2,-8.7,-69.3
+HofCarmel-NeveDavid,TsometKiryatAta,trunk,trunk,9,0,10.2,18.8,-8.6,-77.0
+HofCarmel-NeveDavid,KiryatAta North,trunk,T1,10,0,3.6,0.0,3.6,36.5
+HofCarmel-NeveDavid,KiryatAta North-East,trunk,T1,11,0,0.9,0.0,0.9,10.4
+HofCarmel-NeveDavid,Shefaram,trunk,T1,12,0,0.0,0.0,0.0,0.4
+HofCarmel-NeveDavid,Hamovil,trunk,T1,13,0,0.0,0.5,-0.5,-6.2
+HofCarmel-NeveDavid,Nazareth,trunk,T1,14,0,0.6,0.5,0.1,1.0
+HofCarmel-NeveDavid,TsurShalom,trunk,T2,13,0,1.8,0.8,1.0,13.0
+HofCarmel-NeveDavid,Kiryon,trunk,T2,12,0,2.5,4.2,-1.7,-20.5
+HofCarmel-NeveDavid,KiryatBialik Center,trunk,T2,11,0,2.8,5.0,-2.2,-24.0
+HofCarmel-NeveDavid,KiryatHaim,trunk,T2,10,0,6.3,5.2,1.0,10.4
+HofCarmel-NeveDavid,SavyoneyYam,trunk,T3,13,0,0.0,0.0,0.0,0.5
+HofCarmel-NeveDavid,KiryatYam A,trunk,T3,12,0,0.1,0.0,0.1,0.7
+HofCarmel-NeveDavid,KiryatYam B+C,trunk,T3,11,0,4.0,0.0,4.0,43.9
+HofCarmel-NeveDavid,KiryatHaim West,trunk,T3,10,0,3.2,2.2,0.9,9.1
+Hecht-Shprintzak,TiratCarmel,trunk,trunk,3,3,85.2,81.8,3.5,10.4
+Hecht-Shprintzak,Matam-NeotPeres,trunk,trunk,2,2,220.8,163.5,57.3,114.7
+Hecht-Shprintzak,HofCarmel-NeveDavid,trunk,trunk,1,1,26.4,43.5,-17.1,-17.1
+Hecht-Shprintzak,EinHayam,trunk,trunk,1,0,9.1,3.2,5.8,5.8
+Hecht-Shprintzak,BatGalim-KiryatEliezer,trunk,trunk,2,0,209.5,210.2,-0.8,-1.5
+Hecht-Shprintzak,Hamoshava,trunk,trunk,3,0,35.5,26.2,9.2,27.7
+Hecht-Shprintzak,LowerCity,trunk,trunk,4,0,123.7,84.0,39.7,159.0
+Hecht-Shprintzak,Namal-Giborim,trunk,trunk,5,0,45.5,15.0,30.5,152.7
+Hecht-Shprintzak,Hamifrats,trunk,trunk,6,0,60.3,79.2,-19.0,-113.9
+Hecht-Shprintzak,Bazan-Hutsot,trunk,trunk,7,0,22.8,13.5,9.3,65.2
+Hecht-Shprintzak,TsometKiryatAta,trunk,trunk,8,0,30.7,26.2,4.4,35.5
+Hecht-Shprintzak,KiryatAta North,trunk,T1,9,0,11.0,0.0,11.0,98.8
+Hecht-Shprintzak,KiryatAta North-East,trunk,T1,10,0,2.8,1.5,1.3,13.5
+Hecht-Shprintzak,Shefaram,trunk,T1,11,0,0.1,0.0,0.1,1.1
+Hecht-Shprintzak,Hamovil,trunk,T1,12,0,0.1,0.5,-0.4,-5.1
+Hecht-Shprintzak,Nazareth,trunk,T1,13,0,1.7,2.0,-0.3,-3.6
+Hecht-Shprintzak,TsurShalom,trunk,T2,12,0,5.3,4.5,0.8,9.2
+Hecht-Shprintzak,Kiryon,trunk,T2,11,0,7.6,4.5,3.1,34.6
+Hecht-Shprintzak,KiryatBialik Center,trunk,T2,10,0,8.5,7.0,1.5,14.9
+Hecht-Shprintzak,KiryatHaim,trunk,T2,9,0,18.9,5.8,13.2,118.7
+Hecht-Shprintzak,SavyoneyYam,trunk,T3,12,0,0.1,0.0,0.1,1.5
+Hecht-Shprintzak,KiryatYam A,trunk,T3,11,0,0.2,0.0,0.2,2.0
+Hecht-Shprintzak,KiryatYam B+C,trunk,T3,10,0,12.0,2.5,9.5,95.0
+Hecht-Shprintzak,KiryatHaim West,trunk,T3,9,0,9.5,2.5,7.0,63.0
+EinHayam,TiratCarmel,trunk,trunk,4,4,34.4,5.5,28.9,115.4
+EinHayam,Matam-NeotPeres,trunk,trunk,3,3,89.0,9.8,79.3,237.8
+EinHayam,HofCarmel-NeveDavid,trunk,trunk,2,2,10.6,4.2,6.4,12.7
+EinHayam,Hecht-Shprintzak,trunk,trunk,1,1,15.1,5.8,9.3,9.3
+EinHayam,BatGalim-KiryatEliezer,trunk,trunk,1,0,84.4,17.5,66.9,66.9
+EinHayam,Hamoshava,trunk,trunk,2,0,14.3,5.5,8.8,17.6
+EinHayam,LowerCity,trunk,trunk,3,0,49.9,11.0,38.9,116.6
+EinHayam,Namal-Giborim,trunk,trunk,4,0,18.4,4.8,13.6,54.4
+EinHayam,Hamifrats,trunk,trunk,5,0,24.3,7.5,16.8,84.0
+EinHayam,Bazan-Hutsot,trunk,trunk,6,0,9.2,3.0,6.2,37.2
+EinHayam,TsometKiryatAta,trunk,trunk,7,0,12.4,1.5,10.9,76.1
+EinHayam,KiryatAta North,trunk,T1,8,0,4.4,0.0,4.4,35.4
+EinHayam,KiryatAta North-East,trunk,T1,9,0,1.1,0.0,1.1,10.3
+EinHayam,Shefaram,trunk,T1,10,0,0.0,0.0,0.0,0.4
+EinHayam,Hamovil,trunk,T1,11,0,0.0,0.0,0.0,0.3
+EinHayam,Nazareth,trunk,T1,12,0,0.7,0.0,0.7,8.3
+EinHayam,TsurShalom,trunk,T2,11,0,2.1,0.2,1.9,20.6
+EinHayam,Kiryon,trunk,T2,10,0,3.1,0.2,2.8,28.3
+EinHayam,KiryatBialik Center,trunk,T2,9,0,3.4,0.8,2.7,24.1
+EinHayam,KiryatHaim,trunk,T2,8,0,7.6,0.5,7.1,57.1
+EinHayam,SavyoneyYam,trunk,T3,11,0,0.1,0.0,0.1,0.6
+EinHayam,KiryatYam A,trunk,T3,10,0,0.1,0.0,0.1,0.7
+EinHayam,KiryatYam B+C,trunk,T3,9,0,4.8,0.5,4.3,39.0
+EinHayam,KiryatHaim West,trunk,T3,8,0,3.8,0.0,3.8,30.6
+BatGalim-KiryatEliezer,TiratCarmel,trunk,trunk,5,5,94.0,112.5,-18.5,-92.5
+BatGalim-KiryatEliezer,Matam-NeotPeres,trunk,trunk,4,4,243.6,166.2,77.4,309.7
+BatGalim-KiryatEliezer,HofCarmel-NeveDavid,trunk,trunk,3,3,29.1,82.2,-53.2,-159.5
+BatGalim-KiryatEliezer,Hecht-Shprintzak,trunk,trunk,2,2,41.2,49.5,-8.3,-16.6
+BatGalim-KiryatEliezer,EinHayam,trunk,trunk,1,1,10.0,6.0,4.0,4.0
+BatGalim-KiryatEliezer,Hamoshava,trunk,trunk,1,0,39.1,43.8,-4.6,-4.6
+BatGalim-KiryatEliezer,LowerCity,trunk,trunk,2,0,136.5,145.9,-9.4,-18.8
+BatGalim-KiryatEliezer,Namal-Giborim,trunk,trunk,3,0,50.2,30.0,20.2,60.7
+BatGalim-KiryatEliezer,Hamifrats,trunk,trunk,4,0,66.5,152.5,-86.0,-344.1
+BatGalim-KiryatEliezer,Bazan-Hutsot,trunk,trunk,5,0,25.2,44.4,-19.2,-96.0
+BatGalim-KiryatEliezer,TsometKiryatAta,trunk,trunk,6,0,33.9,40.5,-6.6,-39.9
+BatGalim-KiryatEliezer,KiryatAta North,trunk,T1,7,0,12.1,2.5,9.6,67.3
+BatGalim-KiryatEliezer,KiryatAta North-East,trunk,T1,8,0,3.1,0.0,3.1,25.1
+BatGalim-KiryatEliezer,Shefaram,trunk,T1,9,0,0.1,1.5,-1.4,-12.5
+BatGalim-KiryatEliezer,Hamovil,trunk,T1,10,0,0.1,1.0,-0.9,-9.2
+BatGalim-KiryatEliezer,Nazareth,trunk,T1,11,0,1.9,7.0,-5.1,-56.1
+BatGalim-KiryatEliezer,TsurShalom,trunk,T2,10,0,5.8,9.2,-3.4,-34.4
+BatGalim-KiryatEliezer,Kiryon,trunk,T2,9,0,8.4,19.0,-10.6,-95.1
+BatGalim-KiryatEliezer,KiryatBialik Center,trunk,T2,8,0,9.4,8.2,1.1,8.9
+BatGalim-KiryatEliezer,KiryatHaim,trunk,T2,7,0,20.9,18.0,2.9,20.2
+BatGalim-KiryatEliezer,SavyoneyYam,trunk,T3,10,0,0.1,0.5,-0.4,-3.6
+BatGalim-KiryatEliezer,KiryatYam A,trunk,T3,9,0,0.2,2.5,-2.3,-20.7
+BatGalim-KiryatEliezer,KiryatYam B+C,trunk,T3,8,0,13.2,7.8,5.5,43.9
+BatGalim-KiryatEliezer,KiryatHaim West,trunk,T3,7,0,10.5,4.9,5.6,38.9
+Hamoshava,TiratCarmel,trunk,trunk,6,6,10.8,4.2,6.6,39.5
+Hamoshava,Matam-NeotPeres,trunk,trunk,5,5,50.0,23.2,26.7,133.6
+Hamoshava,HofCarmel-NeveDavid,trunk,trunk,4,4,6.1,8.0,-1.9,-7.7
+Hamoshava,Hecht-Shprintzak,trunk,trunk,3,3,8.6,9.2,-0.6,-1.9
+Hamoshava,EinHayam,trunk,trunk,2,2,2.1,1.0,1.1,2.2
+Hamoshava,BatGalim-KiryatEliezer,trunk,trunk,1,1,48.6,58.5,-9.9,-9.9
+Hamoshava,LowerCity,trunk,trunk,1,0,93.3,30.8,62.5,62.5
+Hamoshava,Namal-Giborim,trunk,trunk,2,0,31.3,7.2,24.0,48.0
+Hamoshava,Hamifrats,trunk,trunk,3,0,23.0,29.0,-6.0,-18.0
+Hamoshava,Bazan-Hutsot,trunk,trunk,4,0,8.7,4.0,4.7,18.8
+Hamoshava,TsometKiryatAta,trunk,trunk,5,0,9.4,4.0,5.4,26.9
+Hamoshava,KiryatAta North,trunk,T1,6,0,0.7,0.2,0.4,2.4
+Hamoshava,KiryatAta North-East,trunk,T1,7,0,0.2,0.5,-0.3,-2.3
+Hamoshava,Shefaram,trunk,T1,8,0,0.2,0.5,-0.3,-2.4
+Hamoshava,Hamovil,trunk,T1,9,0,0.1,0.0,0.1,0.7
+Hamoshava,Nazareth,trunk,T1,10,0,4.5,0.5,4.0,39.7
+Hamoshava,TsurShalom,trunk,T2,9,0,1.7,1.5,0.2,1.9
+Hamoshava,Kiryon,trunk,T2,8,0,2.5,2.8,-0.3,-2.4
+Hamoshava,KiryatBialik Center,trunk,T2,7,0,2.8,1.2,1.5,10.5
+Hamoshava,KiryatHaim,trunk,T2,6,0,3.3,3.0,0.3,1.8
+Hamoshava,SavyoneyYam,trunk,T3,9,0,0.2,0.0,0.2,1.6
+Hamoshava,KiryatYam A,trunk,T3,8,0,0.3,0.5,-0.2,-1.9
+Hamoshava,KiryatYam B+C,trunk,T3,7,0,1.7,0.0,1.7,12.0
+Hamoshava,KiryatHaim West,trunk,T3,6,0,1.5,0.5,1.0,5.9
+LowerCity,TiratCarmel,trunk,trunk,7,7,13.7,8.2,5.4,38.0
+LowerCity,Matam-NeotPeres,trunk,trunk,6,6,63.1,47.5,15.6,93.8
+LowerCity,HofCarmel-NeveDavid,trunk,trunk,5,5,7.7,8.8,-1.1,-5.3
+LowerCity,Hecht-Shprintzak,trunk,trunk,4,4,10.9,5.8,5.1,20.6
+LowerCity,EinHayam,trunk,trunk,3,3,2.6,2.2,0.4,1.2
+LowerCity,BatGalim-KiryatEliezer,trunk,trunk,2,2,61.3,120.1,-58.8,-117.5
+LowerCity,Hamoshava,trunk,trunk,1,1,33.8,27.8,6.1,6.1
+LowerCity,Namal-Giborim,trunk,trunk,1,0,39.5,13.8,25.7,25.7
+LowerCity,Hamifrats,trunk,trunk,2,0,29.0,59.7,-30.7,-61.4
+LowerCity,Bazan-Hutsot,trunk,trunk,3,0,11.0,8.4,2.6,7.8
+LowerCity,TsometKiryatAta,trunk,trunk,4,0,11.9,12.5,-0.6,-2.6
+LowerCity,KiryatAta North,trunk,T1,5,0,0.8,1.0,-0.2,-0.9
+LowerCity,KiryatAta North-East,trunk,T1,6,0,0.2,0.0,0.2,1.3
+LowerCity,Shefaram,trunk,T1,7,0,0.2,0.5,-0.3,-1.8
+LowerCity,Hamovil,trunk,T1,8,0,0.1,1.5,-1.4,-11.2
+LowerCity,Nazareth,trunk,T1,9,0,5.6,11.2,-5.6,-50.5
+LowerCity,TsurShalom,trunk,T2,8,0,2.2,4.2,-2.1,-16.7
+LowerCity,Kiryon,trunk,T2,7,0,3.1,2.5,0.6,4.2
+LowerCity,KiryatBialik Center,trunk,T2,6,0,3.5,2.2,1.2,7.4
+LowerCity,KiryatHaim,trunk,T2,5,0,4.2,7.2,-3.1,-15.4
+LowerCity,SavyoneyYam,trunk,T3,8,0,0.2,0.0,0.2,1.9
+LowerCity,KiryatYam A,trunk,T3,7,0,0.3,1.0,-0.7,-4.6
+LowerCity,KiryatYam B+C,trunk,T3,6,0,2.2,3.2,-1.1,-6.5
+LowerCity,KiryatHaim West,trunk,T3,5,0,1.9,5.0,-3.2,-15.8
+Namal-Giborim,TiratCarmel,trunk,trunk,8,8,21.5,25.8,-4.3,-34.1
+Namal-Giborim,Matam-NeotPeres,trunk,trunk,7,7,66.2,44.8,21.4,149.9
+Namal-Giborim,HofCarmel-NeveDavid,trunk,trunk,6,6,8.0,18.8,-10.8,-64.8
+Namal-Giborim,Hecht-Shprintzak,trunk,trunk,5,5,11.3,12.2,-1.0,-4.9
+Namal-Giborim,EinHayam,trunk,trunk,4,4,2.7,1.5,1.2,4.9
+Namal-Giborim,BatGalim-KiryatEliezer,trunk,trunk,3,3,63.5,92.5,-29.0,-87.1
+Namal-Giborim,Hamoshava,trunk,trunk,2,2,31.5,26.0,5.5,11.1
+Namal-Giborim,LowerCity,trunk,trunk,1,1,109.9,74.2,35.6,35.6
+Namal-Giborim,Hamifrats,trunk,trunk,1,0,29.8,72.2,-42.5,-42.5
+Namal-Giborim,Bazan-Hutsot,trunk,trunk,2,0,11.3,21.5,-10.2,-20.5
+Namal-Giborim,TsometKiryatAta,trunk,trunk,3,0,12.9,35.8,-22.8,-68.5
+Namal-Giborim,KiryatAta North,trunk,T1,4,0,2.0,2.2,-0.3,-1.1
+Namal-Giborim,KiryatAta North-East,trunk,T1,5,0,0.5,3.0,-2.5,-12.4
+Namal-Giborim,Shefaram,trunk,T1,6,0,0.5,0.0,0.5,2.7
+Namal-Giborim,Hamovil,trunk,T1,7,0,0.2,1.0,-0.8,-5.7
+Namal-Giborim,Nazareth,trunk,T1,8,0,5.3,2.8,2.6,20.5
+Namal-Giborim,TsurShalom,trunk,T2,7,0,2.2,8.0,-5.8,-40.3
+Namal-Giborim,Kiryon,trunk,T2,6,0,3.7,7.5,-3.8,-23.1
+Namal-Giborim,KiryatBialik Center,trunk,T2,5,0,3.7,5.5,-1.8,-8.9
+Namal-Giborim,KiryatHaim,trunk,T2,4,0,5.2,17.8,-12.5,-50.1
+Namal-Giborim,SavyoneyYam,trunk,T3,7,0,0.3,1.0,-0.7,-5.2
+Namal-Giborim,KiryatYam A,trunk,T3,6,0,0.4,1.0,-0.6,-3.7
+Namal-Giborim,KiryatYam B+C,trunk,T3,5,0,3.0,3.0,-0.0,-0.1
+Namal-Giborim,KiryatHaim West,trunk,T3,4,0,2.4,2.5,-0.1,-0.5
+Hamifrats,TiratCarmel,trunk,trunk,9,9,28.4,36.0,-7.6,-68.3
+Hamifrats,Matam-NeotPeres,trunk,trunk,8,8,105.5,118.0,-12.5,-99.9
+Hamifrats,HofCarmel-NeveDavid,trunk,trunk,7,7,12.8,26.5,-13.7,-96.1
+Hamifrats,Hecht-Shprintzak,trunk,trunk,6,6,18.1,9.2,8.8,53.1
+Hamifrats,EinHayam,trunk,trunk,5,5,4.4,3.0,1.4,6.9
+Hamifrats,BatGalim-KiryatEliezer,trunk,trunk,4,4,100.9,156.9,-56.0,-224.1
+Hamifrats,Hamoshava,trunk,trunk,3,3,28.3,28.0,0.3,1.0
+Hamifrats,LowerCity,trunk,trunk,2,2,98.6,79.2,19.4,38.8
+Hamifrats,Namal-Giborim,trunk,trunk,1,1,31.1,40.2,-9.1,-9.1
+Hamifrats,Bazan-Hutsot,trunk,trunk,1,0,0.0,30.0,-30.0,-30.0
+Hamifrats,TsometKiryatAta,trunk,trunk,2,0,6.2,45.5,-39.3,-78.5
+Hamifrats,KiryatAta North,trunk,T1,3,0,9.4,2.5,6.9,20.7
+Hamifrats,KiryatAta North-East,trunk,T1,4,0,2.4,1.8,0.7,2.7
+Hamifrats,Shefaram,trunk,T1,5,0,2.4,3.5,-1.1,-5.5
+Hamifrats,Hamovil,trunk,T1,6,0,1.0,8.5,-7.5,-45.0
+Hamifrats,Nazareth,trunk,T1,7,0,8.4,9.8,-1.4,-9.7
+Hamifrats,TsurShalom,trunk,T2,6,0,3.0,7.8,-4.7,-28.2
+Hamifrats,Kiryon,trunk,T2,5,0,6.8,18.0,-11.2,-56.1
+Hamifrats,KiryatBialik Center,trunk,T2,4,0,5.5,11.0,-5.5,-22.0
+Hamifrats,KiryatHaim,trunk,T2,3,0,7.0,16.2,-9.3,-27.8
+Hamifrats,SavyoneyYam,trunk,T3,6,0,0.6,0.5,0.1,0.9
+Hamifrats,KiryatYam A,trunk,T3,5,0,0.9,2.2,-1.3,-6.5
+Hamifrats,KiryatYam B+C,trunk,T3,4,0,4.1,8.8,-4.7,-18.7
+Hamifrats,KiryatHaim West,trunk,T3,3,0,1.4,2.5,-1.0,-3.1
+Bazan-Hutsot,TiratCarmel,trunk,trunk,10,10,4.3,6.0,-1.7,-16.9
+Bazan-Hutsot,Matam-NeotPeres,trunk,trunk,9,9,16.0,13.6,2.5,22.1
+Bazan-Hutsot,HofCarmel-NeveDavid,trunk,trunk,8,8,1.9,1.5,0.4,3.5
+Bazan-Hutsot,Hecht-Shprintzak,trunk,trunk,7,7,2.7,0.8,2.0,14.0
+Bazan-Hutsot,EinHayam,trunk,trunk,6,6,0.7,0.8,-0.1,-0.5
+Bazan-Hutsot,BatGalim-KiryatEliezer,trunk,trunk,5,5,15.3,48.0,-32.7,-163.4
+Bazan-Hutsot,Hamoshava,trunk,trunk,4,4,4.3,2.2,2.1,8.2
+Bazan-Hutsot,LowerCity,trunk,trunk,3,3,15.0,24.2,-9.3,-27.8
+Bazan-Hutsot,Namal-Giborim,trunk,trunk,2,2,4.7,6.8,-2.0,-4.0
+Bazan-Hutsot,Hamifrats,trunk,trunk,1,1,0.0,18.9,-18.9,-18.9
+Bazan-Hutsot,TsometKiryatAta,trunk,trunk,1,0,0.9,6.8,-5.8,-5.8
+Bazan-Hutsot,KiryatAta North,trunk,T1,2,0,1.4,1.8,-0.3,-0.7
+Bazan-Hutsot,KiryatAta North-East,trunk,T1,3,0,0.4,0.0,0.4,1.1
+Bazan-Hutsot,Shefaram,trunk,T1,4,0,0.4,0.2,0.1,0.5
+Bazan-Hutsot,Hamovil,trunk,T1,5,0,0.2,0.5,-0.3,-1.7
+Bazan-Hutsot,Nazareth,trunk,T1,6,0,1.3,1.0,0.3,1.6
+Bazan-Hutsot,TsurShalom,trunk,T2,5,0,0.5,1.5,-1.0,-5.2
+Bazan-Hutsot,Kiryon,trunk,T2,4,0,1.0,2.8,-1.7,-6.9
+Bazan-Hutsot,KiryatBialik Center,trunk,T2,3,0,0.8,4.5,-3.7,-11.0
+Bazan-Hutsot,KiryatHaim,trunk,T2,2,0,1.1,2.5,-1.4,-2.9
+Bazan-Hutsot,SavyoneyYam,trunk,T3,5,0,0.1,1.0,-0.9,-4.5
+Bazan-Hutsot,KiryatYam A,trunk,T3,4,0,0.1,2.8,-2.6,-10.4
+Bazan-Hutsot,KiryatYam B+C,trunk,T3,3,0,0.6,7.0,-6.4,-19.1
+Bazan-Hutsot,KiryatHaim West,trunk,T3,2,0,0.2,2.7,-2.4,-4.9
+TsometKiryatAta,TiratCarmel,trunk,trunk,11,11,5.9,9.0,-3.1,-34.6
+TsometKiryatAta,Matam-NeotPeres,trunk,trunk,10,10,21.7,9.0,12.7,126.9
+TsometKiryatAta,HofCarmel-NeveDavid,trunk,trunk,9,9,2.6,3.5,-0.9,-7.9
+TsometKiryatAta,Hecht-Shprintzak,trunk,trunk,8,8,3.7,2.0,1.7,13.8
+TsometKiryatAta,EinHayam,trunk,trunk,7,7,0.9,0.5,0.4,2.8
+TsometKiryatAta,BatGalim-KiryatEliezer,trunk,trunk,6,6,20.8,16.8,4.1,24.3
+TsometKiryatAta,Hamoshava,trunk,trunk,5,5,5.9,2.5,3.4,16.9
+TsometKiryatAta,LowerCity,trunk,trunk,4,4,20.5,20.5,-0.0,-0.1
+TsometKiryatAta,Namal-Giborim,trunk,trunk,3,3,6.7,6.2,0.4,1.3
+TsometKiryatAta,Hamifrats,trunk,trunk,2,2,2.4,22.2,-19.9,-39.7
+TsometKiryatAta,Bazan-Hutsot,trunk,trunk,1,1,0.9,3.8,-2.8,-2.8
+TsometKiryatAta,KiryatAta North,trunk,T1,1,0,3.5,2.8,0.8,0.8
+TsometKiryatAta,KiryatAta North-East,trunk,T1,2,0,0.9,0.5,0.4,0.8
+TsometKiryatAta,Shefaram,trunk,T1,3,0,0.5,2.0,-1.5,-4.5
+TsometKiryatAta,Hamovil,trunk,T1,4,0,0.2,0.2,-0.1,-0.2
+TsometKiryatAta,Nazareth,trunk,T1,5,0,1.7,3.2,-1.6,-7.8
+TsometKiryatAta,TsurShalom,trunk,T2,4,0,1.1,3.2,-2.1,-8.6
+TsometKiryatAta,Kiryon,trunk,T2,3,0,2.7,9.8,-7.0,-21.1
+TsometKiryatAta,KiryatBialik Center,trunk,T2,2,0,2.1,11.8,-9.7,-19.4
+TsometKiryatAta,KiryatHaim,trunk,T2,1,0,2.9,6.5,-3.6,-3.6
+TsometKiryatAta,SavyoneyYam,trunk,T3,4,0,0.2,2.0,-1.8,-7.3
+TsometKiryatAta,KiryatYam A,trunk,T3,3,0,0.3,4.0,-3.7,-11.2
+TsometKiryatAta,KiryatYam B+C,trunk,T3,2,0,1.6,9.0,-7.4,-14.9
+TsometKiryatAta,KiryatHaim West,trunk,T3,1,0,0.7,4.8,-4.0,-4.0
+KiryatAta North,TiratCarmel,T1,trunk,12,12,4.4,14.0,-9.6,-114.8
+KiryatAta North,Matam-NeotPeres,T1,trunk,11,11,27.1,30.0,-2.9,-32.1
+KiryatAta North,HofCarmel-NeveDavid,T1,trunk,10,10,3.3,3.5,-0.2,-1.8
+KiryatAta North,Hecht-Shprintzak,T1,trunk,9,9,4.7,3.8,1.0,8.6
+KiryatAta North,EinHayam,T1,trunk,8,8,1.1,2.2,-1.1,-8.9
+KiryatAta North,BatGalim-KiryatEliezer,T1,trunk,7,7,27.6,72.8,-45.1,-315.8
+KiryatAta North,Hamoshava,T1,trunk,6,6,7.3,17.5,-10.2,-61.1
+KiryatAta North,LowerCity,T1,trunk,5,5,25.8,63.8,-38.0,-190.0
+KiryatAta North,Namal-Giborim,T1,trunk,4,4,15.5,23.0,-7.5,-30.1
+KiryatAta North,Hamifrats,T1,trunk,3,3,71.9,80.2,-8.3,-25.0
+KiryatAta North,Bazan-Hutsot,T1,trunk,2,2,27.2,21.8,5.5,10.9
+KiryatAta North,TsometKiryatAta,T1,trunk,1,1,66.0,108.0,-42.0,-42.0
+KiryatAta North,KiryatAta North-East,T1,T1,1,0,15.0,0.0,15.0,15.0
+KiryatAta North,Shefaram,T1,T1,2,0,0.6,0.0,0.6,1.1
+KiryatAta North,Hamovil,T1,T1,3,0,0.0,0.0,0.0,0.1
+KiryatAta North,Nazareth,T1,T1,4,0,0.9,2.0,-1.1,-4.4
+KiryatAta North,TsurShalom,T1,T2,5,1,8.3,15.2,-7.0,-34.8
+KiryatAta North,Kiryon,T1,T2,4,1,17.1,29.0,-11.9,-47.6
+KiryatAta North,KiryatBialik Center,T1,T2,3,1,14.7,14.8,-0.1,-0.2
+KiryatAta North,KiryatHaim,T1,T2,2,1,32.2,30.2,2.0,4.0
+KiryatAta North,SavyoneyYam,T1,T3,5,1,1.2,1.8,-0.5,-2.5
+KiryatAta North,KiryatYam A,T1,T3,4,1,1.8,3.5,-1.7,-6.7
+KiryatAta North,KiryatYam B+C,T1,T3,3,1,22.2,34.2,-12.0,-36.1
+KiryatAta North,KiryatHaim West,T1,T3,2,1,14.4,9.0,5.4,10.8
+KiryatAta North-East,TiratCarmel,T1,trunk,13,13,3.0,0.0,3.0,39.2
+KiryatAta North-East,Matam-NeotPeres,T1,trunk,12,12,18.4,5.5,12.9,154.9
+KiryatAta North-East,HofCarmel-NeveDavid,T1,trunk,11,11,2.3,1.0,1.3,13.8
+KiryatAta North-East,Hecht-Shprintzak,T1,trunk,10,10,3.2,0.8,2.4,24.5
+KiryatAta North-East,EinHayam,T1,trunk,9,9,0.8,0.0,0.8,7.0
+KiryatAta North-East,BatGalim-KiryatEliezer,T1,trunk,8,8,18.8,4.5,14.3,114.3
+KiryatAta North-East,Hamoshava,T1,trunk,7,7,5.0,1.0,4.0,27.8
+KiryatAta North-East,LowerCity,T1,trunk,6,6,17.5,1.8,15.8,94.6
+KiryatAta North-East,Namal-Giborim,T1,trunk,5,5,10.5,1.0,9.5,47.6
+KiryatAta North-East,Hamifrats,T1,trunk,4,4,48.9,10.8,38.1,152.5
+KiryatAta North-East,Bazan-Hutsot,T1,trunk,3,3,18.5,2.8,15.8,47.3
+KiryatAta North-East,TsometKiryatAta,T1,trunk,2,2,44.9,8.8,36.1,72.2
+KiryatAta North-East,KiryatAta North,T1,T1,1,1,39.2,59.8,-20.5,-20.5
+KiryatAta North-East,Shefaram,T1,T1,1,0,0.4,6.8,-6.4,-6.4
 KiryatAta North-East,Hamovil,T1,T1,2,0,0.0,1.0,-1.0,-2.0
-KiryatAta North-East,Nazareth,T1,T1,3,0,0.3,0.2,0.0,0.0
-KiryatAta North-East,TsurShalom,T1,T2,6,2,5.1,0.0,5.1,30.6
-KiryatAta North-East,Kiryon,T1,T2,5,2,33.0,1.6,31.4,156.8
-KiryatAta North-East,KiryatBialik Center,T1,T2,4,2,24.1,9.9,14.2,56.9
-KiryatAta North-East,KiryatHaim,T1,T2,3,2,47.4,0.0,47.4,142.3
-KiryatAta North-East,SavyoneyYam,T1,T3,6,2,0.1,0.0,0.1,0.4
-KiryatAta North-East,KiryatYam A,T1,T3,5,2,0.5,0.0,0.5,2.3
-KiryatAta North-East,KiryatYam B+C,T1,T3,4,2,47.7,0.0,47.7,191.0
-KiryatAta North-East,KiryatHaim West,T1,T3,3,2,29.6,0.0,29.6,88.9
-Shefaram,TiratCarmel,T1,trunk,14,14,1.1,0.0,1.1,15.8
-Shefaram,Matam-NeotPeres,T1,trunk,13,13,1.7,0.0,1.7,22.4
-Shefaram,HofCarmel-NeveDavid,T1,trunk,12,12,0.1,0.0,0.1,1.2
-Shefaram,Hecht-Shprintzak,T1,trunk,11,11,0.3,11.7,-11.4,-125.1
-Shefaram,EinHayam,T1,trunk,10,10,0.1,0.0,0.1,0.5
-Shefaram,BatGalim-KiryatEliezer,T1,trunk,9,9,8.9,21.7,-12.8,-115.4
-Shefaram,Hamoshava,T1,trunk,8,8,6.5,3.2,3.3,26.6
-Shefaram,LowerCity,T1,trunk,7,7,15.5,13.4,2.0,14.3
-Shefaram,Namal-Giborim,T1,trunk,6,6,28.5,11.7,16.8,100.6
-Shefaram,Hamifrats,T1,trunk,5,5,92.5,30.3,62.1,310.7
-Shefaram,Bazan-Hutsot,T1,trunk,4,4,63.9,6.3,57.6,230.5
-Shefaram,TsometKiryatAta,T1,trunk,3,3,52.2,12.0,40.2,120.6
-Shefaram,KiryatAta North,T1,T1,2,2,1.2,1.5,-0.3,-0.7
-Shefaram,KiryatAta North-East,T1,T1,1,1,0.5,1.2,-0.8,-0.8
-Shefaram,Hamovil,T1,T1,1,0,0.0,0.0,0.0,0.0
-Shefaram,Nazareth,T1,T1,2,0,1.3,13.7,-12.4,-24.8
-Shefaram,TsurShalom,T1,T2,7,3,0.2,0.0,0.2,1.1
-Shefaram,Kiryon,T1,T2,6,3,1.7,11.3,-9.6,-57.8
-Shefaram,KiryatBialik Center,T1,T2,5,3,0.8,0.0,0.8,3.8
-Shefaram,KiryatHaim,T1,T2,4,3,0.5,0.0,0.5,2.0
-Shefaram,SavyoneyYam,T1,T3,7,3,0.0,0.0,0.0,0.0
-Shefaram,KiryatYam A,T1,T3,6,3,0.0,0.0,0.0,0.0
-Shefaram,KiryatYam B+C,T1,T3,5,3,0.0,0.0,0.0,0.0
-Shefaram,KiryatHaim West,T1,T3,4,3,0.5,0.0,0.5,2.0
-Hamovil,TiratCarmel,T1,trunk,15,15,0.0,0.0,0.0,0.1
-Hamovil,Matam-NeotPeres,T1,trunk,14,14,0.0,1.4,-1.3,-18.8
-Hamovil,HofCarmel-NeveDavid,T1,trunk,13,13,0.0,0.0,0.0,0.0
-Hamovil,Hecht-Shprintzak,T1,trunk,12,12,0.0,1.2,-1.2,-14.9
+KiryatAta North-East,Nazareth,T1,T1,3,0,0.6,0.2,0.4,1.1
+KiryatAta North-East,TsurShalom,T1,T2,6,2,5.6,1.5,4.1,24.8
+KiryatAta North-East,Kiryon,T1,T2,5,2,11.6,3.5,8.1,40.6
+KiryatAta North-East,KiryatBialik Center,T1,T2,4,2,10.0,2.8,7.2,28.9
+KiryatAta North-East,KiryatHaim,T1,T2,3,2,21.9,2.5,19.4,58.2
+KiryatAta North-East,SavyoneyYam,T1,T3,6,2,0.8,0.0,0.8,5.1
+KiryatAta North-East,KiryatYam A,T1,T3,5,2,1.2,0.0,1.2,6.2
+KiryatAta North-East,KiryatYam B+C,T1,T3,4,2,15.1,0.0,15.1,60.4
+KiryatAta North-East,KiryatHaim West,T1,T3,3,2,9.8,0.8,9.0,27.1
+Shefaram,TiratCarmel,T1,trunk,14,14,2.0,1.5,0.5,6.5
+Shefaram,Matam-NeotPeres,T1,trunk,13,13,7.3,4.0,3.3,42.6
+Shefaram,HofCarmel-NeveDavid,T1,trunk,12,12,0.9,0.0,0.9,10.6
+Shefaram,Hecht-Shprintzak,T1,trunk,11,11,1.2,0.0,1.2,13.7
+Shefaram,EinHayam,T1,trunk,10,10,0.3,0.0,0.3,3.0
+Shefaram,BatGalim-KiryatEliezer,T1,trunk,9,9,9.5,13.2,-3.8,-34.0
+Shefaram,Hamoshava,T1,trunk,8,8,7.1,21.5,-14.4,-114.9
+Shefaram,LowerCity,T1,trunk,7,7,25.4,4.0,21.4,150.0
+Shefaram,Namal-Giborim,T1,trunk,6,6,20.2,1.5,18.7,112.3
+Shefaram,Hamifrats,T1,trunk,5,5,129.9,71.0,58.9,294.7
+Shefaram,Bazan-Hutsot,T1,trunk,4,4,49.2,6.2,42.9,171.8
+Shefaram,TsometKiryatAta,T1,trunk,3,3,54.4,9.2,45.2,135.6
+Shefaram,KiryatAta North,T1,T1,2,2,5.9,1.8,4.1,8.2
+Shefaram,KiryatAta North-East,T1,T1,1,1,1.5,16.5,-15.0,-15.0
+Shefaram,Hamovil,T1,T1,1,0,0.2,1.2,-1.1,-1.1
+Shefaram,Nazareth,T1,T1,2,0,8.1,5.8,2.4,4.8
+Shefaram,TsurShalom,T1,T2,7,3,5.5,4.5,1.0,6.7
+Shefaram,Kiryon,T1,T2,6,3,7.4,6.2,1.1,6.8
+Shefaram,KiryatBialik Center,T1,T2,5,3,8.7,2.5,6.2,30.8
+Shefaram,KiryatHaim,T1,T2,4,3,8.8,5.0,3.8,15.0
+Shefaram,SavyoneyYam,T1,T3,7,3,0.1,0.0,0.1,0.6
+Shefaram,KiryatYam A,T1,T3,6,3,0.1,0.0,0.1,0.8
+Shefaram,KiryatYam B+C,T1,T3,5,3,2.6,0.5,2.1,10.4
+Shefaram,KiryatHaim West,T1,T3,4,3,5.5,0.0,5.5,22.2
+Hamovil,TiratCarmel,T1,trunk,15,15,0.0,0.0,0.0,0.3
+Hamovil,Matam-NeotPeres,T1,trunk,14,14,0.1,1.0,-0.9,-12.7
+Hamovil,HofCarmel-NeveDavid,T1,trunk,13,13,0.0,0.8,-0.7,-9.6
+Hamovil,Hecht-Shprintzak,T1,trunk,12,12,0.0,0.0,0.0,0.2
 Hamovil,EinHayam,T1,trunk,11,11,0.0,0.0,0.0,0.0
-Hamovil,BatGalim-KiryatEliezer,T1,trunk,10,10,0.0,6.1,-6.1,-61.4
-Hamovil,Hamoshava,T1,trunk,9,9,0.0,0.0,0.0,0.0
-Hamovil,LowerCity,T1,trunk,8,8,0.0,2.3,-2.3,-18.8
-Hamovil,Namal-Giborim,T1,trunk,7,7,0.0,0.0,0.0,0.0
-Hamovil,Hamifrats,T1,trunk,6,6,0.0,4.1,-4.1,-24.6
-Hamovil,Bazan-Hutsot,T1,trunk,5,5,0.0,0.0,0.0,0.0
-Hamovil,TsometKiryatAta,T1,trunk,4,4,0.0,0.0,0.0,0.0
+Hamovil,BatGalim-KiryatEliezer,T1,trunk,10,10,0.1,2.0,-1.9,-19.1
+Hamovil,Hamoshava,T1,trunk,9,9,0.0,0.8,-0.7,-6.6
+Hamovil,LowerCity,T1,trunk,8,8,0.1,0.5,-0.4,-3.5
+Hamovil,Namal-Giborim,T1,trunk,7,7,0.0,0.8,-0.7,-5.0
+Hamovil,Hamifrats,T1,trunk,6,6,0.1,15.2,-15.1,-90.7
+Hamovil,Bazan-Hutsot,T1,trunk,5,5,0.1,0.0,0.1,0.3
+Hamovil,TsometKiryatAta,T1,trunk,4,4,0.1,1.8,-1.7,-6.8
 Hamovil,KiryatAta North,T1,T1,3,3,0.0,0.0,0.0,0.0
 Hamovil,KiryatAta North-East,T1,T1,2,2,0.0,0.0,0.0,0.0
-Hamovil,Shefaram,T1,T1,1,1,0.0,2.1,-2.1,-2.1
-Hamovil,Nazareth,T1,T1,1,0,0.1,2.6,-2.5,-2.5
-Hamovil,TsurShalom,T1,T2,8,4,0.0,0.0,0.0,0.0
-Hamovil,Kiryon,T1,T2,7,4,0.0,2.8,-2.8,-19.5
-Hamovil,KiryatBialik Center,T1,T2,6,4,0.0,0.0,0.0,0.1
-Hamovil,KiryatHaim,T1,T2,5,4,0.0,0.0,0.0,0.1
+Hamovil,Shefaram,T1,T1,1,1,0.0,19.2,-19.2,-19.2
+Hamovil,Nazareth,T1,T1,1,0,0.4,8.8,-8.3,-8.3
+Hamovil,TsurShalom,T1,T2,8,4,0.5,0.0,0.5,3.6
+Hamovil,Kiryon,T1,T2,7,4,0.5,2.8,-2.2,-15.5
+Hamovil,KiryatBialik Center,T1,T2,6,4,0.7,1.2,-0.6,-3.3
+Hamovil,KiryatHaim,T1,T2,5,4,0.5,1.2,-0.8,-3.8
 Hamovil,SavyoneyYam,T1,T3,8,4,0.0,0.0,0.0,0.0
 Hamovil,KiryatYam A,T1,T3,7,4,0.0,0.0,0.0,0.0
 Hamovil,KiryatYam B+C,T1,T3,6,4,0.0,0.0,0.0,0.0
 Hamovil,KiryatHaim West,T1,T3,5,4,0.0,0.0,0.0,0.0
-Nazareth,TiratCarmel,T1,trunk,16,16,0.0,0.0,0.0,0.0
-Nazareth,Matam-NeotPeres,T1,trunk,15,15,121.9,180.0,-58.1,-871.3
-Nazareth,HofCarmel-NeveDavid,T1,trunk,14,14,7.2,0.0,7.2,100.5
-Nazareth,Hecht-Shprintzak,T1,trunk,13,13,21.8,271.2,-249.3,-3241.2
-Nazareth,EinHayam,T1,trunk,12,12,3.9,0.0,3.9,46.7
-Nazareth,BatGalim-KiryatEliezer,T1,trunk,11,11,86.8,521.1,-434.3,-4777.1
-Nazareth,Hamoshava,T1,trunk,10,10,66.9,0.0,66.9,669.2
-Nazareth,LowerCity,T1,trunk,9,9,132.2,431.5,-299.3,-2693.9
-Nazareth,Namal-Giborim,T1,trunk,8,8,82.3,244.3,-162.0,-1296.3
-Nazareth,Hamifrats,T1,trunk,7,7,49.7,283.0,-233.3,-1632.8
-Nazareth,Bazan-Hutsot,T1,trunk,6,6,34.4,36.1,-1.7,-10.4
-Nazareth,TsometKiryatAta,T1,trunk,5,5,29.8,1.5,28.3,141.3
-Nazareth,KiryatAta North,T1,T1,4,4,6.0,0.0,6.0,23.9
-Nazareth,KiryatAta North-East,T1,T1,3,3,2.4,0.0,2.4,7.2
-Nazareth,Shefaram,T1,T1,2,2,4.4,53.3,-48.9,-97.9
-Nazareth,Hamovil,T1,T1,1,1,0.2,0.0,0.2,0.2
-Nazareth,TsurShalom,T1,T2,9,5,20.2,0.2,20.0,179.6
-Nazareth,Kiryon,T1,T2,8,5,227.1,95.6,131.5,1052.3
-Nazareth,KiryatBialik Center,T1,T2,7,5,100.1,56.2,43.9,307.4
-Nazareth,KiryatHaim,T1,T2,6,5,68.7,227.7,-159.0,-954.0
+Nazareth,TiratCarmel,T1,trunk,16,16,0.8,0.0,0.8,13.4
+Nazareth,Matam-NeotPeres,T1,trunk,15,15,3.3,1.5,1.8,26.8
+Nazareth,HofCarmel-NeveDavid,T1,trunk,14,14,0.4,0.0,0.4,5.5
+Nazareth,Hecht-Shprintzak,T1,trunk,13,13,0.6,0.0,0.6,7.3
+Nazareth,EinHayam,T1,trunk,12,12,0.1,0.0,0.1,1.6
+Nazareth,BatGalim-KiryatEliezer,T1,trunk,11,11,5.2,1.0,4.2,46.1
+Nazareth,Hamoshava,T1,trunk,10,10,28.9,0.0,28.9,289.1
+Nazareth,LowerCity,T1,trunk,9,9,101.1,23.2,77.8,700.5
+Nazareth,Namal-Giborim,T1,trunk,8,8,42.0,21.8,20.2,161.9
+Nazareth,Hamifrats,T1,trunk,7,7,106.2,100.2,6.0,41.8
+Nazareth,Bazan-Hutsot,T1,trunk,6,6,40.2,11.8,28.5,170.8
+Nazareth,TsometKiryatAta,T1,trunk,5,5,43.0,10.8,32.2,161.2
+Nazareth,KiryatAta North,T1,T1,4,4,1.3,1.5,-0.2,-0.9
+Nazareth,KiryatAta North-East,T1,T1,3,3,0.3,0.2,0.1,0.2
+Nazareth,Shefaram,T1,T1,2,2,9.4,6.8,2.6,5.3
+Nazareth,Hamovil,T1,T1,1,1,7.2,2.8,4.5,4.5
+Nazareth,TsurShalom,T1,T2,9,5,13.9,0.2,13.7,122.9
+Nazareth,Kiryon,T1,T2,8,5,49.8,0.8,49.1,392.7
+Nazareth,KiryatBialik Center,T1,T2,7,5,30.0,1.0,29.0,203.1
+Nazareth,KiryatHaim,T1,T2,6,5,29.4,1.8,27.7,165.9
 Nazareth,SavyoneyYam,T1,T3,9,5,0.0,0.0,0.0,0.0
 Nazareth,KiryatYam A,T1,T3,8,5,0.0,0.0,0.0,0.0
-Nazareth,KiryatYam B+C,T1,T3,7,5,2.3,0.0,2.3,16.2
-Nazareth,KiryatHaim West,T1,T3,6,5,1.7,0.0,1.7,10.4
-TsurShalom,TiratCarmel,T2,trunk,15,15,0.0,0.0,0.0,0.6
-TsurShalom,Matam-NeotPeres,T2,trunk,14,14,16.0,129.4,-113.4,-1586.9
-TsurShalom,HofCarmel-NeveDavid,T2,trunk,13,13,0.9,0.0,0.9,12.3
-TsurShalom,Hecht-Shprintzak,T2,trunk,12,12,2.9,0.0,2.9,34.5
-TsurShalom,EinHayam,T2,trunk,11,11,0.5,9.1,-8.6,-94.8
-TsurShalom,BatGalim-KiryatEliezer,T2,trunk,10,10,13.1,9.6,3.5,35.4
-TsurShalom,Hamoshava,T2,trunk,9,9,2.3,45.3,-43.1,-387.6
-TsurShalom,LowerCity,T2,trunk,8,8,5.2,50.0,-44.8,-358.0
-TsurShalom,Namal-Giborim,T2,trunk,7,7,8.6,24.7,-16.0,-112.0
-TsurShalom,Hamifrats,T2,trunk,6,6,27.1,51.8,-24.7,-148.1
-TsurShalom,Bazan-Hutsot,T2,trunk,5,5,18.7,9.8,9.0,44.8
-TsurShalom,TsometKiryatAta,T2,trunk,4,4,16.0,46.4,-30.4,-121.5
-TsurShalom,KiryatAta North,T2,T1,5,4,2.5,0.0,2.5,12.5
-TsurShalom,KiryatAta North-East,T2,T1,6,4,1.0,0.0,1.0,6.0
-TsurShalom,Shefaram,T2,T1,7,4,0.0,0.0,0.0,0.3
-TsurShalom,Hamovil,T2,T1,8,4,0.0,0.0,0.0,0.0
-TsurShalom,Nazareth,T2,T1,9,4,0.2,1.2,-1.0,-8.8
-TsurShalom,Kiryon,T2,T2,1,1,63.2,42.8,20.4,20.4
-TsurShalom,KiryatBialik Center,T2,T2,2,2,36.2,72.4,-36.2,-72.4
-TsurShalom,KiryatHaim,T2,T2,3,3,33.1,62.7,-29.7,-89.0
-TsurShalom,SavyoneyYam,T2,T3,8,4,0.8,0.0,0.8,6.3
-TsurShalom,KiryatYam A,T2,T3,7,4,5.0,72.1,-67.1,-469.8
-TsurShalom,KiryatYam B+C,T2,T3,6,4,27.8,3.6,24.2,145.3
-TsurShalom,KiryatHaim West,T2,T3,5,4,8.6,11.3,-2.7,-13.7
-Kiryon,TiratCarmel,T2,trunk,14,14,0.1,0.0,0.1,0.8
-Kiryon,Matam-NeotPeres,T2,trunk,13,13,37.1,40.3,-3.2,-42.0
-Kiryon,HofCarmel-NeveDavid,T2,trunk,12,12,2.2,0.0,2.2,26.2
-Kiryon,Hecht-Shprintzak,T2,trunk,11,11,6.6,0.0,6.6,73.1
-Kiryon,EinHayam,T2,trunk,10,10,1.2,0.0,1.2,11.9
-Kiryon,BatGalim-KiryatEliezer,T2,trunk,9,9,28.1,11.8,16.4,147.2
-Kiryon,Hamoshava,T2,trunk,8,8,3.9,4.7,-0.8,-6.0
-Kiryon,LowerCity,T2,trunk,7,7,8.8,30.3,-21.6,-151.0
-Kiryon,Namal-Giborim,T2,trunk,6,6,12.4,58.0,-45.6,-273.7
-Kiryon,Hamifrats,T2,trunk,5,5,35.7,4.7,30.9,154.5
-Kiryon,Bazan-Hutsot,T2,trunk,4,4,24.6,153.9,-129.2,-516.9
-Kiryon,TsometKiryatAta,T2,trunk,3,3,23.1,22.7,0.4,1.1
-Kiryon,KiryatAta North,T2,T1,4,3,9.7,0.0,9.7,38.7
-Kiryon,KiryatAta North-East,T2,T1,5,3,3.9,0.0,3.9,19.4
-Kiryon,Shefaram,T2,T1,6,3,0.0,0.0,0.0,0.3
-Kiryon,Hamovil,T2,T1,7,3,0.0,0.0,0.0,0.0
-Kiryon,Nazareth,T2,T1,8,3,0.7,0.0,0.7,5.5
-Kiryon,TsurShalom,T2,T2,1,0,11.6,16.4,-4.7,-4.7
-Kiryon,KiryatBialik Center,T2,T2,1,1,55.0,42.4,12.6,12.6
-Kiryon,KiryatHaim,T2,T2,2,2,44.5,116.4,-71.9,-143.7
-Kiryon,SavyoneyYam,T2,T3,7,3,0.9,5.7,-4.8,-33.5
-Kiryon,KiryatYam A,T2,T3,6,3,5.5,50.6,-45.1,-270.5
-Kiryon,KiryatYam B+C,T2,T3,5,3,28.2,11.4,16.8,83.8
-Kiryon,KiryatHaim West,T2,T3,4,3,7.9,0.0,7.9,31.8
-KiryatBialik Center,TiratCarmel,T2,trunk,13,13,0.1,1.3,-1.1,-14.9
-KiryatBialik Center,Matam-NeotPeres,T2,trunk,12,12,127.4,37.7,89.7,1076.7
-KiryatBialik Center,HofCarmel-NeveDavid,T2,trunk,11,11,6.3,0.0,6.3,69.1
-KiryatBialik Center,Hecht-Shprintzak,T2,trunk,10,10,19.1,23.3,-4.2,-42.0
-KiryatBialik Center,EinHayam,T2,trunk,9,9,3.4,0.0,3.4,30.7
-KiryatBialik Center,BatGalim-KiryatEliezer,T2,trunk,8,8,79.2,11.2,68.0,543.9
-KiryatBialik Center,Hamoshava,T2,trunk,7,7,10.3,11.8,-1.5,-10.6
-KiryatBialik Center,LowerCity,T2,trunk,6,6,22.5,30.6,-8.0,-48.2
-KiryatBialik Center,Namal-Giborim,T2,trunk,5,5,29.5,1.1,28.5,142.3
-KiryatBialik Center,Hamifrats,T2,trunk,4,4,81.2,57.5,23.6,94.5
-KiryatBialik Center,Bazan-Hutsot,T2,trunk,3,3,56.1,0.0,56.1,168.3
-KiryatBialik Center,TsometKiryatAta,T2,trunk,2,2,55.3,49.9,5.4,10.8
-KiryatBialik Center,KiryatAta North,T2,T1,3,2,30.9,0.0,30.9,92.6
-KiryatBialik Center,KiryatAta North-East,T2,T1,4,2,12.4,4.4,8.0,32.0
-KiryatBialik Center,Shefaram,T2,T1,5,2,0.1,0.4,-0.4,-1.8
-KiryatBialik Center,Hamovil,T2,T1,6,2,0.0,2.0,-2.0,-11.8
-KiryatBialik Center,Nazareth,T2,T1,7,2,2.1,0.0,2.1,15.0
-KiryatBialik Center,TsurShalom,T2,T2,2,0,28.9,19.9,9.0,17.9
-KiryatBialik Center,Kiryon,T2,T2,1,0,155.8,64.4,91.3,91.3
-KiryatBialik Center,KiryatHaim,T2,T2,1,1,102.8,135.7,-32.9,-32.9
-KiryatBialik Center,SavyoneyYam,T2,T3,6,2,1.7,13.4,-11.7,-69.9
-KiryatBialik Center,KiryatYam A,T2,T3,5,2,11.0,9.3,1.7,8.4
-KiryatBialik Center,KiryatYam B+C,T2,T3,4,2,52.4,112.4,-60.0,-240.0
-KiryatBialik Center,KiryatHaim West,T2,T3,3,2,13.5,50.0,-36.5,-109.5
-KiryatHaim,TiratCarmel,T2,trunk,12,12,1.2,10.3,-9.1,-109.4
-KiryatHaim,Matam-NeotPeres,T2,trunk,11,11,88.7,66.7,22.0,241.9
-KiryatHaim,HofCarmel-NeveDavid,T2,trunk,10,10,4.6,37.0,-32.5,-324.5
-KiryatHaim,Hecht-Shprintzak,T2,trunk,9,9,13.9,72.0,-58.2,-523.6
-KiryatHaim,EinHayam,T2,trunk,8,8,2.5,0.0,2.5,19.8
-KiryatHaim,BatGalim-KiryatEliezer,T2,trunk,7,7,60.9,35.3,25.7,179.7
-KiryatHaim,Hamoshava,T2,trunk,6,6,6.7,8.1,-1.3,-8.0
-KiryatHaim,LowerCity,T2,trunk,5,5,16.2,91.8,-75.6,-378.1
-KiryatHaim,Namal-Giborim,T2,trunk,4,4,33.1,6.8,26.3,105.3
-KiryatHaim,Hamifrats,T2,trunk,3,3,105.9,38.6,67.3,202.0
-KiryatHaim,Bazan-Hutsot,T2,trunk,2,2,70.3,40.9,29.5,58.9
-KiryatHaim,TsometKiryatAta,T2,trunk,1,1,65.4,30.0,35.4,35.4
-KiryatHaim,KiryatAta North,T2,T1,2,1,26.3,0.0,26.3,52.6
-KiryatHaim,KiryatAta North-East,T2,T1,3,1,10.6,0.0,10.6,31.7
-KiryatHaim,Shefaram,T2,T1,4,1,0.0,1.1,-1.1,-4.2
-KiryatHaim,Hamovil,T2,T1,5,1,0.0,0.0,0.0,0.0
-KiryatHaim,Nazareth,T2,T1,6,1,1.8,0.0,1.8,10.8
-KiryatHaim,TsurShalom,T2,T2,3,0,20.6,82.7,-62.1,-186.4
-KiryatHaim,Kiryon,T2,T2,2,0,100.7,70.0,30.6,61.3
-KiryatHaim,KiryatBialik Center,T2,T2,1,0,95.8,169.3,-73.5,-73.5
-KiryatHaim,SavyoneyYam,T2,T3,5,1,2.8,12.9,-10.2,-50.8
-KiryatHaim,KiryatYam A,T2,T3,4,1,17.7,5.3,12.4,49.6
-KiryatHaim,KiryatYam B+C,T2,T3,3,1,99.2,60.2,39.1,117.2
-KiryatHaim,KiryatHaim West,T2,T3,2,1,31.0,55.2,-24.2,-48.4
-SavyoneyYam,TiratCarmel,T3,trunk,15,15,1.9,6.7,-4.8,-71.5
-SavyoneyYam,Matam-NeotPeres,T3,trunk,14,14,7.3,23.8,-16.5,-230.4
-SavyoneyYam,HofCarmel-NeveDavid,T3,trunk,13,13,0.4,0.0,0.4,5.6
-SavyoneyYam,Hecht-Shprintzak,T3,trunk,12,12,1.3,0.0,1.3,15.6
-SavyoneyYam,EinHayam,T3,trunk,11,11,0.2,0.0,0.2,2.6
-SavyoneyYam,BatGalim-KiryatEliezer,T3,trunk,10,10,9.8,20.3,-10.5,-104.9
-SavyoneyYam,Hamoshava,T3,trunk,9,9,3.3,0.0,3.3,29.7
-SavyoneyYam,LowerCity,T3,trunk,8,8,8.2,33.7,-25.5,-203.8
-SavyoneyYam,Namal-Giborim,T3,trunk,7,7,17.0,1.5,15.5,108.6
-SavyoneyYam,Hamifrats,T3,trunk,6,6,58.2,34.1,24.1,144.5
-SavyoneyYam,Bazan-Hutsot,T3,trunk,5,5,40.2,5.5,34.7,173.5
-SavyoneyYam,TsometKiryatAta,T3,trunk,4,4,49.5,51.7,-2.2,-8.6
-SavyoneyYam,KiryatAta North,T3,T1,5,4,53.0,0.0,53.0,265.2
-SavyoneyYam,KiryatAta North-East,T3,T1,6,4,21.3,0.0,21.3,127.8
-SavyoneyYam,Shefaram,T3,T1,7,4,0.0,0.0,0.0,0.0
-SavyoneyYam,Hamovil,T3,T1,8,4,0.0,0.0,0.0,0.0
-SavyoneyYam,Nazareth,T3,T1,9,4,0.1,0.0,0.1,1.2
-SavyoneyYam,TsurShalom,T3,T2,8,4,17.0,70.1,-53.1,-424.8
-SavyoneyYam,Kiryon,T3,T2,7,4,31.7,41.1,-9.4,-66.0
-SavyoneyYam,KiryatBialik Center,T3,T2,6,4,76.7,37.7,39.0,233.8
-SavyoneyYam,KiryatHaim,T3,T2,5,4,53.2,32.1,21.1,105.5
-SavyoneyYam,KiryatYam A,T3,T3,1,1,39.7,30.9,8.8,8.8
-SavyoneyYam,KiryatYam B+C,T3,T3,2,2,119.8,30.1,89.8,179.5
-SavyoneyYam,KiryatHaim West,T3,T3,3,3,3.6,2.4,1.2,3.5
-KiryatYam A,TiratCarmel,T3,trunk,14,14,1.3,8.7,-7.4,-103.7
-KiryatYam A,Matam-NeotPeres,T3,trunk,13,13,4.9,4.0,0.9,12.3
-KiryatYam A,HofCarmel-NeveDavid,T3,trunk,12,12,0.3,0.0,0.3,3.5
-KiryatYam A,Hecht-Shprintzak,T3,trunk,11,11,0.9,0.0,0.9,9.6
-KiryatYam A,EinHayam,T3,trunk,10,10,0.2,0.0,0.2,1.6
-KiryatYam A,BatGalim-KiryatEliezer,T3,trunk,9,9,6.6,24.5,-17.9,-161.0
-KiryatYam A,Hamoshava,T3,trunk,8,8,2.2,1.6,0.7,5.4
-KiryatYam A,LowerCity,T3,trunk,7,7,5.5,13.6,-8.1,-56.4
-KiryatYam A,Namal-Giborim,T3,trunk,6,6,11.4,3.9,7.6,45.5
-KiryatYam A,Hamifrats,T3,trunk,5,5,39.2,22.1,17.1,85.5
-KiryatYam A,Bazan-Hutsot,T3,trunk,4,4,27.1,37.1,-10.0,-39.9
-KiryatYam A,TsometKiryatAta,T3,trunk,3,3,33.3,67.6,-34.3,-102.9
-KiryatYam A,KiryatAta North,T3,T1,4,3,35.7,0.0,35.7,142.8
-KiryatYam A,KiryatAta North-East,T3,T1,5,3,14.3,0.0,14.3,71.7
-KiryatYam A,Shefaram,T3,T1,6,3,0.0,0.0,0.0,0.0
-KiryatYam A,Hamovil,T3,T1,7,3,0.0,0.0,0.0,0.0
-KiryatYam A,Nazareth,T3,T1,8,3,0.1,0.0,0.1,0.7
-KiryatYam A,TsurShalom,T3,T2,7,3,11.4,11.3,0.1,0.6
-KiryatYam A,Kiryon,T3,T2,6,3,21.3,20.8,0.5,3.3
-KiryatYam A,KiryatBialik Center,T3,T2,5,3,51.6,83.8,-32.2,-161.1
-KiryatYam A,KiryatHaim,T3,T2,4,3,35.8,65.1,-29.3,-117.2
-KiryatYam A,SavyoneyYam,T3,T3,1,0,4.2,6.9,-2.7,-2.7
-KiryatYam A,KiryatYam B+C,T3,T3,1,1,80.7,91.2,-10.5,-10.5
-KiryatYam A,KiryatHaim West,T3,T3,2,2,2.4,6.2,-3.8,-7.6
-KiryatYam B+C,TiratCarmel,T3,trunk,13,13,2.1,18.7,-16.5,-214.9
-KiryatYam B+C,Matam-NeotPeres,T3,trunk,12,12,9.4,203.1,-193.6,-2323.8
-KiryatYam B+C,HofCarmel-NeveDavid,T3,trunk,11,11,0.6,23.3,-22.7,-249.9
-KiryatYam B+C,Hecht-Shprintzak,T3,trunk,10,10,1.7,2.1,-0.4,-3.8
-KiryatYam B+C,EinHayam,T3,trunk,9,9,0.3,0.0,0.3,2.7
-KiryatYam B+C,BatGalim-KiryatEliezer,T3,trunk,8,8,12.7,30.6,-17.9,-143.1
-KiryatYam B+C,Hamoshava,T3,trunk,7,7,3.1,0.0,3.1,21.8
-KiryatYam B+C,LowerCity,T3,trunk,6,6,8.4,38.8,-30.5,-182.7
-KiryatYam B+C,Namal-Giborim,T3,trunk,5,5,20.9,31.3,-10.4,-52.2
-KiryatYam B+C,Hamifrats,T3,trunk,4,4,75.5,87.5,-12.0,-47.8
-KiryatYam B+C,Bazan-Hutsot,T3,trunk,3,3,52.2,69.8,-17.6,-52.7
-KiryatYam B+C,TsometKiryatAta,T3,trunk,2,2,57.6,118.4,-60.8,-121.6
-KiryatYam B+C,KiryatAta North,T3,T1,3,2,47.9,0.0,47.9,143.8
-KiryatYam B+C,KiryatAta North-East,T3,T1,4,2,19.2,0.0,19.2,77.0
-KiryatYam B+C,Shefaram,T3,T1,5,2,0.0,0.0,0.0,0.0
-KiryatYam B+C,Hamovil,T3,T1,6,2,0.0,5.7,-5.7,-34.1
-KiryatYam B+C,Nazareth,T3,T1,7,2,0.2,0.7,-0.4,-2.9
-KiryatYam B+C,TsurShalom,T3,T2,6,2,16.5,67.6,-51.1,-306.5
-KiryatYam B+C,Kiryon,T3,T2,5,2,40.1,110.9,-70.8,-353.9
-KiryatYam B+C,KiryatBialik Center,T3,T2,4,2,74.9,147.6,-72.7,-291.0
-KiryatYam B+C,KiryatHaim,T3,T2,3,2,63.6,64.1,-0.5,-1.5
-KiryatYam B+C,SavyoneyYam,T3,T3,2,0,6.3,14.6,-8.4,-16.7
-KiryatYam B+C,KiryatYam A,T3,T3,1,0,39.9,56.1,-16.2,-16.2
-KiryatYam B+C,KiryatHaim West,T3,T3,1,1,14.4,25.3,-10.9,-10.9
-KiryatHaim West,TiratCarmel,T3,trunk,12,12,2.3,0.0,2.3,27.4
-KiryatHaim West,Matam-NeotPeres,T3,trunk,11,11,23.2,53.6,-30.4,-334.9
-KiryatHaim West,HofCarmel-NeveDavid,T3,trunk,10,10,0.9,0.0,0.9,9.1
-KiryatHaim West,Hecht-Shprintzak,T3,trunk,9,9,2.8,0.0,2.8,25.0
-KiryatHaim West,EinHayam,T3,trunk,8,8,0.5,0.0,0.5,4.0
-KiryatHaim West,BatGalim-KiryatEliezer,T3,trunk,7,7,20.3,64.3,-43.9,-307.6
-KiryatHaim West,Hamoshava,T3,trunk,6,6,2.0,0.0,2.0,11.8
-KiryatHaim West,LowerCity,T3,trunk,5,5,7.4,43.4,-36.0,-180.1
-KiryatHaim West,Namal-Giborim,T3,trunk,4,4,31.3,0.0,31.3,125.0
-KiryatHaim West,Hamifrats,T3,trunk,3,3,120.7,12.8,107.9,323.6
-KiryatHaim West,Bazan-Hutsot,T3,trunk,2,2,81.5,7.5,74.0,148.0
-KiryatHaim West,TsometKiryatAta,T3,trunk,1,1,68.7,89.8,-21.1,-21.1
-KiryatHaim West,KiryatAta North,T3,T1,2,1,8.5,42.0,-33.4,-66.9
-KiryatHaim West,KiryatAta North-East,T3,T1,3,1,3.4,2.5,1.0,2.9
-KiryatHaim West,Shefaram,T3,T1,4,1,0.1,0.0,0.1,0.3
-KiryatHaim West,Hamovil,T3,T1,5,1,0.0,0.0,0.0,0.1
-KiryatHaim West,Nazareth,T3,T1,6,1,0.6,0.0,0.6,3.8
-KiryatHaim West,TsurShalom,T3,T2,5,1,8.2,0.0,8.2,40.8
-KiryatHaim West,Kiryon,T3,T2,4,1,59.5,29.9,29.5,118.1
-KiryatHaim West,KiryatBialik Center,T3,T2,3,1,38.9,0.0,38.9,116.7
-KiryatHaim West,KiryatHaim,T3,T2,2,1,82.1,0.0,82.1,164.3
-KiryatHaim West,SavyoneyYam,T3,T3,3,0,4.0,0.0,4.0,12.1
-KiryatHaim West,KiryatYam A,T3,T3,2,0,25.7,4.2,21.5,43.0
-KiryatHaim West,KiryatYam B+C,T3,T3,1,0,157.4,41.7,115.7,115.7
+Nazareth,KiryatYam B+C,T1,T3,7,5,0.4,0.0,0.4,3.1
+Nazareth,KiryatHaim West,T1,T3,6,5,3.6,0.0,3.6,21.5
+TsurShalom,TiratCarmel,T2,trunk,15,15,20.7,7.8,12.9,193.7
+TsurShalom,Matam-NeotPeres,T2,trunk,14,14,36.7,35.8,0.9,13.0
+TsurShalom,HofCarmel-NeveDavid,T2,trunk,13,13,4.3,2.5,1.8,23.1
+TsurShalom,Hecht-Shprintzak,T2,trunk,12,12,6.1,2.0,4.1,48.8
+TsurShalom,EinHayam,T2,trunk,11,11,1.5,1.0,0.5,5.2
+TsurShalom,BatGalim-KiryatEliezer,T2,trunk,10,10,35.5,40.8,-5.2,-52.4
+TsurShalom,Hamoshava,T2,trunk,9,9,21.6,8.8,12.9,115.7
+TsurShalom,LowerCity,T2,trunk,8,8,75.6,46.0,29.6,236.7
+TsurShalom,Namal-Giborim,T2,trunk,7,7,31.8,15.5,16.3,114.4
+TsurShalom,Hamifrats,T2,trunk,6,6,86.3,99.8,-13.4,-80.4
+TsurShalom,Bazan-Hutsot,T2,trunk,5,5,32.7,19.2,13.4,67.2
+TsurShalom,TsometKiryatAta,T2,trunk,4,4,41.3,29.8,11.5,46.0
+TsurShalom,KiryatAta North,T2,T1,5,4,8.4,4.0,4.4,21.8
+TsurShalom,KiryatAta North-East,T2,T1,6,4,2.2,1.2,0.9,5.5
+TsurShalom,Shefaram,T2,T1,7,4,0.7,1.5,-0.8,-5.3
+TsurShalom,Hamovil,T2,T1,8,4,0.1,1.5,-1.4,-11.1
+TsurShalom,Nazareth,T2,T1,9,4,3.7,1.5,2.2,20.2
+TsurShalom,Kiryon,T2,T2,1,1,158.3,108.0,50.3,50.3
+TsurShalom,KiryatBialik Center,T2,T2,2,2,113.8,89.2,24.5,49.1
+TsurShalom,KiryatHaim,T2,T2,3,3,116.6,78.0,38.6,115.8
+TsurShalom,SavyoneyYam,T2,T3,8,4,6.2,8.5,-2.3,-18.7
+TsurShalom,KiryatYam A,T2,T3,7,4,9.0,10.8,-1.7,-12.2
+TsurShalom,KiryatYam B+C,T2,T3,6,4,33.0,37.5,-4.5,-27.3
+TsurShalom,KiryatHaim West,T2,T3,5,4,12.4,8.5,3.9,19.6
+Kiryon,TiratCarmel,T2,trunk,14,14,19.0,12.8,6.3,87.7
+Kiryon,Matam-NeotPeres,T2,trunk,13,13,41.4,57.8,-16.4,-212.7
+Kiryon,HofCarmel-NeveDavid,T2,trunk,12,12,4.9,4.2,0.6,7.7
+Kiryon,Hecht-Shprintzak,T2,trunk,11,11,6.9,4.0,2.9,32.3
+Kiryon,EinHayam,T2,trunk,10,10,1.7,3.0,-1.3,-13.2
+Kiryon,BatGalim-KiryatEliezer,T2,trunk,9,9,40.4,61.0,-20.6,-185.1
+Kiryon,Hamoshava,T2,trunk,8,8,23.0,9.5,13.5,108.3
+Kiryon,LowerCity,T2,trunk,7,7,80.6,79.8,0.8,5.9
+Kiryon,Namal-Giborim,T2,trunk,6,6,33.7,23.0,10.7,64.2
+Kiryon,Hamifrats,T2,trunk,5,5,90.0,143.0,-53.0,-264.9
+Kiryon,Bazan-Hutsot,T2,trunk,4,4,34.1,28.0,6.1,24.3
+Kiryon,TsometKiryatAta,T2,trunk,3,3,43.2,41.0,2.2,6.6
+Kiryon,KiryatAta North,T2,T1,4,3,9.6,4.5,5.1,20.5
+Kiryon,KiryatAta North-East,T2,T1,5,3,2.5,1.0,1.5,7.5
+Kiryon,Shefaram,T2,T1,6,3,0.7,0.5,0.2,1.0
+Kiryon,Hamovil,T2,T1,7,3,0.1,2.0,-1.9,-13.2
+Kiryon,Nazareth,T2,T1,8,3,3.3,5.2,-1.9,-15.2
+Kiryon,TsurShalom,T2,T2,1,0,58.0,45.8,12.2,12.2
+Kiryon,KiryatBialik Center,T2,T2,1,1,108.9,57.8,51.1,51.1
+Kiryon,KiryatHaim,T2,T2,2,2,110.4,67.0,43.4,86.7
+Kiryon,SavyoneyYam,T2,T3,7,3,6.6,8.8,-2.2,-15.2
+Kiryon,KiryatYam A,T2,T3,6,3,9.6,12.2,-2.6,-15.8
+Kiryon,KiryatYam B+C,T2,T3,5,3,34.4,22.8,11.6,58.1
+Kiryon,KiryatHaim West,T2,T3,4,3,12.7,5.8,6.9,27.7
+KiryatBialik Center,TiratCarmel,T2,trunk,13,13,36.0,14.8,21.2,276.0
+KiryatBialik Center,Matam-NeotPeres,T2,trunk,12,12,88.5,43.5,45.0,540.1
+KiryatBialik Center,HofCarmel-NeveDavid,T2,trunk,11,11,7.9,3.8,4.2,46.2
+KiryatBialik Center,Hecht-Shprintzak,T2,trunk,10,10,11.3,5.5,5.8,57.6
+KiryatBialik Center,EinHayam,T2,trunk,9,9,2.7,1.2,1.5,13.3
+KiryatBialik Center,BatGalim-KiryatEliezer,T2,trunk,8,8,65.8,56.8,9.1,72.6
+KiryatBialik Center,Hamoshava,T2,trunk,7,7,39.3,11.8,27.5,192.5
+KiryatBialik Center,LowerCity,T2,trunk,6,6,137.3,86.2,51.0,306.3
+KiryatBialik Center,Namal-Giborim,T2,trunk,5,5,57.7,16.8,41.0,204.8
+KiryatBialik Center,Hamifrats,T2,trunk,4,4,155.8,112.2,43.5,174.2
+KiryatBialik Center,Bazan-Hutsot,T2,trunk,3,3,59.0,24.0,35.0,104.9
+KiryatBialik Center,TsometKiryatAta,T2,trunk,2,2,74.5,52.8,21.8,43.6
+KiryatBialik Center,KiryatAta North,T2,T1,3,2,15.6,2.0,13.6,40.7
+KiryatBialik Center,KiryatAta North-East,T2,T1,4,2,4.0,1.0,3.0,12.1
+KiryatBialik Center,Shefaram,T2,T1,5,2,1.3,0.2,1.0,5.2
+KiryatBialik Center,Hamovil,T2,T1,6,2,0.2,2.5,-2.3,-13.8
+KiryatBialik Center,Nazareth,T2,T1,7,2,6.5,1.5,5.0,34.7
+KiryatBialik Center,TsurShalom,T2,T2,2,0,104.7,61.5,43.2,86.3
+KiryatBialik Center,Kiryon,T2,T2,1,0,275.0,99.2,175.7,175.7
+KiryatBialik Center,KiryatHaim,T2,T2,1,1,204.7,179.2,25.4,25.4
+KiryatBialik Center,SavyoneyYam,T2,T3,6,2,11.2,11.2,-0.0,-0.3
+KiryatBialik Center,KiryatYam A,T2,T3,5,2,16.4,26.0,-9.6,-48.1
+KiryatBialik Center,KiryatYam B+C,T2,T3,4,2,59.5,44.5,15.0,60.0
+KiryatBialik Center,KiryatHaim West,T2,T3,3,2,22.3,16.0,6.3,18.8
+KiryatHaim,TiratCarmel,T2,trunk,12,12,29.1,33.2,-4.2,-50.0
+KiryatHaim,Matam-NeotPeres,T2,trunk,11,11,102.0,77.2,24.7,271.8
+KiryatHaim,HofCarmel-NeveDavid,T2,trunk,10,10,10.9,16.2,-5.4,-53.5
+KiryatHaim,Hecht-Shprintzak,T2,trunk,9,9,15.4,3.8,11.7,105.3
+KiryatHaim,EinHayam,T2,trunk,8,8,3.7,4.0,-0.3,-2.0
+KiryatHaim,BatGalim-KiryatEliezer,T2,trunk,7,7,89.0,96.5,-7.5,-52.4
+KiryatHaim,Hamoshava,T2,trunk,6,6,36.5,12.5,24.0,144.1
+KiryatHaim,LowerCity,T2,trunk,5,5,127.7,97.8,30.0,149.8
+KiryatHaim,Namal-Giborim,T2,trunk,4,4,56.0,34.5,21.5,86.2
+KiryatHaim,Hamifrats,T2,trunk,3,3,152.5,144.0,8.5,25.5
+KiryatHaim,Bazan-Hutsot,T2,trunk,2,2,56.1,26.2,29.9,59.8
+KiryatHaim,TsometKiryatAta,T2,trunk,1,1,69.9,70.0,-0.1,-0.1
+KiryatHaim,KiryatAta North,T2,T1,2,1,15.9,6.0,9.9,19.7
+KiryatHaim,KiryatAta North-East,T2,T1,3,1,4.1,2.8,1.4,4.1
+KiryatHaim,Shefaram,T2,T1,4,1,0.8,2.0,-1.2,-4.9
+KiryatHaim,Hamovil,T2,T1,5,1,0.2,2.2,-2.1,-10.3
+KiryatHaim,Nazareth,T2,T1,6,1,3.7,3.0,0.7,4.4
+KiryatHaim,TsurShalom,T2,T2,3,0,69.0,67.2,1.8,5.3
+KiryatHaim,Kiryon,T2,T2,2,0,154.2,91.8,62.5,125.0
+KiryatHaim,KiryatBialik Center,T2,T2,1,0,125.1,144.2,-19.1,-19.1
+KiryatHaim,SavyoneyYam,T2,T3,5,1,15.4,8.0,7.4,37.2
+KiryatHaim,KiryatYam A,T2,T3,4,1,22.6,15.8,6.8,27.3
+KiryatHaim,KiryatYam B+C,T2,T3,3,1,90.4,46.8,43.7,131.0
+KiryatHaim,KiryatHaim West,T2,T3,2,1,34.2,40.2,-6.1,-12.1
+SavyoneyYam,TiratCarmel,T3,trunk,15,15,5.1,3.2,1.8,27.1
+SavyoneyYam,Matam-NeotPeres,T3,trunk,14,14,21.7,21.8,-0.0,-0.4
+SavyoneyYam,HofCarmel-NeveDavid,T3,trunk,13,13,2.6,3.0,-0.4,-4.7
+SavyoneyYam,Hecht-Shprintzak,T3,trunk,12,12,3.7,0.5,3.2,38.9
+SavyoneyYam,EinHayam,T3,trunk,11,11,0.9,0.5,0.4,4.5
+SavyoneyYam,BatGalim-KiryatEliezer,T3,trunk,10,10,22.6,19.8,2.9,28.9
+SavyoneyYam,Hamoshava,T3,trunk,9,9,6.0,2.5,3.5,31.3
+SavyoneyYam,LowerCity,T3,trunk,8,8,21.2,21.8,-0.6,-4.5
+SavyoneyYam,Namal-Giborim,T3,trunk,7,7,15.3,8.0,7.3,50.8
+SavyoneyYam,Hamifrats,T3,trunk,6,6,90.8,56.8,34.0,204.2
+SavyoneyYam,Bazan-Hutsot,T3,trunk,5,5,34.4,19.0,15.4,76.8
+SavyoneyYam,TsometKiryatAta,T3,trunk,4,4,43.4,38.2,5.1,20.5
+SavyoneyYam,KiryatAta North,T3,T1,5,4,11.8,0.8,11.0,55.2
+SavyoneyYam,KiryatAta North-East,T3,T1,6,4,3.1,0.0,3.1,18.3
+SavyoneyYam,Shefaram,T3,T1,7,4,0.1,0.0,0.1,0.4
+SavyoneyYam,Hamovil,T3,T1,8,4,0.1,1.2,-1.2,-9.6
+SavyoneyYam,Nazareth,T3,T1,9,4,1.1,2.2,-1.1,-9.9
+SavyoneyYam,TsurShalom,T3,T2,8,4,20.9,34.0,-13.1,-105.0
+SavyoneyYam,Kiryon,T3,T2,7,4,37.2,24.2,13.0,90.8
+SavyoneyYam,KiryatBialik Center,T3,T2,6,4,35.4,18.8,16.7,100.1
+SavyoneyYam,KiryatHaim,T3,T2,5,4,38.8,20.2,18.5,92.6
+SavyoneyYam,KiryatYam A,T3,T3,1,1,38.1,42.8,-4.6,-4.6
+SavyoneyYam,KiryatYam B+C,T3,T3,2,2,86.8,68.0,18.8,37.6
+SavyoneyYam,KiryatHaim West,T3,T3,3,3,9.5,24.8,-15.2,-45.7
+KiryatYam A,TiratCarmel,T3,trunk,14,14,4.5,8.5,-4.0,-55.9
+KiryatYam A,Matam-NeotPeres,T3,trunk,13,13,19.3,26.5,-7.2,-93.1
+KiryatYam A,HofCarmel-NeveDavid,T3,trunk,12,12,2.4,0.5,1.9,22.2
+KiryatYam A,Hecht-Shprintzak,T3,trunk,11,11,3.3,2.5,0.8,9.2
+KiryatYam A,EinHayam,T3,trunk,10,10,0.8,0.0,0.8,8.1
+KiryatYam A,BatGalim-KiryatEliezer,T3,trunk,9,9,20.2,20.5,-0.3,-3.1
+KiryatYam A,Hamoshava,T3,trunk,8,8,5.3,4.5,0.8,6.5
+KiryatYam A,LowerCity,T3,trunk,7,7,18.9,20.8,-1.9,-13.2
+KiryatYam A,Namal-Giborim,T3,trunk,6,6,13.6,13.0,0.6,3.5
+KiryatYam A,Hamifrats,T3,trunk,5,5,80.8,63.0,17.8,89.1
+KiryatYam A,Bazan-Hutsot,T3,trunk,4,4,30.6,9.5,21.1,84.4
+KiryatYam A,TsometKiryatAta,T3,trunk,3,3,38.6,35.5,3.1,9.3
+KiryatYam A,KiryatAta North,T3,T1,4,3,10.5,0.0,10.5,42.0
+KiryatYam A,KiryatAta North-East,T3,T1,5,3,2.7,0.0,2.7,13.6
+KiryatYam A,Shefaram,T3,T1,6,3,0.0,0.5,-0.5,-2.7
+KiryatYam A,Hamovil,T3,T1,7,3,0.0,0.5,-0.5,-3.2
+KiryatYam A,Nazareth,T3,T1,8,3,1.0,2.5,-1.5,-11.8
+KiryatYam A,TsurShalom,T3,T2,7,3,18.6,34.8,-16.2,-113.1
+KiryatYam A,Kiryon,T3,T2,6,3,33.1,37.0,-3.9,-23.1
+KiryatYam A,KiryatBialik Center,T3,T2,5,3,31.5,45.8,-14.2,-71.0
+KiryatYam A,KiryatHaim,T3,T2,4,3,34.5,35.2,-0.7,-2.9
+KiryatYam A,SavyoneyYam,T3,T3,1,0,23.2,29.0,-5.8,-5.8
+KiryatYam A,KiryatYam B+C,T3,T3,1,1,77.3,72.2,5.0,5.0
+KiryatYam A,KiryatHaim West,T3,T3,2,2,8.5,17.5,-9.0,-18.1
+KiryatYam B+C,TiratCarmel,T3,trunk,13,13,18.0,37.5,-19.5,-252.9
+KiryatYam B+C,Matam-NeotPeres,T3,trunk,12,12,71.7,135.2,-63.6,-762.7
+KiryatYam B+C,HofCarmel-NeveDavid,T3,trunk,11,11,8.7,17.5,-8.8,-96.8
+KiryatYam B+C,Hecht-Shprintzak,T3,trunk,10,10,12.3,6.8,5.6,55.8
+KiryatYam B+C,EinHayam,T3,trunk,9,9,3.0,2.5,0.5,4.4
+KiryatYam B+C,BatGalim-KiryatEliezer,T3,trunk,8,8,71.9,269.2,-197.3,-1578.4
+KiryatYam B+C,Hamoshava,T3,trunk,7,7,19.5,15.0,4.5,31.7
+KiryatYam B+C,LowerCity,T3,trunk,6,6,68.7,165.5,-96.8,-580.8
+KiryatYam B+C,Namal-Giborim,T3,trunk,5,5,36.9,19.2,17.7,88.5
+KiryatYam B+C,Hamifrats,T3,trunk,4,4,165.2,172.2,-7.1,-28.4
+KiryatYam B+C,Bazan-Hutsot,T3,trunk,3,3,62.5,62.2,0.3,0.8
+KiryatYam B+C,TsometKiryatAta,T3,trunk,2,2,77.5,89.8,-12.2,-24.5
+KiryatYam B+C,KiryatAta North,T3,T1,3,2,19.3,4.5,14.8,44.3
+KiryatYam B+C,KiryatAta North-East,T3,T1,4,2,5.0,0.0,5.0,20.0
+KiryatYam B+C,Shefaram,T3,T1,5,2,0.3,0.0,0.3,1.4
+KiryatYam B+C,Hamovil,T3,T1,6,2,0.1,0.0,0.1,0.8
+KiryatYam B+C,Nazareth,T3,T1,7,2,2.2,0.5,1.7,11.7
+KiryatYam B+C,TsurShalom,T3,T2,6,2,37.5,37.8,-0.2,-1.4
+KiryatYam B+C,Kiryon,T3,T2,5,2,69.0,57.2,11.8,58.9
+KiryatYam B+C,KiryatBialik Center,T3,T2,4,2,64.2,57.8,6.5,25.8
+KiryatYam B+C,KiryatHaim,T3,T2,3,2,97.2,51.8,45.5,136.5
+KiryatYam B+C,SavyoneyYam,T3,T3,2,0,40.0,54.2,-14.2,-28.5
+KiryatYam B+C,KiryatYam A,T3,T3,1,0,58.5,58.2,0.3,0.3
+KiryatYam B+C,KiryatHaim West,T3,T3,1,1,33.2,53.0,-19.8,-19.8
+KiryatHaim West,TiratCarmel,T3,trunk,12,12,15.2,12.0,3.2,38.7
+KiryatHaim West,Matam-NeotPeres,T3,trunk,11,11,65.6,87.7,-22.0,-242.4
+KiryatHaim West,HofCarmel-NeveDavid,T3,trunk,10,10,7.0,4.5,2.5,25.3
+KiryatHaim West,Hecht-Shprintzak,T3,trunk,9,9,10.0,1.0,9.0,80.6
+KiryatHaim West,EinHayam,T3,trunk,8,8,2.4,2.0,0.4,3.3
+KiryatHaim West,BatGalim-KiryatEliezer,T3,trunk,7,7,56.9,138.4,-81.5,-570.5
+KiryatHaim West,Hamoshava,T3,trunk,6,6,15.7,5.2,10.5,62.7
+KiryatHaim West,LowerCity,T3,trunk,5,5,55.0,88.5,-33.5,-167.5
+KiryatHaim West,Namal-Giborim,T3,trunk,4,4,25.1,9.5,15.6,62.4
+KiryatHaim West,Hamifrats,T3,trunk,3,3,72.1,65.6,6.5,19.5
+KiryatHaim West,Bazan-Hutsot,T3,trunk,2,2,26.2,16.1,10.1,20.2
+KiryatHaim West,TsometKiryatAta,T3,trunk,1,1,31.5,42.2,-10.8,-10.8
+KiryatHaim West,KiryatAta North,T3,T1,2,1,6.4,3.5,2.9,5.9
+KiryatHaim West,KiryatAta North-East,T3,T1,3,1,1.7,2.0,-0.3,-1.0
+KiryatHaim West,Shefaram,T3,T1,4,1,0.3,0.5,-0.2,-0.8
+KiryatHaim West,Hamovil,T3,T1,5,1,0.1,0.0,0.1,0.5
+KiryatHaim West,Nazareth,T3,T1,6,1,1.1,3.0,-1.9,-11.4
+KiryatHaim West,TsurShalom,T3,T2,5,1,15.4,17.8,-2.4,-11.8
+KiryatHaim West,Kiryon,T3,T2,4,1,30.1,18.0,12.1,48.4
+KiryatHaim West,KiryatBialik Center,T3,T2,3,1,26.8,26.5,0.3,0.9
+KiryatHaim West,KiryatHaim,T3,T2,2,1,62.7,42.2,20.5,41.0
+KiryatHaim West,SavyoneyYam,T3,T3,3,0,10.7,3.2,7.4,22.3
+KiryatHaim West,KiryatYam A,T3,T3,2,0,15.6,10.0,5.6,11.3
+KiryatHaim West,KiryatYam B+C,T3,T3,1,0,69.2,34.8,34.4,34.4
