@@ -405,6 +405,16 @@ alternative is removed on the trunk pairs (bus GC set to the feeder-to-LRT GC), 
 on capture. Rerun 31 → 32; report both. **Outputs.** `Output/skims/bus_truncated/`. **Documents.**
 §6ac addendum, S3 ticked. Effort: two hours.
 
+**Status, 23 September 2026 — done for 2022; step 32 not rerun.** Implemented literally as
+specified: on the 90 trunk pairs, `bus_gc_eff` is overwritten with that LRT scenario's own GC
+(`SK[sc]['gc']`) before the `dL` pivot, per scenario per λ/premium case — off-trunk pairs keep
+the real bus GC, since the bus is already only a feeder there. Central case, `'full'` →
+`'truncated'`: underground 4,254 → 5,754 (+35%), ground 3,206 → 5,270 (+64%), design (no accel)
+5,095 → 6,159 (+21%), design + accel 4,300 → 5,776 (+34%), mixed 3,520 → 5,318 (+51%) — the
+regimes whose bus alternative was previously closest to competitive gain the most. **Not
+done:** step 32's forecast-year rerun under `'truncated'` (2022 central case only, matching the
+precedent set by C4 and C5).
+
 ### C8. Designed uncertainty experiment (task C3)
 
 A full factorial over: coverage threshold in step 15 (the saved variants

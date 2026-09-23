@@ -281,6 +281,14 @@ case capture at the default 5-minute headway: 4,300 (design + accel) and 3,520 (
 every regime (`Output/skims/lrt_capture_regime_headway_matrix.csv`). None of this changes which
 regime is largest or smallest.
 
+**Update, 23 September 2026 (task C7 — bus-network response, scenario S3).** A `BUS_COMPETITION`
+switch on step 31 (`'full'` default, `'truncated'` the alternative) gives the upper bound on
+capture that a truncated opening-year bus network would produce: removing the trunk's direct
+bus as an independent alternative (§6ac addendum) raises the central case 21–64 % depending on
+regime (e.g. 4,254 → 5,754 underground), reported under `Output/skims/bus_truncated/` beside
+the full-competition case, not adopted as it — the actual opening-year bus plan is still a
+client-side request.
+
 Every published product, what it was built from, and its status:
 
 | Product (`Output/…`) | Built by | Base / inputs | Geography | Modes | Vintage | Status |
@@ -2181,6 +2189,25 @@ already present before task C5. It is well inside the λ and premium ranges alre
 whiskers and does not change any conclusion; the round-number 4,250 is left standing elsewhere
 in this document rather than chasing a 0.1 % rerun-to-rerun tolerance through every quoted
 figure.
+
+**Addendum, 23 September 2026 — bus-network response, an upper bound on capture (task C7,
+scenario S3).** `BUS_COMPETITION` (`'full'`, default, or `'truncated'`), an environment
+variable read alongside `GC_SOURCE_DIR` and `LRT_HEADWAY`. Today's capture (every case above)
+assumes the parallel bus keeps running unchanged once the LRT opens — a conservative,
+full-competition assumption; the opening-year bus network plan itself is still a client-side
+request (task 3b.8, `docs/RED_TEAM_RESPONSE_2026-09-23.md` §4). `'truncated'` is the opposite
+bound: on the 90 trunk pairs (the ten `ON_LINE` station areas) the direct bus is no longer an
+independent alternative — a rider there faces the LRT's own generalized cost instead of a
+separate, often cheaper, all-bus trip (`bus_gc_eff = SK['bus']['gc']` everywhere except the
+trunk, where it is overwritten with `SK[sc]['gc']`, so only the LRT premium still separates
+the two inside the transit nest); off-trunk pairs are untouched, since the bus is already only
+a feeder there in every scenario. Central case, 2022, `'full'` → `'truncated'`: underground
+4,254 → 5,754 (+35 %), ground 3,206 → 5,270 (+64 %), design (no accel) 5,095 → 6,159 (+21 %),
+design + accel 4,300 → 5,776 (+34 %), mixed 3,520 → 5,318 (+51 %) — the ground and mixed
+regimes gain the most, since a competing bus was previously closer to those regimes' own GC
+than to underground's, so removing it changes more of the choice. Reported as the upper bound
+under `Output/skims/bus_truncated/`, beside the full-competition central case, not in place of
+it.
 
 ---
 
