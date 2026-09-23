@@ -127,7 +127,7 @@ the branch geometry and operating plan; the national model's mode-choice paramet
 | Bus network plan for the opening year: lines truncated to feeders, lines kept in parallel | Route competition in the capture (S3) | Planning team | High |
 | Israel Railways station boardings, Haifa stations, 2018 / 2019 / 2022 | Local rail vintage instead of the national ratio; validates the rail layer | Israel Railways or CBS | High |
 | CBS population and employment by statistical area, 2018 and 2022 | Direct 2018 → 2022 change instead of the extrapolated 2020 → 2025 trend (§8 caveat 11) | CBS, public | High |
-| Road traffic counts on two or three corridor screenlines, AM by direction | Validates the car layer and the car peak factors (B1) | Netivei Israel, Haifa municipality | High |
+| Road traffic counts on two or three corridor screenlines, AM by direction | Validates the car layer and the car peak factors (B1) | Netivei Israel, Haifa municipality | High — **received 23 Sep 2026** (`Input/Network_with_Counts/`, hourly PCE on 3,241 links, 2017–2023) and used in step 36 (§6ah) |
 | Metronit ridership before and after 2013; Red Line first-year ridership vs its forecast | Anchors the LRT preference term until SP data exist | Operators, Ministry, published reports | High |
 | Stated-preference survey, 300–500 corridor travellers: LRT vs bus vs car, with in-vehicle time, access, wait, transfer, fare, reliability and seat attributes | Calibrated λ, LRT constant, transfer penalties; the proper fix for the new-mode problem | New collection | High, longest lead time |
 | Cellular product trip definition: dwell and minimum-distance thresholds | Whether cellular can arbitrate short-trip volumes (B1) | Cellular provider | Medium |

@@ -1,10 +1,14 @@
 # Nofit LRT Extension — Full Project Documentation, in Plain English
 
-> **Status note, 23 September 2026.** The numbers in this companion predate two changes of
-> that day: the trips file's mode codes 4 (group taxi) and 5 (Matronit) were found swapped in
-> steps 15–32 and the chain was rerun with the corrected codes, and step 33 estimated the cost
-> sensitivity λ at the person level. Read the values here as the 22 September state; the
-> current ones are in `METHODOLOGY.md` §0 ("Rerun") and §6m–§6ae.
+> **Status note, 23 September 2026.** The numbers in Parts 1–4 are the state of 22 September
+> 2026. Three things changed on 23 September: the trips file's mode codes 4 (group taxi) and 5
+> (Matronit) were found swapped and the chain rerun with the corrected codes; step 33 estimated
+> the cost sensitivity λ at the person level; and, after new smart-card data for 2025 and a
+> rerun of the matrix tests, step 15's ticketing reference was moved from the on-board survey's
+> destination pattern to RavKav's own inferred alightings and the whole chain rebuilt. **Part 5
+> at the end of this document explains all of this in plain language and carries the current
+> headline numbers**; `METHODOLOGY.md` §0 ("Rerun" and "Rebuild") and §6m–§6ag are the
+> technical record.
 
 *Written 23 September 2026, based on `METHODOLOGY.md` and the supporting `docs/` files as
 they stood on that date.*
@@ -3971,3 +3975,199 @@ planned next step), replacing the straight-line station-walking-access estimate 
 street-network calculation, and obtaining actual branch-line geometry for the 15 of 25 corridor
 areas that currently rely on an approximated bus/Metronit feeder rather than a real drawn LRT
 line — any of these could shift the headline number in either direction.
+
+---
+
+## Part 5 — What changed on 23 September 2026: the mode-code correction, the person-level λ, the 2025 smart-card data, the matrix tests, and the rebuild of the bus calibration (Steps 33 – 35 and the rerun of 15 – 32)
+
+*Added 23 September 2026. Everything above reads at the 22 September state; this part says
+what moved, why, and what the numbers are now.*
+
+### 5.1 The short version
+
+Four things happened in one day, and each led to the next:
+
+1. **The survey's mode codes were wrong in the chain.** Code 4 is the group taxi (sherut) and
+   code 5 is the Matronit (Haifa's bus rapid transit). The chain had them the other way round,
+   so every Matronit rider in the survey had been sitting in the "taxi-type" layer — a layer
+   the ridership model left out of the choice set. The chain was rerun with the codes fixed.
+2. **λ, the cost sensitivity, was estimated properly** from the survey's person records, with
+   car availability held constant. The estimate (0.035 per generalized minute) supports the
+   0.03 the model had assumed. For the people who actually choose between their own car and
+   transit, it still cannot be pinned down.
+3. **New smart-card (RavKav) data for 2025 arrived** — one row per boarding tap for the
+   Metronit, every rail station in the country, and all the buses of the north. It was turned
+   into a boarding layer for a representative Tuesday, a bus + Metronit origin–destination
+   table, a rail table measured from the entry and exit gates, and boarding-hour peak factors.
+4. **The matrix tests were rerun on everything**, and they found something the project had
+   not seen: the survey's bus matrix and the raw RavKav journeys of 2022 have the *same*
+   destination structure, to within the survey's own day-to-day noise — while the ticketing
+   matrix the chain had been calibrating to, which spreads the RavKav volumes using the
+   on-board survey's alighting pattern, matches the survey no better than a random shuffle of
+   the geography. **The on-board pattern, not the ticketing volume, was what separated the two
+   sources.** So the bus calibration (step 15) was rebuilt on RavKav's own alightings, and steps
+   16–35 rerun on the result.
+
+The rebuilt base is smaller in total (the calibrated bus layer is 8 % below the survey rather
+than 1 % above it) but larger inside the corridor, and the long-standing disagreement between
+the survey and the ticketing along the LRT line is gone. The LRT ridership figure barely moved
+(4,114 → 4,250 morning trips, all-underground central case), because the capture *rate* did not
+change; what changed is that it now rests on a transit base whose two sources agree.
+
+### 5.2 The mode-code correction (what was wrong, what it moved)
+
+The survey's activities file, which came with the person and household tables, carries the
+mode labels in Hebrew alongside the codes. Matching the two files record by record showed that
+code 3 is the public bus, **4 the group taxi, 5 the Matronit**, 7 the train, 8 the special taxi.
+Steps 15–32 had used `BUS = [3, 4]` and `TAXI = [5, 8]`. Inside the 25 corridor areas, at the
+2018 survey level, the transit layer was 6,747 trips before the fix and 12,673 after; the
+taxi-type layer 6,650 before and 723 after. The Matronit is the corridor's main transit
+service, so this mattered most exactly where the LRT study looks.
+
+The rerun (before the rebuild of 5.4, so these are intermediate values) moved the corridor
+transit market from 11,664 to 13,778 trips and the central LRT capture from 3,332 to 4,114; the
+survey-to-ticketing comparison towards Haifa went from a 20 % shortfall to parity.
+
+### 5.3 λ from the person records (step 33)
+
+The 2022 cross-section could not identify λ because the places where the bus is dearest
+relative to the car are also the places with the fewest cars (Part 4, 7.2). Step 33 goes to the
+individual trip records instead: each surveyed car-or-transit trip within the 25 areas, joined
+to its person (age, licence, sector) and household (cars, size), with the generalized-cost
+difference from the step-31 skims, and a logit fitted with the survey's `new_wf` weights and
+standard errors that respect the household clustering. Result: **λ = 0.035 per generalized
+minute, with a range of 0.002–0.068**, the right sign, a good fit (ρ² 0.43). The assumed 0.03
+stands as the central case. Split by car availability: households without a car give 0.083,
+people without a licence 0.027, and **licence holders in car-owning households — the people
+the LRT would take from the car — give 0.008 ± 0.017, which is not distinguishable from zero.**
+That group is the one a stated-preference survey is for.
+
+### 5.4 The 2025 smart-card data (step 34)
+
+Three files, 51–52 Tuesdays each, 06:00–09:00, one row per boarding tap with a transfer tag.
+Two things had to be handled first: stop codes are **not unique across operators** (Tel Aviv
+and Jerusalem operators tap "northern" codes at places far outside the area), so every stop
+is keyed by operator cluster and code and located from the taps' own coordinates; and the
+representative day is the average of the 42 Tuesdays common to the three files after dropping
+holidays, the June war and data gaps.
+
+What came out: **bus 88,728 journey origins + 2,911 transfer boardings a day, Metronit 13,078 +
+1,029**; a bus + Metronit journey table of 101,680 journeys with both ends in the study area
+(destinations borrowed from the 2022 RavKav alighting pattern, since the 2025 file has no
+alightings); a **rail table measured from the taps** — the zero-passenger rail rows turned out
+to be the exit gates, so entries and exits could be matched card by card: 20 northern stations,
+23,408 entries a day, 9,437 trips between northern stations, agreeing with the 2019 station
+matrix at a cosine of 0.97; and boarding-hour peak factors (bus 0.475, Metronit 0.433 of the
+three hours in the busiest 60 minutes, 07:15–08:15 — flatter than the survey's 0.589, which is
+a departure-time figure).
+
+Two cautions. The transfer tag marks only 3.7 % of boardings as transfers, where the 2022
+linked journeys had a third of their legs as transfers — so the 2025 "journey origins" are
+closer to legs than to journeys, and the question of what the tag means under the daily fare
+cap goes to the provider. And the base was **not** moved to 2025: doing so needs that answer,
+a 2025 alighting inference of its own, and a 2025 car observation, none of which exist yet.
+The 2025 layer is used as a check on the 2022 anchor (boardings by area agree at 0.98), not as
+its replacement.
+
+### 5.5 The matrix tests, and what they found (step 35)
+
+The same tests as Part 2 (cosine similarity, GEH, Kolmogorov–Smirnov on trip lengths, MSSIM,
+PCA subspace overlap) were run on today's products, with the survey's two days as the "how
+close can two honest measurements be" reference. At the superzone level:
+
+| Pair | Cosine | KS D | PCA overlap |
+|---|---|---|---|
+| Survey day 1 vs day 2 (the reference) | 0.89 | 0.04 | 0.83 |
+| Survey bus vs RavKav 2022 spread on the **on-board survey's** pattern (the old calibration reference) | 0.62 | 0.21 | 0.62 — no better than chance |
+| Survey bus vs RavKav 2022 on **RavKav's own** alightings | **0.89** | **0.05** | **0.81** |
+
+Read plainly: the survey and the raw ticketing agree as well as the survey agrees with itself.
+The matrix that had been used to calibrate the bus layer does not agree with either, and its
+trips are twice as long (median 6.4 km against 3.2–3.6). Step 9 had chosen the on-board pattern
+over RavKav's own alightings on a fine-grained (TAZ-level) correlation; every coarser test says
+the reverse. There are two possible readings — the on-board survey over-represents long lines,
+or RavKav's alighting inference cuts journeys short at the transfer hub — and the data cannot
+choose between them. But for the chain the choice was clear: calibrate to the source the survey
+agrees with.
+
+### 5.6 The rebuild of step 15, and what it changed
+
+Step 15 now takes its ticketing prior (the superzone destination pattern the survey rows are
+shrunk towards), its within-superzone destination split and its coverage-rule volumes from the
+2022 RavKav journeys on RavKav's own alightings. The held-out validation (households split in
+half at random, 40 times; one half's blend predicts the other half's rows) now prefers the
+ticketing pattern outright: the best shrinkage constant went from 2 to 100, and the pure
+ticketing rows predict held-out survey households *better than the survey's own rows do*
+(JSD 0.267 against 0.336; the on-board rows had scored 0.422).
+
+| Quantity | Before (on-board pattern, corrected codes) | After (RavKav's own alightings) |
+|---|---|---|
+| Calibrated bus, 2018 / 2022 | 127,185 / 130,779 | **115,430 / 117,961** |
+| Bus base against the survey's 125,439 | 1 % above | 8 % below |
+| Guarded origin × segment cells (survey kept) | 31 | 30 |
+| Deliverable transit set (bus + rail), 2022 | 134,829 | **122,011** |
+| Transit share of car + transit, all study area | 9.1 % | 8.3 % |
+| Corridor-to-corridor bus trips | 9,837 | **10,255** |
+| Corridor-internal transit market, 25 V2 areas | 13,778 | **14,133** |
+| Trunk inflow link (Bazan-Hutsot → Tsomet Kiryat Ata), transit, 3 h | 3,886 | **4,420** |
+| Survey ÷ ticketing, Haifa segment, towards Haifa (network) | 0.62 | **0.98** |
+| Survey ÷ ticketing, Nazareth origin | 962 vs 2,402 (ticketing 2.5 ×) | 517 vs 185 (ticketing 0.36 ×) |
+| LRT trips, central, underground / ground / design regime | 4,114 / 3,201 / 4,814 | **4,250 / 3,207 / 5,095** |
+| LRT capture rate (share of transit, underground) | 0.277 | 0.277 |
+| Busiest LRT trunk link, 3 h / peak hour | 1,452 / 663 | **1,671 / 764** |
+| LRT trips 2040 / 2050, underground: BU, HS | 5,329 / 5,962; 5,335 / 6,245 | **5,390 / 6,094; 5,598 / 6,516** |
+
+Why the total fell and the corridor rose: the on-board pattern had moved journeys from the outer
+superzones' local market to inter-superzone, Haifa-bound cells, which passed the coverage test
+and pushed the total up; RavKav's own alightings keep 40,816 journeys local (against 23,277),
+so more local segments pass the test and take the lower ticketing volumes, while more of the
+Krayot and Kiryat Ata journeys stay inside the corridor.
+
+**The survey and the ticketing now agree along the whole line.** The 2.5–3 × ticketing excess
+towards Tirat Carmel, and the Nazareth-branch excess, that Parts 3 and 4 discuss at length
+were the on-board pattern. What remains is the Nazareth branch itself: the two ticketing
+readings (on-board pattern 2.5 × the survey, RavKav's alightings 0.36 ×) disagree with each
+other by 13 × and bracket the survey. Only a passenger count on that branch settles it, and
+until then the Nazareth-branch market is carried as a range.
+
+### 5.7 The car layer against traffic counts (step 36)
+
+Later the same day a road network with hourly traffic counts arrived (in passenger-car
+equivalents, one column per hour, on 3,241 directional links counted between 2017 and 2023). It
+is the first thing the car layer has ever been checked against. The check needs no traffic
+assignment: draw a closed ring (a cordon) around a group of zones, and every trip with one end
+inside and one outside must cross it exactly once, whatever road it takes — and a trip passing
+straight through crosses it twice. So the car trips crossing each of six rings (Haifa city, the
+Krayot, Kiryat Ata, Nazareth, Tirat Carmel, and the whole metropolitan core), turned into vehicles
+with the survey's own 1.33 persons per car, can be set against the counts on every road link that
+crosses the ring. Where a crossing road has no count, its volume is estimated from the counted
+roads of the same type, and the result is flagged.
+
+The expected answer is *less than one*, because the counts hold everything on the road — trucks
+and vans, taxis, buses, visitors, and traffic from Tel Aviv or Acre passing through — while the
+survey layer holds residents' personal car trips only. On the rings that are mostly counted the
+car layer is **0.6–0.9 of the counted vehicles** (0.62 in and 0.61 out on the metropolitan core;
+0.58 / 0.70 at Tirat Carmel; 0.66 / 0.90 at Kiryat Ata), which is the order one would expect. The
+direction of the morning flows agrees with the counts within a few points everywhere except the
+Haifa city ring, where the survey is more Haifa-bound (64 % of crossings inbound) than the counted
+roads (47 %). The clearest finding is about the peak hour: on the road, the busiest clock hour
+carries only 38–43 % of the three morning hours (1.1–1.3 times an average hour), whereas the
+survey's reported departure times put 62 % of car trips in the best hour (1.9 times). The fare
+gates said the same thing for buses in step 34. The survey's departure profile is peakier than
+anything observed, so the peak-hour figures of Parts 3 and 4 are upper bounds; a factor of about
+0.42–0.48 is the safer value.
+
+### 5.8 Where things stand now
+
+The single most current answer to "how many riders will the LRT capture" is **about 4,250
+morning (06:00–09:00) corridor-internal trips in 2022** for the all-underground alignment
+(3,207 all-ground, 5,095 in the specified 50 km/h design regime), growing to **5,400–6,500 by
+2040/2050** with the market. The λ range alone moves the central figure between 3,161 and
+6,028; the rail premium between 3,406 and 5,232. These dependencies are unchanged from Part 4.
+What has changed is the footing: the transit base is now calibrated to a ticketing source
+the survey agrees with, and the transit market the capture is applied to includes the Matronit
+riders it had been leaving out. Still open, in order of value: a passenger count on the Haifa
+trunk and the Nazareth branch (the road counts now in hand validate the car layer, not the
+buses); the meaning of the 2025 transfer tag; the branch alignments and
+operating plan; the walking network for station access; and a stated-preference survey for
+the choice riders' λ.

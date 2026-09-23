@@ -2,22 +2,22 @@ cells,pair,D,at km,signed gap (A−B),D boot p2.5,D boot p97.5
 all cells,THS bus 2018 d1 vs THS bus 2018 d2,0.0377,6.9208,-0.0377,,
 all cells,THS bus 2018 vs RavKav 2022,0.2107,4.7994,0.2107,0.1884,0.2527
 all cells,THS bus 2018 vs RavKav 2022 raw,0.0489,2.2642,0.0489,0.0264,0.0996
-all cells,THS bus 2022 vs RavKav 2022,0.1712,19.7258,0.1712,,
-all cells,THS bus 2022 vs RavKav 2025,0.1774,19.7258,0.1774,,
-all cells,THS bus 2018 vs RavKav 2025,0.2131,16.6361,0.2131,0.1920,0.2554
-all cells,RavKav 2022 vs RavKav 2025,0.0097,2.8816,0.0097,,
-all cells,RavKav 2022 raw vs RavKav 2025,0.2010,16.0130,0.2010,,
-all cells,RavKav 2025 vs RavKav 2025 legs,0.0058,9.1644,-0.0058,,
+all cells,THS bus 2022 vs RavKav 2022,0.1671,16.9872,0.1671,,
+all cells,THS bus 2022 vs RavKav 2025,0.1065,4.3990,-0.1065,,
+all cells,THS bus 2018 vs RavKav 2025,0.0451,2.2642,0.0451,0.0269,0.0958
+all cells,RavKav 2022 vs RavKav 2025,0.2145,13.1594,-0.2145,,
+all cells,RavKav 2022 raw vs RavKav 2025,0.0189,7.7902,-0.0189,,
+all cells,RavKav 2025 vs RavKav 2025 legs,0.0015,2.6130,0.0015,,
 all cells,THS bus 2018 vs car 2022,0.1499,2.0212,-0.1499,0.1196,0.1866
-all cells,RavKav 2025 vs car 2022,0.3001,3.0825,-0.3001,,
+all cells,RavKav 2025 vs car 2022,0.1903,2.0597,-0.1903,,
 excl. intra-TAZ,THS bus 2018 d1 vs THS bus 2018 d2,0.0397,6.9208,-0.0397,,
 excl. intra-TAZ,THS bus 2018 vs RavKav 2022,0.2111,16.6361,0.2111,0.1875,0.2505
 excl. intra-TAZ,THS bus 2018 vs RavKav 2022 raw,0.0444,2.2642,0.0444,0.0297,0.0937
-excl. intra-TAZ,THS bus 2022 vs RavKav 2022,0.1746,19.7258,0.1746,,
-excl. intra-TAZ,THS bus 2022 vs RavKav 2025,0.1804,19.7258,0.1804,,
-excl. intra-TAZ,THS bus 2018 vs RavKav 2025,0.2141,16.6361,0.2141,0.1896,0.2521
-excl. intra-TAZ,RavKav 2022 vs RavKav 2025,0.0087,3.4574,0.0087,,
-excl. intra-TAZ,RavKav 2022 raw vs RavKav 2025,0.2022,16.0130,0.2022,,
-excl. intra-TAZ,RavKav 2025 vs RavKav 2025 legs,0.0060,9.1644,-0.0060,,
+excl. intra-TAZ,THS bus 2022 vs RavKav 2022,0.1690,16.9872,0.1690,,
+excl. intra-TAZ,THS bus 2022 vs RavKav 2025,0.1057,4.3990,-0.1057,,
+excl. intra-TAZ,THS bus 2018 vs RavKav 2025,0.0411,2.2642,0.0411,0.0256,0.0904
+excl. intra-TAZ,RavKav 2022 vs RavKav 2025,0.2161,13.1594,-0.2161,,
+excl. intra-TAZ,RavKav 2022 raw vs RavKav 2025,0.0198,7.8748,-0.0198,,
+excl. intra-TAZ,RavKav 2025 vs RavKav 2025 legs,0.0013,3.0331,0.0013,,
 excl. intra-TAZ,THS bus 2018 vs car 2022,0.0755,1.4906,-0.0755,0.0509,0.1047
-excl. intra-TAZ,RavKav 2025 vs car 2022,0.2170,4.4554,-0.2170,,
+excl. intra-TAZ,RavKav 2025 vs car 2022,0.1093,2.0242,-0.1093,,
