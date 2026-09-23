@@ -179,6 +179,26 @@ captures 4,114 / 4,498 / 4,520 / 5,354 → **5,329 / 5,962 / 5,335 / 6,245**. St
 unchanged (its skims did not move). The reports under `reports/` (revisions 2.1 and 1.3) and
 `docs/PLAIN_ENGLISH_METHODOLOGY.md` still carry the pre-correction values.
 
+**Update, 23 September 2026 (step 34 — RavKav 2025).** Three smart-card extracts for 2025
+(Tuesdays, 06:00–09:00, one row per boarding tap with a transfer tag) and a list of the stop
+codes inside `TAZ_North` were added under `Input/BusRavKav/2025/` and
+`Input/BusRavKav/Stops_In_North/` (the May 2022 files moved to `Input/BusRavKav/May_2022/`).
+Step 34 (§6af) turns them into a **2025 boarding layer on a representative Tuesday** — the
+average of the 42 Tuesdays common to the three files after dropping the holiday, June-war and
+data-gap dates — by stop and TAZ with journey origins (non-transfer taps) and transfer legs
+apart: **bus 88,728 journey origins + 2,911 transfer boardings, Metronit 13,078 + 1,029**;
+a **bus + Metronit journey OD** on the OnBoard pattern (101,680 journeys, both ends in the
+study area — the step-9 construction on 2025 volumes); a **rail station-to-station OD measured
+from the entry and exit taps** (the zero-passenger rail rows are exit gates: 20 northern
+stations, 23,408 entries a day, 9,437 trips between northern stations, cell correlation 0.97
+with the 2019 matrix); the operator clusters actually in the extract (task B1c); and
+**boarding-hour peak factors** (task B1e): bus 0.475 and Metronit 0.433 of the three hours in
+the busiest 60 minutes (07:15–08:15), against 0.589 from the survey's departure times. Two
+data findings on the way: `StopCode` is not unique across operators in these extracts (stops
+are keyed by cluster and code, located from the taps' own coordinates), and the transfer tag
+marks 3–7 % of boardings where the 2022 linked journeys had a third of their legs as transfers
+(§8 caveat 16). The chain is **not** re-anchored on this layer here (§6af, "Re-anchoring").
+
 Every published product, what it was built from, and its status:
 
 | Product (`Output/…`) | Built by | Base / inputs | Geography | Modes | Vintage | Status |
@@ -207,6 +227,7 @@ Every published product, what it was built from, and its status:
 | `skims/*` | step 31 | `gc/*` components, feeder composite (bus or Metronit) for the LRT, 2022 corridor flows | 25 V2 areas, 9 trunk links | car; bus; Metronit; LRT (2 scenarios) — complete skims, logit calibration, LRT capture scenarios, trunk-link loads | 2022 (flows), May 2026 (bus), planned (LRT) | **current** — money components still missing; λ assumed |
 | `skims/forecast/*` | step 32 | step-23 forecast sets (BU/HS × 2040/2050), step-31 skims (held fixed) | 25 V2 areas, 9 trunk links | car; transit; taxi — market; LRT (2 scenarios) — capture, boardings, trunk-link loads by scenario-year | 2040 / 2050 (market), 2026 skims (fixed) | **current** — skims fixed at step 31; λ assumed |
 | `mode_choice/*` | step 33 | `Input/THS_2017-2018/` trips, person and household tables × step-31 skims | 25 V2 areas, person-level rows | car vs transit (bus + Metronit + rail) — estimation sample, λ estimates by specification and segment, code check | 2017/18 (survey), May 2026 (skims) | **current** — λ estimated; supports the assumed 0.03; choice-rider λ not identified |
+| `ravkav_2025/*` | step 34 | `Input/BusRavKav/2025/*` (LFS) × the north stops file, `TAZ_North`, the OnBoard pattern, the GTFS stations | stops, 733 TAZ, 28 sub-areas, 25 V2 areas, 20 rail stations | bus + Metronit boardings (journey origins / transfer legs), bus + Metronit journey and leg OD, rail station OD, boarding-hour peak factors | 2025 (representative Tuesday) | **current input layer** — not yet consumed by steps 15–32 (§6af) |
 
 The 25 GS zones (`Input/TAZ_GSnew.csv`) and the 25 retained research areas of the
 forecast tables are different geographies with the same matrix dimension; files are
@@ -244,6 +265,9 @@ validation against counts.
 | `../Corridor_TAZ_Agg_V2.xlsx` (in `Input/`, added 22 Sep 2026) | The V2 corridor aggregation | Sheet `AreaCodes`: 25 areas (`AggCode` 201–217 trunk + Nazareth branch, 101–104 Krayot branch, 301–304 Kiryat Yam branch) with three route orders `Order_T1` / `Order_T2` / `Order_T3` (0 = not on the route); sheet `TazAgg`: 174 TAZ → `AggCode` pairs, all present in the 778-TAZ matrices, none duplicated. TAZ 1509 (LRT station S13) is not listed |
 | `../GeneralHalufa/hf_lrt_3.shp`, `station_hf_lrt_3.geojson` (in `Input/`, added 22 Sep 2026) | Planned LRT alignment and stations | One WGS 84 polyline of 18.94 km from Hamifrats to Tirat Carmel; 46 platform points (`halufa` attribute 1 / 2 / 999 / null — all points lie within 80 m of the line and are used) forming 24 stations. Projected to Israel TM Grid (EPSG:2039) for all distances |
 | `../GTFS/israel-public-transportation.zip` (in `Input/`, LFS, added 22 Sep 2026; feed of 22 May 2026) | The Ministry of Transport's national GTFS feed (https://gtfs.mot.gov.il/gtfsfiles/) | Standard GTFS (`stops`, `routes`, `trips`, `stop_times`, `calendar`, `agency` …); `route_desc` carries the route code (מק"ט), direction and alternative as `code-dir-alt`; the Metronit BRT lines are codes 83001–83005. Used by step 29 for the bus level of service per TAZ and the direct-service skim between the V2 areas; the notebook dry-runs on a synthetic feed while only the LFS pointer is present. **Since 22 Sep 2026 every file directly under `Input/` is on LFS** (`Input/*` in `.gitattributes`): `git lfs pull --include="Input/*.xlsx,Input/*.csv"` is now required before any notebook runs |
+| `../BusRavKav/2025/Metronit_RavKav_Data.csv`, `Rail_RavKav_Data.csv`, `Buses_RavKav.csv` (in `Input/`, LFS, added 23 Sep 2026; 69 MB / 638 MB / 1.6 GB) | RavKav 2025 boarding taps: the Haifa Metronit; every Israel Railways station; a national all-modes extract (the rail and Metronit clusters, the Tel Aviv and Jerusalem light rail and every bus operator cluster in the country included) | One row per tap: `CardIDbi`, `ClusterId` / `ClusterName` (operator cluster), `StopCode`, `StopName`, `TransactionDate`, `TransactionTime` (to the minute), `JourneyTransfer` (`מעבר` transfer / `לא מעבר` first boarding), `PassengersNumber` (signed; −1 refunds; **0 on the rail rows = exit-gate tap**), `Lat` / `Long` (null on most rows; wrong for several rail stations), `Weekday` = 3. 51–52 Tuesdays, 06:00–08:59. 0.66 M / 6.0 M / 14.7 M rows. **`StopCode` is not unique across operator clusters** — Tel Aviv and Jerusalem clusters tap northern codes at places outside the area — so stops are keyed by (cluster, code). Used by step 34 |
+| `../BusRavKav/Stops_In_North/stops_in_taz_north.csv` (in `Input/`, LFS, 946 MB, added 23 Sep 2026) | Stop codes inside `TAZ_North`, with coordinates | 25 M rows (one per tap, apparently), 12,153 unique codes, all inside the polygons; carries the code collisions above, so step 34 uses it only as the fallback location for northern operators' stops without coordinates of their own |
+| `../BusRavKav/May_2022/trips_table_2022-05-*.csv` (in `Input/`, LFS; moved from `Input/BusRavKav/` on 23 Sep 2026) | The May 2022 RavKav linked-journey files of step 8 | Unchanged content; step 8 and this document repointed |
 | `../BusSpeedData/Streets/Streets.shp`, `std_202605.csv` (in `Input/`, CSV in LFS, added 22 Sep 2026) | Bus link speeds, May 2026 | 161,534 national street links (Israel TM Grid; `USERID`, `DIR` = 1 with / −1 against / 0 both directions); 157,618 speed records joined on `USERID` (99.9 % match), 336 columns `d_{weekday}_h_{hour}_{AB,BA}` in km/h with 0 = no bus observation. `Readme.txt`: weekday 3, 07:00–08:00 = `d_3_h_7_AB` / `d_3_h_7_BA`. 54,507 links (5,632 km) fall in the study area, 48,092 with a speed |
 
 **Data-version note.** The activities file currently in the repository contains more
@@ -663,7 +687,7 @@ rate, population — total 2,601,228), figure `ths2017_trip_generation.png`.
 ## 6f. Step 8 — Bus RavKav AM-peak matrix by TAZ (`BusRavKav_matrix.ipynb`)
 
 **Inputs.** `Input/TAZ_North/TAZ_North.shp` (781 TAZ polygons, Israeli TM CRS,
-`TAZ_NUMBER` field) and four RavKav bus-trip files (`Input/BusRavKav/`, Tuesdays
+`TAZ_NUMBER` field) and four RavKav bus-trip files (`Input/BusRavKav/May_2022/`, Tuesdays
 2022-05-03/17/24/31, ~2.5–2.9M records each; national coverage). Each record is one
 **boarding (leg)** with its physical `board`/`alight` stops, plus journey-level fields
 that are constant across a journey's legs: `orig`/`dest` stops (first boarding → final
@@ -2110,6 +2134,137 @@ no alternative-specific term of its own; no income (not in the tables); no money
 (§6x addendum 4); the weight is the trips file's `new_wf` by instruction, whose construction is
 not documented in the repository. λ_T and the LRT premium are untouched by this step.
 
+## 6af. Step 34 — RavKav 2025: boardings by stop and TAZ, bus + Metronit OD on the OnBoard pattern, rail OD from entry and exit taps (`RavKav_2025_boardings_matrix.ipynb`)
+
+**Purpose.** Turn the three 2025 smart-card extracts (§1: the Metronit, every rail station, a
+national all-modes file) into a boarding layer for the study area on one representative
+Tuesday, 06:00–09:00, and from it the bus + Metronit OD and the rail OD that a re-anchored
+base would use. The extracts hold boardings only — no alightings and no linked journeys, unlike
+the May 2022 files of step 8 — so the bus destinations still come from the OnBoard survey's
+pattern, while the rail destinations come from the extract itself.
+
+**Stops keyed by (cluster, code).** `StopCode` is not unique across operator clusters: on the
+rows that carry coordinates, the Tel Aviv cluster taps "northern" codes at places outside the
+study area on 99.99 % of its rows, the Jerusalem clusters likewise, and the north stops file
+(built on codes) inherited these collisions — a code-only filter would have put 141,000
+"northern" bus boardings a day on the map, 89,000 once the collisions are removed. Each
+(cluster, code) is therefore located from the extracts' own coordinates (a quarter of the
+Metronit rows, a third of the bus rows carry them), joined to the `TAZ_North` polygons as step
+8 did; a (cluster, code) without coordinates takes the north file's location only if the cluster
+is a northern operator (at least half of its located stops inside the polygons; 30 of 79
+clusters), else it is dropped. The rail extract's own station coordinates are wrong for several
+stations (Holon, Kfar Chabad and Netanya carry Binyamina's location, Nahariya carries Lev
+HaMifratz's), so the 20 northern stations are located from the GTFS stops table (codes
+17000–17999), a committed copy standing in when the archive is an LFS pointer.
+
+**One representative Tuesday.** Net boardings per date (signed passenger counts; −1 rows are
+refunds) are compared with the dataset's median date and dates below 70 % of it are dropped:
+Passover week (15 April), the June war (17 and 24 June), the autumn holidays (23 September,
+7 and 14 October) in every file, and in the bus file also the four August Tuesdays (the school
+holidays, 20–35 % below the spring level). The **42 Tuesdays common to the three files** are
+averaged: each stop's boardings summed over them and divided by 42, a stop with no tap on a
+date counting as zero there (`daily_totals_by_date.csv`, figure `ravkav_2025_daily_totals.png`).
+
+**Transfer and non-transfer taps.** The transfer tag is kept throughout: non-transfer taps are
+**journey origins**, transfer taps are the further legs of those journeys. On the representative
+Tuesday, at stops inside the study area:
+
+| layer | journey origins (non-transfer) | transfer boardings | all boardings | transfer share |
+|---|---|---|---|---|
+| bus (northern operator clusters) | 88,728 | 2,911 | 91,639 | 3.2 % |
+| Metronit | 13,078 | 1,029 | 14,107 | 7.3 % |
+| bus + Metronit | 101,806 | 3,940 | 105,746 | 3.7 % |
+| rail, northern stations | 23,408 entries (first entry per card and date) | — | — | — |
+
+Operators in the bus layer (journey origins a day): Haifa urban 29,646, HaAmakim 14,256,
+HaGalil 10,222, Krayot 9,168, Hadera–Netanya 6,980, the Nazareth clusters 5,086 + 2,434 +
+1,034, Hadera suburban 4,792, Karmiel 3,031, Tel Aviv–Galil–Amakim 1,399, Golan 883, Kiryat
+Shmona 797 — the answer to task B1c's question which operators the ticketing covers
+(`bus_file_clusters.csv` lists every cluster with its northern and non-northern taps).
+
+**The transfer tag is not the 2022 journey linking.** Step 8's May 2022 files link legs into
+journeys by card and time and found 1.52 legs per journey — a third of all boardings were
+transfer legs. The 2025 tag flags 3.7 %. The tag evidently marks only the boardings charged as
+a transfer under the fare rules (the free transfer within the fare window; under the daily cap
+many second boardings are not), so the 2025 "journey origins" are much closer to leg counts than
+the 2022 journeys are, and a 2025-to-2022 comparison of journeys is a comparison of two units
+(§8 caveat 16). Hamifrats, the transfer hub, shows it: 2,266 journey origins a day in 2025
+against 1,079 journeys in 2022.
+
+**Bus + Metronit OD.** As in step 9, each TAZ's journey origins (bus + Metronit) are distributed
+over the destinations by the OnBoard survey's P(alight | board), renormalised over the known
+destinations; origins the OnBoard survey does not cover take the May 2022 RavKav journey
+pattern from the same TAZ (`bus_od_taz_avg.csv`); the rest is reported. Result: 101,806
+journey origins → 101,680 allocated (OnBoard pattern 92.9 %, 2022 pattern 6.9 %, unallocated
+127 in 14 TAZs); a leg-level matrix from all boardings (105,618) beside it. On the 28 sub-areas,
+both ends inside: RavKav 2022 journeys 23,995 → 2025 journey origins 25,677 (legs 27,082),
+against the survey-based 2022 bus layer 23,510; cell correlation of the two RavKav area
+matrices 0.968 (the same OnBoard pattern on both). On the 25 V2 areas: 16,062 → 18,615
+(× 1.16). By area, 2025 ÷ 2022: Kiryat Motzkin-Bialik 1.14 (6,115 origins), Kiryat Yam 0.80,
+Hamifrats 2.10, Kiryat Ata South 0.93, Nazareth Area 1.00, Neve Yosef 1.45, Matam 2.22, Neot
+Peres 1.88, Tirat Carmel 0.80; Namal 82 → 3 (a stop-tagging or service change to check).
+
+**Rail OD from the taps.** On the rail rows `PassengersNumber` is 1 on 59 % of the taps and 0 on
+41 %; the 0-taps are the exit gates: on the representative Tuesdays 64.5 % of the cards with an
+entry tap have a later 0-tap the same morning (3.01 M card-date entries, 1.94 M matched), 98 %
+of them at a different station, a median 46 minutes later. The matrix is the matched entry →
+next-exit pairs per card and date, averaged over the 42 Tuesdays and **expanded per origin
+station** by entries ÷ matched entries (1.4–2.3; the exits after 09:00 are assumed to spread
+like the matched ones, which understates the long trips). Northern stations: 20, entries 23,408
+a day (Binyamina 3,372, Hadera West 2,885, Hof HaCarmel 2,744, Nahariya 2,260, Kiryat Motzkin
+1,823, Karmiel 1,617, Caesarea 1,568, Akko 1,104, Bat Galim 895, Afula 863, Haifa Merkaz 716 …);
+9,437 trips a day between northern stations (40 % — the rest leave the area, mostly to Tel
+Aviv), the busiest destinations Bat Galim (1,789 exits), Hof HaCarmel (1,286), Lev HaMifratz
+(1,198 + 375) and Haifa Merkaz (1,081). Against the 2019 smartcard station matrix of step 10
+(5,535 trips, 19 station TAZs; × 0.793 = 4,389 at the 2022 level): 2025 gives 9,437 on 20; on the
+14 common station TAZs 2,270 (2019) vs 3,651 (2025), cell correlation 0.968. The survey-based
+rail layer of step 16 (4,050 door-to-door trips) sits well below the station count, as §6n noted.
+
+**Boarding-hour peak factors (task B1e).** The taps carry the minute, so the boarding profile
+in 15-minute bins gives the step-20 factors on boardings rather than on survey departure times:
+
+| scope | bus PHF₃ₕ (peak hour) | Metronit PHF₃ₕ | bus + Metronit PHF₃ₕ / PHF₆₀ |
+|---|---|---|---|
+| study area | 0.475 (07:15–08:15) | 0.433 (07:15–08:15) | 0.470 / 0.92 |
+| V2 corridor TAZs | 0.459 (07:15–08:15) | 0.433 | 0.450 / 0.89 |
+| trunk station areas 201–210 | 0.430 (07:30–08:30) | 0.438 | 0.432 / 0.93 |
+
+The boarding profile is much flatter than the survey's departure-time profile (bus 0.589
+study-area-wide in §6r; network 0.549 up / 0.457 down in §6y): the busiest hour holds 43–48 %
+of the three hours, ≈ 1.4 × an average hour, not 1.8 ×, and the hour within is nearly flat
+(PHF₆₀ 0.9). The survey factors, resting on 1,790 sampled bus trips, overstate the transit
+peak; the boarding-based 0.43–0.48 is the value to carry for the transit layers, and it lands
+on the network down factor step 27 found once the Metronit rows entered the bus layer.
+
+**Outputs** (`Output/ravkav_2025/`): `stops_located_by_cluster_2025.csv`,
+`stops_north_file_taz.csv`, `rail_stations_gtfs_north.csv`, `bus_file_clusters.csv`,
+`daily_totals_by_date.csv`, `boardings_by_stop_2025.csv`, `boardings_by_taz_2025.csv` (bus /
+Metronit × non-transfer / transfer / all), `bus_od_taz_2025.csv` (journeys),
+`bus_od_taz_2025_legs.csv`, `bus_od_area_2025*.csv` (28 sub-areas), `bus_od_area_v2_2025*.csv`
+(25 V2 areas), `boardings_taz_2022_vs_2025.csv`, `bus_origins_area_2022_vs_2025.csv`,
+`rail_od_station_2025_national.csv`, `rail_od_station_2025_north_origins.csv`,
+`rail_od_station_2025_north.csv`, `rail_od_taz_2025.csv`, `rail_stations_north_2025.csv`,
+`boarding_hour_peak_factors_2025.csv`, `boarding_profile_15min_2025.csv`; figures
+`ravkav_2025_daily_totals.png`, `ravkav_2025_vs_2022_area_origins.png`.
+
+**Limits.** Bus and Metronit destinations are the OnBoard pattern, whose unit is unconfirmed
+(§8 caveat 7); the journey-origin unit differs from the 2022 linked journeys (above); the rail
+expansion assumes the after-09:00 exits spread like the matched ones; the representative day
+averages the retained Tuesdays, July inside it; taps that could not be placed are dropped, not
+imputed; the bus clusters' non-northern lines that do enter the area (Tel Aviv–Haifa intercity)
+are kept only where their taps carry coordinates inside the polygons.
+
+**Re-anchoring.** Steps 15–16 anchor the bus layer's volumes on the May 2022 journeys
+(`Output/bus/bus_od_taz_new.csv`) and read the 2022 leg boardings for the within-superzone
+origin split; step 16 scales the survey rail layer by the national ridership ratio. Pointing
+them at `bus_od_taz_2025.csv`, `boardings_by_taz_2025.csv` and `rail_od_taz_2025.csv` moves the
+transit anchor to 2025 while the car and taxi-type layers stay grown to 2022 — a vintage
+mismatch unless the whole base moves to 2025 (the car layer grown 2018 → 2025 on the BU-2025
+zonal file that exists, the coverage rule of §6m re-applied to the 2025 volumes, steps 17–32
+rerun). That is a base-year decision; the products here are ready for it, and the unit
+difference in the transfer tag has to be settled first, or the coverage ratios of §6m — RavKav ÷
+survey — will move by the difference between journeys and legs.
+
 ## 7. Output inventory (`Output/`)
 
 *Layout note (21 September 2026).* The products of steps 1–4 (the 2018 activities-file chain, listed first below with bare file names) now live under `Output/historical/ths2018/`; every other path is as written. Notebooks live under `notebooks/current/`, `notebooks/diagnostics/` and `notebooks/historical/` and anchor their working directory to the repository root, so the `Input/…` and `Output/…` paths in this document are unchanged.
@@ -2164,6 +2319,7 @@ not documented in the repository. λ_T and the LRT premium are untouched by this
 | `skims/*` | 25×25 per mode × component; long; 9 trunk links | Step 31 | Complete per-mode skims (car, bus, Metronit, LRT underground / ground) with status, `skims_area_v2.xlsx` and long-format table, the summary by mode; the logit calibration of the cost sensitivity λ against the 2022 flows; the LRT capture scenarios and pair-level flows; the trunk-link loads against today's bus movements |
 | `skims/forecast/*` | 25×25 per mode; 9 trunk links; per scenario-year | Step 32 | The four step-23 forecast sets aggregated to the V2 areas (car, transit, taxi); the market-growth and transit-origin summaries; the LRT capture scenarios, trip counts, boardings, path-type and origin-area breakdowns and trunk-link loads by scenario-year, on the step-31 skims held fixed |
 | `mode_choice/*` | person-level rows (trip × area pair) | Step 33 | The estimation sample (attributes, skims, `new_wf`-based weights), the sample by car-availability segment, λ by model and segment with intervals, all coefficients, the trips-file code check, and the corridor-internal layers under the corrected and the current mode codes |
+| `ravkav_2025/*` | stops; 733 TAZ; 28 sub-areas; 25 V2 areas; 20 rail stations | Step 34 | The 2025 RavKav layer on a representative Tuesday: located stops by (cluster, code), daily totals by date, boardings by stop and TAZ (bus / Metronit × transfer flag), the bus + Metronit journey and leg OD at TAZ and area level, the 2022-vs-2025 comparisons, the rail station OD (national, northern origins, within-north, by TAZ) with the station table, and the boarding-hour peak factors and 15-minute profile |
 | `figures/` | — | Steps 1b–3 | Scatter plots, CV curves, λ curves, R_AB heatmap |
 
 All matrices are indexed by origin zone (rows) × destination zone (columns). Probability
@@ -2254,6 +2410,18 @@ Added 23 September 2026 (step 33):
     (0.002–0.068) supports the assumed 0.03; for licence holders in car-owning households
     0.008 ± 0.017. λ_T and the LRT premium remain assumptions; a stated-preference survey is
     the way to both.
+16. **The RavKav 2025 extracts (§6af) are boardings whose transfer tag is not the 2022 journey
+    linking, and whose stop codes collide across operators.** The tag marks 3.7 % of the bus +
+    Metronit boardings as transfers where the May 2022 linked journeys had a third of their
+    legs as transfer legs, so the 2025 "journey origins" are nearer to legs than to journeys and
+    must not be compared with the 2022 journeys, or fed to the coverage rule of §6m, as the same
+    unit; the question for the provider is what the tag means under the daily cap. `StopCode`
+    repeats across operator clusters, so every 2025 product is keyed by (cluster, code) and
+    located from the taps' own coordinates; the north stops file alone would have placed
+    52,000 non-northern boardings a day in the area. The rail extract's station coordinates are
+    wrong for several stations; the GTFS locations are used. Alightings for bus and Metronit
+    are still the OnBoard pattern (caveat 7); the rail OD is measured from the exit taps, with an
+    expansion for the exits after 09:00. The chain is not yet re-anchored on this layer.
 
 ## 8b. Related work — PCA-based analysis and structural comparison of OD matrices
 
@@ -2338,6 +2506,8 @@ jupyter nbconvert --to notebook --execute --inplace notebooks/current/LRT_captur
 
 # person-level mode choice (step 33; needs git lfs pull --include="Input/THS_2017-2018/*" and pip install statsmodels; reads step 31's skims)
 jupyter nbconvert --to notebook --execute --inplace notebooks/current/Mode_choice_person_level.ipynb
+# RavKav 2025 layer (step 34; needs git lfs pull --include="Input/BusRavKav/2025/*,Input/BusRavKav/Stops_In_North/*" (≈ 3.3 GB), pip install geopandas, the OnBoard workbook and step 8's bus_od_taz_avg.csv; the GTFS archive if present, else the committed station table; ≈ 5 minutes)
+jupyter nbconvert --to notebook --execute --inplace notebooks/current/RavKav_2025_boardings_matrix.ipynb
 
 # regression test of the hybrid branch (committed outputs only)
 jupyter nbconvert --to notebook --execute --inplace notebooks/diagnostics/Hybrid_superzone_conservation_test.ipynb

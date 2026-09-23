@@ -90,6 +90,9 @@ the two structural gaps, and they are the two that need inputs from the client s
    running in parallel. Today's capture assumes full competition (conservative).
 9. **Rav-Kav boardings by stop group on the trunk (C3)** — to validate the 2022 transit base
    and the ticketing / survey factor on the Nazareth branch; one car screenline count.
+   *Boardings by stop and TAZ for 2025 are now in hand (step 34, `Output/ravkav_2025/
+   boardings_by_stop_2025.csv`, with the transfer tag); alightings are not, so a link load
+   still needs the OnBoard pattern or a count. The car screenline is still to obtain.*
 10. **Parking and car policy** — not needed for the fare (flat, out of the comparison) but
     a destination-parking policy at Matam and the Lower City would enter as a car
     constant per destination in the 2040 / 2050 runs.

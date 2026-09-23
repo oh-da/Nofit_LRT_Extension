@@ -93,19 +93,29 @@ Key facts driving the list (2017 trips-file hybrid, `Output/ths2017/study_taz/`)
       other); the binary rule is kept as a variant, with a threshold sweep. Steps 16–18
       re-run. Result: the 23 → 1 corridor profile did **not** move towards the ticketing
       one — the remaining gap is allocation and destination frame, not coverage (§6p).
-- [ ] **B1c. Cause of the sub-0.5 ratios** — ask the RavKav provider which operators the
+- [~] **B1c. Cause of the sub-0.5 ratios** — ask the RavKav provider which operators the
       extract covers and whether cash / unvalidated boardings are included; cross-check
       route ids against an operator crosswalk valid for May 2022; obtain counts on Nazareth
-      local services. Until answered, publish the four bus variants, not one.
+      local services. Until answered, publish the four bus variants, not one. *Partly
+      answered 2026-09-23 by the 2025 extracts (step 34, METHODOLOGY §6af): the operator
+      clusters present are listed in `Output/ravkav_2025/bus_file_clusters.csv` — Haifa urban,
+      HaAmakim, HaGalil, Krayot, Hadera–Netanya, three Nazareth clusters, Hadera suburban,
+      Karmiel, Golan, Kiryat Shmona — so the Nazareth operators are in the 2025 ticketing;
+      whether they were in the May 2022 extract, and the cash question, remain for the
+      provider. New question for the provider: what the 2025 transfer tag means under the
+      daily cap (3.7 % transfers tagged against a third of legs linked in 2022).*
 - [ ] **B1d. Transit units (review §3)** — establish from the OnBoard codebook whether its
       P(alight | board) rows are per boarding leg or per journey; test whether bus-to-rail
       travellers sit in both the RavKav bus OD and the station matrix; keep person-journey
       and boarding products separate until an access / transfer allocation links them.
 - [x] **B1e. Peak hour** *(done 2026-09-21, `Corridor_peak_hour_2022.ipynb`, METHODOLOGY
       §6r)*: peak-hour factors from survey departure times (07:00–08:00; PHF₃ₕ 0.59–0.66) and
-      peak-hour link profiles. Still open: a boarding-hour factor from the RavKav files
-      (`bus_trip_hour`, LFS) as the independent check for the bus layer, and a
-      link-crossing (rather than departure) hour once travel times exist (A2).
+      peak-hour link profiles. *Boarding-hour factor done 2026-09-23 from the RavKav 2025
+      taps (step 34, METHODOLOGY §6af): bus 0.475, Metronit 0.433, trunk station areas 0.43
+      of the three hours in the busiest 60 minutes (07:15–08:15), PHF₆₀ ≈ 0.9 — flatter
+      than the survey's 0.589; the boarding-based value is the one to carry for the transit
+      layers.* Still open: a link-crossing (rather than departure or boarding) hour once
+      travel times exist (A2).
 - [ ] **B2. Population frames**
   - [ ] Reconcile the transit layer (RavKav journeys by boarding stop, incl. non-residents
         and transfers; Hamifrats 120 THS vs 1,079 RavKav) with the resident-household
