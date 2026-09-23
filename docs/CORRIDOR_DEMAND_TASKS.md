@@ -237,3 +237,11 @@ A1 split rule from zonal files and RavKav; A2 skims; A3; A4 survey-side factors 
 The ordered plan for tightening the capture and the scenarios to test is in
 `docs/PLAN_TIGHTENING_AND_SCENARIOS.md` (person-level λ, walking-network access, TAZ-level
 trunk capture, bus-cost overhead, realistic speed regime, headways; then S1–S9).
+
+## G. Red-team response of 23 September 2026
+
+`docs/RED_TEAM_RESPONSE_2026-09-23.md` answers the external methodology red-team review:
+the gate before any step 31 / 32 figure is reported as ridership (person-level λ or SP data,
+plus one independent trunk count), two parallel tracks (in-house work on LFS data; the data
+request), the rebuild order for steps 15–32, and the data-request sheet with priority and
+holder. It supersedes the "suggested order" above where they differ.
