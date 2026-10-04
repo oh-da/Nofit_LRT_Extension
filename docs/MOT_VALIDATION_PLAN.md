@@ -397,3 +397,15 @@ Run: **T1, T2, T3, T6, T9, T10, T16, T19** (notebooks `MOT_Validation_Stage1d_Zo
 Run: **T11** (= step 42, `MOT_Validation_Stage4_Link_volumes`, AM, PM, midday). All-or-nothing assignment of the 2022 car layer, 1,346 counts 2021-2023: assigned / counted 0.93 (AM), 0.84 (PM), 0.69 (midday); R2 0.47 / 0.51 / 0.50, slope 0.89 / 0.87 / 0.70, RMSE% 113 / 95 / 87: **miss (explained)**; no peak-hour volume class inside its limit; free-flow routing beats shortest distance; best on type-2 arterials (slope 0.87). Workbook: 226 summary rows.
 
 **Cannot be run with what is in the repository:** T13 (Google key, step 37), T18 (Operator 22 AVL data, open question 5), the CBS parts of T2 and T3 (standing request 6), T15 / T16 / T17 for the PM and midday (the 2025 smart-card extracts hold taps 06:00-08:59 only; T17 also needs steps 29-30 for the window). Each needs one input from the user or the data provider; the code path for T13 and T18 is specified above and is a half day each once the input exists.
+
+
+## 13. Parked: T18 waits for the Operator 22 AVL file (decision of 4 October 2026)
+
+The user will share the raw extract later (`New_Query_2026_09_17_15_46_30 (1).csv`: 1,078,845 stop records, lines 34447 and 34448, 132 Thursdays, 25 May 2023 to 10 Sep 2026). Nothing else is needed from the user; open question 5 is answered in principle.
+**Ready-to-run protocol (half a day once the file is in `Input/`):**
+1. Rebuild the calibration sample exactly as the report does (canonical 31-stop journeys, timing QA, 500 m spacing) and check it reproduces 26,653 journeys, 799,590 sections and the coefficients 1.961 (underground) / 2.393 (other) min per section.
+2. Hold-outs, refitting on the rest each time: (a) by year (2023, 2024, 2025, 2026); (b) by line (34447 vs 34448); (c) random 80/20 by date, repeated 20 times; (d) by time of day if the extract carries it.
+3. Report trip-level MAE and MAPE for each hold-out against the in-sample 3.67 min / 5.45 %, the coefficient stability across refits, and the share of held-out trips within +/-15 % (guideline 5.2 style).
+4. Independent check on the Metronit: `is_brt` trips of `Output/gtfs/bus_trips_observed.csv.gz` against the function (not an LRT test, a sanity check of the speed level).
+5. Add a notebook `MOT_Validation_Stage5_LRT_time_function.ipynb`, summary rows for T18, METHODOLOGY 6ai wave 4, README, plan status; no change to the function unless the hold-out shows a bias the user decides to correct.
+Until then T18 stays "not run" in the workbook, with the reason "data to be shared".

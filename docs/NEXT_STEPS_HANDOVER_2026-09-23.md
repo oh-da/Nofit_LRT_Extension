@@ -475,3 +475,6 @@ committed and pushed on its own, with its documents, before the next starts.
 
 Not needed / not coming, by the user's decision on 23 September 2026: Metronit 2013 ridership,
 a stated-preference survey, parking supply, the cellular product's trip definition.
+
+
+> **Parked, 4 October 2026:** the T18 hold-out waits for the Operator 22 AVL extract (protocol: section 13 of `docs/MOT_VALIDATION_PLAN.md`).
