@@ -2818,6 +2818,36 @@ Carmel superzone 302 against none).
 `ravkav2025_rail_tests.csv`, `ravkav2025_tests_summary.csv`; figures `ravkav2025_ks_tld.png`,
 `ravkav2025_pca_overlap.png`.
 
+**Extension of 4 October 2026 — the three sources on one KS footing (code added, run pending).**
+The plan for moving the reports' fitness statements from Jensen–Shannon divergence to the KS
+`D` (JSD stays where it is a loss function, the selection of `k` in §6m, because a probability
+row over 36 unordered superzones has no ordered support for a KS statistic) starts by putting
+the survey, the ticketing and the cellular matrix in one KS run. Section 3 of the notebook was
+extended: (i) the **cellular 2018/19 matrix** (h6–h8, native 1270 zones) joins the source list,
+converted to study TAZs through the same population / employment split as the survey matrices
+of this notebook (step 13 used cellular outflow / inflow shares on both sides; the headline `D`
+there was 0.42) and saved to `study_taz/cellular_2018_taz.csv` on the first run so later runs
+need no LFS; it is paired only with the survey's **all-mode** matrix, rebuilt here by day from
+the trips file — cellular is all modes and RavKav is bus only, so the survey is the hinge and
+cellular is never tested against RavKav; (ii) a second household bootstrap on the all-mode trips
+gives the cellular pair its band, the bus bootstrap keeps the ticketing pairs (the bootstrap
+matrices are stored at the 1250-zone level and converted on demand); (iii) the two step-13
+blocks this notebook had dropped are back — the per-origin trip-length `D` at superzone level
+(3b, flow-weighted by the first matrix's trips, corridor superzones flagged) and the
+flow-concentration `D` at superzone and TAZ level (3c, the second matrix scaled to the first's
+total); (iv) one table, `ravkav2025_ks_three_source.csv` (3d), carries every pair with its
+frame, its noise reference (bus or all-mode day-to-day `D`) and its bootstrap band — the table
+the report's fitness section is to read from. The two all-mode rows also enter the cosine / GEH
+table and the summary table (MSSIM and PCA stay on the bus products). New outputs:
+`ravkav2025_ks_by_origin_sz.csv`, `ravkav2025_ks_concentration.csv`,
+`ravkav2025_ks_concentration_stats.csv`, `ravkav2025_ks_three_source.csv`; figures
+`ravkav2025_ks_by_origin.png`, `ravkav2025_ks_concentration.png`. The container that wrote the
+code holds the LFS inputs as pointers, so the notebook was not executed: the code was dry-run on
+the committed matrices with stand-ins for the trips file and the cellular matrix, and the rows
+for the committed matrices reproduce the values above (e.g. survey bus vs RavKav 2022 raw `D`
+0.049 at 2.26 km). Results and the report wording follow the next run with the LFS inputs; until
+then the numbers above stand and the saved outputs are those of 23 September 2026.
+
 **Limits.** The frames differ inside every survey-vs-ticketing pair (residents' door-to-door
 journeys against all riders' stop-to-stop journeys; for 2025, tag-defined journey origins);
 the MSSIM at TAZ level uses a superzone-grouped ordering, not step 14's Hilbert curve; the
@@ -3371,7 +3401,8 @@ jupyter nbconvert --to notebook --execute --inplace notebooks/current/LRT_captur
 
 # person-level mode choice (step 33; needs git lfs pull --include="Input/THS_2017-2018/*" and pip install statsmodels; reads step 31's skims)
 jupyter nbconvert --to notebook --execute --inplace notebooks/current/Mode_choice_person_level.ipynb
-# the matrix tests on today's products (step 35, diagnostics; needs the THS trips file, the keys and the committed outputs of steps 8, 9, 15, 16, 22, 34; ≈ 4 minutes)
+# the matrix tests on today's products (step 35, diagnostics; needs the THS trips file, the keys and the committed outputs of steps 8, 9, 15, 16, 22, 34; ≈ 4 minutes;
+# the cellular pair of §3 needs git lfs pull --include="Input/Matrices/AvgDayHourlyTrips201819_1270_weekday_v1.csv" once — the converted matrix is then saved under Output/ths2017/study_taz/)
 jupyter nbconvert --to notebook --execute --inplace notebooks/diagnostics/THS_vs_RavKav_2025_tests.ipynb
 # car layer vs traffic counts (step 36; needs git lfs pull --include="Input/Network_with_Counts/*" and the trips file for the occupancy line; geopandas; ≈ 1 minute)
 jupyter nbconvert --to notebook --execute --inplace notebooks/diagnostics/Car_cordon_counts_validation.ipynb
