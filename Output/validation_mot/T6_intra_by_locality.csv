@@ -1,0 +1,4 @@
+segment,origin trips,intra-TAZ share
+urban,856469.6157,0.1470
+suburban,562445.8062,0.3001
+rural,66344.5413,0.1599

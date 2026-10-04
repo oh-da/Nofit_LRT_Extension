@@ -1,0 +1,5 @@
+layer,level,TAZ total,aggregate total,max abs cell difference
+car,super-zone,1.3538e+06,1.3538e+06,0.0466585
+bus,super-zone,117961,117961,0.0045103
+taxi,super-zone,9451.24,9451.24,0.0029
+rail,super-zone,4050.25,4050.25,0.0006

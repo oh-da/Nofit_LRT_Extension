@@ -1,47 +1,47 @@
 cordon,sector,direction,crossing links,counted links,counted share of PCE,count vehicles 16-19,count vehicles 07-08,survey person trips one-end,survey person trips through,survey vehicles 16-19,survey vehicles 07-08,diff % 16-19,diff % 07-08,ratio 16-19,within ±15 % (16-19),within ±15 % (07-08)
-Haifa city,north,inbound,1,0,0.000,1403.691,,3177.129,139.784,2319.040,,65.210,,1.652,False,False
-Haifa city,north,outbound,1,0,0.000,1403.691,,6832.216,192.274,4911.215,,249.878,,3.499,False,False
-Haifa city,east,inbound,22,8,0.283,40131.960,,18960.979,13287.855,22546.968,,-43.818,,0.562,False,False
-Haifa city,east,outbound,22,8,0.345,41203.596,,36081.694,14164.368,35129.839,,-14.741,,0.853,True,False
-Haifa city,south,inbound,10,0,0.000,24616.839,,15857.590,1400.215,12065.900,,-50.985,,0.490,False,False
-Haifa city,south,outbound,10,0,0.000,24616.839,,24245.424,929.132,17600.944,,-28.500,,0.715,False,False
-Haifa city,west,inbound,6,4,0.897,13579.146,,2429.044,481.043,2034.605,,-85.017,,0.150,False,False
-Haifa city,west,outbound,6,4,0.896,13466.419,,2009.986,23.124,1421.461,,-89.444,,0.106,False,False
-Krayot,north,inbound,2,1,0.451,7650.374,,2030.468,4060.728,4258.697,,-44.333,,0.557,False,False
-Krayot,north,outbound,1,0,0.000,4197.646,,4553.833,6528.076,7747.984,,84.579,,1.846,False,False
-Krayot,east,inbound,4,1,0.701,4532.544,,1294.262,5045.262,4432.317,,-2.211,,0.978,True,False
-Krayot,east,outbound,4,1,0.796,6644.362,,4501.553,10215.752,10289.693,,54.864,,1.549,False,False
-Krayot,south,inbound,8,1,0.116,21546.216,,11212.599,12851.339,16824.448,,-21.915,,0.781,False,False
-Krayot,south,outbound,8,1,0.142,22221.671,,10605.606,7124.265,12395.946,,-44.217,,0.558,False,False
-Krayot,west,inbound,11,1,0.103,17259.280,,8861.994,5846.388,10283.454,,-40.418,,0.596,False,False
-Krayot,west,outbound,10,1,0.108,17372.916,,6472.354,3935.625,7276.802,,-58.114,,0.419,False,False
-Kiryat Ata + Zevulun,north,inbound,1,1,1.000,5287.273,,2880.563,3978.836,4795.791,,-9.296,,0.907,True,False
-Kiryat Ata + Zevulun,north,outbound,1,1,1.000,3175.455,,4421.925,4170.970,6007.775,,89.194,,1.892,False,False
-Kiryat Ata + Zevulun,east,inbound,8,4,0.616,17052.879,,1040.751,3654.637,3282.809,,-80.749,,0.193,False,False
-Kiryat Ata + Zevulun,east,outbound,7,4,0.904,19338.419,,3823.169,9181.046,9091.975,,-52.985,,0.470,False,False
-Kiryat Ata + Zevulun,south,inbound,8,2,0.487,10725.404,,1855.737,4131.559,4186.054,,-60.971,,0.390,False,False
-Kiryat Ata + Zevulun,south,outbound,8,2,0.455,10080.859,,1533.194,7240.832,6134.414,,-39.148,,0.609,False,False
-Kiryat Ata + Zevulun,west,inbound,8,3,0.421,17697.725,,6595.583,21899.873,19922.771,,12.572,,1.126,True,False
-Kiryat Ata + Zevulun,west,outbound,8,2,0.200,15734.047,,3662.103,13072.059,11699.791,,-25.640,,0.744,False,False
-Nazareth + Nof HaGalil,north,inbound,4,0,0.000,5279.388,,2634.231,2369.973,3498.720,,-33.729,,0.663,False,False
-Nazareth + Nof HaGalil,north,outbound,4,0,0.000,5279.388,,1998.438,4115.305,4274.461,,-19.035,,0.810,False,False
-Nazareth + Nof HaGalil,east,inbound,6,1,0.063,7682.299,,3679.902,2803.409,4532.846,,-40.996,,0.590,False,False
-Nazareth + Nof HaGalil,east,outbound,7,1,0.029,8826.607,,649.571,767.417,990.696,,-88.776,,0.112,False,False
-Nazareth + Nof HaGalil,south,inbound,3,2,0.590,6674.070,,5964.431,2866.662,6174.312,,-7.488,,0.925,True,False
-Nazareth + Nof HaGalil,south,outbound,3,2,0.508,5563.161,,3489.684,2236.909,4003.782,,-28.030,,0.720,False,False
-Nazareth + Nof HaGalil,west,inbound,11,1,0.241,9185.363,,13014.063,2268.471,10684.877,,16.325,,1.163,False,False
-Nazareth + Nof HaGalil,west,outbound,11,1,0.169,8389.908,,5032.554,3188.885,5748.069,,-31.488,,0.685,False,False
-Tirat Carmel,north,inbound,6,3,0.853,13212.756,,8293.429,11896.065,14115.607,,6.833,,1.068,True,False
-Tirat Carmel,north,outbound,6,3,0.851,13060.937,,6786.340,1233.863,5607.374,,-57.068,,0.429,False,False
-Tirat Carmel,east,inbound,0,0,,0.000,,50.796,2547.377,1816.528,,,,inf,False,False
-Tirat Carmel,east,outbound,0,0,,0.000,,1376.571,2608.185,2785.967,,,,inf,False,False
-Tirat Carmel,south,inbound,7,4,0.930,15743.664,,1080.451,2956.830,2822.689,,-82.071,,0.179,False,False
-Tirat Carmel,south,outbound,6,4,0.952,15196.988,,1406.383,13558.224,10462.596,,-31.153,,0.688,False,False
-"Metropolitan core (Haifa, Nesher, Krayot, Kiryat Ata)",north,inbound,2,1,0.438,7879.458,,5190.279,1249.141,4502.159,,-42.862,,0.571,False,False
-"Metropolitan core (Haifa, Nesher, Krayot, Kiryat Ata)",north,outbound,1,0,0.000,4426.731,,13486.416,1178.355,10252.964,,131.615,,2.316,False,False
-"Metropolitan core (Haifa, Nesher, Krayot, Kiryat Ata)",east,inbound,18,5,0.537,26284.981,,9042.274,1397.076,7298.735,,-72.232,,0.278,False,False
-"Metropolitan core (Haifa, Nesher, Krayot, Kiryat Ata)",east,outbound,17,5,0.711,28629.826,,29577.438,2142.395,22177.113,,-22.538,,0.775,False,False
-"Metropolitan core (Haifa, Nesher, Krayot, Kiryat Ata)",south,inbound,6,2,0.416,16515.781,,10084.946,1158.993,7861.268,,-52.401,,0.476,False,False
-"Metropolitan core (Haifa, Nesher, Krayot, Kiryat Ata)",south,outbound,6,2,0.459,17827.599,,24392.288,1319.690,17976.686,,0.836,,1.008,True,False
-"Metropolitan core (Haifa, Nesher, Krayot, Kiryat Ata)",west,inbound,6,4,0.907,13424.966,,5774.097,1049.874,4771.021,,-64.462,,0.355,False,False
-"Metropolitan core (Haifa, Nesher, Krayot, Kiryat Ata)",west,outbound,6,4,0.906,13312.238,,6213.948,214.644,4494.589,,-66.237,,0.338,False,False
+Haifa city,north,inbound,1,0,0.000,1403.691,,3177.129,139.784,2185.303,,55.683,,1.557,False,False
+Haifa city,north,outbound,1,0,0.000,1403.691,,6832.216,192.274,4627.989,,229.701,,3.297,False,False
+Haifa city,east,inbound,22,8,0.283,40131.960,,18960.979,13287.855,21246.705,,-47.058,,0.529,False,False
+Haifa city,east,outbound,22,8,0.345,41203.596,,36081.694,14164.368,33103.933,,-19.658,,0.803,False,False
+Haifa city,south,inbound,10,0,0.000,24616.839,,15857.590,1400.215,11370.070,,-53.812,,0.462,False,False
+Haifa city,south,outbound,10,0,0.000,24616.839,,24245.424,929.132,16585.914,,-32.624,,0.674,False,False
+Haifa city,west,inbound,6,4,0.897,13579.146,,2429.044,481.043,1917.271,,-85.881,,0.141,False,False
+Haifa city,west,outbound,6,4,0.896,13466.419,,2009.986,23.124,1339.487,,-90.053,,0.099,False,False
+Krayot,north,inbound,2,1,0.451,7650.374,,2030.468,4060.728,4013.101,,-47.544,,0.525,False,False
+Krayot,north,outbound,1,0,0.000,4197.646,,4553.833,6528.076,7301.165,,73.935,,1.739,False,False
+Krayot,east,inbound,4,1,0.701,4532.544,,1294.262,5045.262,4176.709,,-7.851,,0.921,True,False
+Krayot,east,outbound,4,1,0.796,6644.362,,4501.553,10215.752,9696.296,,45.933,,1.459,False,False
+Krayot,south,inbound,8,1,0.116,21546.216,,11212.599,12851.339,15854.197,,-26.418,,0.736,False,False
+Krayot,south,outbound,8,1,0.142,22221.671,,10605.606,7124.265,11681.084,,-47.434,,0.526,False,False
+Krayot,west,inbound,11,1,0.103,17259.280,,8861.994,5846.388,9690.417,,-43.854,,0.561,False,False
+Krayot,west,outbound,10,1,0.108,17372.916,,6472.354,3935.625,6857.155,,-60.530,,0.395,False,False
+Kiryat Ata + Zevulun,north,inbound,1,1,1.000,5287.273,,2880.563,3978.836,4519.222,,-14.526,,0.855,True,False
+Kiryat Ata + Zevulun,north,outbound,1,1,1.000,3175.455,,4421.925,4170.970,5661.312,,78.284,,1.783,False,False
+Kiryat Ata + Zevulun,east,inbound,8,4,0.616,17052.879,,1040.751,3654.637,3093.493,,-81.859,,0.181,False,False
+Kiryat Ata + Zevulun,east,outbound,7,4,0.904,19338.419,,3823.169,9181.046,8567.649,,-55.696,,0.443,False,False
+Kiryat Ata + Zevulun,south,inbound,8,2,0.487,10725.404,,1855.737,4131.559,3944.649,,-63.221,,0.368,False,False
+Kiryat Ata + Zevulun,south,outbound,8,2,0.455,10080.859,,1533.194,7240.832,5780.648,,-42.657,,0.573,False,False
+Kiryat Ata + Zevulun,west,inbound,8,3,0.421,17697.725,,6595.583,21899.873,18773.843,,6.081,,1.061,True,False
+Kiryat Ata + Zevulun,west,outbound,8,2,0.200,15734.047,,3662.103,13072.059,11025.075,,-29.929,,0.701,False,False
+Nazareth + Nof HaGalil,north,inbound,4,0,0.000,5279.388,,2634.231,2369.973,3296.952,,-37.550,,0.624,False,False
+Nazareth + Nof HaGalil,north,outbound,4,0,0.000,5279.388,,1998.438,4115.305,4027.957,,-23.704,,0.763,False,False
+Nazareth + Nof HaGalil,east,inbound,6,1,0.063,7682.299,,3679.902,2803.409,4271.441,,-44.399,,0.556,False,False
+Nazareth + Nof HaGalil,east,outbound,7,1,0.029,8826.607,,649.571,767.417,933.563,,-89.423,,0.106,False,False
+Nazareth + Nof HaGalil,south,inbound,3,2,0.590,6674.070,,5964.431,2866.662,5818.245,,-12.823,,0.872,True,False
+Nazareth + Nof HaGalil,south,outbound,3,2,0.508,5563.161,,3489.684,2236.909,3772.888,,-32.181,,0.678,False,False
+Nazareth + Nof HaGalil,west,inbound,11,1,0.241,9185.363,,13014.063,2268.471,10068.690,,9.617,,1.096,True,False
+Nazareth + Nof HaGalil,west,outbound,11,1,0.169,8389.908,,5032.554,3188.885,5416.583,,-35.439,,0.646,False,False
+Tirat Carmel,north,inbound,6,3,0.853,13212.756,,8293.429,11896.065,13301.573,,0.672,,1.007,True,False
+Tirat Carmel,north,outbound,6,3,0.851,13060.937,,6786.340,1233.863,5284.002,,-59.543,,0.405,False,False
+Tirat Carmel,east,inbound,0,0,,0.000,,50.796,2547.377,1711.771,,,,inf,False,False
+Tirat Carmel,east,outbound,0,0,,0.000,,1376.571,2608.185,2625.302,,,,inf,False,False
+Tirat Carmel,south,inbound,7,4,0.930,15743.664,,1080.451,2956.830,2659.907,,-83.105,,0.169,False,False
+Tirat Carmel,south,outbound,6,4,0.952,15196.988,,1406.383,13558.224,9859.227,,-35.124,,0.649,False,False
+"Metropolitan core (Haifa, Nesher, Krayot, Kiryat Ata)",north,inbound,2,1,0.438,7879.458,,5190.279,1249.141,4242.524,,-46.157,,0.538,False,False
+"Metropolitan core (Haifa, Nesher, Krayot, Kiryat Ata)",north,outbound,1,0,0.000,4426.731,,13486.416,1178.355,9661.684,,118.258,,2.183,False,False
+"Metropolitan core (Haifa, Nesher, Krayot, Kiryat Ata)",east,inbound,18,5,0.537,26284.981,,9042.274,1397.076,6877.823,,-73.834,,0.262,False,False
+"Metropolitan core (Haifa, Nesher, Krayot, Kiryat Ata)",east,outbound,17,5,0.711,28629.826,,29577.438,2142.395,20898.180,,-27.006,,0.730,False,False
+"Metropolitan core (Haifa, Nesher, Krayot, Kiryat Ata)",south,inbound,6,2,0.416,16515.781,,10084.946,1158.993,7407.916,,-55.146,,0.449,False,False
+"Metropolitan core (Haifa, Nesher, Krayot, Kiryat Ata)",south,outbound,6,2,0.459,17827.599,,24392.288,1319.690,16939.987,,-4.979,,0.950,True,False
+"Metropolitan core (Haifa, Nesher, Krayot, Kiryat Ata)",west,inbound,6,4,0.907,13424.966,,5774.097,1049.874,4495.881,,-66.511,,0.335,False,False
+"Metropolitan core (Haifa, Nesher, Krayot, Kiryat Ata)",west,outbound,6,4,0.906,13312.238,,6213.948,214.644,4235.390,,-68.184,,0.318,False,False

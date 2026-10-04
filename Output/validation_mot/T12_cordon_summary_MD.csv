@@ -1,3 +1,3 @@
 set,cells,count total,survey total,total diff %,R2,slope (origin),RMSE%,share of cells within ±15 %
-"all testable sector cells, 10-14",44,627842.525,312103.843,-50.289,0.648,0.478,68.218,0.091
-"cells with >= 50 % of the PCE counted, 10-14",19,248332.481,90247.355,-63.659,0.102,0.315,79.680,0.211
+"all testable sector cells, 10-14",44,627842.525,308684.773,-50.834,0.648,0.472,68.736,0.091
+"cells with >= 50 % of the PCE counted, 10-14",19,248332.481,89258.703,-64.057,0.102,0.311,79.990,0.211

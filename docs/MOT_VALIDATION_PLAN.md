@@ -375,4 +375,21 @@ Outcome by row: **18 pass**, **26 miss (explained)**, 3 not applicable, 3 findin
 **New finding.** RavKav / survey bus trips is 0.74 in the AM and 0.96 / 0.93 in the PM / midday; home-based education is 40 % of the AM survey bus trips and 13 % / 19 % in the other windows (RavKav / survey without education: 1.22 / 1.10 / 1.13).
 The AM coverage gap therefore looks like student and school travel, not a general ticketing gap; to be put to the data provider, with a coverage rule by purpose as the candidate refinement (METHODOLOGY caveat 20). **Decision for the steering group:** keep the AM rule (30 guarded cells, bus base 115,430) as the frozen version, or rerun the calibration with a purpose-specific rule for a later version.
 
-**Next waves.** 2: T1-T3, T6, T9, T10, T16, T19. 3: T11 after step 42. 4: T13, T18, the CBS parts, rail and running times for the three windows.
+**Next waves.** 3: T11 after step 42. 4: T13, T18, the CBS parts, rail and running times for the three windows.
+
+## 11. Status after wave 2 (4 October 2026)
+
+Run: **T1, T2, T3, T6, T9, T10, T16, T19** (notebooks `MOT_Validation_Stage1d_Zones_Population_Rates` and `_Stage2c_Mode_Occupancy_Convergence`; T3, T6, T9, T10, T19 also for PM and midday; METHODOLOGY §6ai wave 2). Workbook: 212 summary rows (AM 99, PM 56, midday 56, whole-day 1).
+
+| Test | Result against the criterion |
+|---|---|
+| T1 zone system | documented; 1250-zones nest in the super-zones (17 of 396 span two), the 28 sub-areas, 25 V2 areas and 25 GS zones do not (13, 15, 11 groups span more than one) |
+| T2 residents | +5.2 % over the zonal 2020 population; 14 of 36 super-zones within +/-5 % (29 after one factor); Haredi +26 %, Arab +11 %; household size 3.39 vs 3.02: **miss (explained)**; CBS parts not run |
+| T3 trip rates | window rate per resident +6.7 % (AM), +7.6 % (PM), +7.4 % (midday) from the 2018 to the 2022 layers; 33, 32, 33 of 35 super-zones within +/-15 %: miss (explained, mostly the resident base) |
+| T6 intra-zonal | 20.6 % (AM), 15.4 % (PM), 16.2 % (midday) of trips inside one TAZ vs 5 %: **miss (explained)**; bus alone 4.5 % passes |
+| T9 mode split | CR 0.98-0.995 study area, all 36 super-zones above 0.6 in every window: **pass**; GC out-of-vehicle weight ratio 2 (guideline 2-3) |
+| T10 occupancy | **correction:** right-hour AM occupancy 1.52, not 1.33; T12 rerun (0.71 -> 0.62); 29 of 36 super-zones within +/-10 %; vehicle-trip pattern CR 0.951 / 0.919 / 0.925 |
+| T16 Metronit | survey 22,812 vs 2025 boardings 13,078 (+74 %); super-zone R2 0.05, CR 0.39: miss; link loads not run |
+| T19 convergence | car exact; **taxi-type does not converge** (largest row residual 28 %, shortfall 3-5 % of the layer, 0.6 % of motorised trips); aggregations exact |
+
+**Next waves.** 3: T11 after step 42. 4: T13, T18 (needs the Operator 22 AVL data, open question 5), the CBS parts, T15 / T17 / T16 for the PM and midday.

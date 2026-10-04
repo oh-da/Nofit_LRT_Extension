@@ -1,0 +1,7 @@
+level,zones,covers
+TAZ,778,all 778 study TAZs
+super-zone (keys table),36,all TAZs
+1250-zone,396,all TAZs (survey / cellular unit)
+GS zone,25,778 TAZs
+sub-area (28),28,205 TAZs
+V2 area (25),25,174 TAZs

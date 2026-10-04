@@ -4180,6 +4180,18 @@ What came out, in plain words:
   The bus layer follows RavKav better outside the morning (at midday it passes the test for every pair of super-zones). The car layer is 64 % (evening) and 50 % (midday) of the counted vehicles, against 71 % in the morning - the residents-only layer holds a smaller part of the road traffic outside the morning peak.
 * **A new clue about the bus gap.** In the morning RavKav records only 74 % of the survey's bus trips; in the evening and at midday 93-96 %. School and student trips are 40 % of the survey's morning bus trips but 13-19 % of the others; without them RavKav is above the survey in every period. So the morning "gap" may be school travel missing from the RavKav file (or too heavy in the survey), not a general shortfall. We have not changed the rule; it is a question for the data provider.
 
+### 5.8b Second wave of checks: population, trip rates, short trips, mode split, car occupancy
+
+Eight more checks from the Ministry list were run. In plain terms:
+
+- **Do the surveyed people add up to the population in the zonal file?** In pattern, yes; in level the survey is 5 % high, its households are bigger (3.4 persons against 3.0), and it carries more Haredi and Arab residents than the zonal file (+26 % and +11 %). This is probably the two different years (2017/18 and 2020) plus the survey's expansion; we cannot say which side is right without census tables.
+- **Does the growth to 2022 keep each area's trips per resident?** Mostly. Rates rise about 7 %, of which about 5 points are just the survey's higher resident count; 33 of 35 areas stay within 15 %.
+- **Are there too many trips that start and end in the same zone?** Yes by the Ministry's 5 % rule: about 21 % of morning trips stay inside one traffic zone (38 % inside one of the larger survey zones). That is how short real trips are, not an effect of our steps; buses alone are at 4.5 %.
+- **Did calibrating the buses to the smart-card data distort the mix of car and transit?** No. The shares of car, bus, taxi and rail stay close to the survey in every area and every time window.
+- **Does the survey's Metronit travel match the 2025 boardings?** Not by area: the survey has 74 % more trips and puts them in different places. The smart cards are the better source for where people board.
+- **Does the balancing of the 2022 matrices converge?** The car matrix does, exactly. The small taxi matrix does not fully (3-5 % of its trips, 0.6 % of all motorised trips, miss their targets).
+- **A correction.** The number of people per car that we used when comparing cars with the road counts (1.33) was computed with the wrong hour of the day. The right figure is 1.52 in the morning. Cars then come out about 12 % lower: the car layer is 0.62 of the counted vehicles in the morning, not 0.71. The matrices themselves count people and are not affected.
+
 ### 5.9 Where things stand now
 
 The single most current answer to "how many riders will the LRT capture" is **about 4,250

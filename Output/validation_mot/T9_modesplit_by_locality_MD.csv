@@ -1,0 +1,4 @@
+segment,trips (survey),trips (2022),transit share survey,transit share calibrated 2018,transit share 2022,CR survey vs calibrated,CR survey vs 2022,transit share 2022 - survey (pp),CR above 0.6
+urban,715970.4035,754103.3917,0.1462,0.1443,0.1384,0.9962,0.9840,-0.7799,True
+suburban,387246.5890,409099.4410,0.0617,0.0589,0.0563,0.9944,0.9894,-0.5305,True
+rural,129221.0605,131432.8734,0.1118,0.1252,0.1243,0.9731,0.9729,1.2537,True
