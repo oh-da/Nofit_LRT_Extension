@@ -34,9 +34,10 @@ series). It is fit for exploratory corridor screening with the caveats of §8; i
 yet an externally validated estimate of corridor demand, and its corridor profiles are
 potential movements — three-hour totals (§6o) and peak-departure-hour values (§6r) —
 not passenger loads. The plain-language account of this base, its tests and its
-corridor results is `reports/Survey_Matrices_Car_Bus_Rail_Report.docx` (revision 2.2,
-23 September 2026: body at the 21 September state plus a dated revision note with the
-current values); the older reports under `reports/historical/` carry dated status
+corridor results is `reports/Survey_Matrices_Car_Bus_Rail_Report.docx` (revision 3.0,
+4 October 2026: rewritten at the 23 September rebuild, without the survey × cellular hybrid,
+with the tests against RavKav and the road counts and a conclusion on fitness for the corridor
+demand assessment); the older reports under `reports/historical/` carry dated status
 notes saying which of their conclusions are overtaken.
 
 **Conclusions for the corridor, as the base stands (21 September 2026).**
