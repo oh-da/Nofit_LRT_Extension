@@ -1,0 +1,7 @@
+layer,sector,sampled trips,median km,mean km
+car,Arab,4673.000,3.023,7.561
+car,Haredi,491.000,1.264,3.416
+car,Jewish non-Haredi,9341.000,1.866,4.893
+transit,Arab,144.000,11.548,13.237
+transit,Haredi,136.000,1.562,5.549
+transit,Jewish non-Haredi,1043.000,2.856,6.092

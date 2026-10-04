@@ -1,0 +1,21 @@
+what,version,class,n,obs_mean,RMSE_pct,limit_pct,pass
+entries,as is,0-100,2,56.712,41.326,50.000,True
+entries,as is,100-250,9,173.236,50.135,40.000,False
+entries,as is,250-500,1,493.552,56.423,30.000,False
+entries,as is,500-750,1,612.062,52.168,20.000,False
+entries,as is,750-1000,1,873.427,55.653,15.000,False
+entries,scaled,0-100,2,56.712,21.513,50.000,True
+entries,scaled,100-250,9,173.236,27.735,40.000,True
+entries,scaled,250-500,1,493.552,11.572,30.000,True
+entries,scaled,500-750,1,612.062,2.936,20.000,True
+entries,scaled,750-1000,1,873.427,10.008,15.000,True
+exits,as is,0-100,6,41.351,53.145,50.000,False
+exits,as is,100-250,5,133.792,59.478,40.000,False
+exits,as is,500-750,1,676.163,35.212,20.000,False
+exits,as is,750-1000,1,870.867,55.732,15.000,False
+exits,as is,1000+,1,1187.500,53.376,12.000,False
+exits,scaled,0-100,6,41.351,54.100,50.000,False
+exits,scaled,100-250,5,133.792,24.469,40.000,True
+exits,scaled,500-750,1,676.163,31.472,20.000,False
+exits,scaled,750-1000,1,870.867,10.169,15.000,True
+exits,scaled,1000+,1,1187.500,5.388,12.000,True

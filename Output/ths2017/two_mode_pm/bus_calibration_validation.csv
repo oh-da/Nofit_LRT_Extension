@@ -1,0 +1,12 @@
+level,pair,cosine,cosine row-normalized,GEH<5 (flow-wtd)
+SZ,survey BUS vs RavKav (own alightings),0.8307,0.7840,0.3503
+SZ,calibrated BUS vs RavKav (own alightings),0.9015,0.9878,0.7159
+SZ,calibrated BUS vs survey BUS,0.9595,0.8442,0.5875
+SZ,binary-guard variant vs RavKav (own alightings),,0.9878,0.7270
+SZ,all-RavKav variant vs RavKav (own alightings),0.9769,0.9878,0.8369
+SZ,survey BUS day 1 vs day 2,0.8569,0.7950,0.2987
+AREA,survey BUS vs RavKav (own alightings),0.8630,0.6004,0.3517
+AREA,calibrated BUS vs RavKav (own alightings),0.9688,0.8118,0.9174
+AREA,binary-guard variant vs RavKav (own alightings),,,
+AREA,calibrated BUS vs survey BUS,0.8800,0.6440,0.3903
+AREA,survey BUS day 1 vs day 2,0.7906,0.4866,0.4036

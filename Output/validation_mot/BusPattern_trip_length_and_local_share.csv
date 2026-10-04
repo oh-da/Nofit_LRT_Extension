@@ -1,0 +1,7 @@
+pattern,median km,mean km,share inside one 1250-zone,share inside one super-zone,KS D,critical (5 %),pass
+survey (reported distance),2.9050,6.3906,0.1330,0.5086,,,
+A  RavKav own alightings,3.5124,6.9907,0.1109,0.4395,0.0782,0.0580,False
+B  RavKav production x on-board,6.3247,13.6348,0.0538,0.2493,0.2404,0.0580,False
+"E  A to super-zone, B inside it",4.1042,7.4800,0.0793,0.4394,0.1379,0.0580,False
+C  current calibrated layer (survey incl.),4.5959,8.1074,0.0838,0.4615,0.1794,0.0580,False
+D  on-board-prior calibrated layer (survey incl.),4.7887,8.4367,0.0780,0.4720,0.1994,0.0580,False

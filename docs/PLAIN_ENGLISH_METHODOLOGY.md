@@ -4157,7 +4157,46 @@ gates said the same thing for buses in step 34. The survey's departure profile i
 anything observed, so the peak-hour figures of Parts 3 and 4 are upper bounds; a factor of about
 0.42–0.48 is the safer value.
 
-### 5.8 Where things stand now
+### 5.8 Checking the matrices against the Ministry of Transport's validation list
+
+The Ministry of Transport has a list of checks that a transport model must pass before it is approved (draft of September 2024): for each check, what to compare, with which data, and
+how close is close enough. Our matrices are not a full four-step model, so we picked the checks that make sense for a survey-based matrix and for which we have independent data
+(`docs/MOT_VALIDATION_PLAN.md`), and ran the first eight (METHODOLOGY §6ai). Nothing was adjusted to pass; when a check missed, the table says by how much and why.
+
+What came out, in plain words:
+
+* **The shape of the morning agrees with independent data.** The survey's departure times follow the hourly traffic counts on the cordon links and the smart-card boardings (agreement 0.63-0.79
+  where 0.6 is the bar). But the survey's peak is sharper: the busiest hour holds 59 % of the three hours in the survey and 48 % in the smart-card data.
+* **The bus matrix agrees with RavKav at the level of districts, not of every pair of super-zones.** At 28 sub-areas it fits (R2 0.94-0.95, slope near 1.07). At 36 super-zones, cell by cell, it does not reach 0.85, but
+  the survey does not repeat itself that closely either (its own day 1 against day 2 is 0.78), and RavKav counts only about three quarters of the survey's bus trips.
+* **The car layer is about 70 % of the counted traffic in three hours, and about 100 % in the busiest hour on the well-counted cordon sectors.** It holds residents' car trips only: no trucks, taxis, buses,
+  visitors or trips from outside the study area. That is a miss against a "within 15 %" rule, and the reason is known.
+* **The survey and the cellular matrix do not coincide** (coincidence ratio 0.43 in the morning against 0.6 wanted): they count different kinds of trips, mostly short ones.
+* **Bus timetables run slower than printed on short trips** (only 52 % of trips within 15 % of schedule) and the Metronit runs faster (89 % of schedule).
+* **Rail** agrees in pattern between 2019 and 2025 but 2025 carries twice the passengers.
+* **Two things were settled.** Two zone tables disagreed on which super-zone 142 of the 778 zones belong to; we use the table the chain uses. Four bus super-zones differ from RavKav by 18-35 % because the calibration rule gives zones with very few survey trips the average adjustment of their origin instead of RavKav's own count.
+* **A question we tested: use the on-board survey's destination probabilities, with RavKav only for how many board?** It is worse. Against where the survey's bus riders actually go, RavKav's own inferred alighting zones fit better at every level, including the split inside a super-zone, and the on-board probabilities make trips twice as long (median 6.3 km against 2.9 km in the survey).
+* **The same matrices for the evening peak and midday.** The Ministry's list asks for three periods, and we had only the morning. We built the PM peak (16:00-19:00) and midday (10:00-14:00) with the same method: car 1.26 and 1.15 million trips, bus 88,800 and 129,500.
+  The bus layer follows RavKav better outside the morning (at midday it passes the test for every pair of super-zones). The car layer is 64 % (evening) and 50 % (midday) of the counted vehicles, against 71 % in the morning - the residents-only layer holds a smaller part of the road traffic outside the morning peak.
+* **A new clue about the bus gap.** In the morning RavKav records only 74 % of the survey's bus trips; in the evening and at midday 93-96 %. School and student trips are 40 % of the survey's morning bus trips but 13-19 % of the others; without them RavKav is above the survey in every period. So the morning "gap" may be school travel missing from the RavKav file (or too heavy in the survey), not a general shortfall. We have not changed the rule; it is a question for the data provider.
+
+### 5.8b Second wave of checks: population, trip rates, short trips, mode split, car occupancy
+
+Eight more checks from the Ministry list were run. In plain terms:
+
+- **Do the surveyed people add up to the population in the zonal file?** In pattern, yes; in level the survey is 5 % high, its households are bigger (3.4 persons against 3.0), and it carries more Haredi and Arab residents than the zonal file (+26 % and +11 %). This is probably the two different years (2017/18 and 2020) plus the survey's expansion; we cannot say which side is right without census tables.
+- **Does the growth to 2022 keep each area's trips per resident?** Mostly. Rates rise about 7 %, of which about 5 points are just the survey's higher resident count; 33 of 35 areas stay within 15 %.
+- **Are there too many trips that start and end in the same zone?** Yes by the Ministry's 5 % rule: about 21 % of morning trips stay inside one traffic zone (38 % inside one of the larger survey zones). That is how short real trips are, not an effect of our steps; buses alone are at 4.5 %.
+- **Did calibrating the buses to the smart-card data distort the mix of car and transit?** No. The shares of car, bus, taxi and rail stay close to the survey in every area and every time window.
+- **Does the survey's Metronit travel match the 2025 boardings?** Not by area: the survey has 74 % more trips and puts them in different places. The smart cards are the better source for where people board.
+- **Does the balancing of the 2022 matrices converge?** The car matrix does, exactly. The small taxi matrix does not fully (3-5 % of its trips, 0.6 % of all motorised trips, miss their targets).
+- **A correction.** The number of people per car that we used when comparing cars with the road counts (1.33) was computed with the wrong hour of the day. The right figure is 1.52 in the morning. Cars then come out about 12 % lower: the car layer is 0.62 of the counted vehicles in the morning, not 0.71. The matrices themselves count people and are not affected.
+
+### 5.8c Loading the car matrix on the road network
+
+We loaded the 2022 car matrix onto the road network, every trip on its quickest route, and compared the result with the traffic counts on 1,346 count points (counts from 2021 to 2023). The total is about right: in the morning the network carries 93 % of the counted vehicles. But the pattern is not: the correlation is weak (0.47 against the Ministry's 0.85 requirement) and individual roads are far off. This is expected. The matrix holds only residents' car trips between places inside the study area; the counts also include trucks, vans, taxis, buses, visitors and trips that begin or end outside. Our simple loading also ignores congestion. So the matrix is fine for judging demand between areas and along the LRT corridor, but it should not be used as it is to forecast the traffic on a single road. Several other checks cannot be done yet: they need a Google travel-time key, the bus operator's GPS data, census tables, or smart-card data for the afternoon and midday (the 2025 files only contain 06:00-09:00).
+
+### 5.9 Where things stand now
 
 The single most current answer to "how many riders will the LRT capture" is **about 4,250
 morning (06:00–09:00) corridor-internal trips in 2022** for the all-underground alignment

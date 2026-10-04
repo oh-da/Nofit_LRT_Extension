@@ -1,0 +1,15 @@
+level,model matrix,reference,cells,n,obs_total,mod_total,total_diff_pct,R2,slope_origin,R2_origin,MAE,RMSE,RMSE_pct,CR
+super-zone (36),survey bus 2018 (raw),RavKav 2022 (own alightings),all cells,1296,119429.7500,129057.1330,8.0611,0.7881,1.1314,0.7959,56.1254,238.8603,259.2009,0.5589
+super-zone (36),survey bus 2018 (raw),RavKav 2022 (own alightings),off-diagonal,1260,58147.2500,55997.4606,-3.6971,0.7561,1.0490,0.7699,32.3984,88.2830,191.3016,0.4694
+super-zone (36),bus 2018 calibrated,RavKav 2022 (own alightings),all cells,1296,119429.7500,128290.9587,7.4196,0.8724,1.0518,0.8783,27.6339,160.4499,174.1133,0.7251
+super-zone (36),bus 2018 calibrated,RavKav 2022 (own alightings),off-diagonal,1260,58147.2500,57311.8463,-1.4367,0.8713,1.0170,0.8808,19.5823,57.4519,124.4931,0.6476
+super-zone (36),bus 2022 layer,RavKav 2022 (own alightings),all cells,1296,119429.7500,129528.0388,8.4554,0.8543,1.0572,0.8610,28.5617,174.1275,188.9556,0.7162
+super-zone (36),bus 2022 layer,RavKav 2022 (own alightings),off-diagonal,1260,58147.2500,57560.1442,-1.0097,0.8682,1.0180,0.8780,19.7519,58.2753,126.2775,0.6458
+super-zone (36),survey bus day 2,survey bus day 1 (repeatability),all cells,1296,135775.7007,122338.6169,-9.8965,0.7677,0.7912,0.7753,54.6868,266.9284,254.7872,0.5749
+super-zone (36),survey bus day 2,survey bus day 1 (repeatability),off-diagonal,1260,58321.8327,52834.1377,-9.4093,0.6278,0.8041,0.6442,33.8079,123.2729,266.3220,0.4388
+sub-area (28),survey bus 2018 (raw),RavKav 2022 (own alightings),all cells,784,34240.0000,35630.6542,4.0615,0.8298,1.0021,0.8361,33.7415,95.1452,217.8558,0.4533
+sub-area (28),survey bus 2018 (raw),RavKav 2022 (own alightings),off-diagonal,756,21451.7500,23423.2067,9.1902,0.5588,0.9546,0.5960,28.4020,66.5345,234.4801,0.3598
+sub-area (28),bus 2018 calibrated,RavKav 2022 (own alightings),all cells,784,34240.0000,34940.8174,2.0468,0.9581,1.0825,0.9594,17.2680,50.9211,116.5951,0.6707
+sub-area (28),bus 2018 calibrated,RavKav 2022 (own alightings),off-diagonal,756,21451.7500,22162.6719,3.3141,0.8375,0.9584,0.8550,14.8969,33.5391,118.1979,0.5882
+sub-area (28),bus 2022 layer,RavKav 2022 (own alightings),all cells,784,34240.0000,35197.3936,2.7961,0.9543,1.0965,0.9557,17.5218,54.7068,125.2633,0.6669
+sub-area (28),bus 2022 layer,RavKav 2022 (own alightings),off-diagonal,756,21451.7500,22281.5611,3.8683,0.8335,0.9614,0.8514,14.9823,34.1021,120.1822,0.5868

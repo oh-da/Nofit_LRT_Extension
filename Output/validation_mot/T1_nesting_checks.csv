@@ -1,0 +1,7 @@
+level,groups,groups spanning more than one super-zone,TAZs in those groups
+sub-area (28),28.0,13.0,136
+V2 area (25),25.0,15.0,124
+GS zone,25.0,11.0,537
+1250-zone,396.0,17.0,55
+TAZ own super-zone vs dominant super-zone of its 1250-zone,,,25
+keys table vs Zonal_2020.csv super-zone,,,142

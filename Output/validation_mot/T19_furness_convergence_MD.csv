@@ -1,0 +1,3 @@
+layer,iterations,trips 2018,trips 2022 (recomputed),trips 2022 (saved),max abs difference to saved layer,max row residual (trips),max column residual (trips),rows with target >= 100,"max relative row residual, targets >= 100","max relative column residual, targets >= 100","row shortfall (trips, total)",share of layer
+car,286,1.08944e+06,1.15087e+06,1.15087e+06,0.235326,9.89554e-07,6.36646e-12,661,8.72091e-11,1.4376e-15,1.39033e-05,1.20807e-11
+taxi-type,500,11798,12538,12537.9,0.0155615,117.307,5.68434e-14,35,0.238463,2.30575e-16,553.238,0.0441249

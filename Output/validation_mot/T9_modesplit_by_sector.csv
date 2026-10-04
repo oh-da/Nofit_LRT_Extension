@@ -1,0 +1,4 @@
+segment,trips (survey),trips (2022),transit share survey,transit share calibrated 2018,transit share 2022,CR survey vs calibrated,CR survey vs 2022,transit share 2022 - survey (pp),CR above 0.6
+Jewish non-Haredi,950834.3518,982194.2284,0.1100,0.1014,0.0979,0.9827,0.9757,-1.2107,True
+Haredi,23557.7676,25494.1360,0.1650,0.1652,0.1601,0.9994,0.9904,-0.4817,True
+Arab,448654.8754,477571.5988,0.0690,0.0672,0.0653,0.9963,0.9927,-0.3656,True

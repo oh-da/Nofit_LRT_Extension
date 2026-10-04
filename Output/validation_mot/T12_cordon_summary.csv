@@ -1,0 +1,5 @@
+set,cells,count total,survey total,total diff %,R2,slope (origin),RMSE%,share of cells within ±15 %
+"all testable sector cells, 06-09",44,525251.288,323947.990,-38.325,0.605,0.594,56.800,0.091
+"cells with >= 50 % of the PCE counted, 06-09",21,240007.955,122664.208,-48.892,0.306,0.462,66.856,0.000
+"all testable sector cells, 07-08 peak hour",44,193126.193,201139.307,4.149,0.614,1.006,48.742,0.227
+"cells with >= 50 % counted, 07-08 peak hour",21,86938.818,76162.207,-12.396,0.304,0.796,50.859,0.238
