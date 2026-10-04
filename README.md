@@ -25,7 +25,7 @@ survey but transit is less local and more Haifa-bound** (PCA, METHODOLOGY §6s):
 transit market cannot be read off the car pattern by scaling, which is why the base keeps
 a transit-specific destination pattern. The plain-language account is
 [`reports/Survey_Matrices_Car_Bus_Rail_Report.docx`](reports/Survey_Matrices_Car_Bus_Rail_Report.docx)
-(revision 2.1). **22 September 2026:** the corridor was re-analysed on the **V2 aggregation**
+(revision 3.0). **22 September 2026:** the corridor was re-analysed on the **V2 aggregation**
 (25 areas, three routes T1 Nazareth / T2 Krayot / T3 Kiryat Yam on a common trunk —
 [METHODOLOGY §6v](METHODOLOGY.md#6v-step-24--corridor-potential-movements-on-the-v2-aggregation-three-routes-corridor_flow_profile_v2_routesipynb));
 the planned **LRT line and its 24 stations** were given station-to-station times with a
@@ -246,9 +246,11 @@ anywhere inside the repository.
   **revision 1.2** adds the observed bus running times of step 30; **revision 1.3** records the
   decisions on money (flat integrated fare), the LRT premium and the free LRT–Metronit transfer,
   and adds the complete skims and the flow comparison of step 31 (Part E)
-- `reports/Survey_Matrices_Car_Bus_Rail_Report.docx` — **revision 2.1, 21 September 2026**: the
-  current base in plain language (survey-only matrix, tests, segmented bus calibration,
-  2022 layers, corridor potential movements and their peak hour, what changed since revision 1 and why)
+- `reports/Survey_Matrices_Car_Bus_Rail_Report.docx` — **revision 3.0, 4 October 2026**: the
+  current base in plain language at the 23 September rebuild (survey-only matrix, tests against the
+  cellular matrix, RavKav 2022 / 2025 and the road counts, segmented bus calibration, 2022 layers,
+  corridor potential movements and their peak hour) with a conclusion on fitness for the corridor demand
+  assessment; the survey × cellular hybrid is no longer described
 - `reports/historical/Nofit_LRT_OD_Demand_Report.docx` (8 September 2026) — kept as a record with a dated
   status note at the front saying which parts are overtaken (its stale PDF rendering was
   removed)
