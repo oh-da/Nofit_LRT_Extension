@@ -1,0 +1,9 @@
+layer,purpose,sampled trips,median km,mean km
+car,HBE,602.000,0.973,3.291
+car,HBO,5182.000,1.639,4.194
+car,HBW,1408.000,2.541,7.397
+car,NHB,5765.000,1.828,4.913
+transit,HBE,371.000,1.764,3.142
+transit,HBO,831.000,2.244,4.846
+transit,HBW,276.000,3.718,6.401
+transit,NHB,518.000,2.244,4.118

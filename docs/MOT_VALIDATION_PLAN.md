@@ -355,3 +355,24 @@ Outcome by row: **18 pass**, **26 miss (explained)**, 3 not applicable, 3 findin
 * **T6 intra-zonal share.** 20.6 % against "< 5 %": a miss by construction; not part of wave 1's notebooks.
 
 **Next waves.** 1b (X1): PM and midday survey matrices and the repeats of T7, T8, T12, T14, T15, T17. 2: T1-T3, T6, T9, T10, T16, T19. 3: T11 after step 42. 4: T13, T18, the CBS parts, rail times.
+
+---
+
+## 10. Status after wave 1b (4 October 2026)
+
+**Built:** the PM-peak (16:00-19:00) and midday (10:00-14:00) survey-based layers (step 8 for the windows, steps 15 and 16 with `NOFIT_PERIOD`; AM unchanged, verified file by file). 2022: car 1,259,603 / 1,150,868, bus 88,817 / 129,528, taxi-type 5,790 / 12,538, rail 3,599 / 1,702.
+**Repeated for PM and midday:** T4, T5, T7, T8 (stage 2b: the three windows, car against the cordon counts and bus against RavKav 2022 hourly journeys), T12, T14. 102 summary rows in the workbook (AM 53, PM 24, midday 24, whole-day 1).
+**Not repeated:** T15 (needs the 2025 rail taps re-extracted for the window) and T17 (needs steps 29 and 30 for the window's timetable and hourly speeds): both are extensions of existing steps with other hours, not new methods.
+
+| Test | PM 16-19 | Midday 10-14 |
+|---|---|---|
+| T7 transit OD, 36 super-zones, calibrated 2022 layer vs RavKav (R2, slope) | 0.77, 1.28: miss | 0.85, 1.06: **pass** |
+| T7 at 28 sub-areas | 0.93, 0.94: **pass** | 0.95, 1.10: **pass** |
+| T8 time-of-day shape (car, 12 cordon-directions) | 11 of 12 above CR 0.6 | all 12 |
+| T12 car vs counts (44 testable cordon-sector cells) | 0.64 of the count | 0.50 of the count |
+| T14 bus origins, anchored zones | 0.99 of RavKav | 0.99 |
+
+**New finding.** RavKav / survey bus trips is 0.74 in the AM and 0.96 / 0.93 in the PM / midday; home-based education is 40 % of the AM survey bus trips and 13 % / 19 % in the other windows (RavKav / survey without education: 1.22 / 1.10 / 1.13).
+The AM coverage gap therefore looks like student and school travel, not a general ticketing gap; to be put to the data provider, with a coverage rule by purpose as the candidate refinement (METHODOLOGY caveat 20). **Decision for the steering group:** keep the AM rule (30 guarded cells, bus base 115,430) as the frozen version, or rerun the calibration with a purpose-specific rule for a later version.
+
+**Next waves.** 2: T1-T3, T6, T9, T10, T16, T19. 3: T11 after step 42. 4: T13, T18, the CBS parts, rail and running times for the three windows.

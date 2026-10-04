@@ -8,8 +8,12 @@ import os, glob
 import pandas as pd
 OUT = 'Output/validation_mot'
 summ = pd.concat([pd.read_csv(p) for p in sorted(glob.glob(f'{OUT}/summary_*.csv'))], ignore_index=True)
+if 'period' not in summ.columns: summ['period'] = 'AM'
+summ['period'] = summ['period'].fillna('AM')
+summ = summ[['period'] + [c for c in summ.columns if c != 'period']]
+summ['_p'] = summ['period'].map({'AM': 0, 'PM': 1, 'MD': 2})
 order = {'T1': 0, 'T4': 1, 'T5': 2, 'T7': 3, 'T7b': 3.5, 'T8': 4, 'T12': 5, 'T14': 6, 'T15': 7, 'T17': 8}
-summ['_o'] = summ['test'].map(order); summ = summ.sort_values('_o', kind='stable').drop(columns='_o')
+summ['_o'] = summ['test'].map(order); summ = summ.sort_values(['_o', '_p'], kind='stable').drop(columns=['_o', '_p'])
 sheets = {
     'Summary': [summ],
     'T4_trip_length_KS': ['T4_trip_length_KS', 'T4_survey_distance_by_purpose', 'T4_survey_distance_by_sector'],
@@ -17,11 +21,18 @@ sheets = {
     'T7_transit_OD_fit': ['T7_transit_OD_fit', 'T7_matched_cells_superzone'],
     'T7b_bus_pattern': ['BusPattern_survey_destination_prediction', 'BusPattern_bootstrap', 'BusPattern_trip_length_and_local_share', 'BusPattern_by_origin_superzone'],
     'T8_time_of_day': ['T8_car_profile_vs_counts', 'T8_transit_profile_vs_ravkav'],
+    'T8b_time_by_window': ['T8b_car_profile_by_window', 'T8b_bus_profile_by_window', 'T8b_bus_hourly_profiles'],
     'T12_cordon_sectors': ['T12_cordon_summary', 'T12_cordon_sectors'],
     'T14_bus_origins': ['T14_bus_origins_summary', 'T14_bus_origins_by_superzone', 'T14_bus_origins_TAZ'],
     'T15_rail_stations': ['T15_rail_stations', 'T15_rail_station_size_classes', 'T15_rail_origins_by_superzone'],
     'T17_running_times': ['T17_bus_running_times', 'T17_bus_running_times_by_length', 'T17_door_to_door_vs_survey'],
 }
+for P, lab in [('PM', 'PM 16-19'), ('MD', 'midday 10-14')]:      # wave 1b: the same tests for the PM peak and midday survey matrices
+    sheets[f'T4_{P}_trip_length'] = [f'T4_trip_length_KS_{P}', f'T4_survey_distance_by_purpose_{P}', f'T4_survey_distance_by_sector_{P}']
+    sheets[f'T5_{P}_CR_cellular'] = [f'T5_coincidence_ratio_{P}']
+    sheets[f'T7_{P}_transit_OD'] = [f'T7_transit_OD_fit_{P}', f'T7_matched_cells_superzone_{P}']
+    sheets[f'T12_{P}_cordons'] = [f'T12_cordon_summary_{P}', f'T12_cordon_sectors_{P}']
+    sheets[f'T14_{P}_bus_origins'] = [f'T14_bus_origins_summary_{P}', f'T14_bus_origins_by_superzone_{P}', f'T14_bus_origins_TAZ_{P}']
 with pd.ExcelWriter(f'{OUT}/validation_workbook.xlsx', engine='openpyxl') as xw:
     readme = pd.DataFrame({'item': ['source', 'frozen version', 'criteria', 'status words', 'periods', 'stage notebooks'],
                            'text': ['Ministry of Transport, Systems Planning, round table on transport models: Validation of the metropolitan models 2024, draft 6 (16 Sep 2024)',

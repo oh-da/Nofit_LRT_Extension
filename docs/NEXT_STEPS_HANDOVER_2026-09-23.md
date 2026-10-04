@@ -7,7 +7,7 @@ method, outputs by exact path, acceptance checks, and the documents to update �
 the order and the standing data requests. Read `METHODOLOGY.md` §0 first; it is the authoritative
 status page and the lineage of every product. Step numbers, section letters and caveat numbers
 below continue the ones used there: **the next step is 37, the next methodology section is
-§6aj (§6ai is the MoT validation wave 1), the next caveat is 20 (19 is the super-zone key mismatch).**
+§6aj (§6ai is the MoT validation wave 1), the next caveat is 21 (19 is the super-zone key mismatch, 20 the education-heavy AM RavKav gap).**
 
 ---
 

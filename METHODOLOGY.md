@@ -265,6 +265,9 @@ layer at sub-area level against RavKav; the transit trip-length distribution onc
 0.74-0.78 where the survey's own day 1 vs day 2 is 0.78; the car layer at 0.71 of the cordon counts in three hours but 1.00 of the busiest hour on the well-counted cells; rail 2019 vs 2025; timetable
 vs measured speeds), and 3 are findings (two super-zone keys disagree on 142 TAZs - decided: the chain's keys table is authoritative, caveat 19; the destination pattern - RavKav's own alightings beat the on-board probabilities against the survey, T7b). No product changed.
 
+**Update, 4 October 2026 (wave 1b - the PM-peak and midday matrices, §6ai).** Steps 8, 15 and 16 now run for three windows (AM, PM 16:00-19:00, midday 10:00-14:00; `NOFIT_PERIOD`, default AM, AM outputs unchanged). 2022 layers: PM car 1,259,603 / bus 88,817 / taxi 5,790 / rail 3,599; midday 1,150,868 / 129,528 / 12,538 / 1,702.
+The guideline's tests were repeated: the bus layer reproduces RavKav better outside the AM (midday passes at super-zone level), the car layer falls to 0.64 (PM) and 0.50 (midday) of the counted vehicles, the time-of-day shape agrees in all windows. A new finding: RavKav records 0.74 of the survey's AM bus trips but 0.93-0.96 in the other windows, while home-based education is 40 % of the AM survey bus trips (caveat 20).
+
 Every published product, what it was built from, and its status:
 
 | Product (`Output/…`) | Built by | Base / inputs | Geography | Modes | Vintage | Status |
@@ -2602,7 +2605,7 @@ a survey-based matrix with a capture model on top and have data (T0-T19); this s
 The frozen version is the 23 September 2026 rebuild; nothing in the chain was changed. The statistics are in `tools/validation_metrics.py` (R2 as
 Correl squared, slope through the origin, RMSE%, coincidence ratio, weighted KS with Kish effective sample sizes, chi-square, share within a
 percentage; GEH is dropped, as in the guideline), tested by hand in `tools/test_validation_metrics.py`. Results are in
-`Output/validation_mot/` (one CSV per table, `validation_workbook.xlsx` with a Summary sheet of 50 rows: 18 pass, 26 miss explained, 3 not applicable, 3 findings). Sector: Arab = `HHTYPE` arab, Haredi = orto, Jewish non-Haredi = secular + religious + other (`migzar` is an area stratum, not a household sector).
+`Output/validation_mot/` (one CSV per table, `validation_workbook.xlsx` with a Summary sheet of 50 rows for the AM base: 18 pass, 26 miss explained, 3 not applicable, 3 findings; wave 1b adds the PM and midday rows, 102 in all). Sector: Arab = `HHTYPE` arab, Haredi = orto, Jewish non-Haredi = secular + religious + other (`migzar` is an area stratum, not a household sector).
 
 **T4 - trip-length distribution (3.5).** Weighted KS between the matrix (centroid distance, intra-zonal 0.52 x sqrt(area)) and the survey's reported
 `TrvlDist` for the same AM trips (17,892 sampled trips, all with a distance). Car: D 0.22 (TAZ proxy) and 0.26 (1250-zone proxy) against a critical
@@ -2681,6 +2684,47 @@ different super-zone in `Zonal_2020.csv` than in the keys table the chain uses; 
 applied to shapes; T11 (link volumes after an assignment), T13 (Google times) and T18 (travel-time function hold-out) are not run yet; the intra-zonal criterion "< 5 %" (T6) is a miss at 20.6 % (diagonal share
 of the 2022 car + transit matrix) and is reported in the plan, not in this wave.
 
+### Wave 1b - the PM-peak and midday survey matrices and the guideline's three periods (4 October 2026)
+
+The guideline asks for three periods: AM peak, PM peak and midday. The layers were AM only, so **steps 8, 15 and 16 were parameterized by time window** and run for **PM peak 16:00-19:00** (hours 16, 17, 18) and **midday 10:00-14:00**
+(hours 10-13, four hours). The switch is the environment variable `NOFIT_PERIOD` (default `AM`); with the default every output of the chain is unchanged, checked file by file (`bus_od_taz_avg` and the boardings table of step 8 to the digit; all CSVs of steps 15 and 16;
+the stage-1 and stage-3 validation tables). Nothing else changes: the same coverage rule (0.5), household-split selection of k, growth factors, rail factor 0.793, occupancy rules. Step 8's window version is `BusRavKav_matrix_periods.ipynb`
+(RavKav May 2022, four Tuesdays: `Output/bus/periods/bus_od_taz_avg_{AM,PM,MD}.csv`, boardings tables and the hourly journey profile `bus_hourly_journeys_2022.csv`); the PM / midday rail layer uses the 2019 station matrix for the window's hours
+(`Train_mtx_table.csv` has hourly columns). Outputs: `Output/ths2017/{two_mode,three_mode_2022}_{pm,md}/`; executed copies `notebooks/current/periods/`.
+
+| 2022 layers, both ends in the study area | AM 06-09 | PM 16-19 | Midday 10-14 |
+|---|---|---|---|
+| car | 1,353,798 | 1,259,603 | 1,150,868 |
+| bus (calibrated, Public Bus + Metronit) | 117,961 | 88,817 | 129,528 |
+| taxi-type | 9,451 | 5,790 | 12,538 |
+| rail (survey, door to door) | 4,050 | 3,599 | 1,702 |
+| bus, corridor to corridor / its share | 10,255 / 12.4 % | 9,108 / 11.2 % | 15,017 / 16.3 % |
+| bus 2018: survey -> calibrated (RavKav journeys; threshold sweep 0.3-0.7) | 125,439 -> 115,430 (92,440; 95,986-129,472) | 81,398 -> 87,354 (78,490; 79,363-92,966) | 129,057 -> 128,291 (119,430; 120,561-137,151) |
+| guarded origin x segment cells; k* | 30; 100 | 16; 50 | 13; 50 |
+
+**The RavKav shortfall is an AM phenomenon.** RavKav records 0.74 of the survey's bus trips in the AM but **0.96 in the PM peak and 0.93 at midday**. In the survey, home-based education trips are **40 %** of the AM bus trips against 13 % (PM) and 19 % (midday);
+without them RavKav / survey is 1.22 / 1.10 / 1.13 (`Output/validation_mot/BusCoverage_by_period_and_purpose.csv`, `MOT_Validation_Stage1c_Bus_coverage_by_period.ipynb`). If the gap were a property of the extract (operators, cash fares, un-geocoded stops) it should not follow the hour; the pattern points at
+student and school travel - under-recorded in the extract, or over-weighted in the survey - which is a question for the data provider and a candidate refinement of the coverage rule (a rule by purpose); the AM rule and its 30 guarded cells are unchanged (caveat 20). The same rules give a lower k* (50) in PM and midday: the RavKav pattern is still preferred over the survey's own rows.
+Known limits of the period runs: the binary-guard sensitivity variant is undefined in the PM (a super-zone without a sampled survey bus trip); in a thin segment the rule still gives the survey volume, which is zero where the survey has no trip (as in the AM).
+
+**The tests of the guideline repeated for the two periods** (`MOT_Validation_Stage1_Inputs_Distribution` and `_Stage3b_Counts_periods` run with `NOFIT_PERIOD`, executed copies in `notebooks/diagnostics/periods/`; `_Stage2b_Timing_periods`; `validation_workbook.xlsx`, 102 summary rows: AM 53, PM 24, midday 24, whole-day 1):
+
+| Test | PM peak 16-19 | Midday 10-14 |
+|---|---|---|
+| T5 coincidence ratio vs cellular (super-zone / GS) | 0.50 (0.54 off-diagonal) / **0.60 pass** (0.62) | 0.44 (0.49) / 0.51 (0.58): miss |
+| T4 trip-length KS, car / transit (1250-zone proxy x detour) | D 0.19 (critical 0.02): miss / **0.060 (0.067): pass** | D 0.20: miss / 0.061 (0.054): marginal miss |
+| T7 transit OD vs RavKav, 36 super-zones: raw survey / calibrated 2018 / 2022 layer (R2, slope) | 0.68, 1.13 / 0.80, 1.24 / 0.77, 1.28: miss (survey day 1 vs 2: R2 0.73) | 0.79, 1.13 / **0.87, 1.05 / 0.85, 1.06: pass** (survey day 1 vs 2: 0.77) |
+| T7 at the 28 sub-areas: calibrated 2018 / 2022 layer | **0.93, 0.94 / 0.93, 0.94: pass** | **0.96, 1.08 / 0.95, 1.10: pass** |
+| T8 car profile vs counts, 12 cordon-directions (CR) | 0.55-0.96, 11 of 12 above 0.6; PM holds 0.27 of the survey's 06-19 crossings vs 0.25 on the road | 0.77-0.97, all pass; midday holds 0.21 vs 0.25 |
+| T8 bus profile vs RavKav 2022 journeys by hour (CR) | 0.84 pass | 0.88 pass (whole day 0.82; AM 0.73) |
+| T12 cordon sectors: survey / count, 44 testable cells (well-counted cells) | 0.64 (0.53); 16 % of cells within +/-15 %; RMSE% 55 | 0.50 (0.36); 9 % within +/-15 %; RMSE% 68 |
+| T14 bus origins by super-zone vs RavKav: all / anchored / guarded zones (layer / RavKav) | 1.13 (R2 0.77) / 0.99 (R2 0.98) / 2.66 | 1.08 (R2 0.86, slope 1.02) / 0.99 (R2 0.99) / 2.25 |
+
+Reading: the **calibrated bus layer reproduces RavKav better in the PM and especially at midday than in the AM** (midday passes at super-zone level), because RavKav and the survey agree on volume there. The **car layer falls further from the counts outside the AM**
+(0.71 of the counted vehicles in the AM, 0.64 in the PM, 0.50 at midday; occupancy of the window from the survey); the layer holds residents' personal car trips only, and trucks, vans, taxis, buses and visitors are a larger share of the road at midday
+- consistent with the gap, but not tested here. The time-of-day shape agrees in all three windows. **Not repeated outside the AM:** T15 (needs the 2025 rail taps re-extracted for the window, a pass over the 668 MB extract) and T17 (needs steps 29-30 for the window's timetable and
+hourly speeds); the 2025 RavKav layer and the on-board pattern exist for the AM only, so the period tests use RavKav May 2022.
+
 ## 7. Output inventory (`Output/`)
 
 *Layout note (21 September 2026).* The products of steps 1–4 (the 2018 activities-file chain, listed first below with bare file names) now live under `Output/historical/ths2018/`; every other path is as written. Notebooks live under `notebooks/current/`, `notebooks/diagnostics/` and `notebooks/historical/` and anchor their working directory to the repository root, so the `Input/…` and `Output/…` paths in this document are unchanged.
@@ -2737,6 +2781,7 @@ of the 2022 car + transit matrix) and is reported in the plan, not in this wave.
 | `mode_choice/*` | person-level rows (trip × area pair) | Step 33 | The estimation sample (attributes, skims, `new_wf`-based weights), the sample by car-availability segment, λ by model and segment with intervals, all coefficients, the trips-file code check, and the corridor-internal layers under the corrected and the current mode codes |
 | `ths2017/tests/ravkav2025_*` | TAZ / SZ / 28 sub-areas / 25 V2 areas | Step 35 | The step 12–14 and 21 tests (cosine, GEH, KS on trip lengths, MSSIM, PCA overlap) on today's products: survey bus (corrected codes, by day) against RavKav 2022 raw, RavKav 2022 and 2025 on the OnBoard pattern, the calibrated layers and the car; the rail checks; a summary table |
 | `validation/car_cordon_*` | 6 cordons × 2 directions; crossing links | Step 36 | The 2022 car layer against the road counts on closed cordons: count and survey vehicles, ratios and ranges, directional split, the counts' hourly profile | Car, taxi, bus variants | 2022 layer vs 2017–2023 counts | Current — validation |
+| `ths2017/{two_mode,three_mode_2022}_{pm,md}/*`, `bus/periods/*` | as the AM folders; period OD matrices | §6ai wave 1b (steps 8, 15, 16 with `NOFIT_PERIOD`) | The PM-peak (16-19) and midday (10-14) survey-based layers, bus calibrated to RavKav May 2022 for the window, and RavKav journeys by window and by hour | diagnostic, same status as the AM base for the guideline's three periods |
 | `validation_mot/*`, `validation_mot/validation_workbook.xlsx` | 48-row Summary + per-test tables | §6ai (MoT guideline, wave 1) | Validation tables and workbook: trip-length KS, coincidence ratio vs cellular, transit OD vs RavKav, time-of-day profiles, cordon sectors, bus origins, rail stations, running times | diagnostics |
 | `ravkav_2025/*` | stops; 733 TAZ; 28 sub-areas; 25 V2 areas; 20 rail stations | Step 34 | The 2025 RavKav layer on a representative Tuesday: located stops by (cluster, code), daily totals by date, boardings by stop and TAZ (bus / Metronit × transfer flag), the bus + Metronit journey and leg OD at TAZ and area level, the 2022-vs-2025 comparisons, the rail station OD (national, northern origins, within-north, by TAZ) with the station table, and the boarding-hour peak factors and 15-minute profile |
 | `figures/` | — | Steps 1b–3 | Scatter plots, CV curves, λ curves, R_AB heatmap |
@@ -2880,6 +2925,10 @@ Added 23 September 2026 (step 33):
     the chain uses is authoritative.** A comparison with CBS or the national model by super-zone must use it; `Zonal_2020.csv`'s `SZ_NEW` should be corrected or ignored. Separately, the segmented bus rule gives thin segments
     (fewer than 5 sampled survey trips) the origin-wide factor, so an "anchored" origin total can differ from RavKav by up to 35 % (zones 3, 12, 13, 20; §6ai T14).
 
+20. **The RavKav shortfall against the survey is an AM, education-heavy phenomenon** (§6ai wave 1b). RavKav / survey bus is 0.74 in the AM, 0.96 in the PM peak and 0.93 at midday; home-based education is 40 % of the AM survey bus trips and 13-19 % in the other windows
+    (without them the ratio is 1.1-1.2 in every window). The coverage threshold of 0.5 and its guarded cells in the AM may therefore be guarding student travel rather than a general ticketing gap. Ask the provider whether school / student trips are in the extract; a coverage rule by purpose
+    is the candidate refinement.
+
 ## 8b. Related work — PCA-based analysis and structural comparison of OD matrices
 
 Context for the PCA validation notebooks (`THS_2018_MTX_PCA_vs_cellular.ipynb`,
@@ -2975,6 +3024,12 @@ jupyter nbconvert --to notebook --execute --inplace notebooks/diagnostics/MOT_Va
 jupyter nbconvert --to notebook --execute --inplace notebooks/diagnostics/MOT_Validation_Stage2_Timing.ipynb
 jupyter nbconvert --to notebook --execute --inplace notebooks/diagnostics/MOT_Validation_Stage3_Counts_Transit.ipynb
 jupyter nbconvert --to notebook --execute --inplace notebooks/diagnostics/Bus_destination_pattern_RavKav_vs_OnBoard.ipynb
+# wave 1b (pull the four May 2022 trip tables, 1.9 GB, and Input/Matrices/Train_mtx_table.csv; ~ 1 minute for step 8, ~ 1 minute per notebook)
+jupyter nbconvert --to notebook --execute --inplace notebooks/current/BusRavKav_matrix_periods.ipynb
+for P in PM MD; do for N in THS_2017_two_mode_matrix THS_2017_three_mode_2022; do NOFIT_PERIOD=$P jupyter nbconvert --to notebook --execute --output-dir notebooks/current/periods --output ${N}_${P}.ipynb notebooks/current/$N.ipynb; done; done
+for P in PM MD; do NOFIT_PERIOD=$P jupyter nbconvert --to notebook --execute --output-dir notebooks/diagnostics/periods --output MOT_Validation_Stage1_Inputs_Distribution_$P.ipynb notebooks/diagnostics/MOT_Validation_Stage1_Inputs_Distribution.ipynb; NOFIT_PERIOD=$P jupyter nbconvert --to notebook --execute --output-dir notebooks/diagnostics/periods --output MOT_Validation_Stage3b_Counts_$P.ipynb notebooks/diagnostics/MOT_Validation_Stage3b_Counts_periods.ipynb; done
+jupyter nbconvert --to notebook --execute --inplace notebooks/diagnostics/MOT_Validation_Stage2b_Timing_periods.ipynb
+jupyter nbconvert --to notebook --execute --inplace notebooks/diagnostics/MOT_Validation_Stage1c_Bus_coverage_by_period.ipynb
 python3 tools/build_validation_workbook.py
 # RavKav 2025 layer (step 34; needs git lfs pull --include="Input/BusRavKav/2025/*,Input/BusRavKav/Stops_In_North/*" (≈ 3.3 GB), pip install geopandas, the OnBoard workbook and step 8's bus_od_taz_avg.csv; the GTFS archive if present, else the committed station table; ≈ 5 minutes)
 jupyter nbconvert --to notebook --execute --inplace notebooks/current/RavKav_2025_boardings_matrix.ipynb

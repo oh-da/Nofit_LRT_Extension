@@ -4176,6 +4176,9 @@ What came out, in plain words:
 * **Rail** agrees in pattern between 2019 and 2025 but 2025 carries twice the passengers.
 * **Two things were settled.** Two zone tables disagreed on which super-zone 142 of the 778 zones belong to; we use the table the chain uses. Four bus super-zones differ from RavKav by 18-35 % because the calibration rule gives zones with very few survey trips the average adjustment of their origin instead of RavKav's own count.
 * **A question we tested: use the on-board survey's destination probabilities, with RavKav only for how many board?** It is worse. Against where the survey's bus riders actually go, RavKav's own inferred alighting zones fit better at every level, including the split inside a super-zone, and the on-board probabilities make trips twice as long (median 6.3 km against 2.9 km in the survey).
+* **The same matrices for the evening peak and midday.** The Ministry's list asks for three periods, and we had only the morning. We built the PM peak (16:00-19:00) and midday (10:00-14:00) with the same method: car 1.26 and 1.15 million trips, bus 88,800 and 129,500.
+  The bus layer follows RavKav better outside the morning (at midday it passes the test for every pair of super-zones). The car layer is 64 % (evening) and 50 % (midday) of the counted vehicles, against 71 % in the morning - the residents-only layer holds a smaller part of the road traffic outside the morning peak.
+* **A new clue about the bus gap.** In the morning RavKav records only 74 % of the survey's bus trips; in the evening and at midday 93-96 %. School and student trips are 40 % of the survey's morning bus trips but 13-19 % of the others; without them RavKav is above the survey in every period. So the morning "gap" may be school travel missing from the RavKav file (or too heavy in the survey), not a general shortfall. We have not changed the rule; it is a question for the data provider.
 
 ### 5.9 Where things stand now
 

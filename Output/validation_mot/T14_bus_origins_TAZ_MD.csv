@@ -1,0 +1,8 @@
+level,reference,n,obs_total,mod_total,total_diff_pct,R2,slope_origin,R2_origin,MAE,RMSE,RMSE_pct,limit_pct,pass
+TAZ (RavKav origins > 0),RavKav 2022,719,119429.750,128985.801,8.001,0.634,0.824,0.738,78.590,161.479,97.215,,
+TAZ size class 0-100,RavKav 2022,426,13014.250,,,,,,,,275.798,50.000,False
+TAZ size class 100-250,RavKav 2022,137,22961.750,,,,,,,,82.227,40.000,False
+TAZ size class 250-500,RavKav 2022,101,35537.500,,,,,,,,59.290,30.000,False
+TAZ size class 500-750,RavKav 2022,30,18904.500,,,,,,,,33.746,20.000,False
+TAZ size class 750-1000,RavKav 2022,14,11633.250,,,,,,,,34.431,15.000,False
+TAZ size class 1000+,RavKav 2022,11,17378.500,,,,,,,,47.612,12.000,False

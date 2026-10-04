@@ -1,0 +1,9 @@
+layer,model distance proxy,survey trips (sampled),n effective,KS D,critical (5 %),pass,"median km, survey reported","median km, matrix","mean km, survey reported","mean km, matrix"
+car,TAZ proxy,12957,8750.9357,0.1686,0.0205,False,1.7481,2.5429,4.8021,5.4766
+car,1250-zone proxy,12957,8750.9357,0.2084,0.0205,False,1.7481,2.4823,4.8021,5.4659
+car,1250-zone proxy x detour,12957,8750.9357,0.1961,0.0205,False,1.7481,2.3789,4.8021,5.2381
+car,"1250-zone proxy, off-diagonal only",8848,8750.9357,0.1002,0.0205,False,2.9566,3.7733,6.7318,7.2946
+transit,TAZ proxy,1996,1243.7224,0.0814,0.0545,False,2.2497,2.6200,4.5665,4.9177
+transit,1250-zone proxy,1996,1243.7224,0.0796,0.0545,False,2.2497,2.6040,4.5665,4.8863
+transit,1250-zone proxy x detour,1996,1243.7224,0.0612,0.0545,False,2.2497,2.4955,4.5665,4.6827
+transit,"1250-zone proxy, off-diagonal only",1774,1243.7224,0.0827,0.0545,False,2.5197,2.7637,5.0054,5.3290

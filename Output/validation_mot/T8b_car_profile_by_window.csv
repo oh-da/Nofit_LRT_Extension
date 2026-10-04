@@ -1,0 +1,37 @@
+cordon,direction,window,CR (hours of the window),survey share of 06-19,count share of 06-19,survey busiest hour share of window,count busiest hour share of window
+Haifa city,inbound,AM 06:00-09:00,0.7227,0.3446,0.2233,0.4488,0.4194
+Haifa city,inbound,PM 16:00-19:00,0.9400,0.2131,0.2293,0.3754,0.3680
+Haifa city,inbound,midday 10:00-14:00,0.9673,0.2136,0.2686,0.2574,0.2532
+Haifa city,outbound,AM 06:00-09:00,0.7299,0.1551,0.1942,0.5220,0.4255
+Haifa city,outbound,PM 16:00-19:00,0.8081,0.3063,0.2447,0.4827,0.3766
+Haifa city,outbound,midday 10:00-14:00,0.8421,0.2261,0.2687,0.3533,0.2844
+Krayot,inbound,AM 06:00-09:00,0.7117,0.2078,0.2203,0.5167,0.4196
+Krayot,inbound,PM 16:00-19:00,0.8015,0.2794,0.2297,0.4024,0.3419
+Krayot,inbound,midday 10:00-14:00,0.8567,0.2344,0.2648,0.3223,0.2659
+Krayot,outbound,AM 06:00-09:00,0.7334,0.2733,0.1650,0.5221,0.4421
+Krayot,outbound,PM 16:00-19:00,0.7807,0.2481,0.2893,0.4724,0.3492
+Krayot,outbound,midday 10:00-14:00,0.9243,0.2404,0.2543,0.3000,0.2656
+Kiryat Ata + Zevulun,inbound,AM 06:00-09:00,0.8209,0.1821,0.2029,0.3785,0.3677
+Kiryat Ata + Zevulun,inbound,PM 16:00-19:00,0.7031,0.2948,0.2554,0.5299,0.3556
+Kiryat Ata + Zevulun,inbound,midday 10:00-14:00,0.8244,0.2304,0.2526,0.3088,0.2805
+Kiryat Ata + Zevulun,outbound,AM 06:00-09:00,0.7072,0.3263,0.1982,0.5403,0.3931
+Kiryat Ata + Zevulun,outbound,PM 16:00-19:00,0.7247,0.2477,0.2566,0.5073,0.3477
+Kiryat Ata + Zevulun,outbound,midday 10:00-14:00,0.8499,0.2199,0.2519,0.3322,0.2627
+Nazareth + Nof HaGalil,inbound,AM 06:00-09:00,0.7808,0.1787,0.1918,0.4351,0.4066
+Nazareth + Nof HaGalil,inbound,PM 16:00-19:00,0.5474,0.3702,0.2774,0.6572,0.3648
+Nazareth + Nof HaGalil,inbound,midday 10:00-14:00,0.7741,0.1554,0.2336,0.4019,0.2745
+Nazareth + Nof HaGalil,outbound,AM 06:00-09:00,0.6388,0.3975,0.2789,0.4763,0.3582
+Nazareth + Nof HaGalil,outbound,PM 16:00-19:00,0.8078,0.1640,0.1967,0.4653,0.3687
+Nazareth + Nof HaGalil,outbound,midday 10:00-14:00,0.7784,0.2137,0.2594,0.3628,0.2659
+Tirat Carmel,inbound,AM 06:00-09:00,0.6140,0.2152,0.2304,0.5037,0.4612
+Tirat Carmel,inbound,PM 16:00-19:00,0.7673,0.2806,0.2418,0.4487,0.3599
+Tirat Carmel,inbound,midday 10:00-14:00,0.8818,0.2217,0.2379,0.3071,0.2653
+Tirat Carmel,outbound,AM 06:00-09:00,0.7700,0.3038,0.2312,0.4829,0.4052
+Tirat Carmel,outbound,PM 16:00-19:00,0.7563,0.2484,0.2432,0.4878,0.3490
+Tirat Carmel,outbound,midday 10:00-14:00,0.8407,0.2138,0.2425,0.3335,0.2613
+Metropolitan core,inbound,AM 06:00-09:00,0.7507,0.3740,0.2494,0.4325,0.3706
+Metropolitan core,inbound,PM 16:00-19:00,0.9649,0.2141,0.2257,0.3713,0.3534
+Metropolitan core,inbound,midday 10:00-14:00,0.8771,0.1864,0.2503,0.2940,0.2534
+Metropolitan core,outbound,AM 06:00-09:00,0.7961,0.1693,0.1994,0.4777,0.3945
+Metropolitan core,outbound,PM 16:00-19:00,0.7353,0.3318,0.2647,0.5082,0.3556
+Metropolitan core,outbound,midday 10:00-14:00,0.8447,0.1939,0.2434,0.3649,0.2807
