@@ -1,0 +1,507 @@
+{
+ "type": "FeatureCollection",
+ "name": "lrt_synthetic_branches",
+ "features": [
+  {
+   "type": "Feature",
+   "properties": {
+    "route": "T1",
+    "AggCode": 210,
+    "AggAreaName": "Hamifrats",
+    "synthetic": true,
+    "regime": "ground"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     35.0383269,
+     32.7903968
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "route": "T1",
+    "AggCode": 211,
+    "AggAreaName": "Bazan-Hutsot",
+    "synthetic": true,
+    "regime": "ground"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     35.0578458,
+     32.804073
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "route": "T1",
+    "AggCode": 212,
+    "AggAreaName": "TsometKiryatAta",
+    "synthetic": true,
+    "regime": "ground"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     35.0689905,
+     32.8093022
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "route": "T1",
+    "AggCode": 213,
+    "AggAreaName": "KiryatAta North",
+    "synthetic": true,
+    "regime": "ground"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     35.1068125,
+     32.8124761
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "route": "T1",
+    "AggCode": 214,
+    "AggAreaName": "KiryatAta North-East",
+    "synthetic": true,
+    "regime": "ground"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     35.1386967,
+     32.8069033
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "route": "T1",
+    "AggCode": 215,
+    "AggAreaName": "Shefaram",
+    "synthetic": true,
+    "regime": "ground"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     35.1729147,
+     32.8039085
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "route": "T1",
+    "AggCode": 216,
+    "AggAreaName": "Hamovil",
+    "synthetic": true,
+    "regime": "ground"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     35.2416966,
+     32.7739963
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "route": "T1",
+    "AggCode": 217,
+    "AggAreaName": "Nazareth",
+    "synthetic": true,
+    "regime": "ground"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     35.3122904,
+     32.7140235
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "route": "T1",
+    "synthetic": true,
+    "kind": "polyline"
+   },
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      35.0383269,
+      32.7903968
+     ],
+     [
+      35.0578458,
+      32.804073
+     ],
+     [
+      35.0689905,
+      32.8093022
+     ],
+     [
+      35.1068125,
+      32.8124761
+     ],
+     [
+      35.1386967,
+      32.8069033
+     ],
+     [
+      35.1729147,
+      32.8039085
+     ],
+     [
+      35.2416966,
+      32.7739963
+     ],
+     [
+      35.3122904,
+      32.7140235
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "route": "T2",
+    "AggCode": 210,
+    "AggAreaName": "Hamifrats",
+    "synthetic": true,
+    "regime": "ground"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     35.0383269,
+     32.7903968
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "route": "T2",
+    "AggCode": 211,
+    "AggAreaName": "Bazan-Hutsot",
+    "synthetic": true,
+    "regime": "ground"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     35.0578458,
+     32.804073
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "route": "T2",
+    "AggCode": 212,
+    "AggAreaName": "TsometKiryatAta",
+    "synthetic": true,
+    "regime": "ground"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     35.0689905,
+     32.8093022
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "route": "T2",
+    "AggCode": 104,
+    "AggAreaName": "KiryatHaim",
+    "synthetic": true,
+    "regime": "ground"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     35.0775938,
+     32.8219416
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "route": "T2",
+    "AggCode": 103,
+    "AggAreaName": "KiryatBialik Center",
+    "synthetic": true,
+    "regime": "ground"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     35.0853217,
+     32.8354229
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "route": "T2",
+    "AggCode": 102,
+    "AggAreaName": "Kiryon",
+    "synthetic": true,
+    "regime": "ground"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     35.0943599,
+     32.8468802
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "route": "T2",
+    "AggCode": 101,
+    "AggAreaName": "TsurShalom",
+    "synthetic": true,
+    "regime": "ground"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     35.0946147,
+     32.856981
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "route": "T2",
+    "synthetic": true,
+    "kind": "polyline"
+   },
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      35.0383269,
+      32.7903968
+     ],
+     [
+      35.0578458,
+      32.804073
+     ],
+     [
+      35.0689905,
+      32.8093022
+     ],
+     [
+      35.0775938,
+      32.8219416
+     ],
+     [
+      35.0853217,
+      32.8354229
+     ],
+     [
+      35.0943599,
+      32.8468802
+     ],
+     [
+      35.0946147,
+      32.856981
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "route": "T3",
+    "AggCode": 210,
+    "AggAreaName": "Hamifrats",
+    "synthetic": true,
+    "regime": "ground"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     35.0383269,
+     32.7903968
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "route": "T3",
+    "AggCode": 211,
+    "AggAreaName": "Bazan-Hutsot",
+    "synthetic": true,
+    "regime": "ground"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     35.0578458,
+     32.804073
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "route": "T3",
+    "AggCode": 212,
+    "AggAreaName": "TsometKiryatAta",
+    "synthetic": true,
+    "regime": "ground"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     35.0689905,
+     32.8093022
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "route": "T3",
+    "AggCode": 304,
+    "AggAreaName": "KiryatHaim West",
+    "synthetic": true,
+    "regime": "ground"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     35.0649035,
+     32.8253467
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "route": "T3",
+    "AggCode": 303,
+    "AggAreaName": "KiryatYam B+C",
+    "synthetic": true,
+    "regime": "ground"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     35.066418,
+     32.8398507
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "route": "T3",
+    "AggCode": 302,
+    "AggAreaName": "KiryatYam A",
+    "synthetic": true,
+    "regime": "ground"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     35.0739112,
+     32.8480302
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "route": "T3",
+    "AggCode": 301,
+    "AggAreaName": "SavyoneyYam",
+    "synthetic": true,
+    "regime": "ground"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     35.0802097,
+     32.8560849
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "route": "T3",
+    "synthetic": true,
+    "kind": "polyline"
+   },
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      35.0383269,
+      32.7903968
+     ],
+     [
+      35.0578458,
+      32.804073
+     ],
+     [
+      35.0689905,
+      32.8093022
+     ],
+     [
+      35.0649035,
+      32.8253467
+     ],
+     [
+      35.066418,
+      32.8398507
+     ],
+     [
+      35.0739112,
+      32.8480302
+     ],
+     [
+      35.0802097,
+      32.8560849
+     ]
+    ]
+   }
+  }
+ ]
+}

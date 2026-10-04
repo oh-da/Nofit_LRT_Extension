@@ -1,0 +1,16 @@
+headway_min,scenario,LRT trips 06-09 (central),of which from bus,of which from car,LRT share of transit
+5.0,LRT all ground,3206,2972,234,0.214
+7.5,LRT all ground,2851,2666,185,0.191
+10.0,LRT all ground,2528,2383,145,0.171
+5.0,LRT all underground,4254,3841,414,0.277
+7.5,LRT all underground,3815,3482,332,0.251
+10.0,LRT all underground,3410,3144,265,0.226
+5.0,LRT design 50 km/h,5095,4481,614,0.326
+7.5,LRT design 50 km/h,4603,4101,502,0.298
+10.0,LRT design 50 km/h,4144,3736,407,0.271
+5.0,LRT design 50 km/h + accel/braking,4300,3877,423,0.28
+7.5,LRT design 50 km/h + accel/braking,3858,3517,341,0.254
+10.0,LRT design 50 km/h + accel/braking,3449,3177,272,0.229
+5.0,LRT mixed (Haifa core underground),3520,3242,277,0.233
+7.5,LRT mixed (Haifa core underground),3137,2917,220,0.209
+10.0,LRT mixed (Haifa core underground),2788,2614,173,0.187

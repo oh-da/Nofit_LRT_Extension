@@ -1,0 +1,13 @@
+cordon,direction,assigned_veh,counted_veh,links,ratio
+Haifa city,inbound,78596,72308,39,1
+Haifa city,outbound,58139,68679,39,1
+Kiryat Ata + Zevulun,inbound,60539,40096,25,2
+Kiryat Ata + Zevulun,outbound,69210,37561,24,2
+Krayot,inbound,53902,41305,25,1
+Krayot,outbound,62435,36762,23,2
+"Metropolitan core (Haifa, Nesher, Krayot, Kiryat Ata)",inbound,48962,65750,32,1
+"Metropolitan core (Haifa, Nesher, Krayot, Kiryat Ata)",outbound,45158,52287,30,1
+Nazareth + Nof HaGalil,inbound,42865,26447,24,2
+Nazareth + Nof HaGalil,outbound,53316,29593,25,2
+Tirat Carmel,inbound,20860,27592,13,1
+Tirat Carmel,outbound,20318,26872,12,1

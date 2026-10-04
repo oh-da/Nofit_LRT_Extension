@@ -1,0 +1,34 @@
+o,d,n,survey,gtfs_d2d,gtfs_ivt,dist_km,o_name,d_name,ratio
+101,104,3.00,30.67,19.20,10.59,4.20,TsurShalom,KiryatHaim,1.60
+101,302,2.00,21.50,15.38,7.82,2.18,TsurShalom,KiryatYam A,1.40
+102,103,2.42,26.54,11.30,4.20,1.53,Kiryon,KiryatBialik Center,2.35
+102,104,4.30,29.33,15.40,7.60,3.18,Kiryon,KiryatHaim,1.90
+102,208,2.56,48.48,36.81,30.63,9.35,Kiryon,LowerCity,1.32
+103,104,3.95,18.91,13.38,4.47,1.66,KiryatBialik Center,KiryatHaim,1.41
+103,208,3.84,40.55,33.47,26.19,8.17,KiryatBialik Center,LowerCity,1.21
+103,212,3.89,16.50,18.67,10.40,3.28,KiryatBialik Center,TsometKiryatAta,0.88
+104,208,2.45,38.58,32.60,24.96,7.22,KiryatHaim,LowerCity,1.18
+201,202,2.00,10.82,35.52,22.61,3.21,TiratCarmel,Matam-NeotPeres,0.30
+204,202,4.00,18.50,15.69,8.12,3.48,Hecht-Shprintzak,Matam-NeotPeres,1.18
+204,205,2.00,26.50,6.45,1.22,0.92,Hecht-Shprintzak,EinHayam,4.11
+204,206,17.02,28.02,14.85,7.92,2.21,Hecht-Shprintzak,BatGalim-KiryatEliezer,1.89
+204,207,2.00,26.98,21.70,15.57,2.77,Hecht-Shprintzak,Hamoshava,1.24
+204,208,2.87,37.90,25.18,19.02,3.68,Hecht-Shprintzak,LowerCity,1.51
+205,104,2.08,53.18,40.71,33.75,10.64,EinHayam,KiryatHaim,1.31
+205,201,4.00,44.54,26.72,14.85,7.52,EinHayam,TiratCarmel,1.67
+205,206,6.70,24.11,8.52,2.40,1.73,EinHayam,BatGalim-KiryatEliezer,2.83
+205,207,4.00,33.50,12.25,6.93,2.63,EinHayam,Hamoshava,2.74
+206,204,2.53,20.45,16.41,9.84,2.21,BatGalim-KiryatEliezer,Hecht-Shprintzak,1.25
+206,208,5.55,19.70,15.06,9.03,2.10,BatGalim-KiryatEliezer,LowerCity,1.31
+207,209,2.00,38.50,16.73,9.84,2.87,Hamoshava,Namal-Giborim,2.30
+213,212,2.00,29.01,22.36,13.58,3.56,KiryatAta North,TsometKiryatAta,1.30
+214,213,2.00,25.01,18.76,5.00,3.05,KiryatAta North-East,KiryatAta North,1.33
+217,102,2.00,44.33,66.67,50.00,25.18,Nazareth,Kiryon,0.66
+301,211,3.44,41.98,31.03,17.64,6.14,SavyoneyYam,Bazan-Hutsot,1.35
+301,303,4.00,55.10,16.69,9.24,2.22,SavyoneyYam,KiryatYam B+C,3.30
+302,303,2.49,11.21,9.03,2.53,1.15,KiryatYam A,KiryatYam B+C,1.24
+303,104,2.10,22.55,26.71,15.61,2.24,KiryatYam B+C,KiryatHaim,0.84
+303,208,2.00,42.49,33.15,19.67,6.63,KiryatYam B+C,LowerCity,1.28
+304,104,2.62,13.12,22.88,11.79,1.25,KiryatHaim West,KiryatHaim,0.57
+304,212,2.04,21.98,11.69,5.09,1.82,KiryatHaim West,TsometKiryatAta,1.88
+304,303,2.33,22.24,12.17,6.28,1.61,KiryatHaim West,KiryatYam B+C,1.83
