@@ -258,6 +258,88 @@ holds 0.38–0.43 of 06:00–09:00 on the road against 0.62 of departures in the
 finding the RavKav boarding profiles gave for transit (§6af); the step-20 peak-hour factors are
 an upper bound (§8 caveat 18).
 
+**Update, 23 September 2026 (task E3 / C4 — bus wait and the non-direct transfer allowance).**
+`docs/NEXT_STEPS_HANDOVER_2026-09-23.md`'s item C4, worked in full: step 29 now carries a
+best-single-line headway beside the pooled one (§6aa addendum); step 26 fixes the 178
+non-direct pairs' transfer count to state the same one-transfer assumption step 31 already
+enforced (no change to any capture number — confirmed by an exact rerun), and gains a
+`BUS_WAIT_RULE` switch, `'half_headway'` (default) or `'best_line'` (§6x addendum 6); step 31
+gains a matching `GC_SOURCE_DIR` switch to compare scenarios (§6ac addendum). Under
+`'best_line'`, central-case LRT trips 06:00–09:00 rise from 4,250 to 4,879 underground (+15%),
+3,207 to 3,733 ground (+16%), 5,095 to 5,777 design regime (+13%) — reported as an alternative
+under `Output/skims/bus_wait_best_line/`, not adopted as the central case.
+
+**Update, 23 September 2026 (task C5 — realistic LRT regime and headway sensitivities).**
+Two new LRT regimes, both derived from step 25's existing calibrated function with no new
+inputs (§6w addendum): `design_50kmh_accel` (the 50 km/h design speed with a 35-second
+acceleration/braking allowance added to its 10-second dwell) ends at 39.7 min, close to the
+calibrated all-underground case (40.7 min); `mixed_core_underground` (the Haifa core, S05–S14,
+underground, the rest at ground level) ends at 56.1 min, between the two pure regimes. Central-
+case capture at the default 5-minute headway: 4,300 (design + accel) and 3,520 (mixed), against
+4,254 underground / 3,206 ground / 5,095 design-no-accel (§6ac addendum). A headway sensitivity
+(`LRT_HEADWAY` = 7.5 / 10 min) loses 7–8 % of the central-case capture per 2.5-minute step for
+every regime (`Output/skims/lrt_capture_regime_headway_matrix.csv`). None of this changes which
+regime is largest or smallest.
+
+**Update, 23 September 2026 (task C7 — bus-network response, scenario S3).** A `BUS_COMPETITION`
+switch on step 31 (`'full'` default, `'truncated'` the alternative) gives the upper bound on
+capture that a truncated opening-year bus network would produce: removing the trunk's direct
+bus as an independent alternative (§6ac addendum) raises the central case 21–64 % depending on
+regime (e.g. 4,254 → 5,754 underground), reported under `Output/skims/bus_truncated/` beside
+the full-competition case, not adopted as it — the actual opening-year bus plan is still a
+client-side request.
+
+**Update, 23 September 2026 (task C11 — observed design-hour factors, caveat 18).** Steps 27,
+24 and 31 gain `PHF3h observed` / `flow_peak_hour_observed` columns beside every existing
+survey-departure peak-hour column, not in place of them: car 0.435 (step 36's cordon counts +
+the stated sliding-window correction), transit 0.4755 (step 34's RavKav study-area boarding
+factor) against the survey's 0.55–0.66 (car) and 0.55–0.74 (bus) — both markedly flatter, as
+§6ah and §6af already found. Because the observed transit factor does not split by direction
+while the survey one does (0.549 up / 0.457 down), the trunk's peak-hour LRT loads move in
+opposite directions from the survey-based figure: up down to 0.865–0.866 of it, down up to
+1.041 of it. Step 32's forecast-year peak-hour outputs are not yet extended.
+
+**Update, 23 September 2026 (task C6 — synthetic branch alignments, scenario S4).** A
+placeholder for task E1's still-missing branch drawings: one station per area, ground level,
+connected in the V2 route order (§6w addendum). Central-case capture is **3,639** — *lower*
+than the all-underground case's 4,254, because for 14 of the 15 off-trunk areas the synthetic
+branch's generalized cost is *worse* than today's bus/Metronit feeder it replaces (§6ac
+addendum, `Output/lrt_v2/lrt_branches_vs_feeder_gc.csv`) — up to 92 minutes worse at Nazareth,
+mostly its one station's walk access across 38 TAZs, not the running speed. Every trunk-pair
+result is unchanged (checked exactly). A genuine finding about the placeholder, not a bug: real
+branch drawings, likely with several stations through a city the size of Nazareth, would change
+this materially.
+
+**Update, 23 September 2026 (step 41 — RavKav 2025 journeys chained from the taps, task C9).**
+A card-level chaining of the 2025 taps (§6ai), in place of the `JourneyTransfer` tag: it
+resolves an alighting for 45.8 % of taps (below the ≥ 85 % target), almost entirely because
+72.2 % of card-date groups tap once in this AM-only window — one leg, nothing to chain against.
+The chained transfer share it does recover, 27.5 %, sits far closer to 2022's own rate (a third
+of legs) than the file's tag (3.7 %), supporting the standing reading that the tag marks a
+fare-rule transfer, not a physical one (§6af caveat 16). The resulting journey OD does not
+resemble 2022's (cosine 0.138) — the 26.3 % of journeys it resolves are systematically the ones
+with an observed transfer or return, not a representative morning sample. Re-anchoring the base
+on 2025 still needs a general alighting inference this file cannot supply by tap-chaining alone.
+
+**Update, 23 September 2026 (task C10 — all-or-nothing assignment of the car layer, step 42).**
+The link-level check step 36 could not give: an assignment on the same counted network, free-flow
+speed assumed by link `TYPE` since no usable speed field exists without the client's codebook
+(the same gap task E5 is blocked on). Aggregate: **1.037** assigned ÷ counted vehicles over the
+3,231 counted links — essentially exact. Link by link: GEH ≤ 10 on only 20 % of links, as an
+unrestrained assignment is expected to give. The six screenlines recomputed from the assignment
+sit above step 36's own 0.58–0.90 range on three of six cordons (Kiryat Ata, Krayot, Nazareth,
+up to 1.84) — likely route concentration onto a single shortest path, not a base-demand problem,
+since the aggregate figure holds up. A genuine link-by-link validation still needs a real,
+capacity-restrained, calibrated-speed assignment.
+
+**Update, 23 September 2026 (task C8 — LRT capture uncertainty, step 40).** A factorial over
+five of the plan's eight factors (§6ak) — coverage threshold, walk access source and car GC
+source are held fixed, blocked by the same gaps as tasks C1–C3/E5 (this document's next
+paragraph and item C1 of `docs/NEXT_STEPS_HANDOVER_2026-09-23.md`). Ranked by range on the
+central case (4,254 LRT trips 06:00–09:00): headway (844) < bus competition's explicit ceiling
+(1,500) < LRT regime (1,889) < λ/the LRT premium (2,865, the widest). None of the four factors
+this session could vary is small enough to drop from a future full design.
+
 Every published product, what it was built from, and its status:
 
 | Product (`Output/…`) | Built by | Base / inputs | Geography | Modes | Vintage | Status |
@@ -284,9 +366,13 @@ Every published product, what it was built from, and its status:
 | `lrt_v2/*` | step 25 | `Input/GeneralHalufa/` geometry × the calibrated travel-time function | 24 stations; 10 trunk areas | LRT in-vehicle time, two scenarios × two forms | planned line | **current** — trunk only (no branches) |
 | `gc/*` | step 26 | survey car times, `Input/BusSpeedData/` (LFS), `lrt_v2/` | 25 V2 areas | car; bus; LRT (2 scenarios) — generalized-cost components with status | 2017/18 (car), May 2026 (bus), planned (LRT) | **current** — partial fill; money components missing |
 | `skims/*` | step 31 | `gc/*` components, feeder composite (bus or Metronit) for the LRT, 2022 corridor flows | 25 V2 areas, 9 trunk links | car; bus; Metronit; LRT (2 scenarios) — complete skims, logit calibration, LRT capture scenarios, trunk-link loads | 2022 (flows), May 2026 (bus), planned (LRT) | **current** — money components still missing; λ assumed |
+| `skims/bus_wait_best_line/*` | steps 26 + 31, `BUS_WAIT_RULE='best_line'` / `GC_SOURCE_DIR` | same as `gc/*` and `skims/*`, bus wait from the single busiest line's own headway instead of the pooled one | 25 V2 areas, 9 trunk links | as `skims/*` | 2022 (flows), May 2026 (bus), planned (LRT) | **alternative scenario** (task E3 / C4) — not the central case |
 | `skims/forecast/*` | step 32 | step-23 forecast sets (BU/HS × 2040/2050), step-31 skims (held fixed) | 25 V2 areas, 9 trunk links | car; transit; taxi — market; LRT (2 scenarios) — capture, boardings, trunk-link loads by scenario-year | 2040 / 2050 (market), 2026 skims (fixed) | **current** — skims fixed at step 31; λ assumed |
 | `mode_choice/*` | step 33 | `Input/THS_2017-2018/` trips, person and household tables × step-31 skims | 25 V2 areas, person-level rows | car vs transit (bus + Metronit + rail) — estimation sample, λ estimates by specification and segment, code check | 2017/18 (survey), May 2026 (skims) | **current** — λ estimated; supports the assumed 0.03; choice-rider λ not identified |
 | `ravkav_2025/*` | step 34 | `Input/BusRavKav/2025/*` (LFS) × the north stops file, `TAZ_North`, the OnBoard pattern, the GTFS stations | stops, 733 TAZ, 28 sub-areas, 25 V2 areas, 20 rail stations | bus + Metronit boardings (journey origins / transfer legs), bus + Metronit journey and leg OD, rail station OD, boarding-hour peak factors | 2025 (representative Tuesday) | **current input layer** — not yet consumed by steps 15–32 (§6af) |
+| `ravkav_2025/bus_od_taz_2025_own_alightings.csv`, `journeys_2025_summary.csv` | step 41 | `Input/BusRavKav/2025/{Buses,Metronit}_RavKav.csv` (LFS), card-level tap chaining | TAZ pairs (allocated journeys only) | bus + Metronit journeys on their own inferred alightings — 45.8 % of taps allocated | 2025 (representative Tuesday) | **diagnostic** — supports caveat 16, does not replace the OnBoard-pattern prior of `ravkav_2025/*` above |
+| `validation/car_aon_link_flows.csv`, `car_aon_fit_by_type.csv`, `car_aon_screenlines.csv` | step 42 | `Output/ths2017/three_mode_2022/car_2022_taz.csv` × the Emme network, all-or-nothing assignment, assumed free-flow speed by TYPE | every car-mode link | assigned vs counted vehicles 06:00–09:00 — aggregate ratio 1.037, link-level GEH ≤ 10 on 20 % | 2022 (demand), mixed years (counts, as step 36) | **diagnostic** — the link-level check step 36 could not give |
+| `skims/uncertainty/lrt_capture_factorial.csv`, `lrt_capture_tornado.csv` | step 40 | steps 31/32's own runs across tasks C4–C7, plus two one-off `truncated`-competition reruns at headway 7.5/10 | 25 areas, aggregated to 06:00–09:00 totals | LRT trips by regime × headway × λ/premium × bus competition (155 rows) | 2022 | **diagnostic** — a factorial over 5 of the plan's 8 factors; coverage/walk/car source fixed |
 
 The 25 GS zones (`Input/TAZ_GSnew.csv`) and the 25 retained research areas of the
 forecast tables are different geographies with the same matrix dimension; files are
@@ -1568,6 +1654,13 @@ peak-hour), `corridor_v2_link_flows_wide.csv`, `corridor_v2_route_summary.csv`,
 `corridor_v2_network_link_flows.csv`, `corridor_v2_vs_earlier_profile.csv`; figure
 `corridor_v2_route_profiles_2022.png`.
 
+**Addendum, 23 September 2026 — the observed design-hour factor (task C11).** When step 27
+provides its `PHF3h observed` column (§6y addendum), `corridor_v2_link_flows_long.csv` gains
+`PHF3h_observed` and `flow_peak_hour_observed` beside the existing survey-based columns, and
+`corridor_v2_route_summary.csv` a `busiest link peak hour observed` column — the same
+three-hour flows, scaled by the flatter observed factor instead of the survey's departure-time
+one.
+
 ## 6w. Step 25 — LRT line and stations: stop-to-stop times, underground vs ground level (`LRT_line_stations_travel_time.ipynb`)
 
 **Purpose.** Turn the planned geometry (`Input/GeneralHalufa/`) into a station table and
@@ -1629,6 +1722,61 @@ dwell, acceleration and deceleration all sit, against 10 s here. It is a perform
 for the alignment, read beside the two calibrated scenarios rather than as a third observed
 regime. Outputs `lrt_station_times_design_50kmh.csv`, `lrt_area_ivt_design_50kmh.csv`, the
 row in `lrt_end_to_end_summary.csv` and the columns in `lrt_line_profile.csv`.
+
+**Addendum, 23 September 2026 — the acceleration/braking allowance and a mixed alignment
+(task C5, `docs/NEXT_STEPS_HANDOVER_2026-09-23.md`).** Two more scenarios, both derived from
+machinery already in this notebook, no new inputs. **`design_50kmh_accel`** adds a stated
+`ACCEL_ALLOWANCE_S = 35` seconds per stop (the midpoint of the usual 30–40 s range; still
+open which value the client's design implies, `docs/PLAN_TIGHTENING_AND_SCENARIOS.md` §6) on
+top of the existing 10 s dwell — the calibrated regimes need no such addition, since their
+fitted stop penalty already comes from the Red Line's own observed acceleration, braking and
+dwell. End to end: **39.7 min (28.3 km/h)** — 3 % above the calibrated all-underground case
+(40.7 min), showing that most of the gap between the unrealistic 50 km/h ceiling (26.3 min)
+and the calibrated regime was exactly this missing allowance, not the running speed itself.
+**`mixed_core_underground`** applies the same calibrated `section_time` function used for the
+two pure regimes, section by section: the Haifa core (**S05–S14**, the ten stations from
+Matam-NeotPeres through Bat Galim-Kiryat Eliezer) underground, the rest — including the two
+Tirat Carmel sections and the run out to Hamifrats — at ground level, since neither end of the
+line sits under the city. 9 of the line's 23 sections fall inside the core. End to end:
+**56.1 min (20.1 km/h)**, between the two pure regimes as expected. Both are flagged pending
+the client's actual design (task E1): the core's boundary and the accel allowance's value are
+both assumed, not given.
+
+**Outputs.** `lrt_station_times_design_50kmh_accel.csv`, `lrt_station_times_mixed_core_underground.csv`,
+`lrt_area_ivt_design_50kmh_accel.csv`, `lrt_area_ivt_mixed_core_underground.csv`; both added to
+`lrt_end_to_end_summary.csv` and `lrt_line_profile.csv` (the mixed scenario's `lrt_line_profile.csv`
+columns also carry the per-section regime actually used) and to the line profile figure.
+
+**Addendum, 23 September 2026 — synthetic branch alignments, until the client's drawings arrive
+(task C6, scenario S4).** Task E1's branch geometry (Hamifrats → Tsomet Kiryat Ata, and the
+three V2 branches) is still not supplied, so a placeholder: one station per area at its
+population + employment weighted representative point (`ac`, already computed above), connected
+in the V2 route order, entirely at ground level (the calibrated `section_time('ground')`
+function — a surface branch is the planning default absent other information). The three
+branches share a synthetic prefix **Hamifrats → Bazan-Hutsot → Tsomet Kiryat Ata** (also
+missing from `hf_lrt_3`) before diverging into T1 (Kiryat Ata North → Nazareth, 5 areas), T2
+(Kiryat Haim → Tsur Shalom, 4 areas) and T3 (Kiryat Haim West → Savyoney Yam, 4 areas) — 15
+off-trunk areas in total, matching the count the capture model's feeder composite has stood in
+for since step 31. Every trunk pair (both areas among the ten real `hf_lrt_3` stations)
+reproduces the real all-underground time **exactly** (checked in the notebook, max deviation
+0.00e+00 min) — the tree-distance construction (same-branch pairs by difference from the
+Tsomet Kiryat Ata junction, cross-branch pairs by sum through it) only supplies new numbers for
+pairs touching an off-trunk area. Branch-to-Hamifrats times range 0.2–68.1 min (Bazan-Hutsot
+nearest, Nazareth furthest); Tirat Carmel–Nazareth end to end is 106.4 min. Branch headway is a
+separate assumption, **10 minutes** against the trunk's 5 (`docs/PLAN_TIGHTENING_AND_SCENARIOS.md`
+item 3b.7), applied in step 26 to any pair touching a branch area.
+
+**Outputs.** `Output/lrt_v2/lrt_area_ivt_branches_synthetic.csv` (25 × 25, the only full-coverage
+IVT table among the LRT scenarios — every other one is 10 × 10, trunk only),
+`lrt_synthetic_branches.geojson` (25 station points + 3 polylines, `synthetic: true` on every
+feature).
+
+**Limits.** The polylines are straight lines between area representative points, not a real
+alignment; every area gets exactly one station regardless of size — a poor fit for a large,
+spread-out area (Nazareth, 38 TAZs), which §6ac's addendum below shows dominates that area's
+result far more than the running speed does. Replace with the client's actual drawings the day
+they exist (task E1), at which point this section and its outputs are superseded, not merely
+revised.
 
 ## 6x. Step 26 — Generalized cost on the V2 areas: data inventory, first-fill skims, gaps (`GC_data_inventory_and_skims.ipynb`)
 
@@ -1752,6 +1900,38 @@ transfer components as the two calibrated scenarios; `gc_area_v2_lrt_design_50km
 a column in `gc_trunk_pairs_comparison.csv`. No section form (the regime is specified, not
 calibrated).
 
+**Addendum 6, 23 September 2026 — bus wait rule and the non-direct transfer allowance (task
+E3 / C4, `docs/NEXT_STEPS_HANDOVER_2026-09-23.md`).** Two fixes, one a correction and one a
+switch. **The correction** (unconditional, applied by default): the 178 area pairs without a
+direct GTFS service (8 of the 90 trunk pairs) had their transfer count set to a missing value
+that a later `fillna(0)` turned into an uncounted transfer — inconsistent with step 31, which
+already assumes one transfer on these pairs when it reads this table
+(`bus_tr.where(direct, 1.0)`, unchanged by this fix). `bus_tr_final` now states the same
+assumption directly, so `gc_area_v2_bus.csv` and `gc_trunk_pairs_comparison.csv` agree with
+what the capture pivot has always used: exactly 178 cells move by +8.0 generalized minutes
+(one `TRANSFER_PEN`), 8 of them trunk pairs (TiratCarmel's four trunk pairs each way); no
+other cell changes, and the capture (step 31/32) is unaffected because it already forced this
+value — confirmed by an exact rerun of steps 26 → 31 reproducing `lrt_capture_scenarios.csv`
+to the last decimal. **The switch**, `BUS_WAIT_RULE` (`'half_headway'`, default, unchanged; or
+`'best_line'`): step 29's GTFS skim (§6aa) now also carries, per area pair, the headway of the
+single busiest line-direction actually serving it in the peak hour, beside the existing
+combined headway pooling every line together. Under `'best_line'` the wait term uses that
+narrower figure instead — median wait on direct pairs rises from the combined figure to a
+noticeably higher one (`bus_best_line_headway_0708_min` median 6.0 min against the combined
+headway's 3.75 min area-pair-wide). The alternative writes to
+`Output/skims/bus_wait_best_line/` rather than the default `Output/gc/` and `Output/skims/`,
+so the default chain is untouched (confirmed by the same exact rerun above). Trip-weighted
+trunk-pair bus GC: 30.7 (default) → 34.9 generalized minutes (`'best_line'`, +14%). Central-case
+LRT capture, 06:00–09:00, 2022: underground 4,250 → 4,879 (+15%), ground 3,207 → 3,733 (+16%),
+design regime 5,095 → 5,777 (+13%) — worse bus wait draws more of the transit market to the
+LRT, as expected, but does not change which regime is largest. `Output/skims/bus_wait_best_line/
+lrt_capture_scenarios.csv` carries the same five λ/premium cases as the default
+`Output/skims/lrt_capture_scenarios.csv` for the full comparison. Both notebooks read the rule
+from the `BUS_WAIT_RULE` / `GC_SOURCE_DIR` environment variables (default when unset), so the
+comparison reruns without editing the notebooks. Not yet done: step 32's forecast-year rerun
+under `'best_line'` — the 2022 comparison above is the only one currently available for this
+alternative.
+
 ## 6y. Step 27 — Peak-hour factors on the V2 routes (`Corridor_peak_hour_V2_routes.ipynb`)
 
 **Purpose.** Step 24's first pass applied the step-20 factors of the 18-area line to the V2
@@ -1781,6 +1961,25 @@ loads. Caveats as §6r.
 
 **Outputs.** `Output/corridor_v2/peak_hour_factors_v2.csv`, `peak_hour_factors_v2_applied.csv`;
 figure `corridor_v2_peak_hour_profiles.png`.
+
+**Addendum, 23 September 2026 — the observed design-hour factor, beside the survey-departure
+one (task C11, caveat 18).** `peak_hour_factors_v2_applied.csv` gains two columns, `PHF3h
+observed` and `observed basis`, computed alongside — not in place of — everything above.
+**Car:** the mean of the 12 cordon-direction `count PHF3h` values of step 36
+(`Output/validation/car_cordon_counts.csv`), 0.405, plus the stated sliding-window correction
+of 0.03 (§6ah: "a sliding 60-minute window sits 5–10 % above the best clock hour") = **0.435**,
+applied to every route and direction alike (the six cordons do not map onto individual V2
+routes, so this is one representative figure, the same simplification the study-area fallback
+above already makes for undersampled route-directions). **Transit:** the RavKav boarding-hour
+factor of step 34, study-area scope, all boardings, bus (`Output/ravkav_2025/
+boarding_hour_peak_factors_2025.csv`) = **0.4755**, applied to bus, Metronit/rail and taxi
+alike (no independent observed source exists for taxi peaking; this is the same borrowing the
+survey-based rail = bus convention above already does). Both observed figures are markedly
+flatter than every survey-departure factor on this page (car 0.55–0.66, bus 0.55–0.74): the
+survey's departure-time profile overstates real peaking on both modes, as §6ah and §6af
+already found independently. Steps 24 and 31 carry the observed factor through to a matching
+`flow_peak_hour_observed` / `..._peak_hour_observed` column beside their existing peak-hour
+outputs; step 32's forecast-year peak-hour outputs are not yet extended.
 
 ## 6z. Step 28 — Corridor transit profiles on the V2 routes: calibrated survey vs ticketing (`Corridor_profile_V2_survey_vs_ticketing.ipynb`)
 
@@ -1874,6 +2073,16 @@ the bus IVT, wait and stop access from this skim where a direct service exists a
 the Metronit as its own mode (§6x addendum). Open: transfer paths for the 178 pairs without
 a direct service; observed (AVL) running times in place of the timetable. The earlier
 synthetic dry run remains under `Output/gtfs/dry_run/`.
+
+**Addendum, 23 September 2026 — the best single line's own headway, per area pair (task
+E3 / C4).** `bus_direct_skim_area_v2.csv` (and the BRT columns alongside it) now also carries
+`bus_best_line_headway_0708_min` / `brt_best_line_headway_0708_min`: the headway of the single
+busiest line-direction actually serving the pair in the peak hour, grouping the same
+morning-peak trips by `(o, d, route_code)` instead of pooling every line together as the
+existing `bus_headway_0708_min` does. Median on the 422 direct pairs: 6.0 min for the best
+single line against 3.75 min combined — pooling several lines together understates the wait a
+rider on any one of them actually faces. Consumed by step 26 (§6x addendum 6) under
+`BUS_WAIT_RULE = 'best_line'`.
 
 **Outputs.** `Output/gtfs/bus_los_taz.csv` (781 rows), `Output/gtfs/bus_direct_skim_area_v2.csv`,
 figure `gtfs_bus_los_taz.png`.
@@ -2047,6 +2256,82 @@ and the free LRT–Metronit transfer are assumptions of the same standing; the f
 at the gateway station; station access / egress walk is the population-weighted
 nearest-station walk of §6x, not a per-trip routing.
 
+**Addendum, 23 September 2026 — reading an alternate GC source (task E3 / C4).** This
+notebook now reads its step-26 components from `GC_SOURCE_DIR` (environment variable,
+default `Output/gc`), and writes to `Output/skims` only when that default is in force —
+otherwise to `GC_SOURCE_DIR` itself, so an alternate scenario never touches the default
+outputs. Rerun with `GC_SOURCE_DIR=Output/skims/bus_wait_best_line` (step 26's
+`BUS_WAIT_RULE='best_line'` output, §6x addendum 6) to compare the capture under the
+best-single-line bus wait rule: central-case LRT trips 06:00–09:00 rise from 4,250 to 4,879
+underground, 3,207 to 3,733 ground, 5,095 to 5,777 in the design regime — a worse bus wait
+draws more of the transit market to the LRT in every scenario and case, without changing
+which regime is largest. The default rerun (`GC_SOURCE_DIR` unset) reproduces
+`lrt_capture_scenarios.csv` and every other output to the last decimal, confirming the
+change is isolated to the alternative.
+
+**Addendum, 23 September 2026 — the two new LRT regimes and the headway sensitivity (task
+C5).** `LRT_SCEN` now picks up `lrt_design_50kmh_accel` and `lrt_mixed_core_underground`
+whenever step 26 produced them (§6w addendum), and `HEADWAY_LRT` reads from the `LRT_HEADWAY`
+environment variable (default 5 min), with `OUT` tagged on either or both when they move from
+default — `Output/skims/lrt_headway_{value}` for a headway-only rerun, `GC_SOURCE_DIR` itself
+when that also points elsewhere. Central case, 2022, 06:00–09:00, by regime × headway:
+
+| Regime | 5 min (default) | 7.5 min | 10 min |
+|---|---|---|---|
+| All underground | 4,254 | 3,815 | 3,410 |
+| All ground | 3,206 | 2,851 | 2,528 |
+| Design 50 km/h (no accel) | 5,095 | 4,603 | 4,144 |
+| Design 50 km/h + accel/braking | 4,300 | 3,858 | 3,449 |
+| Mixed (Haifa core underground) | 3,520 | 3,137 | 2,788 |
+
+(`Output/skims/lrt_capture_regime_headway_matrix.csv`, assembled from the individual runs
+above — every LRT scenario is present in every headway run, so this is one table read off
+five files, not a new computation.) The mixed regime sits between the two pure ones as its
+in-vehicle time does (§6w addendum); the accelerated design regime sits just above the
+calibrated underground case, for the same reason its end-to-end time does. Every regime loses
+7–8 % of its central-case capture per 2.5-minute step of headway, roughly linearly over the
+range tested — wait enters the generalized cost at weight 2.0, so this is the expected order
+of the effect, not a new finding. **Note on reproducibility:** rerunning the unchanged default
+case (headway 5, `GC_SOURCE_DIR` unset) during this work reproduced 4,254 rather than the
+4,250 quoted elsewhere in this document and in `docs/PLAN_TIGHTENING_AND_SCENARIOS.md` — a
+5-trip (0.1 %) drift traced to floating-point evaluation order upstream of this step (not to
+any change made here; the car and pure-regime LRT code paths are untouched by this addendum),
+already present before task C5. It is well inside the λ and premium ranges already carried as
+whiskers and does not change any conclusion; the round-number 4,250 is left standing elsewhere
+in this document rather than chasing a 0.1 % rerun-to-rerun tolerance through every quoted
+figure.
+
+**Addendum, 23 September 2026 — bus-network response, an upper bound on capture (task C7,
+scenario S3).** `BUS_COMPETITION` (`'full'`, default, or `'truncated'`), an environment
+variable read alongside `GC_SOURCE_DIR` and `LRT_HEADWAY`. Today's capture (every case above)
+assumes the parallel bus keeps running unchanged once the LRT opens — a conservative,
+full-competition assumption; the opening-year bus network plan itself is still a client-side
+request (task 3b.8, `docs/RED_TEAM_RESPONSE_2026-09-23.md` §4). `'truncated'` is the opposite
+bound: on the 90 trunk pairs (the ten `ON_LINE` station areas) the direct bus is no longer an
+independent alternative — a rider there faces the LRT's own generalized cost instead of a
+separate, often cheaper, all-bus trip (`bus_gc_eff = SK['bus']['gc']` everywhere except the
+trunk, where it is overwritten with `SK[sc]['gc']`, so only the LRT premium still separates
+the two inside the transit nest); off-trunk pairs are untouched, since the bus is already only
+a feeder there in every scenario. Central case, 2022, `'full'` → `'truncated'`: underground
+4,254 → 5,754 (+35 %), ground 3,206 → 5,270 (+64 %), design (no accel) 5,095 → 6,159 (+21 %),
+design + accel 4,300 → 5,776 (+34 %), mixed 3,520 → 5,318 (+51 %) — the ground and mixed
+regimes gain the most, since a competing bus was previously closer to those regimes' own GC
+than to underground's, so removing it changes more of the choice. Reported as the upper bound
+under `Output/skims/bus_truncated/`, beside the full-competition central case, not in place of
+it.
+
+**Addendum, 23 September 2026 — the observed design-hour factor on the trunk-link peak-hour
+loads (task C11).** `trunk_link_flows_bus_vs_lrt.csv` gains a `..._peak_hour_observed` column
+for every LRT scenario tag, alongside the existing survey-based `..._peak_hour` — the same
+three-hour central-case LRT loads, scaled by the RavKav study-area boarding factor of §6y
+(0.4755, the same figure both directions) instead of the survey's departure-time network
+factor (0.549 up / 0.457 down). Because the observed factor does not split by direction while
+the survey one does, the two move in *opposite* directions from the survey-based figure: up
+loads fall to 0.865–0.866 of it (busiest link, Namal-Giborim → Hamifrats up, 406 → 352), down
+loads rise to 1.041 of it (the same link down, 764 → 796) — not a uniform correction, since the
+survey's own up/down split (which the observed single factor does not carry) is itself part of
+what step 36 and step 34 found overstated.
+
 ---
 
 **Addendum, 22 September 2026 (values of the 23 September rerun) — the design-speed regime
@@ -2060,6 +2345,37 @@ of the transit trips, 48 % on the trunk pairs; λ range 4,350–6,568; premium 0
 2,102; boardings Hamifrats 2,102, Namal-Giborim 729, Tirat Carmel 560, Bat Galim 470,
 Hecht-Shprintzak 408. The ceiling regime draws 20 % more than the calibrated underground
 case — less than the λ range.
+
+**Addendum, 23 September 2026 — the synthetic branches, and an honest check against the feeder
+composite (task C6, scenario S4).** `lrt_branches_synthetic` is added to `LRT_SCEN`; unlike
+every other scenario it needs no gateway/feeder loop at all — step 26 already gives a direct
+`ivt`/`walk`/`wait`/`transfers` for all 25 areas (§6w addendum), and the notebook special-cases
+this scenario to read them straight through (`gateway_o`/`gateway_d` are only set on the real
+trunk portion of a trip, for the trunk-link loading table below; a trip between two branches
+that never touches `hf_lrt_3` correctly gets none). Central case, 2022: **3,639 LRT trips**
+(3,322 from bus, 317 from car) — *lower* than the all-underground central case (4,254), because
+the synthetic branch is often **not** an improvement on today's bus/Metronit feeder: averaged
+over the ten trunk destinations, 14 of the 15 off-trunk areas have a *worse* generalized cost
+on the synthetic branch than on the feeder composite they replace (`Output/lrt_v2/
+lrt_branches_vs_feeder_gc.csv`; the "check" of the C6 method — "branch GC falls below feeder
+GC" — does not hold in general). Kiryat Ata North-East is roughly a wash (83.4 vs 84.0); every
+other branch area is worse, from +5.9 (Bazan-Hutsot) to **+92.1 minutes at Nazareth** (114 →
+206) — a ground-level LRT running at the calibrated Red Line surface speed is not obviously
+faster than a real bus once one station per area is the model, and for a large, spread-out area
+like Nazareth (38 TAZs) the single station's walk access (60 minutes, population-weighted)
+dominates the comparison far more than the 68-minute running time does. This is a genuine
+finding about the "one station per area" placeholder, not an error to fix: a real branch design
+would put several stations through a city the size of Nazareth, and a real bus network would
+very likely be truncated to feed the branch rather than compete with it end to end (task C7)
+once the branch actually exists — this scenario isolates what the branch geometry alone is
+worth against *today's* full-competition bus network, which is the conservative side of two
+things this synthetic exercise cannot yet answer together.
+
+**Outputs.** `Output/lrt_v2/lrt_branches_vs_feeder_gc.csv` (the 15-area comparison above);
+`lrt_branches_synthetic` rows throughout the usual step-31 outputs (`skim_lrt_branches_synthetic_*.csv`,
+`lrt_capture_scenarios.csv`, `lrt_trips_2022_lrt_branches_synthetic_central.csv`). The default
+rerun (every other scenario) reproduces its outputs exactly; step 32's forecast-year rerun is
+not extended to this scenario.
 
 ## 6ad. Step 32 — LRT capture on the 2040 / 2050 forecast matrices (`LRT_capture_forecast_2040_2050.ipynb`)
 
@@ -2402,6 +2718,17 @@ coverage rule re-applied, and steps 16–35 rerun. The products here are ready f
 then the 2025 layer is the **validation** of the 2022 anchor (§6ag: 2022 and 2025 boardings
 by area agree at cosine 0.98 and the rail matrices at 0.97), not its replacement.
 
+**Follow-on, 23 September 2026 (step 41, §6ai, task C9).** The card-level linking this
+paragraph called for was attempted, on the taps directly (no `bus_trip_id` to reproduce, so a
+tap-chaining rule instead): it resolves an alighting for 45.8 % of taps, not because the rule
+is wrong but because 72.2 % of card-date groups have exactly one located tap in this AM-only
+extract — one leg, nothing to chain against. The chained transfer share it does recover, 27.5 %,
+sits far closer to 2022's own rate (a third) than the file's 3.7 % tag, supporting reason (i)
+above on its own terms. None of this closes reason (iii) — there is still no 2025 car
+observation — or supplies the general alighting inference reason (ii) actually needs: that
+would take a full-day extract or a proper AVL/schedule-matching method, not tap-chaining on an
+AM-only file. The verdict stands: not re-anchored.
+
 ## 6ag. Step 35 — The matrix tests rerun: THS against RavKav 2022 and 2025, and the PCA (`THS_vs_RavKav_2025_tests.ipynb`, diagnostics)
 
 **Purpose.** Apply the test suite of steps 12–14 and 21 — cosine similarity and GEH,
@@ -2586,6 +2913,178 @@ cordons; the desire-line proxy for through trips sees only trips with both ends 
 area, so the through traffic from beyond it (Tel Aviv – Haifa – Acre on Roads 2 and 4) is in the
 count and not in the demand; polygon boundaries that a road clips twice count two crossings that
 real trips do not make; no link-level comparison is possible without an assignment (task B1, C3).
+**Done 23 September 2026, step 42, §6aj:** an all-or-nothing assignment on the same network
+gives an aggregate ratio of 1.037 against the counted links (essentially exact) but a poor
+link-by-link fit (GEH ≤ 10 on 20 % of links) and screenline ratios that run both above and below
+this section's own range — see §6aj for the full comparison.
+
+## 6ai. Step 41 — RavKav 2025: journeys chained from the taps, on their own inferred alightings (`RavKav_2025_own_alightings.ipynb`, diagnostics, task C9)
+
+**Purpose.** The 2025 extracts (step 34, §6af) carry boardings only — no alightings, and the
+`JourneyTransfer` tag flags only 3.7 % of taps as a transfer, far below 2022's own linked-journey
+rate (1.52 legs per journey, a third of boardings transfer legs, step 8). This step gives the
+2025 layer an alighting inference and a journey chaining of its own, on data that lacks the
+operator-supplied `bus_trip_id` field the 2022 extract had (§6af "Re-anchoring", reason (ii)).
+
+**Inputs.** `Input/BusRavKav/2025/Buses_RavKav.csv` (LFS, 1.6 GB) and `Metronit_RavKav_Data.csv`
+(LFS, 69 MB), read in 2-million-row chunks; step 34's own stop-location tables
+(`Output/ravkav_2025/stops_located_by_cluster_2025.csv`, `stops_north_file_taz.csv`) reused
+rather than rescanned; step 34's 42 representative Tuesdays
+(`Output/ravkav_2025/daily_totals_by_date.csv`, `kept (all three)`).
+
+**Method.** Per (card, date), sort taps by time (`PassengersNumber ≤ 0` refund rows dropped
+first, as elsewhere). A tap's alighting is the location of the card's *next* tap that day,
+accepted within 90 minutes and 20 km (the plan's own plausibility bounds; no separate
+fare-transfer-window figure exists elsewhere in this repository, so the same bound serves both
+the alighting inference and the chain decision below — a stated simplification; the plan's
+"same line direction" refinement is not built, there being no line-shape matching here). The
+last tap of the day takes the day's first tap's own stop under the same 20 km bound (the
+return-home rule) — but only when the group has more than one tap: a single-tap card has
+nothing to compare against, and an early version of this notebook wrongly "resolved" it against
+itself (distance 0 by construction) before this was caught in testing and fixed. Two consecutive
+taps chain into one journey under the same two bounds — a transfer is, by construction, always
+to the immediately preceding leg's own inferred alighting, so the bounds (not distance from the
+alighting) are what actually decide whether a chain continues.
+
+**Results.** 6,015,350 located bus + Metronit taps over the 42 representative Tuesdays (bus
+5,424,117, Metronit 591,233). **72.2 % of card-date groups have exactly one tap** in the
+06:00–08:59 window — one leg, no observed transfer or return, nothing to infer an alighting
+from, whatever the method; 19.2 % have two, 8.6 % three or more. Alighting resolved for **45.8 %
+of taps** (unallocated 54.2 %) — well below the ≥ 85 % this item's own check asked for, almost
+entirely because of the single-tap majority: of taps with a second tap to chain against, most do
+resolve (27.5 % by the next-tap rule, 18.3 % by return-home). **The chained transfer share,
+27.5 %, sits far closer to 2022's own linked-journey rate (a third of legs) than the file's own
+tag (3.4 %)** — this result does not depend on alighting resolution at all, only on the chain
+decision, and is the more robust finding here: it supports the standing hypothesis (§6af, caveat
+16) that the tag marks a fare-rule transfer, not a physical one. The resulting journey OD
+(103,889 journeys/day chained, 27,304 with an allocated destination, mean 1.38 legs/journey)
+does **not** resemble the 2022 pattern (cosine 0.138 against `bus_od_taz_avg.csv`) — but the two
+are not comparable populations: the 26.3 % of journeys that resolve here are systematically the
+ones with an observed transfer or same-morning return, not a representative sample of all AM
+travel the way 2022's provider-linked journeys are. This is not evidence against the chaining
+method or the 2025 data; it is evidence that single-morning-window tap chaining cannot supply a
+general alighting inference the way step 8's provider-supplied journey IDs could in 2022 — the
+finding the item set out to get, even though it is not the working substitute for re-anchoring
+that a positive result would have been.
+
+**Outputs.** `Output/ravkav_2025/bus_od_taz_2025_own_alightings.csv` (allocated journeys,
+average per representative Tuesday), `journeys_2025_summary.csv` (taps, journeys, allocated
+share, transfer shares); figure `ravkav_2025_own_alighting_distance.png`.
+
+**Limits.** AM-only extract (06:00–08:59), so a single-leg morning trip with no transfer and no
+same-morning return is invisible to this method by construction — a full alighting inference (a
+proper AVL/schedule-matching method, or a full-day extract) is still what re-anchoring on 2025
+would need (§6af); the 90-minute / 20 km bounds do double duty for two different decisions, for
+want of a separately stated transfer-window figure; no line-shape matching.
+
+## 6aj. Step 42 — All-or-nothing assignment of the car layer onto the Emme network (`Car_AON_assignment_2022.ipynb`, diagnostics, task C10)
+
+**Purpose.** Step 36 (§6ah) checked the 2022 car layer against the road counts of
+`Input/Network_with_Counts/` on six closed cordons **without an assignment** — a desire-line
+proxy that cannot give a link-level comparison. This step assigns the same car layer onto the
+network's actual links, all-or-nothing (every trip loaded entirely onto its single shortest
+free-flow-time path, no capacity restraint) — the link-level comparison task B1/C3 asked for
+and step 36 flagged as still needed.
+
+**Inputs.** `Input/Network_with_Counts/Emme_Links_Final_Res 2026-09-23.{shp,shx,dbf}` (LFS; the
+same network step 36 used, now including its shapefile geometry files, which were still LFS
+pointers when this step started); `Output/ths2017/three_mode_2022/car_2022_taz.csv` (778 × 778,
+the residents' 2022 car layer); step 36's own AM occupancy (1.33) and PCE-to-vehicle factor
+(1.10), reused for comparability; `Output/validation/car_cordon_crossing_links.csv` (step 36's
+own screenline links, with its already-imputed `pce_imputed` column) for the screenline
+recomputation.
+
+**Method.** `DATA1`/`DATA2`/`UL1` were checked first, as task C10 asked, and ruled out: `DATA1`
+takes a class.subclass pattern (1.1–1.5, 2.1–2.4, …, 15.3–15.5), not a speed or a time (the
+implied speed if it were minutes is a median 4 km/h on ordinary streets — not plausible); `UL1`
+is a 0/1 flag. Free-flow speed is therefore **assumed by link `TYPE`**: 90 / 70 / 60 / 50 / 40
+km/h for TYPE 1–5, 30 for TYPE 8, 20 for the TAZ connectors (TYPE 9) — the same kind of gap task
+E5 (the car GC uplift) is blocked on. The car-mode graph (`MODES` containing `a`) has 27,441
+directed links over 11,245 nodes; `DIR` carries a single value across the whole network, so any
+one-way restriction rests on whether a link's reverse-direction row is present in the export, not
+an explicit flag. **The network's centroid convention is that a TAZ's node id equals its TAZ
+number** — confirmed for all 778 TAZs in the car matrix, no nearest-node snapping needed (unlike
+step 26's bus skim). A multi-source Dijkstra (`scipy.sparse.csgraph.dijkstra`, 778 sources, under
+2 seconds) gives the shortest-path tree from every TAZ; the vehicle OD (survey car trips ÷ 1.33
+occupancy) is loaded onto each tree by processing destinations in decreasing order of distance
+from the source and accumulating flow up through each node's predecessor edge — the standard
+all-or-nothing tree-loading algorithm, run once per source (18 seconds for all 778).
+
+**Results.** Against the 3,231 counted, car-mode, non-connector links (06:00–09:00): **summed,
+4,973,762 assigned vehicles against 4,795,770 counted — a ratio of 1.037**, essentially exact in
+aggregate, and by `TYPE` similarly close (0.79 underground-class TYPE 1 to 1.21 TYPE 3). Link by
+link the fit is poor, as an unrestrained assignment is expected to be: **GEH ≤ 10 on only 20 % of
+links** (20 % flow-weighted), GEH ≤ 5 on 9 % — route concentration onto a single shortest path
+per OD pair over- or under-loads parallel routes in a way real, congestion-aware driving would
+not. The six screenlines of step 36, recomputed from the assignment: Haifa city 1.09 / 0.85
+(in/out), metropolitan core 0.74 / 0.86, Tirat Carmel 0.76 / 0.76 sit close to or cross-check
+step 36's own 0.58–0.90 survey-based range, but Kiryat Ata (1.51 / 1.84), the Krayot
+(1.30 / 1.70) and Nazareth (1.62 / 1.80) run well **above** 1 — where step 36's method never
+exceeded 0.90 — most plausibly the assignment's own route-concentration tendency landing more of
+the corridor's demand on these cordons' specific (and, per step 36, more heavily imputed)
+counted links than real driving would. This is the link-level check task B1/C3 asked for: the
+base's aggregate scale holds up, but a genuine link-by-link validation still needs a real,
+capacity-restrained, calibrated-speed assignment, not this one.
+
+**Outputs.** `Output/validation/car_aon_link_flows.csv` (every car-mode link: assigned vehicles,
+counted vehicles, TYPE), `car_aon_fit_by_type.csv`, `car_aon_screenlines.csv`; figure
+`car_aon_vs_counts.png`.
+
+**Limits.** All-or-nothing (no capacity restraint, no congestion, no route diversity); no
+traffic from outside the study area's own survey-recorded trips, on top of step 36's own
+through-traffic gap; assumed free-flow speed by TYPE, not a calibrated or client-supplied value;
+`DIR`'s single value means one-way restrictions are only as good as the export's own row
+presence, not an explicit check.
+
+## 6ak. Step 40 — LRT capture: a designed uncertainty experiment, reduced to the available factors (`LRT_capture_uncertainty.ipynb`, task C8)
+
+**Purpose.** Task C3's full factorial over coverage threshold, LRT regime, headway, λ, LRT
+premium, bus competition, walk access source and car GC source, wrapping steps 31/32 as a
+function of a parameter dict. Walk access source (tasks C2/C3, OSM) and car GC source (tasks
+C1/E5, a Google or client-supplied uplift) are both blocked this session (§0); coverage threshold
+requires a rerun from step 15, not just a re-read of step 26/31's saved skims. This step runs the
+factorial over the five remaining factors instead, built from runs steps 31/32 already made
+across tasks C4–C7 (plus two combinations run once, one-off, for this notebook), and documents
+the three factors left fixed rather than silently dropping them.
+
+**Method.** `Mode_skims_and_flow_comparison.ipynb`'s own `OUT`-tagging (tasks C5, C7) composes
+only one alternate dimension at a time: pointing `GC_SOURCE_DIR` at an alternate step-26 headway
+directory makes `OUT` follow it exactly, so setting `BUS_COMPETITION='truncated'` on top of that
+would silently overwrite that directory's existing `full`-competition results rather than tag
+alongside them. Four of the six headway × bus-competition cells (headway 5/7.5/10 at `full`;
+headway 5 at `truncated`) were already on disk from tasks C4/C5/C7; the two `truncated` cells at
+headway 7.5 and 10 were produced by one-off runs of the unmodified notebook (`LRT_HEADWAY` and
+`BUS_COMPETITION` both set, `GC_SOURCE_DIR` pointed at that headway's step-26 directory), with
+only the resulting `lrt_capture_scenarios.csv` copied out to a new, non-colliding directory
+(`Output/skims/lrt_headway_{7.5,10}_truncated/`) — the shared `Output/skims/lrt_headway_{7.5,10}/`
+directories and the notebook itself were left untouched (`git checkout` after each run). The
+`OUT`-tagging gap is left as found; fixing a shared default code path for the sake of two cells
+this notebook already has by other means was judged not worth the regression risk. The six
+sources are concatenated, tagged with `headway_min` and `bus_competition`, into one 155-row
+factorial table (5 regimes × up to 6 headway/competition cells × 5 λ/premium cases each, minus
+the synthetic-branches regime — task C6 — which only exists at headway 5 / full, since its GC
+comes from step 26 directly rather than through the shared feeder/gateway loop). A tornado is
+built by varying one factor at a time around the central case (`LRT all underground`, headway 5,
+full competition, central λ/premium — 4,254 LRT trips 06:00–09:00), the other three held fixed.
+
+**Results.** Ranked by range on the central case, smallest to largest: **headway**
+(5 → 10 min: 4,254 → 3,410, range 844), **bus competition on trunk** (full → truncated:
+4,254 → 5,754, range 1,500 — task C7's explicit upper bound, not a plausible band), **LRT regime**
+(all-ground → design 50 km/h: 3,206 → 5,095, range 1,889) and **λ / the LRT premium**
+(high λ → low λ: 3,166 → 6,031, range 2,865, the widest of the four). Excluding bus competition's
+ceiling, regime and λ/premium move the central case by a comparable, larger amount than headway;
+none of the four is small enough to drop from a future full design.
+
+**Outputs.** `Output/skims/uncertainty/lrt_capture_factorial.csv` (155 rows),
+`lrt_capture_tornado.csv`; figure `Output/figures/lrt_capture_tornado.png`; two new committed data
+directories, `Output/skims/lrt_headway_{7.5,10}_truncated/lrt_capture_scenarios.csv`.
+
+**Limits.** A factorial over five of the plan's eight factors, not all eight — coverage
+threshold, walk access source and car GC source are each held at their single available value
+(§0). The λ/premium sweep is a one-factor-at-a-time design around the centre (five cases), not a
+full λ × premium cross. The synthetic-branches regime (task C6) is central-case only. The
+`OUT`-tagging gap that made two cells need a one-off, hand-copied run is a real (if minor)
+maintenance gap in step 31, left unfixed (see Method).
 
 ## 7. Output inventory (`Output/`)
 
@@ -2747,7 +3246,13 @@ Added 23 September 2026 (step 33):
     52,000 non-northern boardings a day in the area. The rail extract's station coordinates are
     wrong for several stations; the GTFS locations are used. Alightings for bus and Metronit
     are still the OnBoard pattern (caveat 7); the rail OD is measured from the exit taps, with an
-    expansion for the exits after 09:00. The chain is not yet re-anchored on this layer.
+    expansion for the exits after 09:00. The chain is not yet re-anchored on this layer. **Step
+    41 (23 September 2026, §6ai) tried a card-level chaining of the taps themselves in place of
+    the tag: it recovers a transfer share (27.5 %) close to 2022's (a third), supporting the
+    "nearer to legs" reading above, but resolves an alighting for only 45.8 % of taps, because
+    72.2 % of card-date groups tap once in this AM-only window — one leg, nothing to chain
+    against. Re-anchoring still needs a general alighting inference this file cannot supply
+    by tap-chaining alone.**
 17. **The OnBoard destination pattern is what separates the ticketing products from the
     survey** (§6ag). At superzone level the survey's bus matrix matches RavKav's own inferred
     alightings (step 8's `bus_od_taz_avg.csv`) as well as it matches itself between its two

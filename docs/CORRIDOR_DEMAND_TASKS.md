@@ -92,6 +92,14 @@ Key facts driving the list (2017 trips-file hybrid, `Output/ths2017/study_taz/`)
         vs 0.47 counted), and the road peak hour is 0.38–0.43 of the three hours against the
         survey's 0.62 (caveat 18). Still open: the link-level comparison, which needs an
         assignment; count coverage on the Krayot and Nazareth cordons (75–85 % imputed).*
+        *Link-level check done 2026-09-23 (step 42, task C10, METHODOLOGY §6aj): an
+        all-or-nothing assignment (free-flow speed assumed by link TYPE — no usable speed field
+        exists without the client's network codebook) gives an essentially exact aggregate ratio
+        (1.037, 3,231 counted links) but a poor link-by-link fit (GEH ≤ 10 on 20%), and the six
+        screenlines recomputed from it run above step 36's own range on three of six cordons
+        (Kiryat Ata, Krayot, Nazareth) — likely route concentration, not a base-demand problem. A
+        real, capacity-restrained, calibrated-speed assignment is still what a genuine link-level
+        validation needs.*
   - [ ] Resolve the TAZ → superzone key precedence between the 2017 and 2018 chains
         (`prob_sz_cellular.csv` vs the 2017 rebuild; ≤ 0.07 in a handful of cells).
 - [x] **B1b. Ticketing coverage — segmented rule** *(done 2026-09-21 in
@@ -128,6 +136,13 @@ Key facts driving the list (2017 trips-file hybrid, `Output/ths2017/study_taz/`)
       gap towards Tirat Carmel and from Nazareth was the OnBoard pattern). Still open: the
       OnBoard unit itself, and the Nazareth branch, where the two alighting inferences
       disagree by 13 × and bracket the survey — a count decides (C3).
+      *2025 card-level chaining tried 2026-09-23 (step 41, task C9, METHODOLOGY §6ai): resolves
+      an alighting for 45.8% of taps (below the 85% target) because 72.2% of card-date groups
+      tap once in the AM-only window; its chained transfer share (27.5%) sits far closer to
+      2022's rate (a third) than the file's own tag (3.7%), supporting the "nearer to legs"
+      reading, but the resulting OD does not resemble 2022's (cosine 0.138) since the resolved
+      journeys are a biased subset. Re-anchoring still needs a general alighting inference this
+      file cannot supply by tap-chaining alone.*
 - [x] **B1e. Peak hour** *(done 2026-09-21, `Corridor_peak_hour_2022.ipynb`, METHODOLOGY
       §6r)*: peak-hour factors from survey departure times (07:00–08:00; PHF₃ₕ 0.59–0.66) and
       peak-hour link profiles. *Boarding-hour factor done 2026-09-23 from the RavKav 2025
@@ -136,8 +151,13 @@ Key facts driving the list (2017 trips-file hybrid, `Output/ths2017/study_taz/`)
       than the survey's 0.589; the boarding-based value is the one to carry for the transit
       layers.* *Road counts 2026-09-23 (step 36, §6ah): the busiest clock hour on the cordon
       links holds 0.38–0.43 of 06:00–09:00 for all traffic, against the survey's car 0.62 — the
-      step-20 / 27 factors are an upper bound (caveat 18); carry 0.42–0.48 for car.* Still open:
-      a link-crossing (rather than departure or boarding) hour once travel times exist (A2).
+      step-20 / 27 factors are an upper bound (caveat 18); carry 0.42–0.48 for car.* **Carried
+      through done 2026-09-23 (task C11, METHODOLOGY §6y / §6v / §6ac addenda):** steps 27, 24
+      and 31 now publish an observed-factor column (car 0.435, transit 0.4755) beside every
+      survey-departure peak-hour column, not in place of it — the trunk's peak-hour LRT loads
+      move to 0.865–1.041 of the survey-based figure depending on direction, since the observed
+      transit factor does not split by direction the way the survey one does. Still open: a
+      link-crossing hour once an assignment exists (A2, C10); step 32's forecast-year outputs.
 - [ ] **B2. Population frames**
   - [ ] Reconcile the transit layer (RavKav journeys by boarding stop, incl. non-residents
         and transfers; Hamifrats 120 THS vs 1,079 RavKav) with the resident-household
@@ -170,6 +190,13 @@ Key facts driving the list (2017 trips-file hybrid, `Output/ths2017/study_taz/`)
       station area, an 8-minute transfer, then the LRT leg — which is what the capture
       numbers below currently rest on for the branch areas; it stands in for, not replaces,
       the actual branch geometry.
+      *Synthetic branches done 2026-09-23, flagged (task C6, scenario S4, METHODOLOGY §6w /
+      §6ac addenda): one station per area, ground level, connected in the V2 route order —
+      central capture 3,639, lower than the feeder-composite 4,254, because for 14 of the 15
+      off-trunk areas the synthetic branch's GC is worse than today's bus/Metronit feeder
+      (`Output/lrt_v2/lrt_branches_vs_feeder_gc.csv`), up to 92 minutes worse at Nazareth —
+      mostly one station's walk access across 38 TAZs, not the running speed. A genuine
+      finding about the placeholder, not a bug; still open until real drawings arrive.*
 - [x] **E2. LRT speed on this spacing** *(resolved 2026-09-22, step 25 revision 2)* — the
       calibration report's 500 m section assumption was checked against the Red Line's
       timetable in the GTFS (underground sections 970 m, surface 577 m): the coefficients are
@@ -179,6 +206,16 @@ Key facts driving the list (2017 trips-file hybrid, `Output/ths2017/study_taz/`)
       levelled fit against a year-specific calibration. The LRT's open question is now
       **station access** (13.6 min walk on the trunk pairs against 4.7 to a bus stop): an
       access / feeder model (feeder buses, walking network, park-and-ride) — added as E6.
+      *Acceleration allowance and a mixed alignment done 2026-09-23 (task C5, METHODOLOGY §6w
+      addendum, §6ac addendum): a 35-second accel/braking allowance on the design regime (10 s
+      dwell alone had none) brings its end-to-end time to 39.7 min, close to the calibrated
+      underground case (40.7 min); a mixed alignment (Haifa core S05–S14 underground, rest at
+      ground level, using the same calibrated function section by section) gives 56.1 min,
+      between the two pure regimes. Central-case captures and a headway sensitivity (5 / 7.5 /
+      10 min) for both, and for the two pure regimes, are in
+      `Output/skims/lrt_capture_regime_headway_matrix.csv`. Still open: which sections the
+      client's actual design puts underground (the core boundary here is assumed), and the
+      accel allowance's true value (30–40 s is the stated range).*
 - [ ] **E6. LRT access model** — replace the centroid-to-nearest-station walk with a walking
       network, feeder-bus access from the GTFS (bus to the nearest station + transfer) and
       park-and-ride where the station plan allows; this is what the generalized-cost
@@ -194,6 +231,14 @@ Key facts driving the list (2017 trips-file hybrid, `Output/ths2017/study_taz/`)
       trunk pairs) and the survey's reported 27.1 min as the bus calibration margin.
       *Observed running times done 2026-09-22 (step 30, METHODOLOGY §6ab): the trips routed over
       the May 2026 link speeds; the link speeds include dwell; step 26 uses the observed skim.*
+      *Bus wait and the non-direct transfer allowance done 2026-09-23 (METHODOLOGY §6x addendum
+      6, §6aa addendum, §6ac addendum): the transfer count on the 178 non-direct pairs now
+      states the one-transfer assumption step 31 already enforced (no capture change); a
+      `BUS_WAIT_RULE` switch compares the pooled headway (default) against the single busiest
+      line's own headway — central-case LRT capture rises 13–16 % under the latter
+      (`Output/skims/bus_wait_best_line/`), reported as an alternative, not adopted as the
+      central case. Still open: transfer paths for the 178 pairs (a real route rather than the
+      floor's assumption).*
 - [x] **E4. Money components** — *closed by decision, 22 September 2026*: the transit fare
       in the area is flat and integrated with a daily cap (two fares pay for the day), so it
       is identical for bus, Metronit and LRT and for every pair and drops out of the transit
@@ -303,3 +348,11 @@ for this environment) and writes up eleven next steps — spanning items already
 in `docs/RED_TEAM_RESPONSE_2026-09-23.md` §3 — each with exact inputs, method, outputs, checks
 and the documents to update, so any one of them can be started without re-reading the task
 history first.
+
+*Uncertainty factorial done 2026-09-23 (step 40, task C8, METHODOLOGY §6ak):* reduced to 5 of
+the plan's 8 factors — coverage threshold, walk access source and car GC source stay fixed,
+blocked by the same OSM-egress and historical-Google-traffic gaps as tasks C1–C3/E5 above. The
+other five (regime, headway, λ, LRT premium, bus competition) form a 155-row factorial; ranked
+by range on the central case, headway (844) < bus competition's explicit ceiling (1,500) <
+regime (1,889) < λ/premium (2,865, widest) — see `Output/skims/uncertainty/` and
+`Output/figures/lrt_capture_tornado.png`.

@@ -1,0 +1,18 @@
+mode,component,status,what exists now,what is needed to complete it
+car,ivt,derived,"survey door-to-door times, 2017/18, smoothed",a 2026 congestion uplift (Google Distance Matrix sample on ~40 pairs at 07:30) or the national model car skim; intra-area times for the 174-TAZ market
+car,fare (operating cost),constant (decision 22 Sep 2026),"money out of the comparison: a constant per trip against the flat transit fare, absorbed by the pivot",nothing — only if the study is later appraised on money
+car,parking,constant (decision 22 Sep 2026),excluded by the same decision,nothing — only if the study is later appraised on money
+car,VOT,not needed,no money term left to convert,nothing
+bus,ivt,derived (direct services),GTFS scheduled IVT of direct services; fastest-path floor scaled elsewhere,transfer paths for the pairs without a direct service; observed (AVL) running times instead of the timetable
+bus,walk,derived,TAZ centroid → nearest served GTFS stop,a walking network instead of the 1.3 detour factor; stop-specific access for the routes actually used
+bus,wait,derived (direct services),half the GTFS combined headway of the direct services,nothing further for this rule; BUS_WAIT_RULE = 'best_line' is the alternative to the combined-headway default (task E3 / C4)
+bus,transfers,"derived where direct, assumed elsewhere","0 on direct pairs, 1 assumed otherwise","GTFS path building (or the OnBoard survey transfer field tfrs, 9 % of trips carry it)"
+brt,ivt / wait / walk,derived (direct Metronit pairs),"GTFS Metronit lines 83001, 67002, 67003, 62004, 52005",BRT-stop-specific walk access; a bus + BRT nest in the capture model
+bus,fare,constant (decision 22 Sep 2026),"flat integrated fare with a daily cap — identical for bus, Metronit and LRT and for every pair; drops out of the transit choice",nothing
+lrt,ivt,derived (10 trunk areas),calibrated function on hf_lrt_3 stations,"alignment + stations of the segment Hamifrats → Tsomet Kiryat Ata and of the three branches (T1 Kiryat Ata – Nazareth, T2 Krayot, T3 Kiryat Yam); the regime (underground / ground) per section instead of the two pure scenarios; a running / dwell decomposition of the coefficients"
+lrt,walk,derived (10 trunk areas),TAZ centroid → nearest station,the same for the branch stations; a walking network instead of the 1.3 detour factor
+lrt,wait,assumed,headway 8 min (12 departures an hour) / 2,"the planned AM-peak headway per branch, confirmed by the operating plan"
+lrt,transfers,assumed (0 on the trunk),—,"the operating pattern: which branches are through-run, where the branches transfer"
+lrt,fare,constant (decision 22 Sep 2026),the same flat integrated fare as the bus,nothing
+all,"weights (walk 2.0, wait 2.0, transfer 8)",assumed (plan defaults),LRT_CAPTURE_PLAN.md,"confirm against נוהל פר""ת; calibrate λ on the 2022 shares once the skims are complete"
+all,geography,partial,25 V2 areas,TAZ 1509 (station S13) missing from the V2 aggregation; intra-area cells need a within-area treatment (task A2)
