@@ -1,0 +1,9 @@
+level,period,pair,cells,CR (all cells),CR (off-diagonal),volume ratio B / A,R2
+SZ,AM 06:00-09:00,survey vs cellular,1296,0.4346,0.5356,0.2807,0.8489
+SZ,AM 06:00-09:00,survey day 1 vs day 2,1296,0.8810,0.7347,0.9912,0.9916
+SZ,whole day,survey vs cellular,1296,0.4709,0.6253,0.3976,0.8936
+SZ,whole day,survey day 1 vs day 2,1296,0.8934,0.7674,0.9615,0.9953
+GS,AM 06:00-09:00,survey vs cellular,625,0.5189,0.6128,0.2807,0.9043
+GS,AM 06:00-09:00,survey day 1 vs day 2,625,0.9154,0.7682,0.9912,0.9973
+GS,whole day,survey vs cellular,625,0.5481,0.7147,0.3976,0.9408
+GS,whole day,survey day 1 vs day 2,625,0.9258,0.7906,0.9615,0.9987

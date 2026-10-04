@@ -1,0 +1,23 @@
+level,model matrix,reference,cells,n,obs_total,mod_total,total_diff_pct,R2,slope_origin,R2_origin,MAE,RMSE,RMSE_pct,CR
+super-zone (36),survey bus 2018 (raw),RavKav 2022 (own alightings),all cells,1296,92439.7500,125438.7356,35.6978,0.7750,1.4094,0.7856,62.7452,235.5967,330.3053,0.5010
+super-zone (36),survey bus 2018 (raw),RavKav 2022 (own alightings),off-diagonal,1260,51624.2500,61560.3846,19.2470,0.5132,1.0841,0.5494,41.1387,119.5828,291.8673,0.3870
+super-zone (36),bus 2018 calibrated,RavKav 2022 (own alightings),all cells,1296,92439.7500,115430.4761,24.8710,0.7652,1.1440,0.7789,33.8404,175.1432,245.5497,0.6144
+super-zone (36),bus 2018 calibrated,RavKav 2022 (own alightings),off-diagonal,1260,51624.2500,61480.5898,19.0925,0.6817,1.0593,0.7130,21.8313,81.8865,199.8614,0.5977
+super-zone (36),bus 2022 layer,RavKav 2022 (own alightings),all cells,1296,92439.7500,117960.7166,27.6082,0.7382,1.1613,0.7532,35.7512,191.3081,268.2128,0.5991
+super-zone (36),bus 2022 layer,RavKav 2022 (own alightings),off-diagonal,1260,51624.2500,62503.2423,21.0734,0.6590,1.0646,0.6922,22.6001,86.5186,211.1671,0.5878
+super-zone (36),bus 2022 layer,RavKav 2025 (own-alighting pattern),all cells,1296,99464.2691,117960.7166,18.5961,0.7443,1.0568,0.7587,40.5655,184.6688,240.6198,0.5932
+super-zone (36),bus 2022 layer,RavKav 2025 (own-alighting pattern),off-diagonal,1260,54696.1321,62503.2423,14.2736,0.6533,0.9858,0.6865,24.9358,86.9713,200.3503,0.5718
+super-zone (36),survey bus 2018 (raw),RavKav 2022 (on-board pattern),all cells,1296,92712.8194,125438.7356,35.2982,0.3581,1.3538,0.3885,89.4258,355.2021,496.5246,0.3319
+super-zone (36),survey bus 2018 (raw),RavKav 2022 (on-board pattern),off-diagonal,1260,69435.9257,61560.3846,-11.3422,0.3364,0.7597,0.3849,56.7096,143.5042,260.4059,0.2842
+super-zone (36),survey bus day 2,survey bus day 1 (repeatability),all cells,1296,127652.6516,123224.8517,-3.4686,0.7839,0.8542,0.7929,41.6654,216.2711,219.5703,0.6433
+super-zone (36),survey bus day 2,survey bus day 1 (repeatability),off-diagonal,1260,62217.4854,61062.5012,-1.8564,0.7562,0.9082,0.7718,24.4930,91.8614,186.0334,0.5965
+sub-area (28),survey bus 2018 (raw),RavKav 2022 (own alightings),all cells,784,24818.0000,25568.2865,3.0232,0.6404,0.8805,0.6589,30.1736,82.6771,261.1768,0.3622
+sub-area (28),survey bus 2018 (raw),RavKav 2022 (own alightings),off-diagonal,756,17759.7500,18928.8638,6.5829,0.3490,0.9105,0.3906,27.3139,76.1131,323.9995,0.2837
+sub-area (28),bus 2018 calibrated,RavKav 2022 (own alightings),all cells,784,24818.0000,26523.0355,6.8702,0.9475,1.0689,0.9505,12.6302,32.5065,102.6878,0.6760
+sub-area (28),bus 2018 calibrated,RavKav 2022 (own alightings),off-diagonal,756,17759.7500,19510.0432,9.8554,0.8586,0.9673,0.8761,11.1456,24.3649,103.7170,0.6264
+sub-area (28),bus 2022 layer,RavKav 2022 (own alightings),all cells,784,24818.0000,26774.5309,7.8835,0.9425,1.0892,0.9458,12.8880,35.3543,111.6841,0.6723
+sub-area (28),bus 2022 layer,RavKav 2022 (own alightings),off-diagonal,756,17759.7500,19645.9261,10.6205,0.8526,0.9743,0.8709,11.2601,25.0907,106.8064,0.6250
+sub-area (28),bus 2022 layer,RavKav 2025 (own-alighting pattern),all cells,784,26318.6781,26774.5309,1.7321,0.9407,1.0454,0.9440,14.9774,34.5193,102.8286,0.6398
+sub-area (28),bus 2022 layer,RavKav 2025 (own-alighting pattern),off-diagonal,756,18944.8012,19645.9261,3.7009,0.8023,0.9369,0.8283,13.5171,29.1794,116.4416,0.5816
+sub-area (28),survey bus 2018 (raw),RavKav 2022 (on-board pattern),all cells,784,23995.0275,25568.2865,6.5566,0.5710,0.9427,0.5938,32.0334,88.9051,290.4836,0.3294
+sub-area (28),survey bus 2018 (raw),RavKav 2022 (on-board pattern),off-diagonal,756,19262.5575,18928.8638,-1.7323,0.3342,0.7772,0.3751,29.0702,78.7110,308.9181,0.2689
