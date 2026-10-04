@@ -4192,6 +4192,10 @@ Eight more checks from the Ministry list were run. In plain terms:
 - **Does the balancing of the 2022 matrices converge?** The car matrix does, exactly. The small taxi matrix does not fully (3-5 % of its trips, 0.6 % of all motorised trips, miss their targets).
 - **A correction.** The number of people per car that we used when comparing cars with the road counts (1.33) was computed with the wrong hour of the day. The right figure is 1.52 in the morning. Cars then come out about 12 % lower: the car layer is 0.62 of the counted vehicles in the morning, not 0.71. The matrices themselves count people and are not affected.
 
+### 5.8c Loading the car matrix on the road network
+
+We loaded the 2022 car matrix onto the road network, every trip on its quickest route, and compared the result with the traffic counts on 1,346 count points (counts from 2021 to 2023). The total is about right: in the morning the network carries 93 % of the counted vehicles. But the pattern is not: the correlation is weak (0.47 against the Ministry's 0.85 requirement) and individual roads are far off. This is expected. The matrix holds only residents' car trips between places inside the study area; the counts also include trucks, vans, taxis, buses, visitors and trips that begin or end outside. Our simple loading also ignores congestion. So the matrix is fine for judging demand between areas and along the LRT corridor, but it should not be used as it is to forecast the traffic on a single road. Several other checks cannot be done yet: they need a Google travel-time key, the bus operator's GPS data, census tables, or smart-card data for the afternoon and midday (the 2025 files only contain 06:00-09:00).
+
 ### 5.9 Where things stand now
 
 The single most current answer to "how many riders will the LRT capture" is **about 4,250

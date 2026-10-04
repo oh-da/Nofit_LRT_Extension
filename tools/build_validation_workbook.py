@@ -12,7 +12,7 @@ if 'period' not in summ.columns: summ['period'] = 'AM'
 summ['period'] = summ['period'].fillna('AM')
 summ = summ[['period'] + [c for c in summ.columns if c != 'period']]
 summ['_p'] = summ['period'].map({'AM': 0, 'PM': 1, 'MD': 2})
-order = {'T1': 0, 'T2': 0.3, 'T3': 0.6, 'T4': 1, 'T5': 2, 'T6': 2.5, 'T7': 3, 'T7b': 3.5, 'T8': 4, 'T9': 4.3, 'T10': 4.6, 'T12': 5, 'T14': 6, 'T15': 7, 'T16': 7.5, 'T17': 8, 'T19': 9}
+order = {'T1': 0, 'T2': 0.3, 'T3': 0.6, 'T4': 1, 'T5': 2, 'T6': 2.5, 'T7': 3, 'T7b': 3.5, 'T8': 4, 'T9': 4.3, 'T10': 4.6, 'T11': 4.8, 'T12': 5, 'T14': 6, 'T15': 7, 'T16': 7.5, 'T17': 8, 'T19': 9}
 summ['_o'] = summ['test'].map(order); summ = summ.sort_values(['_o', '_p'], kind='stable').drop(columns=['_o', '_p'])
 sheets = {
     'Summary': [summ],
@@ -30,6 +30,7 @@ sheets = {
     'T19_convergence': ['T19_furness_convergence', 'T19_aggregation_check'],
     'T8_time_of_day': ['T8_car_profile_vs_counts', 'T8_transit_profile_vs_ravkav'],
     'T8b_time_by_window': ['T8b_car_profile_by_window', 'T8b_bus_profile_by_window', 'T8b_bus_hourly_profiles'],
+    'T11_link_volumes': ['T11_link_fit', 'T11_peak_hour_classes', 'T11_screenlines_from_assignment'],
     'T12_cordon_sectors': ['T12_cordon_summary', 'T12_cordon_sectors'],
     'T14_bus_origins': ['T14_bus_origins_summary', 'T14_bus_origins_by_superzone', 'T14_bus_origins_TAZ'],
     'T15_rail_stations': ['T15_rail_stations', 'T15_rail_station_size_classes', 'T15_rail_origins_by_superzone'],
@@ -44,6 +45,7 @@ for P, lab in [('PM', 'PM 16-19'), ('MD', 'midday 10-14')]:      # wave 1b: the 
     sheets[f'T9_{P}_mode_split'] = [f'T9_modesplit_by_origin_sz_{P}', f'T9_modesplit_by_destination_sz_{P}', f'T9_modesplit_by_locality_{P}', f'T9_modesplit_by_sector_{P}']
     sheets[f'T10_{P}_occupancy'] = [f'T10_occupancy_{P}']
     sheets[f'T19_{P}_convergence'] = [f'T19_furness_convergence_{P}', f'T19_aggregation_check_{P}']
+    sheets[f'T11_{P}_link_volumes'] = [f'T11_link_fit_{P}']
     sheets[f'T12_{P}_cordons'] = [f'T12_cordon_summary_{P}', f'T12_cordon_sectors_{P}']
     sheets[f'T14_{P}_bus_origins'] = [f'T14_bus_origins_summary_{P}', f'T14_bus_origins_by_superzone_{P}', f'T14_bus_origins_TAZ_{P}']
 with pd.ExcelWriter(f'{OUT}/validation_workbook.xlsx', engine='openpyxl') as xw:
@@ -52,7 +54,7 @@ with pd.ExcelWriter(f'{OUT}/validation_workbook.xlsx', engine='openpyxl') as xw:
                                     '23 September 2026 rebuild of the survey-based layers (steps 15-36); nothing in the chain is changed by the validation',
                                     'as printed in the guideline; implemented in tools/validation_metrics.py', 'pass / miss (explained) / miss (unexplained) / not run / not applicable / finding',
                                     'AM 06:00-09:00 is the base; the PM 16-19 and midday 10-14 matrices (extension X1) repeat the tests that depend on the time window, on sheets with the period in the name',
-                                    'notebooks/diagnostics/MOT_Validation_Stage1_Inputs_Distribution, _Stage1d_Zones_Population_Rates, _Stage2_Timing, _Stage2c_Mode_Occupancy_Convergence, _Stage3_Counts_Transit (and the _Stage1c, _Stage2b, _Stage3b period variants)']})
+                                    'notebooks/diagnostics/MOT_Validation_Stage1_Inputs_Distribution, _Stage1d_Zones_Population_Rates, _Stage2_Timing, _Stage2c_Mode_Occupancy_Convergence, _Stage3_Counts_Transit, _Stage4_Link_volumes (and the _Stage1c, _Stage2b, _Stage3b period variants)']})
     readme.to_excel(xw, sheet_name='README', index=False)
     for name, parts in sheets.items():
         row = 0

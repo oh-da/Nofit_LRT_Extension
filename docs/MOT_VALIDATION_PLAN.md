@@ -392,4 +392,8 @@ Run: **T1, T2, T3, T6, T9, T10, T16, T19** (notebooks `MOT_Validation_Stage1d_Zo
 | T16 Metronit | survey 22,812 vs 2025 boardings 13,078 (+74 %); super-zone R2 0.05, CR 0.39: miss; link loads not run |
 | T19 convergence | car exact; **taxi-type does not converge** (largest row residual 28 %, shortfall 3-5 % of the layer, 0.6 % of motorised trips); aggregations exact |
 
-**Next waves.** 3: T11 after step 42. 4: T13, T18 (needs the Operator 22 AVL data, open question 5), the CBS parts, T15 / T17 / T16 for the PM and midday.
+## 12. Status after wave 3 (4 October 2026)
+
+Run: **T11** (= step 42, `MOT_Validation_Stage4_Link_volumes`, AM, PM, midday). All-or-nothing assignment of the 2022 car layer, 1,346 counts 2021-2023: assigned / counted 0.93 (AM), 0.84 (PM), 0.69 (midday); R2 0.47 / 0.51 / 0.50, slope 0.89 / 0.87 / 0.70, RMSE% 113 / 95 / 87: **miss (explained)**; no peak-hour volume class inside its limit; free-flow routing beats shortest distance; best on type-2 arterials (slope 0.87). Workbook: 226 summary rows.
+
+**Cannot be run with what is in the repository:** T13 (Google key, step 37), T18 (Operator 22 AVL data, open question 5), the CBS parts of T2 and T3 (standing request 6), T15 / T16 / T17 for the PM and midday (the 2025 smart-card extracts hold taps 06:00-08:59 only; T17 also needs steps 29-30 for the window). Each needs one input from the user or the data provider; the code path for T13 and T18 is specified above and is a half day each once the input exists.

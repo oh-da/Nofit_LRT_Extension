@@ -1,0 +1,6 @@
+class,n,obs_mean,RMSE_pct,limit_pct,pass,RMSE_pct after scaling,pass after scaling
+0-500,958,180.63,223.79,50.00,False,143.62,False
+500-1000,250,700.08,150.29,40.00,False,86.64,False
+1000-2000,114,1348.48,117.92,30.00,False,71.26,False
+2000-3000,18,2290.00,106.81,25.00,False,66.06,False
+3000-6000,6,3658.94,107.96,20.00,False,74.75,False

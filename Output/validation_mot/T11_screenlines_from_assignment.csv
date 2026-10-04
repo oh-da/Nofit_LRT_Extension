@@ -1,0 +1,13 @@
+cordon,direction,links,counted share of PCE,count vehicles (imputed),assigned vehicles,assigned / count
+Haifa city,inbound,39.000,0.317,72308.182,68967.358,0.954
+Haifa city,outbound,39.000,0.304,68679.091,50810.887,0.740
+Kiryat Ata + Zevulun,inbound,25.000,0.564,40096.364,53339.903,1.330
+Kiryat Ata + Zevulun,outbound,24.000,0.584,37561.136,61146.189,1.628
+Krayot,inbound,25.000,0.253,41304.545,47638.374,1.153
+Krayot,outbound,23.000,0.160,36761.818,54873.170,1.493
+"Metropolitan core (Haifa, Nesher, Krayot, Kiryat Ata)",inbound,32.000,0.615,65750.303,42591.554,0.648
+"Metropolitan core (Haifa, Nesher, Krayot, Kiryat Ata)",outbound,30.000,0.585,52286.667,38994.192,0.746
+Nazareth + Nof HaGalil,inbound,24.000,0.173,26446.818,37253.104,1.409
+Nazareth + Nof HaGalil,outbound,25.000,0.216,29592.727,46395.698,1.568
+Tirat Carmel,inbound,13.000,0.895,27591.818,17925.002,0.650
+Tirat Carmel,outbound,12.000,0.905,26871.818,17720.699,0.659
