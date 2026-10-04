@@ -1,0 +1,15 @@
+model,segment,lambda (per gen-min),se,p,rho2,rows,ratio to assumed 0.03
+M0: dGC only,all,0.01318,0.01022,0.19700,0.00434,2318,0.43935
+"M1: dGC + car availability, purpose, person, distance band",all,0.03606,0.01553,0.02025,0.43461,2310,1.20213
+M2: λ by car-availability segment,car_available,0.05352,0.02967,0.07125,0.44527,2310,1.78412
+M2: λ by car-availability segment,competition,-0.00004,0.01911,0.99826,0.44527,2310,-0.00139
+M2: λ by car-availability segment,no_car_hh,0.07569,0.02360,0.00134,0.44527,2310,2.52302
+M2: λ by car-availability segment,no_licence,0.02907,0.02552,0.25464,0.44527,2310,0.96889
+M3: M1 + origin and destination area fixed effects,all,0.04860,0.01903,0.01066,0.54832,2310,1.62012
+M1b: M1 with the cheaper of bus and Metronit,all,0.03984,0.01458,0.00628,0.43672,2310,1.32784
+M2b: M2 with the cheaper of bus and Metronit,car_available,0.05359,0.02954,0.06971,0.44466,2310,1.78628
+M2b: M2 with the cheaper of bus and Metronit,competition,0.00898,0.02019,0.65644,0.44466,2310,0.29940
+M2b: M2 with the cheaper of bus and Metronit,no_car_hh,0.07465,0.02338,0.00141,0.44466,2310,2.48833
+M2b: M2 with the cheaper of bus and Metronit,no_licence,0.03082,0.02538,0.22465,0.44466,2310,1.02742
+M1u: M1 unweighted,all,0.04131,0.01140,0.00029,0.39209,2310,1.37708
+M4: licence holders in car-owning households only (the segment the LRT would draw from the car),all,0.01050,0.01511,0.48709,0.20241,1443,0.35009

@@ -386,6 +386,7 @@ Every published product, what it was built from, and its status:
 | `ravkav_2025/bus_od_taz_2025_own_alightings.csv`, `journeys_2025_summary.csv` | step 41 | `Input/BusRavKav/2025/{Buses,Metronit}_RavKav.csv` (LFS), card-level tap chaining | TAZ pairs (allocated journeys only) | bus + Metronit journeys on their own inferred alightings — 45.8 % of taps allocated | 2025 (representative Tuesday) | **diagnostic** — supports caveat 16, does not replace the OnBoard-pattern prior of `ravkav_2025/*` above |
 | `validation/car_aon_link_flows.csv`, `car_aon_fit_by_type.csv`, `car_aon_screenlines.csv` | step 42 | `Output/ths2017/three_mode_2022/car_2022_taz.csv` × the Emme network, all-or-nothing assignment, assumed free-flow speed by TYPE | every car-mode link | assigned vs counted vehicles 06:00–09:00 — aggregate ratio 1.037, link-level GEH ≤ 10 on 20 % | 2022 (demand), mixed years (counts, as step 36) | **diagnostic** — the link-level check step 36 could not give |
 | `skims/uncertainty/lrt_capture_factorial.csv`, `lrt_capture_tornado.csv` | step 40 | steps 31/32's own runs across tasks C4–C7, plus two one-off `truncated`-competition reruns at headway 7.5/10 | 25 areas, aggregated to 06:00–09:00 totals | LRT trips by regime × headway × λ/premium × bus competition (155 rows) | 2022 | **diagnostic** — a factorial over 5 of the plan's 8 factors; coverage/walk/car source fixed |
+| `ovt_research/evidence_table.csv`, `parameter_summary.csv`, `parameter_sets.csv`, `chain_results.csv`, `extracts/*.md`; `skims/ovt_<set>/*`, `mode_choice/ovt_<set>/*` | OVT research (§6al) | five search-summary extracts (275 estimates, 20 verified) and steps 31 → 33 rerun on seven out-of-vehicle parameter sets | 25 V2 areas, 06:00–09:00; person-level λ per set | walk / wait weights, transfer and BRT–LRT penalties, station access: evidence by stream, proposed central / low / high, capture per set (1,456–4,935 underground), re-estimated λ (0.030–0.036) | 2022 | **sensitivity** — no parameter confirmed (nothing read in full), central case unchanged |
 
 The 25 GS zones (`Input/TAZ_GSnew.csv`) and the 25 retained research areas of the
 forecast tables are different geographies with the same matrix dimension; files are
@@ -3131,6 +3132,91 @@ full λ × premium cross. The synthetic-branches regime (task C6) is central-cas
 `OUT`-tagging gap that made two cells need a one-off, hand-copied run is a real (if minor)
 maintenance gap in step 31, left unfixed (see Method).
 
+## 6al. Out-of-vehicle weights and times — the research plan executed, and the chain rerun on seven parameter sets (`docs/OVT_WEIGHTS_RESEARCH_PLAN.md`, `docs/OVT_WEIGHTS_PARAMETER_MEMO.md`, tasks E4 / E7; 4 October 2026)
+
+**Purpose.** Close the inventory's "assumed (plan defaults)" row for the walk / wait weights and
+the transfer penalties (`Output/gc/gc_data_inventory.csv`, task E4) by the plan of 4 October
+2026: a literature and guidance review across five evidence streams, a normalised evidence
+table, a parameter memo with central / low / high per parameter, and the real chain (steps 31 →
+33) rerun on the resulting sets with λ re-estimated on each.
+
+**Method.** *Review.* Five parallel searches (walk weights and times; interchange and station
+access; wait, bus transfer and the appraisal guidance of eleven countries plus Israel; calibrated
+model configurations on GitHub; active-mode evidence) wrote one extract each
+(`Output/ovt_research/extracts/*.md`); `tools/ovt_build_evidence_table.py` consolidates their
+tables into `Output/ovt_research/evidence_table.csv` (275 estimates, plan §5.2 columns, rules N1
+/ N2 / N5 applied where the unit allowed). **The session's network policy blocked every document
+host** (gov.uk, gov.il, infocenters.co.il, ScienceDirect, ResearchGate, ITF, TRB, FTA, WSDOT,
+the university repositories; only raw.githubusercontent.com was reachable), so 255 of the 275
+rows are search-summary values marked unverified and 20 — the model configuration files of
+stream S4 (ActivitySim prototype_mtc, production_semcog, prototype_arc, prototype_mwcog, SANDAG
+ABM3, SimOR, PSRC, the SoundCast / SeaCast / PierceCast / BKRCast DaySim and Emme files, MTC
+TM1 / TM2, CMAP, MATSim, OpenTripPlanner, R5) — were read in full. *Model.* Step 31 now reads
+`W_WALK`, `W_WAIT`, `TRANSFER_PEN`, `BRT_LRT_TRANSFER_PEN`, a new LRT-side station walk weight
+`W_WALK_LRT` and a new station-access term `STATION_ACCESS_UG` / `STATION_ACCESS_GR` (minutes
+per LRT station end, added to the station walk and weighted by `W_WALK_LRT`; the mixed
+alignment applies the underground value at the S05–S14 core) from the environment, and
+`OVT_TAG` sends a non-default set to `Output/skims/ovt_<tag>/` (an untagged non-default set is
+refused, so the default outputs are only ever written by the default set). Step 33 reads
+`SKIM_DIR` and writes to `Output/mode_choice/ovt_<tag>/`. `tools/ovt_run_chain.py` runs both
+for every set in `Output/ovt_research/parameter_sets.csv` (≈ 80 s per set);
+`tools/ovt_chain_summary.py` collects the captures, the re-estimated λ and the capture at that λ
+(λ_T = 2λ), validating each set's capture formula against its own committed scenarios to under
+one trip. The default run reproduces the committed `Output/skims/` CSVs exactly. One latent
+defect was found and fixed on the way: the Metronit feeder's transfer penalty entered the
+feeder *choice* but not the path's generalized cost (harmless while it was 0 by assumption); the
+Metronit-leg count is now saved as `skim_lrt_*_brt_legs.csv` and charged
+`BRT_LRT_TRANSFER_PEN` per leg. Step 40 reads the `ovt_*` directories as a sixth factor.
+
+**Results.** *Evidence (memo §1, §3).* Walk weight: SP / RP meta-analyses ≈ 1.5–1.7 (Wardman
+2001 / 2004 1.66, 2016 urban 1.45, 2026 worldwide 1.50–1.75), guidance 1.5–2.0 (TAG, ATAP, TfNSW)
+to 2 (Sweden) and 2–3 (the Ministry guideline, of which the search found the published edition
+1.0 of 13 January 2026), calibrated models 2.0 (ten families, verified); no calibrated model
+uses a different walk weight for rail access than for bus — the rail preference is an in-vehicle
+multiplier (LRT 0.85–0.9) or a boarding penalty. Wait: empirical ≈ 1.5 (1.0–2.0), guidance
+1.4–2.5, models 1.5 or 2.0 with transfer wait ≥ initial, half-headway everywhere, the random-
+arrival threshold 5–11 min and a weight step rather than a time cap at 10 min. Bus transfer
+penalty: pure values 5–10 (London RP 5.0, Madrid 10.9), guidance 5–10, models ≈ 10. BRT ↔ LRT:
+no study exists; cross-platform proxies 3.6–5, level change 4.7–11. Station access: STOPS 0.5 min
+per level, Sound Transit 2-min rail boarding + 0.5 per escalator with OVT × 2, TM2 4.5-min LRT
+boarding (verified); physically 1–3 min per underground end. By the plan's rule (§1, §5.6) **no
+parameter is confirmed and every value stays**: walk 2.0 / wait 2.0 / transfer 8 are the
+practice median and inside every guidance range, while the two zero-valued terms (BRT–LRT
+transfer, station access) are below every reported value. *Chain (memo §4,
+`Output/ovt_research/chain_results.csv`; underground / ground, λ 0.03, premium 5, headway 5).*
+empirical_low (1.5 / 1.5 / 8) 4,935 / 3,765 (+16 % / +17 %); lrt_walk_weight (LRT walk 1.65,
+hypothesis only) 4,867 / 3,686; default 4,254 / 3,206; brt_lrt_penalty_only (4 min) 3,837 / 2,861
+(−10 % / −11 %); empirical_central (1.66 / 1.5 / 8 / 4 / 1.5, 0.5) 3,465 / 3,011 (−18 % / −6 %);
+station_access_only (1.5 / 0.5) 3,257 / 2,920 (−23 % / −9 %); guideline_central_plus_access
+(2 / 2 / 8 / 4 / 1.5, 0.5) 2,922 / 2,601 (−31 % / −19 %); guideline_high (2.5 / 2.5 / 10 / 7 / 3,
+0.5) 1,456 / 1,970 (−66 % / −39 %). The person-level λ (M1) moves only 0.030–0.036 across the
+sets (M3 0.049–0.053; M4 still not identified), so the assumed 0.03 stands under every set and the
+capture at the re-estimated λ is 0–10 % below the assumed-λ figure. In the step-40 tornado the
+OVT set is now the widest factor (range 3,479 trips, 1,456–4,935), ahead of λ / premium (2,865)
+and the regime (1,889). The screen's direction and order of magnitude (§2 of the plan) are
+confirmed by the chain; with the feeder paths re-optimised the penalty effects are a little
+softer per minute.
+
+**Outputs.** `docs/OVT_WEIGHTS_PARAMETER_MEMO.md`; `Output/ovt_research/` (`evidence_table.csv`,
+`parameter_summary.csv`, `parameter_sets.csv`, `chain_results.csv`, `extracts/` × 5);
+`Output/skims/ovt_<set>/` × 7 (full step-31 outputs per set, `ovt_parameters.csv` in each and
+in `Output/skims/`); `Output/mode_choice/ovt_<set>/` × 7; `Output/skims/skim_lrt_*_brt_legs.csv`;
+step 40's factorial (365 rows) and tornado updated; `tools/ovt_run_chain.py`,
+`tools/ovt_chain_summary.py`, `tools/ovt_build_evidence_table.py`; the inventory row and task E4
+updated.
+
+**Limits.** Nothing outside GitHub was read in full; every S1 / S2 / S3 / S5 number is a search-
+summary value, several of them contradicted by a neighbouring summary (flagged "CONFIRM" in the
+extracts), and the Israeli anchors — `נוהל פר"ת` 2012 and the Ministry guideline ed. 1.0 — are
+unread. The parameter sets are therefore sensitivities, not estimates, and the central case is
+unchanged. Slope-aware walk times (P3, task E6) stay blocked on the OSM extract and a DEM; the
+S5 extract §3 gives the method. The station-access term is coded without any station design,
+the BRT–LRT penalty without the interchange layout; both wait on the planning team (plan §8).
+Step 32 (forecast years) and step 26 (walk speed, detour, wait cap) were not rerun. The
+request letters of plan §8 were not sent. The premium interaction (plan §1) is reported, not
+resolved: the calibrated models' LRT in-vehicle multiplier of 0.85–0.9 is worth 1.4–2.1
+generalized minutes on the trunk against the model's 5-min premium.
+
 ## 6ai. Validation against the Ministry of Transport guideline, waves 1, 1b, 2 and 3 (T1-T12, T14-T17, T19; `MOT_Validation_Stage1_Inputs_Distribution`, `_Stage1d_Zones_Population_Rates`, `_Stage2_Timing`, `_Stage2c_Mode_Occupancy_Convergence`, `_Stage3_Counts_Transit`, `_Stage4_Link_volumes`, diagnostics)
 
 **Purpose.** The Ministry of Transport's validation guideline for the metropolitan models (draft 6, 16 September 2024) lists, per model stage, the
@@ -3597,6 +3683,8 @@ jupyter nbconvert --to notebook --execute --inplace notebooks/current/LRT_captur
 
 # person-level mode choice (step 33; needs git lfs pull --include="Input/THS_2017-2018/*" and pip install statsmodels; reads step 31's skims)
 jupyter nbconvert --to notebook --execute --inplace notebooks/current/Mode_choice_person_level.ipynb
+# out-of-vehicle parameter sets through steps 31 -> 33 (§6al; needs the step-33 inputs above plus nbformat, nbclient, ipykernel); then the summary and the evidence table
+python3 tools/ovt_run_chain.py && python3 tools/ovt_chain_summary.py && python3 tools/ovt_build_evidence_table.py
 # the matrix tests on today's products (step 35, diagnostics; needs the THS trips file, the keys and the committed outputs of steps 8, 9, 15, 16, 22, 34; ≈ 4 minutes;
 # the cellular pair of §3 needs git lfs pull --include="Input/Matrices/AvgDayHourlyTrips201819_1270_weekday_v1.csv" once — the converted matrix is then saved under Output/ths2017/study_taz/)
 jupyter nbconvert --to notebook --execute --inplace notebooks/diagnostics/THS_vs_RavKav_2025_tests.ipynb
