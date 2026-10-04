@@ -260,10 +260,10 @@ finding the RavKav boarding profiles gave for transit (§6af); the step-20 peak-
 an upper bound (§8 caveat 18).
 
 **Update, 4 October 2026 (validation against the Ministry of Transport guideline, wave 1 - §6ai).** The guideline's checks were selected for this project
-(`docs/MOT_VALIDATION_PLAN.md`) and eight were run on the frozen 23 September base: of 48 summary rows, 18 pass (time-of-day shape against the count and RavKav boarding profiles; the calibrated bus
-layer at sub-area level against RavKav; the transit trip-length distribution once the path detour is allowed for), 25 miss with a stated reason (cellular coincidence ratio 0.43-0.55; super-zone R2 against RavKav
+(`docs/MOT_VALIDATION_PLAN.md`) and eight were run on the frozen 23 September base: of 50 summary rows, 18 pass (time-of-day shape against the count and RavKav boarding profiles; the calibrated bus
+layer at sub-area level against RavKav; the transit trip-length distribution once the path detour is allowed for), 26 miss with a stated reason (cellular coincidence ratio 0.43-0.55; super-zone R2 against RavKav
 0.74-0.78 where the survey's own day 1 vs day 2 is 0.78; the car layer at 0.71 of the cordon counts in three hours but 1.00 of the busiest hour on the well-counted cells; rail 2019 vs 2025; timetable
-vs measured speeds), 1 misses unexplained (four anchored bus super-zones) and 1 is a finding (two super-zone keys disagree on 142 TAZs, caveat 19). No product changed.
+vs measured speeds), and 3 are findings (two super-zone keys disagree on 142 TAZs - decided: the chain's keys table is authoritative, caveat 19; the destination pattern - RavKav's own alightings beat the on-board probabilities against the survey, T7b). No product changed.
 
 Every published product, what it was built from, and its status:
 
@@ -2602,8 +2602,7 @@ a survey-based matrix with a capture model on top and have data (T0-T19); this s
 The frozen version is the 23 September 2026 rebuild; nothing in the chain was changed. The statistics are in `tools/validation_metrics.py` (R2 as
 Correl squared, slope through the origin, RMSE%, coincidence ratio, weighted KS with Kish effective sample sizes, chi-square, share within a
 percentage; GEH is dropped, as in the guideline), tested by hand in `tools/test_validation_metrics.py`. Results are in
-`Output/validation_mot/` (one CSV per table, `validation_workbook.xlsx` with a Summary sheet of 48 rows: 18 pass, 25 miss explained, 1 miss unexplained,
-3 not applicable, 1 finding). Sector: Arab = `HHTYPE` arab, Haredi = orto, Jewish non-Haredi = secular + religious + other (`migzar` is an area stratum, not a household sector).
+`Output/validation_mot/` (one CSV per table, `validation_workbook.xlsx` with a Summary sheet of 50 rows: 18 pass, 26 miss explained, 3 not applicable, 3 findings). Sector: Arab = `HHTYPE` arab, Haredi = orto, Jewish non-Haredi = secular + religious + other (`migzar` is an area stratum, not a household sector).
 
 **T4 - trip-length distribution (3.5).** Weighted KS between the matrix (centroid distance, intra-zonal 0.52 x sqrt(area)) and the survey's reported
 `TrvlDist` for the same AM trips (17,892 sampled trips, all with a distance). Car: D 0.22 (TAZ proxy) and 0.26 (1250-zone proxy) against a critical
@@ -2638,11 +2637,26 @@ level matches the road's busiest hour, and its three-hour total is low because t
 (residents only, AM only, no trucks, taxis, buses, non-residents or externals); not adjusted. 2 sector cells (Tirat Carmel east) have no crossing link.
 
 **T14 - bus origins by zone (5.2).** The 2022 bus layer against RavKav 2022 journey origins: 36 super-zones, layer / RavKav 1.28, 53 % of zones within +/-15 % (R2 0.40, slope 1.13,
-RMSE% 72); against 2025, 1.19 and 39 %. Split by what the layer does: the 22 mostly **anchored** super-zones (RavKav volume by construction) agree (ratio 0.99, R2 0.97,
-RMSE% 8, 82 % within +/-15 %) except four zones: 3 (-23 %), 12 (-35 %), 13 (+20 %), 20 (+18 %), three of them with no guarded volume - **unexplained so far**
-(candidates: the home-based re-allocation of origins to TAZs in the calibration, and the two super-zone keys that disagree, caveat 19); the 14 mostly **guarded** super-zones
-keep the survey volume (layer 2.36 x RavKav, 7 % within +/-15 %), which is the coverage rule working as designed. At TAZ level (719 TAZs with RavKav origins) R2 0.62, slope 0.97,
+RMSE% 72); against 2025, 1.19 and 39 %. Split by what the layer does: the 22 mostly **anchored** super-zones agree (ratio 0.99, R2 0.97, RMSE% 8, 82 % within +/-15 %) except four zones:
+3 (-23 %), 12 (-35 %), 13 (+20 %), 20 (+18 %). **Explained:** the segmented rule (§6m) takes RavKav's volume only in origin x segment cells with at least 5 sampled survey trips; thinner
+segments inherit the origin-wide ratio, so the origin total is not RavKav's even when nothing is guarded (zone 3: the corridor-bound segment has RavKav 655 against survey 239 but takes factor 0.97;
+zone 12: the local segment has no survey trip, RavKav 254, volume 0; thin segments account for -663, -770, +350 trips in zones 3, 12, 13; the rule reproduces the layer to within a trip wherever nothing is guarded).
+This is a property of the thin-segment rule, not an error, and a refinement is possible (take RavKav's own volume in a thin segment when the origin as a whole is not guarded); the frozen version is unchanged.
+The 14 mostly **guarded** super-zones keep the survey volume (layer 2.36 x RavKav, 7 % within +/-15 %), which is the coverage rule working as designed. At TAZ level (719 TAZs with RavKav origins) R2 0.62, slope 0.97,
 RMSE% 99; every size class misses its limit (0-100: 283 % against 50 %; 1000+: 26 % against 12 %).
+
+**T7b - the destination pattern: RavKav's own alightings, or RavKav as production only with the on-board probabilities (`Bus_destination_pattern_RavKav_vs_OnBoard.ipynb`, 4 October 2026).**
+The question: what if the bus matrix kept RavKav's *boardings* as the production of each zone and spread them with the on-board survey's destination probabilities (matrix B = step 9's
+`bus_od_taz_new.csv`, 92,713 journeys; the destination prior the chain used until 23 September) instead of RavKav's own inferred alighting zone (matrix A = `bus_od_taz_avg.csv`, 92,440)? The
+survey's bus trips (1,790 sampled, AM, both ends in the study area) are used by neither, so they judge the patterns. A third matrix E takes A to the destination super-zone and B only to split the
+trips inside it. Predicting where the survey's bus trips from each of 26 origin super-zones (at least 20 sampled trips each) go, trip-weighted: **destination super-zone** JSD A 0.13 / B 0.30 / E 0.13 (CR 0.61 / 0.40 / 0.61);
+**destination 1250-zone** JSD 0.37 / 0.54 / 0.43 (CR 0.33 / 0.20 / 0.27); **the 1250-zone split inside the destination super-zone** JSD 0.29 / 0.36 / 0.36 (CR 0.42 / 0.34 / 0.34). A beats B in 17 of 26 origins; with households
+resampled (200 draws) B minus A = +0.16 in JSD (5-95 %: +0.14 to +0.19) and A minus E = -0.06 (-0.08 to -0.05): **the on-board probabilities predict the survey's destinations worse than RavKav's own
+alightings at every resolution, including inside the super-zone, so replacing the alighting zone by them, or using them only for the fine split, does not improve the match.** Trip length against the survey's reported distance
+(1250-zone proxy x detour 0.99): median 2.9 km survey, A 3.5, E 4.1, **B 6.3**; KS D 0.078 (A, critical 0.058), 0.138 (E), 0.240 (B). Local share (inside one super-zone) 51 % survey, 44 % A, 44 % E, **25 % B**.
+The calibrated layers (C: prior A; D: prior B) contain the survey and are shown for completeness: D predicts the survey better than C only because its household-split k* of 2 gives the survey a much larger weight than C's k* of 100.
+Caveat on the evidence: the survey is residents' door-to-door trips, RavKav and the on-board survey cover all riders; the test cannot say whether the on-board survey over-represents long lines or RavKav's
+alightings truncate journeys at the next boarding (§8 caveat 17); it says that the residents' survey and RavKav agree and the on-board pattern does not. The OnBoard codebook (unit per row, expansion) remains the open data request.
 
 **T15 - rail stations (5.2).** 2019 station matrix x 0.793 against the 2025 taps on the 14 common stations: station-pair R2 0.94, slope **0.44**, CR 0.75; entries R2 0.96, slope 0.47, RMSE% 71
 (**18 after one scale factor of 2.03**); exits 0.96 / 0.49 / 87 (26). By station size class the scaled entries pass all five classes, the scaled exits three of five.
@@ -2657,8 +2671,8 @@ use the measured times, so these tests concern the timetable skims of step 29, n
 **Reading.** What passes: the time-of-day shape against two independent profiles (T8); the calibrated bus layer at sub-area level against RavKav (T7, a check of direction);
 the transit trip-length distribution once the detour is allowed for (T4). What misses, with the reason stated in the workbook: super-zone cell-level R2 against RavKav (the survey does not repeat itself
 there either); the cellular coincidence ratio (trip definitions); the car layer against the cordon counts (residents only; the three-hour total is low where the road is flat, and the peak-hour level matches on the
-well-counted cells); the guarded bus zones (coverage); rail (six years apart); the timetable against measured speeds. One miss is unexplained (four anchored bus zones) and one finding needs a decision
-(142 of 778 TAZs carry a different super-zone in `Zonal_2020.csv` than in the keys table the chain uses).
+well-counted cells); the guarded bus zones (coverage); rail (six years apart); the timetable against measured speeds. The anchored bus zones that miss are explained by the thin-segment rule (T14). One finding was decided on 4 October 2026: 142 of 778 TAZs carry a
+different super-zone in `Zonal_2020.csv` than in the keys table the chain uses; **the keys table is authoritative** and `Zonal_2020.csv`'s `SZ_NEW` is not used for any super-zone aggregation.
 
 **Outputs.** `notebooks/diagnostics/MOT_Validation_Stage{1_Inputs_Distribution,2_Timing,3_Counts_Transit}.ipynb`; `tools/validation_metrics.py`, `tools/test_validation_metrics.py`,
 `tools/build_validation_workbook.py`; `Output/validation_mot/*.csv`, `validation_workbook.xlsx`; figures `Output/figures/mot_T*.png`.
@@ -2862,9 +2876,9 @@ Added 23 September 2026 (step 33):
     boarding-based 0.43–0.48 for transit are the values to carry into the design hour until a
     link-crossing profile from an assignment exists (task B1e).
 
-19. **Two super-zone keys disagree** (§6ai). 142 of the 778 TAZs have a different `SZ_NEW` in `Input/Zonal_2020.csv` than in `Input/Matrices/1270_02_09_2021_TAZ_North_keys.csv`, the table the chain
-    uses. The chain is consistent with itself, but a comparison with CBS or the national model by super-zone needs one agreed zone system (guideline 3.1); four "anchored" bus super-zones also differ from
-    RavKav by 18-35 % without an explanation yet, and the key mismatch is one candidate.
+19. **Two super-zone keys disagree** (§6ai). 142 of the 778 TAZs have a different `SZ_NEW` in `Input/Zonal_2020.csv` than in `Input/Matrices/1270_02_09_2021_TAZ_North_keys.csv`. **Decision of 4 October 2026: the keys table
+    the chain uses is authoritative.** A comparison with CBS or the national model by super-zone must use it; `Zonal_2020.csv`'s `SZ_NEW` should be corrected or ignored. Separately, the segmented bus rule gives thin segments
+    (fewer than 5 sampled survey trips) the origin-wide factor, so an "anchored" origin total can differ from RavKav by up to 35 % (zones 3, 12, 13, 20; §6ai T14).
 
 ## 8b. Related work — PCA-based analysis and structural comparison of OD matrices
 
@@ -2960,6 +2974,7 @@ python3 tools/test_validation_metrics.py
 jupyter nbconvert --to notebook --execute --inplace notebooks/diagnostics/MOT_Validation_Stage1_Inputs_Distribution.ipynb
 jupyter nbconvert --to notebook --execute --inplace notebooks/diagnostics/MOT_Validation_Stage2_Timing.ipynb
 jupyter nbconvert --to notebook --execute --inplace notebooks/diagnostics/MOT_Validation_Stage3_Counts_Transit.ipynb
+jupyter nbconvert --to notebook --execute --inplace notebooks/diagnostics/Bus_destination_pattern_RavKav_vs_OnBoard.ipynb
 python3 tools/build_validation_workbook.py
 # RavKav 2025 layer (step 34; needs git lfs pull --include="Input/BusRavKav/2025/*,Input/BusRavKav/Stops_In_North/*" (≈ 3.3 GB), pip install geopandas, the OnBoard workbook and step 8's bus_od_taz_avg.csv; the GTFS archive if present, else the committed station table; ≈ 5 minutes)
 jupyter nbconvert --to notebook --execute --inplace notebooks/current/RavKav_2025_boardings_matrix.ipynb

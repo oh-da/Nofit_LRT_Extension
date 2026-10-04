@@ -7,14 +7,15 @@ guideline reference, level, criterion, result, status (pass / miss (explained) /
 import os, glob
 import pandas as pd
 OUT = 'Output/validation_mot'
-summ = pd.concat([pd.read_csv(p) for p in sorted(glob.glob(f'{OUT}/summary_stage*.csv'))], ignore_index=True)
-order = {'T1': 0, 'T4': 1, 'T5': 2, 'T7': 3, 'T8': 4, 'T12': 5, 'T14': 6, 'T15': 7, 'T17': 8}
+summ = pd.concat([pd.read_csv(p) for p in sorted(glob.glob(f'{OUT}/summary_*.csv'))], ignore_index=True)
+order = {'T1': 0, 'T4': 1, 'T5': 2, 'T7': 3, 'T7b': 3.5, 'T8': 4, 'T12': 5, 'T14': 6, 'T15': 7, 'T17': 8}
 summ['_o'] = summ['test'].map(order); summ = summ.sort_values('_o', kind='stable').drop(columns='_o')
 sheets = {
     'Summary': [summ],
     'T4_trip_length_KS': ['T4_trip_length_KS', 'T4_survey_distance_by_purpose', 'T4_survey_distance_by_sector'],
     'T5_CR_vs_cellular': ['T5_coincidence_ratio'],
     'T7_transit_OD_fit': ['T7_transit_OD_fit', 'T7_matched_cells_superzone'],
+    'T7b_bus_pattern': ['BusPattern_survey_destination_prediction', 'BusPattern_bootstrap', 'BusPattern_trip_length_and_local_share', 'BusPattern_by_origin_superzone'],
     'T8_time_of_day': ['T8_car_profile_vs_counts', 'T8_transit_profile_vs_ravkav'],
     'T12_cordon_sectors': ['T12_cordon_summary', 'T12_cordon_sectors'],
     'T14_bus_origins': ['T14_bus_origins_summary', 'T14_bus_origins_by_superzone', 'T14_bus_origins_TAZ'],

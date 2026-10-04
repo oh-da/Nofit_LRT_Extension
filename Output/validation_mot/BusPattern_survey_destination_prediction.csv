@@ -1,0 +1,16 @@
+pattern,level,origin super-zones used,sampled trips behind them,"JSD (trip-weighted, lower is better)","CR (trip-weighted, higher is better)"
+A  RavKav own alightings,destination super-zone,26,1695,0.1295,0.6088
+A  RavKav own alightings,destination 1250-zone,26,1695,0.3650,0.3276
+A  RavKav own alightings,split inside destination super-zone,26,1695,0.2878,0.4202
+B  RavKav production x on-board,destination super-zone,26,1695,0.3035,0.3978
+B  RavKav production x on-board,destination 1250-zone,26,1695,0.5398,0.1986
+B  RavKav production x on-board,split inside destination super-zone,26,1695,0.3558,0.3404
+"E  A to super-zone, B inside it",destination super-zone,26,1695,0.1285,0.6118
+"E  A to super-zone, B inside it",destination 1250-zone,26,1695,0.4314,0.2646
+"E  A to super-zone, B inside it",split inside destination super-zone,26,1695,0.3583,0.3395
+C  current calibrated layer (survey incl.),destination super-zone,26,1695,0.0616,0.7417
+C  current calibrated layer (survey incl.),destination 1250-zone,26,1695,0.3016,0.3718
+C  current calibrated layer (survey incl.),split inside destination super-zone,26,1695,0.2590,0.4367
+D  on-board-prior calibrated layer (survey incl.),destination super-zone,26,1695,0.0212,0.8292
+D  on-board-prior calibrated layer (survey incl.),destination 1250-zone,26,1695,0.2270,0.4584
+D  on-board-prior calibrated layer (survey incl.),split inside destination super-zone,26,1695,0.2075,0.5204

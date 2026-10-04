@@ -333,8 +333,8 @@ criteria test reproduction of the base year, not response to the LRT. Section 10
 
 ## 9. Status after wave 1 (4 October 2026)
 
-Run: **T0** (metrics module, hand-checked), **T4, T5, T7, T8, T12, T14, T15, T17** (three executed notebooks, METHODOLOGY §6ai, `Output/validation_mot/validation_workbook.xlsx`, 48 summary rows).
-Outcome by row: **18 pass**, **25 miss (explained)**, **1 miss (unexplained)**, 3 not applicable, 1 finding.
+Run: **T0** (metrics module, hand-checked), **T4, T5, T7, T8, T12, T14, T15, T17** (three executed notebooks, METHODOLOGY §6ai, `Output/validation_mot/validation_workbook.xlsx`, 50 summary rows) and the bus destination-pattern experiment **T7b**.
+Outcome by row: **18 pass**, **26 miss (explained)**, 3 not applicable, 3 findings.
 
 | Test | Result against the guideline criterion |
 |---|---|
@@ -343,13 +343,15 @@ Outcome by row: **18 pass**, **25 miss (explained)**, **1 miss (unexplained)**, 
 | T7 transit OD vs RavKav | super-zone R2 0.74-0.78, slope 1.06-1.41: miss (the survey's own day 1 vs 2 is R2 0.78); sub-area R2 0.94-0.95, slope 1.05-1.09: **pass** |
 | T8 time of day | car 12 cordon-directions CR 0.63-0.79, bus 0.75, Metronit 0.74: **pass**; the survey's peak is sharper than both independent profiles |
 | T12 cordon sectors | 44 testable cells: 0.71 of the count in three hours, 16 % within +/-15 %; peak hour 1.19 (1.00 on the well-counted cells): miss |
-| T14 bus origins | anchored zones 0.99 of RavKav (four zones off by 18-35 %, unexplained); guarded zones 2.36 (the coverage rule); all 1.28 |
+| T14 bus origins | anchored zones 0.99 of RavKav (four zones off by 18-35 %: explained by the thin-segment rule); guarded zones 2.36 (the coverage rule); all 1.28 |
+| T7b destination pattern | RavKav's own alightings beat RavKav-production x on-board probabilities against the survey's bus destinations at every resolution (JSD 0.37 vs 0.54 at 1250-zone level; 0.29 vs 0.36 inside the super-zone); on-board trips are 2 x too long |
 | T15 rail | 14 common stations: pattern R2 0.94-0.96, slope 0.44-0.49 (2025 = 2.03 x 2019); after one scale factor RMSE% 18 (entries): miss as is |
 | T17 running times | bus 52 % within +/-15 % (criterion 85 %), Metronit 8 % within +/-10 %, door-to-door vs survey 6 %: miss |
 
-**Decisions this raises**
-* **Zone system (T1).** 142 of 778 TAZs have a different super-zone in `Zonal_2020.csv` than in the keys table the chain uses. Which is right?
-* **Anchored bus zones 3, 12, 13, 20.** Unexplained differences from RavKav of -23 %, -35 %, +20 %, +18 %: to be traced to the home-based re-allocation or to the key.
+**Decisions (4 October 2026)**
+* **Zone system (T1).** The keys table the chain uses is authoritative; `Zonal_2020.csv`'s `SZ_NEW` (different on 142 of 778 TAZs) is not used for super-zones.
+* **Anchored bus zones 3, 12, 13, 20.** Explained: the segmented rule gives segments with fewer than 5 sampled survey trips the origin-wide factor, so the origin total is not RavKav's. A refinement (use RavKav's own volume in a thin segment when the origin is not guarded) is possible in a later version; the frozen version is unchanged.
+* **Destination pattern.** Using the on-board probabilities instead of RavKav's alighting zone (RavKav as production only) is worse against the survey at every resolution, including the split inside a super-zone (T7b). No change proposed; the OnBoard codebook remains the open request.
 * **T6 intra-zonal share.** 20.6 % against "< 5 %": a miss by construction; not part of wave 1's notebooks.
 
 **Next waves.** 1b (X1): PM and midday survey matrices and the repeats of T7, T8, T12, T14, T15, T17. 2: T1-T3, T6, T9, T10, T16, T19. 3: T11 after step 42. 4: T13, T18, the CBS parts, rail times.
