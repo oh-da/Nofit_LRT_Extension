@@ -251,6 +251,7 @@ anywhere inside the repository.
   cellular matrix, RavKav 2022 / 2025 and the road counts, segmented bus calibration, 2022 layers,
   corridor potential movements and their peak hour) with a conclusion on fitness for the corridor demand
   assessment; the survey × cellular hybrid is no longer described
+- `reports/Survey_Matrices_Car_Bus_Rail_Report_HE.docx` — the same report (revision 3.0) in Hebrew, shortened and in simple language
 - `reports/historical/Nofit_LRT_OD_Demand_Report.docx` (8 September 2026) — kept as a record with a dated
   status note at the front saying which parts are overtaken (its stale PDF rendering was
   removed)
