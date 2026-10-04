@@ -1,0 +1,15 @@
+level,reference,n,obs_total,mod_total,total_diff_pct,R2,slope_origin,R2_origin,MAE,RMSE,RMSE_pct,limit_pct,pass
+TAZ (RavKav origins > 0),RavKav 2022,719,92439.750,117678.657,27.303,0.619,0.973,0.746,69.150,126.681,98.533,,
+TAZ size class 0-100,RavKav 2022,450,14250.750,,,,,,,,282.525,50.000,False
+TAZ size class 100-250,RavKav 2022,161,26388.500,,,,,,,,108.679,40.000,False
+TAZ size class 250-500,RavKav 2022,70,24174.750,,,,,,,,39.706,30.000,False
+TAZ size class 500-750,RavKav 2022,24,14607.500,,,,,,,,24.875,20.000,False
+TAZ size class 750-1000,RavKav 2022,11,9348.250,,,,,,,,28.593,15.000,False
+TAZ size class 1000+,RavKav 2022,3,3670.000,,,,,,,,26.355,12.000,False
+TAZ (RavKav origins > 0),RavKav 2025,716,99464.269,117046.907,17.677,0.436,0.745,0.595,89.573,173.021,124.550,,
+TAZ size class 0-100,RavKav 2025,442,14964.093,,,,,,,,271.648,50.000,False
+TAZ size class 100-250,RavKav 2025,164,27469.686,,,,,,,,107.711,40.000,False
+TAZ size class 250-500,RavKav 2025,73,25288.502,,,,,,,,55.924,30.000,False
+TAZ size class 500-750,RavKav 2025,19,11973.374,,,,,,,,40.003,20.000,False
+TAZ size class 750-1000,RavKav 2025,12,10535.677,,,,,,,,42.822,15.000,False
+TAZ size class 1000+,RavKav 2025,6,9232.936,,,,,,,,68.744,12.000,False

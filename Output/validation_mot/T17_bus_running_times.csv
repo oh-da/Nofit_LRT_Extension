@@ -1,0 +1,5 @@
+set,trips,limit ±%,share within limit,median observed / scheduled,mean observed / scheduled,R2,slope (origin),RMSE%
+"bus, covered >= 80 %",6372,15.000,0.516,1.117,1.134,0.700,0.844,29.092
+"bus, all trips",7055,15.000,0.550,1.101,1.125,0.719,0.851,28.450
+"Metronit (BRT), covered >= 80 %",267,10.000,0.082,0.866,0.892,0.873,1.124,17.806
+"Metronit (BRT), all trips",267,10.000,0.082,0.866,0.892,0.873,1.124,17.806

@@ -328,3 +328,28 @@ criteria test reproduction of the base year, not response to the LRT. Section 10
 * **D4. Count years.** 2021–2023 primary; 2017–2023 as the sensitivity.
 * **D4b. Intra-zonal criterion.** "< 5 %" is the share of trips that start and end inside the same TAZ (T6).
 * **Open: Q5.** Can the Operator 22 AVL data used for the travel-time function be shared for the hold-out (T18)? Until then T18 stays deferred.
+
+---
+
+## 9. Status after wave 1 (4 October 2026)
+
+Run: **T0** (metrics module, hand-checked), **T4, T5, T7, T8, T12, T14, T15, T17** (three executed notebooks, METHODOLOGY §6ai, `Output/validation_mot/validation_workbook.xlsx`, 48 summary rows).
+Outcome by row: **18 pass**, **25 miss (explained)**, **1 miss (unexplained)**, 3 not applicable, 1 finding.
+
+| Test | Result against the guideline criterion |
+|---|---|
+| T4 trip length (KS) | car: miss (D 0.22-0.26; median 2.4 vs 1.5 km reported, intra-TAZ trips); transit: D 0.060-0.064 vs 0.055, **pass** once the detour (0.97) is allowed for |
+| T5 CR vs cellular | super-zone AM 0.43, whole day 0.47 (0.54 / 0.63 off-diagonal): miss; survey day 1 vs 2 is 0.88-0.89 |
+| T7 transit OD vs RavKav | super-zone R2 0.74-0.78, slope 1.06-1.41: miss (the survey's own day 1 vs 2 is R2 0.78); sub-area R2 0.94-0.95, slope 1.05-1.09: **pass** |
+| T8 time of day | car 12 cordon-directions CR 0.63-0.79, bus 0.75, Metronit 0.74: **pass**; the survey's peak is sharper than both independent profiles |
+| T12 cordon sectors | 44 testable cells: 0.71 of the count in three hours, 16 % within +/-15 %; peak hour 1.19 (1.00 on the well-counted cells): miss |
+| T14 bus origins | anchored zones 0.99 of RavKav (four zones off by 18-35 %, unexplained); guarded zones 2.36 (the coverage rule); all 1.28 |
+| T15 rail | 14 common stations: pattern R2 0.94-0.96, slope 0.44-0.49 (2025 = 2.03 x 2019); after one scale factor RMSE% 18 (entries): miss as is |
+| T17 running times | bus 52 % within +/-15 % (criterion 85 %), Metronit 8 % within +/-10 %, door-to-door vs survey 6 %: miss |
+
+**Decisions this raises**
+* **Zone system (T1).** 142 of 778 TAZs have a different super-zone in `Zonal_2020.csv` than in the keys table the chain uses. Which is right?
+* **Anchored bus zones 3, 12, 13, 20.** Unexplained differences from RavKav of -23 %, -35 %, +20 %, +18 %: to be traced to the home-based re-allocation or to the key.
+* **T6 intra-zonal share.** 20.6 % against "< 5 %": a miss by construction; not part of wave 1's notebooks.
+
+**Next waves.** 1b (X1): PM and midday survey matrices and the repeats of T7, T8, T12, T14, T15, T17. 2: T1-T3, T6, T9, T10, T16, T19. 3: T11 after step 42. 4: T13, T18, the CBS parts, rail times.

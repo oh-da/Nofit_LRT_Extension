@@ -4157,7 +4157,26 @@ gates said the same thing for buses in step 34. The survey's departure profile i
 anything observed, so the peak-hour figures of Parts 3 and 4 are upper bounds; a factor of about
 0.42–0.48 is the safer value.
 
-### 5.8 Where things stand now
+### 5.8 Checking the matrices against the Ministry of Transport's validation list
+
+The Ministry of Transport has a list of checks that a transport model must pass before it is approved (draft of September 2024): for each check, what to compare, with which data, and
+how close is close enough. Our matrices are not a full four-step model, so we picked the checks that make sense for a survey-based matrix and for which we have independent data
+(`docs/MOT_VALIDATION_PLAN.md`), and ran the first eight (METHODOLOGY §6ai). Nothing was adjusted to pass; when a check missed, the table says by how much and why.
+
+What came out, in plain words:
+
+* **The shape of the morning agrees with independent data.** The survey's departure times follow the hourly traffic counts on the cordon links and the smart-card boardings (agreement 0.63-0.79
+  where 0.6 is the bar). But the survey's peak is sharper: the busiest hour holds 59 % of the three hours in the survey and 48 % in the smart-card data.
+* **The bus matrix agrees with RavKav at the level of districts, not of every pair of super-zones.** At 28 sub-areas it fits (R2 0.94-0.95, slope near 1.07). At 36 super-zones, cell by cell, it does not reach 0.85, but
+  the survey does not repeat itself that closely either (its own day 1 against day 2 is 0.78), and RavKav counts only about three quarters of the survey's bus trips.
+* **The car layer is about 70 % of the counted traffic in three hours, and about 100 % in the busiest hour on the well-counted cordon sectors.** It holds residents' car trips only: no trucks, taxis, buses,
+  visitors or trips from outside the study area. That is a miss against a "within 15 %" rule, and the reason is known.
+* **The survey and the cellular matrix do not coincide** (coincidence ratio 0.43 in the morning against 0.6 wanted): they count different kinds of trips, mostly short ones.
+* **Bus timetables run slower than printed on short trips** (only 52 % of trips within 15 % of schedule) and the Metronit runs faster (89 % of schedule).
+* **Rail** agrees in pattern between 2019 and 2025 but 2025 carries twice the passengers.
+* **Two findings need a decision**: two zone tables disagree on which super-zone 142 of the 778 zones belong to, and four bus super-zones differ from RavKav by 18-35 % for a reason we have not found yet.
+
+### 5.9 Where things stand now
 
 The single most current answer to "how many riders will the LRT capture" is **about 4,250
 morning (06:00–09:00) corridor-internal trips in 2022** for the all-underground alignment

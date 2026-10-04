@@ -1,0 +1,7 @@
+set,reference,zones,RavKav total,layer total,total diff %,R2,slope (origin),RMSE%,share within ±15 %
+all super-zones,RavKav 2022,36,92439.750,117960.725,27.608,0.404,1.132,71.866,0.528
+all super-zones,RavKav 2025,36,99464.269,117960.725,18.596,0.399,1.038,66.303,0.389
+mostly anchored super-zones,RavKav 2022,22,73326.250,72852.768,-0.646,0.974,0.996,8.266,0.818
+mostly anchored super-zones,RavKav 2025,22,79836.177,72852.768,-8.747,0.822,0.897,23.273,0.636
+mostly guarded super-zones,RavKav 2022,14,19113.500,45107.957,136.001,0.418,2.295,215.266,0.071
+mostly guarded super-zones,RavKav 2025,14,19628.092,45107.957,129.813,0.712,2.397,195.444,0.000

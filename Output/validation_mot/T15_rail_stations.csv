@@ -1,0 +1,6 @@
+what,n,obs_total,mod_total,total_diff_pct,R2,slope_origin,R2_origin,MAE,RMSE,RMSE_pct,CR
+"station-pair matrix, common stations",182,3651.593,1799.472,-50.721,0.936,0.443,0.945,10.669,28.638,142.735,0.749
+station entries,14,3651.593,1799.472,-50.721,0.964,0.465,0.982,132.294,186.082,71.343,0.861
+"station entries, after one scale factor (2.03)",14,3651.593,3651.593,0.000,0.964,0.944,0.982,38.867,48.033,18.416,0.861
+station exits,14,3651.593,1799.472,-50.721,0.964,0.489,0.976,132.294,228.123,87.461,0.847
+"station exits, after one scale factor (2.03)",14,3651.593,3651.593,-0.000,0.964,0.993,0.976,43.344,68.444,26.241,0.847

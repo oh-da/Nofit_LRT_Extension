@@ -1,0 +1,13 @@
+cordon,direction,survey trips (sampled),CR 06:00-19:00,CR 06:00-09:00 (3 hours),survey AM share of 06-19,count AM share of 06-19,survey busiest AM clock hour / 3 h,count busiest AM clock hour / 3 h
+Haifa city,inbound,3311,0.7760,0.7227,0.3446,0.2233,0.4488,0.4194
+Haifa city,outbound,3326,0.7723,0.7299,0.1551,0.1942,0.5220,0.4255
+Krayot,inbound,1558,0.7539,0.7117,0.2078,0.2203,0.5167,0.4196
+Krayot,outbound,1560,0.7715,0.7334,0.2733,0.1650,0.5221,0.4421
+Kiryat Ata + Zevulun,inbound,757,0.7859,0.8209,0.1821,0.2029,0.3785,0.3677
+Kiryat Ata + Zevulun,outbound,764,0.7074,0.7072,0.3263,0.1982,0.5403,0.3931
+Nazareth + Nof HaGalil,inbound,662,0.6641,0.7808,0.1787,0.1918,0.4351,0.4066
+Nazareth + Nof HaGalil,outbound,663,0.6328,0.6388,0.3975,0.2789,0.4763,0.3582
+Tirat Carmel,inbound,468,0.7332,0.6140,0.2152,0.2304,0.5037,0.4612
+Tirat Carmel,outbound,478,0.7713,0.7700,0.3038,0.2312,0.4829,0.4052
+Metropolitan core,inbound,2713,0.7673,0.7507,0.3740,0.2494,0.4325,0.3706
+Metropolitan core,outbound,2733,0.7304,0.7961,0.1693,0.1994,0.4777,0.3945
