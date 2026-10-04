@@ -53,7 +53,7 @@ partial) · **DEFER** = applicable, one input missing (named) · **N/A** = does 
 | Guideline check (criterion) | Decision | Reason / data |
 |---|---|---|
 | 3.1 Zone system presented and approved (super-zones, core/rings/sectors) | **RUN** (documentation) | 778 TAZ → 36 super-zones → 28 sub-areas → 25 V2 areas exist. External sectors N/A |
-| 3.2 Population segments: Jewish non-Haredi, Haredi, Arab; urban / suburban / rural | **RUN** (documentation) | THS household table has `migzar` (1–5); `Zonal_2020.csv` has `SETTL_SIZE`. Mapping of `migzar` to the three groups to be confirmed (open question Q2) |
+| 3.2 Population segments: Jewish non-Haredi, Haredi, Arab; urban / suburban / rural | **RUN** (documentation) | THS household table has `HHTYPE` (arab / orto / religious / secular / other), which gives the three groups directly (decision D2); `Zonal_2020.csv` has `SETTL_SIZE` for the settlement type |
 | 3.3 Residents by super-zone ±5 %; by segment ±5 % (CBS) | **RUN\*** | Compare THS-*expanded* residents (sum of `new_wf` by home TAZ) with `Zonal_2020.csv` / `Zonal_BU_2025.csv`. CBS itself is not in hand (standing data request 6) → CBS part **DEFER** |
 | 3.3 Employed by residence / by workplace ±15 %; household size; employment rate; car availability by household ±5 % | **DEFER** | Needs CBS tables and the labour-force survey. Household size and car availability from `HHfinal.csv` can be shown against the zonal file as a partial check |
 | 3.3 Network size and class; prices against external sources | **RUN** (documentation) | Emme link table (counts of links by `TYPE`), GTFS stop and route counts, fare assumptions (none in GC: money out by decision) |
@@ -113,9 +113,10 @@ stated before each test; table with the control value, the model value (absolute
 scatter plots with **observed on x, model on y, regression through the origin with its equation and R²**,
 outliers named and explained; a summary table per test against the criterion; **one Excel workbook with one sheet
 per test** holding the matched data and the computed metrics; the vintage of every comparison data set and any
-growth applied to it. The guideline asks for three periods (AM peak, PM peak, midday); **the layers are AM only**,
-so every test is reported for AM (06:00–09:00 and the 07:00–08:00 peak hour) and the missing periods are stated
-(see extension X1).
+growth applied to it. The guideline asks for three periods (AM peak, PM peak, midday); **the layers are AM only today**.
+Extension X1 (build the PM and midday survey matrices) is **approved (D3)** and scheduled as wave 1b, so the tests
+that the guideline wants in three periods are first run for AM (06:00–09:00 and the 07:00–08:00 peak hour) and then
+repeated for PM and midday when X1 lands.
 
 ### T0. Metrics module — priority A, ½ day
 `tools/validation_metrics.py` (a library, not a notebook, so the "do not import across notebooks" rule does not
@@ -125,8 +126,8 @@ critical value at α = 0.05), `chi2_stat`, `within_pct(share of measurements wit
 calculation. **Output:** the module plus `tools/test_validation_metrics.py`.
 
 ### T1. Zone system and segment definitions (§3.1–3.2) — C, ½ day
-Document the 778 / 36 / 28 / 25 hierarchy with a map (Output/figures), the sector coding (`migzar` → three
-groups) and settlement type from `SETTL_SIZE`. **Needs the steering decision on the levels** (guideline: "the
+Document the 778 / 36 / 28 / 25 hierarchy with a map (Output/figures), the sector coding (from `HHTYPE`: Arab = `arab`,
+Haredi = `orto`, Jewish non-Haredi = `secular` + `religious` + `other`; see D2) and settlement type from `SETTL_SIZE`. **Needs the steering decision on the levels** (guideline: "the
 committee approves the geography"). **Output:** workbook sheet `T1_zones`; two paragraphs in the report.
 
 ### T2. Residents by super-zone (§3.3) — A, ½ day, partly deferred
@@ -161,9 +162,11 @@ the sparse off-diagonal cells; report both the full matrix and the matrix withou
 survey–cellular divergence sits on the diagonal. **Extension:** the same for the external-trip rows, as context.
 
 ### T6. Intra-zonal share (§3.5, §5.4) — C, ¼ day
-Share of intra-zonal trips by super-zone and settlement type, for each layer; and the survey-minus-cellular
-difference. **Criterion:** the guideline gives "< 5 %" without saying of what (Q4): reported as a descriptive
-table plus the share relative to the survey. **Data:** final matrices.
+Share of trips that start and end **inside the same TAZ** (decision D4), by super-zone and settlement type, for each
+layer, and the survey-minus-cellular difference. **Criterion:** < 5 % of person trips. **Preview (not a result of this
+test):** on the final 2022 car + transit matrix the diagonal holds 304,600 of 1,475,809 trips, **20.6 %**, so this will
+be a miss; the survey's short trips (47 % stay inside one cellular zone) and the size of the 778 TAZs explain it, and
+the cellular matrix shows the opposite pattern. Reported as a miss with that explanation. **Data:** final matrices.
 
 ### T7. Survey-based transit matrix against RavKav matrices (§3.5, §5.2) — A, ½ day
 R² and slope (through the origin) at super-zone and sub-area level, CR > 0.6, between the calibrated bus layer
@@ -264,6 +267,7 @@ the rebalance sizes. **Data:** notebook logs and `three_mode_2022/growth_factors
 |---|---|---|---|
 | 0 | T0 metrics module | none | ½ day |
 | 1 (data in hand, no pull beyond LFS) | T4, T5, T7, T8, T12, T14, T15, T17 | LFS pulls: `trips_ths_2017.xlsx`, cellular matrix, RavKav 2025 rail | ≈ 4 days |
+| 1b (approved extension X1) | PM peak (16:00–19:00) and midday (10:00–14:00) survey matrices; repeat T7, T8, T12, T14, T15, T17 for the two periods | steps 15–16 rerun with other windows; RavKav hourly boardings (in hand) | ≈ 1½ days + ≈ 1 day for the repeats |
 | 2 (consistency, descriptive) | T1, T2, T3, T6, T9, T10, T16, T19 | LFS: `HHfinal.csv`, `PersonsFin2.csv`, Metronit 2025 | ≈ 3 days |
 | 3 (needs an upstream step) | T11 | step 42 (AON); Emme links from LFS | 1–2 days |
 | 4 (needs data not in hand) | T13, T18, CBS parts of T2/T3, rail times of T17, Metronit link loads of T16 | Google key; Operator 22 AVL data; CBS tables; Israel Railways times; step 41 | as the inputs arrive |
@@ -305,19 +309,22 @@ criteria test reproduction of the base year, not response to the LRT. Section 10
 
 ## 7. Extensions to consider (not in the selected list)
 
-* **X1. PM peak and midday survey matrices.** The trips file covers the whole day; rerunning step 15–16 with the
+* **X1. PM peak and midday survey matrices (approved, D3).** The trips file covers the whole day; rerunning step 15–16 with the
   16:00–19:00 and 10:00–14:00 windows would give the guideline's three periods for T7, T8, T11, T12, T14, T15, T17.
   About 1½ days plus review; the calibration needs the RavKav hourly boardings (available).
 * **X2. External-trip segment** (the 5 % set aside), which would make T5's external row and the guideline's belt checks
   possible; listed as open in CORRIDOR_DEMAND_TASKS B2.
 * **X3. Sensitivity tests** the guideline defers to a separate document (factorial uncertainty experiment, handover C8).
 
-## 8. Questions for the steering group
+## 8. Decisions (4 October 2026) and what is still open
 
-* **Q1.** Is the guideline to be applied in full spirit to a survey-based matrix + capture model, or is the agreed
-  scope the selection above? (The selection assumes the latter.)
-* **Q2.** `migzar` 1–5: which codes are Jewish non-Haredi, Haredi, Arab? (Used: 4–5 Arab, 1–3 the rest.)
-* **Q3.** Which count years count as 2022 ± ? (Proposed: 2021–2023 primary.)
-* **Q4.** The intra-zonal criterion "< 5 %": of what quantity?
-* **Q5.** Can the Operator 22 AVL data set used for the travel-time function be shared for the hold-out (T18)?
-* **Q6.** Is X1 (PM and midday matrices) wanted, so the three-period reporting can be met?
+* **D1. Scope.** Accepted: the guideline is applied to a survey-based matrix + capture model through the selection above.
+* **D2. Sector coding.** `migzar` is **not** the sector variable. The dictionary has no entry for it, and its values are area strata:
+  1–3 cover Jewish areas (123 Arab households sit there) and 4–5 are Arab localities (1,466 of 1,497 households are Arab).
+  The household-level sector is `HHTYPE`. Mapping used: **Arab = `arab`; Haredi = `orto`; Jewish non-Haredi = `secular` +
+  `religious` + `other`.** Step 33 used `migzar` 4–5 as "Arab-sector"; that remains a locality proxy and the
+  validation sheets will carry both versions.
+* **D3. PM peak and midday matrices (X1).** Approved: wave 1b.
+* **D4. Count years.** 2021–2023 primary; 2017–2023 as the sensitivity.
+* **D4b. Intra-zonal criterion.** "< 5 %" is the share of trips that start and end inside the same TAZ (T6).
+* **Open: Q5.** Can the Operator 22 AVL data used for the travel-time function be shared for the hold-out (T18)? Until then T18 stays deferred.
