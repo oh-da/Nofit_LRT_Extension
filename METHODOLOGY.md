@@ -73,6 +73,7 @@ notes saying which of their conclusions are overtaken.
 | Observed bus in-vehicle time (trips routed over the May 2026 link speeds) ÷ scheduled | per trip 1.09 (Metronit 0.87); hops < 500 m 1.00, > 2 km 1.42 — the link speeds include dwell, the long arterial hops run slower than the timetable; trunk pairs 12.7 vs 10.4 min demand-weighted | §6ab |
 | Complete skims, trunk pairs, trip-weighted GC (generalized minutes): car / bus / Metronit (its 72 pairs) / LRT underground / LRT ground | 14.5 / 27.4 / 23.4 / 43.9 / 51.5 | §6ac |
 | Complete skims, all 600 off-diagonal pairs, trip-weighted GC: car / bus / Metronit (278 pairs, 68 % of transit trips) / LRT underground / LRT ground | 19.5 / 37.6 / 30.6 / 62.8 / 68.0 (LRT off the line by feeder, Metronit feeder with a free transfer) | §6ac |
+| LRT capture at TAZ level (174 TAZs), underground central, 06:00–09:00 | 6,963 on the step-44 TAZ bus skim (× 1.64 the area level's 4,254, the caveat-26 effect); 4,226 on the area bus components with TAZ walks (0.99); regression check 3,970 (0.93: induced trips 130 vs 414, caveat 27); area level stays central | §6ao |
 | Car time 2017/18 survey (door-to-door) vs May 2026 network (07:00 speeds + 3 min terminal), trunk pairs trip-weighted / all 600 pairs | 14.4 vs 13.0 min (0.90) / 16.9 vs 16.1 (0.95); by distance 1.00 (< 3 km) … 0.83 (> 20 km) — no 2026 uplift; capture unchanged under the 2026 skim (the pivot cancels the car level) | §6am, §6ac addendum |
 | 2022 AM off-diagonal trips, 25 areas: car / transit (bus + rail) / taxi | 56,445 / 14,133 (share 0.200) / 720 — (13,778 with the OnBoard prior; 11,664 / 6,982 before the code correction) | §6ac |
 | Cost sensitivity λ from the 2022 cross-section (binary logit, transit share vs `GC_bus − GC_car`, 597 pairs / 70,200 trips) | wrong sign (−0.010, ρ² 0.002); with distance-band constants +0.008 (ρ² 0.027) — not identifiable; λ assumed 0.03 (range 0.02–0.05), λ_T = 2λ; person-level estimate in §6ae | §6ac |
@@ -406,6 +407,20 @@ traveller from a given TAZ can combine. The area skims are not replaced (the cap
 pivot on the transit-side *change*, and both LRT and bus would carry the same access
 correction); the TAZ-level skims are the input task C3 / step 39 needs, and the gap is caveat 26.
 
+**Update, 5 October 2026 (step 39 — TAZ-level LRT capture on the TAZ-level skims, task C3).**
+Step 31's pivot on the 174 corridor TAZs (§6ao, `LRT_capture_TAZ.ipynb`): bus from step 44's
+TAZ skim, LRT from the area skim with the TAZ's own station and stop walks, the TAZ pair's
+share smoothed towards the area pair's. On the step-44 bus skim the underground central case
+gives **6,963 LRT trips against 4,254** at the area level (× 1.64; ground 5,811, design
+7,726), the rise being caveat 26 — the bus priced at what a TAZ traveller faces while the LRT
+keeps the area skim's in-vehicle time and feeder leg. On the hand-over's own construction
+(area bus components + TAZ walks) the result is **4,226** (0.99), with the expected access
+gradient (capture rate 0.42 within 500 m of a station, 0.23 beyond 1.5 km) netting out over
+the areas. The regression check closes to 7 %, not 1 %: the trips from the bus reproduce the
+area result exactly, the trips induced from the car fall from 414 to 130 because the TAZ-pair
+shares are more dispersed (caveat 27). The area-level 4,254 stays the central case; a
+consistent TAZ run needs the feeder leg and the LRT in-vehicle time at TAZ level.
+
 Every published product, what it was built from, and its status:
 
 | Product (`Output/…`) | Built by | Base / inputs | Geography | Modes | Vintage | Status |
@@ -444,6 +459,7 @@ Every published product, what it was built from, and its status:
 | `skims/car_network/*`, `skims/car_network/forecast/*` | steps 26 + 31 + 32, `CAR_SOURCE='network'` / `GC_SOURCE_DIR` / `SK_DIR` | same as `gc/*`, `skims/*`, `skims/forecast/*`, car IVT = step-37 time + 3 min | 25 V2 areas, 9 trunk links | as `skims/*` | 2022 (flows), May 2026 (bus and car), planned (LRT) | **alternative scenario** (task C1 / E5) — capture identical to the central case (the pivot cancels the car level) |
 | `mode_choice/car_network/*` | step 33, `SK_DIR=Output/skims/car_network` | `Input/THS_2017-2018/` trips, person and household tables × the step-31 skims on the 2026 car time | 25 V2 areas, person-level rows | car vs transit — λ estimates by specification and segment on the 2026 car skim | 2017/18 (survey), May 2026 (skims, car and bus) | **alternative estimate** — λ 0.040 (M1) vs 0.035; choice-rider λ still not identified |
 | `los/car_los_taz.csv.gz`, `transit_los_taz.csv.gz`, `los_taz_accessibility.csv`, `*_area_v2.csv`, `los_area_v2_pairs.csv`, `los_area_v2_vs_step31.csv` | step 44 | step 37's car network between TAZ centroids; GTFS AM services (step 29) with step 30's observed times as a line graph; `Zonal_2020` weights | 781 TAZs (609,180 pairs); 25 V2 areas | car: IVT, km, GC; transit (bus + Metronit): GC, IVT, walk, wait, transfers, Metronit share | May 2026 (car), 2 June 2026 (GTFS) | **current** — TAZ-level LOS for the first time; area aggregates beside step 31, not replacing it (caveat 26) |
+| `skims/taz/*`, `skims/taz/bus_area_plus_walk/*` | step 39 | `final_2022` TAZ layers × step 44's TAZ bus skim (or the area bus components + TAZ walks) × step 31's LRT area skims with TAZ station walks | 174 corridor TAZs (27,836 inter-area pairs) | LRT capture by regime × case, from bus / car, by area, trunk link, station, access band | 2022 | **diagnostic** — 6,963 (step-44 bus) / 4,226 (hand-over construction) vs 4,254 area level; not adopted (caveats 26, 27) |
 
 The 25 GS zones (`Input/TAZ_GSnew.csv`) and the 25 retained research areas of the
 forecast tables are different geographies with the same matrix dimension; files are
@@ -3605,6 +3621,68 @@ trips. The chain's area skims are not replaced: the capture pivot cancels the ca
 (caveat 25) and the transit-side gap above is a finding for task C3, not a correction applied
 here (caveat 26).
 
+## 6ao. Step 39 — TAZ-level LRT capture on the 174 corridor TAZs, on the TAZ-level skims (`LRT_capture_TAZ.ipynb`, task C3 / A2 / E6)
+
+**Purpose.** Step 31's pivot on the 174 V2 TAZs instead of the 25 areas (hand-over C3), because
+the logit is nonlinear in access time and averaging the walk over an area before applying it
+biases the result; run on the TAZ-level skims of step 44 (§6an).
+
+**Method.** *Costs per TAZ pair.* Bus: step 44's TAZ transit skim, the best bus / Metronit path
+from the TAZ centroid with its own walk, wait and transfers (`BUS_TAZ_SOURCE='los'`, default);
+the hand-over's construction — the area pair's bus in-vehicle time, wait and transfers with
+2 × the TAZ's own nearest-stop walks — as the alternative (`'area_plus_walk'`). LRT per
+scenario: step 31's area skim (in-vehicle time, wait, transfer penalties, feeder composition,
+gateways) with the two side walks replaced at TAZ level — the TAZ's walk to its nearest station
+where that end is on the line (`lrt_access_taz_v2.csv`), the TAZ's walk to its nearest bus stop
+where that end reaches the LRT by a feeder (checked: the area skim's walk is exactly the sum of
+its two side walks). Car: step 44's TAZ skim, for the record. *Universe.* The 27,836 inter-area
+TAZ pairs (the area diagonal is not skimmed for the LRT at either level); their 2022 trips
+(`final_2022`) reproduce the area flows exactly (car 56,445, transit 14,133). *Pivot.* Step 31's
+formulas and constants copied: the TAZ pair's observed transit share EB-smoothed towards the
+area pair's share (k = 20), `P_LRT|T`, the nest logsum gain, the incremental car → transit
+shift; three regimes × five λ / premium cases. *Back up.* Sums to areas, trunk links by the area
+pair's gateways (step 31's rule), boardings by gateway area and by the on-line origin TAZ's
+nearest station, capture rate by the origin TAZ's station-access band.
+
+**Results.** On the trunk TAZ pairs, transit-trip-weighted, the bus costs 41.7 generalized
+minutes on step 44's path against 30.7 in the area skim; the LRT 43.2 (underground) against
+46.6 (the transit riders' TAZs walk less than the area's population-weighted average). *On the
+step-44 bus skim*: underground central **6,963 LRT trips 06:00–09:00** (6,496 from the bus,
+466 from the car) against **4,254** at the area level, × 1.64; ground 5,811 vs 3,206; design
+7,726 vs 5,095; trunk `P_LRT|T` 0.55 vs 0.35; busiest link Namal-Giborim → Hamifrats (down)
+2,662 vs 1,673; boardings led by S12 (418), S10 (358), S02 (250). Capture rate by the origin
+TAZ's station access 0.57 / 0.56 / 0.59 / 0.44 (< 500 / 500–1,000 / 1,000–1,500 / > 1,500 m),
+0.40 off the line — no gradient, the bus's access cost growing with the same distance. The rise
+is the caveat-26 effect: the bus alternative priced at what a TAZ traveller faces while the LRT
+keeps the area skim's in-vehicle time and, for the 110 off-line TAZs, the area skim's optimistic
+bus feeder leg — the off-line capture rate (0.40 against 0.23 under the alternative) is where
+that asymmetry bites. *On the hand-over's construction*: underground central **4,226** against
+4,254 (0.99), ground 3,280 (1.02), design 4,924 (0.97), 0.91–1.12 across the cases; the
+expected access gradient appears (0.42 / 0.34 / 0.32 / 0.23 by band, 0.23 off the line) and
+nets out over the areas; busiest link 1,644 vs 1,673. *Regression check* (every TAZ pair given
+its area pair's skims): 3,970 / 3,050 / 4,668 (0.93 / 0.95 / 0.92), not the 1 % the hand-over
+set — the trips from the bus reproduce exactly (3,841 / 2,972 / 4,481), the trips induced from
+the car fall from 414 / 234 / 614 to 130 / 77 / 187, because the incremental shift is
+proportional to S·(1 − S) and the TAZ pairs' allocated shares are far more dispersed than the
+area pair's: the induced component is a property of the level the pivot runs at, the area's
+414 its upper reading (caveat 27). The no-build check holds exactly.
+
+**Outputs.** `Output/skims/taz/` (the alternative under `bus_area_plus_walk/`):
+`lrt_capture_scenarios_taz.csv`, `lrt_trips_2022_taz_{sc}_central.csv`, `lrt_share_of_transit_taz_{sc}_central.csv`,
+`transit_share_2022_pivot_taz.csv`, `taz_access_table.csv`, `lrt_trips_2022_area_from_taz_{sc}_central.csv`,
+`lrt_trips_by_area_taz_vs_area.csv`, `taz_vs_area_capture_comparison.csv`, `trunk_link_flows_taz.csv`,
+`lrt_boardings_by_station_area_taz.csv`, `lrt_boardings_by_station_taz.csv`, `lrt_capture_by_access_band.csv`,
+`regression_check_area_skims_on_taz.csv`; figures `lrt_capture_taz_vs_area.png`, `_bus_area_plus_walk.png`.
+
+**Limits.** The LRT's in-vehicle time, wait and feeder composition stay the area pair's; only
+the side walks are at TAZ level, straight-line from the polygon centroid. The two bus
+constructions bracket the answer and neither is clean: the step-44 path is consistent on the
+on-line pairs and inconsistent on the feeder pairs; the hand-over's construction carries the
+area skim's optimism on both sides. A consistent run needs the feeder leg routed at TAZ level
+on the step-44 graph (origin TAZ → gateway station) and the LRT's in-vehicle time from the
+TAZ's own nearest station — the next piece of C3, after C2's walking network. The central
+case stays the area-level 4,254; the TAZ runs are reported beside it, not adopted.
+
 ## 7. Output inventory (`Output/`)
 
 *Layout note (21 September 2026).* The products of steps 1–4 (the 2018 activities-file chain, listed first below with bare file names) now live under `Output/historical/ths2018/`; every other path is as written. Notebooks live under `notebooks/current/`, `notebooks/diagnostics/` and `notebooks/historical/` and anchor their working directory to the repository root, so the `Input/…` and `Output/…` paths in this document are unchanged.
@@ -3670,6 +3748,7 @@ here (caveat 26).
 | `mode_choice/car_network/*` | as `mode_choice/*` | Step 33 with `SK_DIR=Output/skims/car_network` | The person-level logits re-estimated with the 2026 car time in the car generalized cost: λ 0.040 (M1), 0.048 / 0.060 / 0.042 (M1b / M3 / M1u), choice riders 0.011 not identified (§6ae addendum) |
 | `los/car_los_taz.csv.gz`, `transit_los_taz.csv.gz` | 609,180 / 608,400 rows | Step 44 | Every reachable TAZ pair: car kerb-to-kerb time, path km, GC (+ 3 min); transit GC, IVT, walk, wait, transfers, boardings, Metronit IVT, walk-only flag |
 | `los/los_taz_accessibility.csv`; `los/{car_ivt,car_gc,car_km,transit_gc,transit_ivt,transit_walk,transit_wait,transit_transfers,transit_brt_ivt}_area_v2.csv`, `transit_direct_share_area_v2.csv`, `taz_pairs_reachable_area_v2.csv`; `los_area_v2_pairs.csv`, `los_area_v2_vs_step31.csv` | 781 rows; 25 × 25 (× 11); 600 rows; 18 rows | Step 44 | Per-TAZ accessibility (median GC to the corridor TAZs, car and transit, their ratio); the population × employment aggregates to the 25 areas; the pair-by-pair and summary comparison with steps 31 and 37 |
+| `skims/taz/lrt_capture_scenarios_taz.csv`, `taz_vs_area_capture_comparison.csv`, `lrt_trips_2022_taz_{sc}_central.csv`, `lrt_share_of_transit_taz_{sc}_central.csv`, `transit_share_2022_pivot_taz.csv`, `taz_access_table.csv`, `lrt_trips_2022_area_from_taz_{sc}_central.csv`, `lrt_trips_by_area_taz_vs_area.csv`, `trunk_link_flows_taz.csv`, `lrt_boardings_by_station_area_taz.csv`, `lrt_boardings_by_station_taz.csv`, `lrt_capture_by_access_band.csv`, `regression_check_area_skims_on_taz.csv` (and the same under `bus_area_plus_walk/`) | 15 rows; 15; 174 × 174 (× 3 + 3); 174 rows; 25 × 25; 75 rows; 18; 10; stations; 15; 3 | Step 39 | The TAZ-level capture: scenario × case totals and the comparison with step 31; TAZ trip and share matrices; the pivot's shares; the TAZ access table; sums to areas, links, gateway areas and stations; the capture rate by access band; the regression check |
 | `figures/` | — | Steps 1b–3 | Scatter plots, CV curves, λ curves, R_AB heatmap |
 
 All matrices are indexed by origin zone (rows) × destination zone (columns). Probability
@@ -3862,8 +3941,20 @@ Added 23 September 2026 (step 33):
     LRT is added, and the LRT's own area skim carries the same kind of access averaging — but
     the bus-versus-LRT comparison within the nest (`P_LRT|T`) is sensitive to it, and the
     direction is not obvious: the LRT's station access is already TAZ-weighted (step 25), the
-    bus's is not. Task C3 / step 39 (the TAZ-level capture) is where this is resolved, with
-    `Output/los/` as its input.
+    bus's is not. Step 39 (§6ao) ran the TAZ-level capture on `Output/los/`: with the bus at
+    the TAZ-routed cost and the LRT on the area skim the capture rises × 1.64 (6,963), with the
+    bus on the area components plus TAZ walks it stays (4,226) — the gap is the asymmetry, and
+    closing it needs the LRT's feeder leg and in-vehicle time at TAZ level too.
+
+27. **The trips the pivot induces from the car depend on the level it is run at** (§6ao, step
+    39). With every TAZ pair given its area pair's skims, the TAZ-level pivot returns the area
+    result's trips from the bus exactly but only 130 of its 414 induced trips (underground
+    central; 77 of 234 ground, 187 of 614 design): the incremental shift is proportional to
+    S·(1 − S) of the pair's smoothed transit share, and the TAZ pairs' shares — allocations of
+    survey trips to TAZs — are far more dispersed than the area pair's. The induced component
+    is thus not a property of the demand alone but of the aggregation the pivot is applied at;
+    the area level's 414 is its upper reading, and any TAZ-level capture adopted later should
+    state which level its induced trips come from.
 
 ## 8b. Related work — PCA-based analysis and structural comparison of OD matrices
 
@@ -3985,6 +4076,9 @@ SK_DIR=Output/skims/car_network jupyter nbconvert --to notebook --execute --outp
 SK_DIR=Output/skims/car_network jupyter nbconvert --to notebook --execute --output-dir /tmp/car_network notebooks/current/Mode_choice_person_level.ipynb   # step 33 on the 2026 car skim (needs the THS person, household and activities files; ≈ 1 minute)
 # level of service at TAZ level and aggregated to the V2 areas (step 44; needs step 43's gpkg, the bus street network geometry, step 29's GTFS intermediates, step 30's segments, Input/Corridor_TAZ_Agg_V2.xlsx and the committed step-31 / 37 skims; ≈ 1.5 minutes)
 jupyter nbconvert --to notebook --execute --inplace notebooks/current/LOS_skims_TAZ_and_V2.ipynb
+# TAZ-level LRT capture (step 39; needs step 44's Output/los/, the committed step-31 skims and final_2022 layers, Input/Corridor_TAZ_Agg_V2.xlsx; seconds); the hand-over's bus construction as the alternative
+jupyter nbconvert --to notebook --execute --inplace notebooks/current/LRT_capture_TAZ.ipynb
+BUS_TAZ_SOURCE=area_plus_walk jupyter nbconvert --to notebook --execute --output-dir /tmp/taz_apw notebooks/current/LRT_capture_TAZ.ipynb
 git checkout -- Output/figures/gc_first_fill_trunk_v2.png Output/figures/gc_bus_gtfs_vs_survey.png Output/figures/skims_logit_car_vs_transit.png Output/figures/skims_trunk_link_flows_bus_vs_lrt.png Output/figures/lrt_capture_forecast_2040_2050.png   # the alternative run redraws the default figures
 
 # regression test of the hybrid branch (committed outputs only)

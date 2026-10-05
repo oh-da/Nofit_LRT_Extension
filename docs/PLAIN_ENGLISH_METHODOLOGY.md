@@ -4282,6 +4282,25 @@ transit cost when the LRT arrives, not on its level), but it is exactly the kind
 the plan's zone-level capture step (C3) is meant to remove, and the zone-level skims are now
 there for it.
 
+### 5.8g The ridership estimate zone by zone (step 39)
+
+The plan had asked for the ridership estimate to be run on the 174 corridor zones rather than
+the 25 areas, because walking distance to a station matters more to someone 300 m away than
+the area's average says, and the choice model is not linear in it. With the zone-level costs
+of 5.8f this was done. Two versions were run. In the first, the bus alternative is costed the
+way a traveller from each zone actually experiences it (5.8f) while the LRT keeps the
+area-level running time and feeder legs with the zone's own station walk: the estimate rises
+to about 6,960 morning LRT trips from 4,250. That rise is largely the inconsistency of 5.8f
+coming through — the bus is priced realistically, the LRT's feeder bus leg is not — so it is
+not adopted. In the second, the bus keeps the area costs with only the zone's own stop walk
+changed: the estimate is 4,230, almost unchanged, and the pattern the plan expected appears
+(about 42 % of transit trips within 500 m of a station switch to the LRT, 23 % beyond 1.5 km)
+but averages out across the areas. One more thing came out: the small number of trips the
+model moves from car to transit (about 400 at area level) falls to about 130 at zone level,
+simply because zone-level shares are more extreme and the model has less room to shift them.
+The area-level estimate therefore stays the central figure; a clean zone-level estimate needs
+the LRT's feeder legs and running times at zone level too.
+
 ### 5.9 Where things stand now
 
 The single most current answer to "how many riders will the LRT capture" is **about 4,250

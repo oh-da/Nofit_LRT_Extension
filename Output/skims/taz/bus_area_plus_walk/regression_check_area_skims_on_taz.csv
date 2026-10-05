@@ -1,0 +1,4 @@
+scenario,area level (step 31),TAZ level with the area skims,ratio,from bus — area,from bus — TAZ,from car — area,from car — TAZ
+LRT all underground,4254,3970,0.9333,3841,3841,414,130
+LRT all ground,3206,3050,0.9513,2972,2972,234,77
+LRT design 50 km/h,5095,4668,0.9161,4481,4481,614,187

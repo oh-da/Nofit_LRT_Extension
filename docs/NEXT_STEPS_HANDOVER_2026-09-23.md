@@ -281,7 +281,14 @@ to be taken from the area skim, and the bus side can be taken at TAZ level too r
 "area IVT + TAZ walk". Note caveat 26: aggregated back to the areas the TAZ-level transit GC is
 1.5 × step 31's, the gap being walk and wait, so a TAZ run on the step-31 transit components
 plus a TAZ walk will not reproduce the TAZ-routed cost; decide which bus skim the pivot uses
-and say so.
+and say so. **Run the same day** (`LRT_capture_TAZ.ipynb`, METHODOLOGY §6ao) under both:
+on the step-44 bus skim 6,963 underground central vs 4,254 (the caveat-26 asymmetry, the LRT's
+feeder leg still the area's); on this section's construction 4,226 (0.99) with the access
+gradient 0.42 → 0.23 netting out. The regression check closes to 7 %, not 1 %: the bus-drawn
+trips reproduce exactly, the car-induced trips fall from 414 to 130 (caveat 27). Still open
+for a consistent TAZ run: the feeder leg routed on the step-44 graph (origin TAZ → gateway
+station) and the LRT in-vehicle time from the TAZ's own nearest station; then C2's walking
+network for both sides.
 
 **Inputs.** 2022 TAZ layers `Output/final_2022/{car,transit}_2022_taz.csv` restricted to the 174
 TAZs of `TazAgg`; the area skims of step 31 (`Output/skims/skim_*_*.csv`) for IVT, wait and

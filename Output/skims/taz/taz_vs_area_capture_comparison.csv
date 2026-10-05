@@ -1,0 +1,16 @@
+scenario,case,LRT trips — area level (step 31),LRT trips — TAZ level,ratio TAZ / area,from bus — area,from bus — TAZ,from car — area,from car — TAZ,trunk pairs — area,trunk pairs — TAZ,P_LRT|T trunk — area,P_LRT|T trunk — TAZ
+LRT all underground,"central (λ 0.03, λ_T 0.06, premium 5)",4254,6963,1.637,3841,6496,414,466,1767,2695,0.345,0.547
+LRT all underground,"low λ (0.02 / 0.03, premium 5)",6031,7341,1.217,5113,6708,917,634,2315,2635,0.419,0.525
+LRT all underground,"high λ (0.05 / 0.10, premium 5)",3166,6981,2.205,2890,6379,276,601,1298,2851,0.26,0.57
+LRT all underground,"no premium (λ central, premium 0)",3410,5996,1.758,3144,5668,265,328,1406,2318,0.281,0.477
+LRT all underground,premium 10 (λ central),5236,7982,1.524,4610,7335,627,647,2187,3083,0.414,0.615
+LRT all ground,"central (λ 0.03, λ_T 0.06, premium 5)",3206,5811,1.813,2972,5493,234,319,1203,2093,0.243,0.431
+LRT all ground,"low λ (0.02 / 0.03, premium 5)",5272,6652,1.262,4568,6134,704,518,1922,2299,0.359,0.463
+LRT all ground,"high λ (0.05 / 0.10, premium 5)",1952,5363,2.748,1843,5008,109,356,663,1946,0.138,0.398
+LRT all ground,"no premium (λ central, premium 0)",2528,4912,1.943,2383,4694,145,218,938,1747,0.193,0.364
+LRT all ground,premium 10 (λ central),4017,6784,1.689,3650,6329,367,455,1523,2464,0.301,0.5
+LRT design 50 km/h,"central (λ 0.03, λ_T 0.06, premium 5)",5095,7726,1.516,4481,7127,614,599,2202,3055,0.415,0.613
+LRT design 50 km/h,"low λ (0.02 / 0.03, premium 5)",6568,7796,1.187,5477,7073,1091,723,2576,2836,0.456,0.561
+LRT design 50 km/h,"high λ (0.05 / 0.10, premium 5)",4350,8072,1.856,3797,7224,553,848,1940,3396,0.366,0.663
+LRT design 50 km/h,"no premium (λ central, premium 0)",4144,6739,1.626,3736,6307,407,432,1785,2675,0.346,0.545
+LRT design 50 km/h,premium 10 (λ central),6176,8752,1.417,5279,7941,897,812,2674,3437,0.487,0.677

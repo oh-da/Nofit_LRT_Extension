@@ -1,0 +1,76 @@
+area,name,scenario,lrt_origins_area_level,lrt_origins_taz_level,lrt_destinations_area_level,lrt_destinations_taz_level
+201,TiratCarmel,LRT all underground,428.0,412.0,220.0,198.0
+202,Matam-NeotPeres,LRT all underground,105.0,115.0,641.0,622.0
+203,HofCarmel-NeveDavid,LRT all underground,128.0,138.0,100.0,95.0
+204,Hecht-Shprintzak,LRT all underground,340.0,329.0,106.0,104.0
+205,EinHayam,LRT all underground,112.0,115.0,24.0,24.0
+206,BatGalim-KiryatEliezer,LRT all underground,386.0,361.0,606.0,599.0
+207,Hamoshava,LRT all underground,138.0,142.0,235.0,240.0
+208,LowerCity,LRT all underground,134.0,121.0,773.0,727.0
+209,Namal-Giborim,LRT all underground,152.0,157.0,252.0,281.0
+210,Hamifrats,LRT all underground,181.0,212.0,379.0,444.0
+211,Bazan-Hutsot,LRT all underground,37.0,34.0,167.0,161.0
+212,TsometKiryatAta,LRT all underground,51.0,49.0,183.0,174.0
+213,KiryatAta North,LRT all underground,89.0,91.0,55.0,54.0
+214,KiryatAta North-East,LRT all underground,64.0,62.0,10.0,10.0
+215,Shefaram,LRT all underground,68.0,73.0,2.0,2.0
+216,Hamovil,LRT all underground,0.0,0.0,0.0,1.0
+217,Nazareth,LRT all underground,187.0,186.0,17.0,16.0
+101,TsurShalom,LRT all underground,178.0,173.0,52.0,52.0
+102,Kiryon,LRT all underground,177.0,178.0,95.0,95.0
+103,KiryatBialik Center,LRT all underground,332.0,327.0,78.0,77.0
+104,KiryatHaim,LRT all underground,321.0,315.0,167.0,160.0
+301,SavyoneyYam,LRT all underground,110.0,105.0,8.0,8.0
+302,KiryatYam A,LRT all underground,98.0,98.0,8.0,8.0
+303,KiryatYam B+C,LRT all underground,240.0,240.0,49.0,49.0
+304,KiryatHaim West,LRT all underground,198.0,192.0,27.0,27.0
+201,TiratCarmel,LRT all ground,266.0,278.0,143.0,136.0
+202,Matam-NeotPeres,LRT all ground,64.0,75.0,434.0,434.0
+203,HofCarmel-NeveDavid,LRT all ground,98.0,108.0,80.0,77.0
+204,Hecht-Shprintzak,LRT all ground,255.0,251.0,80.0,80.0
+205,EinHayam,LRT all ground,80.0,83.0,16.0,17.0
+206,BatGalim-KiryatEliezer,LRT all ground,274.0,269.0,417.0,430.0
+207,Hamoshava,LRT all ground,111.0,117.0,192.0,197.0
+208,LowerCity,LRT all ground,103.0,95.0,606.0,589.0
+209,Namal-Giborim,LRT all ground,114.0,122.0,194.0,229.0
+210,Hamifrats,LRT all ground,112.0,141.0,279.0,345.0
+211,Bazan-Hutsot,LRT all ground,27.0,27.0,140.0,136.0
+212,TsometKiryatAta,LRT all ground,39.0,39.0,152.0,146.0
+213,KiryatAta North,LRT all ground,74.0,76.0,44.0,45.0
+214,KiryatAta North-East,LRT all ground,51.0,50.0,8.0,8.0
+215,Shefaram,LRT all ground,57.0,62.0,1.0,1.0
+216,Hamovil,LRT all ground,0.0,0.0,0.0,1.0
+217,Nazareth,LRT all ground,166.0,166.0,13.0,12.0
+101,TsurShalom,LRT all ground,142.0,141.0,44.0,43.0
+102,Kiryon,LRT all ground,141.0,145.0,79.0,79.0
+103,KiryatBialik Center,LRT all ground,266.0,267.0,65.0,64.0
+104,KiryatHaim,LRT all ground,253.0,254.0,139.0,134.0
+301,SavyoneyYam,LRT all ground,90.0,88.0,7.0,6.0
+302,KiryatYam A,LRT all ground,80.0,82.0,7.0,7.0
+303,KiryatYam B+C,LRT all ground,190.0,194.0,41.0,41.0
+304,KiryatHaim West,LRT all ground,152.0,150.0,23.0,23.0
+201,TiratCarmel,LRT design 50 km/h,560.0,501.0,282.0,242.0
+202,Matam-NeotPeres,LRT design 50 km/h,140.0,147.0,850.0,799.0
+203,HofCarmel-NeveDavid,LRT design 50 km/h,149.0,157.0,115.0,107.0
+204,Hecht-Shprintzak,LRT design 50 km/h,408.0,389.0,128.0,124.0
+205,EinHayam,LRT design 50 km/h,136.0,138.0,29.0,28.0
+206,BatGalim-KiryatEliezer,LRT design 50 km/h,471.0,425.0,751.0,718.0
+207,Hamoshava,LRT design 50 km/h,158.0,160.0,263.0,266.0
+208,LowerCity,LRT design 50 km/h,157.0,139.0,891.0,817.0
+209,Namal-Giborim,LRT design 50 km/h,180.0,180.0,294.0,315.0
+210,Hamifrats,LRT design 50 km/h,235.0,260.0,458.0,508.0
+211,Bazan-Hutsot,LRT design 50 km/h,46.0,41.0,187.0,180.0
+212,TsometKiryatAta,LRT design 50 km/h,62.0,58.0,206.0,196.0
+213,KiryatAta North,LRT design 50 km/h,103.0,104.0,62.0,61.0
+214,KiryatAta North-East,LRT design 50 km/h,77.0,74.0,12.0,12.0
+215,Shefaram,LRT design 50 km/h,76.0,80.0,2.0,2.0
+216,Hamovil,LRT design 50 km/h,0.0,0.0,1.0,1.0
+217,Nazareth,LRT design 50 km/h,201.0,198.0,19.0,17.0
+101,TsurShalom,LRT design 50 km/h,205.0,196.0,58.0,57.0
+102,Kiryon,LRT design 50 km/h,202.0,202.0,106.0,106.0
+103,KiryatBialik Center,LRT design 50 km/h,382.0,371.0,87.0,86.0
+104,KiryatHaim,LRT design 50 km/h,380.0,366.0,188.0,178.0
+301,SavyoneyYam,LRT design 50 km/h,128.0,119.0,9.0,8.0
+302,KiryatYam A,LRT design 50 km/h,111.0,111.0,9.0,9.0
+303,KiryatYam B+C,LRT design 50 km/h,288.0,280.0,56.0,56.0
+304,KiryatHaim West,LRT design 50 km/h,240.0,227.0,31.0,30.0

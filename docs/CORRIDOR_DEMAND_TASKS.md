@@ -42,7 +42,12 @@ Key facts driving the list (2017 trips-file hybrid, `Output/ths2017/study_taz/`)
 - [~] **A2. Trip length / level of service per OD pair** *(first pass 2026-09-22 on the
       25 V2 areas, `GC_data_inventory_and_skims.ipynb`, METHODOLOGY §6x)*
   - [~] Build network skims (walk, car, existing bus, rail, proposed LRT) for the corridor
-        TAZs; replace centroid-distance bands in `Base_mode_shares_2022.ipynb`. *Done at
+        TAZs; replace centroid-distance bands in `Base_mode_shares_2022.ipynb`. *TAZ-level car
+        and transit (bus + Metronit) skims for all 781 TAZs done 2026-10-05 by step 44
+        (`LOS_skims_TAZ_and_V2.ipynb`, §6an, `Output/los/`), and the capture run on them by
+        step 39 (`LRT_capture_TAZ.ipynb`, §6ao): 6,963 vs 4,254 on the step-44 bus skim, 4,226
+        on the area components + TAZ walks — not adopted (caveats 26, 27); the LRT's feeder leg
+        and in-vehicle time at TAZ level are what remain.* *Done at
         area level: car door-to-door from the survey (smoothed), bus fastest-path IVT on the
         May 2026 speed network (lower bound; survey door-to-door is 2.1–2.3 × it), LRT
         station-to-station on `hf_lrt_3` (step 25) with walk access from the TAZs. Open: the
@@ -219,7 +224,10 @@ Key facts driving the list (2017 trips-file hybrid, `Output/ths2017/study_taz/`)
 - [ ] **E6. LRT access model** — replace the centroid-to-nearest-station walk with a walking
       network, feeder-bus access from the GTFS (bus to the nearest station + transfer) and
       park-and-ride where the station plan allows; this is what the generalized-cost
-      comparison now turns on.
+      comparison now turns on. *Partly addressed 2026-10-05: step 39 (§6ao) applies the
+      TAZ's own station walk per TAZ (the gradient 0.42 within 500 m → 0.23 beyond 1.5 km
+      nets out over the areas); feeder access by bus is still the area-level leg, and the
+      walking network (C2) is still open.*
 - [~] **E3. Bus level of service from GTFS** — *done 2026-09-22 for the direct services*
       (`GTFS_bus_LOS_TAZ.ipynb`, METHODOLOGY §6aa; feed of 22 May 2026): per-TAZ LOS for bus
       and for the Metronit (codes 83001, 67002, 67003, 62004, 52005 — the supplied 83002–83005
