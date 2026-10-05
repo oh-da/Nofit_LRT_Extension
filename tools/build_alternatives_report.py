@@ -133,6 +133,7 @@ for f, cap in [('map_shift_sources_AM_BU_2040.png', 'LRT trips drawn from the ca
     pth = f'{FIG}/alternatives/{f}'
     if os.path.exists(pth): doc.add_picture(pth, width=Cm(24)); doc.add_paragraph(cap).alignment = WD_ALIGN_PARAGRAPH.CENTER
 doc.add_heading('Limits', 1)
+doc.add_paragraph('Level of service: every scenario-year runs on the May 2026 car and bus times while the demand grows by 30–60 % (the do-minimum-network convention). The slower-bus sensitivity (buses in mixed traffic × 1.10 in 2040 and × 1.20 in 2050, Metronit and LRT unchanged; Output/alternatives_bus_slow/) adds +2 % to the LRT trips in 2040 and +4–5 % in 2050; a slower car cannot register in the pivot (caveat 25). See the comprehensive report, section 4.6.', style='List Bullet')
 doc.add_paragraph('The main route\'s at-grade running, headway and through-running are assumed; its demand moves with any feeder restructuring in Kiryat Ata and Nazareth. The forecast PM sets are grown at the AM rates. The LRT premium over the Metronit is an estimate, not an estimated parameter. '
                   'The pivot\'s induced car trips depend on the aggregation level (METHODOLOGY caveat 27). No capacity, no route choice against parallel bus services, no fare, no park-and-ride. The level of service is a single best path per TAZ pair at the line\'s own headway (caveat 26).')
 os.makedirs('reports', exist_ok=True); doc.save('reports/LRT_Alternatives_Demand_Report.docx'); print('report written')

@@ -3962,7 +3962,13 @@ from the car +7–16 % (AM 353 → 376 … 1,311 → 1,446), the trips using the
 gain is small because the bus in-vehicle time is well under half of the bus generalized cost
 (walk and wait at weight 2, the transfer penalty) and the LRT's own bus feeders slow too. The
 constant-LOS central case is thus conservative for the LRT by a few percent; the comprehensive
-report carries the sensitivity as a column of its demand table and as section 4.6.
+report carries the sensitivity as a column of its demand table and as section 4.6. The same
+revision of the report (5 October 2026) adds section 2.4, the generalized cost in plain terms
+with a worked bus-against-LRT example, and section 2.5, the cost sensitivity λ — what it is,
+why the capture rests on it, why the pair-level fit of §6ac could not identify it, how §6ae
+estimated it at the person level (the table of M1 / M1b / M3 / M4 / M1u and the 2026-skim
+rerun), and why the chain keeps the assumed 0.03 with its range and λ_T = 2λ; the alternatives
+report's limits name the level-of-service convention and the sensitivity.
 
 ## 7. Output inventory (`Output/`)
 
