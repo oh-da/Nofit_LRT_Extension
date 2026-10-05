@@ -22,8 +22,17 @@ xl = pd.ExcelFile('Input/Corridor_TAZ_Agg_V2.xlsx', engine='openpyxl'); names = 
 def srow(p, sc, reg=REG, alt='Main'):
     s = summary[(summary.period == p) & (summary.scenario == sc) & (summary.alternative.str.startswith(alt)) & (summary.regime.str.startswith(REG_LAB[reg]))]
     assert len(s) == 1, (p, sc, reg, alt); return s.iloc[0]
-def loads(p, sc, kind, reg=REG):
-    return pd.read_csv(f'{OUT}/{p}/{sc}/{ALT}_{reg}/{kind}_line_loads.csv')
+# peak-hour factors (tools/peak_hour_factors_periods.py: step 27's method on the AM and PM windows). Every chart is drawn for the peak hour
+# of its period: line loads by the network bus factor of the direction (the LRT and total transit alike, the chain's convention since step 31),
+# totals by the study-area factor of the layer (transit for the LRT and transit quantities, car for the car).
+PHF = pd.read_csv(f'{OUT}/peak_hour_factors.csv'); PHFI = PHF.set_index(['period', 'layer', 'direction'])['PHF3h']
+def phf(p, layer, direction='all'): return float(PHFI[(p, layer, direction)])
+def loads(p, sc, kind, reg=REG, peak=True):
+    l = pd.read_csv(f'{OUT}/{p}/{sc}/{ALT}_{reg}/{kind}_line_loads.csv').copy()
+    if peak: l['dir1_towards_Nazareth_end'] *= phf(p, 'transit', 'up'); l['dir2_towards_TiratCarmel'] *= phf(p, 'transit', 'down')
+    return l
+def peak_busiest(p, sc, reg=REG):
+    l = loads(p, sc, 'lrt', reg); return float(max(l['dir1_towards_Nazareth_end'].max(), l['dir2_towards_TiratCarmel'].max()))
 # ---------------- the shift / demand table ----------------
 def shift_table(p, reg=REG):
     rows = []
@@ -43,7 +52,9 @@ def shift_table(p, reg=REG):
                      'LRT using the extension': r['LRT trips using the extension (at least one segment S01–S24)'],
                      'ext: from car': r['LRT from car using the extension'], 'ext: from BRT': r['LRT from BRT using the extension'], 'ext: from bus': r['LRT from bus using the extension'],
                      'LRT within the extension': r['LRT trips on the extension stations (both ends on S01–S24)'],
-                     'busiest segment (3 h, one direction)': r['busiest segment load (3 h, one direction)']})
+                     'busiest segment (3 h, one direction)': r['busiest segment load (3 h, one direction)'],
+                     'LRT (peak hour)': lrt * phf(p, 'transit'), 'LRT using the extension (peak hour)': r['LRT trips using the extension (at least one segment S01–S24)'] * phf(p, 'transit'),
+                     'busiest segment (peak hour, one direction)': peak_busiest(p, sc, reg)})
     return pd.DataFrame(rows)
 tabs = {(p, reg): shift_table(p, reg) for p in ['AM', 'PM'] for reg in REG_LAB}
 # ---------------- charts ----------------
@@ -63,9 +74,9 @@ def flow_chart(p, kind, fname):
         ax.bar(x - 0.2, l['dir1_towards_Nazareth_end'], 0.4, color='#1f77b4', label='towards Nazareth (S01 → M20)')
         ax.bar(x + 0.2, l['dir2_towards_TiratCarmel'], 0.4, color='#d62728', label='towards Tirat Carmel (M20 → S01)')
         ax.axvline(n_ext - 0.5, color='k', ls='--', lw=0.8); ax.text(n_ext - 0.3, ax.get_ylim()[1] * 0.9 if ax.get_ylim()[1] > 0 else 1, 'extension | main route', fontsize=7, va='top')
-        ax.set_ylabel('passengers / 3 h'); ax.set_title(f'{SCEN_LAB[sc]} — {p}', fontsize=9, loc='left'); ax.grid(axis='y', alpha=0.3)
+        ax.set_ylabel('passengers / peak hour'); ax.set_title(f'{SCEN_LAB[sc]} — {p}', fontsize=9, loc='left'); ax.grid(axis='y', alpha=0.3)
     axes[0].legend(fontsize=8, loc='upper right'); axes[-1].set_xticks(np.arange(len(l))); axes[-1].set_xticklabels(seg_lab, rotation=90, fontsize=6)
-    fig.suptitle(f'{"LRT" if kind == "lrt" else "Total transit"} flow by segment and direction — main route + extension, Prioritized, {p} (three hours)', fontsize=11)
+    fig.suptitle(f'{"LRT" if kind == "lrt" else "Total transit"} flow by segment and direction — main route + extension, Prioritized, {p} peak hour (factors {phf(p, "transit", "up"):.2f} / {phf(p, "transit", "down"):.2f} of the three hours)', fontsize=11)
     fig.tight_layout(); fig.savefig(f'{CFIG}/{fname}', dpi=150); plt.close(fig)
 def flow_chart_compact(p, kind, fname):
     """All four forecast scenarios on one pair of panels (one per direction)."""
@@ -73,9 +84,9 @@ def flow_chart_compact(p, kind, fname):
     for ax, (d, lab) in zip(axes, [('dir1_towards_Nazareth_end', 'towards Nazareth (S01 → M20)'), ('dir2_towards_TiratCarmel', 'towards Tirat Carmel (M20 → S01)')]):
         for i, sc in enumerate(SCEN):
             l = loads(p, sc, kind); x = np.arange(len(l)); ax.bar(x + (i - 1.5) * 0.2, l[d], 0.2, color=cols[sc], label=SCEN_LAB[sc])
-        ax.axvline(n_ext - 0.5, color='k', ls='--', lw=0.8); ax.set_ylabel('passengers / 3 h'); ax.set_title(lab, fontsize=9, loc='left'); ax.grid(axis='y', alpha=0.3)
+        ax.axvline(n_ext - 0.5, color='k', ls='--', lw=0.8); ax.set_ylabel('passengers / peak hour'); ax.set_title(lab, fontsize=9, loc='left'); ax.grid(axis='y', alpha=0.3)
     axes[0].legend(fontsize=8, ncol=4); axes[-1].set_xticks(np.arange(len(l))); axes[-1].set_xticklabels(seg_lab, rotation=90, fontsize=6)
-    fig.suptitle(f'{"LRT" if kind == "lrt" else "Total transit"} flow by segment — the four scenarios, main route + extension, Prioritized, {p} (three hours)', fontsize=11)
+    fig.suptitle(f'{"LRT" if kind == "lrt" else "Total transit"} flow by segment — the four scenarios, main route + extension, Prioritized, {p} peak hour (factors {phf(p, "transit", "up"):.2f} / {phf(p, "transit", "down"):.2f} of the three hours)', fontsize=11)
     fig.tight_layout(); fig.savefig(f'{CFIG}/{fname}', dpi=150); plt.close(fig)
 for p in ['AM', 'PM']:
     flow_chart(p, 'lrt', f'flow_lrt_{p}.png'); flow_chart(p, 'transit', f'flow_transit_{p}.png')
@@ -96,23 +107,24 @@ mode_split_chart('mode_split.png')
 def demand_bars(fname):
     fig, axes = plt.subplots(1, 2, figsize=(13, 5))
     for ax, p in zip(axes, ['AM', 'PM']):
-        t = tabs[(p, REG)]; x = np.arange(len(t)); w = 0.2
-        ax.bar(x - 1.5 * w, t['transit before'], w, color='#c7c7c7', label='transit before (no LRT)')
-        ax.bar(x - 0.5 * w, t['total transit after'], w, color='#1f77b4', label='total transit after')
-        ax.bar(x + 0.5 * w, t['LRT'], w, color='#2ca02c', label='LRT (main + extension)')
-        ax.bar(x + 1.5 * w, t['LRT using the extension'], w, color='#98df8a', label='LRT using the extension')
-        ax.set_xticks(x); ax.set_xticklabels(t['scenario']); ax.set_ylabel('trips / 3 h'); ax.set_title(f'{p} — transit demand on the corridor', fontsize=10); ax.grid(axis='y', alpha=0.3)
+        t = tabs[(p, REG)]; x = np.arange(len(t)); w = 0.2; f = phf(p, 'transit')
+        ax.bar(x - 1.5 * w, t['transit before'] * f, w, color='#c7c7c7', label='transit before (no LRT)')
+        ax.bar(x - 0.5 * w, t['total transit after'] * f, w, color='#1f77b4', label='total transit after')
+        ax.bar(x + 0.5 * w, t['LRT'] * f, w, color='#2ca02c', label='LRT (main + extension)')
+        ax.bar(x + 1.5 * w, t['LRT using the extension'] * f, w, color='#98df8a', label='LRT using the extension')
+        ax.set_xticks(x); ax.set_xticklabels(t['scenario']); ax.set_ylabel('trips / peak hour'); ax.set_title(f'{p} — transit demand on the corridor, peak hour ({f:.2f} of the three hours)', fontsize=10); ax.grid(axis='y', alpha=0.3)
     axes[0].legend(fontsize=8); fig.tight_layout(); fig.savefig(f'{CFIG}/{fname}', dpi=150); plt.close(fig)
 demand_bars('demand_by_scenario.png')
 def shift_chart(fname):
     fig, axes = plt.subplots(1, 2, figsize=(13, 5))
     for ax, p in zip(axes, ['AM', 'PM']):
-        t = tabs[(p, REG)]; x = np.arange(len(t)); w = 0.35
+        t = tabs[(p, REG)].copy(); x = np.arange(len(t)); w = 0.35; f = phf(p, 'transit')
+        for c in ['car → LRT', 'BRT → LRT', 'bus → LRT', 'ext: from car', 'ext: from BRT', 'ext: from bus']: t[c] = t[c] * f
         ax.bar(x - w / 2, t['car → LRT'], w, color='#7f7f7f', label='from car (whole line)'); ax.bar(x - w / 2, t['BRT → LRT'], w, bottom=t['car → LRT'], color='#1f77b4', label='from BRT (Metronit)')
         ax.bar(x - w / 2, t['bus → LRT'], w, bottom=t['car → LRT'] + t['BRT → LRT'], color='#aec7e8', label='from bus')
         ax.bar(x + w / 2, t['ext: from car'], w, color='#7f7f7f', alpha=0.5, hatch='//', label='… of which using the extension'); ax.bar(x + w / 2, t['ext: from BRT'], w, bottom=t['ext: from car'], color='#1f77b4', alpha=0.5, hatch='//')
         ax.bar(x + w / 2, t['ext: from bus'], w, bottom=t['ext: from car'] + t['ext: from BRT'], color='#aec7e8', alpha=0.5, hatch='//')
-        ax.set_xticks(x); ax.set_xticklabels(t['scenario']); ax.set_ylabel('LRT trips / 3 h'); ax.set_title(f'{p} — where the LRT trips come from', fontsize=10); ax.grid(axis='y', alpha=0.3)
+        ax.set_xticks(x); ax.set_xticklabels(t['scenario']); ax.set_ylabel('LRT trips / peak hour'); ax.set_title(f'{p} — where the LRT trips come from, peak hour ({f:.2f} of the three hours)', fontsize=10); ax.grid(axis='y', alpha=0.3)
     axes[0].legend(fontsize=8); fig.tight_layout(); fig.savefig(f'{CFIG}/{fname}', dpi=150); plt.close(fig)
 shift_chart('shift_sources.png')
 print('charts written')
@@ -248,10 +260,10 @@ fig(f'{FIG}/mode_choice_person_level_by_segment.png', 14, 'Figure 3.6 — λ by 
 H('3.4 The base scenario with the LRT (2022)', 2)
 r22 = srow('AM', '2022'); r22u = srow('AM', '2022', 'unprioritized'); r22p = srow('PM', '2022')
 P(f'With the main route + extension added to the 2022 service, the AM three-hour LRT demand on the corridor market is {r22["LRT"]:,.0f} trips Prioritized ({r22u["LRT"]:,.0f} Unprioritized), {r22["LRT trips using the extension (at least one segment S01–S24)"]:,.0f} of them using the extension; '
-  f'{r22["LRT from car"]:,.0f} come from the car and {r22["LRT from bus/BRT"]:,.0f} from bus and Metronit. The transit share of the corridor market moves from {r22["transit before"]/(r22["car before"]+r22["transit before"])*100:.1f} % to {r22["total transit"]/(r22["car"]+r22["total transit"])*100:.1f} %. The PM figure is {r22p["LRT"]:,.0f} ({r22p["LRT"]/r22["LRT"]*100:.0f} % of the AM).')
+  f'{r22["LRT from car"]:,.0f} come from the car and {r22["LRT from bus/BRT"]:,.0f} from bus and Metronit. The transit share of the corridor market moves from {r22["transit before"]/(r22["car before"]+r22["transit before"])*100:.1f} % to {r22["total transit"]/(r22["car"]+r22["total transit"])*100:.1f} %. The PM figure is {r22p["LRT"]:,.0f} ({r22p["LRT"]/r22["LRT"]*100:.0f} % of the AM). In the peak hour: {r22["LRT"]*phf("AM", "transit"):,.0f} AM and {r22p["LRT"]*phf("PM", "transit"):,.0f} PM (factors {phf("AM", "transit"):.2f} / {phf("PM", "transit"):.2f}).')
 P('The uncertainty experiment (step 40) and the λ / premium ranges of step 31 put the 2022 capture between about 0.75 × and 1.4 × the central value: λ 0.02 → +40 %, λ 0.05 → −25 %; premium 0 → −20 %, premium 10 → +25 %. The regime (running time) is worth about −20 % (Unprioritized against Prioritized), of the same order as the λ range.')
 fig(f'{FIG}/lrt_capture_tornado.png', 14, 'Figure 3.7 — Sensitivity of the 2022 LRT capture to the assumed factors (step 40).')
-fig(f'{FIG}/alternatives/map_line_loads_AM_2022.png', 16, 'Figure 3.8 — LRT line loads and station boardings, 2022 AM, main route + extension, Prioritized (step 45).')
+fig(f'{FIG}/alternatives/map_line_loads_AM_2022.png', 16, 'Figure 3.8 — LRT line loads and station boardings in the peak hour, 2022 AM, main route + extension, Prioritized (step 45).')
 H('3.5 What the model is good for, and what it should not be used for', 2)
 P('Good for:')
 for s_ in ['Sizing the corridor market by mode and locating it (which areas and TAZs, which stations), at the three-hour peak and at the design-hour scale (≈ 1.8 × an average hour).',
@@ -292,6 +304,12 @@ H('4. Results — the 2040 and 2050 scenarios')
 P('All results in this section are for the main route + extension run as one through line (Tirat Carmel – Hamifrats – Nazareth) in the Prioritized regime of the extension, on the corridor market (TAZ pairs of the 174 corridor TAZs in different areas), three-hour periods. '
   'The extension part is reported within that run: trips that ride at least one segment between S01 and S24, and trips with both ends at extension stations. The Unprioritized regime is given as a sensitivity in 4.5. The 2022 row is the base with the LRT added to today\'s service. '
   'Source: Output/alternatives/demand_summary.csv and the per-run folders Output/alternatives/{AM,PM}/{scenario}/main_ext_prioritized/.')
+P('Periods and the peak hour. The matrices are three-hour periods (AM 06:00–09:00, PM 16:00–19:00); the tables give the three-hour totals with the peak-hour values beside them, and every chart and map is drawn for the peak hour. '
+  'The peak-hour factors are the share of the three hours in the busiest sliding 60-minute window of the survey\'s departures (step 27\'s method, run on both windows; Output/alternatives/peak_hour_factors.csv): '
+  'line loads use the network bus factor of the direction (the chain\'s convention for LRT loads since step 31, the LRT and total transit alike); totals use the study-area factor of the layer. '
+  'The observed design-hour factors are lower (RavKav boardings 0.43–0.48, road counts 0.38–0.43 in the AM; caveat 18), so the peak-hour values here are the survey\'s, the upper reading.')
+pf = PHF.copy(); pf['PHF3h'] = pf['PHF3h'].round(3); table(pf[['period', 'layer', 'direction', 'PHF3h', 'peak hour', 'basis']], {'PHF3h': '{:.3f}'}, font=7)
+P('Table 4.0 — Peak-hour factors applied (share of the three-hour period in the peak hour).').runs[0].font.size = Pt(8)
 H('4.1 Shift to the LRT and total demand by mode', 2)
 landscape()
 for p in ['AM', 'PM']:
@@ -305,7 +323,7 @@ for p in ['AM', 'PM']:
     for c in ['car share', 'BRT share', 'LRT share', 'bus share', 'transit share', 'LRT share of transit']: b[c] = t[c] * 100
     table(b, {c: '{:.1f} %' for c in ['car share', 'BRT share', 'LRT share', 'bus share', 'transit share', 'LRT share of transit']}, font=7)
     P('The extension part, as part of the through line:').runs[0].font.italic = True
-    c = t[['scenario', 'LRT', 'LRT using the extension', 'ext: from car', 'ext: from BRT', 'ext: from bus', 'LRT within the extension', 'busiest segment (3 h, one direction)']].copy()
+    c = t[['scenario', 'LRT', 'LRT (peak hour)', 'LRT using the extension', 'LRT using the extension (peak hour)', 'ext: from car', 'ext: from BRT', 'ext: from bus', 'LRT within the extension', 'busiest segment (3 h, one direction)', 'busiest segment (peak hour, one direction)']].copy()
     c['extension share of LRT trips'] = t['LRT using the extension'] / t['LRT'] * 100
     table(c, {'extension share of LRT trips': '{:.1f} %'}, font=7)
     doc.add_paragraph()
@@ -316,11 +334,11 @@ P('Reading the tables. "Before" is the scenario\'s no-build market (car, bus inc
 P('A note on the car column. The AM shift from the car doubles between 2040 BU and 2050 BU (684 → 1,421) and between 2040 BU and 2040 HS (684 → 1,387) while the market grows by 16 % and 4 %. This is not a demand effect but the aggregation effect of caveat 27 seen across scenarios: '
   'the incremental shift of a TAZ pair is proportional to S·(1 − S) of its smoothed transit share, and the forecast sets of step 23 seed trips into TAZ pairs that are empty in 2022 (small-base and transforming TAZs receive the super-zone pattern), so the number of corridor pairs with both car and transit trips rises from 1,620 (2022) to 2,084 (2040 BU), 2,942 (2050 BU), 4,970 (2040 HS) and 5,688 (2050 HS) and the trip-weighted S·(1 − S) from 0.048 to 0.062. '
   'The PM sets, grown pair by pair from the PM base, keep the 2022 pair set and show a smooth car column (666 → 880). The car shift should therefore be read as an order of magnitude (300–1,300 trips, 0.4–1.5 % of the corridor car trips), not compared between scenarios (caveat 29).')
-fig(f'{CFIG}/demand_by_scenario.png', 16, 'Figure 4.1 — Transit demand on the corridor by scenario: no-build transit, total transit after the LRT, LRT trips, and the LRT trips using the extension (AM and PM).')
-fig(f'{CFIG}/shift_sources.png', 16, 'Figure 4.2 — Where the LRT trips come from (car, Metronit, bus), whole line and the part using the extension, by scenario.')
+fig(f'{CFIG}/demand_by_scenario.png', 16, 'Figure 4.1 — Transit demand on the corridor by scenario, peak hour: no-build transit, total transit after the LRT, LRT trips, and the LRT trips using the extension (AM and PM).')
+fig(f'{CFIG}/shift_sources.png', 16, 'Figure 4.2 — Where the LRT trips come from (car, Metronit, bus), whole line and the part using the extension, by scenario, peak hour.')
 H('4.2 Flow on the line — LRT, both directions', 2)
-P('Passengers on each segment of the line in the three hours, by direction: towards Nazareth (S01 → S24 → M20) and towards Tirat Carmel (M20 → M01 → S01). The dashed line marks the junction of the extension (S24) with the main route (M01, the same station at Hamifrats). '
-  'Source: lrt_line_loads.csv in each run folder (the LRT trips between the cheapest-access stations of each TAZ pair).')
+P('Passengers on each segment of the line in the peak hour, by direction: towards Nazareth (S01 → S24 → M20) and towards Tirat Carmel (M20 → M01 → S01). The dashed line marks the junction of the extension (S24) with the main route (M01, the same station at Hamifrats). '
+  'Source: lrt_line_loads.csv in each run folder (the LRT trips between the cheapest-access stations of each TAZ pair), scaled to the peak hour by the network bus factor of the direction.')
 landscape()
 fig(f'{CFIG}/flow_lrt_scenarios_AM.png', 25, 'Figure 4.3 — LRT flow by segment and direction, the four scenarios, AM.')
 fig(f'{CFIG}/flow_lrt_scenarios_PM.png', 25, 'Figure 4.4 — LRT flow by segment and direction, the four scenarios, PM.')
@@ -328,7 +346,7 @@ fig(f'{CFIG}/flow_lrt_AM.png', 25, 'Figure 4.5 — LRT flow per scenario, both d
 fig(f'{CFIG}/flow_lrt_PM.png', 25, 'Figure 4.6 — LRT flow per scenario, both directions on one panel, PM.')
 H('4.3 Flow on the line — total transit, both directions', 2)
 P('The same profile for all transit trips of the corridor market (bus, Metronit and LRT after the LRT is added), loaded along the line between the LRT stations nearest their ends — the transit demand the line\'s corridor carries, of which the LRT takes the share shown in 4.1. '
-  'Source: transit_line_loads.csv in each run folder.')
+  'Source: transit_line_loads.csv in each run folder, scaled to the peak hour as above.')
 fig(f'{CFIG}/flow_transit_scenarios_AM.png', 25, 'Figure 4.7 — Total transit flow by segment and direction, the four scenarios, AM.')
 fig(f'{CFIG}/flow_transit_scenarios_PM.png', 25, 'Figure 4.8 — Total transit flow by segment and direction, the four scenarios, PM.')
 fig(f'{CFIG}/flow_transit_AM.png', 25, 'Figure 4.9 — Total transit flow per scenario, both directions, AM.')
@@ -353,22 +371,23 @@ rt.columns = [str(c) for c in rt.columns]; table(rt.head(40), {'scheduled_min (m
 P('Table 4.4 — End-to-end times on the route by mode (Output/alternatives/time_on_route.csv). The LRT through line runs 74.3 min Prioritized / 99.6 min Unprioritized from Tirat Carmel to Nazareth (extension 40.7 / 65.8 min; main route 33.7 min at 80 km/h with 10 s dwell).').runs[0].font.size = Pt(8)
 H('4.7 Maps', 2)
 P('The map set of the alternatives report (Output/figures/alternatives/, 41 maps: line loads, origins and destinations of the LRT trips, LRT share, growth, shift sources and rates, travel-time maps) applies to these runs; four are reproduced here.')
-fig(f'{FIG}/alternatives/map_line_loads_AM_HS_2050.png', 16, 'Figure 4.12 — LRT line loads and station boardings, HS 2050 AM.')
-fig(f'{FIG}/alternatives/map_growth_by_scenario_AM.png', 16, 'Figure 4.13 — Growth of the LRT trips by TAZ, 2022 → each scenario, AM.')
-fig(f'{FIG}/alternatives/map_shift_sources_AM_BU_2040.png', 16, 'Figure 4.14 — Sources of the LRT trips by TAZ (car, Metronit, bus), BU 2040 AM.')
+fig(f'{FIG}/alternatives/map_line_loads_AM_HS_2050.png', 16, 'Figure 4.12 — LRT line loads and station boardings in the peak hour, HS 2050 AM.')
+fig(f'{FIG}/alternatives/map_growth_by_scenario_AM.png', 16, 'Figure 4.13 — Growth of the LRT trips by TAZ, 2022 → each scenario, AM peak hour.')
+fig(f'{FIG}/alternatives/map_shift_sources_AM_BU_2040.png', 16, 'Figure 4.14 — Sources of the LRT trips by TAZ (car, Metronit, bus), BU 2040 AM peak hour.')
 fig(f'{FIG}/alternatives/map_time_lrt_vs_bus_AM.png', 16, 'Figure 4.15 — LRT against bus generalized cost by TAZ, AM.')
 
 # ======================= 5 =======================
 H('5. Conclusions')
 tA = tabs[('AM', REG)].set_index('scenario'); tP = tabs[('PM', REG)].set_index('scenario')
-lo, hi = tA.loc['2040 BU'], tA.loc['2050 HS']
+lo, hi = tA.loc['2040 BU'], tA.loc['2050 HS']; fA = phf('AM', 'transit')
 peak1_lo = loads('AM', 'BU_2040', 'lrt')['dir1_towards_Nazareth_end'].max(); peak1_hi = loads('AM', 'HS_2050', 'lrt')['dir1_towards_Nazareth_end'].max()
-for s_ in [f'Demand. The through line (main route + extension) carries {lo["LRT"]:,.0f} trips in the AM three hours in 2040 BU and {hi["LRT"]:,.0f} in 2050 HS ({tA.loc["2050 BU", "LRT"]:,.0f} in 2050 BU, {tA.loc["2040 HS", "LRT"]:,.0f} in 2040 HS); the PM is {tP.loc["2040 BU", "LRT"]/lo["LRT"]*100:.0f} % of the AM. '
+_pm = [loads('PM', sc, 'lrt') for sc in SCEN]; pm_d1_lo, pm_d1_hi = min(l['dir1_towards_Nazareth_end'].max() for l in _pm), max(l['dir1_towards_Nazareth_end'].max() for l in _pm); pm_d2_lo, pm_d2_hi = min(l['dir2_towards_TiratCarmel'].max() for l in _pm), max(l['dir2_towards_TiratCarmel'].max() for l in _pm)
+for s_ in [f'Demand. The through line (main route + extension) carries {lo["LRT"]:,.0f} trips in the AM three hours in 2040 BU and {hi["LRT"]:,.0f} in 2050 HS ({tA.loc["2050 BU", "LRT"]:,.0f} in 2050 BU, {tA.loc["2040 HS", "LRT"]:,.0f} in 2040 HS), that is {lo["LRT"]*fA:,.0f}–{hi["LRT"]*fA:,.0f} in the AM peak hour; the PM is {tP.loc["2040 BU", "LRT"]/lo["LRT"]*100:.0f} % of the AM. '
            f'Of these, {lo["LRT using the extension"]:,.0f}–{hi["LRT using the extension"]:,.0f} ({lo["LRT using the extension"]/lo["LRT"]*100:.0f} %) use the extension and {lo["LRT within the extension"]:,.0f}–{hi["LRT within the extension"]:,.0f} travel between extension stations only: the extension is where most of the line\'s riders are, the main route feeds it rather than the reverse.',
            f'Sources. The LRT is first a transit reorganisation: {lo["BRT → LRT"]:,.0f}–{hi["BRT → LRT"]:,.0f} trips come from the Metronit ({lo["BRT → LRT"]/lo["BRT before"]*100:.0f} % of its corridor trips), {lo["bus → LRT"]:,.0f}–{hi["bus → LRT"]:,.0f} from the bus, and {lo["car → LRT"]:,.0f}–{hi["car → LRT"]:,.0f} from the car ({lo["car → LRT"]/lo["car before"]*100:.1f} % of the corridor car trips). '
            f'The transit share of the corridor market rises by about {(lo["transit share"] - srow("AM", "BU_2040")["transit share before"])*100:.1f} points; the LRT takes {lo["LRT share of transit"]*100:.0f} % of transit.',
-           f'Profile. In the AM the busiest segment is the entry into Hamifrats from the main route (S24–M02) in the direction towards Tirat Carmel, {lo["busiest segment (3 h, one direction)"]:,.0f} (2040 BU) to {hi["busiest segment (3 h, one direction)"]:,.0f} (2050 HS) passengers in three hours (about 1,100–1,700 in the design hour at a 0.55–0.6 peak-hour factor); in the direction towards Nazareth the peak is on the Carmel coast (S14–S15, {peak1_lo:,.0f}–{peak1_hi:,.0f}). '
-           f'In the PM the two directions nearly balance (S24–M02 towards Nazareth 1,300–1,400; S05–S06 or S11–S12 towards Tirat Carmel 1,100–1,700). The main route beyond Kiryat Ata (M06 onwards) carries a few hundred per direction; the extension carries 4 of 5 riders.',
+           f'Profile. In the AM the busiest segment is the entry into Hamifrats from the main route (S24–M02) in the direction towards Tirat Carmel, {lo["busiest segment (3 h, one direction)"]:,.0f} (2040 BU) to {hi["busiest segment (3 h, one direction)"]:,.0f} (2050 HS) passengers in three hours, {lo["busiest segment (peak hour, one direction)"]:,.0f}–{hi["busiest segment (peak hour, one direction)"]:,.0f} in the peak hour; in the direction towards Nazareth the peak is on the Carmel coast (S14–S15, {peak1_lo:,.0f}–{peak1_hi:,.0f} in the peak hour). '
+           f'In the PM the two directions nearly balance (S24–M02 towards Nazareth {pm_d1_lo:,.0f}–{pm_d1_hi:,.0f} in the peak hour; S05–S06 or S11–S12 towards Tirat Carmel {pm_d2_lo:,.0f}–{pm_d2_hi:,.0f}). The main route beyond Kiryat Ata (M06 onwards) carries a few hundred per direction; the extension carries 4 of 5 riders.',
            'Growth. Between 2040 BU and 2050 HS the LRT demand grows by about 45 %, in step with the corridor transit market (×1.3–1.5 on 2022), because the forecast holds behaviour at 2022; the HS scenario adds 15–25 % over BU in the same year.',
            'Regime. Priority at the interchanges is worth about 20–25 % of the LRT trips: at-grade running of the extension lengthens its end-to-end time from 41 to 66 minutes and loses a fifth of the riders, mostly on the extension.',
            'Robustness. The central figures sit within a range of about −25 % / +40 % from the cost sensitivity and the LRT premium alone (step 40); the car-to-LRT shift is the least certain component (caveats 15, 25, 27) and should be read as an order of magnitude; the bus and Metronit shifts rest on observed shares and measured service and are the firmer part.',

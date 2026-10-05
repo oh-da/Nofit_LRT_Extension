@@ -1,0 +1,13 @@
+period,layer,direction,PHF3h,peak hour,n sampled,basis
+AM,car,up,0.5556,07:15–08:15,777,"step 27's method, network scope, CAR trips crossing links in this direction"
+AM,car,down,0.5220,07:00–08:00,1001,"step 27's method, network scope, CAR trips crossing links in this direction"
+AM,car,all,0.6209,07:00–08:00,15949,"step 27's method, study area, all CAR trips"
+AM,transit,up,0.5494,07:30–08:30,143,"step 27's method, network scope, BUS trips crossing links in this direction"
+AM,transit,down,0.4568,07:00–08:00,153,"step 27's method, network scope, BUS trips crossing links in this direction"
+AM,transit,all,0.5890,07:00–08:00,1790,"step 27's method, study area, all BUS trips"
+PM,car,up,0.4452,16:00–17:00,984,"step 27's method, network scope, CAR trips crossing links in this direction, PM window 16:00–19:00"
+PM,car,down,0.4345,16:00–17:00,844,"step 27's method, network scope, CAR trips crossing links in this direction, PM window 16:00–19:00"
+PM,car,all,0.4467,16:00–17:00,14507,"step 27's method, study area, all CAR trips, PM window 16:00–19:00"
+PM,transit,up,0.5351,16:00–17:00,135,"step 27's method, network scope, BUS trips crossing links in this direction, PM window 16:00–19:00"
+PM,transit,down,0.4675,17:30–18:30,123,"step 27's method, network scope, BUS trips crossing links in this direction, PM window 16:00–19:00"
+PM,transit,all,0.4782,16:00–17:00,1199,"step 27's method, study area, all BUS trips, PM window 16:00–19:00"

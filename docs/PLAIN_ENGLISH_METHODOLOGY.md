@@ -4338,7 +4338,13 @@ pivot moves more trips where car and transit share a pair — read it as an orde
 (caveat 29). The charts show the flow along the line in both directions, for the LRT and for all
 transit, and the split of the corridor's trips between car, bus, Metronit and LRT: transit stays
 at about a fifth of the corridor's trips in the morning, with the LRT taking a third to two fifths
-of that fifth.
+of that fifth. Every chart and map in the report shows the busiest hour, not the whole three-hour
+period: the morning peak hour holds about 55 % of the three hours' riders towards Nazareth and
+46 % towards Tirat Carmel (the survey's departure pattern, step 27), the evening 54 % and 47 %;
+for totals, 59 % of the morning's transit trips and 48 % of the evening's. In the peak hour the
+through line carries about 3,700 (2040 BU) to 5,400 (2050 HS) morning riders, and the busiest
+piece of track, the entry into Hamifrats towards Tirat Carmel, 1,000–1,400 passengers in one
+direction. The tables keep the three-hour totals beside the peak-hour values.
 
 ### 5.9 Where things stand now
 
