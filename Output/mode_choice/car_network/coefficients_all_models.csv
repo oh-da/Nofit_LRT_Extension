@@ -1,0 +1,140 @@
+model,term,coef,se,p
+M0: dGC only,Intercept,-1.31898,0.23325,0.00000
+M0: dGC only,dGC,-0.00756,0.01093,0.48908
+"M1: dGC + car availability, purpose, person, distance band",Intercept,-2.60971,0.60230,0.00001
+"M1: dGC + car availability, purpose, person, distance band","C(car_seg, Treatment(""car_available""))[T.competition]",2.16404,0.58237,0.00020
+"M1: dGC + car availability, purpose, person, distance band","C(car_seg, Treatment(""car_available""))[T.no_car_hh]",5.58301,0.61675,0.00000
+"M1: dGC + car availability, purpose, person, distance band","C(car_seg, Treatment(""car_available""))[T.no_licence]",4.22818,0.64810,0.00000
+"M1: dGC + car availability, purpose, person, distance band","C(purpose, Treatment(""HBW""))[T.HBE]",0.41480,0.59371,0.48476
+"M1: dGC + car availability, purpose, person, distance band","C(purpose, Treatment(""HBW""))[T.HBO]",-2.03580,0.58673,0.00052
+"M1: dGC + car availability, purpose, person, distance band","C(purpose, Treatment(""HBW""))[T.NHB]",-1.59170,0.57418,0.00557
+"M1: dGC + car availability, purpose, person, distance band","C(age_grp, Treatment(""35-64""))[T.0-17]",-2.22416,0.55973,0.00007
+"M1: dGC + car availability, purpose, person, distance band","C(age_grp, Treatment(""35-64""))[T.18-24]",0.43224,0.44802,0.33466
+"M1: dGC + car availability, purpose, person, distance band","C(age_grp, Treatment(""35-64""))[T.25-34]",0.00730,0.61699,0.99056
+"M1: dGC + car availability, purpose, person, distance band","C(age_grp, Treatment(""35-64""))[T.65+]",0.79420,0.61558,0.19699
+"M1: dGC + car availability, purpose, person, distance band",female[T.True],0.46512,0.31352,0.13793
+"M1: dGC + car availability, purpose, person, distance band",student[T.True],0.22108,0.55945,0.69272
+"M1: dGC + car availability, purpose, person, distance band","C(sector, Treatment(""general""))[T.arab]",-1.90629,0.77704,0.01416
+"M1: dGC + car availability, purpose, person, distance band","C(band, Treatment(""6-10""))[T.<3]",-1.14419,0.46851,0.01460
+"M1: dGC + car availability, purpose, person, distance band","C(band, Treatment(""6-10""))[T.3-6]",-0.17882,0.40277,0.65706
+"M1: dGC + car availability, purpose, person, distance band","C(band, Treatment(""6-10""))[T.10-20]",0.71611,0.74656,0.33745
+"M1: dGC + car availability, purpose, person, distance band","C(band, Treatment(""6-10""))[T.20+]",1.64719,1.14802,0.15134
+"M1: dGC + car availability, purpose, person, distance band",dGC,-0.04032,0.01648,0.01439
+M2: λ by car-availability segment,Intercept,-2.21814,0.81901,0.00676
+M2: λ by car-availability segment,"C(car_seg, Treatment(""car_available""))[T.competition]",1.06148,0.98392,0.28066
+M2: λ by car-availability segment,"C(car_seg, Treatment(""car_available""))[T.no_car_hh]",5.88928,1.04304,0.00000
+M2: λ by car-availability segment,"C(car_seg, Treatment(""car_available""))[T.no_licence]",3.99422,1.08372,0.00023
+M2: λ by car-availability segment,"C(purpose, Treatment(""HBW""))[T.HBE]",0.50984,0.60077,0.39608
+M2: λ by car-availability segment,"C(purpose, Treatment(""HBW""))[T.HBO]",-2.02425,0.58348,0.00052
+M2: λ by car-availability segment,"C(purpose, Treatment(""HBW""))[T.NHB]",-1.64724,0.58239,0.00468
+M2: λ by car-availability segment,"C(age_grp, Treatment(""35-64""))[T.0-17]",-2.42327,0.57801,0.00003
+M2: λ by car-availability segment,"C(age_grp, Treatment(""35-64""))[T.18-24]",0.44992,0.44760,0.31480
+M2: λ by car-availability segment,"C(age_grp, Treatment(""35-64""))[T.25-34]",0.00444,0.62970,0.99438
+M2: λ by car-availability segment,"C(age_grp, Treatment(""35-64""))[T.65+]",0.76012,0.60650,0.21010
+M2: λ by car-availability segment,female[T.True],0.47503,0.31471,0.13120
+M2: λ by car-availability segment,student[T.True],0.24225,0.57562,0.67386
+M2: λ by car-availability segment,"C(sector, Treatment(""general""))[T.arab]",-2.14056,0.79190,0.00687
+M2: λ by car-availability segment,"C(band, Treatment(""6-10""))[T.<3]",-1.19470,0.50241,0.01741
+M2: λ by car-availability segment,"C(band, Treatment(""6-10""))[T.3-6]",-0.11609,0.39526,0.76898
+M2: λ by car-availability segment,"C(band, Treatment(""6-10""))[T.10-20]",0.75043,0.65196,0.24972
+M2: λ by car-availability segment,"C(band, Treatment(""6-10""))[T.20+]",1.13316,0.93975,0.22789
+M2: λ by car-availability segment,dGC:C(car_seg)[car_available],-0.06253,0.03717,0.09247
+M2: λ by car-availability segment,dGC:C(car_seg)[competition],-0.00323,0.01985,0.87077
+M2: λ by car-availability segment,dGC:C(car_seg)[no_car_hh],-0.07898,0.02760,0.00422
+M2: λ by car-availability segment,dGC:C(car_seg)[no_licence],-0.04560,0.03293,0.16613
+M3: M1 + origin and destination area fixed effects,Intercept,-3.81353,1.21011,0.00162
+M3: M1 + origin and destination area fixed effects,"C(car_seg, Treatment(""car_available""))[T.competition]",2.40857,0.63625,0.00015
+M3: M1 + origin and destination area fixed effects,"C(car_seg, Treatment(""car_available""))[T.no_car_hh]",6.56239,0.74990,0.00000
+M3: M1 + origin and destination area fixed effects,"C(car_seg, Treatment(""car_available""))[T.no_licence]",5.30349,0.76521,0.00000
+M3: M1 + origin and destination area fixed effects,"C(purpose, Treatment(""HBW""))[T.HBE]",0.29773,0.78566,0.70472
+M3: M1 + origin and destination area fixed effects,"C(purpose, Treatment(""HBW""))[T.HBO]",-2.47029,0.62655,0.00008
+M3: M1 + origin and destination area fixed effects,"C(purpose, Treatment(""HBW""))[T.NHB]",-1.89957,0.52660,0.00031
+M3: M1 + origin and destination area fixed effects,"C(age_grp, Treatment(""35-64""))[T.0-17]",-2.81783,0.71605,0.00008
+M3: M1 + origin and destination area fixed effects,"C(age_grp, Treatment(""35-64""))[T.18-24]",0.57783,0.59442,0.33101
+M3: M1 + origin and destination area fixed effects,"C(age_grp, Treatment(""35-64""))[T.25-34]",0.08485,0.63874,0.89432
+M3: M1 + origin and destination area fixed effects,"C(age_grp, Treatment(""35-64""))[T.65+]",1.04961,0.60523,0.08288
+M3: M1 + origin and destination area fixed effects,female[T.True],0.70323,0.30090,0.01944
+M3: M1 + origin and destination area fixed effects,student[T.True],0.31250,0.53141,0.55650
+M3: M1 + origin and destination area fixed effects,"C(sector, Treatment(""general""))[T.arab]",-1.35572,1.40310,0.33393
+M3: M1 + origin and destination area fixed effects,"C(band, Treatment(""6-10""))[T.<3]",-2.09817,0.70021,0.00273
+M3: M1 + origin and destination area fixed effects,"C(band, Treatment(""6-10""))[T.3-6]",-1.02494,0.56606,0.07020
+M3: M1 + origin and destination area fixed effects,"C(band, Treatment(""6-10""))[T.10-20]",1.75145,0.90940,0.05411
+M3: M1 + origin and destination area fixed effects,"C(band, Treatment(""6-10""))[T.20+]",3.19183,0.80357,0.00007
+M3: M1 + origin and destination area fixed effects,dGC,-0.06033,0.02153,0.00507
+M1b: M1 with the cheaper of bus and Metronit,Intercept,-2.47790,0.60184,0.00004
+M1b: M1 with the cheaper of bus and Metronit,"C(car_seg, Treatment(""car_available""))[T.competition]",2.18120,0.59411,0.00024
+M1b: M1 with the cheaper of bus and Metronit,"C(car_seg, Treatment(""car_available""))[T.no_car_hh]",5.62880,0.61439,0.00000
+M1b: M1 with the cheaper of bus and Metronit,"C(car_seg, Treatment(""car_available""))[T.no_licence]",4.26297,0.65143,0.00000
+M1b: M1 with the cheaper of bus and Metronit,"C(purpose, Treatment(""HBW""))[T.HBE]",0.37618,0.58696,0.52159
+M1b: M1 with the cheaper of bus and Metronit,"C(purpose, Treatment(""HBW""))[T.HBO]",-2.04524,0.58611,0.00048
+M1b: M1 with the cheaper of bus and Metronit,"C(purpose, Treatment(""HBW""))[T.NHB]",-1.61440,0.56486,0.00426
+M1b: M1 with the cheaper of bus and Metronit,"C(age_grp, Treatment(""35-64""))[T.0-17]",-2.22707,0.56028,0.00007
+M1b: M1 with the cheaper of bus and Metronit,"C(age_grp, Treatment(""35-64""))[T.18-24]",0.44603,0.45129,0.32299
+M1b: M1 with the cheaper of bus and Metronit,"C(age_grp, Treatment(""35-64""))[T.25-34]",0.01252,0.61794,0.98383
+M1b: M1 with the cheaper of bus and Metronit,"C(age_grp, Treatment(""35-64""))[T.65+]",0.79881,0.61731,0.19566
+M1b: M1 with the cheaper of bus and Metronit,female[T.True],0.47204,0.31236,0.13075
+M1b: M1 with the cheaper of bus and Metronit,student[T.True],0.22934,0.55784,0.68098
+M1b: M1 with the cheaper of bus and Metronit,"C(sector, Treatment(""general""))[T.arab]",-1.86749,0.78192,0.01693
+M1b: M1 with the cheaper of bus and Metronit,"C(band, Treatment(""6-10""))[T.<3]",-1.22740,0.46294,0.00802
+M1b: M1 with the cheaper of bus and Metronit,"C(band, Treatment(""6-10""))[T.3-6]",-0.23530,0.40237,0.55869
+M1b: M1 with the cheaper of bus and Metronit,"C(band, Treatment(""6-10""))[T.10-20]",0.77505,0.74367,0.29732
+M1b: M1 with the cheaper of bus and Metronit,"C(band, Treatment(""6-10""))[T.20+]",1.74441,1.17688,0.13828
+M1b: M1 with the cheaper of bus and Metronit,dGC_best,-0.04781,0.01596,0.00275
+M2b: M2 with the cheaper of bus and Metronit,Intercept,-2.19354,0.81290,0.00697
+M2b: M2 with the cheaper of bus and Metronit,"C(car_seg, Treatment(""car_available""))[T.competition]",1.32059,1.04401,0.20590
+M2b: M2 with the cheaper of bus and Metronit,"C(car_seg, Treatment(""car_available""))[T.no_car_hh]",5.93362,1.02903,0.00000
+M2b: M2 with the cheaper of bus and Metronit,"C(car_seg, Treatment(""car_available""))[T.no_licence]",4.09266,1.07268,0.00014
+M2b: M2 with the cheaper of bus and Metronit,"C(purpose, Treatment(""HBW""))[T.HBE]",0.46509,0.59303,0.43288
+M2b: M2 with the cheaper of bus and Metronit,"C(purpose, Treatment(""HBW""))[T.HBO]",-2.02791,0.58505,0.00053
+M2b: M2 with the cheaper of bus and Metronit,"C(purpose, Treatment(""HBW""))[T.NHB]",-1.65493,0.58112,0.00440
+M2b: M2 with the cheaper of bus and Metronit,"C(age_grp, Treatment(""35-64""))[T.0-17]",-2.40389,0.57259,0.00003
+M2b: M2 with the cheaper of bus and Metronit,"C(age_grp, Treatment(""35-64""))[T.18-24]",0.45195,0.45248,0.31787
+M2b: M2 with the cheaper of bus and Metronit,"C(age_grp, Treatment(""35-64""))[T.25-34]",-0.00324,0.62992,0.99590
+M2b: M2 with the cheaper of bus and Metronit,"C(age_grp, Treatment(""35-64""))[T.65+]",0.76252,0.61203,0.21281
+M2b: M2 with the cheaper of bus and Metronit,female[T.True],0.47830,0.31495,0.12886
+M2b: M2 with the cheaper of bus and Metronit,student[T.True],0.23827,0.57139,0.67668
+M2b: M2 with the cheaper of bus and Metronit,"C(sector, Treatment(""general""))[T.arab]",-2.05726,0.78735,0.00898
+M2b: M2 with the cheaper of bus and Metronit,"C(band, Treatment(""6-10""))[T.<3]",-1.26285,0.49057,0.01005
+M2b: M2 with the cheaper of bus and Metronit,"C(band, Treatment(""6-10""))[T.3-6]",-0.17301,0.39601,0.66219
+M2b: M2 with the cheaper of bus and Metronit,"C(band, Treatment(""6-10""))[T.10-20]",0.81814,0.65666,0.21280
+M2b: M2 with the cheaper of bus and Metronit,"C(band, Treatment(""6-10""))[T.20+]",1.32896,0.97993,0.17504
+M2b: M2 with the cheaper of bus and Metronit,dGC_best:C(car_seg)[car_available],-0.06432,0.03686,0.08097
+M2b: M2 with the cheaper of bus and Metronit,dGC_best:C(car_seg)[competition],-0.01636,0.02315,0.47961
+M2b: M2 with the cheaper of bus and Metronit,dGC_best:C(car_seg)[no_car_hh],-0.08125,0.02736,0.00299
+M2b: M2 with the cheaper of bus and Metronit,dGC_best:C(car_seg)[no_licence],-0.05104,0.03253,0.11664
+M1u: M1 unweighted,Intercept,-2.41327,0.55735,0.00001
+M1u: M1 unweighted,"C(car_seg, Treatment(""car_available""))[T.competition]",1.54221,0.50461,0.00224
+M1u: M1 unweighted,"C(car_seg, Treatment(""car_available""))[T.no_car_hh]",4.78581,0.54544,0.00000
+M1u: M1 unweighted,"C(car_seg, Treatment(""car_available""))[T.no_licence]",3.83067,0.58653,0.00000
+M1u: M1 unweighted,"C(purpose, Treatment(""HBW""))[T.HBE]",1.56276,0.47839,0.00109
+M1u: M1 unweighted,"C(purpose, Treatment(""HBW""))[T.HBO]",-1.44437,0.40481,0.00036
+M1u: M1 unweighted,"C(purpose, Treatment(""HBW""))[T.NHB]",-1.30532,0.39526,0.00096
+M1u: M1 unweighted,"C(age_grp, Treatment(""35-64""))[T.0-17]",-3.18108,0.55071,0.00000
+M1u: M1 unweighted,"C(age_grp, Treatment(""35-64""))[T.18-24]",-0.09005,0.55012,0.86997
+M1u: M1 unweighted,"C(age_grp, Treatment(""35-64""))[T.25-34]",0.21041,0.44584,0.63697
+M1u: M1 unweighted,"C(age_grp, Treatment(""35-64""))[T.65+]",0.68701,0.44136,0.11957
+M1u: M1 unweighted,female[T.True],0.28154,0.27675,0.30900
+M1u: M1 unweighted,student[T.True],0.07295,0.52025,0.88848
+M1u: M1 unweighted,"C(sector, Treatment(""general""))[T.arab]",-1.86101,0.69152,0.00712
+M1u: M1 unweighted,"C(band, Treatment(""6-10""))[T.<3]",-0.97026,0.39955,0.01517
+M1u: M1 unweighted,"C(band, Treatment(""6-10""))[T.3-6]",-0.18716,0.34442,0.58684
+M1u: M1 unweighted,"C(band, Treatment(""6-10""))[T.10-20]",0.78680,0.54961,0.15227
+M1u: M1 unweighted,"C(band, Treatment(""6-10""))[T.20+]",1.85239,1.10686,0.09422
+M1u: M1 unweighted,dGC,-0.04162,0.01205,0.00056
+M4: licence holders in car-owning households only (the segment the LRT would draw from the car),Intercept,-2.97110,0.71579,0.00003
+M4: licence holders in car-owning households only (the segment the LRT would draw from the car),"C(car_seg, Treatment(""car_available""))[T.competition]",2.19424,0.57308,0.00013
+M4: licence holders in car-owning households only (the segment the LRT would draw from the car),"C(purpose, Treatment(""HBW""))[T.HBE]",-0.63622,1.32686,0.63159
+M4: licence holders in car-owning households only (the segment the LRT would draw from the car),"C(purpose, Treatment(""HBW""))[T.HBO]",-1.82671,0.96159,0.05748
+M4: licence holders in car-owning households only (the segment the LRT would draw from the car),"C(purpose, Treatment(""HBW""))[T.NHB]",-1.39699,0.86806,0.10755
+M4: licence holders in car-owning households only (the segment the LRT would draw from the car),"C(age_grp, Treatment(""35-64""))[T.0-17]",-19.34835,1.41793,0.00000
+M4: licence holders in car-owning households only (the segment the LRT would draw from the car),"C(age_grp, Treatment(""35-64""))[T.18-24]",-1.07538,1.29083,0.40479
+M4: licence holders in car-owning households only (the segment the LRT would draw from the car),"C(age_grp, Treatment(""35-64""))[T.25-34]",0.41047,0.60954,0.50068
+M4: licence holders in car-owning households only (the segment the LRT would draw from the car),"C(age_grp, Treatment(""35-64""))[T.65+]",0.31036,1.08857,0.77556
+M4: licence holders in car-owning households only (the segment the LRT would draw from the car),female[T.True],0.06131,0.55000,0.91124
+M4: licence holders in car-owning households only (the segment the LRT would draw from the car),student[T.True],-0.16815,1.13439,0.88216
+M4: licence holders in car-owning households only (the segment the LRT would draw from the car),"C(sector, Treatment(""general""))[T.arab]",-2.72439,1.04389,0.00906
+M4: licence holders in car-owning households only (the segment the LRT would draw from the car),"C(band, Treatment(""6-10""))[T.<3]",-0.53913,0.67215,0.42249
+M4: licence holders in car-owning households only (the segment the LRT would draw from the car),"C(band, Treatment(""6-10""))[T.3-6]",-0.45097,0.65098,0.48846
+M4: licence holders in car-owning households only (the segment the LRT would draw from the car),"C(band, Treatment(""6-10""))[T.10-20]",0.76752,0.75427,0.30888
+M4: licence holders in car-owning households only (the segment the LRT would draw from the car),"C(band, Treatment(""6-10""))[T.20+]",1.25740,1.14479,0.27204
+M4: licence holders in car-owning households only (the segment the LRT would draw from the car),dGC,-0.01057,0.01543,0.49320

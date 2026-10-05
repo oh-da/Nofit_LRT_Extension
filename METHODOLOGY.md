@@ -387,8 +387,10 @@ reproduces the capture **to the trip in every scenario and case** (4,254 undergr
 cancels out of it. The car skim's vintage therefore cannot move the capture under the current
 model (caveat 25); it enters only the failed cross-sectional λ fit (−0.0096 → −0.0121 per
 generalized minute, still the wrong sign) and would matter in a full mode-choice model or a
-person-level λ (step 33). The survey time stays the default pending the provider's hourly
-aggregation (caveat 24).
+person-level λ (step 33) — re-estimated on the 2026 skim the same day (§6ae addendum): M1
+λ 0.040 (0.008–0.073) against 0.035, the choice riders' λ still not identified (0.011,
+−0.020 to 0.041), the 0.03–0.05 reading unchanged. The survey time stays the default pending
+the provider's hourly aggregation (caveat 24).
 
 Every published product, what it was built from, and its status:
 
@@ -426,6 +428,7 @@ Every published product, what it was built from, and its status:
 | `car_speed/GoogleSpeed_202605_North.{shp,gpkg}`, `car_link_speeds_hourly_north.csv`, `car_speed_hourly_summary_north.csv` | step 43 | `Input/CarSpeedData/GoogleSpeed_202605/` clipped to the links intersecting `Input/TAZ_North/` | 9,927 links (4,996 km) in the study area; 4,693 with a speed | car link speeds by hour (06–21) and direction, May 2026 | May 2026 | **current input layer** — consumed by step 37 |
 | `gc/car_ivt_network_area_v2.csv`, `car_ivt_network_fastest_hour_area_v2.csv`, `car_km_network_area_v2.csv`, `car_path_fallback_share_area_v2.csv`, `car_network_vs_survey_{pairs,summary}.csv`, `car_network_skim_sensitivity.csv` | step 37 | `car_speed/*` speeds transferred onto `Input/BusSpeedData/Streets` and routed between the step-26 area points | 25 V2 areas | car: 07:00 kerb-to-kerb time, path km, fallback share; vs the survey skim | May 2026 | **current** — the alternative car source (`CAR_SOURCE=network`); survey remains the default |
 | `skims/car_network/*`, `skims/car_network/forecast/*` | steps 26 + 31 + 32, `CAR_SOURCE='network'` / `GC_SOURCE_DIR` / `SK_DIR` | same as `gc/*`, `skims/*`, `skims/forecast/*`, car IVT = step-37 time + 3 min | 25 V2 areas, 9 trunk links | as `skims/*` | 2022 (flows), May 2026 (bus and car), planned (LRT) | **alternative scenario** (task C1 / E5) — capture identical to the central case (the pivot cancels the car level) |
+| `mode_choice/car_network/*` | step 33, `SK_DIR=Output/skims/car_network` | `Input/THS_2017-2018/` trips, person and household tables × the step-31 skims on the 2026 car time | 25 V2 areas, person-level rows | car vs transit — λ estimates by specification and segment on the 2026 car skim | 2017/18 (survey), May 2026 (skims, car and bus) | **alternative estimate** — λ 0.040 (M1) vs 0.035; choice-rider λ still not identified |
 
 The 25 GS zones (`Input/TAZ_GSnew.csv`) and the 25 retained research areas of the
 forecast tables are different geographies with the same matrix dimension; files are
@@ -2660,6 +2663,22 @@ no alternative-specific term of its own; no income (not in the tables); no money
 (§6x addendum 4); the weight is the trips file's `new_wf` by instruction, whose construction is
 not documented in the repository. λ_T and the LRT premium are untouched by this step.
 
+**Addendum, 5 October 2026 — λ re-estimated on the 2026 car skim (task C1 / E5, step 37).**
+`SK_DIR` (environment variable, default `Output/skims`) points this notebook at an alternate
+step-31 skim set; the outputs then go to `Output/mode_choice/<tag>/` and the figure carries the
+tag. Run with `SK_DIR=Output/skims/car_network` (the May 2026 network car time + 3 min in the
+car generalized cost, §6am; everything else unchanged, 2,310 rows, 543 households): the car
+cost falls, the cost handicap of transit widens, and λ moves up a little on every
+specification — M1 **0.040** per generalized minute (95 % 0.008–0.073; was 0.035, 0.002–0.068),
+M1b 0.048 (was 0.041), M3 0.060 (was 0.053), M1u 0.042 (was 0.042); by car-availability segment
+the no-car households stay at 0.08 and the car-available at 0.06 (0.05), the competition
+segment moves from −0.006 to 0.003, neither distinguishable from zero; and **M4, the licence
+holders in car-owning households — the segment the LRT would draw from the car — is still not
+identified: 0.011 (−0.020 to 0.041; was 0.008)**. The reading of §6ae stands: the data support
+an aggregate λ in the 0.03–0.05 range, with the assumed 0.03 at its lower end, and say nothing
+about the choice riders' sensitivity on either car skim. Outputs under
+`Output/mode_choice/car_network/`; figure `mode_choice_person_level_by_segment_car_network.png`.
+
 ## 6af. Step 34 — RavKav 2025: boardings by stop and TAZ, bus + Metronit OD on the 2022 RavKav alighting pattern, rail OD from entry and exit taps (`RavKav_2025_boardings_matrix.ipynb`)
 
 **Purpose.** Turn the three 2025 smart-card extracts (§1: the Metronit, every rail station, a
@@ -3573,6 +3592,7 @@ allowance closes that gap, and on the short pairs it does not.
 | `car_speed/GoogleSpeed_202605_North.{shp,shx,dbf,prj,cpg,gpkg}`, `car_link_speeds_hourly_north.csv`, `car_speed_hourly_summary_north.csv`, `car_speed_dir_convention_check.csv` | 9,927 links × 36 fields; 101,840 rows; 32 rows; 3 rows | Step 43 | The May 2026 car speed network clipped to the links intersecting `TAZ_North` (whole links, all fields: `SPD_{6..21}_{AB,BA}` km/h); the observed speeds as a long table (link, hour, direction); per-hour summary; the `DIR` × zero-speed check |
 | `gc/car_ivt_network_area_v2.csv`, `car_ivt_network_fastest_hour_area_v2.csv`, `car_km_network_area_v2.csv`, `car_path_fallback_share_area_v2.csv`, `car_network_area_connectors.csv`, `car_network_segment_coverage.csv`, `car_network_skim_sensitivity.csv`, `car_network_vs_survey_pairs.csv`, `car_network_vs_survey_summary.csv` | 25 × 25 (×4); 25 rows; 3 rows; 5 rows; 600 rows; 8 rows | Step 37 | The V2 areas routed at the May 2026 07:00 car speeds (kerb to kerb with connectors), the fastest-hour variant, path km, share of the path on assumed-speed segments, connector lengths, the transfer's coverage of the street network, the fallback / own-topology sensitivity, and the pair-by-pair and banded comparison with the survey skim |
 | `skims/car_network/*`, `skims/car_network/forecast/*` | as `gc/*`, `skims/*`, `skims/forecast/*` | Steps 26 + 31 + 32 with `CAR_SOURCE=network` / `GC_SOURCE_DIR` / `SK_DIR` | The chain on the 2026 car skim (car IVT = step-37 time + 3 min; `car_ivt_2026_network_area_v2.csv` beside the survey's): capture identical to the central case (§6ac addendum) |
+| `mode_choice/car_network/*` | as `mode_choice/*` | Step 33 with `SK_DIR=Output/skims/car_network` | The person-level logits re-estimated with the 2026 car time in the car generalized cost: λ 0.040 (M1), 0.048 / 0.060 / 0.042 (M1b / M3 / M1u), choice riders 0.011 not identified (§6ae addendum) |
 | `figures/` | — | Steps 1b–3 | Scatter plots, CV curves, λ curves, R_AB heatmap |
 
 All matrices are indexed by origin zone (rows) × destination zone (columns). Probability
@@ -3749,8 +3769,10 @@ Added 23 September 2026 (step 33):
     attractiveness: a faster or slower car in 2040 would not alter the LRT's draw from it. That
     is a limitation of the pivot, acceptable for a corridor screening where the car cost is
     held constant between the build and no-build cases, but any statement about car-to-LRT
-    diversion rests on λ and the transit-side costs alone. A full mode-choice formulation (or
-    step 33's person-level λ re-estimated on the 2026 skim) is where the car time would count.
+    diversion rests on λ and the transit-side costs alone. A full mode-choice formulation is where the car time would
+    count; step 33's person-level λ re-estimated on the 2026 skim (§6ae addendum) moves from
+    0.035 to 0.040 and leaves the choice riders' λ unidentified, so the assumed 0.03 and its
+    0.02–0.05 range stand on either car skim.
 
 ## 8b. Related work — PCA-based analysis and structural comparison of OD matrices
 
@@ -3869,6 +3891,7 @@ jupyter nbconvert --to notebook --execute --inplace notebooks/current/Car_skim_2
 CAR_SOURCE=network jupyter nbconvert --to notebook --execute --output-dir /tmp/car_network notebooks/current/GC_data_inventory_and_skims.ipynb
 GC_SOURCE_DIR=Output/skims/car_network jupyter nbconvert --to notebook --execute --output-dir /tmp/car_network notebooks/current/Mode_skims_and_flow_comparison.ipynb
 SK_DIR=Output/skims/car_network jupyter nbconvert --to notebook --execute --output-dir /tmp/car_network notebooks/current/LRT_capture_forecast_2040_2050.ipynb
+SK_DIR=Output/skims/car_network jupyter nbconvert --to notebook --execute --output-dir /tmp/car_network notebooks/current/Mode_choice_person_level.ipynb   # step 33 on the 2026 car skim (needs the THS person, household and activities files; ≈ 1 minute)
 git checkout -- Output/figures/gc_first_fill_trunk_v2.png Output/figures/gc_bus_gtfs_vs_survey.png Output/figures/skims_logit_car_vs_transit.png Output/figures/skims_trunk_link_flows_bus_vs_lrt.png Output/figures/lrt_capture_forecast_2040_2050.png   # the alternative run redraws the default figures
 
 # regression test of the hybrid branch (committed outputs only)

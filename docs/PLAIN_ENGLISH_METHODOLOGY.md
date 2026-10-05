@@ -4249,7 +4249,11 @@ added, starting from today's observed car/transit split, and the car's own trave
 not in that calculation. So a faster or slower car would not change the LRT's forecast
 either way. That is acceptable for a screening of the corridor, but it means the "trips taken
 from the car" figure rests on the transit-side costs and the assumed sensitivity alone. The
-survey times remain the central case until the speed provider's method is clarified.
+one place the car time does count — the cost sensitivity estimated from individual travellers
+(5.3) — was re-run with the 2026 car times: the sensitivity comes out a little higher (0.040
+against 0.035 per generalized minute), still inside the range assumed, and the sensitivity of
+the people who actually have a car to choose from is still not pinned down. The survey times
+remain the central case until the speed provider's method is clarified.
 
 ### 5.9 Where things stand now
 

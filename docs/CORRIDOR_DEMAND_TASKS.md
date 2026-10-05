@@ -257,7 +257,8 @@ Key facts driving the list (2017 trips-file hybrid, `Output/ths2017/study_taz/`)
       evidence; the chain rerun on the 2026 skim (`CAR_SOURCE=network`,
       `Output/skims/car_network/`) is reported in §6ac / §6ad addenda: the capture is
       identical to the trip, since the incremental-logit pivot cancels the car's cost level
-      (caveat 25). Still open: the
+      (caveat 25); step 33 re-estimated on the 2026 skim gives λ 0.040 against 0.035, the
+      choice riders' λ still not identified (§6ae addendum). Still open: the
       provider's hourly aggregation (caveat 24) before the 07:00 column is called a peak
       speed; the survey time stays the default until then.*
 - [~] **E7. Cost sensitivity λ** — *person-level estimate done 2026-09-23 (step 33,

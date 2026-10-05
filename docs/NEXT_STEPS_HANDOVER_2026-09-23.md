@@ -674,8 +674,10 @@ committed and pushed on its own, with its documents, before the next starts.
    addenda): **identical to the trip in every scenario and case**, because the incremental-logit
    pivot cancels the car's cost level (caveat 25) — the premise of C1 ("run the capture on the
    uplifted skim") has no purchase on this model; the car time would count only in a full
-   mode-choice formulation or a re-estimated person-level λ (step 33). The survey time stays
-   the default pending the provider's aggregation method.
+   mode-choice formulation or a re-estimated person-level λ (step 33). Step 33 was re-run on
+   the 2026 skim (`SK_DIR`, `Output/mode_choice/car_network/`, §6ae addendum): λ 0.040
+   (0.008–0.073) against 0.035, the choice riders' λ still not identified (0.011). The survey
+   time stays the default pending the provider's aggregation method.
 
 Not needed / not coming, by the user's decision on 23 September 2026: Metronit 2013 ridership,
 a stated-preference survey, parking supply, the cellular product's trip definition.
