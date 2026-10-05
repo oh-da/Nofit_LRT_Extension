@@ -3851,7 +3851,14 @@ transit / LRT GC matrices; per `{period}/{scenario}/{alt}_{regime}/` the car, tr
 Metronit trip matrices at TAZ and area level, `lrt_line_loads.csv`, `lrt_stations_boardings.csv`;
 `demand_summary.csv`; `LRT_alternatives_matrices.xlsx` and
 `reports/LRT_Alternatives_Demand_Report.docx` (`tools/build_alternatives_report.py`); figures
-`lrt_alternatives_{lines,demand,line_loads}.png`; `Output/gtfs/stop_times_study_area_{am,pm}_trips_v45.csv.gz`,
+`lrt_alternatives_{lines,demand,line_loads}.png`; **maps** in `Output/figures/alternatives/`
+(`tools/build_alternatives_maps.py`, 26 maps, also in the report's section 4): line loads by
+segment and direction with station boardings (AM 2022 / BU 2040 / HS 2050, PM BU 2040, the four
+combinations each), LRT trip origins, destinations and LRT share of transit by TAZ, the
+differences main route + extension − extension only and Prioritized − Unprioritized, the growth
+2022 → HS 2050 and AM against PM, and the time maps to the reference TAZ (the busiest LRT
+alighting station's, TAZ 1517 Matam) — LRT generalized time per combination, best bus / Metronit
+against the LRT with the difference, car AM / PM, and LRT ÷ car; `Output/gtfs/stop_times_study_area_{am,pm}_trips_v45.csv.gz`,
 `stop_times_study_area_rail_day.csv.gz`.
 
 **Limits.** The main route's stations and at-grade running are assumed (caveat 28); the forecast
@@ -4272,7 +4279,8 @@ BUS_TAZ_SOURCE=area_plus_walk jupyter nbconvert --to notebook --execute --output
 # the LRT alternatives (step 45; pull Input/GTFS/israel-public-transportation.zip and Input/Corridor_TAZ_Agg_V2.xlsx; Input/Main_Nofit is plain git; the GTFS extraction below is skipped when its outputs are committed; ≈ 3 minutes + 1 minute for the report; pip install python-docx)
 python3 tools/gtfs_extract_periods.py   # Output/gtfs/stop_times_study_area_{am,pm}_trips_v45.csv.gz and stop_times_study_area_rail_day.csv.gz (committed; rerun only with a new feed)
 jupyter nbconvert --to notebook --execute --inplace notebooks/current/LRT_alternatives_demand.ipynb
-python3 tools/build_alternatives_report.py
+python3 tools/build_alternatives_maps.py      # Output/figures/alternatives/*.png (≈ 1.5 minutes)
+python3 tools/build_alternatives_report.py    # the workbook and the Word report, maps included
 git checkout -- Output/figures/gc_first_fill_trunk_v2.png Output/figures/gc_bus_gtfs_vs_survey.png Output/figures/skims_logit_car_vs_transit.png Output/figures/skims_trunk_link_flows_bus_vs_lrt.png Output/figures/lrt_capture_forecast_2040_2050.png   # the alternative run redraws the default figures
 
 # regression test of the hybrid branch (committed outputs only)
