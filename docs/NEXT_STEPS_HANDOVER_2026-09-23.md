@@ -274,14 +274,14 @@ Effort: one day (most of it the OSM handling).
 nonlinear in access time and averaging the walk before applying it biases the area result:
 expect more capture within 500 m of a station and less beyond 1.5 km.
 
-**Update, 5 October 2026.** Step 44 (`LOS_skims_TAZ_and_V2.ipynb`, METHODOLOGY §6an) now
+**Update, 5 October 2026.** Step 44 (`LOS_skims_TAZ_and_V2.ipynb`, METHODOLOGY §6ao) now
 provides **TAZ-level car and transit skims for all 781 TAZs** (`Output/los/car_los_taz.csv.gz`,
 `transit_los_taz.csv.gz`: GC, IVT, walk, wait, transfers per pair) — so the car no longer has
 to be taken from the area skim, and the bus side can be taken at TAZ level too rather than as
 "area IVT + TAZ walk". Note caveat 26: aggregated back to the areas the TAZ-level transit GC is
 1.5 × step 31's, the gap being walk and wait, so a TAZ run on the step-31 transit components
 plus a TAZ walk will not reproduce the TAZ-routed cost; decide which bus skim the pivot uses
-and say so. **Run the same day** (`LRT_capture_TAZ.ipynb`, METHODOLOGY §6ao) under both:
+and say so. **Run the same day** (`LRT_capture_TAZ.ipynb`, METHODOLOGY §6ap) under both:
 on the step-44 bus skim 6,963 underground central vs 4,254 (the caveat-26 asymmetry, the LRT's
 feeder leg still the area's); on this section's construction 4,226 (0.99) with the access
 gradient 0.42 → 0.23 netting out. The regression check closes to 7 %, not 1 %: the bus-drawn
@@ -681,7 +681,7 @@ committed and pushed on its own, with its documents, before the next starts.
    how the hourly values were aggregated before treating `SPD_7` as the peak), and half the
    study-area links carry no speed (short local links; connectors and a fallback speed are
    needed where a path uses them). **Done the same day as step 37**
-   (`Car_skim_2026_network.ipynb`, METHODOLOGY §6am): routed on the bus street network's
+   (`Car_skim_2026_network.ipynb`, METHODOLOGY §6an): routed on the bus street network's
    topology with the car speeds transferred onto its segments (the car layer's own junctions do
    not connect), 30 km/h assumed on the uncovered local segments; trunk pairs 10.0 + 3 min
    terminal = 13.0 min vs the survey's 14.4 (ratio 0.90) — no 2026 uplift on this evidence;

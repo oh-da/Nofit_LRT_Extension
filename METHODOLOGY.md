@@ -73,8 +73,8 @@ notes saying which of their conclusions are overtaken.
 | Observed bus in-vehicle time (trips routed over the May 2026 link speeds) ÷ scheduled | per trip 1.09 (Metronit 0.87); hops < 500 m 1.00, > 2 km 1.42 — the link speeds include dwell, the long arterial hops run slower than the timetable; trunk pairs 12.7 vs 10.4 min demand-weighted | §6ab |
 | Complete skims, trunk pairs, trip-weighted GC (generalized minutes): car / bus / Metronit (its 72 pairs) / LRT underground / LRT ground | 14.5 / 27.4 / 23.4 / 43.9 / 51.5 | §6ac |
 | Complete skims, all 600 off-diagonal pairs, trip-weighted GC: car / bus / Metronit (278 pairs, 68 % of transit trips) / LRT underground / LRT ground | 19.5 / 37.6 / 30.6 / 62.8 / 68.0 (LRT off the line by feeder, Metronit feeder with a free transfer) | §6ac |
-| LRT capture at TAZ level (174 TAZs), underground central, 06:00–09:00 | 6,963 on the step-44 TAZ bus skim (× 1.64 the area level's 4,254, the caveat-26 effect); 4,226 on the area bus components with TAZ walks (0.99); regression check 3,970 (0.93: induced trips 130 vs 414, caveat 27); area level stays central | §6ao |
-| Car time 2017/18 survey (door-to-door) vs May 2026 network (07:00 speeds + 3 min terminal), trunk pairs trip-weighted / all 600 pairs | 14.4 vs 13.0 min (0.90) / 16.9 vs 16.1 (0.95); by distance 1.00 (< 3 km) … 0.83 (> 20 km) — no 2026 uplift; capture unchanged under the 2026 skim (the pivot cancels the car level) | §6am, §6ac addendum |
+| LRT capture at TAZ level (174 TAZs), underground central, 06:00–09:00 | 6,963 on the step-44 TAZ bus skim (× 1.64 the area level's 4,254, the caveat-26 effect); 4,226 on the area bus components with TAZ walks (0.99); regression check 3,970 (0.93: induced trips 130 vs 414, caveat 27); area level stays central | §6ap |
+| Car time 2017/18 survey (door-to-door) vs May 2026 network (07:00 speeds + 3 min terminal), trunk pairs trip-weighted / all 600 pairs | 14.4 vs 13.0 min (0.90) / 16.9 vs 16.1 (0.95); by distance 1.00 (< 3 km) … 0.83 (> 20 km) — no 2026 uplift; capture unchanged under the 2026 skim (the pivot cancels the car level) | §6an, §6ac addendum |
 | 2022 AM off-diagonal trips, 25 areas: car / transit (bus + rail) / taxi | 56,445 / 14,133 (share 0.200) / 720 — (13,778 with the OnBoard prior; 11,664 / 6,982 before the code correction) | §6ac |
 | Cost sensitivity λ from the 2022 cross-section (binary logit, transit share vs `GC_bus − GC_car`, 597 pairs / 70,200 trips) | wrong sign (−0.010, ρ² 0.002); with distance-band constants +0.008 (ρ² 0.027) — not identifiable; λ assumed 0.03 (range 0.02–0.05), λ_T = 2λ; person-level estimate in §6ae | §6ac |
 | LRT capture, central case (λ 0.03, λ_T 0.06, LRT premium 5, free LRT–Metronit transfer), 06:00–09:00 within the 25 areas: underground / ground trips (of which from bus / from car) | **4,250** (3,837 / 413) / **3,207** (2,973 / 234); λ range 3,161–6,028 (ug), 1,952–5,272 (ground); premium 0 / 10: 3,406 / 5,232 (ug) — (4,114 / 3,201 with the OnBoard prior; 3,332 / 2,544 before the code correction) | §6ac |
@@ -358,7 +358,7 @@ this session could vary is small enough to drop from a future full design.
 **Update, 5 October 2026 (step 43 — the May 2026 car speed network, clipped to the study area).**
 The first car-speed source arrived (`Input/CarSpeedData/GoogleSpeed_202605/`: 30,701 links for
 the whole country, a car speed per link, per hour 06:00–21:00 and per direction, May 2026 —
-the item §D-8 of the hand-over was waiting for). Step 43 (§6al, `Car_speed_network_North.ipynb`)
+the item §D-8 of the hand-over was waiting for). Step 43 (§6am, `Car_speed_network_North.ipynb`)
 verifies the column convention (`SPD_{h}_AB` / `SPD_{h}_BA` = the hour *h*:00–*h*+1:00, with /
 against the link geometry; `DIR` 1 / −1 / 0 as in the bus network, 0 = no observation), clips
 the layer to the links that intersect the `TAZ_North` polygons, kept whole (9,927 links,
@@ -374,7 +374,7 @@ speeds (caveat 24). No chain output changes; the car uplift (task C1 / E5) can n
 on this layer.
 
 **Update, 5 October 2026 (step 37 — car skims for 2026 on the May 2026 speeds, task C1 / E5).**
-The 25 V2 areas routed at the 07:00 car speeds (§6am, `Car_skim_2026_network.ipynb`): the car
+The 25 V2 areas routed at the 07:00 car speeds (§6an, `Car_skim_2026_network.ipynb`): the car
 layer's own junctions do not connect, so the routing runs on the bus street network's topology
 with the car speeds transferred onto its segments (85 % of the length covered, 68 % with an
 observed speed, 30 km/h assumed on the rest, ±1.5 min on the trunk at 20 / 40). Against the
@@ -394,7 +394,7 @@ person-level λ (step 33) — re-estimated on the 2026 skim the same day (§6ae 
 the provider's hourly aggregation (caveat 24).
 
 **Update, 5 October 2026 (step 44 — level of service at TAZ level and aggregated to the V2
-areas).** Car and transit skims for all 781 TAZs (§6an, `LOS_skims_TAZ_and_V2.ipynb`): the car
+areas).** Car and transit skims for all 781 TAZs (§6ao, `LOS_skims_TAZ_and_V2.ipynb`): the car
 on step 37's network between TAZ centroids, the transit as a frequency-based line graph of
 the GTFS bus and Metronit services with step 30's observed running times. Aggregated to the
 25 areas with population × employment weights and put beside step 31: the car agrees (trunk
@@ -408,7 +408,7 @@ pivot on the transit-side *change*, and both LRT and bus would carry the same ac
 correction); the TAZ-level skims are the input task C3 / step 39 needs, and the gap is caveat 26.
 
 **Update, 5 October 2026 (step 39 — TAZ-level LRT capture on the TAZ-level skims, task C3).**
-Step 31's pivot on the 174 corridor TAZs (§6ao, `LRT_capture_TAZ.ipynb`): bus from step 44's
+Step 31's pivot on the 174 corridor TAZs (§6ap, `LRT_capture_TAZ.ipynb`): bus from step 44's
 TAZ skim, LRT from the area skim with the TAZ's own station and stop walks, the TAZ pair's
 share smoothed towards the area pair's. On the step-44 bus skim the underground central case
 gives **6,963 LRT trips against 4,254** at the area level (× 1.64; ground 5,811, design
@@ -460,6 +460,7 @@ Every published product, what it was built from, and its status:
 | `mode_choice/car_network/*` | step 33, `SK_DIR=Output/skims/car_network` | `Input/THS_2017-2018/` trips, person and household tables × the step-31 skims on the 2026 car time | 25 V2 areas, person-level rows | car vs transit — λ estimates by specification and segment on the 2026 car skim | 2017/18 (survey), May 2026 (skims, car and bus) | **alternative estimate** — λ 0.040 (M1) vs 0.035; choice-rider λ still not identified |
 | `los/car_los_taz.csv.gz`, `transit_los_taz.csv.gz`, `los_taz_accessibility.csv`, `*_area_v2.csv`, `los_area_v2_pairs.csv`, `los_area_v2_vs_step31.csv` | step 44 | step 37's car network between TAZ centroids; GTFS AM services (step 29) with step 30's observed times as a line graph; `Zonal_2020` weights | 781 TAZs (609,180 pairs); 25 V2 areas | car: IVT, km, GC; transit (bus + Metronit): GC, IVT, walk, wait, transfers, Metronit share | May 2026 (car), 2 June 2026 (GTFS) | **current** — TAZ-level LOS for the first time; area aggregates beside step 31, not replacing it (caveat 26) |
 | `skims/taz/*`, `skims/taz/bus_area_plus_walk/*` | step 39 | `final_2022` TAZ layers × step 44's TAZ bus skim (or the area bus components + TAZ walks) × step 31's LRT area skims with TAZ station walks | 174 corridor TAZs (27,836 inter-area pairs) | LRT capture by regime × case, from bus / car, by area, trunk link, station, access band | 2022 | **diagnostic** — 6,963 (step-44 bus) / 4,226 (hand-over construction) vs 4,254 area level; not adopted (caveats 26, 27) |
+| `ovt_research/evidence_table.csv`, `parameter_summary.csv`, `parameter_sets.csv`, `chain_results.csv`, `extracts/*.md`; `skims/ovt_<set>/*`, `mode_choice/ovt_<set>/*` | OVT research (§6al) | five search-summary extracts (275 estimates, 20 verified) and steps 31 → 33 rerun on seven out-of-vehicle parameter sets | 25 V2 areas, 06:00–09:00; person-level λ per set | walk / wait weights, transfer and BRT–LRT penalties, station access: evidence by stream, proposed central / low / high, capture per set (1,456–4,935 underground), re-estimated λ (0.030–0.036) | 2022 | **sensitivity** — no parameter confirmed (nothing read in full), central case unchanged |
 
 The 25 GS zones (`Input/TAZ_GSnew.csv`) and the 25 retained research areas of the
 forecast tables are different geographies with the same matrix dimension; files are
@@ -502,7 +503,7 @@ validation against counts.
 | `../Network_with_Counts/Emme_Links_Final_Res 2026-09-23.{shp,dbf,shx,prj}` (in `Input/`, LFS, 74 MB dbf, added 23 Sep 2026) | The Emme highway network of the north with hourly traffic counts | 29,710 directional links (WGS 84; `INODE`–`JNODE`, `TYPE` 1–21 with 9 = centroid connector, `MODES`, `LANES`, `NAME` in Hebrew, UTF-8); counts in PCE per hour `YARAM6` … `YARAM19` on 3,241 links at 698 stations (`ID_COUNT`; `DATE` dd/mm/yyyy or an Excel serial, 2017–2022; `F2023COUNT` marks 2023 count files). Used by step 36 (§6ah) |
 | `../BusRavKav/May_2022/trips_table_2022-05-*.csv` (in `Input/`, LFS; moved from `Input/BusRavKav/` on 23 Sep 2026) | The May 2022 RavKav linked-journey files of step 8 | Unchanged content; step 8 and this document repointed |
 | `../BusSpeedData/Streets/Streets.shp`, `std_202605.csv` (in `Input/`, CSV in LFS, added 22 Sep 2026) | Bus link speeds, May 2026 | 161,534 national street links (Israel TM Grid; `USERID`, `DIR` = 1 with / −1 against / 0 both directions); 157,618 speed records joined on `USERID` (99.9 % match), 336 columns `d_{weekday}_h_{hour}_{AB,BA}` in km/h with 0 = no bus observation. `Readme.txt`: weekday 3, 07:00–08:00 = `d_3_h_7_AB` / `d_3_h_7_BA`. 54,507 links (5,632 km) fall in the study area, 48,092 with a speed |
-| `../CarSpeedData/GoogleSpeed_202605/GoogleSpeed.{shp,shx,dbf,prj}` (+ the delivered `.zip`; in `Input/`, plain git, added 5 Oct 2026) | Car link speeds, May 2026, the whole country | 30,701 links (Israel TM Grid; `ID` unique, `USERID` the id of one member segment of the bus street network above — 96 % of the study-area links are such merged segments, so not a one-to-one key; `DIR` = 1 with / −1 against / 0 both directions; `LENGTH` in km); 32 columns `SPD_{hour}_{AB,BA}` in km/h for the hours 6–21 (`SPD_7_AB` = 07:00–08:00 in the direction of the link geometry, `SPD_7_BA` against it), 0 = no observation in that hour or the closed direction of a one-way link, NaN on the 16,071 links without any record. One value per hour for the month, no weekday dimension. 9,927 links (4,996 km) intersect the `TAZ_North` polygons, 4,693 with a speed (80 % of the length); clipped by step 43 (§6al) to `Output/car_speed/` |
+| `../CarSpeedData/GoogleSpeed_202605/GoogleSpeed.{shp,shx,dbf,prj}` (+ the delivered `.zip`; in `Input/`, plain git, added 5 Oct 2026) | Car link speeds, May 2026, the whole country | 30,701 links (Israel TM Grid; `ID` unique, `USERID` the id of one member segment of the bus street network above — 96 % of the study-area links are such merged segments, so not a one-to-one key; `DIR` = 1 with / −1 against / 0 both directions; `LENGTH` in km); 32 columns `SPD_{hour}_{AB,BA}` in km/h for the hours 6–21 (`SPD_7_AB` = 07:00–08:00 in the direction of the link geometry, `SPD_7_BA` against it), 0 = no observation in that hour or the closed direction of a one-way link, NaN on the 16,071 links without any record. One value per hour for the month, no weekday dimension. 9,927 links (4,996 km) intersect the `TAZ_North` polygons, 4,693 with a speed (80 % of the length); clipped by step 43 (§6am) to `Output/car_speed/` |
 
 **Data-version note.** The activities file currently in the repository contains more
 records than the file used by the original `THS_2018_MTX.ipynb` Colab run: identical
@@ -2022,7 +2023,7 @@ alternative.
 
 **Addendum 7, 5 October 2026 — the car source switch (task C1 / E5, step 37).** `CAR_SOURCE`
 (environment variable; `'survey'` by default, `'network'`) selects the car in-vehicle time:
-the survey door-to-door skim of this section, or step 37's May 2026 network time (§6am) plus
+the survey door-to-door skim of this section, or step 37's May 2026 network time (§6an) plus
 `CAR_TERMINAL_MIN = 3.0` for parking and walking at both ends, the intra-area cells kept from
 the survey (the network skim has no intra-area path), status `measured` off the diagonal. Under
 `network` the survey time stays in the components table as `ivt_survey`, the inventory and
@@ -2698,7 +2699,7 @@ not documented in the repository. λ_T and the LRT premium are untouched by this
 `SK_DIR` (environment variable, default `Output/skims`) points this notebook at an alternate
 step-31 skim set; the outputs then go to `Output/mode_choice/<tag>/` and the figure carries the
 tag. Run with `SK_DIR=Output/skims/car_network` (the May 2026 network car time + 3 min in the
-car generalized cost, §6am; everything else unchanged, 2,310 rows, 543 households): the car
+car generalized cost, §6an; everything else unchanged, 2,310 rows, 543 households): the car
 cost falls, the cost handicap of transit widens, and λ moves up a little on every
 specification — M1 **0.040** per generalized minute (95 % 0.008–0.073; was 0.035, 0.002–0.068),
 M1b 0.048 (was 0.041), M3 0.060 (was 0.053), M1u 0.042 (was 0.042); by car-availability segment
@@ -3261,6 +3262,91 @@ full λ × premium cross. The synthetic-branches regime (task C6) is central-cas
 `OUT`-tagging gap that made two cells need a one-off, hand-copied run is a real (if minor)
 maintenance gap in step 31, left unfixed (see Method).
 
+## 6al. Out-of-vehicle weights and times — the research plan executed, and the chain rerun on seven parameter sets (`docs/OVT_WEIGHTS_RESEARCH_PLAN.md`, `docs/OVT_WEIGHTS_PARAMETER_MEMO.md`, tasks E4 / E7; 4 October 2026)
+
+**Purpose.** Close the inventory's "assumed (plan defaults)" row for the walk / wait weights and
+the transfer penalties (`Output/gc/gc_data_inventory.csv`, task E4) by the plan of 4 October
+2026: a literature and guidance review across five evidence streams, a normalised evidence
+table, a parameter memo with central / low / high per parameter, and the real chain (steps 31 →
+33) rerun on the resulting sets with λ re-estimated on each.
+
+**Method.** *Review.* Five parallel searches (walk weights and times; interchange and station
+access; wait, bus transfer and the appraisal guidance of eleven countries plus Israel; calibrated
+model configurations on GitHub; active-mode evidence) wrote one extract each
+(`Output/ovt_research/extracts/*.md`); `tools/ovt_build_evidence_table.py` consolidates their
+tables into `Output/ovt_research/evidence_table.csv` (275 estimates, plan §5.2 columns, rules N1
+/ N2 / N5 applied where the unit allowed). **The session's network policy blocked every document
+host** (gov.uk, gov.il, infocenters.co.il, ScienceDirect, ResearchGate, ITF, TRB, FTA, WSDOT,
+the university repositories; only raw.githubusercontent.com was reachable), so 255 of the 275
+rows are search-summary values marked unverified and 20 — the model configuration files of
+stream S4 (ActivitySim prototype_mtc, production_semcog, prototype_arc, prototype_mwcog, SANDAG
+ABM3, SimOR, PSRC, the SoundCast / SeaCast / PierceCast / BKRCast DaySim and Emme files, MTC
+TM1 / TM2, CMAP, MATSim, OpenTripPlanner, R5) — were read in full. *Model.* Step 31 now reads
+`W_WALK`, `W_WAIT`, `TRANSFER_PEN`, `BRT_LRT_TRANSFER_PEN`, a new LRT-side station walk weight
+`W_WALK_LRT` and a new station-access term `STATION_ACCESS_UG` / `STATION_ACCESS_GR` (minutes
+per LRT station end, added to the station walk and weighted by `W_WALK_LRT`; the mixed
+alignment applies the underground value at the S05–S14 core) from the environment, and
+`OVT_TAG` sends a non-default set to `Output/skims/ovt_<tag>/` (an untagged non-default set is
+refused, so the default outputs are only ever written by the default set). Step 33 reads
+`SKIM_DIR` and writes to `Output/mode_choice/ovt_<tag>/`. `tools/ovt_run_chain.py` runs both
+for every set in `Output/ovt_research/parameter_sets.csv` (≈ 80 s per set);
+`tools/ovt_chain_summary.py` collects the captures, the re-estimated λ and the capture at that λ
+(λ_T = 2λ), validating each set's capture formula against its own committed scenarios to under
+one trip. The default run reproduces the committed `Output/skims/` CSVs exactly. One latent
+defect was found and fixed on the way: the Metronit feeder's transfer penalty entered the
+feeder *choice* but not the path's generalized cost (harmless while it was 0 by assumption); the
+Metronit-leg count is now saved as `skim_lrt_*_brt_legs.csv` and charged
+`BRT_LRT_TRANSFER_PEN` per leg. Step 40 reads the `ovt_*` directories as a sixth factor.
+
+**Results.** *Evidence (memo §1, §3).* Walk weight: SP / RP meta-analyses ≈ 1.5–1.7 (Wardman
+2001 / 2004 1.66, 2016 urban 1.45, 2026 worldwide 1.50–1.75), guidance 1.5–2.0 (TAG, ATAP, TfNSW)
+to 2 (Sweden) and 2–3 (the Ministry guideline, of which the search found the published edition
+1.0 of 13 January 2026), calibrated models 2.0 (ten families, verified); no calibrated model
+uses a different walk weight for rail access than for bus — the rail preference is an in-vehicle
+multiplier (LRT 0.85–0.9) or a boarding penalty. Wait: empirical ≈ 1.5 (1.0–2.0), guidance
+1.4–2.5, models 1.5 or 2.0 with transfer wait ≥ initial, half-headway everywhere, the random-
+arrival threshold 5–11 min and a weight step rather than a time cap at 10 min. Bus transfer
+penalty: pure values 5–10 (London RP 5.0, Madrid 10.9), guidance 5–10, models ≈ 10. BRT ↔ LRT:
+no study exists; cross-platform proxies 3.6–5, level change 4.7–11. Station access: STOPS 0.5 min
+per level, Sound Transit 2-min rail boarding + 0.5 per escalator with OVT × 2, TM2 4.5-min LRT
+boarding (verified); physically 1–3 min per underground end. By the plan's rule (§1, §5.6) **no
+parameter is confirmed and every value stays**: walk 2.0 / wait 2.0 / transfer 8 are the
+practice median and inside every guidance range, while the two zero-valued terms (BRT–LRT
+transfer, station access) are below every reported value. *Chain (memo §4,
+`Output/ovt_research/chain_results.csv`; underground / ground, λ 0.03, premium 5, headway 5).*
+empirical_low (1.5 / 1.5 / 8) 4,935 / 3,765 (+16 % / +17 %); lrt_walk_weight (LRT walk 1.65,
+hypothesis only) 4,867 / 3,686; default 4,254 / 3,206; brt_lrt_penalty_only (4 min) 3,837 / 2,861
+(−10 % / −11 %); empirical_central (1.66 / 1.5 / 8 / 4 / 1.5, 0.5) 3,465 / 3,011 (−18 % / −6 %);
+station_access_only (1.5 / 0.5) 3,257 / 2,920 (−23 % / −9 %); guideline_central_plus_access
+(2 / 2 / 8 / 4 / 1.5, 0.5) 2,922 / 2,601 (−31 % / −19 %); guideline_high (2.5 / 2.5 / 10 / 7 / 3,
+0.5) 1,456 / 1,970 (−66 % / −39 %). The person-level λ (M1) moves only 0.030–0.036 across the
+sets (M3 0.049–0.053; M4 still not identified), so the assumed 0.03 stands under every set and the
+capture at the re-estimated λ is 0–10 % below the assumed-λ figure. In the step-40 tornado the
+OVT set is now the widest factor (range 3,479 trips, 1,456–4,935), ahead of λ / premium (2,865)
+and the regime (1,889). The screen's direction and order of magnitude (§2 of the plan) are
+confirmed by the chain; with the feeder paths re-optimised the penalty effects are a little
+softer per minute.
+
+**Outputs.** `docs/OVT_WEIGHTS_PARAMETER_MEMO.md`; `Output/ovt_research/` (`evidence_table.csv`,
+`parameter_summary.csv`, `parameter_sets.csv`, `chain_results.csv`, `extracts/` × 5);
+`Output/skims/ovt_<set>/` × 7 (full step-31 outputs per set, `ovt_parameters.csv` in each and
+in `Output/skims/`); `Output/mode_choice/ovt_<set>/` × 7; `Output/skims/skim_lrt_*_brt_legs.csv`;
+step 40's factorial (365 rows) and tornado updated; `tools/ovt_run_chain.py`,
+`tools/ovt_chain_summary.py`, `tools/ovt_build_evidence_table.py`; the inventory row and task E4
+updated.
+
+**Limits.** Nothing outside GitHub was read in full; every S1 / S2 / S3 / S5 number is a search-
+summary value, several of them contradicted by a neighbouring summary (flagged "CONFIRM" in the
+extracts), and the Israeli anchors — `נוהל פר"ת` 2012 and the Ministry guideline ed. 1.0 — are
+unread. The parameter sets are therefore sensitivities, not estimates, and the central case is
+unchanged. Slope-aware walk times (P3, task E6) stay blocked on the OSM extract and a DEM; the
+S5 extract §3 gives the method. The station-access term is coded without any station design,
+the BRT–LRT penalty without the interchange layout; both wait on the planning team (plan §8).
+Step 32 (forecast years) and step 26 (walk speed, detour, wait cap) were not rerun. The
+request letters of plan §8 were not sent. The premium interaction (plan §1) is reported, not
+resolved: the calibrated models' LRT in-vehicle multiplier of 0.85–0.9 is worth 1.4–2.1
+generalized minutes on the trunk against the model's 5-min premium.
+
 ## 6ai. Validation against the Ministry of Transport guideline, waves 1, 1b, 2 and 3 (T1-T12, T14-T17, T19; `MOT_Validation_Stage1_Inputs_Distribution`, `_Stage1d_Zones_Population_Rates`, `_Stage2_Timing`, `_Stage2c_Mode_Occupancy_Convergence`, `_Stage3_Counts_Transit`, `_Stage4_Link_volumes`, diagnostics)
 
 **Purpose.** The Ministry of Transport's validation guideline for the metropolitan models (draft 6, 16 September 2024) lists, per model stage, the
@@ -3427,7 +3513,7 @@ Counts: PCE / 1.10 on the 3,231 counted road links; count year read from `DATE` 
 **Why it misses (all stated, none adjusted):** the layer is a residents' personal-car trip table with both ends inside the study area (no through, external, commercial or taxi traffic); one path per zone pair with no congestion and no choice between near-equal routes; 778 zones whose centroid connectors decide where trips enter the network; 20.6 % of trips are intra-TAZ and load nothing; the speeds are assumed. A link-level fit at the guideline's level needs an equilibrium assignment with the model's own volume-delay functions and the external and commercial matrices, which are not part of this project.
 **Not run in wave 3 (no input in the repository):** T13 (the Google sample needs `GOOGLE_MAPS_API_KEY`, step 37), T18 (the Operator 22 AVL hold-out data, open question 5), the CBS parts of T2 / T3 (standing request 6), and **T15, T16 and T17 outside the AM**: the 2025 smart-card extracts contain only the taps 06:00-08:59 (checked on the Metronit file: hours 06, 07, 08 only), so a PM or midday comparison needs new extracts from the provider; the T17 timetable comparison needs steps 29-30 re-run for the window.
 
-## 6al. Step 43 — The May 2026 car speed network: clipped to the study area, hourly link speeds by direction (`Car_speed_network_North.ipynb`)
+## 6am. Step 43 — The May 2026 car speed network: clipped to the study area, hourly link speeds by direction (`Car_speed_network_North.ipynb`)
 
 **Purpose.** A car speed network for the whole country was delivered on 5 October 2026
 (`Input/CarSpeedData/GoogleSpeed_202605/`): a measured car speed per link, per hour of the day
@@ -3486,13 +3572,13 @@ lightly modulated by hour rather than hour-specific measurements — the provide
 documented with the delivery and should be asked for before the 07:00 values are used as peak
 speeds (caveat 24). No speeds before 06:00 or after 22:00.
 
-## 6am. Step 37 — Car skims for 2026: the V2 areas routed over the May 2026 car link speeds (`Car_skim_2026_network.ipynb`, task C1 / E5)
+## 6an. Step 37 — Car skims for 2026: the V2 areas routed over the May 2026 car link speeds (`Car_skim_2026_network.ipynb`, task C1 / E5)
 
 **Purpose.** A 2026 car time per V2 area pair, to measure the uplift on the 2017/18 survey
 door-to-door car skim that steps 26, 31 and 32 use, and to run the capture on it (task C1 /
 E5; the Google Distance Matrix route of the hand-over's C1 was structurally unavailable for a
 past month, and the item waited on a car-network source, §D-8). The source is the May 2026 car
-speed network of step 43 (§6al).
+speed network of step 43 (§6am).
 
 **Method.** *The network.* The car layer's merge did not keep the junctions (at a metre's
 tolerance 22 % of its end points connect; the junction gap is 10–20 m, the two carriageways of
@@ -3561,7 +3647,7 @@ points with no explicit intersection delay against a reported door-to-door time 
 addresses — different quantities, so the ratio is an uplift only to the extent the terminal
 allowance closes that gap, and on the short pairs it does not.
 
-## 6an. Step 44 — Level of service for car and transit at two levels: the 781 TAZs and the 25 V2 areas (`LOS_skims_TAZ_and_V2.ipynb`)
+## 6ao. Step 44 — Level of service for car and transit at two levels: the 781 TAZs and the 25 V2 areas (`LOS_skims_TAZ_and_V2.ipynb`)
 
 **Purpose.** The chain's level of service lives on the 25 V2 areas, routed between one
 representative point per area (§6x, §6ac). This step builds the same quantities **at TAZ
@@ -3621,11 +3707,11 @@ trips. The chain's area skims are not replaced: the capture pivot cancels the ca
 (caveat 25) and the transit-side gap above is a finding for task C3, not a correction applied
 here (caveat 26).
 
-## 6ao. Step 39 — TAZ-level LRT capture on the 174 corridor TAZs, on the TAZ-level skims (`LRT_capture_TAZ.ipynb`, task C3 / A2 / E6)
+## 6ap. Step 39 — TAZ-level LRT capture on the 174 corridor TAZs, on the TAZ-level skims (`LRT_capture_TAZ.ipynb`, task C3 / A2 / E6)
 
 **Purpose.** Step 31's pivot on the 174 V2 TAZs instead of the 25 areas (hand-over C3), because
 the logit is nonlinear in access time and averaging the walk over an area before applying it
-biases the result; run on the TAZ-level skims of step 44 (§6an).
+biases the result; run on the TAZ-level skims of step 44 (§6ao).
 
 **Method.** *Costs per TAZ pair.* Bus: step 44's TAZ transit skim, the best bus / Metronit path
 from the TAZ centroid with its own walk, wait and transfers (`BUS_TAZ_SOURCE='los'`, default);
@@ -3906,7 +3992,7 @@ Added 23 September 2026 (step 33):
 
 23. **The car layer does not reproduce the link counts' pattern** (§6ai wave 3, T11; step 42 done). All-or-nothing assignment on the Emme network (assumed free-flow speeds by link type): assigned / counted 0.93 on the 1,346 links counted 2021-2023 (slope 0.89), but R2 0.47 and RMSE% 113 against 0.85 and 35, and no peak-hour volume class inside its limit; one global factor does not help. The layer is residents' car trips without externals, trucks, taxis or intra-TAZ trips, so it should not be used as an assignment matrix for link forecasts without the missing demand components and an equilibrium assignment; corridor-level flows should be read through the cordon and screenline comparisons (T12) and the survey's own corridor profiles, not from individual link loads. The 2025 RavKav extracts hold 06:00-08:59 only, so T15-T17 cannot be extended to the PM and midday without new extracts.
 
-24. **The May 2026 car speeds are nearly the same in every hour** (§6al, step 43). On the links
+24. **The May 2026 car speeds are nearly the same in every hour** (§6am, step 43). On the links
     observed in every hour the speed moves by a median of 2.3 km/h across 06:00–21:00 (p90 8.8,
     constant on 739 of 8,660), and the study-area means per hour sit within 0.2 km/h of each
     other — no morning-peak dip. The delivery holds one value per hour for the month, with no
@@ -3931,7 +4017,7 @@ Added 23 September 2026 (step 33):
     0.02–0.05 range stand on either car skim.
 
 26. **The area-level transit skim understates the generalized cost a traveller from a given
-    TAZ faces** (§6an, step 44). Routed TAZ by TAZ and aggregated with population × employment
+    TAZ faces** (§6ao, step 44). Routed TAZ by TAZ and aggregated with population × employment
     weights, the transit GC on the trunk pairs is 45.2 generalized minutes against step 31's
     29.8 (pooled wait) / 34.9 (best-line wait), a median pair ratio of 1.5, with the same
     in-vehicle time and transfer count: the area skim combines the nearest stop's walk, the
@@ -3941,12 +4027,12 @@ Added 23 September 2026 (step 33):
     LRT is added, and the LRT's own area skim carries the same kind of access averaging — but
     the bus-versus-LRT comparison within the nest (`P_LRT|T`) is sensitive to it, and the
     direction is not obvious: the LRT's station access is already TAZ-weighted (step 25), the
-    bus's is not. Step 39 (§6ao) ran the TAZ-level capture on `Output/los/`: with the bus at
+    bus's is not. Step 39 (§6ap) ran the TAZ-level capture on `Output/los/`: with the bus at
     the TAZ-routed cost and the LRT on the area skim the capture rises × 1.64 (6,963), with the
     bus on the area components plus TAZ walks it stays (4,226) — the gap is the asymmetry, and
     closing it needs the LRT's feeder leg and in-vehicle time at TAZ level too.
 
-27. **The trips the pivot induces from the car depend on the level it is run at** (§6ao, step
+27. **The trips the pivot induces from the car depend on the level it is run at** (§6ap, step
     39). With every TAZ pair given its area pair's skims, the TAZ-level pivot returns the area
     result's trips from the bus exactly but only 130 of its 414 induced trips (underground
     central; 77 of 234 ground, 187 of 614 design): the incremental shift is proportional to
@@ -4040,6 +4126,8 @@ jupyter nbconvert --to notebook --execute --inplace notebooks/current/LRT_captur
 
 # person-level mode choice (step 33; needs git lfs pull --include="Input/THS_2017-2018/*" and pip install statsmodels; reads step 31's skims)
 jupyter nbconvert --to notebook --execute --inplace notebooks/current/Mode_choice_person_level.ipynb
+# out-of-vehicle parameter sets through steps 31 -> 33 (§6al; needs the step-33 inputs above plus nbformat, nbclient, ipykernel); then the summary and the evidence table
+python3 tools/ovt_run_chain.py && python3 tools/ovt_chain_summary.py && python3 tools/ovt_build_evidence_table.py
 # the matrix tests on today's products (step 35, diagnostics; needs the THS trips file, the keys and the committed outputs of steps 8, 9, 15, 16, 22, 34; ≈ 4 minutes;
 # the cellular pair of §3 needs git lfs pull --include="Input/Matrices/AvgDayHourlyTrips201819_1270_weekday_v1.csv" once — the converted matrix is then saved under Output/ths2017/study_taz/)
 jupyter nbconvert --to notebook --execute --inplace notebooks/diagnostics/THS_vs_RavKav_2025_tests.ipynb

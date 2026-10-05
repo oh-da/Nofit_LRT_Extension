@@ -44,8 +44,8 @@ Key facts driving the list (2017 trips-file hybrid, `Output/ths2017/study_taz/`)
   - [~] Build network skims (walk, car, existing bus, rail, proposed LRT) for the corridor
         TAZs; replace centroid-distance bands in `Base_mode_shares_2022.ipynb`. *TAZ-level car
         and transit (bus + Metronit) skims for all 781 TAZs done 2026-10-05 by step 44
-        (`LOS_skims_TAZ_and_V2.ipynb`, §6an, `Output/los/`), and the capture run on them by
-        step 39 (`LRT_capture_TAZ.ipynb`, §6ao): 6,963 vs 4,254 on the step-44 bus skim, 4,226
+        (`LOS_skims_TAZ_and_V2.ipynb`, §6ao, `Output/los/`), and the capture run on them by
+        step 39 (`LRT_capture_TAZ.ipynb`, §6ap): 6,963 vs 4,254 on the step-44 bus skim, 4,226
         on the area components + TAZ walks — not adopted (caveats 26, 27); the LRT's feeder leg
         and in-vehicle time at TAZ level are what remain.* *Done at
         area level: car door-to-door from the survey (smoothed), bus fastest-path IVT on the
@@ -224,7 +224,7 @@ Key facts driving the list (2017 trips-file hybrid, `Output/ths2017/study_taz/`)
 - [ ] **E6. LRT access model** — replace the centroid-to-nearest-station walk with a walking
       network, feeder-bus access from the GTFS (bus to the nearest station + transfer) and
       park-and-ride where the station plan allows; this is what the generalized-cost
-      comparison now turns on. *Partly addressed 2026-10-05: step 39 (§6ao) applies the
+      comparison now turns on. *Partly addressed 2026-10-05: step 39 (§6ap) applies the
       TAZ's own station walk per TAZ (the gradient 0.42 within 500 m → 0.23 beyond 1.5 km
       nets out over the areas); feeder access by bus is still the area-level leg, and the
       walking network (C2) is still open.*
@@ -254,13 +254,23 @@ Key facts driving the list (2017 trips-file hybrid, `Output/ths2017/study_taz/`)
       cost and parking are excluded on the same decision (METHODOLOGY §6x addendum 4). Still
       open from this item: confirm the walk / wait / transfer weights against נוהל פר"ת.
 - [~] **E5. Car skim vintage** — the survey door-to-door times are 2017 / 18; a small
+      *OVT research run on 4 October 2026 (`docs/OVT_WEIGHTS_RESEARCH_PLAN.md`,
+      `docs/OVT_WEIGHTS_PARAMETER_MEMO.md`, METHODOLOGY §6al): 275 estimates collected, seven
+      parameter sets rerun through steps 31 and 33. Nothing could be read in full from the
+      session (network policy), so by the plan's rule every weight keeps its value and the
+      evidence range is a sensitivity: the LRT capture (underground) spans ≈ −58 % to +16 % of
+      the central 4,254 across the sets, the two zero-valued terms (BRT–LRT transfer, station
+      access) being the largest single items. נוהל פר"ת 2012 and the Ministry guideline
+      ed. 1.0 (January 2026) still have to be read; the station and interchange design is the
+      other input.*
+- [ ] **E5. Car skim vintage** — the survey door-to-door times are 2017 / 18; a small
       Google Distance Matrix sample (≈ 40 pairs, Tuesday 07:30) or the national model's
       car skim gives the 2026 uplift. *Data in hand since 2026-10-05: a May 2026 car speed
       network for the whole country (`Input/CarSpeedData/GoogleSpeed_202605/`; a speed per
       link, hour 06:00–21:00 and direction), clipped to the study area by step 43
       (`Car_speed_network_North.ipynb`, METHODOLOGY §6al; 9,927 links, 4,693 with a speed,
       `Output/car_speed/`). Routed 2026-10-05 by step 37 (`Car_skim_2026_network.ipynb`,
-      METHODOLOGY §6am): on the 90 trunk pairs the 2026 network time + 3 min terminal is
+      METHODOLOGY §6an): on the 90 trunk pairs the 2026 network time + 3 min terminal is
       13.0 min against the survey's 14.4 (ratio 0.90; 0.95 on all pairs) — no uplift on this
       evidence; the chain rerun on the 2026 skim (`CAR_SOURCE=network`,
       `Output/skims/car_network/`) is reported in §6ac / §6ad addenda: the capture is

@@ -1,0 +1,6 @@
+car_seg,trip rows,expanded (avg day),transit share (weighted),transit share (unweighted),mean dGC (weighted)
+car_available,807.0000,22525.8612,0.0192,0.0211,18.4235
+competition,636.0000,20334.1265,0.1090,0.0833,18.5026
+no_car_hh,319.0000,10282.6279,0.6886,0.5925,16.2947
+no_licence,556.0000,13872.4841,0.2168,0.1691,11.1552
+all,2319.0000,67058.7043,0.1899,0.1522,16.6082

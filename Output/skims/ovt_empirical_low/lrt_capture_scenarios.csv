@@ -1,0 +1,31 @@
+scenario,case,λ,λ_T,LRT premium,LRT trips 06–09,of which from bus,of which from car,bus trips after,car trips after,transit share before,transit share after,LRT share of transit,LRT trips on trunk pairs,trunk pairs P_LRT|T (trip-wtd)
+LRT all underground,"central (λ 0.03, λ_T 0.06, premium 5)",0.03,0.06,5.0,4935,4372,563,10647,54996,0.2003,0.2208,0.317,2169,0.411
+LRT all underground,"low λ (0.02 / 0.03, premium 5)",0.02,0.03,5.0,6498,5432,1066,10268,53812,0.2003,0.2376,0.388,2564,0.455
+LRT all underground,"high λ (0.05 / 0.10, premium 5)",0.05,0.1,5.0,4050,3596,453,11218,55310,0.2003,0.2163,0.265,1860,0.357
+LRT all underground,"no premium (λ central, premium 0)",0.03,0.06,0.0,3991,3622,368,11270,55318,0.2003,0.2162,0.262,1750,0.341
+LRT all underground,premium 10 (λ central),0.03,0.06,10.0,6016,5181,835,9960,54602,0.2003,0.2264,0.377,2645,0.484
+LRT all ground,"central (λ 0.03, λ_T 0.06, premium 5)",0.03,0.06,5.0,3765,3440,325,11427,55386,0.2003,0.2153,0.248,1509,0.298
+LRT all ground,"low λ (0.02 / 0.03, premium 5)",0.02,0.03,5.0,5702,4879,824,10708,54168,0.2003,0.2325,0.347,2142,0.392
+LRT all ground,"high λ (0.05 / 0.10, premium 5)",0.05,0.1,5.0,2549,2365,185,12244,55785,0.2003,0.2096,0.172,994,0.201
+LRT all ground,"no premium (λ central, premium 0)",0.03,0.06,0.0,2991,2786,205,11956,55631,0.2003,0.2118,0.2,1190,0.24
+LRT all ground,premium 10 (λ central),0.03,0.06,10.0,4678,4177,501,10821,55079,0.2003,0.2196,0.302,1887,0.362
+LRT design 50 km/h,"central (λ 0.03, λ_T 0.06, premium 5)",0.03,0.06,5.0,5849,5034,815,10065,54664,0.2003,0.2255,0.368,2656,0.484
+LRT design 50 km/h,"low λ (0.02 / 0.03, premium 5)",0.02,0.03,5.0,7062,5801,1261,9963,53554,0.2003,0.2412,0.415,2841,0.492
+LRT design 50 km/h,"high λ (0.05 / 0.10, premium 5)",0.05,0.1,5.0,5418,4567,851,10355,54805,0.2003,0.2235,0.343,2645,0.474
+LRT design 50 km/h,"no premium (λ central, premium 0)",0.03,0.06,0.0,4803,4250,553,10732,55043,0.2003,0.2201,0.309,2185,0.412
+LRT design 50 km/h,premium 10 (λ central),0.03,0.06,10.0,7020,5856,1164,9349,54209,0.2003,0.2319,0.429,3175,0.557
+LRT design 50 km/h + accel/braking,"central (λ 0.03, λ_T 0.06, premium 5)",0.03,0.06,5.0,4986,4410,576,10614,54978,0.2003,0.221,0.32,2196,0.415
+LRT design 50 km/h + accel/braking,"low λ (0.02 / 0.03, premium 5)",0.02,0.03,5.0,6530,5454,1077,10250,53797,0.2003,0.2378,0.389,2580,0.457
+LRT design 50 km/h + accel/braking,"high λ (0.05 / 0.10, premium 5)",0.05,0.1,5.0,4122,3651,470,11171,55285,0.2003,0.2167,0.27,1901,0.364
+LRT design 50 km/h + accel/braking,"no premium (λ central, premium 0)",0.03,0.06,0.0,4035,3658,377,11240,55303,0.2003,0.2164,0.264,1774,0.346
+LRT design 50 km/h + accel/braking,premium 10 (λ central),0.03,0.06,10.0,6073,5221,852,9925,54581,0.2003,0.2267,0.38,2675,0.488
+LRT mixed (Haifa core underground),"central (λ 0.03, λ_T 0.06, premium 5)",0.03,0.06,5.0,4131,3742,389,11175,55273,0.2003,0.2169,0.27,1823,0.354
+LRT mixed (Haifa core underground),"low λ (0.02 / 0.03, premium 5)",0.02,0.03,5.0,5946,5052,894,10566,54066,0.2003,0.234,0.36,2353,0.424
+LRT mixed (Haifa core underground),"high λ (0.05 / 0.10, premium 5)",0.05,0.1,5.0,2989,2751,238,11929,55659,0.2003,0.2114,0.2,1369,0.272
+LRT mixed (Haifa core underground),"no premium (λ central, premium 0)",0.03,0.06,0.0,3300,3052,247,11738,55541,0.2003,0.2131,0.219,1453,0.289
+LRT mixed (Haifa core underground),premium 10 (λ central),0.03,0.06,10.0,5101,4508,593,10538,54939,0.2003,0.2216,0.326,2253,0.424
+LRT + synthetic branches (task C6),"central (λ 0.03, λ_T 0.06, premium 5)",0.03,0.06,5.0,4674,4161,514,10912,54992,0.2003,0.2208,0.3,2169,0.411
+LRT + synthetic branches (task C6),"low λ (0.02 / 0.03, premium 5)",0.02,0.03,5.0,6437,5348,1089,10418,53722,0.2003,0.2388,0.382,2564,0.455
+LRT + synthetic branches (task C6),"high λ (0.05 / 0.10, premium 5)",0.05,0.1,5.0,3479,3136,343,11689,55410,0.2003,0.2149,0.229,1860,0.357
+LRT + synthetic branches (task C6),"no premium (λ central, premium 0)",0.03,0.06,0.0,3732,3403,329,11524,55322,0.2003,0.2162,0.245,1750,0.341
+LRT + synthetic branches (task C6),premium 10 (λ central),0.03,0.06,10.0,5773,4995,778,10221,54584,0.2003,0.2266,0.361,2645,0.484

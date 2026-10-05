@@ -1,6 +1,8 @@
 # Research plan — confirming the out-of-vehicle weights and times for transit
 
-*4 October 2026. Status: **plan, not yet executed.** Only the sensitivity screen (§2) and a first scan of sources (§4) have been done. This plan closes the open item "confirm the walk / wait / transfer weights against `נוהל פר"ת`" (`docs/CORRIDOR_DEMAND_TASKS.md` E4; `Output/gc/gc_data_inventory.csv`, row `all, weights`: "assumed (plan defaults)").*
+*4 October 2026. Status: **executed on 4 October 2026 within the limits of a cloud session** — see `docs/OVT_WEIGHTS_PARAMETER_MEMO.md` for the outcome per parameter, `Output/ovt_research/` for the evidence table (275 estimates), the extracts, the parameter sets and the chain reruns, and METHODOLOGY §6al. What was done: P0–P2 and P4 as a search-summary review (the session's network policy blocked every document host, so no study, guideline or Israeli document was read in full; only the model configuration files of stream S4 were read and verified), P3 as an evidence review only (slope-aware walk times stay blocked on the OSM extract and DEM, task E6), and P5 in full for steps 31 and 33 (seven parameter sets through the real chain, λ re-estimated on each). Under the plan's own rule (§1, §5.6) no unverified lead is used as an input, so **every parameter keeps its current value and the evidence range is carried as a sensitivity**; the inputs of §8 remain outstanding. The original plan text follows unchanged.*
+
+*Original status line: plan, not yet executed. Only the sensitivity screen (§2) and a first scan of sources (§4) have been done.* This plan closes the open item "confirm the walk / wait / transfer weights against `נוהל פר"ת`" (`docs/CORRIDOR_DEMAND_TASKS.md` E4; `Output/gc/gc_data_inventory.csv`, row `all, weights`: "assumed (plan defaults)").*
 
 ## 1. Aim, scope and what "confirmed" means
 
