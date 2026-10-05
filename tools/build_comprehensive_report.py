@@ -17,10 +17,14 @@ OUT = 'Output/alternatives'; FIG = 'Output/figures'; CFIG = f'{FIG}/comprehensiv
 SCEN = ['BU_2040', 'BU_2050', 'HS_2040', 'HS_2050']; SCEN_LAB = {'2022': '2022', 'BU_2040': '2040 BU', 'BU_2050': '2050 BU', 'HS_2040': '2040 HS', 'HS_2050': '2050 HS'}
 ALT, REG = 'main_ext', 'prioritized'; REG_LAB = {'prioritized': 'Prioritized', 'unprioritized': 'Unprioritized'}
 summary = pd.read_csv(f'{OUT}/demand_summary.csv'); route = pd.read_csv(f'{OUT}/time_on_route.csv'); skims = pd.read_csv(f'{OUT}/skims_summary.csv')
+# the bus-slowdown sensitivity (step 45 rerun with BUS_SLOWDOWN, ALT_OUT=Output/alternatives_bus_slow): mixed-traffic buses 10 % slower in 2040, 20 % in 2050
+SLOW_OUT = 'Output/alternatives_bus_slow'; SLOW_FACTORS = {'BU_2040': 1.10, 'BU_2050': 1.20, 'HS_2040': 1.10, 'HS_2050': 1.20}
+summary_slow = pd.read_csv(f'{SLOW_OUT}/demand_summary.csv') if os.path.exists(f'{SLOW_OUT}/demand_summary.csv') else None
 stations = pd.read_csv(f'{OUT}/stations_main_ext.csv')
 xl = pd.ExcelFile('Input/Corridor_TAZ_Agg_V2.xlsx', engine='openpyxl'); names = xl.parse('AreaCodes').set_index('AggCode')['AggAreaName']
-def srow(p, sc, reg=REG, alt='Main'):
-    s = summary[(summary.period == p) & (summary.scenario == sc) & (summary.alternative.str.startswith(alt)) & (summary.regime.str.startswith(REG_LAB[reg]))]
+def srow(p, sc, reg=REG, alt='Main', src=None):
+    src = summary if src is None else src
+    s = src[(src.period == p) & (src.scenario == sc) & (src.alternative.str.startswith(alt)) & (src.regime.str.startswith(REG_LAB[reg]))]
     assert len(s) == 1, (p, sc, reg, alt); return s.iloc[0]
 # peak-hour factors (tools/peak_hour_factors_periods.py: step 27's method on the AM and PM windows). Every chart is drawn for the peak hour
 # of its period: line loads by the network bus factor of the direction (the LRT and total transit alike, the chain's convention since step 31),
@@ -321,7 +325,10 @@ for p in ['AM', 'PM']:
     P('Demand after the LRT and the share of each mode (of car + transit on the corridor market):').runs[0].font.italic = True
     b = t[['scenario', 'car after', 'BRT after', 'LRT', 'bus after', 'total transit after']].copy()
     for c in ['car share', 'BRT share', 'LRT share', 'bus share', 'transit share', 'LRT share of transit']: b[c] = t[c] * 100
-    table(b, {c: '{:.1f} %' for c in ['car share', 'BRT share', 'LRT share', 'bus share', 'transit share', 'LRT share of transit']}, font=7)
+    if summary_slow is not None:
+        b['LRT, buses slower (sensitivity)'] = [srow(p, sc, REG, src=summary_slow)['LRT'] if sc in SLOW_FACTORS else np.nan for sc in ['2022'] + SCEN]
+        b['LRT share of transit, buses slower'] = [srow(p, sc, REG, src=summary_slow)['LRT'] / srow(p, sc, REG, src=summary_slow)['total transit'] * 100 if sc in SLOW_FACTORS else np.nan for sc in ['2022'] + SCEN]
+    table(b, {**{c: '{:.1f} %' for c in ['car share', 'BRT share', 'LRT share', 'bus share', 'transit share', 'LRT share of transit']}, 'LRT share of transit, buses slower': '{:.1f} %'}, font=7)
     P('The extension part, as part of the through line:').runs[0].font.italic = True
     c = t[['scenario', 'LRT', 'LRT (peak hour)', 'LRT using the extension', 'LRT using the extension (peak hour)', 'ext: from car', 'ext: from BRT', 'ext: from bus', 'LRT within the extension', 'busiest segment (3 h, one direction)', 'busiest segment (peak hour, one direction)']].copy()
     c['extension share of LRT trips'] = t['LRT using the extension'] / t['LRT'] * 100
@@ -330,7 +337,8 @@ for p in ['AM', 'PM']:
 portrait()
 P('Reading the tables. "Before" is the scenario\'s no-build market (car, bus incl. rail, BRT = Metronit) on the corridor TAZ pairs; the three shift columns are the trips the pivot moves to the LRT from each; "after" is what remains plus the LRT. '
   '"car → transit" is the trips the logsum improvement moves out of the car; "car → LRT" is the part of them the LRT itself carries (the rest board the bus or Metronit path of their pair). "BRT → LRT" and "bus → LRT" are the LRT trips drawn from existing transit on the pairs whose transit path is Metronit-based or bus-based; the three LRT columns add up to the LRT total. Taxi-type trips (about 700) are carried unchanged and are outside the shares. '
-  'The extension columns count the LRT trips of the same run that ride at least one segment between S01 and S24 (from either end of the line), and separately those with both ends at extension stations.')
+  'The extension columns count the LRT trips of the same run that ride at least one segment between S01 and S24 (from either end of the line), and separately those with both ends at extension stations. '
+  'The last two columns of the demand table are the bus-slowdown sensitivity of 4.6 (mixed-traffic buses 10 % slower in 2040 and 20 % in 2050, Metronit and LRT unchanged); the 2022 row has no such case.')
 P('A note on the car column. The AM shift from the car doubles between 2040 BU and 2050 BU (684 → 1,421) and between 2040 BU and 2040 HS (684 → 1,387) while the market grows by 16 % and 4 %. This is not a demand effect but the aggregation effect of caveat 27 seen across scenarios: '
   'the incremental shift of a TAZ pair is proportional to S·(1 − S) of its smoothed transit share, and the forecast sets of step 23 seed trips into TAZ pairs that are empty in 2022 (small-base and transforming TAZs receive the super-zone pattern), so the number of corridor pairs with both car and transit trips rises from 1,620 (2022) to 2,084 (2040 BU), 2,942 (2050 BU), 4,970 (2040 HS) and 5,688 (2050 HS) and the trip-weighted S·(1 − S) from 0.048 to 0.062. '
   'The PM sets, grown pair by pair from the PM base, keep the 2022 pair set and show a smooth car column (666 → 880). The car shift should therefore be read as an order of magnitude (300–1,300 trips, 0.4–1.5 % of the corridor car trips), not compared between scenarios (caveat 29).')
@@ -365,11 +373,30 @@ for p in ['AM', 'PM']:
                      'from car, Prioritized': a['LRT from car'], 'from car, Unprioritized': b['LRT from car']})
 table(pd.DataFrame(rows), {'ratio': '{:.2f}'}, font=7)
 P('Table 4.3 — LRT trips in the two regimes of the extension. The Unprioritized regime (at-grade running, 65.8 min end to end on the extension against 40.7) loses about a fifth of the LRT trips, most of it on the extension itself.').runs[0].font.size = Pt(8)
-H('4.6 Time on route', 2)
+H('4.6 Sensitivity: slower buses in 2040 and 2050', 2)
+P('Every scenario year runs on the May 2026 level of service: the car and the buses are as fast in 2050 as today while the corridor demand grows by 30–60 %. This is the "do-minimum network" convention, kept because the 2040 road and transit network of the regional model is not available and degrading today\'s network with tomorrow\'s demand while leaving out every planned scheme would be the worse assumption. '
+  'Two things follow. First, a slower car would change nothing in this model: the pivot moves trips on the change of the transit bundle only, and the car\'s level enters through the observed 2022 shares (caveat 25); making the car count needs a no-build mode-choice step (handover item D-11). '
+  'Second, slower buses do count: a bus in mixed traffic that slows with the road raises the bus generalized cost, while the Metronit on its lanes and a Prioritized LRT keep their times, so both the LRT share within transit and the draw from the car rise. The central assumption is therefore conservative for the LRT.')
+P('The sensitivity: step 45 rerun with the running time of every bus ride that is not the Metronit multiplied by 1.10 in 2040 and 1.20 in 2050 (both BU and HS), the Metronit and the LRT unchanged, the bus feeder legs of the LRT paths slowed with the buses. '
+  'The factors are a reading of a standard volume–delay curve for a road demand growing by 1.3–1.6 × from about 80 % of capacity, not a calibrated value: the May 2026 car speeds hardly move by hour (caveat 24) and cannot calibrate one. Source: Output/alternatives_bus_slow/demand_summary.csv.')
+if summary_slow is not None:
+    rows = []
+    for p in ['AM', 'PM']:
+        for sc in SCEN:
+            a, b = srow(p, sc, REG), srow(p, sc, REG, src=summary_slow)
+            rows.append({'period': p, 'scenario': SCEN_LAB[sc], 'bus factor': SLOW_FACTORS[sc], 'LRT central': a['LRT'], 'LRT, buses slower': b['LRT'], 'ratio': b['LRT'] / a['LRT'],
+                         'from car, central': a['LRT from car'], 'from car, buses slower': b['LRT from car'], 'from bus/BRT, central': a['LRT from bus/BRT'], 'from bus/BRT, buses slower': b['LRT from bus/BRT'],
+                         'using the extension, central': a['LRT trips using the extension (at least one segment S01–S24)'], 'using the extension, buses slower': b['LRT trips using the extension (at least one segment S01–S24)'],
+                         'transit share after, central': a['total transit'] / (a['car'] + a['total transit']) * 100, 'transit share after, buses slower': b['total transit'] / (b['car'] + b['total transit']) * 100})
+    sens = pd.DataFrame(rows); table(sens, {'bus factor': '{:.2f}', 'ratio': '{:.2f}', 'transit share after, central': '{:.1f} %', 'transit share after, buses slower': '{:.1f} %'}, font=7)
+    sA = sens[sens.period == 'AM']
+    P(f'Table 4.4 — LRT trips with slower buses against the central case, main route + extension, Prioritized (three hours). AM: the LRT gains {(sA["ratio"].min() - 1) * 100:+.0f} % to {(sA["ratio"].max() - 1) * 100:+.0f} %, from {sA["LRT central"].min():,.0f}–{sA["LRT central"].max():,.0f} to {sA["LRT, buses slower"].min():,.0f}–{sA["LRT, buses slower"].max():,.0f}.').runs[0].font.size = Pt(8)
+else: P('[sensitivity run not found: Output/alternatives_bus_slow/]')
+H('4.7 Time on route', 2)
 rt = route[['mode', 'period', 'direction', 'from', 'to', 'scheduled_min (median)', 'observed_min (step 30 ratio)']].copy() if 'direction' in route.columns else route
 rt.columns = [str(c) for c in rt.columns]; table(rt.head(40), {'scheduled_min (median)': '{:.0f}', 'observed_min (step 30 ratio)': '{:.0f}'}, font=7)
-P('Table 4.4 — End-to-end times on the route by mode (Output/alternatives/time_on_route.csv). The LRT through line runs 74.3 min Prioritized / 99.6 min Unprioritized from Tirat Carmel to Nazareth (extension 40.7 / 65.8 min; main route 33.7 min at 80 km/h with 10 s dwell).').runs[0].font.size = Pt(8)
-H('4.7 Maps', 2)
+P('Table 4.5 — End-to-end times on the route by mode (Output/alternatives/time_on_route.csv). The LRT through line runs 74.3 min Prioritized / 99.6 min Unprioritized from Tirat Carmel to Nazareth (extension 40.7 / 65.8 min; main route 33.7 min at 80 km/h with 10 s dwell).').runs[0].font.size = Pt(8)
+H('4.8 Maps', 2)
 P('The map set of the alternatives report (Output/figures/alternatives/, 41 maps: line loads, origins and destinations of the LRT trips, LRT share, growth, shift sources and rates, travel-time maps) applies to these runs; four are reproduced here.')
 fig(f'{FIG}/alternatives/map_line_loads_AM_HS_2050.png', 16, 'Figure 4.12 — LRT line loads and station boardings in the peak hour, HS 2050 AM.')
 fig(f'{FIG}/alternatives/map_growth_by_scenario_AM.png', 16, 'Figure 4.13 — Growth of the LRT trips by TAZ, 2022 → each scenario, AM peak hour.')
@@ -390,7 +417,7 @@ for s_ in [f'Demand. The through line (main route + extension) carries {lo["LRT"
            f'In the PM the two directions nearly balance (S24–M02 towards Nazareth {pm_d1_lo:,.0f}–{pm_d1_hi:,.0f} in the peak hour; S05–S06 or S11–S12 towards Tirat Carmel {pm_d2_lo:,.0f}–{pm_d2_hi:,.0f}). The main route beyond Kiryat Ata (M06 onwards) carries a few hundred per direction; the extension carries 4 of 5 riders.',
            'Growth. Between 2040 BU and 2050 HS the LRT demand grows by about 45 %, in step with the corridor transit market (×1.3–1.5 on 2022), because the forecast holds behaviour at 2022; the HS scenario adds 15–25 % over BU in the same year.',
            'Regime. Priority at the interchanges is worth about 20–25 % of the LRT trips: at-grade running of the extension lengthens its end-to-end time from 41 to 66 minutes and loses a fifth of the riders, mostly on the extension.',
-           'Robustness. The central figures sit within a range of about −25 % / +40 % from the cost sensitivity and the LRT premium alone (step 40); the car-to-LRT shift is the least certain component (caveats 15, 25, 27) and should be read as an order of magnitude; the bus and Metronit shifts rest on observed shares and measured service and are the firmer part.',
+           'Robustness. The central figures sit within a range of about −25 % / +40 % from the cost sensitivity and the LRT premium alone (step 40); the level of service is held at May 2026 in every year, and if the buses slow with the road (10 % in 2040, 20 % in 2050) the LRT gains ' + (f'{(sA["ratio"].min() - 1) * 100:.0f}–{(sA["ratio"].max() - 1) * 100:.0f} % in the AM' if summary_slow is not None else 'a few percent') + ' (section 4.6), so the constant-LOS central case is conservative for the LRT; the car-to-LRT shift is the least certain component (caveats 15, 25, 27) and should be read as an order of magnitude; the bus and Metronit shifts rest on observed shares and measured service and are the firmer part.',
            'Fitness. The results support the sizing and location of the extension\'s market, the ranking of the regimes, and the design-hour scale of the trunk load. They do not support capacity, fleet or frequency decisions or an appraisal without a validated assignment and a full mode-choice model; the next steps are a purpose split of the survey, a PM-specific forecast, the main route\'s operating plan, and a choice-rider λ from a stated-preference or a revealed choice set with the car cost in it.']:
     B(s_)
 P('Repository record: METHODOLOGY.md §6aq (step 45) and §8; docs/PLAIN_ENGLISH_METHODOLOGY.md Part 5; the alternatives report reports/LRT_Alternatives_Demand_Report.docx and its workbook Output/alternatives/LRT_alternatives_matrices.xlsx; this report\'s builder tools/build_comprehensive_report.py.')

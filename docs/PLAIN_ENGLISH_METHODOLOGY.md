@@ -4346,6 +4346,18 @@ through line carries about 3,700 (2040 BU) to 5,400 (2050 HS) morning riders, an
 piece of track, the entry into Hamifrats towards Tirat Carmel, 1,000–1,400 passengers in one
 direction. The tables keep the three-hour totals beside the peak-hour values.
 
+**Will the roads and buses be slower in 2040?** Probably, and the model does not assume it:
+every future year runs on the May 2026 speeds, because the future road and transit network is
+not in hand and degrading today's network with tomorrow's demand, while leaving out every
+planned scheme, would be the worse guess. We tested what slower buses would do (10 % slower in
+2040, 20 % in 2050, the Metronit on its own lanes and the LRT unchanged): the LRT gains 2 % in
+2040 and 4–5 % in 2050, a small effect because waiting, walking and transfers, not the ride,
+make up most of the cost of a bus trip. A slower car, on the other hand, cannot show up in this
+model at all. The LRT's draw from the car is a response to transit getting better, scaled by
+how many people already use transit on each pair; the car's own speed enters only through those
+observed shares. Letting a worse car count would need a first step that re-splits the 2040
+market between car and transit before the LRT is added, which is on the task list.
+
 ### 5.9 Where things stand now
 
 The single most current answer to "how many riders will the LRT capture" is **about 4,250

@@ -709,6 +709,19 @@ committed and pushed on its own, with its documents, before the next starts.
    mode-choice model that has the car cost in it (task E7 / the choice-rider λ). Until then the
    report reads the car column as an order of magnitude.
 
+11. **Level of service in 2040 / 2050 — a no-build mode-choice step** (added 5 October 2026,
+   §6aq addendum 3). The chain holds the car and bus level of service at May 2026 in every
+   scenario-year. The slower-bus sensitivity (`BUS_SLOWDOWN`, buses × 1.10 / 1.20) is in place
+   and worth +2 … +5 % of LRT trips; a slower car cannot register at all, because the pivot
+   reads only the change of the transit nest and step 23 freezes the no-build mode split at
+   2022. To make the car count: (a) a congested-network time growth per scenario from an
+   assignment of the forecast car matrices on the Emme network (step 42's all-or-nothing with a
+   volume–delay function by link type; capacity assumptions needed), transferred to the bus
+   links of step 30; (b) a first pivot on the no-build forecast with Δ_car ≠ 0 and Δ_transit = 0
+   (step 33's person-level logit, λ = 0.035, as the car-versus-transit model), which raises the
+   no-build transit shares and replaces caveat 29's seeded shares; then the LRT pivot on top.
+   (b) is the methodological step; (a) without (b) changes nothing.
+
 Not needed / not coming, by the user's decision on 23 September 2026: Metronit 2013 ridership,
 a stated-preference survey, parking supply, the cellular product's trip definition.
 
