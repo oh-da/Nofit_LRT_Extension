@@ -62,75 +62,57 @@ def shift_table(p, reg=REG):
     return pd.DataFrame(rows)
 tabs = {(p, reg): shift_table(p, reg) for p in ['AM', 'PM'] for reg in REG_LAB}
 # ---------------- charts ----------------
+# One chart per image file; every chart of a set that spans scenario-years or periods uses the same axis scale (the maximum over the set).
 seg_lab = (loads('AM', 'BU_2040', 'lrt')['from_station'] + '–' + loads('AM', 'BU_2040', 'lrt')['to_station']).tolist()
 n_ext = int((loads('AM', 'BU_2040', 'lrt')['to_station'].str.startswith('S')).sum())   # 23 extension segments S01–S24 (S24 = M01 at Hamifrats)
-st_area = stations.set_index('station_id')
-def seg_names(ids):
-    out = []
-    for s in ids:
-        a = st_area.loc[s, 'AggCode']; out.append(f"{s} {names[int(a)] if pd.notna(a) else ''}")
-    return out
-def flow_chart(p, kind, fname):
-    """Line loads per segment, both directions, one panel per scenario (2022 + 4)."""
-    scs = ['2022'] + SCEN; fig, axes = plt.subplots(len(scs), 1, figsize=(13, 2.6 * len(scs)), sharex=True)
-    for ax, sc in zip(axes, scs):
-        l = loads(p, sc, kind); x = np.arange(len(l))
-        ax.bar(x - 0.2, l['dir1_towards_Nazareth_end'], 0.4, color='#1f77b4', label='towards Nazareth (S01 → M20)')
-        ax.bar(x + 0.2, l['dir2_towards_TiratCarmel'], 0.4, color='#d62728', label='towards Tirat Carmel (M20 → S01)')
-        ax.axvline(n_ext - 0.5, color='k', ls='--', lw=0.8); ax.text(n_ext - 0.3, ax.get_ylim()[1] * 0.9 if ax.get_ylim()[1] > 0 else 1, 'extension | main route', fontsize=7, va='top')
-        ax.set_ylabel('passengers / peak hour'); ax.set_title(f'{SCEN_LAB[sc]} — {p}', fontsize=9, loc='left'); ax.grid(axis='y', alpha=0.3)
-    axes[0].legend(fontsize=8, loc='upper right'); axes[-1].set_xticks(np.arange(len(l))); axes[-1].set_xticklabels(seg_lab, rotation=90, fontsize=6)
-    fig.suptitle(f'{"LRT" if kind == "lrt" else "Total transit"} flow by segment and direction — main route + extension, Prioritized, {p} peak hour (factors {phf(p, "transit", "up"):.2f} / {phf(p, "transit", "down"):.2f} of the three hours)', fontsize=11)
-    fig.tight_layout(); fig.savefig(f'{CFIG}/{fname}', dpi=150); plt.close(fig)
-def flow_chart_compact(p, kind, fname):
-    """All four forecast scenarios on one pair of panels (one per direction)."""
-    fig, axes = plt.subplots(2, 1, figsize=(13, 7), sharex=True); cols = {'BU_2040': '#9ecae1', 'BU_2050': '#3182bd', 'HS_2040': '#fdae6b', 'HS_2050': '#e6550d'}
-    for ax, (d, lab) in zip(axes, [('dir1_towards_Nazareth_end', 'towards Nazareth (S01 → M20)'), ('dir2_towards_TiratCarmel', 'towards Tirat Carmel (M20 → S01)')]):
-        for i, sc in enumerate(SCEN):
-            l = loads(p, sc, kind); x = np.arange(len(l)); ax.bar(x + (i - 1.5) * 0.2, l[d], 0.2, color=cols[sc], label=SCEN_LAB[sc])
-        ax.axvline(n_ext - 0.5, color='k', ls='--', lw=0.8); ax.set_ylabel('passengers / peak hour'); ax.set_title(lab, fontsize=9, loc='left'); ax.grid(axis='y', alpha=0.3)
-    axes[0].legend(fontsize=8, ncol=4); axes[-1].set_xticks(np.arange(len(l))); axes[-1].set_xticklabels(seg_lab, rotation=90, fontsize=6)
-    fig.suptitle(f'{"LRT" if kind == "lrt" else "Total transit"} flow by segment — the four scenarios, main route + extension, Prioritized, {p} peak hour (factors {phf(p, "transit", "up"):.2f} / {phf(p, "transit", "down"):.2f} of the three hours)', fontsize=11)
-    fig.tight_layout(); fig.savefig(f'{CFIG}/{fname}', dpi=150); plt.close(fig)
-for p in ['AM', 'PM']:
-    flow_chart(p, 'lrt', f'flow_lrt_{p}.png'); flow_chart(p, 'transit', f'flow_transit_{p}.png')
-    flow_chart_compact(p, 'lrt', f'flow_lrt_scenarios_{p}.png'); flow_chart_compact(p, 'transit', f'flow_transit_scenarios_{p}.png')
-def mode_split_chart(fname):
-    fig, axes = plt.subplots(1, 2, figsize=(13, 5))
-    for ax, p in zip(axes, ['AM', 'PM']):
-        t = tabs[(p, REG)]; x = np.arange(len(t)); w = 0.6
-        ax.bar(x, t['car share'] * 100, w, color='#7f7f7f', label='car')
-        ax.bar(x, t['bus share'] * 100, w, bottom=t['car share'] * 100, color='#aec7e8', label='bus')
-        ax.bar(x, t['BRT share'] * 100, w, bottom=(t['car share'] + t['bus share']) * 100, color='#1f77b4', label='BRT (Metronit)')
-        ax.bar(x, t['LRT share'] * 100, w, bottom=(t['car share'] + t['bus share'] + t['BRT share']) * 100, color='#2ca02c', label='LRT')
-        for i, r in t.iterrows():
-            ax.text(i, 101, f"transit {r['transit share']*100:.1f} %\nLRT {r['LRT share']*100:.1f} %", ha='center', va='bottom', fontsize=7)
-        ax.set_xticks(x); ax.set_xticklabels(t['scenario']); ax.set_ylim(0, 115); ax.set_ylabel('% of car + transit trips'); ax.set_title(f'{p} — mode split on the corridor (174 TAZs) after the LRT', fontsize=10); ax.grid(axis='y', alpha=0.3)
-    axes[0].legend(loc='lower left', fontsize=8); fig.tight_layout(); fig.savefig(f'{CFIG}/{fname}', dpi=150); plt.close(fig)
-mode_split_chart('mode_split.png')
-def demand_bars(fname):
-    fig, axes = plt.subplots(1, 2, figsize=(13, 5))
-    for ax, p in zip(axes, ['AM', 'PM']):
-        t = tabs[(p, REG)]; x = np.arange(len(t)); w = 0.2; f = phf(p, 'transit')
-        ax.bar(x - 1.5 * w, t['transit before'] * f, w, color='#c7c7c7', label='transit before (no LRT)')
-        ax.bar(x - 0.5 * w, t['total transit after'] * f, w, color='#1f77b4', label='total transit after')
-        ax.bar(x + 0.5 * w, t['LRT'] * f, w, color='#2ca02c', label='LRT (main + extension)')
-        ax.bar(x + 1.5 * w, t['LRT using the extension'] * f, w, color='#98df8a', label='LRT using the extension')
-        ax.set_xticks(x); ax.set_xticklabels(t['scenario']); ax.set_ylabel('trips / peak hour'); ax.set_title(f'{p} — transit demand on the corridor, peak hour ({f:.2f} of the three hours)', fontsize=10); ax.grid(axis='y', alpha=0.3)
-    axes[0].legend(fontsize=8); fig.tight_layout(); fig.savefig(f'{CFIG}/{fname}', dpi=150); plt.close(fig)
-demand_bars('demand_by_scenario.png')
-def shift_chart(fname):
-    fig, axes = plt.subplots(1, 2, figsize=(13, 5))
-    for ax, p in zip(axes, ['AM', 'PM']):
-        t = tabs[(p, REG)].copy(); x = np.arange(len(t)); w = 0.35; f = phf(p, 'transit')
-        for c in ['car → LRT', 'BRT → LRT', 'bus → LRT', 'ext: from car', 'ext: from BRT', 'ext: from bus']: t[c] = t[c] * f
-        ax.bar(x - w / 2, t['car → LRT'], w, color='#7f7f7f', label='from car (whole line)'); ax.bar(x - w / 2, t['BRT → LRT'], w, bottom=t['car → LRT'], color='#1f77b4', label='from BRT (Metronit)')
-        ax.bar(x - w / 2, t['bus → LRT'], w, bottom=t['car → LRT'] + t['BRT → LRT'], color='#aec7e8', label='from bus')
-        ax.bar(x + w / 2, t['ext: from car'], w, color='#7f7f7f', alpha=0.5, hatch='//', label='… of which using the extension'); ax.bar(x + w / 2, t['ext: from BRT'], w, bottom=t['ext: from car'], color='#1f77b4', alpha=0.5, hatch='//')
-        ax.bar(x + w / 2, t['ext: from bus'], w, bottom=t['ext: from car'] + t['ext: from BRT'], color='#aec7e8', alpha=0.5, hatch='//')
-        ax.set_xticks(x); ax.set_xticklabels(t['scenario']); ax.set_ylabel('LRT trips / peak hour'); ax.set_title(f'{p} — where the LRT trips come from, peak hour ({f:.2f} of the three hours)', fontsize=10); ax.grid(axis='y', alpha=0.3)
-    axes[0].legend(fontsize=8); fig.tight_layout(); fig.savefig(f'{CFIG}/{fname}', dpi=150); plt.close(fig)
-shift_chart('shift_sources.png')
+SCS = ['2022'] + SCEN; DIRS = [('dir1_towards_Nazareth_end', 'towards Nazareth (S01 → M20)', '#1f77b4'), ('dir2_towards_TiratCarmel', 'towards Tirat Carmel (M20 → S01)', '#d62728')]
+def nice(v): return float(np.ceil(v / 500.0) * 500) if v > 2000 else float(np.ceil(v / 100.0) * 100)
+YMAX = {kind: nice(max(loads(p, sc, kind)[[d[0] for d in DIRS]].values.max() for p in ['AM', 'PM'] for sc in SCS)) for kind in ('lrt', 'transit')}   # one scale per kind, over both periods, all scenario-years and both directions
+def flow_chart(p, sc, kind):
+    """one scenario-year, both directions as grouped bars"""
+    l = loads(p, sc, kind); x = np.arange(len(l)); fig, ax = plt.subplots(figsize=(13, 4.2))
+    for i, (col, lab, c) in enumerate(DIRS): ax.bar(x + (i - 0.5) * 0.4, l[col], 0.4, color=c, label=lab)
+    ax.axvline(n_ext - 0.5, color='k', ls='--', lw=0.8); ax.text(n_ext - 0.3, YMAX[kind] * 0.95, 'extension | main route', fontsize=7, va='top')
+    ax.set_ylim(0, YMAX[kind]); ax.set_ylabel('passengers / peak hour'); ax.set_xticks(x); ax.set_xticklabels(seg_lab, rotation=90, fontsize=6); ax.grid(axis='y', alpha=0.3); ax.legend(fontsize=8, loc='upper right')
+    ax.set_title(f'{"LRT" if kind == "lrt" else "Total transit"} flow by segment and direction — {SCEN_LAB[sc]}, {p} peak hour (factors {phf(p, "transit", "up"):.2f} / {phf(p, "transit", "down"):.2f} of the three hours); main route + extension, Prioritized', fontsize=9)
+    fig.tight_layout(); fig.savefig(f'{CFIG}/flow_{kind}_{p}_{sc}.png', dpi=150); plt.close(fig)
+def flow_chart_scenarios(p, kind, col, lab, tag):
+    """one direction, the four forecast scenario-years side by side"""
+    cols = {'BU_2040': '#9ecae1', 'BU_2050': '#3182bd', 'HS_2040': '#fdae6b', 'HS_2050': '#e6550d'}; fig, ax = plt.subplots(figsize=(13, 4.2))
+    for i, sc in enumerate(SCEN):
+        l = loads(p, sc, kind); x = np.arange(len(l)); ax.bar(x + (i - 1.5) * 0.2, l[col], 0.2, color=cols[sc], label=SCEN_LAB[sc])
+    ax.axvline(n_ext - 0.5, color='k', ls='--', lw=0.8); ax.set_ylim(0, YMAX[kind]); ax.set_ylabel('passengers / peak hour'); ax.set_xticks(np.arange(len(l))); ax.set_xticklabels(seg_lab, rotation=90, fontsize=6); ax.grid(axis='y', alpha=0.3); ax.legend(fontsize=8, ncol=4, loc='upper right')
+    ax.set_title(f'{"LRT" if kind == "lrt" else "Total transit"} flow by segment, {lab} — the four scenario-years, {p} peak hour; main route + extension, Prioritized', fontsize=9)
+    fig.tight_layout(); fig.savefig(f'{CFIG}/flow_{kind}_{p}_scenarios_{tag}.png', dpi=150); plt.close(fig)
+for kind in ('lrt', 'transit'):
+    for p in ['AM', 'PM']:
+        for sc in SCS: flow_chart(p, sc, kind)
+        for (col, lab, _), tag in zip(DIRS, ('dir1', 'dir2')): flow_chart_scenarios(p, kind, col, lab, tag)
+def mode_split_chart(p):
+    t = tabs[(p, REG)]; x = np.arange(len(t)); w = 0.6; fig, ax = plt.subplots(figsize=(7, 5))
+    ax.bar(x, t['car share'] * 100, w, color='#7f7f7f', label='car'); ax.bar(x, t['bus share'] * 100, w, bottom=t['car share'] * 100, color='#aec7e8', label='bus')
+    ax.bar(x, t['BRT share'] * 100, w, bottom=(t['car share'] + t['bus share']) * 100, color='#1f77b4', label='BRT (Metronit)'); ax.bar(x, t['LRT share'] * 100, w, bottom=(t['car share'] + t['bus share'] + t['BRT share']) * 100, color='#2ca02c', label='LRT')
+    for i, r in t.iterrows(): ax.text(i, 101, f"transit {r['transit share']*100:.1f} %\nLRT {r['LRT share']*100:.1f} %", ha='center', va='bottom', fontsize=7)
+    ax.set_xticks(x); ax.set_xticklabels(t['scenario']); ax.set_ylim(0, 115); ax.set_ylabel('% of car + transit trips'); ax.set_title(f'{p} — mode split on the corridor (174 TAZs) after the LRT', fontsize=10); ax.grid(axis='y', alpha=0.3); ax.legend(loc='lower left', fontsize=8)
+    fig.tight_layout(); fig.savefig(f'{CFIG}/mode_split_{p}.png', dpi=150); plt.close(fig)
+DEMAND_YMAX = nice(max(max(tabs[(p, REG)]['transit before'].max(), tabs[(p, REG)]['total transit after'].max()) * phf(p, 'transit') for p in ['AM', 'PM']))
+def demand_bars(p):
+    t = tabs[(p, REG)]; x = np.arange(len(t)); w = 0.2; f = phf(p, 'transit'); fig, ax = plt.subplots(figsize=(7, 5))
+    ax.bar(x - 1.5 * w, t['transit before'] * f, w, color='#c7c7c7', label='transit before (no LRT)'); ax.bar(x - 0.5 * w, t['total transit after'] * f, w, color='#1f77b4', label='total transit after')
+    ax.bar(x + 0.5 * w, t['LRT'] * f, w, color='#2ca02c', label='LRT (main + extension)'); ax.bar(x + 1.5 * w, t['LRT using the extension'] * f, w, color='#98df8a', label='LRT using the extension')
+    ax.set_ylim(0, DEMAND_YMAX); ax.set_xticks(x); ax.set_xticklabels(t['scenario']); ax.set_ylabel('trips / peak hour'); ax.set_title(f'{p} — transit demand on the corridor, peak hour ({f:.2f} of the three hours)', fontsize=10); ax.grid(axis='y', alpha=0.3); ax.legend(fontsize=8)
+    fig.tight_layout(); fig.savefig(f'{CFIG}/demand_by_scenario_{p}.png', dpi=150); plt.close(fig)
+SHIFT_YMAX = nice(max(tabs[(p, REG)]['LRT'].max() * phf(p, 'transit') for p in ['AM', 'PM']))
+def shift_chart(p):
+    t = tabs[(p, REG)].copy(); x = np.arange(len(t)); w = 0.35; f = phf(p, 'transit'); fig, ax = plt.subplots(figsize=(7, 5))
+    for c in ['car → LRT', 'BRT → LRT', 'bus → LRT', 'ext: from car', 'ext: from BRT', 'ext: from bus']: t[c] = t[c] * f
+    ax.bar(x - w / 2, t['car → LRT'], w, color='#7f7f7f', label='from car (whole line)'); ax.bar(x - w / 2, t['BRT → LRT'], w, bottom=t['car → LRT'], color='#1f77b4', label='from BRT (Metronit)'); ax.bar(x - w / 2, t['bus → LRT'], w, bottom=t['car → LRT'] + t['BRT → LRT'], color='#aec7e8', label='from bus')
+    ax.bar(x + w / 2, t['ext: from car'], w, color='#7f7f7f', alpha=0.5, hatch='//', label='… of which using the extension'); ax.bar(x + w / 2, t['ext: from BRT'], w, bottom=t['ext: from car'], color='#1f77b4', alpha=0.5, hatch='//'); ax.bar(x + w / 2, t['ext: from bus'], w, bottom=t['ext: from car'] + t['ext: from BRT'], color='#aec7e8', alpha=0.5, hatch='//')
+    ax.set_ylim(0, SHIFT_YMAX); ax.set_xticks(x); ax.set_xticklabels(t['scenario']); ax.set_ylabel('LRT trips / peak hour'); ax.set_title(f'{p} — where the LRT trips come from, peak hour ({f:.2f} of the three hours)', fontsize=10); ax.grid(axis='y', alpha=0.3); ax.legend(fontsize=8)
+    fig.tight_layout(); fig.savefig(f'{CFIG}/shift_sources_{p}.png', dpi=150); plt.close(fig)
+for p in ['AM', 'PM']: mode_split_chart(p); demand_bars(p); shift_chart(p)
+for old in ['flow_lrt_AM.png', 'flow_lrt_PM.png', 'flow_transit_AM.png', 'flow_transit_PM.png', 'flow_lrt_scenarios_AM.png', 'flow_lrt_scenarios_PM.png', 'flow_transit_scenarios_AM.png', 'flow_transit_scenarios_PM.png', 'mode_split.png', 'demand_by_scenario.png', 'shift_sources.png']:
+    if os.path.exists(f'{CFIG}/{old}'): os.remove(f'{CFIG}/{old}')   # the former multi-panel files
 print('charts written')
 # ---------------- Word report ----------------
 doc = Document()
@@ -369,7 +351,7 @@ P(f'With the main route + extension added to the 2022 service, the AM three-hour
   f'{r22["LRT from car"]:,.0f} come from the car and {r22["LRT from bus/BRT"]:,.0f} from bus and Metronit. The transit share of the corridor market moves from {r22["transit before"]/(r22["car before"]+r22["transit before"])*100:.1f} % to {r22["total transit"]/(r22["car"]+r22["total transit"])*100:.1f} %. The PM figure is {r22p["LRT"]:,.0f} ({r22p["LRT"]/r22["LRT"]*100:.0f} % of the AM). In the peak hour: {r22["LRT"]*phf("AM", "transit"):,.0f} AM and {r22p["LRT"]*phf("PM", "transit"):,.0f} PM (factors {phf("AM", "transit"):.2f} / {phf("PM", "transit"):.2f}).')
 P('The uncertainty experiment (step 40) and the λ / premium ranges of step 31 put the 2022 capture between about 0.75 × and 1.4 × the central value: λ 0.02 → +40 %, λ 0.05 → −25 %; premium 0 → −20 %, premium 10 → +25 %. The regime (running time) is worth about −20 % (Unprioritized against Prioritized), of the same order as the λ range.')
 fig(f'{FIG}/lrt_capture_tornado.png', 14, 'Figure 3.7 — Sensitivity of the 2022 LRT capture to the assumed factors (step 40).')
-fig(f'{FIG}/alternatives/map_line_loads_AM_2022.png', 16, 'Figure 3.8 — LRT line loads and station boardings in the peak hour, 2022 AM, main route + extension, Prioritized (step 45).')
+fig(f'{FIG}/alternatives/single/map_line_loads_AM_2022.png', 15, 'Figure 3.8 — LRT line loads and station boardings in the peak hour, 2022 AM, main route + extension, Prioritized (step 45); the width scale is the one shared by every line-load map of this report.')
 H('3.5 What the model is good for, and what it should not be used for', 2)
 P('Good for:')
 for s_ in ['Sizing the corridor market by mode and locating it (which areas and TAZs, which stations), at the three-hour peak and at the design-hour scale (≈ 1.8 × an average hour).',
@@ -462,8 +444,10 @@ P('Reading the tables. "Before" is the scenario\'s no-build market (car, bus inc
 P('A note on the car column. The AM shift from the car doubles between 2040 BU and 2050 BU (684 → 1,421) and between 2040 BU and 2040 HS (684 → 1,387) while the market grows by 16 % and 4 %. This is not a demand effect but the aggregation effect of caveat 27 seen across scenarios: '
   'the incremental shift of a TAZ pair is proportional to S·(1 − S) of its smoothed transit share, and the forecast sets of step 23 seed trips into TAZ pairs that are empty in 2022 (small-base and transforming TAZs receive the super-zone pattern), so the number of corridor pairs with both car and transit trips rises from 1,620 (2022) to 2,084 (2040 BU), 2,942 (2050 BU), 4,970 (2040 HS) and 5,688 (2050 HS) and the trip-weighted S·(1 − S) from 0.048 to 0.062. '
   'The PM sets, grown pair by pair from the PM base, keep the 2022 pair set and show a smooth car column (666 → 880). The car shift should therefore be read as an order of magnitude (300–1,300 trips, 0.4–1.5 % of the corridor car trips), not compared between scenarios (caveat 29).')
-fig(f'{CFIG}/demand_by_scenario.png', 16, 'Figure 4.1 — Transit demand on the corridor by scenario, peak hour: no-build transit, total transit after the LRT, LRT trips, and the LRT trips using the extension (AM and PM).')
-fig(f'{CFIG}/shift_sources.png', 16, 'Figure 4.2 — Where the LRT trips come from (car, Metronit, bus), whole line and the part using the extension, by scenario, peak hour.')
+fig(f'{CFIG}/demand_by_scenario_AM.png', 12, 'Figure 4.1a — Transit demand on the corridor by scenario, AM peak hour: no-build transit, total transit after the LRT, LRT trips, and the LRT trips using the extension (same scale as 4.1b).')
+fig(f'{CFIG}/demand_by_scenario_PM.png', 12, 'Figure 4.1b — The same for the PM peak hour.')
+fig(f'{CFIG}/shift_sources_AM.png', 12, 'Figure 4.2a — Where the LRT trips come from (car, Metronit, bus), whole line and the part using the extension, by scenario, AM peak hour (same scale as 4.2b).')
+fig(f'{CFIG}/shift_sources_PM.png', 12, 'Figure 4.2b — The same for the PM peak hour.')
 H('4.3 Where the demand comes from — markets', 2)
 P(f'The LRT trips of the reference case grouped by the corridor areas of their two ends (Output/alternatives/AM/{REF}/main_ext_prioritized/t_lrt_area_v2.csv; both directions added), and the ten largest area pairs. "Haifa" is Matam to Hamifrats (areas 202–210); the Krayot (areas 101–104, 301–304) are off the line and reach it by bus or Metronit feeder; the main route is Bazan-Hutsot to Nazareth (211–217). "Crossing Hamifrats" is the load on the S24–M02 segment in both directions, i.e. every trip that rides from one side of the junction to the other.')
 for sc in [REF, 'HS_2050']:
@@ -485,21 +469,27 @@ H('4.5 Flow on the line — LRT, both directions', 2)
 P('Passengers on each segment of the line in the peak hour, by direction: towards Nazareth (S01 → S24 → M20) and towards Tirat Carmel (M20 → M01 → S01). The dashed line marks the junction of the extension (S24) with the main route (M01, the same station at Hamifrats). '
   'Source: lrt_line_loads.csv in each run folder (the LRT trips between the cheapest-access stations of each TAZ pair), scaled to the peak hour by the network bus factor of the direction.')
 landscape()
-fig(f'{CFIG}/flow_lrt_scenarios_AM.png', 25, 'Figure 4.3 — LRT flow by segment and direction, the four scenarios, AM.')
-fig(f'{CFIG}/flow_lrt_scenarios_PM.png', 25, 'Figure 4.4 — LRT flow by segment and direction, the four scenarios, PM.')
-fig(f'{CFIG}/flow_lrt_AM.png', 25, 'Figure 4.5 — LRT flow per scenario, both directions on one panel, AM (2022 and the four scenarios).')
-fig(f'{CFIG}/flow_lrt_PM.png', 25, 'Figure 4.6 — LRT flow per scenario, both directions on one panel, PM.')
+P('Every chart of this section uses the same vertical scale (' + f'{YMAX["lrt"]:,.0f}' + ' passengers per peak hour), so the scenario-years can be compared by eye. One chart per scenario-year and period with both directions, then one chart per direction with the four forecast scenario-years side by side.')
+k_ = 3
+for p in ['AM', 'PM']:
+    for sc in SCS:
+        fig(f'{CFIG}/flow_lrt_{p}_{sc}.png', 25, f'Figure 4.{k_} — LRT flow by segment and direction, {SCEN_LAB[sc]}, {p} peak hour.'); k_ += 1
+    for (col, lab, _), tag in zip(DIRS, ('dir1', 'dir2')):
+        fig(f'{CFIG}/flow_lrt_{p}_scenarios_{tag}.png', 25, f'Figure 4.{k_} — LRT flow by segment, {lab}, the four scenario-years, {p} peak hour.'); k_ += 1
 H('4.6 Flow on the line — total transit, both directions', 2)
 P('The same profile for all transit trips of the corridor market (bus, Metronit and LRT after the LRT is added), loaded along the line between the LRT stations nearest their ends — the transit demand the line\'s corridor carries, of which the LRT takes the share shown in 4.2. '
   'Source: transit_line_loads.csv in each run folder, scaled to the peak hour as above.')
-fig(f'{CFIG}/flow_transit_scenarios_AM.png', 25, 'Figure 4.7 — Total transit flow by segment and direction, the four scenarios, AM.')
-fig(f'{CFIG}/flow_transit_scenarios_PM.png', 25, 'Figure 4.8 — Total transit flow by segment and direction, the four scenarios, PM.')
-fig(f'{CFIG}/flow_transit_AM.png', 25, 'Figure 4.9 — Total transit flow per scenario, both directions, AM.')
-fig(f'{CFIG}/flow_transit_PM.png', 25, 'Figure 4.10 — Total transit flow per scenario, both directions, PM.')
+P('Same layout and the same rule: one vertical scale (' + f'{YMAX["transit"]:,.0f}' + ' passengers per peak hour) for every chart of the section.')
+for p in ['AM', 'PM']:
+    for sc in SCS:
+        fig(f'{CFIG}/flow_transit_{p}_{sc}.png', 25, f'Figure 4.{k_} — Total transit flow by segment and direction, {SCEN_LAB[sc]}, {p} peak hour.'); k_ += 1
+    for (col, lab, _), tag in zip(DIRS, ('dir1', 'dir2')):
+        fig(f'{CFIG}/flow_transit_{p}_scenarios_{tag}.png', 25, f'Figure 4.{k_} — Total transit flow by segment, {lab}, the four scenario-years, {p} peak hour.'); k_ += 1
 portrait()
 H('4.7 Mode split on the route', 2)
 P('The split of the corridor market between car and transit after the LRT, with the LRT shown within transit, by scenario and period.')
-fig(f'{CFIG}/mode_split.png', 16, 'Figure 4.11 — Mode split on the corridor after the LRT: car, bus, Metronit and LRT, AM and PM.')
+fig(f'{CFIG}/mode_split_AM.png', 12, 'Figure 4.11a — Mode split on the corridor after the LRT: car, bus, Metronit and LRT, AM.')
+fig(f'{CFIG}/mode_split_PM.png', 12, 'Figure 4.11b — The same for the PM.')
 H('4.8 Sensitivity: the Unprioritized regime', 2)
 rows = []
 for p in ['AM', 'PM']:
@@ -535,10 +525,20 @@ rt.columns = [str(c) for c in rt.columns]; table(rt.head(40), {'scheduled_min (m
 P('Table 4.10 — End-to-end times on the route by mode (Output/alternatives/time_on_route.csv). The LRT through line runs 74.3 min Prioritized / 99.6 min Unprioritized from Tirat Carmel to Nazareth (extension 40.7 / 65.8 min; main route 33.7 min at 80 km/h with 10 s dwell).').runs[0].font.size = Pt(8)
 H('4.11 Maps', 2)
 P('The map set of the alternatives report (Output/figures/alternatives/, 41 maps: line loads, origins and destinations of the LRT trips, LRT share, growth, shift sources and rates, travel-time maps) applies to these runs; four are reproduced here.')
-fig(f'{FIG}/alternatives/map_line_loads_AM_HS_2050.png', 16, 'Figure 4.12 — LRT line loads and station boardings in the peak hour, HS 2050 AM.')
-fig(f'{FIG}/alternatives/map_growth_by_scenario_AM.png', 16, 'Figure 4.13 — Growth of the LRT trips by TAZ, 2022 → each scenario, AM peak hour.')
-fig(f'{FIG}/alternatives/map_shift_sources_AM_BU_2040.png', 16, 'Figure 4.14 — Sources of the LRT trips by TAZ (car, Metronit, bus), BU 2040 AM peak hour.')
-fig(f'{FIG}/alternatives/map_time_lrt_vs_bus_AM.png', 16, 'Figure 4.15 — LRT against bus generalized cost by TAZ, AM.')
+P('One map per scenario-year, all on the same width scale (the HS 2050 maximum) and the same boarding-circle scale.')
+k_ = 12
+for sc in SCEN:
+    fig(f'{FIG}/alternatives/single/map_line_loads_AM_{sc}.png', 15, f'Figure 4.{k_} — LRT line loads and station boardings in the AM peak hour, {SCEN_LAB[sc]}, main route + extension, Prioritized.'); k_ += 1
+fig(f'{FIG}/alternatives/single/map_line_loads_PM_BU_2050.png', 15, f'Figure 4.{k_} — The same for the PM peak hour, 2050 BU.'); k_ += 1
+P('Growth of the LRT trip origins by TAZ, 2022 to each scenario-year, one map per scenario-year on one colour scale.')
+for sc in SCEN:
+    fig(f'{FIG}/alternatives/single/map_growth_AM_{sc}.png', 15, f'Figure 4.{k_} — Growth of the LRT trip origins by TAZ, 2022 → {SCEN_LAB[sc]}, AM peak hour.'); k_ += 1
+P('Sources of the LRT trips by origin TAZ in the reference case, one map per source; the bus and Metronit maps share one colour scale, the car map has its own (its values are an order of magnitude smaller).')
+for src_, lab_ in [('car', 'from the car'), ('bus', 'from bus-based paths'), ('brt', 'from Metronit-based paths')]:
+    fig(f'{FIG}/alternatives/single/map_shift_{src_}_AM_{REF}.png', 15, f'Figure 4.{k_} — LRT trips {lab_} by origin TAZ, {REF_LAB}, AM peak hour.'); k_ += 1
+P('Generalized cost to the reference destination (the TAZ of the busiest LRT alighting station): the best bus or Metronit path today and the LRT, on one colour scale, then their difference.')
+for m_, lab_ in [('bus', 'best bus / Metronit path, no LRT'), ('lrt', 'LRT, main route + extension, Prioritized'), ('diff', 'LRT minus best bus (negative = LRT cheaper)')]:
+    fig(f'{FIG}/alternatives/single/map_time_{m_}_AM.png', 15, f'Figure 4.{k_} — {lab_}, generalized minutes from every TAZ, AM.'); k_ += 1
 
 # ======================= 5 =======================
 H('5. Conclusions')

@@ -167,3 +167,41 @@ for p, sc in (('AM', 'BU_2040'), ('PM', 'BU_2040'), ('AM', '2022')):
     choropleth(axes[1], fo / trb.replace(0, np.nan) * 100, 'bus and Metronit trips lost to the LRT, % of the TAZ\'s transit trips', 'YlGnBu', Normalize(0, 80), '% of transit trips', alt=a)
     fig.suptitle(f'Shift rates by origin TAZ — main route + extension, Prioritized, {p} {sc}', fontsize=11); plt.tight_layout(); plt.savefig(f'{FIG}/map_shift_rates_{p}_{sc}.png', dpi=130); plt.close()
 print(f'maps written to {FIG}; reference destination {ref_label}'); print(len(os.listdir(FIG)), 'maps')
+# ---------------- single-panel maps for the comprehensive report (one map per file, shared scales across scenario-years) ----------------
+SFIG = f'{FIG}/single'; os.makedirs(SFIG, exist_ok=True); a, r = 'main_ext', 'prioritized'
+SCS_ALL = ['2022', 'BU_2040', 'BU_2050', 'HS_2040', 'HS_2050']
+import textwrap
+def single(title, draw, fname, figsize=(12, 6.8)):
+    fig_, ax_ = plt.subplots(figsize=figsize); draw(ax_); ax_.set_title(textwrap.fill(title, 120), fontsize=9, loc='left'); plt.tight_layout(); plt.savefig(f'{SFIG}/{fname}', dpi=150, bbox_inches='tight'); plt.close()
+# line loads: one width scale and one boarding scale over every period and scenario-year
+wmax_all = max(loads_ph(p, sc, a, r)[['dir1_towards_Nazareth_end', 'dir2_towards_TiratCarmel']].values.max() for p in ('AM', 'PM') for sc in SCS_ALL)
+bmax_all = max(boardings_ph(p, sc, a, r)['boardings'].max() for p in ('AM', 'PM') for sc in SCS_ALL)
+def flow_map_scaled(ax, p, sc, title):
+    base(ax, title); st = STN[a]; ld = loads_ph(p, sc, a, r); bo = boardings_ph(p, sc, a, r); xy = st.set_index('station_id')[['x', 'y']]
+    for _, s_ in ld.iterrows():
+        seg = LineString([xy.loc[s_['from_station']].values, xy.loc[s_['to_station']].values])
+        for col, c, sign in (('dir1_towards_Nazareth_end', BLUE, 1), ('dir2_towards_TiratCarmel', ORANGE, -1)):
+            w = s_[col] / wmax_all * 9
+            if w > 0.05:
+                g = offset(seg, sign * 120); xs, ys = (g.xy if g.geom_type == 'LineString' else list(g.geoms)[0].xy); ax.plot(xs, ys, color=c, lw=max(w, .4), solid_capstyle='butt', alpha=.9)
+    ax.scatter(st['x'], st['y'], s=4 + bo['boardings'].values / bmax_all * 120, facecolor='white', edgecolor=INK, lw=.6, zorder=5)
+    ax.plot([], [], color=BLUE, lw=4, label='towards Nazareth'); ax.plot([], [], color=ORANGE, lw=4, label='towards Tirat Carmel'); ax.scatter([], [], s=60, facecolor='white', edgecolor=INK, label=f'station (size = boardings; largest {bmax_all:,.0f})'); ax.legend(loc='lower right', fontsize=8, frameon=False)
+for p in ('AM', 'PM'):
+    for sc in SCS_ALL:
+        single(f'LRT line loads by segment and direction, {p} peak hour, {sc.replace("_", " ")} — main route + extension, Prioritized (width ∝ passengers; the same scale on every map, max {wmax_all:,.0f})', lambda ax_: flow_map_scaled(ax_, p, sc, ''), f'map_line_loads_{p}_{sc}.png')
+# growth of the LRT origins 2022 -> each scenario-year, one colour scale
+v22 = lrt_sum('AM', '2022', a, r, 1); vmax_g = max(abs(lrt_sum('AM', sc, a, r, 1) - v22).max() for sc in SCS_ALL[1:])
+for sc in SCS_ALL[1:]:
+    d_ = lrt_sum('AM', sc, a, r, 1) - v22
+    single(f'{sc.replace("_", " ")} minus 2022: LRT trip origins by TAZ, AM peak hour (total {d_.sum():+,.0f}; one colour scale for the four maps)', lambda ax_, d_=d_: choropleth(ax_, d_, '', 'RdBu', TwoSlopeNorm(0, -vmax_g, vmax_g), 'change in LRT origins per TAZ, AM peak hour', alt=a), f'map_growth_AM_{sc}.png')
+# shift sources in the reference case: bus and Metronit on one scale, the car on its own
+sc = 'BU_2050'; fc, fb, fm = (runmat('AM', sc, a, r, k).sum(1) for k in ('from_car', 'from_bus', 'from_brt')); vmax_s = max(fb.max(), fm.max())
+single(f'LRT trips drawn from the car, by origin TAZ — AM peak hour, {sc.replace("_", " ")} ({fc.sum():,.0f} trips; own colour scale)', lambda ax_: choropleth(ax_, fc, '', 'YlOrRd', Normalize(0, max(fc.max(), 1)), 'LRT trips from the car per TAZ', alt=a), f'map_shift_car_AM_{sc}.png')
+single(f'LRT trips drawn from bus-based paths, by origin TAZ — AM peak hour, {sc.replace("_", " ")} ({fb.sum():,.0f} trips; scale shared with the Metronit map)', lambda ax_: choropleth(ax_, fb, '', 'YlGnBu', Normalize(0, vmax_s), 'LRT trips from bus-based paths per TAZ', alt=a), f'map_shift_bus_AM_{sc}.png')
+single(f'LRT trips drawn from Metronit-based paths, by origin TAZ — AM peak hour, {sc.replace("_", " ")} ({fm.sum():,.0f} trips; scale shared with the bus map)', lambda ax_: choropleth(ax_, fm, '', 'BuPu', Normalize(0, vmax_s), 'LRT trips from Metronit-based paths per TAZ', alt=a), f'map_shift_brt_AM_{sc}.png')
+# time to the reference destination: bus and LRT on one scale, then the difference
+bus_t = GC[('AM', 'bus', a)][REF]; lrt_t = GC[('AM', 'lrt', a, r)][REF]
+single(f'Generalized minutes to {ref_label} by the best bus / Metronit path (no LRT), AM — scale shared with the LRT map', lambda ax_: choropleth(ax_, bus_t, '', 'RdYlGn_r', Normalize(20, 120), 'generalized minutes', alt=None), 'map_time_bus_AM.png')
+single(f'Generalized minutes to {ref_label} by the LRT (main route + extension, Prioritized), AM — scale shared with the bus map', lambda ax_: choropleth(ax_, lrt_t, '', 'RdYlGn_r', Normalize(20, 120), 'generalized minutes', alt=a), 'map_time_lrt_AM.png')
+single(f'LRT minus best bus / Metronit, generalized minutes to {ref_label}, AM (negative = LRT cheaper)', lambda ax_: choropleth(ax_, lrt_t - bus_t, '', 'RdBu_r', TwoSlopeNorm(0, -40, 40), 'generalized minutes', alt=a), 'map_time_diff_AM.png')
+print(len(os.listdir(SFIG)), 'single-panel maps in', SFIG)

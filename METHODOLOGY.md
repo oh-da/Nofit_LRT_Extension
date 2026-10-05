@@ -4004,6 +4004,22 @@ it executes the English builder's data part and writes a shorter right-to-left d
 `w:bidi` paragraphs, `w:bidiVisual` tables) with the English charts; the time-on-route table and
 the full caveat list are summarised in a paragraph and referred to the English report.
 
+**Chart convention of both reports (5 October 2026, at the study team's request).** One chart
+per image file — no multi-panel figures — and one axis scale for every chart of a set that spans
+scenario-years or periods: the LRT flow charts share one vertical scale over both periods, all
+five scenario-years and both directions (the maximum, rounded up), the total-transit flow charts
+likewise, the demand and shift-source bars share one scale over AM and PM, and the line-load
+maps one width and one boarding-circle scale over every period and scenario-year.
+`Output/figures/comprehensive/` holds the charts (`flow_{lrt,transit}_{AM,PM}_{scenario}.png`,
+`flow_{kind}_{period}_scenarios_{dir1,dir2}.png`, `demand_by_scenario_{AM,PM}.png`,
+`shift_sources_{AM,PM}.png`, `mode_split_{AM,PM}.png`); `Output/figures/alternatives/single/`
+the single-panel maps the reports reproduce (line loads per period and scenario-year, growth per
+scenario-year on one colour scale, shift sources per source, time to the reference TAZ by bus,
+by LRT and their difference), written by `tools/build_alternatives_maps.py` beside its
+multi-panel set, which the alternatives report keeps. The step-3 diagnostic figures reused in
+section 3 (corridor profiles, cordons, λ by segment, the tornado) are the earlier steps' own
+figures and keep their layout.
+
 ## 7. Output inventory (`Output/`)
 
 *Layout note (21 September 2026).* The products of steps 1–4 (the 2018 activities-file chain, listed first below with bare file names) now live under `Output/historical/ths2018/`; every other path is as written. Notebooks live under `notebooks/current/`, `notebooks/diagnostics/` and `notebooks/historical/` and anchor their working directory to the repository root, so the `Input/…` and `Output/…` paths in this document are unchanged.
