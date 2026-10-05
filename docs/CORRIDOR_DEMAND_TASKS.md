@@ -246,6 +246,16 @@ Key facts driving the list (2017 trips-file hybrid, `Output/ths2017/study_taz/`)
       cost and parking are excluded on the same decision (METHODOLOGY §6x addendum 4). Still
       open from this item: confirm the walk / wait / transfer weights against נוהל פר"ת.
 - [~] **E5. Car skim vintage** — the survey door-to-door times are 2017 / 18; a small
+      *OVT research run on 4 October 2026 (`docs/OVT_WEIGHTS_RESEARCH_PLAN.md`,
+      `docs/OVT_WEIGHTS_PARAMETER_MEMO.md`, METHODOLOGY §6al): 275 estimates collected, seven
+      parameter sets rerun through steps 31 and 33. Nothing could be read in full from the
+      session (network policy), so by the plan's rule every weight keeps its value and the
+      evidence range is a sensitivity: the LRT capture (underground) spans ≈ −58 % to +16 % of
+      the central 4,254 across the sets, the two zero-valued terms (BRT–LRT transfer, station
+      access) being the largest single items. נוהל פר"ת 2012 and the Ministry guideline
+      ed. 1.0 (January 2026) still have to be read; the station and interchange design is the
+      other input.*
+- [ ] **E5. Car skim vintage** — the survey door-to-door times are 2017 / 18; a small
       Google Distance Matrix sample (≈ 40 pairs, Tuesday 07:30) or the national model's
       car skim gives the 2026 uplift. *Data in hand since 2026-10-05: a May 2026 car speed
       network for the whole country (`Input/CarSpeedData/GoogleSpeed_202605/`; a speed per

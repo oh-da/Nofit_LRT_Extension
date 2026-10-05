@@ -1,0 +1,31 @@
+scenario,case,λ,λ_T,LRT premium,LRT trips 06–09,of which from bus,of which from car,bus trips after,car trips after,transit share before,transit share after,LRT share of transit,LRT trips on trunk pairs,trunk pairs P_LRT|T (trip-wtd)
+LRT all underground,"central (λ 0.03, λ_T 0.06, premium 5)",0.03,0.06,5.0,3257,3015,242,11763,55558,0.2003,0.2128,0.217,1341,0.269
+LRT all underground,"low λ (0.02 / 0.03, premium 5)",0.02,0.03,5.0,5275,4569,707,10931,54372,0.2003,0.2296,0.326,2029,0.376
+LRT all underground,"high λ (0.05 / 0.10, premium 5)",0.05,0.1,5.0,2020,1909,111,12607,55951,0.2003,0.2072,0.138,789,0.164
+LRT all underground,"no premium (λ central, premium 0)",0.03,0.06,0.0,2571,2420,150,12241,55767,0.2003,0.2099,0.174,1050,0.215
+LRT all underground,premium 10 (λ central),0.03,0.06,10.0,4074,3695,379,11208,55296,0.2003,0.2165,0.267,1690,0.331
+LRT all ground,"central (λ 0.03, λ_T 0.06, premium 5)",0.03,0.06,5.0,2920,2726,194,12002,55657,0.2003,0.2114,0.196,1090,0.222
+LRT all ground,"low λ (0.02 / 0.03, premium 5)",0.02,0.03,5.0,5035,4392,643,11075,54468,0.2003,0.2283,0.313,1836,0.345
+LRT all ground,"high λ (0.05 / 0.10, premium 5)",0.05,0.1,5.0,1665,1586,79,12867,56046,0.2003,0.2059,0.115,556,0.116
+LRT all ground,"no premium (λ central, premium 0)",0.03,0.06,0.0,2292,2172,119,12442,55844,0.2003,0.2088,0.156,846,0.175
+LRT all ground,premium 10 (λ central),0.03,0.06,10.0,3676,3369,307,11483,55419,0.2003,0.2148,0.243,1388,0.276
+LRT design 50 km/h,"central (λ 0.03, λ_T 0.06, premium 5)",0.03,0.06,5.0,4699,4176,523,10794,55086,0.2003,0.2195,0.303,2029,0.387
+LRT design 50 km/h,"low λ (0.02 / 0.03, premium 5)",0.02,0.03,5.0,6294,5289,1005,10367,53918,0.2003,0.2361,0.378,2471,0.442
+LRT design 50 km/h,"high λ (0.05 / 0.10, premium 5)",0.05,0.1,5.0,3824,3395,429,11365,55390,0.2003,0.2152,0.252,1686,0.324
+LRT design 50 km/h,"no premium (λ central, premium 0)",0.03,0.06,0.0,3800,3457,343,11390,55388,0.2003,0.2152,0.25,1634,0.32
+LRT design 50 km/h,premium 10 (λ central),0.03,0.06,10.0,5728,4955,774,10134,54716,0.2003,0.2247,0.361,2479,0.458
+LRT design 50 km/h + accel/braking,"central (λ 0.03, λ_T 0.06, premium 5)",0.03,0.06,5.0,3943,3587,356,11296,55339,0.2003,0.2159,0.259,1638,0.322
+LRT design 50 km/h + accel/braking,"low λ (0.02 / 0.03, premium 5)",0.02,0.03,5.0,5801,4950,851,10642,54136,0.2003,0.233,0.353,2232,0.407
+LRT design 50 km/h + accel/braking,"high λ (0.05 / 0.10, premium 5)",0.05,0.1,5.0,2794,2579,215,12059,55724,0.2003,0.2105,0.188,1133,0.23
+LRT design 50 km/h + accel/braking,"no premium (λ central, premium 0)",0.03,0.06,0.0,3146,2920,226,11839,55593,0.2003,0.2123,0.21,1297,0.261
+LRT design 50 km/h + accel/braking,premium 10 (λ central),0.03,0.06,10.0,4877,4332,545,10679,55022,0.2003,0.2204,0.313,2038,0.39
+LRT mixed (Haifa core underground),"central (λ 0.03, λ_T 0.06, premium 5)",0.03,0.06,5.0,3077,2863,213,11893,55609,0.2003,0.2121,0.206,1249,0.252
+LRT mixed (Haifa core underground),"low λ (0.02 / 0.03, premium 5)",0.02,0.03,5.0,5160,4485,675,11003,54415,0.2003,0.229,0.319,1963,0.366
+LRT mixed (Haifa core underground),"high λ (0.05 / 0.10, premium 5)",0.05,0.1,5.0,1802,1715,87,12769,56007,0.2003,0.2064,0.124,696,0.145
+LRT mixed (Haifa core underground),"no premium (λ central, premium 0)",0.03,0.06,0.0,2418,2287,131,12353,55807,0.2003,0.2093,0.164,975,0.2
+LRT mixed (Haifa core underground),premium 10 (λ central),0.03,0.06,10.0,3867,3529,338,11353,55358,0.2003,0.2156,0.254,1581,0.312
+LRT + synthetic branches (task C6),"central (λ 0.03, λ_T 0.06, premium 5)",0.03,0.06,5.0,3314,3051,264,11794,55469,0.2003,0.2141,0.219,1615,0.318
+LRT + synthetic branches (task C6),"low λ (0.02 / 0.03, premium 5)",0.02,0.03,5.0,5388,4610,777,10969,54221,0.2003,0.2318,0.329,2217,0.405
+LRT + synthetic branches (task C6),"high λ (0.05 / 0.10, premium 5)",0.05,0.1,5.0,1967,1852,115,12704,55907,0.2003,0.2079,0.134,1105,0.224
+LRT + synthetic branches (task C6),"no premium (λ central, premium 0)",0.03,0.06,0.0,2602,2439,163,12277,55699,0.2003,0.2108,0.175,1278,0.258
+LRT + synthetic branches (task C6),premium 10 (λ central),0.03,0.06,10.0,4170,3755,416,11229,55178,0.2003,0.2182,0.271,2012,0.386

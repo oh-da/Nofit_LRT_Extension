@@ -1,0 +1,31 @@
+scenario,case,λ,λ_T,LRT premium,LRT trips 06–09,of which from bus,of which from car,bus trips after,car trips after,transit share before,transit share after,LRT share of transit,LRT trips on trunk pairs,trunk pairs P_LRT|T (trip-wtd)
+LRT all underground,"central (λ 0.03, λ_T 0.06, premium 5)",0.03,0.06,5.0,1456,1404,52,13040,56082,0.2003,0.2054,0.1,679,0.142
+LRT all underground,"low λ (0.02 / 0.03, premium 5)",0.02,0.03,5.0,3494,3169,325,11937,55147,0.2003,0.2186,0.226,1480,0.287
+LRT all underground,"high λ (0.05 / 0.10, premium 5)",0.05,0.1,5.0,519,512,8,13728,56330,0.2003,0.2019,0.036,233,0.05
+LRT all underground,"no premium (λ central, premium 0)",0.03,0.06,0.0,1115,1084,30,13291,56172,0.2003,0.2041,0.077,518,0.11
+LRT all underground,premium 10 (λ central),0.03,0.06,10.0,1884,1797,88,12728,55966,0.2003,0.207,0.129,882,0.183
+LRT all ground,"central (λ 0.03, λ_T 0.06, premium 5)",0.03,0.06,5.0,1970,1875,95,12667,55941,0.2003,0.2074,0.135,845,0.175
+LRT all ground,"low λ (0.02 / 0.03, premium 5)",0.02,0.03,5.0,4063,3631,432,11608,54907,0.2003,0.222,0.259,1631,0.312
+LRT all ground,"high λ (0.05 / 0.10, premium 5)",0.05,0.1,5.0,887,862,24,13447,56244,0.2003,0.2031,0.062,353,0.075
+LRT all ground,"no premium (λ central, premium 0)",0.03,0.06,0.0,1524,1468,57,12990,56064,0.2003,0.2057,0.105,650,0.136
+LRT all ground,premium 10 (λ central),0.03,0.06,10.0,2519,2363,155,12276,55783,0.2003,0.2096,0.17,1089,0.222
+LRT design 50 km/h,"central (λ 0.03, λ_T 0.06, premium 5)",0.03,0.06,5.0,3365,3070,295,11688,55525,0.2003,0.2133,0.224,1640,0.321
+LRT design 50 km/h,"low λ (0.02 / 0.03, premium 5)",0.02,0.03,5.0,5169,4461,709,10967,54441,0.2003,0.2286,0.32,2221,0.405
+LRT design 50 km/h,"high λ (0.05 / 0.10, premium 5)",0.05,0.1,5.0,2330,2150,180,12401,55848,0.2003,0.2087,0.158,1176,0.234
+LRT design 50 km/h,"no premium (λ central, premium 0)",0.03,0.06,0.0,2678,2490,187,12164,55737,0.2003,0.2103,0.18,1303,0.261
+LRT design 50 km/h,premium 10 (λ central),0.03,0.06,10.0,4171,3720,450,11145,55262,0.2003,0.217,0.272,2034,0.387
+LRT design 50 km/h + accel/braking,"central (λ 0.03, λ_T 0.06, premium 5)",0.03,0.06,5.0,2755,2567,188,12109,55714,0.2003,0.2106,0.185,1301,0.262
+LRT design 50 km/h + accel/braking,"low λ (0.02 / 0.03, premium 5)",0.02,0.03,5.0,4732,4143,589,11219,54627,0.2003,0.226,0.297,1997,0.371
+LRT design 50 km/h + accel/braking,"high λ (0.05 / 0.10, premium 5)",0.05,0.1,5.0,1602,1526,76,12917,56059,0.2003,0.2057,0.11,754,0.157
+LRT design 50 km/h + accel/braking,"no premium (λ central, premium 0)",0.03,0.06,0.0,2164,2048,116,12527,55887,0.2003,0.2082,0.147,1018,0.209
+LRT design 50 km/h + accel/braking,premium 10 (λ central),0.03,0.06,10.0,3464,3166,298,11618,55495,0.2003,0.2137,0.23,1641,0.323
+LRT mixed (Haifa core underground),"central (λ 0.03, λ_T 0.06, premium 5)",0.03,0.06,5.0,1910,1816,94,12721,55947,0.2003,0.2073,0.131,854,0.176
+LRT mixed (Haifa core underground),"low λ (0.02 / 0.03, premium 5)",0.02,0.03,5.0,4011,3584,427,11648,54919,0.2003,0.2219,0.256,1635,0.313
+LRT mixed (Haifa core underground),"high λ (0.05 / 0.10, premium 5)",0.05,0.1,5.0,837,813,24,13495,56246,0.2003,0.2031,0.058,364,0.077
+LRT mixed (Haifa core underground),"no premium (λ central, premium 0)",0.03,0.06,0.0,1476,1419,56,13034,56068,0.2003,0.2056,0.102,657,0.137
+LRT mixed (Haifa core underground),premium 10 (λ central),0.03,0.06,10.0,2448,2295,153,12339,55791,0.2003,0.2095,0.166,1098,0.223
+LRT + synthetic branches (task C6),"central (λ 0.03, λ_T 0.06, premium 5)",0.03,0.06,5.0,2526,2368,158,12324,55728,0.2003,0.2104,0.17,1282,0.258
+LRT + synthetic branches (task C6),"low λ (0.02 / 0.03, premium 5)",0.02,0.03,5.0,4680,4085,596,11347,54551,0.2003,0.2271,0.292,1983,0.369
+LRT + synthetic branches (task C6),"high λ (0.05 / 0.10, premium 5)",0.05,0.1,5.0,1263,1212,51,13198,56117,0.2003,0.2049,0.087,734,0.153
+LRT + synthetic branches (task C6),"no premium (λ central, premium 0)",0.03,0.06,0.0,1963,1867,96,12715,55901,0.2003,0.208,0.134,1002,0.206
+LRT + synthetic branches (task C6),premium 10 (λ central),0.03,0.06,10.0,3214,2960,255,11856,55508,0.2003,0.2135,0.213,1618,0.319
