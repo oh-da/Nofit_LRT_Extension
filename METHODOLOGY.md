@@ -3937,6 +3937,33 @@ route + extension Prioritized: AM LRT trips 3,716 (BU 2040) … 5,433 (HS 2050) 
 segment (S24–M02 towards Tirat Carmel) 966 … 1,397; PM LRT 2,562 (BU 2040) … 2,934 (BU 2050), busiest
 segment 687 … 787.
 
+**Addendum 3, 5 October 2026 — level of service in 2040 / 2050: held at May 2026, and the
+slower-bus sensitivity (`BUS_SLOWDOWN`).** Every scenario-year runs on the May 2026 car and
+bus level of service while the corridor demand grows by 30–60 % — the do-minimum-network
+convention, kept because the regional model's 2040 network is not available and degrading
+today's network with tomorrow's demand while leaving out every planned scheme would be the
+worse assumption. Two consequences. (i) A slower car would change nothing in this chain: the
+pivot moves trips on the change of the transit nest only, the car's level enters through the
+observed 2022 shares (caveat 25), and step 23 freezes the no-build mode split at 2022; letting
+the car worsening count needs a first pivot on the no-build forecast with Δ_car ≠ 0 (a
+no-build mode-choice step, handover item D-11), which would also replace caveat 29's seeded
+shares. (ii) Slower buses do count, because the bus cost is on the pivot's transit side while
+the Metronit (own lanes) and a Prioritized LRT keep their times. The notebook therefore takes
+`BUS_SLOWDOWN="BU_2040:1.10,BU_2050:1.20,HS_2040:1.10,HS_2050:1.20"` (a factor on the running
+time of every bus ride edge that is not the Metronit, per scenario-year; the bus feeder legs of
+the LRT paths slow with it; `ALT_OUT` names the run's own output folder,
+`Output/alternatives_bus_slow/`, which keeps the summary files, the area matrices and the line
+loads but not the TAZ matrices). The factors are a reading of a standard volume–delay curve for
+a road demand growing × 1.3–1.6 from about 80 % of capacity, not a calibrated value (the May
+2026 car speeds cannot calibrate one, caveat 24). Result, main route + extension Prioritized,
+three hours: the LRT gains **+2 % in 2040 and +4–5 % in 2050** (AM 6,309 → 6,442 BU 2040;
+7,433 → 7,804 BU 2050; 7,476 → 7,624 HS 2040; 9,225 → 9,590 HS 2050; PM +2 … +4 %), the trips
+from the car +7–16 % (AM 353 → 376 … 1,311 → 1,446), the trips using the extension +2–5 %. The
+gain is small because the bus in-vehicle time is well under half of the bus generalized cost
+(walk and wait at weight 2, the transfer penalty) and the LRT's own bus feeders slow too. The
+constant-LOS central case is thus conservative for the LRT by a few percent; the comprehensive
+report carries the sensitivity as a column of its demand table and as section 4.6.
+
 ## 7. Output inventory (`Output/`)
 
 *Layout note (21 September 2026).* The products of steps 1–4 (the 2018 activities-file chain, listed first below with bare file names) now live under `Output/historical/ths2018/`; every other path is as written. Notebooks live under `notebooks/current/`, `notebooks/diagnostics/` and `notebooks/historical/` and anchor their working directory to the repository root, so the `Input/…` and `Output/…` paths in this document are unchanged.
@@ -4004,6 +4031,7 @@ segment 687 … 787.
 | `los/los_taz_accessibility.csv`; `los/{car_ivt,car_gc,car_km,transit_gc,transit_ivt,transit_walk,transit_wait,transit_transfers,transit_brt_ivt}_area_v2.csv`, `transit_direct_share_area_v2.csv`, `taz_pairs_reachable_area_v2.csv`; `los_area_v2_pairs.csv`, `los_area_v2_vs_step31.csv` | 781 rows; 25 × 25 (× 11); 600 rows; 18 rows | Step 44 | Per-TAZ accessibility (median GC to the corridor TAZs, car and transit, their ratio); the population × employment aggregates to the 25 areas; the pair-by-pair and summary comparison with steps 31 and 37 |
 | `alternatives/stations_{main_ext,ext}.csv`, `lrt_station_times_{alt}_{regime}.csv`, `main_route_nodes.csv`, `time_on_route.csv`, `skims_summary.csv`, `{AM,PM}/{car_gc,transit_gc_no_lrt_*,lrt_gc_*}_taz.csv.gz`, `{AM,PM}/{scenario}/{alt}_{regime}/{t_car_new,t_tr_new,t_lrt,t_bus,t_brt}_{taz.csv.gz,area_v2.csv}`, `lrt_line_loads.csv`, `transit_line_loads.csv`, `lrt_stations_boardings.csv`, `demand_summary.csv`, `shift_table_{AM,PM}_{regime}.csv`, `LRT_alternatives_matrices.xlsx` | 50 / 24 stations; 25 × 25 … 174 × 174; 40 runs | Step 45 | The LRT alternatives: stations and times, times on route (LRT / Metronit / train / car), the TAZ-level skims per period, the trip matrices after the LRT per run at both levels, LRT and total-transit line loads by segment and direction, boardings by station, the summary of all 40 runs (with the extension part within the through line), the shift-and-share tables, the workbook |
 | `figures/comprehensive/*.png` and `reports/Nofit_LRT_Extension_Comprehensive_Report.docx` | 11 charts | `tools/build_comprehensive_report.py` (after step 45) | The comprehensive report: LRT and total-transit flows by segment and direction per scenario (AM / PM), mode split on the corridor, demand by scenario, shift sources — all charts at the peak hour |
+| `alternatives_bus_slow/` (`demand_summary.csv`, `skims_summary.csv`, `time_on_route.csv`, per run the area matrices, `lrt_line_loads.csv`, `transit_line_loads.csv`, `lrt_stations_boardings.csv`; no TAZ matrices) | 40 runs | Step 45 with `BUS_SLOWDOWN` (§6aq addendum 3) | The slower-bus sensitivity: mixed-traffic buses × 1.10 in 2040, × 1.20 in 2050, Metronit and LRT unchanged — LRT +2 % / +4–5 % |
 | `alternatives/peak_hour_factors.csv`, `corridor_v2/peak_hour_factors_v2_pm.csv` | 12 rows; the step-27 table for the PM | `tools/peak_hour_factors_periods.py` | The peak-hour factors applied to the alternatives' charts and maps: period × layer (car, transit) × direction (up, down, all); the PM window run of step 27's method |
 | `gtfs/stop_times_study_area_{am,pm}_trips_v45.csv.gz`, `stop_times_study_area_rail_day.csv.gz` | 259,001 / 259,883 / 1,959 rows | Step 45 | The study-area stop times of the service day for the AM and PM windows (bus and Metronit) and the day's rail trips |
 | `skims/taz/lrt_capture_scenarios_taz.csv`, `taz_vs_area_capture_comparison.csv`, `lrt_trips_2022_taz_{sc}_central.csv`, `lrt_share_of_transit_taz_{sc}_central.csv`, `transit_share_2022_pivot_taz.csv`, `taz_access_table.csv`, `lrt_trips_2022_area_from_taz_{sc}_central.csv`, `lrt_trips_by_area_taz_vs_area.csv`, `trunk_link_flows_taz.csv`, `lrt_boardings_by_station_area_taz.csv`, `lrt_boardings_by_station_taz.csv`, `lrt_capture_by_access_band.csv`, `regression_check_area_skims_on_taz.csv` (and the same under `bus_area_plus_walk/`) | 15 rows; 15; 174 × 174 (× 3 + 3); 174 rows; 25 × 25; 75 rows; 18; 10; stations; 15; 3 | Step 39 | The TAZ-level capture: scenario × case totals and the comparison with step 31; TAZ trip and share matrices; the pivot's shares; the TAZ access table; sums to areas, links, gateway areas and stations; the capture rate by access band; the regression check |
@@ -4366,6 +4394,8 @@ python3 tools/gtfs_extract_periods.py   # Output/gtfs/stop_times_study_area_{am,
 jupyter nbconvert --to notebook --execute --inplace notebooks/current/LRT_alternatives_demand.ipynb
 python3 tools/build_alternatives_maps.py      # Output/figures/alternatives/*.png (≈ 1.5 minutes)
 python3 tools/build_alternatives_report.py    # the workbook and the Word report, maps included
+# the slower-bus sensitivity of step 45 (§6aq addendum 3): the same notebook with the bus factors per scenario-year, into its own folder; the executed copy goes to a scratch folder
+BUS_SLOWDOWN="BU_2040:1.10,BU_2050:1.20,HS_2040:1.10,HS_2050:1.20" ALT_OUT=Output/alternatives_bus_slow jupyter nbconvert --to notebook --execute --output-dir /tmp/bus_slow notebooks/current/LRT_alternatives_demand.ipynb
 python3 tools/peak_hour_factors_periods.py    # Output/alternatives/peak_hour_factors.csv (AM from step 27, PM by the same method; ≈ 2 minutes; needed by the two builders below)
 python3 tools/build_comprehensive_report.py   # reports/Nofit_LRT_Extension_Comprehensive_Report.docx + Output/figures/comprehensive/ (≈ 1 minute)
 git checkout -- Output/figures/gc_first_fill_trunk_v2.png Output/figures/gc_bus_gtfs_vs_survey.png Output/figures/skims_logit_car_vs_transit.png Output/figures/skims_trunk_link_flows_bus_vs_lrt.png Output/figures/lrt_capture_forecast_2040_2050.png   # the alternative run redraws the default figures
