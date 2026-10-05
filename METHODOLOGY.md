@@ -3997,7 +3997,12 @@ a network decision outside the study, larger than any demand uncertainty); the *
 range** (2050 BU AM: central 7,433, lower 5,532 at λ 0.05, upper 10,537 at λ 0.02 — the widest
 single factor of step 40 applied as a ratio; the Unprioritized regime 5,700 shown as a design
 choice); and the evidence statement. `tools/build_comprehensive_report.py` computes all of it
-from the step-45 outputs (`through_table`, `market_tables`, `cross_hamifrats`).
+from the step-45 outputs (`through_table`, `market_tables`, `cross_hamifrats`). A **Hebrew
+version in simple language**, `reports/Nofit_LRT_Extension_Comprehensive_Report_HE.docx`
+(`tools/build_comprehensive_report_he.py`), follows the same structure with the same numbers —
+it executes the English builder's data part and writes a shorter right-to-left document (Arial,
+`w:bidi` paragraphs, `w:bidiVisual` tables) with the English charts; the time-on-route table and
+the full caveat list are summarised in a paragraph and referred to the English report.
 
 ## 7. Output inventory (`Output/`)
 
@@ -4433,6 +4438,7 @@ python3 tools/build_alternatives_report.py    # the workbook and the Word report
 BUS_SLOWDOWN="BU_2040:1.10,BU_2050:1.20,HS_2040:1.10,HS_2050:1.20" ALT_OUT=Output/alternatives_bus_slow jupyter nbconvert --to notebook --execute --output-dir /tmp/bus_slow notebooks/current/LRT_alternatives_demand.ipynb
 python3 tools/peak_hour_factors_periods.py    # Output/alternatives/peak_hour_factors.csv (AM from step 27, PM by the same method; ≈ 2 minutes; needed by the two builders below)
 python3 tools/build_comprehensive_report.py   # reports/Nofit_LRT_Extension_Comprehensive_Report.docx + Output/figures/comprehensive/ (≈ 1 minute)
+python3 tools/build_comprehensive_report_he.py   # the same report in simple Hebrew, reports/Nofit_LRT_Extension_Comprehensive_Report_HE.docx (≈ 1 minute)
 git checkout -- Output/figures/gc_first_fill_trunk_v2.png Output/figures/gc_bus_gtfs_vs_survey.png Output/figures/skims_logit_car_vs_transit.png Output/figures/skims_trunk_link_flows_bus_vs_lrt.png Output/figures/lrt_capture_forecast_2040_2050.png   # the alternative run redraws the default figures
 
 # regression test of the hybrid branch (committed outputs only)

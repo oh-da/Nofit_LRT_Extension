@@ -4372,6 +4372,8 @@ Metronit keeps running, the net addition to transit being the few hundred to a t
 drawn from the car. Whether the Metronit is kept, cut or turned into a feeder after opening is a
 network decision outside the study, and it moves the LRT's loads more than any uncertainty in
 the demand. The planning range on the central 7,400 morning riders is about 5,500 to 10,500.
+The same report exists in simple Hebrew, shorter and with the same numbers
+(`reports/Nofit_LRT_Extension_Comprehensive_Report_HE.docx`).
 
 ### 5.9 Where things stand now
 
