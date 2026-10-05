@@ -1,0 +1,17 @@
+a_from,a_to,dir1_towards_Nazareth_end,dir2_towards_TiratCarmel,link
+201,202,605.7,295.9,TiratCarmel → Matam-NeotPeres
+202,203,707.0,697.4,Matam-NeotPeres → HofCarmel-NeveDavid
+203,204,819.6,695.9,HofCarmel-NeveDavid → Hecht-Shprintzak
+204,205,889.3,688.4,Hecht-Shprintzak → EinHayam
+205,206,1035.7,629.9,EinHayam → BatGalim-KiryatEliezer
+206,207,818.5,793.0,BatGalim-KiryatEliezer → Hamoshava
+207,208,749.2,928.1,Hamoshava → LowerCity
+208,209,598.7,1099.6,LowerCity → Namal-Giborim
+209,210,461.0,1152.3,Namal-Giborim → Hamifrats
+210,211,358.6,1397.1,Hamifrats → Bazan-Hutsot
+211,212,330.1,828.8,Bazan-Hutsot → TsometKiryatAta
+212,213,217.0,927.1,TsometKiryatAta → KiryatAta North
+213,214,169.8,713.9,KiryatAta North → KiryatAta North-East
+214,215,68.1,352.2,KiryatAta North-East → Shefaram
+215,216,66.1,234.4,Shefaram → Hamovil
+216,217,66.2,234.2,Hamovil → Nazareth

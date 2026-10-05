@@ -110,6 +110,34 @@ def shift_chart(p):
     ax.bar(x + w / 2, t['ext: from car'], w, color='#7f7f7f', alpha=0.5, hatch='//', label='… of which using the extension'); ax.bar(x + w / 2, t['ext: from BRT'], w, bottom=t['ext: from car'], color='#1f77b4', alpha=0.5, hatch='//'); ax.bar(x + w / 2, t['ext: from bus'], w, bottom=t['ext: from car'] + t['ext: from BRT'], color='#aec7e8', alpha=0.5, hatch='//')
     ax.set_ylim(0, SHIFT_YMAX); ax.set_xticks(x); ax.set_xticklabels(t['scenario']); ax.set_ylabel('LRT trips / peak hour'); ax.set_title(f'{p} — where the LRT trips come from, peak hour ({f:.2f} of the three hours)', fontsize=10); ax.grid(axis='y', alpha=0.3); ax.legend(fontsize=8)
     fig.tight_layout(); fig.savefig(f'{CFIG}/shift_sources_{p}.png', dpi=150); plt.close(fig)
+# ---- flows by corridor area: the load on the segment that crosses from one area to the next along the line ----
+_st = stations.copy(); _st['AggCode'] = _st['AggCode'].ffill().astype(int); _area_of = _st.set_index('station_id')['AggCode']
+def area_loads(p, sc, kind, reg=REG, peak=True):
+    l = loads(p, sc, kind, reg, peak); l['a_from'] = l['from_station'].map(_area_of); l['a_to'] = l['to_station'].map(_area_of); l = l[l['a_from'] != l['a_to']]
+    g = l.groupby(['a_from', 'a_to'], sort=False)[['dir1_towards_Nazareth_end', 'dir2_towards_TiratCarmel']].sum().reset_index()
+    g['link'] = [f'{names[a]} → {names[b]}' for a, b in zip(g['a_from'], g['a_to'])]; return g
+area_lab = area_loads('AM', 'BU_2040', 'lrt')['link'].tolist(); n_ext_area = int((area_loads('AM', 'BU_2040', 'lrt')['a_to'] <= 210).sum())   # links up to Hamifrats (210) are the extension's
+AYMAX = {kind: nice(max(area_loads(p, sc, kind)[[d[0] for d in DIRS]].values.max() for p in ['AM', 'PM'] for sc in SCS)) for kind in ('lrt', 'transit')}
+def area_flow_chart(p, sc, kind):
+    g = area_loads(p, sc, kind); x = np.arange(len(g)); fig, ax = plt.subplots(figsize=(13, 4.6))
+    for i, (col, lab, c) in enumerate(DIRS): ax.bar(x + (i - 0.5) * 0.4, g[col], 0.4, color=c, label=lab)
+    ax.axvline(n_ext_area - 0.5, color='k', ls='--', lw=0.8); ax.text(n_ext_area - 0.3, AYMAX[kind] * 0.95, 'extension | main route', fontsize=7, va='top')
+    ax.set_ylim(0, AYMAX[kind]); ax.set_ylabel('passengers / peak hour'); ax.set_xticks(x); ax.set_xticklabels(area_lab, rotation=45, ha='right', fontsize=7); ax.grid(axis='y', alpha=0.3); ax.legend(fontsize=8, loc='upper right')
+    ax.set_title(f'{"LRT" if kind == "lrt" else "Total transit"} flow between corridor areas along the line — {SCEN_LAB[sc]}, {p} peak hour; main route + extension, Prioritized', fontsize=9)
+    fig.tight_layout(); fig.savefig(f'{CFIG}/areaflow_{kind}_{p}_{sc}.png', dpi=150); plt.close(fig)
+def area_flow_chart_scenarios(p, kind, col, lab, tag):
+    cols = {'BU_2040': '#9ecae1', 'BU_2050': '#3182bd', 'HS_2040': '#fdae6b', 'HS_2050': '#e6550d'}; fig, ax = plt.subplots(figsize=(13, 4.6))
+    for i, sc in enumerate(SCEN):
+        g = area_loads(p, sc, kind); x = np.arange(len(g)); ax.bar(x + (i - 1.5) * 0.2, g[col], 0.2, color=cols[sc], label=SCEN_LAB[sc])
+    ax.axvline(n_ext_area - 0.5, color='k', ls='--', lw=0.8); ax.set_ylim(0, AYMAX[kind]); ax.set_ylabel('passengers / peak hour'); ax.set_xticks(np.arange(len(g))); ax.set_xticklabels(area_lab, rotation=45, ha='right', fontsize=7); ax.grid(axis='y', alpha=0.3); ax.legend(fontsize=8, ncol=4, loc='upper right')
+    ax.set_title(f'{"LRT" if kind == "lrt" else "Total transit"} flow between corridor areas, {lab} — the four scenario-years, {p} peak hour; main route + extension, Prioritized', fontsize=9)
+    fig.tight_layout(); fig.savefig(f'{CFIG}/areaflow_{kind}_{p}_scenarios_{tag}.png', dpi=150); plt.close(fig)
+for kind in ('lrt', 'transit'):
+    for p in ['AM', 'PM']:
+        for sc in SCS: area_flow_chart(p, sc, kind)
+        for (col, lab, _), tag in zip(DIRS, ('dir1', 'dir2')): area_flow_chart_scenarios(p, kind, col, lab, tag)
+    for p in ['AM', 'PM']:
+        for sc in SCS: area_loads(p, sc, kind).to_csv(f'{OUT}/{p}/{sc}/{ALT}_{REG}/{kind}_area_link_loads_peak_hour.csv', index=False, float_format='%.1f')
 for p in ['AM', 'PM']: mode_split_chart(p); demand_bars(p); shift_chart(p)
 for old in ['flow_lrt_AM.png', 'flow_lrt_PM.png', 'flow_transit_AM.png', 'flow_transit_PM.png', 'flow_lrt_scenarios_AM.png', 'flow_lrt_scenarios_PM.png', 'flow_transit_scenarios_AM.png', 'flow_transit_scenarios_PM.png', 'mode_split.png', 'demand_by_scenario.png', 'shift_sources.png']:
     if os.path.exists(f'{CFIG}/{old}'): os.remove(f'{CFIG}/{old}')   # the former multi-panel files
@@ -352,6 +380,7 @@ P(f'With the main route + extension added to the 2022 service, the AM three-hour
 P('The uncertainty experiment (step 40) and the λ / premium ranges of step 31 put the 2022 capture between about 0.75 × and 1.4 × the central value: λ 0.02 → +40 %, λ 0.05 → −25 %; premium 0 → −20 %, premium 10 → +25 %. The regime (running time) is worth about −20 % (Unprioritized against Prioritized), of the same order as the λ range.')
 fig(f'{FIG}/lrt_capture_tornado.png', 14, 'Figure 3.7 — Sensitivity of the 2022 LRT capture to the assumed factors (step 40).')
 fig(f'{FIG}/alternatives/single/map_line_loads_AM_2022.png', 15, 'Figure 3.8 — LRT line loads and station boardings in the peak hour, 2022 AM, main route + extension, Prioritized (step 45); the width scale is the one shared by every line-load map of this report.')
+fig(f'{FIG}/alternatives/single/map_line_loads_AM_2022_zoom.png', 12, 'Figure 3.8z — The same, zoomed on the extension (Tirat Carmel – Hamifrats).')
 H('3.5 What the model is good for, and what it should not be used for', 2)
 P('Good for:')
 for s_ in ['Sizing the corridor market by mode and locating it (which areas and TAZs, which stations), at the three-hour peak and at the design-hour scale (≈ 1.8 × an average hour).',
@@ -476,6 +505,12 @@ for p in ['AM', 'PM']:
         fig(f'{CFIG}/flow_lrt_{p}_{sc}.png', 25, f'Figure 4.{k_} — LRT flow by segment and direction, {SCEN_LAB[sc]}, {p} peak hour.'); k_ += 1
     for (col, lab, _), tag in zip(DIRS, ('dir1', 'dir2')):
         fig(f'{CFIG}/flow_lrt_{p}_scenarios_{tag}.png', 25, f'Figure 4.{k_} — LRT flow by segment, {lab}, the four scenario-years, {p} peak hour.'); k_ += 1
+P('The same flows between the corridor areas along the line: each bar is the load on the segment that crosses from one area to the next (Tirat Carmel → Matam-Neot Peres … Hamovil → Nazareth), in the peak hour, one vertical scale (' + f'{AYMAX["lrt"]:,.0f}' + ') for every area chart of the section. Source: {kind}_area_link_loads_peak_hour.csv in each run folder.')
+for p in ['AM', 'PM']:
+    for sc in SCS:
+        fig(f'{CFIG}/areaflow_lrt_{p}_{sc}.png', 25, f'Figure 4.{k_} — LRT flow between corridor areas, {SCEN_LAB[sc]}, {p} peak hour.'); k_ += 1
+    for (col, lab, _), tag in zip(DIRS, ('dir1', 'dir2')):
+        fig(f'{CFIG}/areaflow_lrt_{p}_scenarios_{tag}.png', 25, f'Figure 4.{k_} — LRT flow between corridor areas, {lab}, the four scenario-years, {p} peak hour.'); k_ += 1
 H('4.6 Flow on the line — total transit, both directions', 2)
 P('The same profile for all transit trips of the corridor market (bus, Metronit and LRT after the LRT is added), loaded along the line between the LRT stations nearest their ends — the transit demand the line\'s corridor carries, of which the LRT takes the share shown in 4.2. '
   'Source: transit_line_loads.csv in each run folder, scaled to the peak hour as above.')
@@ -485,6 +520,12 @@ for p in ['AM', 'PM']:
         fig(f'{CFIG}/flow_transit_{p}_{sc}.png', 25, f'Figure 4.{k_} — Total transit flow by segment and direction, {SCEN_LAB[sc]}, {p} peak hour.'); k_ += 1
     for (col, lab, _), tag in zip(DIRS, ('dir1', 'dir2')):
         fig(f'{CFIG}/flow_transit_{p}_scenarios_{tag}.png', 25, f'Figure 4.{k_} — Total transit flow by segment, {lab}, the four scenario-years, {p} peak hour.'); k_ += 1
+P('The same between the corridor areas (one vertical scale, ' + f'{AYMAX["transit"]:,.0f}' + ', for every area chart of the section).')
+for p in ['AM', 'PM']:
+    for sc in SCS:
+        fig(f'{CFIG}/areaflow_transit_{p}_{sc}.png', 25, f'Figure 4.{k_} — Total transit flow between corridor areas, {SCEN_LAB[sc]}, {p} peak hour.'); k_ += 1
+    for (col, lab, _), tag in zip(DIRS, ('dir1', 'dir2')):
+        fig(f'{CFIG}/areaflow_transit_{p}_scenarios_{tag}.png', 25, f'Figure 4.{k_} — Total transit flow between corridor areas, {lab}, the four scenario-years, {p} peak hour.'); k_ += 1
 portrait()
 H('4.7 Mode split on the route', 2)
 P('The split of the corridor market between car and transit after the LRT, with the LRT shown within transit, by scenario and period.')
@@ -527,18 +568,19 @@ H('4.11 Maps', 2)
 P('The map set of the alternatives report (Output/figures/alternatives/, 41 maps: line loads, origins and destinations of the LRT trips, LRT share, growth, shift sources and rates, travel-time maps) applies to these runs; four are reproduced here.')
 P('One map per scenario-year, all on the same width scale (the HS 2050 maximum) and the same boarding-circle scale.')
 k_ = 12
+P('Each map is followed by its zoom on the extension (Tirat Carmel – Hamifrats), same scale.')
 for sc in SCEN:
-    fig(f'{FIG}/alternatives/single/map_line_loads_AM_{sc}.png', 15, f'Figure 4.{k_} — LRT line loads and station boardings in the AM peak hour, {SCEN_LAB[sc]}, main route + extension, Prioritized.'); k_ += 1
-fig(f'{FIG}/alternatives/single/map_line_loads_PM_BU_2050.png', 15, f'Figure 4.{k_} — The same for the PM peak hour, 2050 BU.'); k_ += 1
+    fig(f'{FIG}/alternatives/single/map_line_loads_AM_{sc}.png', 15, f'Figure 4.{k_} — LRT line loads and station boardings in the AM peak hour, {SCEN_LAB[sc]}, main route + extension, Prioritized.'); fig(f'{FIG}/alternatives/single/map_line_loads_AM_{sc}_zoom.png', 12, f'Figure 4.{k_}z — The same, zoomed on the extension.'); k_ += 1
+fig(f'{FIG}/alternatives/single/map_line_loads_PM_BU_2050.png', 15, f'Figure 4.{k_} — The same for the PM peak hour, 2050 BU.'); fig(f'{FIG}/alternatives/single/map_line_loads_PM_BU_2050_zoom.png', 12, f'Figure 4.{k_}z — The same, zoomed on the extension.'); k_ += 1
 P('Growth of the LRT trip origins by TAZ, 2022 to each scenario-year, one map per scenario-year on one colour scale.')
 for sc in SCEN:
-    fig(f'{FIG}/alternatives/single/map_growth_AM_{sc}.png', 15, f'Figure 4.{k_} — Growth of the LRT trip origins by TAZ, 2022 → {SCEN_LAB[sc]}, AM peak hour.'); k_ += 1
+    fig(f'{FIG}/alternatives/single/map_growth_AM_{sc}.png', 15, f'Figure 4.{k_} — Growth of the LRT trip origins by TAZ, 2022 → {SCEN_LAB[sc]}, AM peak hour.'); fig(f'{FIG}/alternatives/single/map_growth_AM_{sc}_zoom.png', 12, f'Figure 4.{k_}z — The same, zoomed on the extension.'); k_ += 1
 P('Sources of the LRT trips by origin TAZ in the reference case, one map per source; the bus and Metronit maps share one colour scale, the car map has its own (its values are an order of magnitude smaller).')
 for src_, lab_ in [('car', 'from the car'), ('bus', 'from bus-based paths'), ('brt', 'from Metronit-based paths')]:
-    fig(f'{FIG}/alternatives/single/map_shift_{src_}_AM_{REF}.png', 15, f'Figure 4.{k_} — LRT trips {lab_} by origin TAZ, {REF_LAB}, AM peak hour.'); k_ += 1
+    fig(f'{FIG}/alternatives/single/map_shift_{src_}_AM_{REF}.png', 15, f'Figure 4.{k_} — LRT trips {lab_} by origin TAZ, {REF_LAB}, AM peak hour.'); fig(f'{FIG}/alternatives/single/map_shift_{src_}_AM_{REF}_zoom.png', 12, f'Figure 4.{k_}z — The same, zoomed on the extension.'); k_ += 1
 P('Generalized cost to the reference destination (the TAZ of the busiest LRT alighting station): the best bus or Metronit path today and the LRT, on one colour scale, then their difference.')
 for m_, lab_ in [('bus', 'best bus / Metronit path, no LRT'), ('lrt', 'LRT, main route + extension, Prioritized'), ('diff', 'LRT minus best bus (negative = LRT cheaper)')]:
-    fig(f'{FIG}/alternatives/single/map_time_{m_}_AM.png', 15, f'Figure 4.{k_} — {lab_}, generalized minutes from every TAZ, AM.'); k_ += 1
+    fig(f'{FIG}/alternatives/single/map_time_{m_}_AM.png', 15, f'Figure 4.{k_} — {lab_}, generalized minutes from every TAZ, AM.'); fig(f'{FIG}/alternatives/single/map_time_{m_}_AM_zoom.png', 12, f'Figure 4.{k_}z — The same, zoomed on the extension.'); k_ += 1
 
 # ======================= 5 =======================
 H('5. Conclusions')
