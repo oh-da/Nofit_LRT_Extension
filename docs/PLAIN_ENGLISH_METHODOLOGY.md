@@ -4224,6 +4224,33 @@ same as at midday. Real roads slow down in the morning peak, so these values loo
 monthly average lightly adjusted by hour. The provider's method should be asked for; until it
 is known, a car time built on these speeds is a May 2026 all-day time, not a peak time.
 
+### 5.8e Car travel times for 2026, and whether the survey's car times need an uplift (step 37)
+
+The ridership estimate compares the LRT against the car using car travel times from the
+2017/18 survey — what the travellers reported, door to door. With the May 2026 car speeds in
+hand (5.8d), we computed a 2026 car time for every pair of the 25 corridor areas by finding
+the quickest route at the 07:00–08:00 speeds. One practical point: the car layer's links do
+not quite meet at junctions, so the routes were run on the bus street network (whose links do
+meet) with the car speeds copied onto the streets that each car link covers — 85 % of the
+street length is covered, 68 % with a measured speed, and local streets without one were
+given an assumed 30 km/h (the result moves by about a minute and a half if that assumption is
+20 or 40 km/h instead).
+
+The result: on the trunk pairs, the 2026 network time plus a 3-minute allowance for parking
+and walking is 13.0 minutes, against 14.4 minutes reported in the survey — the 2026 time is
+about 10 % lower, and across all 600 pairs about 5 % lower. So the survey's car times do not
+need to be increased for 2026; if anything they are already on the high side. Two cautions:
+the May 2026 speeds hardly vary by hour (5.8d), so they may understate the morning peak, and
+a reported door-to-door time includes things a network route does not. The ridership
+estimate was rerun with the 2026 car times in place of the survey's, and it did not change
+by a single trip — which exposes something about the method rather than the data: the
+estimate moves riders according to how much *better the transit side* becomes when the LRT is
+added, starting from today's observed car/transit split, and the car's own travel time is
+not in that calculation. So a faster or slower car would not change the LRT's forecast
+either way. That is acceptable for a screening of the corridor, but it means the "trips taken
+from the car" figure rests on the transit-side costs and the assumed sensitivity alone. The
+survey times remain the central case until the speed provider's method is clarified.
+
 ### 5.9 Where things stand now
 
 The single most current answer to "how many riders will the LRT capture" is **about 4,250

@@ -251,9 +251,15 @@ Key facts driving the list (2017 trips-file hybrid, `Output/ths2017/study_taz/`)
       network for the whole country (`Input/CarSpeedData/GoogleSpeed_202605/`; a speed per
       link, hour 06:00–21:00 and direction), clipped to the study area by step 43
       (`Car_speed_network_North.ipynb`, METHODOLOGY §6al; 9,927 links, 4,693 with a speed,
-      `Output/car_speed/`). Still open: route the V2 area pairs over it to get the 2026 car
-      times and the uplift on the survey skim; the hourly profile is almost flat (caveat 24),
-      so confirm the provider's aggregation before calling the 07:00 column a peak speed.*
+      `Output/car_speed/`). Routed 2026-10-05 by step 37 (`Car_skim_2026_network.ipynb`,
+      METHODOLOGY §6am): on the 90 trunk pairs the 2026 network time + 3 min terminal is
+      13.0 min against the survey's 14.4 (ratio 0.90; 0.95 on all pairs) — no uplift on this
+      evidence; the chain rerun on the 2026 skim (`CAR_SOURCE=network`,
+      `Output/skims/car_network/`) is reported in §6ac / §6ad addenda: the capture is
+      identical to the trip, since the incremental-logit pivot cancels the car's cost level
+      (caveat 25). Still open: the
+      provider's hourly aggregation (caveat 24) before the 07:00 column is called a peak
+      speed; the survey time stays the default until then.*
 - [~] **E7. Cost sensitivity λ** — *person-level estimate done 2026-09-23 (step 33,
       `Mode_choice_person_level.ipynb`, METHODOLOGY §6ae), on the THS person and household
       tables with `new_wf` as the only weight: with car availability, purpose, age and sector

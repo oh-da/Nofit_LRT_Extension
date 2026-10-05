@@ -664,7 +664,18 @@ committed and pushed on its own, with its documents, before the next starts.
    two things to settle first — the hourly profile is almost flat (caveat 24: ask the provider
    how the hourly values were aggregated before treating `SPD_7` as the peak), and half the
    study-area links carry no speed (short local links; connectors and a fallback speed are
-   needed where a path uses them).
+   needed where a path uses them). **Done the same day as step 37**
+   (`Car_skim_2026_network.ipynb`, METHODOLOGY §6am): routed on the bus street network's
+   topology with the car speeds transferred onto its segments (the car layer's own junctions do
+   not connect), 30 km/h assumed on the uncovered local segments; trunk pairs 10.0 + 3 min
+   terminal = 13.0 min vs the survey's 14.4 (ratio 0.90) — no 2026 uplift on this evidence;
+   step 26's `CAR_SOURCE=network` switch and the 26 → 31 → 32 rerun under
+   `Output/skims/car_network/` report the capture beside the central case (§6ac / §6ad
+   addenda): **identical to the trip in every scenario and case**, because the incremental-logit
+   pivot cancels the car's cost level (caveat 25) — the premise of C1 ("run the capture on the
+   uplifted skim") has no purchase on this model; the car time would count only in a full
+   mode-choice formulation or a re-estimated person-level λ (step 33). The survey time stays
+   the default pending the provider's aggregation method.
 
 Not needed / not coming, by the user's decision on 23 September 2026: Metronit 2013 ridership,
 a stated-preference survey, parking supply, the cellular product's trip definition.

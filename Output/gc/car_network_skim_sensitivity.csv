@@ -1,0 +1,6 @@
+variant,"trunk pairs, trip-weighted (min)","all pairs, trip-weighted (min)","trunk pairs, simple mean (min)"
+"07:00, fallback 30 km/h (central)",9.96,13.08,11.91
+"07:00, fallback 20 km/h",11.48,15.20,13.63
+"07:00, fallback 40 km/h",9.08,11.77,10.88
+"fastest hour, fallback 30 km/h",9.46,12.52,11.37
+"cross-check: car layer on its own topology, 50 m snap, fallback 30",8.80,12.19,11.15
