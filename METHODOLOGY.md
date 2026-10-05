@@ -4018,7 +4018,14 @@ scenario-year on one colour scale, shift sources per source, time to the referen
 by LRT and their difference), written by `tools/build_alternatives_maps.py` beside its
 multi-panel set, which the alternatives report keeps. The step-3 diagnostic figures reused in
 section 3 (corridor profiles, cordons, λ by segment, the tornado) are the earlier steps' own
-figures and keep their layout.
+figures and keep their layout. Every single-panel map also has a `_zoom` twin framed on the
+extension (the extension stations' bounding box with a 1.5–2.5 km margin), same scale, and the
+flow charts exist at a second level: **flows between the corridor areas along the line**
+(`areaflow_{lrt,transit}_{period}_{scenario}.png`, `areaflow_{kind}_{period}_scenarios_{dir}.png`)
+— each bar the load on the segment that crosses from one area to the next (Tirat Carmel → Matam
+… Hamovil → Nazareth, 16 links; station S13, without an area code, takes the preceding
+station's), one scale per kind over every period and scenario-year; the values are written per
+run as `{lrt,transit}_area_link_loads_peak_hour.csv`.
 
 ## 7. Output inventory (`Output/`)
 

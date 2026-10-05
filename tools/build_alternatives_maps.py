@@ -171,8 +171,14 @@ print(f'maps written to {FIG}; reference destination {ref_label}'); print(len(os
 SFIG = f'{FIG}/single'; os.makedirs(SFIG, exist_ok=True); a, r = 'main_ext', 'prioritized'
 SCS_ALL = ['2022', 'BU_2040', 'BU_2050', 'HS_2040', 'HS_2050']
 import textwrap
+_ext = STN['ext']; ZOOM = (_ext['x'].min() - 1500, _ext['x'].max() + 2500, _ext['y'].min() - 1500, _ext['y'].max() + 1500)   # the extension's bounding box with a margin (m)
 def single(title, draw, fname, figsize=(12, 6.8)):
-    fig_, ax_ = plt.subplots(figsize=figsize); draw(ax_); ax_.set_title(textwrap.fill(title, 120), fontsize=9, loc='left'); plt.tight_layout(); plt.savefig(f'{SFIG}/{fname}', dpi=150, bbox_inches='tight'); plt.close()
+    """one map per file, and a second file (_zoom) framed on the extension (Tirat Carmel – Hamifrats)"""
+    for zoom in (False, True):
+        fig_, ax_ = plt.subplots(figsize=figsize if not zoom else (9, 9)); draw(ax_)
+        if zoom: ax_.set_xlim(ZOOM[0], ZOOM[1]); ax_.set_ylim(ZOOM[2], ZOOM[3])
+        ax_.set_title(textwrap.fill(title + (' — zoom on the extension' if zoom else ''), 120 if not zoom else 90), fontsize=9, loc='left'); plt.tight_layout()
+        plt.savefig(f'{SFIG}/{fname[:-4] + "_zoom.png" if zoom else fname}', dpi=150, bbox_inches='tight'); plt.close()
 # line loads: one width scale and one boarding scale over every period and scenario-year
 wmax_all = max(loads_ph(p, sc, a, r)[['dir1_towards_Nazareth_end', 'dir2_towards_TiratCarmel']].values.max() for p in ('AM', 'PM') for sc in SCS_ALL)
 bmax_all = max(boardings_ph(p, sc, a, r)['boardings'].max() for p in ('AM', 'PM') for sc in SCS_ALL)
