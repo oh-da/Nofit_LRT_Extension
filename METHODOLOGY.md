@@ -3860,8 +3860,13 @@ opposite directions.
 **Outputs** (`Output/alternatives/`). `stations_{alt}.csv`, `lrt_station_times_{alt}_{regime}.csv`,
 `main_route_nodes.csv`, `time_on_route.csv`, `skims_summary.csv`, per period the TAZ car / no-LRT
 transit / LRT GC matrices; per `{period}/{scenario}/{alt}_{regime}/` the car, transit, LRT, bus and
-Metronit trip matrices at TAZ and area level, `lrt_line_loads.csv`, `lrt_stations_boardings.csv`;
-`demand_summary.csv`; `LRT_alternatives_matrices.xlsx` and
+Metronit trip matrices at TAZ and area level, `lrt_line_loads.csv`, `transit_line_loads.csv` (all
+transit trips of the corridor market after the LRT, loaded between the pair's gateway stations —
+the transit flow of the line's corridor), `lrt_stations_boardings.csv`;
+`demand_summary.csv` (since 5 October 2026 also the **extension part within the through line**:
+LRT trips riding at least one segment S01–S24, split by source car / bus / Metronit, beside the
+both-ends-on-the-extension count); `shift_table_{AM,PM}_{regime}.csv` (the comprehensive report's
+shift-and-share table per scenario); `LRT_alternatives_matrices.xlsx` and
 `reports/LRT_Alternatives_Demand_Report.docx` (`tools/build_alternatives_report.py`); figures
 `lrt_alternatives_{lines,demand,line_loads}.png`; **maps** in `Output/figures/alternatives/`
 (`tools/build_alternatives_maps.py`, 41 maps, also in the report's section 4): line loads by
@@ -3884,6 +3889,53 @@ dwell are assumed (caveat 28; its stations are the delivered list); the forecast
 grown at the AM rates; the Metronit premium is an estimate; the pivot's induced trips
 depend on the aggregation level (caveat 27); no capacity, no bus-network response (task C7's
 truncation not applied), no fare, no park-and-ride; one Tuesday's schedule.
+
+**Addendum, 5 October 2026 — the comprehensive report, the extension part within the through
+line, and the car shift across scenarios (caveat 29).** `tools/build_comprehensive_report.py`
+writes `reports/Nofit_LRT_Extension_Comprehensive_Report.docx` (goal and objectives; model
+structure, data inputs with their dates, approach; calibration and the base scenario with its
+tests, charts and the fitness-for-use statement with all caveats; the results for 2040 BU,
+2050 BU, 2040 HS, 2050 HS on **main route + extension, Prioritized**, with the extension part
+shown within that run; conclusions) and its charts in `Output/figures/comprehensive/`: the LRT
+flow and the total-transit flow by segment and direction (both directions, per scenario and the
+four scenarios side by side, AM and PM), the mode split on the corridor (car / bus / Metronit /
+LRT), the demand by scenario and the shift sources. The shift table reads the car shift as
+`car before − car after` (the logsum-induced trips out of the car, of which `from_car` is the part
+the LRT carries; the rest board the pair's bus or Metronit path) and the bus / Metronit shifts
+from the `from_bus` / `from_brt` matrices (the pairs whose transit path is bus-based or
+Metronit-based); the three LRT sources add to the LRT total. AM, main + extension, Prioritized:
+car → transit 563 (2022) / 684 (BU 2040) / 1,421 (BU 2050) / 1,387 (HS 2040) / 2,035 (HS 2050), of
+which to the LRT 295 / 353 / 818 / 870 / 1,311; Metronit → LRT 2,768 / 3,308 / 3,731 / 3,753 /
+4,548; bus → LRT 2,128 / 2,648 / 2,881 / 2,850 / 3,365; LRT trips using the extension 4,004 /
+4,950 / 6,003 / 5,651 / 7,010 (77–81 % of the line's trips), with both ends on it 2,413 / 3,038 /
+3,851 / 3,276 / 4,068. The AM car column doubles between BU 2040 and BU 2050 and between BU 2040
+and HS 2040 on a 16 % / 4 % market growth: the forecast sets seed trips into TAZ pairs empty in
+2022, so the corridor pairs with both car and transit trips rise from 1,620 (2022) to 2,084 /
+2,942 / 4,970 / 5,688 and the trip-weighted `S·(1 − S)` from 0.048 to 0.050 / 0.061 / 0.058 /
+0.062, while the PM sets (grown pair by pair from the PM base, the 2022 pair set kept) move
+smoothly, 666 → 880. Caveat 27's aggregation dependence thus also acts across scenarios; the car
+shift is an order of magnitude (0.4–1.5 % of the corridor car trips), not a scenario comparison.
+
+**Addendum 2, 5 October 2026 — every chart and map at the peak hour.** At the study team's
+request the charts of the comprehensive report and the maps of `tools/build_alternatives_maps.py`
+show the peak hour, not the three-hour period; the tables keep the three-hour totals with the
+peak-hour values beside them. The factors are step 27's (the busiest sliding 60-minute window of
+the survey's departures, link-crossing weights by direction on the V2 tree network): the AM
+values are step 27's own (`Output/corridor_v2/peak_hour_factors_v2.csv`), the PM values come
+from `tools/peak_hour_factors_periods.py`, which runs the same code on the 16:00–19:00 window
+(`Output/corridor_v2/peak_hour_factors_v2_pm.csv`; the AM rerun reproduces step 27 exactly).
+`Output/alternatives/peak_hour_factors.csv` holds the applied set — line loads by the network
+bus factor of the direction (the chain's convention for LRT loads since step 31, applied to the
+LRT and to the total-transit loads alike): AM 0.549 towards Nazareth / 0.457 towards Tirat
+Carmel, PM 0.535 / 0.468 (bus peak 16:00–17:00 up, 17:30–18:30 down; 135 / 123 sampled);
+totals by the study-area factor of the layer: transit AM 0.589 / PM 0.478, car AM 0.621 / PM
+0.447 (car network by direction AM 0.556 / 0.522, PM 0.445 / 0.435). The PM is flatter than
+the AM for the car (0.45 against 0.62) and about as peaked for the bus. These are the survey's
+departure-hour factors, the upper reading beside the observed design-hour factors (RavKav
+boardings 0.43–0.48, road counts 0.38–0.43 in the AM; caveat 18). Peak-hour headline, main
+route + extension Prioritized: AM LRT trips 3,716 (BU 2040) … 5,433 (HS 2050) with the busiest
+segment (S24–M02 towards Tirat Carmel) 966 … 1,397; PM LRT 2,562 (BU 2040) … 2,934 (BU 2050), busiest
+segment 687 … 787.
 
 ## 7. Output inventory (`Output/`)
 
@@ -3950,7 +4002,9 @@ truncation not applied), no fare, no park-and-ride; one Tuesday's schedule.
 | `mode_choice/car_network/*` | as `mode_choice/*` | Step 33 with `SK_DIR=Output/skims/car_network` | The person-level logits re-estimated with the 2026 car time in the car generalized cost: λ 0.040 (M1), 0.048 / 0.060 / 0.042 (M1b / M3 / M1u), choice riders 0.011 not identified (§6ae addendum) |
 | `los/car_los_taz.csv.gz`, `transit_los_taz.csv.gz` | 609,180 / 608,400 rows | Step 44 | Every reachable TAZ pair: car kerb-to-kerb time, path km, GC (+ 3 min); transit GC, IVT, walk, wait, transfers, boardings, Metronit IVT, walk-only flag |
 | `los/los_taz_accessibility.csv`; `los/{car_ivt,car_gc,car_km,transit_gc,transit_ivt,transit_walk,transit_wait,transit_transfers,transit_brt_ivt}_area_v2.csv`, `transit_direct_share_area_v2.csv`, `taz_pairs_reachable_area_v2.csv`; `los_area_v2_pairs.csv`, `los_area_v2_vs_step31.csv` | 781 rows; 25 × 25 (× 11); 600 rows; 18 rows | Step 44 | Per-TAZ accessibility (median GC to the corridor TAZs, car and transit, their ratio); the population × employment aggregates to the 25 areas; the pair-by-pair and summary comparison with steps 31 and 37 |
-| `alternatives/stations_{main_ext,ext}.csv`, `lrt_station_times_{alt}_{regime}.csv`, `main_route_nodes.csv`, `time_on_route.csv`, `skims_summary.csv`, `{AM,PM}/{car_gc,transit_gc_no_lrt_*,lrt_gc_*}_taz.csv.gz`, `{AM,PM}/{scenario}/{alt}_{regime}/{t_car_new,t_tr_new,t_lrt,t_bus,t_brt}_{taz.csv.gz,area_v2.csv}`, `lrt_line_loads.csv`, `lrt_stations_boardings.csv`, `demand_summary.csv`, `LRT_alternatives_matrices.xlsx` | 50 / 24 stations; 25 × 25 … 174 × 174; 40 runs | Step 45 | The LRT alternatives: stations and times, times on route (LRT / Metronit / train / car), the TAZ-level skims per period, the trip matrices after the LRT per run at both levels, line loads by segment and direction, boardings by station, the summary of all 40 runs, the workbook |
+| `alternatives/stations_{main_ext,ext}.csv`, `lrt_station_times_{alt}_{regime}.csv`, `main_route_nodes.csv`, `time_on_route.csv`, `skims_summary.csv`, `{AM,PM}/{car_gc,transit_gc_no_lrt_*,lrt_gc_*}_taz.csv.gz`, `{AM,PM}/{scenario}/{alt}_{regime}/{t_car_new,t_tr_new,t_lrt,t_bus,t_brt}_{taz.csv.gz,area_v2.csv}`, `lrt_line_loads.csv`, `transit_line_loads.csv`, `lrt_stations_boardings.csv`, `demand_summary.csv`, `shift_table_{AM,PM}_{regime}.csv`, `LRT_alternatives_matrices.xlsx` | 50 / 24 stations; 25 × 25 … 174 × 174; 40 runs | Step 45 | The LRT alternatives: stations and times, times on route (LRT / Metronit / train / car), the TAZ-level skims per period, the trip matrices after the LRT per run at both levels, LRT and total-transit line loads by segment and direction, boardings by station, the summary of all 40 runs (with the extension part within the through line), the shift-and-share tables, the workbook |
+| `figures/comprehensive/*.png` and `reports/Nofit_LRT_Extension_Comprehensive_Report.docx` | 11 charts | `tools/build_comprehensive_report.py` (after step 45) | The comprehensive report: LRT and total-transit flows by segment and direction per scenario (AM / PM), mode split on the corridor, demand by scenario, shift sources — all charts at the peak hour |
+| `alternatives/peak_hour_factors.csv`, `corridor_v2/peak_hour_factors_v2_pm.csv` | 12 rows; the step-27 table for the PM | `tools/peak_hour_factors_periods.py` | The peak-hour factors applied to the alternatives' charts and maps: period × layer (car, transit) × direction (up, down, all); the PM window run of step 27's method |
 | `gtfs/stop_times_study_area_{am,pm}_trips_v45.csv.gz`, `stop_times_study_area_rail_day.csv.gz` | 259,001 / 259,883 / 1,959 rows | Step 45 | The study-area stop times of the service day for the AM and PM windows (bus and Metronit) and the day's rail trips |
 | `skims/taz/lrt_capture_scenarios_taz.csv`, `taz_vs_area_capture_comparison.csv`, `lrt_trips_2022_taz_{sc}_central.csv`, `lrt_share_of_transit_taz_{sc}_central.csv`, `transit_share_2022_pivot_taz.csv`, `taz_access_table.csv`, `lrt_trips_2022_area_from_taz_{sc}_central.csv`, `lrt_trips_by_area_taz_vs_area.csv`, `trunk_link_flows_taz.csv`, `lrt_boardings_by_station_area_taz.csv`, `lrt_boardings_by_station_taz.csv`, `lrt_capture_by_access_band.csv`, `regression_check_area_skims_on_taz.csv` (and the same under `bus_area_plus_walk/`) | 15 rows; 15; 174 × 174 (× 3 + 3); 174 rows; 25 × 25; 75 rows; 18; 10; stations; 15; 3 | Step 39 | The TAZ-level capture: scenario × case totals and the comparison with step 31; TAZ trip and share matrices; the pivot's shares; the TAZ access table; sums to areas, links, gateway areas and stations; the capture rate by access band; the regression check |
 | `figures/` | — | Steps 1b–3 | Scatter plots, CV curves, λ curves, R_AB heatmap |
@@ -4170,6 +4224,18 @@ Added 23 September 2026 (step 33):
     margins are built on AM productions and attractions; a PM-specific growth would need the PM
     rates (task).
 
+29. **The car shift is not comparable between the AM forecast scenarios** (§6aq addendum of
+    5 October 2026). The pivot's trips out of the car are proportional to `S·(1 − S)` of each
+    TAZ pair's smoothed transit share (caveat 27), and step 23's forecast sets seed trips into
+    TAZ pairs that are empty in 2022 (small-base and transforming TAZs take the super-zone
+    pattern), so the corridor pairs with both car and transit trips rise from 1,620 (2022) to
+    2,084 (BU 2040), 2,942 (BU 2050), 4,970 (HS 2040) and 5,688 (HS 2050) and the AM car → transit
+    shift doubles on a 4–16 % market growth (684 → 1,387–1,421); the PM sets, grown pair by pair
+    from the PM base, keep the 2022 pair set and move smoothly. The car shift is an order of
+    magnitude (0.4–1.5 % of the corridor car trips); differences between scenarios in that column
+    are an artefact of the seeding, and a scenario comparison of the car draw would need the pivot
+    run at the area level (caveat 27's upper reading) or a full mode-choice model.
+
 ## 8b. Related work — PCA-based analysis and structural comparison of OD matrices
 
 Context for the PCA validation notebooks (`THS_2018_MTX_PCA_vs_cellular.ipynb`,
@@ -4300,6 +4366,8 @@ python3 tools/gtfs_extract_periods.py   # Output/gtfs/stop_times_study_area_{am,
 jupyter nbconvert --to notebook --execute --inplace notebooks/current/LRT_alternatives_demand.ipynb
 python3 tools/build_alternatives_maps.py      # Output/figures/alternatives/*.png (≈ 1.5 minutes)
 python3 tools/build_alternatives_report.py    # the workbook and the Word report, maps included
+python3 tools/peak_hour_factors_periods.py    # Output/alternatives/peak_hour_factors.csv (AM from step 27, PM by the same method; ≈ 2 minutes; needed by the two builders below)
+python3 tools/build_comprehensive_report.py   # reports/Nofit_LRT_Extension_Comprehensive_Report.docx + Output/figures/comprehensive/ (≈ 1 minute)
 git checkout -- Output/figures/gc_first_fill_trunk_v2.png Output/figures/gc_bus_gtfs_vs_survey.png Output/figures/skims_logit_car_vs_transit.png Output/figures/skims_trunk_link_flows_bus_vs_lrt.png Output/figures/lrt_capture_forecast_2040_2050.png   # the alternative run redraws the default figures
 
 # regression test of the hybrid branch (committed outputs only)

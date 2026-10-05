@@ -91,6 +91,7 @@ doc.add_heading('Figures', 1)
 for f, cap in [('lrt_alternatives_lines.png', 'The two lines and their stations.'), ('lrt_alternatives_demand.png', 'LRT trips by scenario-year, alternative and regime, AM and PM.'), ('lrt_alternatives_line_loads.png', 'Line loads by segment and direction, main route + extension, Prioritized, BU 2040, AM.')]:
     if os.path.exists(f'{FIG}/{f}'): doc.add_picture(f'{FIG}/{f}', width=Cm(24)); doc.add_paragraph(cap).alignment = WD_ALIGN_PARAGRAPH.CENTER
 doc.add_heading('4. Maps — time, demand, loads and differences', 1)
+doc.add_paragraph('Every volume on the maps (trips, line loads, boardings) is for the peak hour of its period, scaled from the three-hour matrices by the factors in Output/alternatives/peak_hour_factors.csv (step 27\'s method on the AM and PM windows: line loads by the network bus factor of the direction, AM 0.55 towards Nazareth / 0.46 towards Tirat Carmel, PM 0.54 / 0.47; totals by the study-area factor, transit AM 0.59 / PM 0.48, car AM 0.62 / PM 0.45). The time maps and the shift rates are unaffected. The tables of sections 1–3 remain three-hour totals.')
 doc.add_paragraph('Produced by tools/build_alternatives_maps.py from the same runs (Output/figures/alternatives/). Reference destination for the time maps: the TAZ of the station with the most LRT alightings (BU 2040 AM, main route + extension, Prioritized).')
 MAPS = [('map_time_lrt_vs_bus_AM.png', 'Transit time to the reference TAZ, AM: today\'s best bus / Metronit path, the LRT (main route + extension, Prioritized), and the difference (blue = LRT cheaper).'),
         ('map_time_lrt_to_ref_AM.png', 'Time by LRT to the reference TAZ (access + wait + ride + egress, generalized minutes), AM, the four alternative × regime combinations.'),
@@ -110,7 +111,7 @@ for f, cap in MAPS:
     pth = f'{FIG}/alternatives/{f}'
     if os.path.exists(pth): doc.add_picture(pth, width=Cm(24)); doc.add_paragraph(cap).alignment = WD_ALIGN_PARAGRAPH.CENTER
 doc.add_heading('4a. Volumes', 2)
-for f, cap in [('map_station_volumes_AM_BU_2040.png', 'Station volumes: boardings (blue) and alightings (orange) in the AM three hours, BU 2040, the four combinations; six busiest stations labelled.'),
+for f, cap in [('map_station_volumes_AM_BU_2040.png', 'Station volumes: boardings (blue) and alightings (orange) in the AM peak hour, BU 2040, the four combinations; six busiest stations labelled.'),
                ('map_station_volumes_PM_BU_2040.png', 'The same for the PM.'),
                ('map_trip_volumes_AM_BU_2040.png', 'Trip volumes by origin TAZ after the LRT — car, transit (bus + Metronit + LRT) and the LRT share of transit; main route + extension, Prioritized, AM BU 2040.'),
                ('map_trip_volumes_PM_BU_2040.png', 'The same for the PM.')]:
