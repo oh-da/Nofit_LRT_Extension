@@ -109,6 +109,28 @@ MAPS = [('map_time_lrt_vs_bus_AM.png', 'Transit time to the reference TAZ, AM: t
 for f, cap in MAPS:
     pth = f'{FIG}/alternatives/{f}'
     if os.path.exists(pth): doc.add_picture(pth, width=Cm(24)); doc.add_paragraph(cap).alignment = WD_ALIGN_PARAGRAPH.CENTER
+doc.add_heading('4a. Volumes', 2)
+for f, cap in [('map_station_volumes_AM_BU_2040.png', 'Station volumes: boardings (blue) and alightings (orange) in the AM three hours, BU 2040, the four combinations; six busiest stations labelled.'),
+               ('map_station_volumes_PM_BU_2040.png', 'The same for the PM.'),
+               ('map_trip_volumes_AM_BU_2040.png', 'Trip volumes by origin TAZ after the LRT — car, transit (bus + Metronit + LRT) and the LRT share of transit; main route + extension, Prioritized, AM BU 2040.'),
+               ('map_trip_volumes_PM_BU_2040.png', 'The same for the PM.')]:
+    pth = f'{FIG}/alternatives/{f}'
+    if os.path.exists(pth): doc.add_picture(pth, width=Cm(24)); doc.add_paragraph(cap).alignment = WD_ALIGN_PARAGRAPH.CENTER
+doc.add_heading('4b. Growth', 2)
+for f, cap in [('map_growth_by_scenario_AM.png', 'Growth of the LRT trip origins by TAZ, each forecast set minus 2022; main route + extension, Prioritized, AM.'),
+               ('map_growth_line_loads_AM.png', 'Growth of the line loads, 2022 against HS 2050 on the same width scale; main route + extension, Prioritized, AM.')]:
+    pth = f'{FIG}/alternatives/{f}'
+    if os.path.exists(pth): doc.add_picture(pth, width=Cm(24)); doc.add_paragraph(cap).alignment = WD_ALIGN_PARAGRAPH.CENTER
+doc.add_heading('4c. Shift to the LRT from the car, the bus and the Metronit', 2)
+doc.add_paragraph('The pivot moves trips in two steps: within the transit nest the LRT takes its share of the pair\'s transit trips (from bus-based or Metronit-based paths, by which best path the pair had), and the nest\'s cost gain draws trips from the car. The maps show the three sources by origin TAZ, and the shift rates as a share of the TAZ\'s car and transit trips.')
+for f, cap in [('map_shift_sources_AM_BU_2040.png', 'LRT trips drawn from the car, from bus-based paths and from Metronit-based paths, by origin TAZ; main route + extension, Prioritized, AM BU 2040.'),
+               ('map_shift_sources_PM_BU_2040.png', 'The same for the PM.'),
+               ('map_shift_sources_AM_2022.png', 'The same for 2022 AM.'),
+               ('map_shift_from_car_AM_BU_2040.png', 'Shift from the car to the LRT by origin TAZ, AM BU 2040, the four combinations.'),
+               ('map_shift_rates_AM_BU_2040.png', 'Shift rates by origin TAZ: car trips lost to the LRT as % of the TAZ\'s car trips, and bus + Metronit trips lost as % of its transit trips; main route + extension, Prioritized, AM BU 2040.'),
+               ('map_shift_rates_PM_BU_2040.png', 'The same for the PM.')]:
+    pth = f'{FIG}/alternatives/{f}'
+    if os.path.exists(pth): doc.add_picture(pth, width=Cm(24)); doc.add_paragraph(cap).alignment = WD_ALIGN_PARAGRAPH.CENTER
 doc.add_heading('Limits', 1)
 doc.add_paragraph('The main route\'s at-grade running, headway and through-running are assumed; its demand moves with any feeder restructuring in Kiryat Ata and Nazareth. The forecast PM sets are grown at the AM rates. The LRT premium over the Metronit is an estimate, not an estimated parameter. '
                   'The pivot\'s induced car trips depend on the aggregation level (METHODOLOGY caveat 27). No capacity, no route choice against parallel bus services, no fare, no park-and-ride. The level of service is a single best path per TAZ pair at the line\'s own headway (caveat 26).')

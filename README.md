@@ -297,7 +297,7 @@ anywhere inside the repository.
   the revision responds to
 - Full inventory in [METHODOLOGY.md §7](METHODOLOGY.md#7-output-inventory-output)
 
-- [`reports/LRT_Alternatives_Demand_Report.docx`](reports/LRT_Alternatives_Demand_Report.docx) — the LRT alternatives (step 45, 5 October 2026): car and transit matrices, times on route (LRT, Metronit, train, car), total demand AM / PM for main route + extension and extension only, Prioritized / Unprioritized, 2022–2050, and 14 maps of time, demand, line loads and differences (all 26 in `Output/figures/alternatives/`); the matrices workbook is `Output/alternatives/LRT_alternatives_matrices.xlsx`
+- [`reports/LRT_Alternatives_Demand_Report.docx`](reports/LRT_Alternatives_Demand_Report.docx) — the LRT alternatives (step 45, 5 October 2026): car and transit matrices, times on route (LRT, Metronit, train, car), total demand AM / PM for main route + extension and extension only, Prioritized / Unprioritized, 2022–2050, and 26 maps of time, demand, line loads, differences, volumes, growth and the shift to the LRT from the car, the bus and the Metronit (all 41 in `Output/figures/alternatives/`); the matrices workbook is `Output/alternatives/LRT_alternatives_matrices.xlsx`
 
 ## Setup
 

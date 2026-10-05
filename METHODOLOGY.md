@@ -3864,13 +3864,19 @@ Metronit trip matrices at TAZ and area level, `lrt_line_loads.csv`, `lrt_station
 `demand_summary.csv`; `LRT_alternatives_matrices.xlsx` and
 `reports/LRT_Alternatives_Demand_Report.docx` (`tools/build_alternatives_report.py`); figures
 `lrt_alternatives_{lines,demand,line_loads}.png`; **maps** in `Output/figures/alternatives/`
-(`tools/build_alternatives_maps.py`, 26 maps, also in the report's section 4): line loads by
+(`tools/build_alternatives_maps.py`, 41 maps, also in the report's section 4): line loads by
 segment and direction with station boardings (AM 2022 / BU 2040 / HS 2050, PM BU 2040, the four
 combinations each), LRT trip origins, destinations and LRT share of transit by TAZ, the
 differences main route + extension − extension only and Prioritized − Unprioritized, the growth
 2022 → HS 2050 and AM against PM, and the time maps to the reference TAZ (the busiest LRT
 alighting station's, TAZ 1517 Matam) — LRT generalized time per combination, best bus / Metronit
-against the LRT with the difference, car AM / PM, and LRT ÷ car; `Output/gtfs/stop_times_study_area_{am,pm}_trips_v45.csv.gz`,
+against the LRT with the difference, car AM / PM, and LRT ÷ car; since the same day also the
+**volumes** (station boardings and alightings; car, transit and LRT-share volumes by origin TAZ),
+the **growth** (each forecast set minus 2022 by TAZ; line loads 2022 against HS 2050 on one scale)
+and the **shift to the LRT by source** (trips drawn from the car, from bus-based and from
+Metronit-based paths by origin TAZ, the from-car map for the four combinations, and the shift
+rates as % of the TAZ's car and transit trips) — the per-run `from_car`, `from_bus`, `from_brt`
+and base `t_car_base` / `t_tr_base` matrices are written for them; `Output/gtfs/stop_times_study_area_{am,pm}_trips_v45.csv.gz`,
 `stop_times_study_area_rail_day.csv.gz`.
 
 **Limits.** The main route's at-grade running, 5-minute through-running headway and 10-second
