@@ -367,6 +367,7 @@ is what each file is, plain and simple:
 | `Corridor_TAZ_Agg_V2.xlsx` (added 22 Sep 2026) | The newer "V2" corridor grouping used for the LRT-specific analysis | Has **25 areas** grouped into three route orderings (a trunk shared by all three, plus a Nazareth branch, a Krayot branch, and a Kiryat Yam branch) and a table matching **174 TAZs** to those 25 areas — all 174 of those TAZs exist in the main 778-zone matrices, and none appear twice. One TAZ (1509, where an LRT station is planned) is not included in this table |
 | `hf_lrt_3.shp`, `station_hf_lrt_3.geojson` (added 22 Sep 2026) | The planned LRT route line and its candidate station points | One route line, **18.94 km** long, from Hamifrats to Tirat Carmel; **46** candidate platform points which group into **24** actual stations. Coordinates are converted to the Israel TM Grid for accurate distance measurement |
 | `israel-public-transportation.zip` (GTFS feed, added 22 Sep 2026) | The Ministry of Transport's official national public-transport timetable data (stops, routes, trip schedules, etc.) | A standard public-transport data format ("GTFS"); the specific bus-rapid-transit ("Metronit") lines are tagged with codes 83001–83005. Captures the timetable as it stood on **22 May 2026** |
+| `CarSpeedData/GoogleSpeed_202605/GoogleSpeed.shp` (added 5 Oct 2026) | Measured road-link driving speeds for cars, from May 2026, by hour (06:00–21:00) and direction (`SPD_7_AB` / `SPD_7_BA` = 07:00–08:00 with / against the link's drawn direction) | **30,701** links nationally, **14,630** with a speed; the same street geometry as the bus-speed network below with its segments merged. Within the study area (links touching the TAZ polygons): **9,927** links (**4,996 km**), **4,693** with a speed — half the links but 80 % of the length. Cut and unpivoted by step 43 (section 5.8d) |
 | `Streets.shp`, `std_202605.csv` (added 22 Sep 2026) | Measured road-link driving speeds for buses, from May 2026 | **161,534** street links nationally; **157,618** of them have a matched speed record (a **99.9%** match rate). Speeds are broken out by weekday and hour. Within the study area: **54,507** links (**5,632 km**), of which **48,092** have an actual measured speed |
 
 **A data-quality note worth knowing:** the activities file currently in the project has
@@ -4195,6 +4196,133 @@ Eight more checks from the Ministry list were run. In plain terms:
 ### 5.8c Loading the car matrix on the road network
 
 We loaded the 2022 car matrix onto the road network, every trip on its quickest route, and compared the result with the traffic counts on 1,346 count points (counts from 2021 to 2023). The total is about right: in the morning the network carries 93 % of the counted vehicles. But the pattern is not: the correlation is weak (0.47 against the Ministry's 0.85 requirement) and individual roads are far off. This is expected. The matrix holds only residents' car trips between places inside the study area; the counts also include trucks, vans, taxis, buses, visitors and trips that begin or end outside. Our simple loading also ignores congestion. So the matrix is fine for judging demand between areas and along the LRT corridor, but it should not be used as it is to forecast the traffic on a single road. Several other checks cannot be done yet: they need a Google travel-time key, the bus operator's GPS data, census tables, or smart-card data for the afternoon and midday (the 2025 files only contain 06:00-09:00).
+
+### 5.8d The car speed network for May 2026 (step 43)
+
+On 5 October 2026 a car speed network arrived — the first measured car speeds in the project.
+It is one map layer for the whole country with 30,701 road links, and for every link a car
+speed for each hour of the day from 06:00 to 21:00, separately for the two directions of
+travel. The columns are read as `SPD_7_AB` and `SPD_7_BA` for 07:00–08:00: `AB` is the
+direction the link is drawn in, `BA` the opposite. We checked that reading against the layer's
+own one-way flag and it holds without exception; a zero means "no observation in that hour",
+and about half the links have no speed at all (the short local ones — four fifths of the road
+length is covered).
+
+The layer was cut to our study area using the TAZ polygons as the reference: every link that
+touches a study-area zone is kept, whole, so that the network stays connected (9,927 links,
+4,996 km, 4,693 of them with a speed). The result is in `Output/car_speed/` as a map layer
+and as a plain table with one row per link, hour and direction (101,840 rows), ready for the
+2026 car travel-time update that the ridership estimate has been waiting for (the survey's car
+times are from 2017/18).
+
+Two things to know before using it. First, it is the same road geometry as the bus-speed
+network of step 26, with short street segments merged into longer links — the two can be
+overlaid, but not simply joined by their id. Second, the speeds hardly change over the day: on
+the links observed in every hour the typical difference between the fastest and slowest hour is
+about 2 km/h, and the 07:00–08:00 average in the study area (52 km/h, length-weighted) is the
+same as at midday. Real roads slow down in the morning peak, so these values look like a
+monthly average lightly adjusted by hour. The provider's method should be asked for; until it
+is known, a car time built on these speeds is a May 2026 all-day time, not a peak time.
+
+### 5.8e Car travel times for 2026, and whether the survey's car times need an uplift (step 37)
+
+The ridership estimate compares the LRT against the car using car travel times from the
+2017/18 survey — what the travellers reported, door to door. With the May 2026 car speeds in
+hand (5.8d), we computed a 2026 car time for every pair of the 25 corridor areas by finding
+the quickest route at the 07:00–08:00 speeds. One practical point: the car layer's links do
+not quite meet at junctions, so the routes were run on the bus street network (whose links do
+meet) with the car speeds copied onto the streets that each car link covers — 85 % of the
+street length is covered, 68 % with a measured speed, and local streets without one were
+given an assumed 30 km/h (the result moves by about a minute and a half if that assumption is
+20 or 40 km/h instead).
+
+The result: on the trunk pairs, the 2026 network time plus a 3-minute allowance for parking
+and walking is 13.0 minutes, against 14.4 minutes reported in the survey — the 2026 time is
+about 10 % lower, and across all 600 pairs about 5 % lower. So the survey's car times do not
+need to be increased for 2026; if anything they are already on the high side. Two cautions:
+the May 2026 speeds hardly vary by hour (5.8d), so they may understate the morning peak, and
+a reported door-to-door time includes things a network route does not. The ridership
+estimate was rerun with the 2026 car times in place of the survey's, and it did not change
+by a single trip — which exposes something about the method rather than the data: the
+estimate moves riders according to how much *better the transit side* becomes when the LRT is
+added, starting from today's observed car/transit split, and the car's own travel time is
+not in that calculation. So a faster or slower car would not change the LRT's forecast
+either way. That is acceptable for a screening of the corridor, but it means the "trips taken
+from the car" figure rests on the transit-side costs and the assumed sensitivity alone. The
+one place the car time does count — the cost sensitivity estimated from individual travellers
+(5.3) — was re-run with the 2026 car times: the sensitivity comes out a little higher (0.040
+against 0.035 per generalized minute), still inside the range assumed, and the sensitivity of
+the people who actually have a car to choose from is still not pinned down. The survey times
+remain the central case until the speed provider's method is clarified.
+
+### 5.8f Level of service zone by zone, and what it says about the corridor skims (step 44)
+
+"Level of service" here means the travel cost a traveller faces between two places, in
+generalized minutes: the time in the vehicle, plus twice the walking time, plus twice the
+waiting time, plus 8 minutes for every transfer (money is left out, since the fare is flat and
+the same for every transit mode). For the **car** it is the quickest route at the May 2026
+speeds between the two zones' centre points, with a short connector at each end and 3 minutes
+for parking and walking. For **transit** it is the best bus or Metronit path on the June 2026
+timetable in the morning: walk to a stop (any stop within a kilometre), wait half the line's
+headway (capped at 10 minutes), ride at the measured May 2026 running speeds, transfer by
+walking between nearby stops if needed, walk to the destination.
+
+Until now the project held these costs only for the 25 corridor areas, each represented by one
+point. This step computes them for every one of the 781 zones (609,180 zone pairs), and then
+averages the zone pairs back up to the 25 areas, weighting origins by population and
+destinations by jobs. For the car the two agree (13.3 against 13.0 minutes on the trunk
+pairs). For transit they do not: zone by zone the trunk pairs cost 45 generalized minutes,
+against 30 in the area-level skim. The time on board and the transfers are the same; the
+difference is walking and waiting. The area-level skim takes the walk to the *nearest* stop,
+the running time of the *best* line and the combined frequency of *all* the lines that serve
+the pair — a combination no actual traveller from a given zone gets, because the best line
+usually stops somewhere further than the nearest stop and runs at its own frequency. This
+does not change the ridership estimate directly (that estimate moves on the *change* in
+transit cost when the LRT arrives, not on its level), but it is exactly the kind of averaging
+the plan's zone-level capture step (C3) is meant to remove, and the zone-level skims are now
+there for it.
+
+### 5.8g The ridership estimate zone by zone (step 39)
+
+The plan had asked for the ridership estimate to be run on the 174 corridor zones rather than
+the 25 areas, because walking distance to a station matters more to someone 300 m away than
+the area's average says, and the choice model is not linear in it. With the zone-level costs
+of 5.8f this was done. Two versions were run. In the first, the bus alternative is costed the
+way a traveller from each zone actually experiences it (5.8f) while the LRT keeps the
+area-level running time and feeder legs with the zone's own station walk: the estimate rises
+to about 6,960 morning LRT trips from 4,250. That rise is largely the inconsistency of 5.8f
+coming through — the bus is priced realistically, the LRT's feeder bus leg is not — so it is
+not adopted. In the second, the bus keeps the area costs with only the zone's own stop walk
+changed: the estimate is 4,230, almost unchanged, and the pattern the plan expected appears
+(about 42 % of transit trips within 500 m of a station switch to the LRT, 23 % beyond 1.5 km)
+but averages out across the areas. One more thing came out: the small number of trips the
+model moves from car to transit (about 400 at area level) falls to about 130 at zone level,
+simply because zone-level shares are more extreme and the model has less room to shift them.
+The area-level estimate therefore stays the central figure; a clean zone-level estimate needs
+the LRT's feeder legs and running times at zone level too.
+
+### 5.8h Demand for the two LRT alternatives, 2022 to 2050, morning and evening (step 45)
+
+The main Nofit light-rail route, now under construction from Hamifrats to Nazareth, was added to
+the project, and the demand was estimated for two alternatives: the main route and the extension
+run as one line, and the extension alone. For the extension two versions were run — "Prioritized"
+(underground, the faster calibrated times) and "Unprioritized" (at street level) — and the main
+route runs at its 80 km/h design speed. Since the delivery has no station list for the main
+route, stations were assumed every kilometre or more along it (27 in all); the real list should
+replace this. The estimate uses the zone-level travel costs of 5.8f for both the bus and the LRT
+(the LRT reached on foot, by bus or by Metronit, whichever is cheapest to the nearest station),
+the out-of-vehicle weights the research of 4 October recommended as central, and an LRT bonus of
+5 minutes over a bus and 2.5 over the Metronit.
+
+In the 2022 morning the through line carries about 5,400 LRT trips in three hours Prioritized
+(4,600 Unprioritized), the extension alone about 3,600 (2,850); the evening is about 80 % of the
+morning. By 2040–2050 the through line reaches 6,600–9,500 morning trips and the extension alone
+4,500–6,100, depending on the growth scenario. Making the extension underground is worth 15–20 %
+of its riders; adding the main route adds roughly half again, with the busiest point moving from
+the Haifa core to the line's entry into Hamifrats from Kiryat Ata (up to about 3,200 trips in one
+direction in three hours by 2050). Matrices for the car and for transit, times on route for the
+LRT, the Metronit, the train and the car, and the totals by period are in the report
+`reports/LRT_Alternatives_Demand_Report.docx` and the workbook `Output/alternatives/LRT_alternatives_matrices.xlsx`.
 
 ### 5.9 Where things stand now
 

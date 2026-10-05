@@ -1,0 +1,16 @@
+AggCode,AggAreaName,feeder_gc_to_trunk_avg,synthetic_branch_gc_to_trunk_avg,diff (branch - feeder)
+211,Bazan-Hutsot,59.9,65.8,5.9
+212,TsometKiryatAta,54.9,62.7,7.8
+213,KiryatAta North,70.0,78.9,8.9
+214,KiryatAta North-East,84.0,83.4,-0.6
+215,Shefaram,94.0,125.7,31.6
+216,Hamovil,108.4,163.7,55.3
+217,Nazareth,114.4,206.5,92.1
+101,TsurShalom,65.4,80.0,14.6
+102,Kiryon,60.4,79.3,18.9
+103,KiryatBialik Center,58.2,79.0,20.8
+104,KiryatHaim,56.7,71.5,14.7
+301,SavyoneyYam,74.4,85.9,11.5
+302,KiryatYam A,67.0,75.7,8.7
+303,KiryatYam B+C,62.6,76.5,13.9
+304,KiryatHaim West,59.3,71.5,12.3

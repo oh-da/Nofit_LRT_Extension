@@ -1,0 +1,33 @@
+mode,period,direction,from,to,trips,stops,scheduled_min (median),observed_min (step 30 ratio)
+Metronit line 1 (83001),AM,0,ת. מרכזית חוף הכרמל/רציפים עירוני,מרכזית הקריות/הורדה מטרונית,36.0,42.0,65.0,57.2
+Metronit line 1 (83001),AM,1,מרכזית הקריות/איסוף מטרונית,ת. מרכזית חוף הכרמל/הורדה מטרונית,36.0,41.0,65.0,57.2
+"Train (Israel Railways, study-area stations)",AM,0,בנימינה,נהריה,14.0,9.0,65.0,
+"Train (Israel Railways, study-area stations)",AM,1,נהריה,בנימינה,16.0,9.0,68.0,
+Metronit line 1 (83001),PM,0,ת. מרכזית חוף הכרמל/רציפים עירוני,מרכזית הקריות/הורדה מטרונית,41.0,42.0,65.0,57.2
+Metronit line 1 (83001),PM,1,מרכזית הקריות/איסוף מטרונית,ת. מרכזית חוף הכרמל/הורדה מטרונית,41.0,41.0,65.0,57.2
+"Train (Israel Railways, study-area stations)",PM,0,בנימינה,נהריה,17.0,9.0,65.0,
+"Train (Israel Railways, study-area stations)",PM,1,נהריה,בנימינה,16.0,9.0,68.0,
+"Train (Israel Railways, corridor segment)",AM,חוף הכרמל → קרית מוצקין,חוף הכרמל,קרית מוצקין,14.0,,30.0,
+"Train (Israel Railways, corridor segment)",AM,קרית מוצקין → חוף הכרמל,קרית מוצקין,חוף הכרמל,20.0,,31.0,
+"Train (Israel Railways, corridor segment)",PM,חוף הכרמל → קרית מוצקין,חוף הכרמל,קרית מוצקין,18.0,,30.0,
+"Train (Israel Railways, corridor segment)",PM,קרית מוצקין → חוף הכרמל,קרית מוצקין,חוף הכרמל,20.0,,31.0,
+"LRT — Main route + extension, Prioritized (extension underground)",all,both (symmetric),Tirat Carmel (S01),Hamifrats (S24),,50.0,40.6,
+"LRT — Main route + extension, Prioritized (extension underground)",all,both (symmetric),Hamifrats (S24),Nazareth (M27),,50.0,34.9,
+"LRT — Main route + extension, Prioritized (extension underground)",all,both (symmetric),Tirat Carmel (S01),Nazareth (M27),,50.0,75.5,
+"LRT — Main route + extension, Unprioritized (extension at grade)",all,both (symmetric),Tirat Carmel (S01),Hamifrats (S24),,50.0,65.8,
+"LRT — Main route + extension, Unprioritized (extension at grade)",all,both (symmetric),Hamifrats (S24),Nazareth (M27),,50.0,34.9,
+"LRT — Main route + extension, Unprioritized (extension at grade)",all,both (symmetric),Tirat Carmel (S01),Nazareth (M27),,50.0,100.7,
+"LRT — Extension only, Prioritized (extension underground)",all,both (symmetric),Tirat Carmel (S01),Hamifrats (S24),,24.0,40.6,
+"LRT — Extension only, Unprioritized (extension at grade)",all,both (symmetric),Tirat Carmel (S01),Hamifrats (S24),,24.0,65.8,
+"Car (May 2026 speeds, 07:00)",AM,forward,TiratCarmel,Hamifrats,,,32.5,
+"Car (May 2026 speeds, 07:00)",AM,reverse,Hamifrats,TiratCarmel,,,20.8,
+"Car (May 2026 speeds, 07:00)",AM,forward,Hamifrats,Nazareth,,,45.8,
+"Car (May 2026 speeds, 07:00)",AM,reverse,Nazareth,Hamifrats,,,41.9,
+"Car (May 2026 speeds, 07:00)",AM,forward,TiratCarmel,Nazareth,,,64.6,
+"Car (May 2026 speeds, 07:00)",AM,reverse,Nazareth,TiratCarmel,,,58.9,
+"Car (May 2026 speeds, 17:00)",PM,forward,TiratCarmel,Hamifrats,,,32.0,
+"Car (May 2026 speeds, 17:00)",PM,reverse,Hamifrats,TiratCarmel,,,21.2,
+"Car (May 2026 speeds, 17:00)",PM,forward,Hamifrats,Nazareth,,,46.5,
+"Car (May 2026 speeds, 17:00)",PM,reverse,Nazareth,Hamifrats,,,40.9,
+"Car (May 2026 speeds, 17:00)",PM,forward,TiratCarmel,Nazareth,,,64.9,
+"Car (May 2026 speeds, 17:00)",PM,reverse,Nazareth,TiratCarmel,,,58.3,

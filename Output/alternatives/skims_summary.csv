@@ -1,0 +1,15 @@
+period,alternative,regime,mode,"trunk TAZ pairs, transit-trip-weighted GC","all corridor pairs, transit-trip-weighted GC"
+AM,Main route + extension,—,bus / Metronit best path (no LRT),41.7,50.6
+AM,Main route + extension,Prioritized (extension underground),LRT (access + line + egress),45.8,60.0
+AM,Main route + extension,Unprioritized (extension at grade),LRT (access + line + egress),52.3,65.8
+AM,Extension only,—,bus / Metronit best path (no LRT),41.7,50.7
+AM,Extension only,Prioritized (extension underground),LRT (access + line + egress),46.1,65.0
+AM,Extension only,Unprioritized (extension at grade),LRT (access + line + egress),52.6,72.2
+AM,—,—,car (network + 3 min),13.8,16.3
+PM,Main route + extension,—,bus / Metronit best path (no LRT),43.1,47.4
+PM,Main route + extension,Prioritized (extension underground),LRT (access + line + egress),47.5,57.2
+PM,Main route + extension,Unprioritized (extension at grade),LRT (access + line + egress),54.3,62.7
+PM,Extension only,—,bus / Metronit best path (no LRT),43.1,47.4
+PM,Extension only,Prioritized (extension underground),LRT (access + line + egress),47.7,63.2
+PM,Extension only,Unprioritized (extension at grade),LRT (access + line + egress),54.5,69.5
+PM,—,—,car (network + 3 min),13.5,15.9

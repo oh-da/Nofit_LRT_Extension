@@ -274,6 +274,22 @@ Effort: one day (most of it the OSM handling).
 nonlinear in access time and averaging the walk before applying it biases the area result:
 expect more capture within 500 m of a station and less beyond 1.5 km.
 
+**Update, 5 October 2026.** Step 44 (`LOS_skims_TAZ_and_V2.ipynb`, METHODOLOGY §6ao) now
+provides **TAZ-level car and transit skims for all 781 TAZs** (`Output/los/car_los_taz.csv.gz`,
+`transit_los_taz.csv.gz`: GC, IVT, walk, wait, transfers per pair) — so the car no longer has
+to be taken from the area skim, and the bus side can be taken at TAZ level too rather than as
+"area IVT + TAZ walk". Note caveat 26: aggregated back to the areas the TAZ-level transit GC is
+1.5 × step 31's, the gap being walk and wait, so a TAZ run on the step-31 transit components
+plus a TAZ walk will not reproduce the TAZ-routed cost; decide which bus skim the pivot uses
+and say so. **Run the same day** (`LRT_capture_TAZ.ipynb`, METHODOLOGY §6ap) under both:
+on the step-44 bus skim 6,963 underground central vs 4,254 (the caveat-26 asymmetry, the LRT's
+feeder leg still the area's); on this section's construction 4,226 (0.99) with the access
+gradient 0.42 → 0.23 netting out. The regression check closes to 7 %, not 1 %: the bus-drawn
+trips reproduce exactly, the car-induced trips fall from 414 to 130 (caveat 27). Still open
+for a consistent TAZ run: the feeder leg routed on the step-44 graph (origin TAZ → gateway
+station) and the LRT in-vehicle time from the TAZ's own nearest station; then C2's walking
+network for both sides.
+
 **Inputs.** 2022 TAZ layers `Output/final_2022/{car,transit}_2022_taz.csv` restricted to the 174
 TAZs of `TazAgg`; the area skims of step 31 (`Output/skims/skim_*_*.csv`) for IVT, wait and
 transfers; the TAZ-level access walks of C2 (`Output/access/walk_access_taz.csv`; fall back to
@@ -655,6 +671,35 @@ committed and pushed on its own, with its documents, before the next starts.
    2022 car layer onto the Emme network with an *assumed* free-flow speed by link `TYPE` as a
    separate, lower-stakes exercise — it is not a substitute for a real skim. Both the GC/capture
    pivot's car uplift (C1) and any future car-network assignment work are waiting on this item.
+   **Received in part, 5 October 2026:** not a skim but a **car speed network** for May 2026
+   (`Input/CarSpeedData/GoogleSpeed_202605/`; a speed per link, hour 06:00–21:00 and direction,
+   `SPD_7_AB` / `SPD_7_BA` for 07:00–08:00). Step 43 (`Car_speed_network_North.ipynb`,
+   METHODOLOGY §6al) clipped it to the `TAZ_North` links and unpivoted the observed speeds to
+   `Output/car_speed/`. The uplift of C1 can now be built by routing the V2 area centroids over
+   this layer (as step 26 did for the bus on the street network) instead of the Google API;
+   two things to settle first — the hourly profile is almost flat (caveat 24: ask the provider
+   how the hourly values were aggregated before treating `SPD_7` as the peak), and half the
+   study-area links carry no speed (short local links; connectors and a fallback speed are
+   needed where a path uses them). **Done the same day as step 37**
+   (`Car_skim_2026_network.ipynb`, METHODOLOGY §6an): routed on the bus street network's
+   topology with the car speeds transferred onto its segments (the car layer's own junctions do
+   not connect), 30 km/h assumed on the uncovered local segments; trunk pairs 10.0 + 3 min
+   terminal = 13.0 min vs the survey's 14.4 (ratio 0.90) — no 2026 uplift on this evidence;
+   step 26's `CAR_SOURCE=network` switch and the 26 → 31 → 32 rerun under
+   `Output/skims/car_network/` report the capture beside the central case (§6ac / §6ad
+   addenda): **identical to the trip in every scenario and case**, because the incremental-logit
+   pivot cancels the car's cost level (caveat 25) — the premise of C1 ("run the capture on the
+   uplifted skim") has no purchase on this model; the car time would count only in a full
+   mode-choice formulation or a re-estimated person-level λ (step 33). Step 33 was re-run on
+   the 2026 skim (`SK_DIR`, `Output/mode_choice/car_network/`, §6ae addendum): λ 0.040
+   (0.008–0.073) against 0.035, the choice riders' λ still not identified (0.011). The survey
+   time stays the default pending the provider's aggregation method.
+
+9. **The main Nofit route's station list and operating plan** (added 5 October 2026, step 45,
+   §6aq) — `Input/Main_Nofit/` is an alignment without stations; step 45 assumes 27 stations at the
+   network nodes ≥ 1 km apart and at-grade running at 80 km/h with a 5-minute through-running
+   headway. The planned stations, the headway and whether the line through-runs or terminates at
+   Hamifrats decide the 1,800–2,100 AM trips the main route adds (caveat 28).
 
 Not needed / not coming, by the user's decision on 23 September 2026: Metronit 2013 ridership,
 a stated-preference survey, parking supply, the cellular product's trip definition.

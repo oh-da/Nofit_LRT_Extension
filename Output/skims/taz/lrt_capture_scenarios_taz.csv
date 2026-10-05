@@ -1,0 +1,16 @@
+scenario,case,λ,λ_T,LRT premium,LRT trips 06–09,of which from bus,of which from car,bus trips after,car trips after,transit share before,transit share after,LRT share of transit,LRT trips on trunk pairs,trunk pairs P_LRT|T (trip-wtd),TAZ pairs with LRT available
+LRT all underground,"central (λ 0.03, λ_T 0.06, premium 5)",0.03,0.06,5.0,6963,6496,466,8082,55534,0.2003,0.2132,0.463,2695,0.547,23488
+LRT all underground,"low λ (0.02 / 0.03, premium 5)",0.02,0.03,5.0,7341,6708,634,8172,55065,0.2003,0.2198,0.473,2635,0.525,23488
+LRT all underground,"high λ (0.05 / 0.10, premium 5)",0.05,0.1,5.0,6981,6379,601,8104,55493,0.2003,0.2137,0.463,2851,0.57,23488
+LRT all underground,"no premium (λ central, premium 0)",0.03,0.06,0.0,5996,5668,328,8858,55724,0.2003,0.2105,0.404,2318,0.477,23488
+LRT all underground,premium 10 (λ central),0.03,0.06,10.0,7982,7335,647,7292,55305,0.2003,0.2164,0.523,3083,0.615,23488
+LRT all ground,"central (λ 0.03, λ_T 0.06, premium 5)",0.03,0.06,5.0,5811,5493,319,9038,55729,0.2003,0.2104,0.391,2093,0.431,23488
+LRT all ground,"low λ (0.02 / 0.03, premium 5)",0.02,0.03,5.0,6652,6134,518,8705,55221,0.2003,0.2176,0.433,2299,0.463,23488
+LRT all ground,"high λ (0.05 / 0.10, premium 5)",0.05,0.1,5.0,5363,5008,356,9421,55794,0.2003,0.2095,0.363,1946,0.398,23488
+LRT all ground,"no premium (λ central, premium 0)",0.03,0.06,0.0,4912,4694,218,9781,55885,0.2003,0.2082,0.334,1747,0.364,23488
+LRT all ground,premium 10 (λ central),0.03,0.06,10.0,6784,6329,455,8256,55539,0.2003,0.2131,0.451,2464,0.5,23488
+LRT design 50 km/h,"central (λ 0.03, λ_T 0.06, premium 5)",0.03,0.06,5.0,7726,7127,599,7474,55378,0.2003,0.2154,0.508,3055,0.613,23488
+LRT design 50 km/h,"low λ (0.02 / 0.03, premium 5)",0.02,0.03,5.0,7796,7073,723,7829,54953,0.2003,0.2214,0.499,2836,0.561,23488
+LRT design 50 km/h,"high λ (0.05 / 0.10, premium 5)",0.05,0.1,5.0,8072,7224,848,7284,55222,0.2003,0.2176,0.526,3396,0.663,23488
+LRT design 50 km/h,"no premium (λ central, premium 0)",0.03,0.06,0.0,6739,6307,432,8246,55593,0.2003,0.2123,0.45,2675,0.545,23488
+LRT design 50 km/h,premium 10 (λ central),0.03,0.06,10.0,8752,7941,812,6704,55122,0.2003,0.219,0.566,3437,0.677,23488

@@ -1,0 +1,16 @@
+scenario,origin station access (walking m),TAZs,population,transit trips 2022,LRT trips,capture rate (LRT / transit after),from car
+LRT all underground,0–500,27,32640,2796.480,1239.769,0.425,52.627
+LRT all underground,500–1000,28,36585,2137.621,758.943,0.345,21.254
+LRT all underground,1000–1500,3,5282,218.912,74.950,0.321,4.811
+LRT all underground,> 1500,6,3663,124.469,29.374,0.227,1.087
+LRT all underground,off the line (feeder),110,414172,8855.934,2123.380,0.234,66.716
+LRT all ground,0–500,27,32640,2796.480,933.039,0.323,32.931
+LRT all ground,500–1000,28,36585,2137.621,541.313,0.248,11.242
+LRT all ground,1000–1500,3,5282,218.912,47.033,0.206,2.456
+LRT all ground,> 1500,6,3663,124.469,17.707,0.139,0.505
+LRT all ground,off the line (feeder),110,414172,8855.934,1741.327,0.193,40.823
+LRT design 50 km/h,0–500,27,32640,2796.480,1446.458,0.492,70.914
+LRT design 50 km/h,500–1000,28,36585,2137.621,915.063,0.412,31.903
+LRT design 50 km/h,1000–1500,3,5282,218.912,96.051,0.404,7.426
+LRT design 50 km/h,> 1500,6,3663,124.469,39.108,0.298,1.820
+LRT design 50 km/h,off the line (feeder),110,414172,8855.934,2426.889,0.266,96.312

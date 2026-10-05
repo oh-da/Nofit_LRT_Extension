@@ -42,7 +42,12 @@ Key facts driving the list (2017 trips-file hybrid, `Output/ths2017/study_taz/`)
 - [~] **A2. Trip length / level of service per OD pair** *(first pass 2026-09-22 on the
       25 V2 areas, `GC_data_inventory_and_skims.ipynb`, METHODOLOGY §6x)*
   - [~] Build network skims (walk, car, existing bus, rail, proposed LRT) for the corridor
-        TAZs; replace centroid-distance bands in `Base_mode_shares_2022.ipynb`. *Done at
+        TAZs; replace centroid-distance bands in `Base_mode_shares_2022.ipynb`. *TAZ-level car
+        and transit (bus + Metronit) skims for all 781 TAZs done 2026-10-05 by step 44
+        (`LOS_skims_TAZ_and_V2.ipynb`, §6ao, `Output/los/`), and the capture run on them by
+        step 39 (`LRT_capture_TAZ.ipynb`, §6ap): 6,963 vs 4,254 on the step-44 bus skim, 4,226
+        on the area components + TAZ walks — not adopted (caveats 26, 27); the LRT's feeder leg
+        and in-vehicle time at TAZ level are what remain.* *Done at
         area level: car door-to-door from the survey (smoothed), bus fastest-path IVT on the
         May 2026 speed network (lower bound; survey door-to-door is 2.1–2.3 × it), LRT
         station-to-station on `hf_lrt_3` (step 25) with walk access from the TAZs. Open: the
@@ -219,7 +224,10 @@ Key facts driving the list (2017 trips-file hybrid, `Output/ths2017/study_taz/`)
 - [ ] **E6. LRT access model** — replace the centroid-to-nearest-station walk with a walking
       network, feeder-bus access from the GTFS (bus to the nearest station + transfer) and
       park-and-ride where the station plan allows; this is what the generalized-cost
-      comparison now turns on.
+      comparison now turns on. *Partly addressed 2026-10-05: step 39 (§6ap) applies the
+      TAZ's own station walk per TAZ (the gradient 0.42 within 500 m → 0.23 beyond 1.5 km
+      nets out over the areas); feeder access by bus is still the area-level leg, and the
+      walking network (C2) is still open.*
 - [~] **E3. Bus level of service from GTFS** — *done 2026-09-22 for the direct services*
       (`GTFS_bus_LOS_TAZ.ipynb`, METHODOLOGY §6aa; feed of 22 May 2026): per-TAZ LOS for bus
       and for the Metronit (codes 83001, 67002, 67003, 62004, 52005 — the supplied 83002–83005
@@ -245,6 +253,7 @@ Key facts driving the list (2017 trips-file hybrid, `Output/ths2017/study_taz/`)
       choice; against the car it is a constant per trip absorbed by the pivot. Car operating
       cost and parking are excluded on the same decision (METHODOLOGY §6x addendum 4). Still
       open from this item: confirm the walk / wait / transfer weights against נוהל פר"ת.
+- [~] **E5. Car skim vintage** — the survey door-to-door times are 2017 / 18; a small
       *OVT research run on 4 October 2026 (`docs/OVT_WEIGHTS_RESEARCH_PLAN.md`,
       `docs/OVT_WEIGHTS_PARAMETER_MEMO.md`, METHODOLOGY §6al): 275 estimates collected, seven
       parameter sets rerun through steps 31 and 33. Nothing could be read in full from the
@@ -256,7 +265,20 @@ Key facts driving the list (2017 trips-file hybrid, `Output/ths2017/study_taz/`)
       other input.*
 - [ ] **E5. Car skim vintage** — the survey door-to-door times are 2017 / 18; a small
       Google Distance Matrix sample (≈ 40 pairs, Tuesday 07:30) or the national model's
-      car skim gives the 2026 uplift.
+      car skim gives the 2026 uplift. *Data in hand since 2026-10-05: a May 2026 car speed
+      network for the whole country (`Input/CarSpeedData/GoogleSpeed_202605/`; a speed per
+      link, hour 06:00–21:00 and direction), clipped to the study area by step 43
+      (`Car_speed_network_North.ipynb`, METHODOLOGY §6al; 9,927 links, 4,693 with a speed,
+      `Output/car_speed/`). Routed 2026-10-05 by step 37 (`Car_skim_2026_network.ipynb`,
+      METHODOLOGY §6an): on the 90 trunk pairs the 2026 network time + 3 min terminal is
+      13.0 min against the survey's 14.4 (ratio 0.90; 0.95 on all pairs) — no uplift on this
+      evidence; the chain rerun on the 2026 skim (`CAR_SOURCE=network`,
+      `Output/skims/car_network/`) is reported in §6ac / §6ad addenda: the capture is
+      identical to the trip, since the incremental-logit pivot cancels the car's cost level
+      (caveat 25); step 33 re-estimated on the 2026 skim gives λ 0.040 against 0.035, the
+      choice riders' λ still not identified (§6ae addendum). Still open: the
+      provider's hourly aggregation (caveat 24) before the 07:00 column is called a peak
+      speed; the survey time stays the default until then.*
 - [~] **E7. Cost sensitivity λ** — *person-level estimate done 2026-09-23 (step 33,
       `Mode_choice_person_level.ipynb`, METHODOLOGY §6ae), on the THS person and household
       tables with `new_wf` as the only weight: with car availability, purpose, age and sector
