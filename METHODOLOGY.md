@@ -3970,6 +3970,40 @@ estimated it at the person level (the table of M1 / M1b / M3 / M4 / M1u and the 
 rerun), and why the chain keeps the assumed 0.03 with its range and λ_T = 2λ; the alternatives
 report's limits name the level-of-service convention and the sensitivity.
 
+**Addendum 4, 5 October 2026 — the decision-maker's revision of the report.** On the study
+team's review the report gained: a one-page **executive decision summary** ahead of section 1
+(the question; the reference case; a planning range; what the evidence supports and does not);
+**2050 BU as the principal reference case** (2040 and HS as growth sensitivities, with the
+observation that the HS sets also move the market's composition, caveat 29); **section 4.1,
+through-running against terminating at Hamifrats**, from the two alternatives already run — the
+extension's own riders are the same in both (AM 2050 BU 6,003 on the through line against 5,939
+terminating, +1 %; 2040 BU +1 %), because the 2,849 trips that cross Hamifrats (38 % of the
+through line's riders) reach S24 by Metronit or bus feeder in the terminating case and board
+there, so through-running replaces a feeder leg by an LRT leg for the same trips; the +25 % on
+the line is the main route's own market (1,430 trips between its stations and Hamifrats), carried
+by a terminating main line as well; the benefit of through-running in the model's terms is the
+transfer spared on the crossing trips (a terminating main line beside a terminating extension
+was not run; the 8-minute penalty would apply to every crossing trip); **section 4.3, the
+markets** of the LRT trips by corridor-area group (2050 BU AM: Tirat Carmel ↔ Haifa 2,189 / 29 %,
+Haifa internal 1,663 / 22 %, Krayot ↔ Haifa by feeder 1,665 / 22 %, main route ↔ Haifa 891 /
+12 %; crossing Hamifrats 2,849 / 38 %; both ends on the extension 3,851 / 52 %; largest pair
+Tirat Carmel – Bat Galim 820; in HS 2050 Haifa internal rises to a third and Tirat Carmel falls
+to a tenth — the composition is scenario-dependent, caveat 29); **section 4.4, the Metronit**
+(the model keeps every line as it runs and the LRT draws 33 % of the corridor Metronit trips as a
+choice, not a cut; the LRT's riders are mostly today's transit riders on a faster vehicle and the
+transit market grows only by the car shift; the Krayot market is Metronit riders transferring to
+the LRT; a reduced Metronit would raise the LRT's trunk loads by up to its corridor volume —
+a network decision outside the study, larger than any demand uncertainty); the **planning
+range** (2050 BU AM: central 7,433, lower 5,532 at λ 0.05, upper 10,537 at λ 0.02 — the widest
+single factor of step 40 applied as a ratio; the Unprioritized regime 5,700 shown as a design
+choice); and the evidence statement. `tools/build_comprehensive_report.py` computes all of it
+from the step-45 outputs (`through_table`, `market_tables`, `cross_hamifrats`). A **Hebrew
+version in simple language**, `reports/Nofit_LRT_Extension_Comprehensive_Report_HE.docx`
+(`tools/build_comprehensive_report_he.py`), follows the same structure with the same numbers —
+it executes the English builder's data part and writes a shorter right-to-left document (Arial,
+`w:bidi` paragraphs, `w:bidiVisual` tables) with the English charts; the time-on-route table and
+the full caveat list are summarised in a paragraph and referred to the English report.
+
 ## 7. Output inventory (`Output/`)
 
 *Layout note (21 September 2026).* The products of steps 1–4 (the 2018 activities-file chain, listed first below with bare file names) now live under `Output/historical/ths2018/`; every other path is as written. Notebooks live under `notebooks/current/`, `notebooks/diagnostics/` and `notebooks/historical/` and anchor their working directory to the repository root, so the `Input/…` and `Output/…` paths in this document are unchanged.
@@ -4404,6 +4438,7 @@ python3 tools/build_alternatives_report.py    # the workbook and the Word report
 BUS_SLOWDOWN="BU_2040:1.10,BU_2050:1.20,HS_2040:1.10,HS_2050:1.20" ALT_OUT=Output/alternatives_bus_slow jupyter nbconvert --to notebook --execute --output-dir /tmp/bus_slow notebooks/current/LRT_alternatives_demand.ipynb
 python3 tools/peak_hour_factors_periods.py    # Output/alternatives/peak_hour_factors.csv (AM from step 27, PM by the same method; ≈ 2 minutes; needed by the two builders below)
 python3 tools/build_comprehensive_report.py   # reports/Nofit_LRT_Extension_Comprehensive_Report.docx + Output/figures/comprehensive/ (≈ 1 minute)
+python3 tools/build_comprehensive_report_he.py   # the same report in simple Hebrew, reports/Nofit_LRT_Extension_Comprehensive_Report_HE.docx (≈ 1 minute)
 git checkout -- Output/figures/gc_first_fill_trunk_v2.png Output/figures/gc_bus_gtfs_vs_survey.png Output/figures/skims_logit_car_vs_transit.png Output/figures/skims_trunk_link_flows_bus_vs_lrt.png Output/figures/lrt_capture_forecast_2040_2050.png   # the alternative run redraws the default figures
 
 # regression test of the hybrid branch (committed outputs only)

@@ -4358,6 +4358,23 @@ how many people already use transit on each pair; the car's own speed enters onl
 observed shares. Letting a worse car count would need a first step that re-splits the 2040
 market between car and transit before the LRT is added, which is on the task list.
 
+**The decision-maker's questions (5 October 2026).** The report now opens with a one-page
+decision summary and treats 2050 business-as-usual as the planning case. Three answers it gives
+that the earlier version only implied. Through-running to Nazareth does not change how many
+people ride the extension (6,000 either way in 2050): the riders from Kiryat Ata and beyond
+reach Hamifrats by Metronit today and would board the extension there; the single line spares
+them that transfer, and the extra quarter on the line is the main route's own market. The
+riders come in three legs of similar size — Tirat Carmel to Haifa, within Haifa, and the Krayot
+reaching Haifa by feeder — with a tenth from the main route; four in ten cross Hamifrats and half
+stay between extension stations. And the LRT does not create a transit market so much as take
+over one: a third of today's Metronit riders on the corridor move to it as a choice while the
+Metronit keeps running, the net addition to transit being the few hundred to a thousand trips
+drawn from the car. Whether the Metronit is kept, cut or turned into a feeder after opening is a
+network decision outside the study, and it moves the LRT's loads more than any uncertainty in
+the demand. The planning range on the central 7,400 morning riders is about 5,500 to 10,500.
+The same report exists in simple Hebrew, shorter and with the same numbers
+(`reports/Nofit_LRT_Extension_Comprehensive_Report_HE.docx`).
+
 ### 5.9 Where things stand now
 
 The single most current answer to "how many riders will the LRT capture" is **about 4,250
