@@ -1,0 +1,6 @@
+model,lambda,lo95,hi95,rows,households,assumed (step 31),assumed range
+"M1: dGC + car availability, purpose, person, distance band",0.0300,-0.0042,0.0641,2310,543,0.0300,0.02–0.05
+M1b: M1 with the cheaper of bus and Metronit,0.0381,0.0062,0.0699,2310,543,0.0300,0.02–0.05
+M3: M1 + origin and destination area fixed effects,0.0529,0.0106,0.0951,2310,543,0.0300,0.02–0.05
+M4: licence holders in car-owning households only (the segment the LRT would draw from the car),0.0016,-0.0335,0.0367,1443,424,0.0300,0.02–0.05
+M1u: M1 unweighted,0.0397,0.0141,0.0652,2310,543,0.0300,0.02–0.05

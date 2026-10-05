@@ -1,0 +1,19 @@
+mode,scope,pairs skimmed,transit trips covered,share of transit trips covered,ivt,walk,wait,transfers,gc
+Car,all off-diagonal pairs,600,14133.0,1.0,19.2,0.0,0.0,0.0,19.2
+Car,trunk pairs (10 station areas),90,4567.0,1.0,15.4,0.0,0.0,0.0,15.4
+Bus,all off-diagonal pairs,598,14117.0,0.999,20.2,5.9,2.2,0.1,33.2
+Bus,trunk pairs (10 station areas),90,4567.0,1.0,16.1,5.1,1.7,0.1,27.3
+Metronit (BRT),all off-diagonal pairs,278,9561.0,0.676,16.2,5.8,2.1,0.0,28.0
+Metronit (BRT),trunk pairs (10 station areas),72,3367.0,0.737,11.2,4.9,2.4,0.0,22.2
+LRT all underground,all off-diagonal pairs,600,14133.0,1.0,31.6,10.2,4.7,0.1,55.1
+LRT all underground,trunk pairs (10 station areas),90,4567.0,1.0,13.8,13.9,2.5,0.0,38.4
+LRT all ground,all off-diagonal pairs,600,14133.0,1.0,37.4,10.2,4.8,0.1,60.8
+LRT all ground,trunk pairs (10 station areas),90,4567.0,1.0,22.4,13.9,2.5,0.0,47.0
+LRT design 50 km/h,all off-diagonal pairs,600,14133.0,1.0,28.0,10.2,4.7,0.1,51.4
+LRT design 50 km/h,trunk pairs (10 station areas),90,4567.0,1.0,8.8,13.9,2.5,0.0,33.4
+LRT design 50 km/h + accel/braking,all off-diagonal pairs,600,14133.0,1.0,31.4,10.2,4.7,0.1,54.9
+LRT design 50 km/h + accel/braking,trunk pairs (10 station areas),90,4567.0,1.0,13.5,13.9,2.5,0.0,38.1
+LRT mixed (Haifa core underground),all off-diagonal pairs,600,14133.0,1.0,35.7,10.2,4.8,0.1,59.1
+LRT mixed (Haifa core underground),trunk pairs (10 station areas),90,4567.0,1.0,17.9,13.9,2.5,0.0,42.5
+LRT + synthetic branches (task C6),all off-diagonal pairs,600,14133.0,1.0,24.1,17.2,4.2,0.0,56.2
+LRT + synthetic branches (task C6),trunk pairs (10 station areas),90,4567.0,1.0,13.8,13.9,2.5,0.0,38.4
