@@ -89,6 +89,25 @@ for p in PERIODS:
 doc.add_heading('Figures', 1)
 for f, cap in [('lrt_alternatives_lines.png', 'The two lines and their stations.'), ('lrt_alternatives_demand.png', 'LRT trips by scenario-year, alternative and regime, AM and PM.'), ('lrt_alternatives_line_loads.png', 'Line loads by segment and direction, main route + extension, Prioritized, BU 2040, AM.')]:
     if os.path.exists(f'{FIG}/{f}'): doc.add_picture(f'{FIG}/{f}', width=Cm(24)); doc.add_paragraph(cap).alignment = WD_ALIGN_PARAGRAPH.CENTER
+doc.add_heading('4. Maps — time, demand, loads and differences', 1)
+doc.add_paragraph('Produced by tools/build_alternatives_maps.py from the same runs (Output/figures/alternatives/). Reference destination for the time maps: the TAZ of the station with the most LRT alightings (BU 2040 AM, main route + extension, Prioritized).')
+MAPS = [('map_time_lrt_vs_bus_AM.png', 'Transit time to the reference TAZ, AM: today\'s best bus / Metronit path, the LRT (main route + extension, Prioritized), and the difference (blue = LRT cheaper).'),
+        ('map_time_lrt_to_ref_AM.png', 'Time by LRT to the reference TAZ (access + wait + ride + egress, generalized minutes), AM, the four alternative × regime combinations.'),
+        ('map_time_car.png', 'Car time to the reference TAZ, AM (07:00 speeds) and PM (17:00 speeds), plus the 3-minute terminal.'),
+        ('map_time_lrt_over_car_AM.png', 'LRT ÷ car generalized time to the reference TAZ, AM, main route + extension and extension only (Prioritized).'),
+        ('map_line_loads_AM_BU_2040.png', 'LRT line loads by segment and direction (width ∝ trips) and station boardings (circle size), AM BU 2040, the four combinations.'),
+        ('map_line_loads_PM_BU_2040.png', 'The same for the PM BU 2040.'),
+        ('map_line_loads_AM_HS_2050.png', 'The same for the AM HS 2050, the largest loads.'),
+        ('map_lrt_origins_AM_BU_2040.png', 'LRT trip origins by TAZ, AM BU 2040, the four combinations.'),
+        ('map_lrt_destinations_AM_BU_2040.png', 'LRT trip destinations by TAZ, AM BU 2040.'),
+        ('map_lrt_share_AM_BU_2040.png', 'LRT share of the transit trips by origin TAZ, AM BU 2040.'),
+        ('map_diff_main_vs_ext_AM_BU_2040.png', 'What the main route adds: LRT origins and destinations, main route + extension minus extension only (Prioritized), AM BU 2040.'),
+        ('map_diff_prioritized_vs_unprioritized_AM_BU_2040.png', 'What the underground extension adds: LRT origins, Prioritized minus Unprioritized, AM BU 2040.'),
+        ('map_growth_2022_to_HS2050_AM.png', 'Growth of the LRT demand, 2022 to HS 2050, main route + extension, Prioritized, AM.'),
+        ('map_lrt_origins_AM_vs_PM_BU_2040.png', 'LRT trip origins, AM against PM, main route + extension, Prioritized, BU 2040.')]
+for f, cap in MAPS:
+    pth = f'{FIG}/alternatives/{f}'
+    if os.path.exists(pth): doc.add_picture(pth, width=Cm(24)); doc.add_paragraph(cap).alignment = WD_ALIGN_PARAGRAPH.CENTER
 doc.add_heading('Limits', 1)
 doc.add_paragraph('The main route\'s stations are assumed; its demand moves with the real station list and with any feeder restructuring in Kiryat Ata and Nazareth. The forecast PM sets are grown at the AM rates. The LRT premium over the Metronit is an estimate, not an estimated parameter. '
                   'The pivot\'s induced car trips depend on the aggregation level (METHODOLOGY caveat 27). No capacity, no route choice against parallel bus services, no fare, no park-and-ride. The level of service is a single best path per TAZ pair at the line\'s own headway (caveat 26).')
