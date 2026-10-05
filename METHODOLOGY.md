@@ -392,6 +392,20 @@ person-level λ (step 33) — re-estimated on the 2026 skim the same day (§6ae 
 −0.020 to 0.041), the 0.03–0.05 reading unchanged. The survey time stays the default pending
 the provider's hourly aggregation (caveat 24).
 
+**Update, 5 October 2026 (step 44 — level of service at TAZ level and aggregated to the V2
+areas).** Car and transit skims for all 781 TAZs (§6an, `LOS_skims_TAZ_and_V2.ipynb`): the car
+on step 37's network between TAZ centroids, the transit as a frequency-based line graph of
+the GTFS bus and Metronit services with step 30's observed running times. Aggregated to the
+25 areas with population × employment weights and put beside step 31: the car agrees (trunk
+pairs 13.3 vs 13.0 between the area points, 14.4 survey), **the transit does not — 45.2
+generalized minutes on the trunk pairs against step 31's 29.8 (pooled wait) / 34.9 (best-line
+wait)**, a median pair ratio of 1.5, with the same in-vehicle time and transfers and the gap
+in walk (9.6 vs 5.1 min) and wait (5.1 vs 1.7 / 3.8): the area skim pairs the nearest stop's
+walk with the best line's running time and the pooled headway of every direct line, which no
+traveller from a given TAZ can combine. The area skims are not replaced (the capture is a
+pivot on the transit-side *change*, and both LRT and bus would carry the same access
+correction); the TAZ-level skims are the input task C3 / step 39 needs, and the gap is caveat 26.
+
 Every published product, what it was built from, and its status:
 
 | Product (`Output/…`) | Built by | Base / inputs | Geography | Modes | Vintage | Status |
@@ -429,6 +443,7 @@ Every published product, what it was built from, and its status:
 | `gc/car_ivt_network_area_v2.csv`, `car_ivt_network_fastest_hour_area_v2.csv`, `car_km_network_area_v2.csv`, `car_path_fallback_share_area_v2.csv`, `car_network_vs_survey_{pairs,summary}.csv`, `car_network_skim_sensitivity.csv` | step 37 | `car_speed/*` speeds transferred onto `Input/BusSpeedData/Streets` and routed between the step-26 area points | 25 V2 areas | car: 07:00 kerb-to-kerb time, path km, fallback share; vs the survey skim | May 2026 | **current** — the alternative car source (`CAR_SOURCE=network`); survey remains the default |
 | `skims/car_network/*`, `skims/car_network/forecast/*` | steps 26 + 31 + 32, `CAR_SOURCE='network'` / `GC_SOURCE_DIR` / `SK_DIR` | same as `gc/*`, `skims/*`, `skims/forecast/*`, car IVT = step-37 time + 3 min | 25 V2 areas, 9 trunk links | as `skims/*` | 2022 (flows), May 2026 (bus and car), planned (LRT) | **alternative scenario** (task C1 / E5) — capture identical to the central case (the pivot cancels the car level) |
 | `mode_choice/car_network/*` | step 33, `SK_DIR=Output/skims/car_network` | `Input/THS_2017-2018/` trips, person and household tables × the step-31 skims on the 2026 car time | 25 V2 areas, person-level rows | car vs transit — λ estimates by specification and segment on the 2026 car skim | 2017/18 (survey), May 2026 (skims, car and bus) | **alternative estimate** — λ 0.040 (M1) vs 0.035; choice-rider λ still not identified |
+| `los/car_los_taz.csv.gz`, `transit_los_taz.csv.gz`, `los_taz_accessibility.csv`, `*_area_v2.csv`, `los_area_v2_pairs.csv`, `los_area_v2_vs_step31.csv` | step 44 | step 37's car network between TAZ centroids; GTFS AM services (step 29) with step 30's observed times as a line graph; `Zonal_2020` weights | 781 TAZs (609,180 pairs); 25 V2 areas | car: IVT, km, GC; transit (bus + Metronit): GC, IVT, walk, wait, transfers, Metronit share | May 2026 (car), 2 June 2026 (GTFS) | **current** — TAZ-level LOS for the first time; area aggregates beside step 31, not replacing it (caveat 26) |
 
 The 25 GS zones (`Input/TAZ_GSnew.csv`) and the 25 retained research areas of the
 forecast tables are different geographies with the same matrix dimension; files are
@@ -3530,6 +3545,66 @@ points with no explicit intersection delay against a reported door-to-door time 
 addresses — different quantities, so the ratio is an uplift only to the extent the terminal
 allowance closes that gap, and on the short pairs it does not.
 
+## 6an. Step 44 — Level of service for car and transit at two levels: the 781 TAZs and the 25 V2 areas (`LOS_skims_TAZ_and_V2.ipynb`)
+
+**Purpose.** The chain's level of service lives on the 25 V2 areas, routed between one
+representative point per area (§6x, §6ac). This step builds the same quantities **at TAZ
+level** for all 781 study TAZs, on the networks the chain already uses, and **aggregates them
+to the 25 areas** with population × employment weights, to put beside the area skims — the
+same level of service from the bottom up — and to give the corridor a TAZ-level car and
+transit skim for the first time (task C3 / step 39 needs one).
+
+**How the level of service is defined (both levels).** Generalized cost in minutes,
+`GC = IVT + 2·walk + 2·wait + 8·transfers`, money out by decision; walking on the straight
+line × 1.3 at 4.8 km/h; wait = half the headway, capped at 10 min. *Car*: fastest path at the
+May 2026 07:00 car speeds on step 37's network (the street topology with the car speeds
+transferred, 30 km/h where unobserved) between the TAZ polygon centroids, straight-line
+connectors at 20 km/h, plus 3 min terminal; no walk, wait or transfer. *Transit*: the GTFS bus
+and Metronit services of Tuesday 2 June 2026 departing 06:00–09:00 (step 29's intermediates)
+as a frequency-based line graph — a node per stop and per (line, direction, stop); ride edges
+at step 30's observed running time where it exists (97 % of the 44,726 ride edges) else the
+schedule; boarding edges at 2 × wait (half the line-direction's 07:00–08:00 headway at that
+stop, capped) + the 8-min penalty, one penalty refunded per path; alighting free; walk
+transfers between stops within 300 m; access and egress from the TAZ centroid to every stop
+within 1,000 m (and the nearest in any case). Cheapest generalized-cost path per TAZ pair, by
+Dijkstra from every TAZ, the components summed along the predecessor tree. This is a single
+best path with its own line's headway (the chain's `best_line` reading), not the chain's
+default pooled headway of all direct lines; the planned LRT is not in it.
+
+**Results.** *Car*: all 609,180 TAZ pairs reachable; 26 min / 18 km at the median between the
+174 corridor TAZs; aggregated to the areas **13.3 min on the trunk pairs** (trip-weighted)
+against step 37's 13.0 between the area points and the survey's 14.4 (median pair ratio to the
+survey 0.99) — the representative points stand for their areas well for the car. *Transit*:
+608,400 pairs reachable (5,903 by walking alone); between the corridor TAZs GC 92 generalized
+minutes at the median (IVT 33, walk 15, wait 10, 0.72 transfers, 44 % direct, 54 % of paths
+on the Metronit); aggregated to the areas **45.2 on the trunk pairs** (IVT 14.7, walk 9.6,
+wait 5.1, 0.1 transfers, 86 % of TAZ pairs direct) against step 31's **29.8** (cheaper of bus
+and Metronit, pooled wait) and **34.9** (best-line wait): median pair ratio 1.5 on the trunk,
+1.45 over the 600 pairs, 1.36 against the best-line variant. The in-vehicle time is lower
+than step 31's (14.7 vs 16.1) and transfers equal; the gap is walk (9.6 vs 5.1, weighted
+twice) and wait (5.1 vs 1.7 pooled / 3.8 best line) — the area skim pairs the nearest stop's
+walk with the best line's running time and the pooled headway of every direct line, a
+combination no traveller from a given TAZ can take; at TAZ level the line that gives the
+direct ride is reached by a longer walk and waited for at its own headway. Per TAZ the
+transit / car GC ratio to the other corridor TAZs is 3.0 at the median (2.6–3.7), 2.2–2.4 in
+the Krayot and Nazareth centres, 4.2–5.2 in the employment-only zones of the Haifa bay and the
+Kiryat Ata fringe.
+
+**Outputs** (`Output/los/`). `car_los_taz.csv.gz`, `transit_los_taz.csv.gz` (every reachable
+TAZ pair with the components), `los_taz_accessibility.csv` (per TAZ), the 25 × 25 aggregates
+`{car_ivt,car_gc,car_km,transit_gc,transit_ivt,transit_walk,transit_wait,transit_transfers,transit_brt_ivt}_area_v2.csv`,
+`transit_direct_share_area_v2.csv`, `taz_pairs_reachable_area_v2.csv`, the comparison
+`los_area_v2_pairs.csv` / `los_area_v2_vs_step31.csv`; figures `los_area_v2_taz_agg_vs_step31.png`,
+`los_taz_gc_maps.png`.
+
+**Limits.** A single best path with its own headway (no pooling); one Tuesday's schedule with
+step 30's observed times where covered; straight-line walking from polygon centroids (a poor
+stand-in for a large TAZ's residents — task C2); step 37's car assumptions and caveat 24; no
+money at either level; population × employment weights in the aggregation, not observed
+trips. The chain's area skims are not replaced: the capture pivot cancels the car level
+(caveat 25) and the transit-side gap above is a finding for task C3, not a correction applied
+here (caveat 26).
+
 ## 7. Output inventory (`Output/`)
 
 *Layout note (21 September 2026).* The products of steps 1–4 (the 2018 activities-file chain, listed first below with bare file names) now live under `Output/historical/ths2018/`; every other path is as written. Notebooks live under `notebooks/current/`, `notebooks/diagnostics/` and `notebooks/historical/` and anchor their working directory to the repository root, so the `Input/…` and `Output/…` paths in this document are unchanged.
@@ -3593,6 +3668,8 @@ allowance closes that gap, and on the short pairs it does not.
 | `gc/car_ivt_network_area_v2.csv`, `car_ivt_network_fastest_hour_area_v2.csv`, `car_km_network_area_v2.csv`, `car_path_fallback_share_area_v2.csv`, `car_network_area_connectors.csv`, `car_network_segment_coverage.csv`, `car_network_skim_sensitivity.csv`, `car_network_vs_survey_pairs.csv`, `car_network_vs_survey_summary.csv` | 25 × 25 (×4); 25 rows; 3 rows; 5 rows; 600 rows; 8 rows | Step 37 | The V2 areas routed at the May 2026 07:00 car speeds (kerb to kerb with connectors), the fastest-hour variant, path km, share of the path on assumed-speed segments, connector lengths, the transfer's coverage of the street network, the fallback / own-topology sensitivity, and the pair-by-pair and banded comparison with the survey skim |
 | `skims/car_network/*`, `skims/car_network/forecast/*` | as `gc/*`, `skims/*`, `skims/forecast/*` | Steps 26 + 31 + 32 with `CAR_SOURCE=network` / `GC_SOURCE_DIR` / `SK_DIR` | The chain on the 2026 car skim (car IVT = step-37 time + 3 min; `car_ivt_2026_network_area_v2.csv` beside the survey's): capture identical to the central case (§6ac addendum) |
 | `mode_choice/car_network/*` | as `mode_choice/*` | Step 33 with `SK_DIR=Output/skims/car_network` | The person-level logits re-estimated with the 2026 car time in the car generalized cost: λ 0.040 (M1), 0.048 / 0.060 / 0.042 (M1b / M3 / M1u), choice riders 0.011 not identified (§6ae addendum) |
+| `los/car_los_taz.csv.gz`, `transit_los_taz.csv.gz` | 609,180 / 608,400 rows | Step 44 | Every reachable TAZ pair: car kerb-to-kerb time, path km, GC (+ 3 min); transit GC, IVT, walk, wait, transfers, boardings, Metronit IVT, walk-only flag |
+| `los/los_taz_accessibility.csv`; `los/{car_ivt,car_gc,car_km,transit_gc,transit_ivt,transit_walk,transit_wait,transit_transfers,transit_brt_ivt}_area_v2.csv`, `transit_direct_share_area_v2.csv`, `taz_pairs_reachable_area_v2.csv`; `los_area_v2_pairs.csv`, `los_area_v2_vs_step31.csv` | 781 rows; 25 × 25 (× 11); 600 rows; 18 rows | Step 44 | Per-TAZ accessibility (median GC to the corridor TAZs, car and transit, their ratio); the population × employment aggregates to the 25 areas; the pair-by-pair and summary comparison with steps 31 and 37 |
 | `figures/` | — | Steps 1b–3 | Scatter plots, CV curves, λ curves, R_AB heatmap |
 
 All matrices are indexed by origin zone (rows) × destination zone (columns). Probability
@@ -3774,6 +3851,20 @@ Added 23 September 2026 (step 33):
     0.035 to 0.040 and leaves the choice riders' λ unidentified, so the assumed 0.03 and its
     0.02–0.05 range stand on either car skim.
 
+26. **The area-level transit skim understates the generalized cost a traveller from a given
+    TAZ faces** (§6an, step 44). Routed TAZ by TAZ and aggregated with population × employment
+    weights, the transit GC on the trunk pairs is 45.2 generalized minutes against step 31's
+    29.8 (pooled wait) / 34.9 (best-line wait), a median pair ratio of 1.5, with the same
+    in-vehicle time and transfer count: the area skim combines the nearest stop's walk, the
+    best line's running time and the pooled headway of every direct line, which no single
+    traveller can do. The car skim shows no such gap (13.3 vs 13.0). For the capture this
+    matters less than it looks — the pivot moves on the *change* in the transit nest when the
+    LRT is added, and the LRT's own area skim carries the same kind of access averaging — but
+    the bus-versus-LRT comparison within the nest (`P_LRT|T`) is sensitive to it, and the
+    direction is not obvious: the LRT's station access is already TAZ-weighted (step 25), the
+    bus's is not. Task C3 / step 39 (the TAZ-level capture) is where this is resolved, with
+    `Output/los/` as its input.
+
 ## 8b. Related work — PCA-based analysis and structural comparison of OD matrices
 
 Context for the PCA validation notebooks (`THS_2018_MTX_PCA_vs_cellular.ipynb`,
@@ -3892,6 +3983,8 @@ CAR_SOURCE=network jupyter nbconvert --to notebook --execute --output-dir /tmp/c
 GC_SOURCE_DIR=Output/skims/car_network jupyter nbconvert --to notebook --execute --output-dir /tmp/car_network notebooks/current/Mode_skims_and_flow_comparison.ipynb
 SK_DIR=Output/skims/car_network jupyter nbconvert --to notebook --execute --output-dir /tmp/car_network notebooks/current/LRT_capture_forecast_2040_2050.ipynb
 SK_DIR=Output/skims/car_network jupyter nbconvert --to notebook --execute --output-dir /tmp/car_network notebooks/current/Mode_choice_person_level.ipynb   # step 33 on the 2026 car skim (needs the THS person, household and activities files; ≈ 1 minute)
+# level of service at TAZ level and aggregated to the V2 areas (step 44; needs step 43's gpkg, the bus street network geometry, step 29's GTFS intermediates, step 30's segments, Input/Corridor_TAZ_Agg_V2.xlsx and the committed step-31 / 37 skims; ≈ 1.5 minutes)
+jupyter nbconvert --to notebook --execute --inplace notebooks/current/LOS_skims_TAZ_and_V2.ipynb
 git checkout -- Output/figures/gc_first_fill_trunk_v2.png Output/figures/gc_bus_gtfs_vs_survey.png Output/figures/skims_logit_car_vs_transit.png Output/figures/skims_trunk_link_flows_bus_vs_lrt.png Output/figures/lrt_capture_forecast_2040_2050.png   # the alternative run redraws the default figures
 
 # regression test of the hybrid branch (committed outputs only)

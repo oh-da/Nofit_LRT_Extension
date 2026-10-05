@@ -4255,6 +4255,33 @@ against 0.035 per generalized minute), still inside the range assumed, and the s
 the people who actually have a car to choose from is still not pinned down. The survey times
 remain the central case until the speed provider's method is clarified.
 
+### 5.8f Level of service zone by zone, and what it says about the corridor skims (step 44)
+
+"Level of service" here means the travel cost a traveller faces between two places, in
+generalized minutes: the time in the vehicle, plus twice the walking time, plus twice the
+waiting time, plus 8 minutes for every transfer (money is left out, since the fare is flat and
+the same for every transit mode). For the **car** it is the quickest route at the May 2026
+speeds between the two zones' centre points, with a short connector at each end and 3 minutes
+for parking and walking. For **transit** it is the best bus or Metronit path on the June 2026
+timetable in the morning: walk to a stop (any stop within a kilometre), wait half the line's
+headway (capped at 10 minutes), ride at the measured May 2026 running speeds, transfer by
+walking between nearby stops if needed, walk to the destination.
+
+Until now the project held these costs only for the 25 corridor areas, each represented by one
+point. This step computes them for every one of the 781 zones (609,180 zone pairs), and then
+averages the zone pairs back up to the 25 areas, weighting origins by population and
+destinations by jobs. For the car the two agree (13.3 against 13.0 minutes on the trunk
+pairs). For transit they do not: zone by zone the trunk pairs cost 45 generalized minutes,
+against 30 in the area-level skim. The time on board and the transfers are the same; the
+difference is walking and waiting. The area-level skim takes the walk to the *nearest* stop,
+the running time of the *best* line and the combined frequency of *all* the lines that serve
+the pair — a combination no actual traveller from a given zone gets, because the best line
+usually stops somewhere further than the nearest stop and runs at its own frequency. This
+does not change the ridership estimate directly (that estimate moves on the *change* in
+transit cost when the LRT arrives, not on its level), but it is exactly the kind of averaging
+the plan's zone-level capture step (C3) is meant to remove, and the zone-level skims are now
+there for it.
+
 ### 5.9 Where things stand now
 
 The single most current answer to "how many riders will the LRT capture" is **about 4,250

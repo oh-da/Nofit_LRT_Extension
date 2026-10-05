@@ -1,0 +1,19 @@
+quantity,trunk pairs (trip-weighted),all pairs (trip-weighted),all pairs (simple mean)
+car GC — TAZ-aggregated (2026 network + 3 min),13.33,16.58,25.09
+car GC — step 37 area points (2026 network + 3 min),12.96,16.08,24.27
+car GC — step 31 (survey door-to-door),14.44,16.93,25.94
+car IVT — TAZ-aggregated kerb to kerb,10.33,13.58,22.09
+car km — TAZ-aggregated path,6.29,8.88,16.12
+transit GC — TAZ-aggregated best path (bus + Metronit),45.21,54.20,74.64
+transit GC — step 31 cheaper of bus / Metronit (pooled wait),29.79,36.80,52.00
+bus GC — step 31 (pooled wait),30.69,37.24,52.25
+bus GC — step 31 best-line wait variant,34.86,41.11,54.94
+transit IVT — TAZ-aggregated,14.71,18.93,28.60
+bus IVT — step 31,16.08,20.17,29.04
+transit walk — TAZ-aggregated,9.56,11.56,13.30
+bus walk — step 31,5.07,5.89,6.94
+transit wait — TAZ-aggregated (best line),5.14,5.33,7.88
+bus wait — step 31 pooled,1.72,2.24,3.52
+bus wait — step 31 best line,3.81,4.17,4.87
+transit transfers — TAZ-aggregated,0.14,0.19,0.46
+bus transfers — step 31 (0 direct / 1 assumed),0.13,0.11,0.30

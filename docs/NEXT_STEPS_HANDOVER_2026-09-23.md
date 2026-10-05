@@ -274,6 +274,15 @@ Effort: one day (most of it the OSM handling).
 nonlinear in access time and averaging the walk before applying it biases the area result:
 expect more capture within 500 m of a station and less beyond 1.5 km.
 
+**Update, 5 October 2026.** Step 44 (`LOS_skims_TAZ_and_V2.ipynb`, METHODOLOGY §6an) now
+provides **TAZ-level car and transit skims for all 781 TAZs** (`Output/los/car_los_taz.csv.gz`,
+`transit_los_taz.csv.gz`: GC, IVT, walk, wait, transfers per pair) — so the car no longer has
+to be taken from the area skim, and the bus side can be taken at TAZ level too rather than as
+"area IVT + TAZ walk". Note caveat 26: aggregated back to the areas the TAZ-level transit GC is
+1.5 × step 31's, the gap being walk and wait, so a TAZ run on the step-31 transit components
+plus a TAZ walk will not reproduce the TAZ-routed cost; decide which bus skim the pivot uses
+and say so.
+
 **Inputs.** 2022 TAZ layers `Output/final_2022/{car,transit}_2022_taz.csv` restricted to the 174
 TAZs of `TazAgg`; the area skims of step 31 (`Output/skims/skim_*_*.csv`) for IVT, wait and
 transfers; the TAZ-level access walks of C2 (`Output/access/walk_access_taz.csv`; fall back to
