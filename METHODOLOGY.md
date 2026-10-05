@@ -73,7 +73,7 @@ notes saying which of their conclusions are overtaken.
 | Observed bus in-vehicle time (trips routed over the May 2026 link speeds) ÷ scheduled | per trip 1.09 (Metronit 0.87); hops < 500 m 1.00, > 2 km 1.42 — the link speeds include dwell, the long arterial hops run slower than the timetable; trunk pairs 12.7 vs 10.4 min demand-weighted | §6ab |
 | Complete skims, trunk pairs, trip-weighted GC (generalized minutes): car / bus / Metronit (its 72 pairs) / LRT underground / LRT ground | 14.5 / 27.4 / 23.4 / 43.9 / 51.5 | §6ac |
 | Complete skims, all 600 off-diagonal pairs, trip-weighted GC: car / bus / Metronit (278 pairs, 68 % of transit trips) / LRT underground / LRT ground | 19.5 / 37.6 / 30.6 / 62.8 / 68.0 (LRT off the line by feeder, Metronit feeder with a free transfer) | §6ac |
-| LRT alternatives on TAZ-level skims with feeders, OVT central, AM three hours: main route + extension Prioritized / Unprioritized; extension only Prioritized / Unprioritized | 2022: 5,414 / 4,601; 3,588 / 2,851 — BU 2040: 6,607 / 5,499; 4,505 / 3,497 — HS 2050: 9,548 / 8,010; 6,086 / 4,718; PM ≈ 80 % of AM; busiest segment up to 3,210 (3 h, one direction) | §6aq |
+| LRT alternatives on TAZ-level skims with feeders, OVT central, AM three hours: main route + extension Prioritized / Unprioritized; extension only Prioritized / Unprioritized | 2022: 5,193 / 4,209; 3,884 / 2,921 — BU 2040: 6,309 / 4,999; 4,879 / 3,595 — HS 2050: 9,225 / 7,393; 6,653 / 4,893; PM ≈ 80 % of AM; busiest segment up to 3,058 (3 h, one direction) | §6aq |
 | LRT capture at TAZ level (174 TAZs), underground central, 06:00–09:00 | 6,963 on the step-44 TAZ bus skim (× 1.64 the area level's 4,254, the caveat-26 effect); 4,226 on the area bus components with TAZ walks (0.99); regression check 3,970 (0.93: induced trips 130 vs 414, caveat 27); area level stays central | §6ap |
 | Car time 2017/18 survey (door-to-door) vs May 2026 network (07:00 speeds + 3 min terminal), trunk pairs trip-weighted / all 600 pairs | 14.4 vs 13.0 min (0.90) / 16.9 vs 16.1 (0.95); by distance 1.00 (< 3 km) … 0.83 (> 20 km) — no 2026 uplift; capture unchanged under the 2026 skim (the pivot cancels the car level) | §6an, §6ac addendum |
 | 2022 AM off-diagonal trips, 25 areas: car / transit (bus + rail) / taxi | 56,445 / 14,133 (share 0.200) / 720 — (13,778 with the OnBoard prior; 11,664 / 6,982 before the code correction) | §6ac |
@@ -425,12 +425,13 @@ consistent TAZ run needs the feeder leg and the LRT in-vehicle time at TAZ level
 **Update, 5 October 2026 (step 45 — demand for the LRT alternatives, main route + extension and
 extension only, AM and PM, 2022–2050).** The main Nofit route (Hamifrats – Nazareth, 40.7 km,
 `Input/Main_Nofit/`) is modelled with the extension as one through line at its 80 km/h design
-speed (stations assumed at ≥ 1 km, caveat 28) and the extension alone, in the Prioritized
-(underground) and Unprioritized (at-grade) regimes, on TAZ-level skims that carry the LRT's own
-feeder legs (§6aq) — the consistency step 39 lacked — with the OVT research's central parameters
-and a 2.5-minute premium over the Metronit. AM 2022: **5,414** LRT trips main + extension
-Prioritized, 3,588 extension only; 2040 / 2050: 6,607–9,548 and 4,505–6,086; PM about 80 % of
-the AM. Prioritized is worth 15–20 % of the trips, the main route 45–60 %. Report in
+speed (its 20 delivered stops; at-grade running and headway assumed, caveat 28) and the extension
+alone, in the Prioritized (priority at interchanges, step 25's underground-calibrated times) and
+Unprioritized (at-grade) regimes, on TAZ-level skims that carry the LRT's own feeder legs (§6aq)
+— the consistency step 39 lacked — with the OVT research's central parameters, the station access
+at 0.5 min per end in both regimes, walking at 4 km/h and a 2.5-minute premium over the Metronit.
+AM 2022: **5,193** LRT trips main + extension Prioritized, 3,884 extension only; 2040 / 2050:
+6,309–9,225 and 4,879–6,653; PM about 80 % of the AM. Prioritized is worth 15–20 % of the trips, the main route 45–60 %. Report in
 `reports/LRT_Alternatives_Demand_Report.docx`, matrices in `Output/alternatives/`.
 
 Every published product, what it was built from, and its status:
@@ -472,7 +473,7 @@ Every published product, what it was built from, and its status:
 | `mode_choice/car_network/*` | step 33, `SK_DIR=Output/skims/car_network` | `Input/THS_2017-2018/` trips, person and household tables × the step-31 skims on the 2026 car time | 25 V2 areas, person-level rows | car vs transit — λ estimates by specification and segment on the 2026 car skim | 2017/18 (survey), May 2026 (skims, car and bus) | **alternative estimate** — λ 0.040 (M1) vs 0.035; choice-rider λ still not identified |
 | `los/car_los_taz.csv.gz`, `transit_los_taz.csv.gz`, `los_taz_accessibility.csv`, `*_area_v2.csv`, `los_area_v2_pairs.csv`, `los_area_v2_vs_step31.csv` | step 44 | step 37's car network between TAZ centroids; GTFS AM services (step 29) with step 30's observed times as a line graph; `Zonal_2020` weights | 781 TAZs (609,180 pairs); 25 V2 areas | car: IVT, km, GC; transit (bus + Metronit): GC, IVT, walk, wait, transfers, Metronit share | May 2026 (car), 2 June 2026 (GTFS) | **current** — TAZ-level LOS for the first time; area aggregates beside step 31, not replacing it (caveat 26) |
 | `skims/taz/*`, `skims/taz/bus_area_plus_walk/*` | step 39 | `final_2022` TAZ layers × step 44's TAZ bus skim (or the area bus components + TAZ walks) × step 31's LRT area skims with TAZ station walks | 174 corridor TAZs (27,836 inter-area pairs) | LRT capture by regime × case, from bus / car, by area, trunk link, station, access band | 2022 | **diagnostic** — 6,963 (step-44 bus) / 4,226 (hand-over construction) vs 4,254 area level; not adopted (caveats 26, 27) |
-| `alternatives/*` (per period × scenario-year × alternative × regime: trip matrices TAZ and area, line loads, boardings; `demand_summary.csv`, `time_on_route.csv`, `LRT_alternatives_matrices.xlsx`) and `reports/LRT_Alternatives_Demand_Report.docx` | step 45 | `Input/Main_Nofit/` + `hf_lrt_3` × the step-44 TAZ graphs (AM and PM from the GTFS) with LRT feeder legs × `final_2022` / wave-1b PM / step-23 forecasts | 174 corridor TAZs, 25 areas, both line directions | car; bus; Metronit; LRT; total transit — 2 alternatives × 2 regimes × 5 scenario-years × AM / PM | 2022, 2040, 2050 | **current — the alternatives deliverable**; main-route stations assumed (caveat 28) |
+| `alternatives/*` (per period × scenario-year × alternative × regime: trip matrices TAZ and area, line loads, boardings; `demand_summary.csv`, `time_on_route.csv`, `LRT_alternatives_matrices.xlsx`) and `reports/LRT_Alternatives_Demand_Report.docx` | step 45 | `Input/Main_Nofit/` + `hf_lrt_3` × the step-44 TAZ graphs (AM and PM from the GTFS) with LRT feeder legs × `final_2022` / wave-1b PM / step-23 forecasts | 174 corridor TAZs, 25 areas, both line directions | car; bus; Metronit; LRT; total transit — 2 alternatives × 2 regimes × 5 scenario-years × AM / PM | 2022, 2040, 2050 | **current — the alternatives deliverable**; main-route operation assumed (caveat 28) |
 | `ovt_research/evidence_table.csv`, `parameter_summary.csv`, `parameter_sets.csv`, `chain_results.csv`, `extracts/*.md`; `skims/ovt_<set>/*`, `mode_choice/ovt_<set>/*` | OVT research (§6al) | five search-summary extracts (275 estimates, 20 verified) and steps 31 → 33 rerun on seven out-of-vehicle parameter sets | 25 V2 areas, 06:00–09:00; person-level λ per set | walk / wait weights, transfer and BRT–LRT penalties, station access: evidence by stream, proposed central / low / high, capture per set (1,456–4,935 underground), re-estimated λ (0.030–0.036) | 2022 | **sensitivity** — no parameter confirmed (nothing read in full), central case unchanged |
 
 The 25 GS zones (`Input/TAZ_GSnew.csv`) and the 25 retained research areas of the
@@ -516,7 +517,7 @@ validation against counts.
 | `../Network_with_Counts/Emme_Links_Final_Res 2026-09-23.{shp,dbf,shx,prj}` (in `Input/`, LFS, 74 MB dbf, added 23 Sep 2026) | The Emme highway network of the north with hourly traffic counts | 29,710 directional links (WGS 84; `INODE`–`JNODE`, `TYPE` 1–21 with 9 = centroid connector, `MODES`, `LANES`, `NAME` in Hebrew, UTF-8); counts in PCE per hour `YARAM6` … `YARAM19` on 3,241 links at 698 stations (`ID_COUNT`; `DATE` dd/mm/yyyy or an Excel serial, 2017–2022; `F2023COUNT` marks 2023 count files). Used by step 36 (§6ah) |
 | `../BusRavKav/May_2022/trips_table_2022-05-*.csv` (in `Input/`, LFS; moved from `Input/BusRavKav/` on 23 Sep 2026) | The May 2022 RavKav linked-journey files of step 8 | Unchanged content; step 8 and this document repointed |
 | `../BusSpeedData/Streets/Streets.shp`, `std_202605.csv` (in `Input/`, CSV in LFS, added 22 Sep 2026) | Bus link speeds, May 2026 | 161,534 national street links (Israel TM Grid; `USERID`, `DIR` = 1 with / −1 against / 0 both directions); 157,618 speed records joined on `USERID` (99.9 % match), 336 columns `d_{weekday}_h_{hour}_{AB,BA}` in km/h with 0 = no bus observation. `Readme.txt`: weekday 3, 07:00–08:00 = `d_3_h_7_AB` / `d_3_h_7_BA`. 54,507 links (5,632 km) fall in the study area, 48,092 with a speed |
-| `../Main_Nofit/Main_Nofit 2026-10-05.{shp,shx,dbf,prj}` (in `Input/`, plain git, added 5 Oct 2026) | The main Nofit LRT route under construction, Hamifrats – Nazareth | 49 Emme-style links (WGS 84; `AB_INODE` / `AB_JNODE` 34000–34050, `AB_TYPE` 15, `DIR` 0), one path of 40.7 km from node 34000 (103 m from the extension's S24) to node 34034 in Nazareth; no station layer — step 45 (§6aq) assumes stations at the nodes ≥ 1 km apart (27) pending the planned list |
+| `../Main_Nofit/Main_Nofit 2026-10-05.{shp,shx,dbf,prj}` (in `Input/`, plain git, added 5 Oct 2026) | The main Nofit LRT route under construction, Hamifrats – Nazareth | 49 Emme-style links (WGS 84; `AB_INODE` / `AB_JNODE` 34000–34050, `AB_TYPE` 15, `DIR` 0), one path of 40.7 km from node 34000 (103 m from the extension's S24) to node 34034 in Nazareth; `Main_Nofit_StopsID.csv` (LFS, added and corrected later the same day) lists the 20 stop nodes used by step 45 (§6aq) as the stations |
 | `../CarSpeedData/GoogleSpeed_202605/GoogleSpeed.{shp,shx,dbf,prj}` (+ the delivered `.zip`; in `Input/`, plain git, added 5 Oct 2026) | Car link speeds, May 2026, the whole country | 30,701 links (Israel TM Grid; `ID` unique, `USERID` the id of one member segment of the bus street network above — 96 % of the study-area links are such merged segments, so not a one-to-one key; `DIR` = 1 with / −1 against / 0 both directions; `LENGTH` in km); 32 columns `SPD_{hour}_{AB,BA}` in km/h for the hours 6–21 (`SPD_7_AB` = 07:00–08:00 in the direction of the link geometry, `SPD_7_BA` against it), 0 = no observation in that hour or the closed direction of a one-way link, NaN on the 16,071 links without any record. One value per hour for the month, no weekday dimension. 9,927 links (4,996 km) intersect the `TAZ_North` polygons, 4,693 with a speed (80 % of the length); clipped by step 43 (§6am) to `Output/car_speed/` |
 
 **Data-version note.** The activities file currently in the repository contains more
@@ -3789,19 +3790,24 @@ case stays the area-level 4,254; the TAZ runs are reported beside it, not adopte
 `Input/Main_Nofit/`, 49 Emme links, 40.7 km, received 5 October 2026) beside the extension
 (`Input/GeneralHalufa/hf_lrt_3`, Tirat Carmel – Hamifrats, 18.9 km, 24 stations), estimate the LRT
 demand for two alternatives — (1) main route + extension as one through line, (2) the extension
-alone — in two extension regimes — **Prioritized** (step 25's all-underground times) and
-**Unprioritized** (all-ground) — with the main route at its 80 km/h design speed; for 2022 and
-BU / HS × 2040 / 2050; AM (06:00–09:00) and PM (16:00–19:00); on the 174 corridor TAZs and
-aggregated to the 25 areas; both directions of the line. Out-of-vehicle parameters at the OVT
-research's central set (§6al); an LRT premium over the bus and an estimated one over the Metronit.
+alone — in two extension regimes — **Prioritized**, an LRT with full priority at the
+interchanges, represented by step 25's underground-calibrated running times, and
+**Unprioritized**, at grade with step 25's ground times (no underground line is planned, decision
+of 5 October 2026: the regimes differ in running time only) — with the main route at its 80 km/h
+design speed; for 2022 and BU / HS × 2040 / 2050; AM (06:00–09:00) and PM (16:00–19:00); on the
+174 corridor TAZs and aggregated to the 25 areas; both directions of the line. Out-of-vehicle
+parameters at the OVT research's central set (§6al) with the station access at 0.5 min per end in
+both regimes and walking at 4 km/h (both decisions of 5 October 2026); an LRT premium over the
+bus and an estimated one over the Metronit.
 
 **Method.** *Lines.* The main route chained from its links into one path (node 34000, 103 m from
-S24 at Hamifrats, to node 34034 in Nazareth); **stations assumed** at the path's nodes kept ≥ 1 km
-apart (27, mean spacing 1.6 km — the real line is reported with about 20; to be replaced by the
-planned list); times 80 km/h + 10 s dwell per stop (the design-regime form of §6w), at grade:
-34.9 min Hamifrats – Nazareth (70 km/h commercial). Through line = extension matrix + main
-matrix via S24: Tirat Carmel – Nazareth 75.5 min Prioritized, 100.7 Unprioritized; 5-minute
-headway, no transfer at Hamifrats. *Level of service per period* (the step-44 construction,
+S24 at Hamifrats, to node 34034 in Nazareth); **stations at the delivered stop nodes**
+(`Input/Main_Nofit/Main_Nofit_StopsID.csv`, the corrected list of 5 October 2026: 20 of the
+route's 50 nodes, mean spacing 2.1 km, the first of them the junction node at Hamifrats — the
+first run, before the list, had assumed 27 stations at ≥ 1 km); times 80 km/h + 10 s dwell per
+stop (the design-regime form of §6w), at grade: 33.7 min Hamifrats – Nazareth (72.5 km/h
+commercial). Through line = extension matrix + main matrix via S24: Tirat Carmel – Nazareth
+74.3 min Prioritized, 99.6 Unprioritized; 5-minute headway, no transfer at Hamifrats. *Level of service per period* (the step-44 construction,
 §6ao): car on the May 2026 speeds at 07:00 / 17:00 between the TAZ centroids + 3 min; transit as
 the line graph of the period's GTFS bus and Metronit services (extracted for both windows from
 the archive: AM 7,266 trips, PM 7,196; step 30's observed segment times, and for the PM the AM
@@ -3811,9 +3817,10 @@ alternative is a node of that graph (walk from stops within 400 m and from TAZ c
 components; **each end boards at its cheapest-access station** (step 31's gateway rule — a joint
 choice of the station pair lets a long trip ride the Metronit the whole way and the LRT one stop,
 which the first version did and which is not an LRT trip); LRT cost = access + boarding penalty
-(8 after a bus, 4 after the Metronit, 0 on foot) + 2 × 2.5 wait + station access (1.5 per
-underground end, 0.5 per surface end) + line time + egress + alighting penalty; no LRT where both
-ends share the station. *Premium.* 5 generalized minutes against a bus-based best path, **2.5
+(8 after a bus, 4 after the Metronit, 0 on foot) + 2 × 2.5 wait + station access (0.5 per end,
+both regimes) + line time + egress + alighting penalty; no LRT where both ends share the station.
+Walking at 4 km/h on the straight line × 1.3 throughout the graph (the chain's other steps use
+4.8). *Premium.* 5 generalized minutes against a bus-based best path, **2.5
 against a Metronit-based one** (range 1.5–3.5), from the OVT evidence table's calibrated in-vehicle
 multipliers (LRT 0.80–0.85, BRT 0.90–0.95: a 0.15 gap ≈ the model's 5 min, a 0.05–0.10 gap ≈
 1.7–3.3). *Demand.* Step 31's pivot per TAZ pair (§6ac, §6ap; λ 0.03, λ_T 0.06, k = 20 towards the
@@ -3825,21 +3832,26 @@ Metronit for at least half its in-vehicle time. Line loads by segment and direct
 boarding / alighting stations; boardings by station.
 
 **Results.** *Times on route* (`time_on_route.csv`): extension S01 → S24 40.6 / 65.8 min; main
-S24 → Nazareth 34.9; Metronit line 1 Hof HaCarmel – Krayot 65 scheduled / 57 observed (ratio
+S24 → Nazareth 33.7; Metronit line 1 Hof HaCarmel – Krayot 65 scheduled / 57 observed (ratio
 0.88), both periods; train Hof HaCarmel – Kiryat Motzkin 30–31; car Tirat Carmel → Hamifrats 32.5
 (20.8 reverse), Hamifrats → Nazareth 45.8 (41.9), Tirat Carmel → Nazareth 64.6 (58.9), PM within a
 minute (caveat 24). *Trunk TAZ pairs, AM, transit-trip-weighted generalized minutes*: bus /
-Metronit best path 41.7; LRT 45.8 Prioritized, 52.3 Unprioritized; car 13.8. *Demand 2022* (three
-hours, corridor TAZ pairs): AM main + extension **5,414** Prioritized (327 from the car), 4,601
-Unprioritized; extension only **3,588** / 2,851; PM 4,260 / 3,625 / 3,078 / 2,491. The main route
-adds 1,800–2,100 AM trips and moves the busiest segment from the extension (S20–S21 towards Tirat
-Carmel, 1,124) to its entry into Hamifrats (M02 → M03 towards Tirat Carmel, 1,943). *Forecast*, AM
-main + extension Prioritized: **6,607 / 7,799 / 7,744 / 9,548** (BU 2040 / BU 2050 / HS 2040 /
-HS 2050), Unprioritized 5,499 / 6,307 / 6,514 / 8,010; extension only 4,505 / 5,510 / 4,950 /
-6,086 and 3,497 / 4,150 / 3,852 / 4,718; PM main + extension Prioritized 5,606 / 6,428 / 5,808 /
-6,165, extension only 4,112 / 4,790 / 4,346 / 4,651. Busiest segment up to 3,210 trips in the AM
-three hours (HS 2050). Prioritized against Unprioritized is worth 15–20 % of the LRT trips; the
-main route against the extension alone 45–60 %. The extension-only Prioritized AM 2022 figure
+Metronit best path 44.8; LRT 48.7 Prioritized, 57.2 Unprioritized; car 13.8. *Demand 2022* (three
+hours, corridor TAZ pairs): AM main + extension **5,193** Prioritized (295 from the car), 4,209
+Unprioritized; extension only **3,884** / 2,921; PM 4,101 / 3,313 / 3,240 / 2,462. The main route
+adds about 1,300 AM trips and moves the busiest segment from the extension (S20–S21 towards Tirat
+Carmel, 1,313) to its entry into Hamifrats (towards Tirat Carmel, 1,840). *Forecast*, AM main +
+extension Prioritized: **6,309 / 7,433 / 7,476 / 9,225** (BU 2040 / BU 2050 / HS 2040 / HS 2050),
+Unprioritized 4,999 / 5,700 / 6,010 / 7,393; extension only 4,879 / 5,939 / 5,424 / 6,653 and
+3,595 / 4,242 / 4,008 / 4,893; PM main + extension Prioritized 5,358 / 6,135 / 5,620 / 5,956,
+extension only 4,270 / 4,960 / 4,608 / 4,918. Busiest segment up to 3,058 trips in the AM three
+hours (HS 2050). Prioritized against Unprioritized is worth 20–25 % of the LRT trips (the running
+time alone separates them now); the main route against the extension alone 30–40 %. Earlier
+runs of the same day, for the record: with 27 assumed stations, 4.8 km/h walking and 1.5 min of
+station access per Prioritized end, 5,414 / 3,588 (AM 2022, main + extension / extension only);
+with the delivered 20 stops 5,244 / 3,588; the equal access term lifts the Prioritized extension
+by 8 %, the slower walk costs the LRT and the bus alike, and the main route's added demand falls
+by a fifth, its stations being the farthest to walk to. The extension-only Prioritized AM 2022 figure
 (3,588) sits between the area-level central case (4,254, §6ac, no station access or BRT–LRT
 penalty) and the OVT memo's "today's weights plus the two terms" case (2,922): the TAZ-level cost
 on both sides of the nest (caveat 26's consistency) and the research's two terms pull in
@@ -3852,17 +3864,24 @@ Metronit trip matrices at TAZ and area level, `lrt_line_loads.csv`, `lrt_station
 `demand_summary.csv`; `LRT_alternatives_matrices.xlsx` and
 `reports/LRT_Alternatives_Demand_Report.docx` (`tools/build_alternatives_report.py`); figures
 `lrt_alternatives_{lines,demand,line_loads}.png`; **maps** in `Output/figures/alternatives/`
-(`tools/build_alternatives_maps.py`, 26 maps, also in the report's section 4): line loads by
+(`tools/build_alternatives_maps.py`, 41 maps, also in the report's section 4): line loads by
 segment and direction with station boardings (AM 2022 / BU 2040 / HS 2050, PM BU 2040, the four
 combinations each), LRT trip origins, destinations and LRT share of transit by TAZ, the
 differences main route + extension − extension only and Prioritized − Unprioritized, the growth
 2022 → HS 2050 and AM against PM, and the time maps to the reference TAZ (the busiest LRT
 alighting station's, TAZ 1517 Matam) — LRT generalized time per combination, best bus / Metronit
-against the LRT with the difference, car AM / PM, and LRT ÷ car; `Output/gtfs/stop_times_study_area_{am,pm}_trips_v45.csv.gz`,
+against the LRT with the difference, car AM / PM, and LRT ÷ car; since the same day also the
+**volumes** (station boardings and alightings; car, transit and LRT-share volumes by origin TAZ),
+the **growth** (each forecast set minus 2022 by TAZ; line loads 2022 against HS 2050 on one scale)
+and the **shift to the LRT by source** (trips drawn from the car, from bus-based and from
+Metronit-based paths by origin TAZ, the from-car map for the four combinations, and the shift
+rates as % of the TAZ's car and transit trips) — the per-run `from_car`, `from_bus`, `from_brt`
+and base `t_car_base` / `t_tr_base` matrices are written for them; `Output/gtfs/stop_times_study_area_{am,pm}_trips_v45.csv.gz`,
 `stop_times_study_area_rail_day.csv.gz`.
 
-**Limits.** The main route's stations and at-grade running are assumed (caveat 28); the forecast
-PM sets are grown at the AM rates; the Metronit premium is an estimate; the pivot's induced trips
+**Limits.** The main route's at-grade running, 5-minute through-running headway and 10-second
+dwell are assumed (caveat 28; its stations are the delivered list); the forecast PM sets are
+grown at the AM rates; the Metronit premium is an estimate; the pivot's induced trips
 depend on the aggregation level (caveat 27); no capacity, no bus-network response (task C7's
 truncation not applied), no fare, no park-and-ride; one Tuesday's schedule.
 
@@ -4141,15 +4160,15 @@ Added 23 September 2026 (step 33):
     the area level's 414 is its upper reading, and any TAZ-level capture adopted later should
     state which level its induced trips come from.
 
-28. **The main route's stations are assumed, and the forecast PM sets are grown at the AM
-    rates** (§6aq, step 45). The delivery of `Input/Main_Nofit/` is an alignment without a station
-    layer; step 45 places 27 stations at the route's network nodes at least 1 km apart (the real
-    line is reported with about 20) and runs it at grade. Station count and placement move the
-    access walks and the dwell time, and with them the 1,800–2,100 AM trips the main route adds
-    to the extension's; the planned station list should replace the assumption before the
-    figures are used outside the corridor comparison. The PM forecast matrices are the wave-1b PM
-    base multiplied by step 23's AM growth per TAZ pair, since step 23's margins are built on AM
-    productions and attractions; a PM-specific growth would need the PM rates (task).
+28. **The main route's operation is assumed, and the forecast PM sets are grown at the AM
+    rates** (§6aq, step 45). The stations are the delivered stop list (20 nodes,
+    `Main_Nofit_StopsID.csv`; the first run had assumed 27 at ≥ 1 km, which carried 3–5 % more
+    main-route demand), but its running at grade at 80 km/h with 10 s dwell, the 5-minute headway
+    and the through-running at Hamifrats without a transfer are assumptions; a terminating main
+    line would put a transfer penalty on every trip crossing Hamifrats. The PM forecast matrices
+    are the wave-1b PM base multiplied by step 23's AM growth per TAZ pair, since step 23's
+    margins are built on AM productions and attractions; a PM-specific growth would need the PM
+    rates (task).
 
 ## 8b. Related work — PCA-based analysis and structural comparison of OD matrices
 

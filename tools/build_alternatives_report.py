@@ -50,13 +50,14 @@ def table(df, float_fmt='{:,.0f}', font=8, col_widths=None):
             for row in t.rows: row.cells[j].width = Cm(w)
     return t
 doc.add_heading('Nofit LRT — demand for the main route and the extension', 0)
-doc.add_paragraph('Alternatives: (1) main route + extension as one through line; (2) extension only. Extension regimes: Prioritized (underground, step 25 calibrated times) and Unprioritized (at grade). '
+doc.add_paragraph('Alternatives: (1) main route + extension as one through line; (2) extension only. Extension regimes: Prioritized (priority at interchanges; step 25\'s underground-calibrated running times) and Unprioritized (at grade). '
                   'Main route at its 80 km/h design speed. Scenario-years 2022, BU 2040, BU 2050, HS 2040, HS 2050; periods AM 06:00–09:00 and PM 16:00–19:00; TAZ level (174 corridor TAZs) aggregated to the 25 corridor areas; both directions of the line. '
                   'Source: notebooks/current/LRT_alternatives_demand.ipynb (METHODOLOGY §6aq); produced 5 October 2026.')
 doc.add_heading('Assumptions stated', 1)
-for s_ in ['Out-of-vehicle parameters: the central set of the OVT research — walk 2.0 × and wait 2.0 × in-vehicle time, bus ↔ LRT transfer 8 min, Metronit ↔ LRT 4 min, station access 1.5 min per underground end and 0.5 per surface end; wait = half the headway, capped at 10 min; walking 4.8 km/h on the straight line × 1.3.',
+for s_ in ['Regimes: "Prioritized" is an LRT with full priority at the interchanges, represented by the running times step 25 calibrated for an underground line; "Unprioritized" runs at grade with step 25\'s ground times. No underground line is planned: the two regimes differ in running time only, the station access being the same.',
+           'Out-of-vehicle parameters: the central set of the OVT research — walk 2.0 × and wait 2.0 × in-vehicle time, bus ↔ LRT transfer 8 min, Metronit ↔ LRT 4 min; station access 0.5 min per end in both regimes; wait = half the headway, capped at 10 min; walking 4 km/h on the straight line × 1.3.',
            'LRT premium: 5 generalized minutes over a bus-based alternative and 2.5 over a Metronit-based one (estimated from the calibrated models\' in-vehicle multipliers, LRT 0.80–0.85 against BRT 0.90–0.95; range 1.5–3.5). Cost sensitivity λ = 0.03 per generalized minute, λ_T = 0.06 within the transit nest (step 31\'s central values).',
-           'Main route stations: not in the delivery — taken at the route\'s network nodes at least 1 km apart (27 stations, 1.6 km mean spacing); to be replaced by the planned station list. Running time 80 km/h between stops + 10 s dwell per stop, at grade. One line through-runs at a 5-minute headway.',
+           'Main route stations: the delivered stop list (Input/Main_Nofit/Main_Nofit_StopsID.csv, 20 stops, 2.1 km mean spacing). Running time 80 km/h between stops + 10 s dwell per stop, at grade (assumed). One line through-runs at a 5-minute headway without a transfer at Hamifrats (assumed).',
            'Transit level of service: the GTFS bus and Metronit services of Tuesday 2 June 2026 in each period, with step 30\'s observed running times (May 2026 speeds); the car on the May 2026 speeds (07:00 / 17:00). Demand: step 31\'s incremental-logit pivot per TAZ pair on the observed 2022 shares.',
            'Base and forecast matrices: AM 2022 from step 22, PM 2022 from the wave-1b PM layers; forecast AM sets from step 23; forecast PM sets = the PM base grown at step 23\'s AM rates per TAZ pair (an approximation). Totals are for the three-hour periods on the corridor-internal TAZ pairs in different areas; taxi is carried unchanged; rail is inside the bus figure.']:
     doc.add_paragraph(s_, style='List Bullet')
@@ -108,7 +109,29 @@ MAPS = [('map_time_lrt_vs_bus_AM.png', 'Transit time to the reference TAZ, AM: t
 for f, cap in MAPS:
     pth = f'{FIG}/alternatives/{f}'
     if os.path.exists(pth): doc.add_picture(pth, width=Cm(24)); doc.add_paragraph(cap).alignment = WD_ALIGN_PARAGRAPH.CENTER
+doc.add_heading('4a. Volumes', 2)
+for f, cap in [('map_station_volumes_AM_BU_2040.png', 'Station volumes: boardings (blue) and alightings (orange) in the AM three hours, BU 2040, the four combinations; six busiest stations labelled.'),
+               ('map_station_volumes_PM_BU_2040.png', 'The same for the PM.'),
+               ('map_trip_volumes_AM_BU_2040.png', 'Trip volumes by origin TAZ after the LRT — car, transit (bus + Metronit + LRT) and the LRT share of transit; main route + extension, Prioritized, AM BU 2040.'),
+               ('map_trip_volumes_PM_BU_2040.png', 'The same for the PM.')]:
+    pth = f'{FIG}/alternatives/{f}'
+    if os.path.exists(pth): doc.add_picture(pth, width=Cm(24)); doc.add_paragraph(cap).alignment = WD_ALIGN_PARAGRAPH.CENTER
+doc.add_heading('4b. Growth', 2)
+for f, cap in [('map_growth_by_scenario_AM.png', 'Growth of the LRT trip origins by TAZ, each forecast set minus 2022; main route + extension, Prioritized, AM.'),
+               ('map_growth_line_loads_AM.png', 'Growth of the line loads, 2022 against HS 2050 on the same width scale; main route + extension, Prioritized, AM.')]:
+    pth = f'{FIG}/alternatives/{f}'
+    if os.path.exists(pth): doc.add_picture(pth, width=Cm(24)); doc.add_paragraph(cap).alignment = WD_ALIGN_PARAGRAPH.CENTER
+doc.add_heading('4c. Shift to the LRT from the car, the bus and the Metronit', 2)
+doc.add_paragraph('The pivot moves trips in two steps: within the transit nest the LRT takes its share of the pair\'s transit trips (from bus-based or Metronit-based paths, by which best path the pair had), and the nest\'s cost gain draws trips from the car. The maps show the three sources by origin TAZ, and the shift rates as a share of the TAZ\'s car and transit trips.')
+for f, cap in [('map_shift_sources_AM_BU_2040.png', 'LRT trips drawn from the car, from bus-based paths and from Metronit-based paths, by origin TAZ; main route + extension, Prioritized, AM BU 2040.'),
+               ('map_shift_sources_PM_BU_2040.png', 'The same for the PM.'),
+               ('map_shift_sources_AM_2022.png', 'The same for 2022 AM.'),
+               ('map_shift_from_car_AM_BU_2040.png', 'Shift from the car to the LRT by origin TAZ, AM BU 2040, the four combinations.'),
+               ('map_shift_rates_AM_BU_2040.png', 'Shift rates by origin TAZ: car trips lost to the LRT as % of the TAZ\'s car trips, and bus + Metronit trips lost as % of its transit trips; main route + extension, Prioritized, AM BU 2040.'),
+               ('map_shift_rates_PM_BU_2040.png', 'The same for the PM.')]:
+    pth = f'{FIG}/alternatives/{f}'
+    if os.path.exists(pth): doc.add_picture(pth, width=Cm(24)); doc.add_paragraph(cap).alignment = WD_ALIGN_PARAGRAPH.CENTER
 doc.add_heading('Limits', 1)
-doc.add_paragraph('The main route\'s stations are assumed; its demand moves with the real station list and with any feeder restructuring in Kiryat Ata and Nazareth. The forecast PM sets are grown at the AM rates. The LRT premium over the Metronit is an estimate, not an estimated parameter. '
+doc.add_paragraph('The main route\'s at-grade running, headway and through-running are assumed; its demand moves with any feeder restructuring in Kiryat Ata and Nazareth. The forecast PM sets are grown at the AM rates. The LRT premium over the Metronit is an estimate, not an estimated parameter. '
                   'The pivot\'s induced car trips depend on the aggregation level (METHODOLOGY caveat 27). No capacity, no route choice against parallel bus services, no fare, no park-and-ride. The level of service is a single best path per TAZ pair at the line\'s own headway (caveat 26).')
 os.makedirs('reports', exist_ok=True); doc.save('reports/LRT_Alternatives_Demand_Report.docx'); print('report written')

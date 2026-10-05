@@ -695,11 +695,11 @@ committed and pushed on its own, with its documents, before the next starts.
    (0.008–0.073) against 0.035, the choice riders' λ still not identified (0.011). The survey
    time stays the default pending the provider's aggregation method.
 
-9. **The main Nofit route's station list and operating plan** (added 5 October 2026, step 45,
-   §6aq) — `Input/Main_Nofit/` is an alignment without stations; step 45 assumes 27 stations at the
-   network nodes ≥ 1 km apart and at-grade running at 80 km/h with a 5-minute through-running
-   headway. The planned stations, the headway and whether the line through-runs or terminates at
-   Hamifrats decide the 1,800–2,100 AM trips the main route adds (caveat 28).
+9. **The main Nofit route's operating plan** (added 5 October 2026, step 45, §6aq) — the station
+   list arrived the same day (`Main_Nofit_StopsID.csv`, 20 stops, used); still assumed: at-grade
+   running at 80 km/h with 10 s dwell, a 5-minute headway and through-running at Hamifrats without
+   a transfer. The headway and whether the line through-runs or terminates at Hamifrats decide the
+   1,600–1,700 AM trips the main route adds (caveat 28).
 
 Not needed / not coming, by the user's decision on 23 September 2026: Metronit 2013 ridership,
 a stated-preference survey, parking supply, the cellular product's trip definition.

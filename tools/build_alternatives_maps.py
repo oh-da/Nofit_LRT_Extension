@@ -115,4 +115,46 @@ fig, axes = plt.subplots(1, 2, figsize=(16, 7))
 for ax, (a, r) in zip(axes, (('main_ext', 'prioritized'), ('ext', 'prioritized'))):
     ratio = GC[('AM', 'lrt', a, r)][REF] / GC[('AM', 'car')][REF]; choropleth(ax, ratio, f'{ALTS[a]}, Prioritized: LRT ÷ car generalized time', 'RdYlGn_r', Normalize(1, 5), 'ratio', alt=a)
 fig.suptitle(f'LRT against the car, generalized time to {ref_label} — AM', fontsize=11); plt.tight_layout(); plt.savefig(f'{FIG}/map_time_lrt_over_car_AM.png', dpi=130); plt.close()
-print(f'maps written to {FIG}; reference destination {ref_label}'); print(sorted(os.listdir(FIG)))
+# ---------------- volumes ----------------
+def runmat(p, sc, a, r, k): return rd(f'{OUT}/{p}/{sc}/{a}_{r}/{k}_taz.csv.gz')
+for p, sc in (('AM', 'BU_2040'), ('PM', 'BU_2040')):
+    fig, axes = plt.subplots(2, 2, figsize=(16, 13)); bmax = max(pd.read_csv(f'{OUT}/{p}/{sc}/{a}_{r}/lrt_stations_boardings.csv')[['boardings', 'alightings']].values.max() for a, r in COMBOS)
+    for ax, (a, r) in zip(axes.ravel(), COMBOS):
+        base(ax, f'{ALTS[a]}, {REGIMES[r]}'); draw_lines(ax, a); st = STN[a]; bo = pd.read_csv(f'{OUT}/{p}/{sc}/{a}_{r}/lrt_stations_boardings.csv')
+        ax.scatter(st['x'] - 150, st['y'], s=4 + bo['boardings'] / bmax * 700, facecolor=BLUE, edgecolor='white', lw=.4, alpha=.75, zorder=5)
+        ax.scatter(st['x'] + 150, st['y'], s=4 + bo['alightings'] / bmax * 700, facecolor=ORANGE, edgecolor='white', lw=.4, alpha=.75, zorder=5)
+        for _, s in bo.nlargest(6, 'boardings').iterrows(): ax.annotate(f"{s['station']} {s['boardings']:,.0f}", (st.loc[st['station_id'] == s['station'], 'x'].iloc[0], st.loc[st['station_id'] == s['station'], 'y'].iloc[0]), fontsize=6, color=INK2, xytext=(4, 4), textcoords='offset points')
+    axes[0, 0].scatter([], [], s=200, color=BLUE, alpha=.75, label='boardings'); axes[0, 0].scatter([], [], s=200, color=ORANGE, alpha=.75, label='alightings'); axes[0, 0].legend(loc='lower right', frameon=False, fontsize=8)
+    fig.suptitle(f'Station volumes: boardings and alightings in the three hours (largest {bmax:,.0f}), six busiest labelled — {p} {sc}', fontsize=11); plt.tight_layout(); plt.savefig(f'{FIG}/map_station_volumes_{p}_{sc}.png', dpi=130); plt.close()
+    fig, axes = plt.subplots(1, 3, figsize=(22, 7)); a, r = 'main_ext', 'prioritized'
+    tr = runmat(p, sc, a, r, 't_tr_new').sum(1); car_ = runmat(p, sc, a, r, 't_car_new').sum(1); lrt = runmat(p, sc, a, r, 't_lrt').sum(1)
+    choropleth(axes[0], car_, 'car trips from the TAZ (after the LRT)', 'YlOrBr', Normalize(0, car_.quantile(.98)), f'car trips, {p} 3 h', alt=a)
+    choropleth(axes[1], tr, 'transit trips from the TAZ (bus + Metronit + LRT)', 'YlGnBu', Normalize(0, tr.quantile(.98)), f'transit trips, {p} 3 h', alt=a)
+    choropleth(axes[2], lrt / tr.replace(0, np.nan), 'LRT share of the TAZ\'s transit trips', 'PuBuGn', Normalize(0, .8), 'share', alt=a)
+    fig.suptitle(f'Trip volumes by origin TAZ — main route + extension, Prioritized, {p} {sc}', fontsize=11); plt.tight_layout(); plt.savefig(f'{FIG}/map_trip_volumes_{p}_{sc}.png', dpi=130); plt.close()
+# ---------------- growth ----------------
+a, r = 'main_ext', 'prioritized'; v22 = lrt_sum('AM', '2022', a, r, 1)
+fig, axes = plt.subplots(2, 2, figsize=(16, 13)); vmax = max(abs(lrt_sum('AM', sc, a, r, 1) - v22).max() for sc in ('BU_2040', 'BU_2050', 'HS_2040', 'HS_2050'))
+for ax, sc in zip(axes.ravel(), ('BU_2040', 'BU_2050', 'HS_2040', 'HS_2050')):
+    d = lrt_sum('AM', sc, a, r, 1) - v22; choropleth(ax, d, f'{sc.replace("_", " ")} minus 2022: LRT trip origins (total {d.sum():+,.0f})', 'RdBu', TwoSlopeNorm(0, -vmax, vmax), 'change in LRT origins per TAZ, AM 3 h', alt=a)
+fig.suptitle('Growth of the LRT demand by scenario-year — main route + extension, Prioritized, AM', fontsize=11); plt.tight_layout(); plt.savefig(f'{FIG}/map_growth_by_scenario_AM.png', dpi=130); plt.close()
+fig, axes = plt.subplots(1, 2, figsize=(16, 7)); wmax = max(pd.read_csv(f'{OUT}/AM/{sc}/{a}_{r}/lrt_line_loads.csv')[['dir1_towards_Nazareth_end', 'dir2_towards_TiratCarmel']].values.max() for sc in ('2022', 'HS_2050'))
+for ax, sc in zip(axes, ('2022', 'HS_2050')): flow_map(ax, 'AM', sc, a, r, wmax, f'line loads, AM {sc.replace("_", " ")} (max {wmax:,.0f})')
+fig.suptitle('Growth of the line loads, 2022 against HS 2050 — main route + extension, Prioritized, AM (same width scale)', fontsize=11); plt.tight_layout(); plt.savefig(f'{FIG}/map_growth_line_loads_AM.png', dpi=130); plt.close()
+# ---------------- shift to the LRT by source ----------------
+for p, sc in (('AM', 'BU_2040'), ('PM', 'BU_2040'), ('AM', '2022')):
+    fig, axes = plt.subplots(1, 3, figsize=(22, 7)); a, r = 'main_ext', 'prioritized'
+    fc, fb, fm = (runmat(p, sc, a, r, k).sum(1) for k in ('from_car', 'from_bus', 'from_brt')); vmax = max(fb.max(), fm.max())
+    choropleth(axes[0], fc, f'from the car ({fc.sum():,.0f} trips)', 'YlOrRd', Normalize(0, max(fc.max(), 1)), f'LRT trips drawn from the car, by origin TAZ, {p} 3 h', alt=a)
+    choropleth(axes[1], fb, f'from the bus ({fb.sum():,.0f} trips)', 'YlGnBu', Normalize(0, vmax), f'LRT trips drawn from bus-based paths, {p} 3 h', alt=a)
+    choropleth(axes[2], fm, f'from the Metronit ({fm.sum():,.0f} trips)', 'BuPu', Normalize(0, vmax), f'LRT trips drawn from Metronit-based paths, {p} 3 h', alt=a)
+    fig.suptitle(f'Where the LRT trips come from, by origin TAZ — main route + extension, Prioritized, {p} {sc}', fontsize=11); plt.tight_layout(); plt.savefig(f'{FIG}/map_shift_sources_{p}_{sc}.png', dpi=130); plt.close()
+    fig, axes = plt.subplots(2, 2, figsize=(16, 13)); vals = {c: runmat(p, sc, c[0], c[1], 'from_car').sum(1) for c in COMBOS}; vmax = max(v.max() for v in vals.values())
+    for ax, c in zip(axes.ravel(), COMBOS): choropleth(ax, vals[c], f'{ALTS[c[0]]}, {REGIMES[c[1]]} ({vals[c].sum():,.0f} trips)', 'YlOrRd', Normalize(0, vmax), f'LRT trips drawn from the car, by origin TAZ, {p} 3 h', alt=c[0])
+    fig.suptitle(f'Shift from the car to the LRT by origin TAZ — {p} {sc}', fontsize=11); plt.tight_layout(); plt.savefig(f'{FIG}/map_shift_from_car_{p}_{sc}.png', dpi=130); plt.close()
+    fig, axes = plt.subplots(1, 2, figsize=(16, 7)); a, r = 'main_ext', 'prioritized'
+    carb = runmat(p, sc, a, r, 't_car_base').sum(1); trb = runmat(p, sc, a, r, 't_tr_base').sum(1); fc = runmat(p, sc, a, r, 'from_car').sum(1); fo = (runmat(p, sc, a, r, 'from_bus') + runmat(p, sc, a, r, 'from_brt')).sum(1)
+    choropleth(axes[0], fc / carb.replace(0, np.nan) * 100, 'car trips lost to the LRT, % of the TAZ\'s car trips', 'YlOrRd', Normalize(0, 3), '% of car trips', alt=a)
+    choropleth(axes[1], fo / trb.replace(0, np.nan) * 100, 'bus and Metronit trips lost to the LRT, % of the TAZ\'s transit trips', 'YlGnBu', Normalize(0, 80), '% of transit trips', alt=a)
+    fig.suptitle(f'Shift rates by origin TAZ — main route + extension, Prioritized, {p} {sc}', fontsize=11); plt.tight_layout(); plt.savefig(f'{FIG}/map_shift_rates_{p}_{sc}.png', dpi=130); plt.close()
+print(f'maps written to {FIG}; reference destination {ref_label}'); print(len(os.listdir(FIG)), 'maps')
