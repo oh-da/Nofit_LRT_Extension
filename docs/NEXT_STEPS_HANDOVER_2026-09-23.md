@@ -701,6 +701,14 @@ committed and pushed on its own, with its documents, before the next starts.
    a transfer. The headway and whether the line through-runs or terminates at Hamifrats decide the
    1,600–1,700 AM trips the main route adds (caveat 28).
 
+10. **A scenario-comparable car shift** (added 5 October 2026, comprehensive report, §6aq
+   addendum, caveat 29) — the TAZ-level pivot's trips out of the car double between the AM
+   forecast scenarios because step 23 seeds trips into TAZ pairs empty in 2022 (1,620 → 5,688
+   mixed car + transit pairs). Either run the car draw at the area level per scenario (caveat
+   27's upper reading) and carry it beside the TAZ result, or replace the pivot's car term with a
+   mode-choice model that has the car cost in it (task E7 / the choice-rider λ). Until then the
+   report reads the car column as an order of magnitude.
+
 Not needed / not coming, by the user's decision on 23 September 2026: Metronit 2013 ridership,
 a stated-preference survey, parking supply, the cellular product's trip definition.
 

@@ -4324,6 +4324,22 @@ direction in three hours by 2050). Matrices for the car and for transit, times o
 LRT, the Metronit, the train and the car, and the totals by period are in the report
 `reports/LRT_Alternatives_Demand_Report.docx` and the workbook `Output/alternatives/LRT_alternatives_matrices.xlsx`.
 
+**The comprehensive report (5 October 2026).** Everything above is drawn together in
+`reports/Nofit_LRT_Extension_Comprehensive_Report.docx`: what the study set out to do, how the
+"model" is built and from which data (with the date of every input), how the base year was
+calibrated and tested and what it may and may not be used for, and the results for the four
+futures (2040 and 2050, business-as-usual and high scenario) on the through line Tirat Carmel –
+Nazareth, with the extension's own part shown inside it. Four of every five riders of the through
+line use the extension. The shift table shows where the riders come from: in the morning about
+2,600–4,500 from the Metronit, 2,100–3,400 from the bus and a few hundred to 1,300 from the car.
+One warning belongs with that last number: it jumps between the scenarios not because people
+change but because the forecast spreads trips into zone pairs that are empty today, and the
+pivot moves more trips where car and transit share a pair — read it as an order of magnitude
+(caveat 29). The charts show the flow along the line in both directions, for the LRT and for all
+transit, and the split of the corridor's trips between car, bus, Metronit and LRT: transit stays
+at about a fifth of the corridor's trips in the morning, with the LRT taking a third to two fifths
+of that fifth.
+
 ### 5.9 Where things stand now
 
 The single most current answer to "how many riders will the LRT capture" is **about 4,250
