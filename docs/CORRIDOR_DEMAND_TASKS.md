@@ -245,9 +245,15 @@ Key facts driving the list (2017 trips-file hybrid, `Output/ths2017/study_taz/`)
       choice; against the car it is a constant per trip absorbed by the pivot. Car operating
       cost and parking are excluded on the same decision (METHODOLOGY §6x addendum 4). Still
       open from this item: confirm the walk / wait / transfer weights against נוהל פר"ת.
-- [ ] **E5. Car skim vintage** — the survey door-to-door times are 2017 / 18; a small
+- [~] **E5. Car skim vintage** — the survey door-to-door times are 2017 / 18; a small
       Google Distance Matrix sample (≈ 40 pairs, Tuesday 07:30) or the national model's
-      car skim gives the 2026 uplift.
+      car skim gives the 2026 uplift. *Data in hand since 2026-10-05: a May 2026 car speed
+      network for the whole country (`Input/CarSpeedData/GoogleSpeed_202605/`; a speed per
+      link, hour 06:00–21:00 and direction), clipped to the study area by step 43
+      (`Car_speed_network_North.ipynb`, METHODOLOGY §6al; 9,927 links, 4,693 with a speed,
+      `Output/car_speed/`). Still open: route the V2 area pairs over it to get the 2026 car
+      times and the uplift on the survey skim; the hourly profile is almost flat (caveat 24),
+      so confirm the provider's aggregation before calling the 07:00 column a peak speed.*
 - [~] **E7. Cost sensitivity λ** — *person-level estimate done 2026-09-23 (step 33,
       `Mode_choice_person_level.ipynb`, METHODOLOGY §6ae), on the THS person and household
       tables with `new_wf` as the only weight: with car availability, purpose, age and sector

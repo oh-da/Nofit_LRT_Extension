@@ -655,6 +655,16 @@ committed and pushed on its own, with its documents, before the next starts.
    2022 car layer onto the Emme network with an *assumed* free-flow speed by link `TYPE` as a
    separate, lower-stakes exercise — it is not a substitute for a real skim. Both the GC/capture
    pivot's car uplift (C1) and any future car-network assignment work are waiting on this item.
+   **Received in part, 5 October 2026:** not a skim but a **car speed network** for May 2026
+   (`Input/CarSpeedData/GoogleSpeed_202605/`; a speed per link, hour 06:00–21:00 and direction,
+   `SPD_7_AB` / `SPD_7_BA` for 07:00–08:00). Step 43 (`Car_speed_network_North.ipynb`,
+   METHODOLOGY §6al) clipped it to the `TAZ_North` links and unpivoted the observed speeds to
+   `Output/car_speed/`. The uplift of C1 can now be built by routing the V2 area centroids over
+   this layer (as step 26 did for the bus on the street network) instead of the Google API;
+   two things to settle first — the hourly profile is almost flat (caveat 24: ask the provider
+   how the hourly values were aggregated before treating `SPD_7` as the peak), and half the
+   study-area links carry no speed (short local links; connectors and a fallback speed are
+   needed where a path uses them).
 
 Not needed / not coming, by the user's decision on 23 September 2026: Metronit 2013 ridership,
 a stated-preference survey, parking supply, the cellular product's trip definition.

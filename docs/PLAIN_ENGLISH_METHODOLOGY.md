@@ -367,6 +367,7 @@ is what each file is, plain and simple:
 | `Corridor_TAZ_Agg_V2.xlsx` (added 22 Sep 2026) | The newer "V2" corridor grouping used for the LRT-specific analysis | Has **25 areas** grouped into three route orderings (a trunk shared by all three, plus a Nazareth branch, a Krayot branch, and a Kiryat Yam branch) and a table matching **174 TAZs** to those 25 areas — all 174 of those TAZs exist in the main 778-zone matrices, and none appear twice. One TAZ (1509, where an LRT station is planned) is not included in this table |
 | `hf_lrt_3.shp`, `station_hf_lrt_3.geojson` (added 22 Sep 2026) | The planned LRT route line and its candidate station points | One route line, **18.94 km** long, from Hamifrats to Tirat Carmel; **46** candidate platform points which group into **24** actual stations. Coordinates are converted to the Israel TM Grid for accurate distance measurement |
 | `israel-public-transportation.zip` (GTFS feed, added 22 Sep 2026) | The Ministry of Transport's official national public-transport timetable data (stops, routes, trip schedules, etc.) | A standard public-transport data format ("GTFS"); the specific bus-rapid-transit ("Metronit") lines are tagged with codes 83001–83005. Captures the timetable as it stood on **22 May 2026** |
+| `CarSpeedData/GoogleSpeed_202605/GoogleSpeed.shp` (added 5 Oct 2026) | Measured road-link driving speeds for cars, from May 2026, by hour (06:00–21:00) and direction (`SPD_7_AB` / `SPD_7_BA` = 07:00–08:00 with / against the link's drawn direction) | **30,701** links nationally, **14,630** with a speed; the same street geometry as the bus-speed network below with its segments merged. Within the study area (links touching the TAZ polygons): **9,927** links (**4,996 km**), **4,693** with a speed — half the links but 80 % of the length. Cut and unpivoted by step 43 (section 5.8d) |
 | `Streets.shp`, `std_202605.csv` (added 22 Sep 2026) | Measured road-link driving speeds for buses, from May 2026 | **161,534** street links nationally; **157,618** of them have a matched speed record (a **99.9%** match rate). Speeds are broken out by weekday and hour. Within the study area: **54,507** links (**5,632 km**), of which **48,092** have an actual measured speed |
 
 **A data-quality note worth knowing:** the activities file currently in the project has
@@ -4195,6 +4196,33 @@ Eight more checks from the Ministry list were run. In plain terms:
 ### 5.8c Loading the car matrix on the road network
 
 We loaded the 2022 car matrix onto the road network, every trip on its quickest route, and compared the result with the traffic counts on 1,346 count points (counts from 2021 to 2023). The total is about right: in the morning the network carries 93 % of the counted vehicles. But the pattern is not: the correlation is weak (0.47 against the Ministry's 0.85 requirement) and individual roads are far off. This is expected. The matrix holds only residents' car trips between places inside the study area; the counts also include trucks, vans, taxis, buses, visitors and trips that begin or end outside. Our simple loading also ignores congestion. So the matrix is fine for judging demand between areas and along the LRT corridor, but it should not be used as it is to forecast the traffic on a single road. Several other checks cannot be done yet: they need a Google travel-time key, the bus operator's GPS data, census tables, or smart-card data for the afternoon and midday (the 2025 files only contain 06:00-09:00).
+
+### 5.8d The car speed network for May 2026 (step 43)
+
+On 5 October 2026 a car speed network arrived — the first measured car speeds in the project.
+It is one map layer for the whole country with 30,701 road links, and for every link a car
+speed for each hour of the day from 06:00 to 21:00, separately for the two directions of
+travel. The columns are read as `SPD_7_AB` and `SPD_7_BA` for 07:00–08:00: `AB` is the
+direction the link is drawn in, `BA` the opposite. We checked that reading against the layer's
+own one-way flag and it holds without exception; a zero means "no observation in that hour",
+and about half the links have no speed at all (the short local ones — four fifths of the road
+length is covered).
+
+The layer was cut to our study area using the TAZ polygons as the reference: every link that
+touches a study-area zone is kept, whole, so that the network stays connected (9,927 links,
+4,996 km, 4,693 of them with a speed). The result is in `Output/car_speed/` as a map layer
+and as a plain table with one row per link, hour and direction (101,840 rows), ready for the
+2026 car travel-time update that the ridership estimate has been waiting for (the survey's car
+times are from 2017/18).
+
+Two things to know before using it. First, it is the same road geometry as the bus-speed
+network of step 26, with short street segments merged into longer links — the two can be
+overlaid, but not simply joined by their id. Second, the speeds hardly change over the day: on
+the links observed in every hour the typical difference between the fastest and slowest hour is
+about 2 km/h, and the 07:00–08:00 average in the study area (52 km/h, length-weighted) is the
+same as at midday. Real roads slow down in the morning peak, so these values look like a
+monthly average lightly adjusted by hour. The provider's method should be asked for; until it
+is known, a car time built on these speeds is a May 2026 all-day time, not a peak time.
 
 ### 5.9 Where things stand now
 

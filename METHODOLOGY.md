@@ -353,6 +353,24 @@ central case (4,254 LRT trips 06:00–09:00): headway (844) < bus competition's 
 (1,500) < LRT regime (1,889) < λ/the LRT premium (2,865, the widest). None of the four factors
 this session could vary is small enough to drop from a future full design.
 
+**Update, 5 October 2026 (step 43 — the May 2026 car speed network, clipped to the study area).**
+The first car-speed source arrived (`Input/CarSpeedData/GoogleSpeed_202605/`: 30,701 links for
+the whole country, a car speed per link, per hour 06:00–21:00 and per direction, May 2026 —
+the item §D-8 of the hand-over was waiting for). Step 43 (§6al, `Car_speed_network_North.ipynb`)
+verifies the column convention (`SPD_{h}_AB` / `SPD_{h}_BA` = the hour *h*:00–*h*+1:00, with /
+against the link geometry; `DIR` 1 / −1 / 0 as in the bus network, 0 = no observation), clips
+the layer to the links that intersect the `TAZ_North` polygons, kept whole (9,927 links,
+4,996 km, 4,693 of them with a speed — 47 % of the links but 80 % of the length), and writes
+the clipped shapefile with a long table of the 101,840 observed link-hour-direction speeds
+(`Output/car_speed/`). Two facts for its use: the layer is the bus-speed street network with
+its segments merged into longer links (96 % of the study-area links carry a `USERID` of that
+network and the named segment lies on the car link; `USERID` is therefore not a one-to-one
+key), and the hourly profile is almost flat (a median 2 km/h range across the 16 hours on the
+links observed in every hour; 07:00–08:00 length-weighted mean 51.8 km/h, median link
+31.5 km/h) — the provider's aggregation should be asked for before these are used as peak
+speeds (caveat 24). No chain output changes; the car uplift (task C1 / E5) can now be routed
+on this layer.
+
 Every published product, what it was built from, and its status:
 
 | Product (`Output/…`) | Built by | Base / inputs | Geography | Modes | Vintage | Status |
@@ -386,6 +404,7 @@ Every published product, what it was built from, and its status:
 | `ravkav_2025/bus_od_taz_2025_own_alightings.csv`, `journeys_2025_summary.csv` | step 41 | `Input/BusRavKav/2025/{Buses,Metronit}_RavKav.csv` (LFS), card-level tap chaining | TAZ pairs (allocated journeys only) | bus + Metronit journeys on their own inferred alightings — 45.8 % of taps allocated | 2025 (representative Tuesday) | **diagnostic** — supports caveat 16, does not replace the OnBoard-pattern prior of `ravkav_2025/*` above |
 | `validation/car_aon_link_flows.csv`, `car_aon_fit_by_type.csv`, `car_aon_screenlines.csv` | step 42 | `Output/ths2017/three_mode_2022/car_2022_taz.csv` × the Emme network, all-or-nothing assignment, assumed free-flow speed by TYPE | every car-mode link | assigned vs counted vehicles 06:00–09:00 — aggregate ratio 1.037, link-level GEH ≤ 10 on 20 % | 2022 (demand), mixed years (counts, as step 36) | **diagnostic** — the link-level check step 36 could not give |
 | `skims/uncertainty/lrt_capture_factorial.csv`, `lrt_capture_tornado.csv` | step 40 | steps 31/32's own runs across tasks C4–C7, plus two one-off `truncated`-competition reruns at headway 7.5/10 | 25 areas, aggregated to 06:00–09:00 totals | LRT trips by regime × headway × λ/premium × bus competition (155 rows) | 2022 | **diagnostic** — a factorial over 5 of the plan's 8 factors; coverage/walk/car source fixed |
+| `car_speed/GoogleSpeed_202605_North.{shp,gpkg}`, `car_link_speeds_hourly_north.csv`, `car_speed_hourly_summary_north.csv` | step 43 | `Input/CarSpeedData/GoogleSpeed_202605/` clipped to the links intersecting `Input/TAZ_North/` | 9,927 links (4,996 km) in the study area; 4,693 with a speed | car link speeds by hour (06–21) and direction, May 2026 | May 2026 | **current input layer** — prepared for the car uplift (task C1 / E5); not yet consumed by steps 26–32 |
 
 The 25 GS zones (`Input/TAZ_GSnew.csv`) and the 25 retained research areas of the
 forecast tables are different geographies with the same matrix dimension; files are
@@ -428,6 +447,7 @@ validation against counts.
 | `../Network_with_Counts/Emme_Links_Final_Res 2026-09-23.{shp,dbf,shx,prj}` (in `Input/`, LFS, 74 MB dbf, added 23 Sep 2026) | The Emme highway network of the north with hourly traffic counts | 29,710 directional links (WGS 84; `INODE`–`JNODE`, `TYPE` 1–21 with 9 = centroid connector, `MODES`, `LANES`, `NAME` in Hebrew, UTF-8); counts in PCE per hour `YARAM6` … `YARAM19` on 3,241 links at 698 stations (`ID_COUNT`; `DATE` dd/mm/yyyy or an Excel serial, 2017–2022; `F2023COUNT` marks 2023 count files). Used by step 36 (§6ah) |
 | `../BusRavKav/May_2022/trips_table_2022-05-*.csv` (in `Input/`, LFS; moved from `Input/BusRavKav/` on 23 Sep 2026) | The May 2022 RavKav linked-journey files of step 8 | Unchanged content; step 8 and this document repointed |
 | `../BusSpeedData/Streets/Streets.shp`, `std_202605.csv` (in `Input/`, CSV in LFS, added 22 Sep 2026) | Bus link speeds, May 2026 | 161,534 national street links (Israel TM Grid; `USERID`, `DIR` = 1 with / −1 against / 0 both directions); 157,618 speed records joined on `USERID` (99.9 % match), 336 columns `d_{weekday}_h_{hour}_{AB,BA}` in km/h with 0 = no bus observation. `Readme.txt`: weekday 3, 07:00–08:00 = `d_3_h_7_AB` / `d_3_h_7_BA`. 54,507 links (5,632 km) fall in the study area, 48,092 with a speed |
+| `../CarSpeedData/GoogleSpeed_202605/GoogleSpeed.{shp,shx,dbf,prj}` (+ the delivered `.zip`; in `Input/`, plain git, added 5 Oct 2026) | Car link speeds, May 2026, the whole country | 30,701 links (Israel TM Grid; `ID` unique, `USERID` the id of one member segment of the bus street network above — 96 % of the study-area links are such merged segments, so not a one-to-one key; `DIR` = 1 with / −1 against / 0 both directions; `LENGTH` in km); 32 columns `SPD_{hour}_{AB,BA}` in km/h for the hours 6–21 (`SPD_7_AB` = 07:00–08:00 in the direction of the link geometry, `SPD_7_BA` against it), 0 = no observation in that hour or the closed direction of a one-way link, NaN on the 16,071 links without any record. One value per hour for the month, no weekday dimension. 9,927 links (4,996 km) intersect the `TAZ_North` polygons, 4,693 with a speed (80 % of the length); clipped by step 43 (§6al) to `Output/car_speed/` |
 
 **Data-version note.** The activities file currently in the repository contains more
 records than the file used by the original `THS_2018_MTX.ipynb` Colab run: identical
@@ -3297,6 +3317,65 @@ Counts: PCE / 1.10 on the 3,231 counted road links; count year read from `DATE` 
 **Why it misses (all stated, none adjusted):** the layer is a residents' personal-car trip table with both ends inside the study area (no through, external, commercial or taxi traffic); one path per zone pair with no congestion and no choice between near-equal routes; 778 zones whose centroid connectors decide where trips enter the network; 20.6 % of trips are intra-TAZ and load nothing; the speeds are assumed. A link-level fit at the guideline's level needs an equilibrium assignment with the model's own volume-delay functions and the external and commercial matrices, which are not part of this project.
 **Not run in wave 3 (no input in the repository):** T13 (the Google sample needs `GOOGLE_MAPS_API_KEY`, step 37), T18 (the Operator 22 AVL hold-out data, open question 5), the CBS parts of T2 / T3 (standing request 6), and **T15, T16 and T17 outside the AM**: the 2025 smart-card extracts contain only the taps 06:00-08:59 (checked on the Metronit file: hours 06, 07, 08 only), so a PM or midday comparison needs new extracts from the provider; the T17 timetable comparison needs steps 29-30 re-run for the window.
 
+## 6al. Step 43 — The May 2026 car speed network: clipped to the study area, hourly link speeds by direction (`Car_speed_network_North.ipynb`)
+
+**Purpose.** A car speed network for the whole country was delivered on 5 October 2026
+(`Input/CarSpeedData/GoogleSpeed_202605/`): a measured car speed per link, per hour of the day
+and per direction, for May 2026 — the month of the bus-speed network (§1) and the first car-speed
+source in the repository (the car skim of §6x / §6ac still rests on the 2017/18 survey's
+door-to-door times; the hand-over's standing request §D-8 and task C1 / E5 were waiting on it).
+This step prepares the data, nothing more: establish what the layer holds, cut it to the study
+area with `Input/TAZ_North/TAZ_North.shp` as the reference, and fix how the hourly columns are
+read. The car uplift itself is the next step.
+
+**The columns.** `SPD_{h}_AB` and `SPD_{h}_BA` are the speed in km/h for the hour *h*:00 –
+*h*+1:00, *h* = 6 … 21 (07:00–08:00 = `SPD_7_AB` / `SPD_7_BA`); `AB` is the direction of the
+link's drawn geometry, `BA` the opposite. `DIR` reads as in the bus network: 1 = one-way with the
+geometry, −1 = against it, 0 = two-way. Checked on the 07:00 columns of the 14,630 links with a
+record: a one-way link never carries a speed in its closed direction (0 of 5,049 and 0 of 3,748),
+so a zero in the closed direction is the one-way marker, a zero in an open direction is "no
+observation" (as the bus network's 0), and NaN in every column means no record at all (16,071
+links nationally). `LENGTH` is in km (equal to the geometric length). `ID` is unique; `USERID`
+is not (2 duplicated rows).
+
+**The clip.** The reference is the union of the 781 `TAZ_North` polygons; a link is kept when
+it intersects the union, and kept **whole** — a network cut at polygon edges loses its topology
+and its link attributes no longer describe the pieces. The cost is 43 km of the retained links'
+4,996 km lying outside the polygons (9,874 of the 9,927 links are wholly inside). Step 26's
+bounding-box rule would have kept 10,042; the polygon rule drops the 115 in the box's empty
+corners. The hourly columns are also unpivoted to a long table of the observed values only
+(the closed direction of one-way links and the zeros dropped).
+
+**Results.** 9,927 links (4,996 km) in the study area, touching 751 of the 781 TAZs; 4,693 with
+a speed (47 % of the links, 80 % of the length — the gaps are short local links). 101,840
+observed link-hour-direction speeds on 4,640 links; exactly the same 6,365 directional link
+speeds (5,700 directional km) in every one of the 16 hours. 07:00–08:00: length-weighted mean
+51.8 km/h, mean link 37.8, median link 31.5, p10 / p90 17.6 / 68.1 — and every other hour within
+0.2 km/h of it; on the 8,660 national links observed in every hour the range across the day is
+2.3 km/h at the median, 8.8 at p90, zero on 739. The layer is **not the Emme network** of §6ah
+(no link end points in common; the 1,043 shared `ID` values are accidental). It **is derived
+from the bus-speed street network** of §1: 9,513 of the 9,927 study-area links carry a `USERID`
+that exists there, and for 9,435 of them the named street segment lies on the car link (median
+segment ÷ link length 0.38; identical end points on 2,672 only) — the car layer is the street
+geometry with consecutive segments merged, carrying one member's id. Allowing for the merged
+link being drawn the opposite way to its segment (4,720 cases), `DIR` agrees on 99.1 % of the
+matched pairs. So the geometry and the direction convention are shared, but `USERID` finds one
+segment per car link, not a car speed per street segment; a link-level car-vs-bus speed
+comparison needs a spatial match.
+
+**Outputs.** `Output/car_speed/GoogleSpeed_202605_North.{shp,shx,dbf,prj,cpg}` and `.gpkg`
+(the clipped layer, all 36 attribute fields as delivered); `car_link_speeds_hourly_north.csv`
+(`ID, USERID, DIR, LENGTH_km, hour, direction, speed_kmh`, 101,840 rows);
+`car_speed_hourly_summary_north.csv` (per hour and direction: links, km, mean, length-weighted
+mean, p10 / p50 / p90); `car_speed_dir_convention_check.csv`; figures
+`car_speed_network_north_hourly_profile.png`, `car_speed_network_north_map_0700.png`.
+
+**Limits.** Half the study-area links have no record; one value per hour for the month, no
+weekday dimension, no spread; and a flat hourly profile that looks like a monthly aggregate
+lightly modulated by hour rather than hour-specific measurements — the provider's method is not
+documented with the delivery and should be asked for before the 07:00 values are used as peak
+speeds (caveat 24). No speeds before 06:00 or after 22:00.
+
 ## 7. Output inventory (`Output/`)
 
 *Layout note (21 September 2026).* The products of steps 1–4 (the 2018 activities-file chain, listed first below with bare file names) now live under `Output/historical/ths2018/`; every other path is as written. Notebooks live under `notebooks/current/`, `notebooks/diagnostics/` and `notebooks/historical/` and anchor their working directory to the repository root, so the `Input/…` and `Output/…` paths in this document are unchanged.
@@ -3356,6 +3435,7 @@ Counts: PCE / 1.10 on the 3,231 counted road links; count year read from `DATE` 
 | `ths2017/{two_mode,three_mode_2022}_{pm,md}/*`, `bus/periods/*` | as the AM folders; period OD matrices | §6ai wave 1b (steps 8, 15, 16 with `NOFIT_PERIOD`) | The PM-peak (16-19) and midday (10-14) survey-based layers, bus calibrated to RavKav May 2022 for the window, and RavKav journeys by window and by hour | diagnostic, same status as the AM base for the guideline's three periods |
 | `validation_mot/*`, `validation_mot/validation_workbook.xlsx` | 226-row Summary + per-test tables | §6ai (MoT guideline, waves 1, 1b, 2, 3) | Validation tables and workbook: trip-length KS, coincidence ratio vs cellular, transit OD vs RavKav, time-of-day profiles, cordon sectors, bus origins, rail stations, running times | diagnostics |
 | `ravkav_2025/*` | stops; 733 TAZ; 28 sub-areas; 25 V2 areas; 20 rail stations | Step 34 | The 2025 RavKav layer on a representative Tuesday: located stops by (cluster, code), daily totals by date, boardings by stop and TAZ (bus / Metronit × transfer flag), the bus + Metronit journey and leg OD at TAZ and area level, the 2022-vs-2025 comparisons, the rail station OD (national, northern origins, within-north, by TAZ) with the station table, and the boarding-hour peak factors and 15-minute profile |
+| `car_speed/GoogleSpeed_202605_North.{shp,shx,dbf,prj,cpg,gpkg}`, `car_link_speeds_hourly_north.csv`, `car_speed_hourly_summary_north.csv`, `car_speed_dir_convention_check.csv` | 9,927 links × 36 fields; 101,840 rows; 32 rows; 3 rows | Step 43 | The May 2026 car speed network clipped to the links intersecting `TAZ_North` (whole links, all fields: `SPD_{6..21}_{AB,BA}` km/h); the observed speeds as a long table (link, hour, direction); per-hour summary; the `DIR` × zero-speed check |
 | `figures/` | — | Steps 1b–3 | Scatter plots, CV curves, λ curves, R_AB heatmap |
 
 All matrices are indexed by origin zone (rows) × destination zone (columns). Probability
@@ -3513,6 +3593,17 @@ Added 23 September 2026 (step 33):
 
 23. **The car layer does not reproduce the link counts' pattern** (§6ai wave 3, T11; step 42 done). All-or-nothing assignment on the Emme network (assumed free-flow speeds by link type): assigned / counted 0.93 on the 1,346 links counted 2021-2023 (slope 0.89), but R2 0.47 and RMSE% 113 against 0.85 and 35, and no peak-hour volume class inside its limit; one global factor does not help. The layer is residents' car trips without externals, trucks, taxis or intra-TAZ trips, so it should not be used as an assignment matrix for link forecasts without the missing demand components and an equilibrium assignment; corridor-level flows should be read through the cordon and screenline comparisons (T12) and the survey's own corridor profiles, not from individual link loads. The 2025 RavKav extracts hold 06:00-08:59 only, so T15-T17 cannot be extended to the PM and midday without new extracts.
 
+24. **The May 2026 car speeds are nearly the same in every hour** (§6al, step 43). On the links
+    observed in every hour the speed moves by a median of 2.3 km/h across 06:00–21:00 (p90 8.8,
+    constant on 739 of 8,660), and the study-area means per hour sit within 0.2 km/h of each
+    other — no morning-peak dip. The delivery holds one value per hour for the month, with no
+    weekday dimension, and exactly the same set of links in every hour, which reads as a monthly
+    aggregate lightly modulated by hour rather than hour-specific measurements. Half the
+    study-area links (short local ones; 20 % of the length) have no record. Before the 07:00
+    column is used as the peak car speed for the uplift (task C1 / E5), the provider's
+    aggregation method should be asked for; until then any skim built on it is a May 2026
+    all-day car speed, not a peak one.
+
 ## 8b. Related work — PCA-based analysis and structural comparison of OD matrices
 
 Context for the PCA validation notebooks (`THS_2018_MTX_PCA_vs_cellular.ipynb`,
@@ -3622,6 +3713,8 @@ for P in AM PM MD; do NOFIT_PERIOD=$P jupyter nbconvert --to notebook --execute 
 python3 tools/build_validation_workbook.py
 # RavKav 2025 layer (step 34; needs git lfs pull --include="Input/BusRavKav/2025/*,Input/BusRavKav/Stops_In_North/*" (≈ 3.3 GB), pip install geopandas, the OnBoard workbook and step 8's bus_od_taz_avg.csv; the GTFS archive if present, else the committed station table; ≈ 5 minutes)
 jupyter nbconvert --to notebook --execute --inplace notebooks/current/RavKav_2025_boardings_matrix.ipynb
+# May 2026 car speed network clipped to the study area (step 43; Input/CarSpeedData/ is plain git, no lfs pull; pip install geopandas pyogrio pyshp; the bus street network for the USERID check and the Emme network (LFS, optional) for the end-point check; ≈ 1 minute)
+jupyter nbconvert --to notebook --execute --inplace notebooks/current/Car_speed_network_North.ipynb
 
 # regression test of the hybrid branch (committed outputs only)
 jupyter nbconvert --to notebook --execute --inplace notebooks/diagnostics/Hybrid_superzone_conservation_test.ipynb
