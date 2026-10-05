@@ -4307,19 +4307,19 @@ The main Nofit light-rail route, now under construction from Hamifrats to Nazare
 the project, and the demand was estimated for two alternatives: the main route and the extension
 run as one line, and the extension alone. For the extension two versions were run — "Prioritized"
 (underground, the faster calibrated times) and "Unprioritized" (at street level) — and the main
-route runs at its 80 km/h design speed. Since the delivery has no station list for the main
-route, stations were assumed every kilometre or more along it (27 in all); the real list should
-replace this. The estimate uses the zone-level travel costs of 5.8f for both the bus and the LRT
+route runs at its 80 km/h design speed with its 20 stops (the stop list arrived after the first
+run, which had assumed 27 stations; the real, sparser list lowers the main route's added demand
+by a few per cent). The estimate uses the zone-level travel costs of 5.8f for both the bus and the LRT
 (the LRT reached on foot, by bus or by Metronit, whichever is cheapest to the nearest station),
 the out-of-vehicle weights the research of 4 October recommended as central, and an LRT bonus of
 5 minutes over a bus and 2.5 over the Metronit.
 
-In the 2022 morning the through line carries about 5,400 LRT trips in three hours Prioritized
-(4,600 Unprioritized), the extension alone about 3,600 (2,850); the evening is about 80 % of the
-morning. By 2040–2050 the through line reaches 6,600–9,500 morning trips and the extension alone
+In the 2022 morning the through line carries about 5,250 LRT trips in three hours Prioritized
+(4,450 Unprioritized), the extension alone about 3,600 (2,850); the evening is about 80 % of the
+morning. By 2040–2050 the through line reaches 6,400–9,250 morning trips and the extension alone
 4,500–6,100, depending on the growth scenario. Making the extension underground is worth 15–20 %
 of its riders; adding the main route adds roughly half again, with the busiest point moving from
-the Haifa core to the line's entry into Hamifrats from Kiryat Ata (up to about 3,200 trips in one
+the Haifa core to the line's entry into Hamifrats from Kiryat Ata (up to about 3,100 trips in one
 direction in three hours by 2050). Matrices for the car and for transit, times on route for the
 LRT, the Metronit, the train and the car, and the totals by period are in the report
 `reports/LRT_Alternatives_Demand_Report.docx` and the workbook `Output/alternatives/LRT_alternatives_matrices.xlsx`.
