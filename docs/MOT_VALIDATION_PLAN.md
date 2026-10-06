@@ -284,7 +284,7 @@ one-to-one to the guideline's working-paper structure. The chain (steps 15–36)
   data vintage, one-line explanation. Also written to CSV (the repository convention).
 * **Figures:** scatter plots as specified (observed on x, model on y, through the origin, equation and R²),
   cordon bars, profile overlays, a map of the count and station points by type; `Output/figures/mot_*.png`.
-* **Document:** a new chapter in `METHODOLOGY.md` (§6ai onward, the next free section letter), a section in the
+* **Document:** a new chapter in `METHODOLOGY.md` (§6ar; written as §6ai on 4 October 2026 and renumbered on 6 October 2026, when the duplicate with step 41's §6ai was resolved), a section in the
   plain-English companion, and a **"Validation against the Ministry of Transport guideline"** chapter in the
   survey-matrices report (revision 3.1) with the summary table, the misses and their explanations, and the
   not-applicable list. Hebrew version updated alongside.
@@ -333,7 +333,7 @@ criteria test reproduction of the base year, not response to the LRT. Section 10
 
 ## 9. Status after wave 1 (4 October 2026)
 
-Run: **T0** (metrics module, hand-checked), **T4, T5, T7, T8, T12, T14, T15, T17** (three executed notebooks, METHODOLOGY §6ai, `Output/validation_mot/validation_workbook.xlsx`, 50 summary rows) and the bus destination-pattern experiment **T7b**.
+Run: **T0** (metrics module, hand-checked), **T4, T5, T7, T8, T12, T14, T15, T17** (three executed notebooks, METHODOLOGY §6ar, `Output/validation_mot/validation_workbook.xlsx`, 50 summary rows) and the bus destination-pattern experiment **T7b**.
 Outcome by row: **18 pass**, **26 miss (explained)**, 3 not applicable, 3 findings.
 
 | Test | Result against the guideline criterion |
@@ -379,7 +379,7 @@ The AM coverage gap therefore looks like student and school travel, not a genera
 
 ## 11. Status after wave 2 (4 October 2026)
 
-Run: **T1, T2, T3, T6, T9, T10, T16, T19** (notebooks `MOT_Validation_Stage1d_Zones_Population_Rates` and `_Stage2c_Mode_Occupancy_Convergence`; T3, T6, T9, T10, T19 also for PM and midday; METHODOLOGY §6ai wave 2). Workbook: 212 summary rows (AM 99, PM 56, midday 56, whole-day 1).
+Run: **T1, T2, T3, T6, T9, T10, T16, T19** (notebooks `MOT_Validation_Stage1d_Zones_Population_Rates` and `_Stage2c_Mode_Occupancy_Convergence`; T3, T6, T9, T10, T19 also for PM and midday; METHODOLOGY §6ar wave 2). Workbook: 212 summary rows (AM 99, PM 56, midday 56, whole-day 1).
 
 | Test | Result against the criterion |
 |---|---|
@@ -407,5 +407,5 @@ The user will share the raw extract later (`New_Query_2026_09_17_15_46_30 (1).cs
 2. Hold-outs, refitting on the rest each time: (a) by year (2023, 2024, 2025, 2026); (b) by line (34447 vs 34448); (c) random 80/20 by date, repeated 20 times; (d) by time of day if the extract carries it.
 3. Report trip-level MAE and MAPE for each hold-out against the in-sample 3.67 min / 5.45 %, the coefficient stability across refits, and the share of held-out trips within +/-15 % (guideline 5.2 style).
 4. Independent check on the Metronit: `is_brt` trips of `Output/gtfs/bus_trips_observed.csv.gz` against the function (not an LRT test, a sanity check of the speed level).
-5. Add a notebook `MOT_Validation_Stage5_LRT_time_function.ipynb`, summary rows for T18, METHODOLOGY 6ai wave 4, README, plan status; no change to the function unless the hold-out shows a bias the user decides to correct.
+5. Add a notebook `MOT_Validation_Stage5_LRT_time_function.ipynb`, summary rows for T18, METHODOLOGY §6ar wave 4, README, plan status; no change to the function unless the hold-out shows a bias the user decides to correct.
 Until then T18 stays "not run" in the workbook, with the reason "data to be shared".
