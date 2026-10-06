@@ -30,6 +30,12 @@ below continue the ones used there: **the next step is 37, the next methodology 
   --ExecutePreprocessor.timeout=3000 notebooks/current/<name>.ipynb`. Long chains go in a
   background shell script that appends `=== START/OK/FAILED <notebook>` lines to a log; watch the
   log rather than blocking the session. Executed notebooks (with outputs) are committed.
+  *(6 October 2026)* The chain also runs as one pipeline: `python3 -m pipeline run [--stage …|--from
+  … --to …|--only …]` executes the manifest `pipeline/steps.py` in dependency order with the same
+  `=== START/OK/FAILED` log lines (`pipeline/logs/`); `python3 -m pipeline check` says which LFS inputs
+  to pull first. A new step is added as one `Step(...)` entry in the manifest, in its run position, and
+  `python3 -m pipeline doc` regenerates `docs/PIPELINE.md`; `python3 tools/test_pipeline.py` checks the
+  manifest.
 
 ### A2. Writing a new step
 

@@ -173,6 +173,7 @@ docs/                          plans, the plain-English companion, the handover,
 notebooks/current/             the chain (one notebook per step) and its input notebooks; periods/ holds PM and midday copies
 notebooks/diagnostics/         tests and validations: evidence, not products
 notebooks/historical/          superseded work (the survey x cellular hybrids, the 25-area composite), kept as record
+pipeline/                      the chain as one pipeline: the manifest of every step (steps.py) and the runner (python3 -m pipeline)
 tools/                         Python scripts: report builders, map builders, the LFS pull helper, validation metrics
 reports/                       the Word reports (English and Hebrew); reports/historical/ for superseded ones
 Input/                         survey, smart cards, zonal files, timetables, speed networks, line drawings (large files in Git LFS)
@@ -300,8 +301,23 @@ git lfs pull --include="Input/BusRavKav/2025/*,Input/BusRavKav/Stops_In_North/*"
 git lfs pull                                                             # everything else: cellular, RavKav 2022, train
 ```
 
-Run order of the chain (all under `notebooks/current/`, each with
-`jupyter nbconvert --to notebook --execute --inplace <notebook>`):
+The whole chain runs as one pipeline from `pipeline/` (the manifest of every step, in run order, with
+its inputs, outputs and dependencies, is `pipeline/steps.py`; the document generated from it is
+[docs/PIPELINE.md](docs/PIPELINE.md)):
+
+```bash
+pip install nbformat nbclient ipykernel         # the notebook runner, besides the packages above
+python3 -m pipeline check                       # which inputs are still LFS pointers, which packages are missing, with the pull command
+python3 -m pipeline run --dry-run               # the plan: every default step in order, with its environment
+python3 -m pipeline run                         # base year → forecast → corridor and LRT line → level of service → capture → alternatives → reports
+python3 -m pipeline run --stage los capture     # or a stage, a slice (--from s31 --to s45), single steps (--only s45 r_comp)
+python3 -m pipeline run --skip-done             # skip every step whose outputs already exist
+python3 -m pipeline list --all -v               # every step, including the optional upstream rebuilds, sensitivities and validation
+```
+
+Each step is still an ordinary notebook or script and can be run on its own. The same order, step by
+step, with `jupyter nbconvert --to notebook --execute --inplace <notebook>` (all under
+`notebooks/current/`):
 
 1. Base year: `THS_2017_two_mode_matrix` → `THS_2017_three_mode_2022` → `Corridor_flow_profile_survey_2022` → `Corridor_profile_hybrid_vs_ticketing` → `Corridor_peak_hour_2022` → `Final_matrices_2022` → `Forecast_matrices_TAZ_2040_2050`
 2. Corridor and LRT line: `Corridor_peak_hour_V2_routes` → `Corridor_flow_profile_V2_routes` → `Corridor_profile_V2_survey_vs_ticketing` → `LRT_line_stations_travel_time`
