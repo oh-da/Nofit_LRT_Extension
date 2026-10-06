@@ -601,6 +601,9 @@ for s_ in [f'Reference case. {REF_LAB}: {ref["LRT"]:,.0f} LRT riders in the AM t
            'Fitness. The results support the sizing and location of the extension\'s market, the ranking of the regimes, and the design-hour scale of the trunk load. They do not support capacity, fleet or frequency decisions or an appraisal without a validated assignment and a full mode-choice model; the next steps are a purpose split of the survey, a PM-specific forecast, the main route\'s operating plan, and a choice-rider λ from a stated-preference or a revealed choice set with the car cost in it.']:
     B(s_)
 P('Repository record: METHODOLOGY.md §6aq (step 45) and §8; docs/PLAIN_ENGLISH_METHODOLOGY.md Part 5; the alternatives report reports/LRT_Alternatives_Demand_Report.docx and its workbook Output/alternatives/LRT_alternatives_matrices.xlsx; this report\'s builder tools/build_comprehensive_report.py.')
+# ======================= appendices A–D =======================
+import sys; sys.path.insert(0, os.path.join(os.getcwd(), 'tools')); from report_appendices import add_appendices
+portrait(); add_appendices(doc, H, P, B, fig, table)   # tools/report_appendices.py: the LRT time function, out-of-vehicle time, λ, the generalized cost
 os.makedirs('reports', exist_ok=True); doc.save('reports/Nofit_LRT_Extension_Comprehensive_Report.docx'); print('report written')
 for (p, reg), t in tabs.items(): t.to_csv(f'{OUT}/shift_table_{p}_{reg}.csv', index=False)
 print('shift tables written')

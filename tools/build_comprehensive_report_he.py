@@ -371,4 +371,7 @@ for s_ in [f'תרחיש הייחוס. 2050 רגיל: {n(ref["LRT"])} נוסעי 
            'התאמה. התוצאות תומכות באמידת גודל שוק ההארכה ומיקומו, בדירוג המשטרים ובקנה המידה של עומס הציר בשעת התכנון. הן אינן תומכות בהחלטות קיבולת, צי או תדירות או בהערכה כלכלית בלי הקצאה מתוקפת ומודל בחירת אמצעי מלא; הצעדים הבאים: פיצול מטרות בסקר, תחזית ייעודית לאחר הצהריים, תוכנית ההפעלה של הקו הראשי והחלטה על עתיד המטרונית, ו-λ לבעלי רכב ממקור שיש בו עלות הרכב.']:
     B(s_)
 P('תיעוד: METHODOLOGY.md פרק 6aq (שלב 45) ופרק 8; docs/PLAIN_ENGLISH_METHODOLOGY.md חלק 5; הדוח המלא באנגלית reports/Nofit_LRT_Extension_Comprehensive_Report.docx; הבונה של הדוח הזה tools/build_comprehensive_report_he.py.')
+# ======================= נספחים א–ד =======================
+import sys; sys.path.insert(0, os.path.join(os.getcwd(), 'tools')); from report_appendices_he import add_appendices_he
+portrait(); add_appendices_he(doc, H, P, B, fig, table, CAP)   # tools/report_appendices_he.py: פונקציית הזמן של הרכבת הקלה, הזמן מחוץ לרכב, λ, העלות המוכללת
 doc.save('reports/Nofit_LRT_Extension_Comprehensive_Report_HE.docx'); print('Hebrew report written')
