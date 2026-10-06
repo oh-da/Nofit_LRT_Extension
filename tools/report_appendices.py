@@ -52,8 +52,9 @@ def build_figures():
     for regime, col, lab in [('underground', '#2a78d6', 'segregated / underground (used for the Prioritized regime)'), ('ground', '#eb6834', 'street level (used for the Unprioritized regime)')]:
         ax.plot(km * 1000, section_time(km, regime), color=col, lw=2, label=lab)
         ax.plot([RL_SPACING[regime]], [section_time(RL_SPACING[regime] / 1000, regime)], 'o', color=col, ms=7)
-        ax.annotate(f'Red Line mean spacing {RL_SPACING[regime]} m\n{section_time(RL_SPACING[regime] / 1000, regime):.2f} min (calibrated {UG_SEC if regime == "underground" else GR_SEC:.3f})', (RL_SPACING[regime], section_time(RL_SPACING[regime] / 1000, regime)),
-                    xytext=(10, -30) if regime == 'underground' else (-182, 16), textcoords='offset points', fontsize=7.5, color=col)
+        ug = regime == 'underground'
+        ax.annotate(f'Red Line mean spacing {RL_SPACING[regime]} m\n{section_time(RL_SPACING[regime] / 1000, regime):.2f} min (calibrated {UG_SEC if ug else GR_SEC:.3f})', (RL_SPACING[regime], section_time(RL_SPACING[regime] / 1000, regime)),
+                    xytext=(10, -30) if ug else (-8, 20), ha='left' if ug else 'right', textcoords='offset points', fontsize=7.5, color=col)
     ax.axvline(HAIFA_SPACING, color='#7d8794', lw=1, ls='--'); ax.text(HAIFA_SPACING + 12, 0.45, f'Haifa extension\nmean spacing {HAIFA_SPACING} m', fontsize=7.5, color='#4b5665')
     ax.axvline(500, color='#c3c2b7', lw=1, ls=':'); ax.text(505, 0.45, "the report's\n500 m assumption", fontsize=7.5, color='#7d8794')
     ax.set_xlabel('distance between consecutive stations (m)'); ax.set_ylabel('time from one stop to the next (min)'); ax.set_ylim(0, 4.2); ax.grid(alpha=0.25)
