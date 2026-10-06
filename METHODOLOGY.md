@@ -4395,6 +4395,16 @@ standardizes on the cell-based toolkit (GEH, %RMSE), which is precisely what str
 
 > **In plain words.** The commands that reproduce every product, in dependency order, with the LFS files and Python packages each needs and the run time. The README's section 9 gives the same in five short groups. Environment variables select the alternative runs; the default run of every notebook writes the committed outputs.
 
+**The same listing as one pipeline (6 October 2026).** Every command below is also a step of the
+manifest `pipeline/steps.py` (id, stage, the steps whose outputs it reads, its LFS inputs, key outputs,
+environment and run time), and `python3 -m pipeline run` executes the manifest in this order:
+`check` reports which inputs are still LFS pointers and prints the pull command, `run --dry-run` shows
+the plan, `run --stage`, `--from/--to` and `--only` select parts of the chain, `--skip-done` skips steps
+whose outputs exist, and the alternative runs (`v*` steps) write their executed copies to a scratch
+folder exactly as the `--output-dir /tmp/...` lines below do. [docs/PIPELINE.md](docs/PIPELINE.md),
+generated from the manifest, lists every step with its dependencies and a dependency graph. The
+notebooks themselves are unchanged and still run one by one as listed here.
+
 ```bash
 pip install pandas numpy scipy matplotlib jupyter openpyxl pyshp shapely pyproj   # the base chain; later steps add geopandas pyogrio statsmodels python-docx nbformat nbclient
 git lfs pull --include="Input/*.xlsx,Input/*.csv"   # required since 22 Sep 2026: the top-level Input files are on LFS

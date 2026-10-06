@@ -1,4 +1,6 @@
-
 # Python bytecode caches
 __pycache__/
 *.pyc
+
+# Pipeline run logs (python3 -m pipeline run)
+pipeline/logs/
