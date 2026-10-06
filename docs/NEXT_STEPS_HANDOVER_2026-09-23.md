@@ -7,7 +7,7 @@ method, outputs by exact path, acceptance checks, and the documents to update �
 the order and the standing data requests. Read `METHODOLOGY.md` §0 first; it is the authoritative
 status page and the lineage of every product. Step numbers, section letters and caveat numbers
 below continue the ones used there: **the next step is 37, the next methodology section is
-§6aj (§6ai is the MoT validation, waves 1, 1b and 2), the next caveat is 24 (23 the link-count pattern of the assignment check, 19 is the super-zone key mismatch, 20 the education-heavy AM RavKav gap, 21 the car occupancy computed with the wrong hour, 22 the survey population vs the zonal one).**
+§6as (§6ar is the MoT validation, waves 1, 1b, 2 and 3; §6ai is step 41; §6am–§6aq are steps 43, 37, 44, 39 and 45), the next caveat is 30 (23 the link-count pattern of the assignment check, 19 is the super-zone key mismatch, 20 the education-heavy AM RavKav gap, 21 the car occupancy computed with the wrong hour, 22 the survey population vs the zonal one).**
 
 ---
 
@@ -531,7 +531,7 @@ the journey origins of step 34 within 2 %. **Documents.** §6an, caveat 16 updat
 2025; the car layer would be grown to 2025 with the step-16 factors on `Zonal_BU_2025.csv`).
 Effort: one day; memory-bound (chunk the 1.6 GB file by date).
 
-### C10. Step 42 — All-or-nothing assignment link check of the car layer (task B1) — **DONE 4 October 2026 as T11 of the MoT validation (§6ai wave 3, `MOT_Validation_Stage4_Link_volumes`; caveat 23); the outputs are in `Output/validation_mot/T11_*`, not `Output/validation/car_aon_*`**
+### C10. Step 42 — All-or-nothing assignment link check of the car layer (task B1) — **DONE 4 October 2026 as T11 of the MoT validation (§6ar wave 3, `MOT_Validation_Stage4_Link_volumes`; caveat 23); the outputs are in `Output/validation_mot/T11_*`, not `Output/validation/car_aon_*`**
 **Status, 23 September 2026 — built as `RavKav_2025_own_alightings.ipynb` (§6ai, not §6an — the
 next free letter when this was written); the ≥ 85 % check fails, and the reason is itself the
 finding.** 6,015,350 located taps over the 42 representative Tuesdays; alighting resolved for

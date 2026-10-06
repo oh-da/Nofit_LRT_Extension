@@ -4162,7 +4162,7 @@ anything observed, so the peak-hour figures of Parts 3 and 4 are upper bounds; a
 
 The Ministry of Transport has a list of checks that a transport model must pass before it is approved (draft of September 2024): for each check, what to compare, with which data, and
 how close is close enough. Our matrices are not a full four-step model, so we picked the checks that make sense for a survey-based matrix and for which we have independent data
-(`docs/MOT_VALIDATION_PLAN.md`), and ran the first eight (METHODOLOGY §6ai). Nothing was adjusted to pass; when a check missed, the table says by how much and why.
+(`docs/MOT_VALIDATION_PLAN.md`), and ran the first eight (METHODOLOGY §6ar). Nothing was adjusted to pass; when a check missed, the table says by how much and why.
 
 What came out, in plain words:
 
