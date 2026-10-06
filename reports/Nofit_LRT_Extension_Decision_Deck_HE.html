@@ -85,8 +85,12 @@ li { max-width: 60ch; }
 .chart .mark.c1 { fill: var(--accent); } .chart .mark.c2 { fill: var(--orange); } .chart .mark.c3 { fill: var(--aqua); }
 .chart .mark.o1 { fill: var(--o1); } .chart .mark.o2 { fill: var(--o2); } .chart .mark.o3 { fill: var(--o3); }
 .chart .mark.wash { fill: var(--wash); }
-.chart .mark-line { stroke: var(--accent); stroke-width: 2; stroke-linecap: round; }
-.chart .dot.c1 { fill: var(--accent); stroke: var(--surface); stroke-width: 2; }
+.chart .mark-line { stroke: var(--accent); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; fill: none; }
+.chart .mark-line.c2 { stroke: var(--orange); } .chart .mark-line.c3 { stroke: var(--aqua); } .chart .mark-line.thin { stroke-width: 1.5; opacity: 0.45; }
+.chart .vline { stroke: var(--muted); stroke-width: 1; stroke-dasharray: 4 3; }
+.chart .seg { stroke: var(--surface); stroke-width: 2; } .chart .seg.bonus { fill: var(--aqua); opacity: 0.55; }
+.sw.thin { opacity: 0.45; }
+.chart .dot.c1 { fill: var(--accent); stroke: var(--surface); stroke-width: 2; } .chart .dot.c2 { fill: var(--orange); stroke: var(--surface); stroke-width: 2; }
 .chart .dot.hollow { fill: var(--surface); stroke: var(--accent); stroke-width: 2; }
 .chart path.mark:hover { opacity: 0.8; }
 /* nav */
@@ -400,10 +404,142 @@ li { max-width: 60ch; }
     
   </div>
 </section>
+<section class="slide text" id="s17" aria-label="שקופית 17">
+  <div class="inner">
+    <p class="eyebrow">נספחים</p>
+    <h2>ארבעה עמודי רקע למי שרוצה לראות איך נבנו המספרים.</h2>
+    <ol class="steps"><li><span class="n">א</span><div><strong>איך נמדדה מהירות הרכבת הקלה.</strong> על הקו האדום בתל אביב, ומשם למרווח התחנות בחיפה.</div></li><li><span class="n">ב</span><div><strong>כמה עולות הליכה, המתנה והחלפת כלי רכב.</strong> המשקולות שהמודל משתמש בהן, מה המחקר מצא, וכמה הן מזיזות את התוצאה.</div></li><li><span class="n">ג</span><div><strong>איך הפרש עלות הופך לנוסעים.</strong> מקדם הרגישות λ, עם דוגמאות מחושבות.</div></li><li><span class="n">ד</span><div><strong>מה יש בעלות המוכללת.</strong> הנוסחה, מאיפה היא באה, ונסיעה מחושבת.</div></li></ol><p class="aside">הנספחים המלאים, עם המקורות, נמצאים בדוח המסכם (נספחים א–ד).</p>
+    
+  </div>
+</section>
+<section class="slide chart" id="s18" aria-label="שקופית 18">
+  <div class="inner">
+    <p class="eyebrow">נספח א · מהירות הרכבת הקלה</p>
+    <h2>מהירות הרכבת נמדדה על הקו האדום בתל אביב: 46 קמ"ש בין תחנות ועוד כ-50 שניות בכל עצירה.</h2>
+    <div class="cols chart-cols"><div class="chartbox"><svg class="chart" viewBox="0 0 640 320" role="img" aria-label="זמן מתחנה לתחנה מול מרווח התחנות">
+<line class="grid" x1="56" x2="624" y1="266.0" y2="266.0"/>
+<text class="tick" x="48" y="270.0" text-anchor="end">0</text>
+<line class="grid" x1="56" x2="624" y1="210.9" y2="210.9"/>
+<text class="tick" x="48" y="214.9" text-anchor="end">1</text>
+<line class="grid" x1="56" x2="624" y1="155.8" y2="155.8"/>
+<text class="tick" x="48" y="159.8" text-anchor="end">2</text>
+<line class="grid" x1="56" x2="624" y1="100.7" y2="100.7"/>
+<text class="tick" x="48" y="104.7" text-anchor="end">3</text>
+<line class="grid" x1="56" x2="624" y1="45.6" y2="45.6"/>
+<text class="tick" x="48" y="49.6" text-anchor="end">4</text>
+<text class="tick" x="103.3" y="284" text-anchor="middle">400</text>
+<text class="tick" x="198.0" y="284" text-anchor="middle">600</text>
+<text class="tick" x="292.7" y="284" text-anchor="middle">800</text>
+<text class="tick" x="387.3" y="284" text-anchor="middle">1,000</text>
+<text class="tick" x="482.0" y="284" text-anchor="middle">1,200</text>
+<text class="tick" x="576.7" y="284" text-anchor="middle">1,400</text>
+<line class="vline" x1="299.8" x2="299.8" y1="18" y2="266"/>
+<text class="note" x="305.8" y="30">ההארכה בחיפה: מרווח ממוצע 815 מ'</text>
+<polyline class="mark-line c1" points="56.0,203.4 67.8,201.7 79.7,200.0 91.5,198.3 103.3,196.6 115.2,194.9 127.0,193.3 138.8,191.6 150.7,189.9 162.5,188.2 174.3,186.5 186.2,184.8 198.0,183.1 209.8,181.4 221.7,179.7 233.5,178.0 245.3,176.3 257.2,174.6 269.0,172.9 280.8,171.2 292.7,169.5 304.5,167.8 316.3,166.1 328.2,164.4 340.0,162.7 351.8,161.0 363.7,159.3 375.5,157.6 387.3,155.9 399.2,154.2 411.0,152.5 422.8,150.8 434.7,149.2 446.5,147.5 458.3,145.8 470.2,144.1 482.0,142.4 493.8,140.7 505.7,139.0 517.5,137.3 529.3,135.6 541.2,133.9 553.0,132.2 564.8,130.5 576.7,128.8 588.5,127.1 600.3,125.4 612.2,123.7 624.0,122.0"/>
+<polyline class="mark-line c2" points="56.0,164.3 67.8,161.6 79.7,158.9 91.5,156.1 103.3,153.4 115.2,150.7 127.0,148.0 138.8,145.3 150.7,142.5 162.5,139.8 174.3,137.1 186.2,134.4 198.0,131.6 209.8,128.9 221.7,126.2 233.5,123.5 245.3,120.8 257.2,118.0 269.0,115.3 280.8,112.6 292.7,109.9 304.5,107.1 316.3,104.4 328.2,101.7 340.0,99.0 351.8,96.2 363.7,93.5 375.5,90.8 387.3,88.1 399.2,85.4 411.0,82.6 422.8,79.9 434.7,77.2 446.5,74.5 458.3,71.7 470.2,69.0 482.0,66.3 493.8,63.6 505.7,60.8 517.5,58.1 529.3,55.4 541.2,52.7 553.0,50.0 564.8,47.2 576.7,44.5 588.5,41.8 600.3,39.1 612.2,36.3 624.0,33.6"/>
+<circle class="dot c1" cx="373.1" cy="158.0" r="6"/>
+<text class="vlabel" x="383.1" y="180.0" text-anchor="start">הקו האדום תת-קרקעי, 970 מ': 1.96</text>
+<circle class="dot c2" cx="187.1" cy="134.1" r="6"/>
+<text class="vlabel" x="197.1" y="120.1" text-anchor="start">הקו האדום עילי, 577 מ': 2.39</text>
+<line class="axis" x1="56" x2="624" y1="266" y2="266"/>
+<text class="tick" x="340.0" y="314" text-anchor="middle">מרחק בין תחנות סמוכות (מטר)</text>
+<text class="tick" transform="translate(12 142.0) rotate(-90)" text-anchor="middle">דקות מתחנה לתחנה</text>
+</svg><ul class="keylist"><li><span class="sw c1"></span>קו מופרד (משמש ל"עם עדיפות")</li><li><span class="sw c2"></span>קו ברמת הרחוב (משמש ל"בלי עדיפות")</li></ul><p class="caption">זמן מתחנה לתחנה כפונקציה של מרווח התחנות, מ-26,653 נסיעות שנמדדו בקו האדום (2024 עד 2026).</p></div><div class="facts"><div><span class="k">למה נמדד ולא הונח</span><span class="v">מהירות תכן מחמיצה בלימה, שהייה, האצה והמתנה בצמתים; הקו האדום נוסע גם מופרד וגם ברחוב</span></div><div><span class="k">התיקון שהיה חשוב</span><span class="v">דוח הכיול הניח 500 מטר בין תחנות; המרווח האמיתי בקו האדום הוא 970 מטר בתת-הקרקע, ולכן הקריאה הראשונה הפכה את הקו לאיטי פי שניים</span></div><div><span class="k">על ההארכה</span><span class="v">40.7 דקות מקצה לקצה עם עדיפות, 65.8 בלעדיה. הקו הראשי לנצרת מוגדר ב-80 קמ"ש, לא נמדד</span></div></div></div>
+    <p class="source">מקור: נספח א בדוח המסכם.</p>
+  </div>
+</section>
+<section class="slide chart" id="s19" aria-label="שקופית 19">
+  <div class="inner">
+    <p class="eyebrow">נספח ב · הזמן מחוץ לרכב</p>
+    <h2>דקה של הליכה או המתנה נספרת כפליים. המשקולות האלה מזיזות את התוצאה יותר מכל הנחה אחרת.</h2>
+    <div class="cols chart-cols"><div class="chartbox"><svg class="chart" viewBox="0 0 640 220" role="img" aria-label="נוסעי הרכבת הקלה בשש קבוצות משקולות">
+<text class="cat" x="352" y="29.0" text-anchor="start">משקולות נמוכות (חציוני הראיות)</text>
+<path class="mark c3" d="M340,14.0 h-226.0 a4,4 0 0 0 -4,4 v14 a4,4 0 0 0 4,4 h226.0 z"><title>משקולות נמוכות (חציוני הראיות): 4,935</title></path>
+<text class="vlabel" x="102.0" y="29.0" text-anchor="end">4,935</text>
+<text class="cat" x="352" y="63.0" text-anchor="start">המודל לפני 5 באוקטובר (הליכה 2, המתנה 2, מעבר 8)</text>
+<path class="mark c1" d="M340,48.0 h-194.2613981762918 a4,4 0 0 0 -4,4 v14 a4,4 0 0 0 4,4 h194.2613981762918 z"><title>המודל לפני 5 באוקטובר (הליכה 2, המתנה 2, מעבר 8): 4,254</title></path>
+<text class="vlabel" x="133.7" y="63.0" text-anchor="end">4,254</text>
+<text class="cat" x="352" y="97.0" text-anchor="start">… ועוד החלפה במטרונית של 4 דקות</text>
+<path class="mark o2" d="M340,82.0 h-174.82674772036475 a4,4 0 0 0 -4,4 v14 a4,4 0 0 0 4,4 h174.82674772036475 z"><title>… ועוד החלפה במטרונית של 4 דקות: 3,837</title></path>
+<text class="vlabel" x="153.2" y="97.0" text-anchor="end">3,837</text>
+<text class="cat" x="352" y="131.0" text-anchor="start">… ועוד 1.5 דקות בתוך תחנה תת-קרקעית</text>
+<path class="mark o2" d="M340,116.0 h-147.79533941236068 a4,4 0 0 0 -4,4 v14 a4,4 0 0 0 4,4 h147.79533941236068 z"><title>… ועוד 1.5 דקות בתוך תחנה תת-קרקעית: 3,257</title></path>
+<text class="vlabel" x="180.2" y="131.0" text-anchor="end">3,257</text>
+<text class="cat" x="352" y="165.0" text-anchor="start">… ועוד שניהם</text>
+<path class="mark o2" d="M340,150.0 h-132.1823708206687 a4,4 0 0 0 -4,4 v14 a4,4 0 0 0 4,4 h132.1823708206687 z"><title>… ועוד שניהם: 2,922</title></path>
+<text class="vlabel" x="195.8" y="165.0" text-anchor="end">2,922</text>
+<text class="cat" x="352" y="199.0" text-anchor="start">הטווח העליון של ההנחיות, תחנות עמוקות</text>
+<path class="mark c2" d="M340,184.0 h-63.858156028368796 a4,4 0 0 0 -4,4 v14 a4,4 0 0 0 4,4 h63.858156028368796 z"><title>הטווח העליון של ההנחיות, תחנות עמוקות: 1,456</title></path>
+<text class="vlabel" x="264.1" y="199.0" text-anchor="end">1,456</text>
+<line class="axis" x1="340" x2="340" y1="8" y2="212"/>
+</svg><p class="caption">נוסעי בוקר ברכבת הקלה במבחן 2022 של ההארכה לבדה (25 אזורים), בשש קבוצות משקולות. תרחיש הייחוס יושב בין השורה השנייה לחמישית.</p></div><div class="facts"><div><span class="k">מה המודל משתמש בו היום</span><span class="v">הליכה והמתנה נספרות כפליים; 8 דקות להחלפה מאוטובוס, 4 ממטרונית; חצי דקה בתוך כל תחנה; הליכה ב-4 קמ"ש; בונוס של 5 דקות לרכבת על פני אוטובוס (2.5 על פני המטרונית)</span></div><div><span class="k">מאיפה הערכים</span><span class="v">הנחיות הערכה של אחת-עשרה מדינות וישראל, ספרות ערך הזמן, ועשרה מודלים אזוריים מכוילים. המסמכים הישראליים טרם נקראו במלואם</span></div><div><span class="k">עדיין פתוח</span><span class="v">תכנון התחנות והמעברים, שמכריע את שני הרכיבים החשובים ביותר</span></div></div></div>
+    <p class="source">מקור: נספח ב בדוח המסכם.</p>
+  </div>
+</section>
+<section class="slide chart" id="s20" aria-label="שקופית 20">
+  <div class="inner">
+    <p class="eyebrow">נספח ג · מקדם הרגישות λ</p>
+    <h2>λ הופך הפרש עלות לנוסעים: יתרון של 10 דקות נותן לרכבת הקלה כ-65 % מנוסעי התח"צ בזוג אזורים.</h2>
+    <div class="cols chart-cols"><div class="chartbox"><svg class="chart" viewBox="0 0 640 320" role="img" aria-label="חלק הבוחרים ברכבת הקלה מול יתרון העלות שלה">
+<line class="grid" x1="56" x2="624" y1="266.0" y2="266.0"/>
+<text class="tick" x="48" y="270.0" text-anchor="end">0</text>
+<line class="grid" x1="56" x2="624" y1="204.0" y2="204.0"/>
+<text class="tick" x="48" y="208.0" text-anchor="end">25</text>
+<line class="grid" x1="56" x2="624" y1="142.0" y2="142.0"/>
+<text class="tick" x="48" y="146.0" text-anchor="end">50</text>
+<line class="grid" x1="56" x2="624" y1="80.0" y2="80.0"/>
+<text class="tick" x="48" y="84.0" text-anchor="end">75</text>
+<line class="grid" x1="56" x2="624" y1="18.0" y2="18.0"/>
+<text class="tick" x="48" y="22.0" text-anchor="end">100</text>
+<text class="tick" x="56.0" y="284" text-anchor="middle">-30</text>
+<text class="tick" x="150.7" y="284" text-anchor="middle">-20</text>
+<text class="tick" x="245.3" y="284" text-anchor="middle">-10</text>
+<text class="tick" x="340.0" y="284" text-anchor="middle">0</text>
+<text class="tick" x="434.7" y="284" text-anchor="middle">10</text>
+<text class="tick" x="529.3" y="284" text-anchor="middle">20</text>
+<text class="tick" x="624.0" y="284" text-anchor="middle">30</text>
+<line class="axis" x1="56" x2="624" y1="142.0" y2="142.0"/>
+<line class="vline" x1="340.0" x2="340.0" y1="18" y2="266"/>
+<text class="note" x="346.0" y="30"></text>
+<polyline class="mark-line c1 thin" points="56.0,194.3 65.5,192.8 74.9,191.2 84.4,189.6 93.9,188.0 103.3,186.4 112.8,184.8 122.3,183.2 131.7,181.5 141.2,179.8 150.7,178.1 160.1,176.4 169.6,174.7 179.1,173.0 188.5,171.2 198.0,169.4 207.5,167.7 216.9,165.9 226.4,164.1 235.9,162.3 245.3,160.5 254.8,158.6 264.3,156.8 273.7,155.0 283.2,153.1 292.7,151.3 302.1,149.4 311.6,147.6 321.1,145.7 330.5,143.9 340.0,142.0 349.5,140.1 358.9,138.3 368.4,136.4 377.9,134.6 387.3,132.7 396.8,130.9 406.3,129.0 415.7,127.2 425.2,125.4 434.7,123.5 444.1,121.7 453.6,119.9 463.1,118.1 472.5,116.3 482.0,114.6 491.5,112.8 500.9,111.0 510.4,109.3 519.9,107.6 529.3,105.9 538.8,104.2 548.3,102.5 557.7,100.8 567.2,99.2 576.7,97.6 586.1,96.0 595.6,94.4 605.1,92.8 614.5,91.2 624.0,89.7"/>
+<polyline class="mark-line c1 thin" points="56.0,254.2 65.5,253.1 74.9,251.8 84.4,250.4 93.9,248.9 103.3,247.2 112.8,245.4 122.3,243.4 131.7,241.3 141.2,238.9 150.7,236.4 160.1,233.7 169.6,230.8 179.1,227.7 188.5,224.3 198.0,220.8 207.5,216.9 216.9,212.9 226.4,208.6 235.9,204.1 245.3,199.3 254.8,194.3 264.3,189.1 273.7,183.7 283.2,178.1 292.7,172.4 302.1,166.5 311.6,160.5 321.1,154.4 330.5,148.2 340.0,142.0 349.5,135.8 358.9,129.6 368.4,123.5 377.9,117.5 387.3,111.6 396.8,105.9 406.3,100.3 415.7,94.9 425.2,89.7 434.7,84.7 444.1,79.9 453.6,75.4 463.1,71.1 472.5,67.1 482.0,63.2 491.5,59.7 500.9,56.3 510.4,53.2 519.9,50.3 529.3,47.6 538.8,45.1 548.3,42.7 557.7,40.6 567.2,38.6 576.7,36.8 586.1,35.1 595.6,33.6 605.1,32.2 614.5,30.9 624.0,29.8"/>
+<polyline class="mark-line c1" points="56.0,230.8 65.5,229.0 74.9,227.0 84.4,225.0 93.9,222.9 103.3,220.8 112.8,218.5 122.3,216.1 131.7,213.7 141.2,211.2 150.7,208.6 160.1,205.9 169.6,203.1 179.1,200.3 188.5,197.3 198.0,194.3 207.5,191.2 216.9,188.0 226.4,184.8 235.9,181.5 245.3,178.1 254.8,174.7 264.3,171.2 273.7,167.7 283.2,164.1 292.7,160.5 302.1,156.8 311.6,153.1 321.1,149.4 330.5,145.7 340.0,142.0 349.5,138.3 358.9,134.6 368.4,130.9 377.9,127.2 387.3,123.5 396.8,119.9 406.3,116.3 415.7,112.8 425.2,109.3 434.7,105.9 444.1,102.5 453.6,99.2 463.1,96.0 472.5,92.8 482.0,89.7 491.5,86.7 500.9,83.7 510.4,80.9 519.9,78.1 529.3,75.4 538.8,72.8 548.3,70.3 557.7,67.9 567.2,65.5 576.7,63.2 586.1,61.1 595.6,59.0 605.1,57.0 614.5,55.0 624.0,53.2"/>
+<circle class="dot c1" cx="434.7" cy="105.9" r="6"/>
+<text class="vlabel" x="444.7" y="119.9" text-anchor="start">65 %</text>
+<circle class="dot c1" cx="529.3" cy="75.4" r="6"/>
+<text class="vlabel" x="539.3" y="89.4" text-anchor="start">77 %</text>
+<line class="axis" x1="56" x2="624" y1="266" y2="266"/>
+<text class="tick" x="340.0" y="314" text-anchor="middle">יתרון הרכבת הקלה על מסלול האוטובוס או המטרונית (דקות מורגשות)</text>
+<text class="tick" transform="translate(12 142.0) rotate(-90)" text-anchor="middle">חלק נוסעי התח"צ של הזוג שבוחרים ברכבת הקלה (%)</text>
+</svg><ul class="keylist"><li><span class="sw c1"></span>λ_T = 0.06 (בשימוש)</li><li><span class="sw c1 thin"></span>λ_T = 0.03 ו-0.10 (הטווח הנישא)</li></ul><p class="caption">עלות שווה מחלקת את הנוסעים שווה בשווה. כל דקה מורגשת של יתרון מזיזה את הסיכויים בכ-6 % בין שני מסלולי תח"צ ובכ-3 % בין הרכב לתח"צ.</p></div><div class="facts"><div><span class="k">שני מקדמי רגישות</span><span class="v">0.06 בין שני מסלולי תח"צ; 0.03 בין הרכב לתח"צ, שמגיב בערך בחצי מהעוצמה</span></div><div><span class="k">נאמד מהסקר</span><span class="v">0.035 כשזמינות הרכב מוחזקת קבועה, מה שתומך ב-0.03 שבשימוש. לבעלי רכב לא ניתן היה למדוד</span></div><div><span class="k">מה הוא עושה לתוצאה</span><span class="v">טווח ה-λ לבדו משתרע על −26 % עד +42 % מהנוסעים: המקור לטווח התכנון 5,500 עד 10,500</span></div></div></div>
+    <p class="source">מקור: נספח ג בדוח המסכם.</p>
+  </div>
+</section>
+<section class="slide chart" id="s21" aria-label="שקופית 21">
+  <div class="inner">
+    <p class="eyebrow">נספח ד · העלות המוכללת</p>
+    <h2>העלות המוכללת היא כמה הנסיעה מרגישה ארוכה. בדוגמה המחושבת הרכבת הקלה הולכת יותר ועדיין זולה בעשר דקות מורגשות.</h2>
+    <div class="cols chart-cols"><div class="chartbox"><svg class="chart" viewBox="0 0 640 126" role="img" aria-label="הדוגמה המחושבת בדקות מורגשות">
+<text class="cat" x="542" y="41.0" text-anchor="start">באוטובוס</text>
+<rect class="mark seg o1" x="414.5" y="24.0" width="115.5" height="26"/>
+<rect class="mark seg o2" x="332.0" y="24.0" width="82.5" height="26"/>
+<rect class="mark seg o3" x="290.8" y="24.0" width="41.2" height="26"/>
+<text class="vlabel" x="280.8" y="41.0" text-anchor="end">58 דקות מורגשות</text>
+<text class="cat" x="542" y="95.0" text-anchor="start">ברכבת הקלה</text>
+<rect class="mark seg o1" x="447.5" y="78.0" width="82.5" height="26"/>
+<rect class="mark seg o2" x="332.0" y="78.0" width="115.5" height="26"/>
+<rect class="mark seg o3" x="311.4" y="78.0" width="20.6" height="26"/>
+<rect class="mark seg bonus c3" x="311.4" y="78.0" width="20.6" height="26"/>
+<text class="vlabel" x="301.4" y="95.0" text-anchor="end">48 (53 לפני הבונוס)</text>
+<line class="axis" x1="530" x2="530" y1="10" y2="118"/>
+</svg><ul class="keylist"><li><span class="sw o1"></span>נסיעה</li><li><span class="sw o2"></span>הליכה × 2</li><li><span class="sw o3"></span>המתנה × 2</li><li><span class="sw c3 thin"></span>בונוס הרכבת (−5)</li></ul><p class="caption">מקריית חיים לבת גלים. אוטובוס: 28 דקות נסיעה, 10 הליכה, 5 המתנה. רכבת קלה: 20 נסיעה, 14 הליכה, 2.5 המתנה (רכבת כל 5 דקות).</p></div><div class="facts"><div><span class="k">הנוסחה</span><span class="v">נסיעה + 2 × הליכה + 2 × המתנה + 8 לכל החלפה (4 ממטרונית לרכבת הקלה) + 0.5 לכל קצה תחנה − בונוס הרכבת</span></div><div><span class="k">בלי כסף</span><span class="v">התעריף אחיד ומשולב ולכן מתקזז; אין נתוני חניה לאזור</span></div><div><span class="k">איך נבנתה</span><span class="v">קודם משקולות מקובלות, ואז כל מציין מקום הוחלף בנתונים שנמדדו: לוח הזמנים, מהירויות אוטובוס שנמדדו, פונקציית הרכבת המכוילת, ועלויות לכל אזור תנועה על רשת הקווים האמיתית</span></div></div></div>
+    <p class="source">מקור: נספח ד בדוח המסכם.</p>
+  </div>
+</section>
 </main>
 <nav class="bar" aria-label="שקופית">
   <span class="title">הרכבת הקלה נופית · הארכה דרך חיפה לטירת כרמל</span>
-  <span class="ctl"><button type="button" id="prev" aria-label="השקופית הקודמת">הקודם ›</button><span class="count" id="count">1 / 16</span><button type="button" id="next" aria-label="השקופית הבאה">‹ הבא</button></span>
+  <span class="ctl"><button type="button" id="prev" aria-label="השקופית הקודמת">הקודם ›</button><span class="count" id="count">1 / 21</span><button type="button" id="next" aria-label="השקופית הבאה">‹ הבא</button></span>
 </nav>
 </div>
 <script>

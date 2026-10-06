@@ -9,6 +9,7 @@ lead with the answer, then the evidence, then the ask.
 Run:  python3 tools/build_decision_deck.py                          -- both files
       python3 tools/build_decision_deck.py --lang he --body-only out.html   -- one language, without the html/head/body skeleton"""
 import base64, io, os, sys
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__))))
 while not os.path.exists('METHODOLOGY.md') and os.getcwd() != '/': os.chdir('..')
 OUT_HTML = {'en': 'reports/Nofit_LRT_Extension_Decision_Deck.html', 'he': 'reports/Nofit_LRT_Extension_Decision_Deck_HE.html'}
 MAP_PNG = 'Output/figures/lrt_alternatives_lines.png'
@@ -127,6 +128,40 @@ S['en'] = dict(
                ('Morning peak', ': trips leaving 06:00 to 09:00. The busiest hour is about 59 percent of that.'), ('Riders', ': boardings on the light rail, including trips that start or end on a feeder bus or Metronit.'),
                ('Corridor', ': 25 areas and 174 traffic zones from Tirat Carmel to Nazareth.')],
     s16_aside='Every figure traces to reports/Nofit_LRT_Extension_Comprehensive_Report.docx and the files under Output/ it names. This deck is built by tools/build_decision_deck.py.',
+    # backup slides: the report's appendices A–D, one page each
+    s17_eyebrow='Appendices', s17_title='Four backup pages for readers who want to see how the numbers were built.',
+    s17_items=[('A', 'How the tram\'s speed was measured.', 'On the Tel Aviv Red Line, then carried over to Haifa\'s station spacing.'), ('B', 'What walking, waiting and changing vehicles cost.', 'The weights the model uses, what the research found, and how much they move the result.'),
+               ('C', 'How a cost difference becomes riders.', 'The sensitivity λ, with worked examples.'), ('D', 'What is in the generalized cost.', 'The formula, where it came from, and a worked trip.')],
+    s17_aside='The full appendices, with their sources, are in the comprehensive report (Appendices A to D).',
+    s18_eyebrow='Appendix A · the tram\'s speed', s18_title='The tram\'s speed was measured on the Tel Aviv Red Line: 46 km/h between stops plus about 50 seconds at every stop.',
+    s18_series=['Segregated line (used for "with priority")', 'Street-level line (used for "no priority")'], s18_xlabel='distance between consecutive stations (m)', s18_ylabel='minutes from one stop to the next',
+    s18_vline='Haifa extension: 815 m mean spacing', s18_marks=['Red Line underground, 970 m', 'Red Line surface, 577 m'], s18_chart='Stop-to-stop time against station spacing',
+    s18_caption='Stop-to-stop time as a function of station spacing, measured on 26,653 Red Line journeys (2024 to 2026).',
+    s18_facts=[('Why measured, not assumed', 'A design speed misses braking, dwell, acceleration and waits at junctions; the Red Line runs both segregated and on the street'),
+               ('The correction that mattered', 'The calibration report assumed 500 m between stops; the Red Line\'s real spacing is 970 m underground, so the first reading made the line twice too slow'),
+               ('On the extension', '40.7 minutes end to end with priority, 65.8 without. The main route to Nazareth is specified at 80 km/h, not measured')],
+    s18_src='Source: Appendix A of the comprehensive report.',
+    s19_eyebrow='Appendix B · time outside the vehicle', s19_title='A minute of walking or waiting counts double. These weights move the result more than any other assumption.',
+    s19_labels=['Lower weights (the evidence medians)', 'Walk 2, wait 2, transfer 8 (before 5 Oct)', '… plus a 4-minute Metronit change', '… plus 1.5 min inside an underground station', '… plus both', 'Upper guidance range, deep stations'],
+    s19_chart='LRT riders under six sets of out-of-vehicle weights', s19_caption='Morning LRT riders in the 2022 test of the extension alone (25 areas) under six sets of weights. The reference case sits between the second and the fifth row.',
+    s19_facts=[('What the model uses now', 'Walking and waiting count twice; 8 minutes per change from a bus, 4 from the Metronit; half a minute inside each station; walking at 4 km/h; a 5-minute preference for the tram over a bus (2.5 over the Metronit)'),
+               ('Where the values come from', 'Appraisal guidance of eleven countries and Israel, the value-of-time literature, and ten calibrated regional models. The Israeli documents could not yet be read in full'),
+               ('Still open', 'The station and interchange design, which decides the two terms that matter most')],
+    s19_src='Source: Appendix B of the comprehensive report.',
+    s20_eyebrow='Appendix C · the sensitivity λ', s20_title='λ turns a cost difference into riders: a 10-minute advantage gives the tram about 65 % of a pair\'s transit riders.',
+    s20_series=['λ_T = 0.06 (used)', 'λ_T = 0.03 and 0.10 (the range carried)'], s20_xlabel='tram advantage over the bus or Metronit path (felt minutes)', s20_ylabel='share of the pair\'s transit riders choosing the tram (%)', s20_chart='The share choosing the tram against its cost advantage',
+    s20_caption='Equal cost splits the riders evenly. Each felt minute of advantage moves the odds by about 6 % between two transit paths and 3 % between the car and transit.',
+    s20_facts=[('Two sensitivities', '0.06 between two transit paths; 0.03 between the car and transit, which responds about half as strongly'),
+               ('Estimated from the survey', '0.035 with car availability held constant, which supports the 0.03 used. For car owners it could not be measured'),
+               ('What it does to the result', 'The λ range alone spans −26 % to +42 % of the riders: the source of the 5,500 to 10,500 planning range')],
+    s20_src='Source: Appendix C of the comprehensive report.',
+    s21_eyebrow='Appendix D · the generalized cost', s21_title='The generalized cost is how long a trip feels. In the worked example the tram walks more and is still ten felt minutes cheaper.',
+    s21_labels=['By bus', 'By tram'], s21_keys=['riding', 'walking × 2', 'waiting × 2', 'tram preference (−5)'], s21_totals=['58 felt minutes', '48 (53 before the preference)'], s21_chart='The worked example as felt minutes',
+    s21_caption='Kiryat Haim to Bat Galim. Bus: 28 minutes riding, 10 walking, 5 waiting. Tram: 20 riding, 14 walking, 2.5 waiting (a tram every 5 minutes).',
+    s21_facts=[('The formula', 'riding + 2 × walking + 2 × waiting + 8 per change (4 from the Metronit to the tram) + 0.5 per station end − the tram preference'),
+               ('No money in it', 'The fare is flat and integrated, so it cancels out; no parking data exist for the area'),
+               ('How it was built', 'Standard weights first, then every placeholder replaced by measured data: the timetable, measured bus speeds, the calibrated tram function, and costs per zone on the real line network')],
+    s21_src='Source: Appendix D of the comprehensive report.',
 )
 S['he'] = dict(
     lang='he', dir='rtl', title='תמצית החלטה: הארכת נופית',
@@ -230,6 +265,40 @@ S['he'] = dict(
                ('שיא הבוקר', ': נסיעות שיוצאות בין 06:00 ל-09:00. השעה העמוסה היא כ-59 אחוז מהן.'), ('נוסעים', ': עליות לרכבת הקלה, כולל נסיעות שמתחילות או מסתיימות באוטובוס מזין או במטרונית.'),
                ('המסדרון', ': 25 אזורים ו-174 אזורי תנועה מטירת כרמל עד נצרת.')],
     s16_aside='כל מספר ניתן לאיתור בדוח reports/Nofit_LRT_Extension_Comprehensive_Report.docx ובקבצים תחת Output/ שהוא מציין. המצגת נבנית על ידי tools/build_decision_deck.py.',
+    # שקופיות רקע: נספחי הדוח א–ד, עמוד לכל אחד
+    s17_eyebrow='נספחים', s17_title='ארבעה עמודי רקע למי שרוצה לראות איך נבנו המספרים.',
+    s17_items=[('א', 'איך נמדדה מהירות הרכבת הקלה.', 'על הקו האדום בתל אביב, ומשם למרווח התחנות בחיפה.'), ('ב', 'כמה עולות הליכה, המתנה והחלפת כלי רכב.', 'המשקולות שהמודל משתמש בהן, מה המחקר מצא, וכמה הן מזיזות את התוצאה.'),
+               ('ג', 'איך הפרש עלות הופך לנוסעים.', 'מקדם הרגישות λ, עם דוגמאות מחושבות.'), ('ד', 'מה יש בעלות המוכללת.', 'הנוסחה, מאיפה היא באה, ונסיעה מחושבת.')],
+    s17_aside='הנספחים המלאים, עם המקורות, נמצאים בדוח המסכם (נספחים א–ד).',
+    s18_eyebrow='נספח א · מהירות הרכבת הקלה', s18_title='מהירות הרכבת נמדדה על הקו האדום בתל אביב: 46 קמ"ש בין תחנות ועוד כ-50 שניות בכל עצירה.',
+    s18_series=['קו מופרד (משמש ל"עם עדיפות")', 'קו ברמת הרחוב (משמש ל"בלי עדיפות")'], s18_xlabel='מרחק בין תחנות סמוכות (מטר)', s18_ylabel='דקות מתחנה לתחנה',
+    s18_vline='ההארכה בחיפה: מרווח ממוצע 815 מ\'', s18_marks=['הקו האדום תת-קרקעי, 970 מ\'', 'הקו האדום עילי, 577 מ\''], s18_chart='זמן מתחנה לתחנה מול מרווח התחנות',
+    s18_caption='זמן מתחנה לתחנה כפונקציה של מרווח התחנות, מ-26,653 נסיעות שנמדדו בקו האדום (2024 עד 2026).',
+    s18_facts=[('למה נמדד ולא הונח', 'מהירות תכן מחמיצה בלימה, שהייה, האצה והמתנה בצמתים; הקו האדום נוסע גם מופרד וגם ברחוב'),
+               ('התיקון שהיה חשוב', 'דוח הכיול הניח 500 מטר בין תחנות; המרווח האמיתי בקו האדום הוא 970 מטר בתת-הקרקע, ולכן הקריאה הראשונה הפכה את הקו לאיטי פי שניים'),
+               ('על ההארכה', '40.7 דקות מקצה לקצה עם עדיפות, 65.8 בלעדיה. הקו הראשי לנצרת מוגדר ב-80 קמ"ש, לא נמדד')],
+    s18_src='מקור: נספח א בדוח המסכם.',
+    s19_eyebrow='נספח ב · הזמן מחוץ לרכב', s19_title='דקה של הליכה או המתנה נספרת כפליים. המשקולות האלה מזיזות את התוצאה יותר מכל הנחה אחרת.',
+    s19_labels=['משקולות נמוכות (חציוני הראיות)', 'המודל לפני 5 באוקטובר (הליכה 2, המתנה 2, מעבר 8)', '… ועוד החלפה במטרונית של 4 דקות', '… ועוד 1.5 דקות בתוך תחנה תת-קרקעית', '… ועוד שניהם', 'הטווח העליון של ההנחיות, תחנות עמוקות'],
+    s19_chart='נוסעי הרכבת הקלה בשש קבוצות משקולות', s19_caption='נוסעי בוקר ברכבת הקלה במבחן 2022 של ההארכה לבדה (25 אזורים), בשש קבוצות משקולות. תרחיש הייחוס יושב בין השורה השנייה לחמישית.',
+    s19_facts=[('מה המודל משתמש בו היום', 'הליכה והמתנה נספרות כפליים; 8 דקות להחלפה מאוטובוס, 4 ממטרונית; חצי דקה בתוך כל תחנה; הליכה ב-4 קמ"ש; בונוס של 5 דקות לרכבת על פני אוטובוס (2.5 על פני המטרונית)'),
+               ('מאיפה הערכים', 'הנחיות הערכה של אחת-עשרה מדינות וישראל, ספרות ערך הזמן, ועשרה מודלים אזוריים מכוילים. המסמכים הישראליים טרם נקראו במלואם'),
+               ('עדיין פתוח', 'תכנון התחנות והמעברים, שמכריע את שני הרכיבים החשובים ביותר')],
+    s19_src='מקור: נספח ב בדוח המסכם.',
+    s20_eyebrow='נספח ג · מקדם הרגישות λ', s20_title='λ הופך הפרש עלות לנוסעים: יתרון של 10 דקות נותן לרכבת הקלה כ-65 % מנוסעי התח"צ בזוג אזורים.',
+    s20_series=['λ_T = 0.06 (בשימוש)', 'λ_T = 0.03 ו-0.10 (הטווח הנישא)'], s20_xlabel='יתרון הרכבת הקלה על מסלול האוטובוס או המטרונית (דקות מורגשות)', s20_ylabel='חלק נוסעי התח"צ של הזוג שבוחרים ברכבת הקלה (%)', s20_chart='חלק הבוחרים ברכבת הקלה מול יתרון העלות שלה',
+    s20_caption='עלות שווה מחלקת את הנוסעים שווה בשווה. כל דקה מורגשת של יתרון מזיזה את הסיכויים בכ-6 % בין שני מסלולי תח"צ ובכ-3 % בין הרכב לתח"צ.',
+    s20_facts=[('שני מקדמי רגישות', '0.06 בין שני מסלולי תח"צ; 0.03 בין הרכב לתח"צ, שמגיב בערך בחצי מהעוצמה'),
+               ('נאמד מהסקר', '0.035 כשזמינות הרכב מוחזקת קבועה, מה שתומך ב-0.03 שבשימוש. לבעלי רכב לא ניתן היה למדוד'),
+               ('מה הוא עושה לתוצאה', 'טווח ה-λ לבדו משתרע על −26 % עד +42 % מהנוסעים: המקור לטווח התכנון 5,500 עד 10,500')],
+    s20_src='מקור: נספח ג בדוח המסכם.',
+    s21_eyebrow='נספח ד · העלות המוכללת', s21_title='העלות המוכללת היא כמה הנסיעה מרגישה ארוכה. בדוגמה המחושבת הרכבת הקלה הולכת יותר ועדיין זולה בעשר דקות מורגשות.',
+    s21_labels=['באוטובוס', 'ברכבת הקלה'], s21_keys=['נסיעה', 'הליכה × 2', 'המתנה × 2', 'בונוס הרכבת (−5)'], s21_totals=['58 דקות מורגשות', '48 (53 לפני הבונוס)'], s21_chart='הדוגמה המחושבת בדקות מורגשות',
+    s21_caption='מקריית חיים לבת גלים. אוטובוס: 28 דקות נסיעה, 10 הליכה, 5 המתנה. רכבת קלה: 20 נסיעה, 14 הליכה, 2.5 המתנה (רכבת כל 5 דקות).',
+    s21_facts=[('הנוסחה', 'נסיעה + 2 × הליכה + 2 × המתנה + 8 לכל החלפה (4 ממטרונית לרכבת הקלה) + 0.5 לכל קצה תחנה − בונוס הרכבת'),
+               ('בלי כסף', 'התעריף אחיד ומשולב ולכן מתקזז; אין נתוני חניה לאזור'),
+               ('איך נבנתה', 'קודם משקולות מקובלות, ואז כל מציין מקום הוחלף בנתונים שנמדדו: לוח הזמנים, מהירויות אוטובוס שנמדדו, פונקציית הרכבת המכוילת, ועלויות לכל אזור תנועה על רשת הקווים האמיתית')],
+    s21_src='מקור: נספח ד בדוח המסכם.',
 )
 
 # ---------------- SVG chart helpers (marks: bars <= 24 px, 4 px rounded data-end, square at the baseline; hairline grid) ----------------
@@ -318,6 +387,45 @@ def range_chart(t, width=640, height=196):
     out.append(f'<text class="tick" x="{L}" y="{yb + 100}">{t["s11_axis"]}</text>')
     out.append('</svg>'); return '\n'.join(out)
 
+def line_chart(series, xlim, ylim, xticks, yticks, title, width=640, height=320, marks=(), vlines=(), hlines=(), xlabel='', ylabel=''):
+    """series: (cls, [(x, y), ...], thin). marks: (x, y, label, cls, anchor, dx, dy). vlines: (x, label). Numbers run left to right in both languages."""
+    L, R, T, B = 56, 16, 18, 54; pw, ph = width - L - R, height - T - B
+    def x(v): return L + pw * (v - xlim[0]) / (xlim[1] - xlim[0])
+    def y(v): return T + ph - ph * (v - ylim[0]) / (ylim[1] - ylim[0])
+    out = [f'<svg class="chart" viewBox="0 0 {width} {height}" role="img" aria-label="{title}">']
+    for tk in yticks:
+        out.append(f'<line class="grid" x1="{L}" x2="{L + pw}" y1="{y(tk):.1f}" y2="{y(tk):.1f}"/>'); out.append(f'<text class="tick" x="{L - 8}" y="{y(tk) + 4:.1f}" text-anchor="end">{fmt(tk)}</text>')
+    for tk in xticks: out.append(f'<text class="tick" x="{x(tk):.1f}" y="{T + ph + 18}" text-anchor="middle">{fmt(tk)}</text>')
+    for yv in hlines: out.append(f'<line class="axis" x1="{L}" x2="{L + pw}" y1="{y(yv):.1f}" y2="{y(yv):.1f}"/>')
+    for xv, lab in vlines:
+        out.append(f'<line class="vline" x1="{x(xv):.1f}" x2="{x(xv):.1f}" y1="{T}" y2="{T + ph}"/>'); out.append(f'<text class="note" x="{x(xv) + 6:.1f}" y="{T + 12}">{lab}</text>')
+    for cls, pts, thin in series:
+        out.append(f'<polyline class="mark-line {cls}{" thin" if thin else ""}" points="{" ".join(f"{x(px):.1f},{y(py):.1f}" for px, py in pts)}"/>')
+    for xv, yv, lab, cls, anchor, dx, dy in marks:
+        out.append(f'<circle class="dot {cls}" cx="{x(xv):.1f}" cy="{y(yv):.1f}" r="6"/>'); out.append(f'<text class="vlabel" x="{x(xv) + dx:.1f}" y="{y(yv) + dy:.1f}" text-anchor="{anchor}">{lab}</text>')
+    out.append(f'<line class="axis" x1="{L}" x2="{L + pw}" y1="{T + ph}" y2="{T + ph}"/>')
+    if xlabel: out.append(f'<text class="tick" x="{L + pw / 2:.1f}" y="{height - 6}" text-anchor="middle">{xlabel}</text>')
+    if ylabel: out.append(f'<text class="tick" transform="translate(12 {T + ph / 2:.1f}) rotate(-90)" text-anchor="middle">{ylabel}</text>')
+    out.append('</svg>'); return '\n'.join(out)
+
+def stacked_hbars(labels, rows, totals, title, rtl=False, width=640, row_h=54, label_w=110, vmax=80):
+    """rows: per label a list of (value, cls); a negative value is a bonus drawn back over the end of the stack. totals: the label at the bar tip."""
+    T = 10; height = T + row_h * len(labels) + 8; val_w = 200; pw = width - label_w - val_w; bw = 26
+    x0 = width - label_w if rtl else label_w
+    def xx(v): return x0 - pw * v / vmax if rtl else x0 + pw * v / vmax
+    out = [f'<svg class="chart" viewBox="0 0 {width} {height}" role="img" aria-label="{title}">']
+    for i, (lab, segs, tot) in enumerate(zip(labels, rows, totals)):
+        yy = T + i * row_h + (row_h - bw) / 2; pos = 0
+        out.append(f'<text class="cat" x="{x0 + (12 if rtl else -12)}" y="{yy + bw / 2 + 4:.1f}" text-anchor="{"start" if rtl else "end"}">{lab}</text>')
+        for v, cls in segs:
+            if v >= 0:
+                a, b = xx(pos), xx(pos + v); out.append(f'<rect class="mark seg {cls}" x="{min(a, b):.1f}" y="{yy}" width="{abs(b - a):.1f}" height="{bw}"/>'); pos += v
+            else:
+                a, b = xx(pos + v), xx(pos); out.append(f'<rect class="mark seg bonus {cls}" x="{min(a, b):.1f}" y="{yy}" width="{abs(b - a):.1f}" height="{bw}"/>')
+        tip = xx(pos); out.append(f'<text class="vlabel" x="{tip - 10 if rtl else tip + 10:.1f}" y="{yy + bw / 2 + 4:.1f}" text-anchor="{"end" if rtl else "start"}">{tot}</text>')
+    out.append(f'<line class="axis" x1="{x0}" x2="{x0}" y1="{T}" y2="{T + row_h * len(labels)}"/>')
+    out.append('</svg>'); return '\n'.join(out)
+
 def map_data_uri():
     from PIL import Image
     im = Image.open(MAP_PNG).convert('RGB').crop((120, 120, 1620, 960)); im.thumbnail((1200, 800))
@@ -379,6 +487,26 @@ def build(lang):
     slides.append(slide('appendix', t['s16_eyebrow'], t['s16_title'],
         f'<div class="cols"><div><h3>{t["s16_h_data"]}</h3>{ul(t["s16_data"], "tight")}</div><div><h3>{t["s16_h_terms"]}</h3>'
         + '<ul class="tight">' + ''.join(f'<li><strong>{k}</strong>{v}</li>' for k, v in t['s16_terms']) + '</ul></div></div>' + f'<p class="aside">{t["s16_aside"]}</p>'))
+    # ---- backup slides: the report's appendices A–D ----
+    from report_appendices import section_time, p_lrt     # the same functions the report's appendices use (tools/report_appendices.py)
+    spac = [300 + 25 * i for i in range(49)]
+    ch_app_a = line_chart([('c1', [(s, section_time(s / 1000, 'underground')) for s in spac], False), ('c2', [(s, section_time(s / 1000, 'ground')) for s in spac], False)],
+                          (300, 1500), (0, 4.5), [400, 600, 800, 1000, 1200, 1400], [0, 1, 2, 3, 4], t['s18_chart'], vlines=[(815, t['s18_vline'])],
+                          marks=[(970, section_time(0.970, 'underground'), f'{t["s18_marks"][0]}: 1.96', 'c1', 'start', 10, 22), (577, section_time(0.577, 'ground'), f'{t["s18_marks"][1]}: 2.39', 'c2', 'start', 10, -14)],
+                          xlabel=t['s18_xlabel'], ylabel=t['s18_ylabel'])
+    ch_app_b = hbars(t['s19_labels'], [4935, 4254, 3837, 3257, 2922, 1456], t['s19_chart'], rtl=rtl, label_w=300, classes=['c3', 'c1', 'o2', 'o2', 'o2', 'c2'])
+    adv = [-30 + i for i in range(61)]
+    ch_app_c = line_chart([('c1', [(a, 100 * p_lrt(a, 0.03)) for a in adv], True), ('c1', [(a, 100 * p_lrt(a, 0.10)) for a in adv], True), ('c1', [(a, 100 * p_lrt(a, 0.06)) for a in adv], False)],
+                          (-30, 30), (0, 100), [-30, -20, -10, 0, 10, 20, 30], [0, 25, 50, 75, 100], t['s20_chart'], hlines=[50], vlines=[(0, '')],
+                          marks=[(10, 100 * p_lrt(10), f'{100 * p_lrt(10):.0f} %', 'c1', 'start', 10, 14), (20, 100 * p_lrt(20), f'{100 * p_lrt(20):.0f} %', 'c1', 'start', 10, 14)],
+                          xlabel=t['s20_xlabel'], ylabel=t['s20_ylabel'])
+    ch_app_d = stacked_hbars(t['s21_labels'], [[(28, 'o1'), (20, 'o2'), (10, 'o3')], [(20, 'o1'), (28, 'o2'), (5, 'o3'), (-5, 'c3')]], t['s21_totals'], t['s21_chart'], rtl=rtl)
+    slides.append(slide('text', t['s17_eyebrow'], t['s17_title'],
+        '<ol class="steps">' + ''.join(f'<li><span class="n">{k}</span><div><strong>{h}</strong> {b}</div></li>' for k, h, b in t['s17_items']) + '</ol>' + f'<p class="aside">{t["s17_aside"]}</p>'))
+    slides.append(slide('chart', t['s18_eyebrow'], t['s18_title'], chart_slide(ch_app_a, t['s18_caption'], t['s18_facts'], html_legend([(t['s18_series'][0], 'c1', 0), (t['s18_series'][1], 'c2', 0)])), t['s18_src']))
+    slides.append(slide('chart', t['s19_eyebrow'], t['s19_title'], chart_slide(ch_app_b, t['s19_caption'], t['s19_facts']), t['s19_src']))
+    slides.append(slide('chart', t['s20_eyebrow'], t['s20_title'], chart_slide(ch_app_c, t['s20_caption'], t['s20_facts'], html_legend([(t['s20_series'][0], 'c1', 0), (t['s20_series'][1], 'c1 thin', 0)])), t['s20_src']))
+    slides.append(slide('chart', t['s21_eyebrow'], t['s21_title'], chart_slide(ch_app_d, t['s21_caption'], t['s21_facts'], html_legend([(t['s21_keys'][0], 'o1', 0), (t['s21_keys'][1], 'o2', 0), (t['s21_keys'][2], 'o3', 0), (t['s21_keys'][3], 'c3 thin', 0)])), t['s21_src']))
 
     head = f'''<title>{t['title']}</title>
 <link rel="stylesheet" href="{t['fonts']}">
@@ -462,8 +590,12 @@ li {{ max-width: 60ch; }}
 .chart .mark.c1 {{ fill: var(--accent); }} .chart .mark.c2 {{ fill: var(--orange); }} .chart .mark.c3 {{ fill: var(--aqua); }}
 .chart .mark.o1 {{ fill: var(--o1); }} .chart .mark.o2 {{ fill: var(--o2); }} .chart .mark.o3 {{ fill: var(--o3); }}
 .chart .mark.wash {{ fill: var(--wash); }}
-.chart .mark-line {{ stroke: var(--accent); stroke-width: 2; stroke-linecap: round; }}
-.chart .dot.c1 {{ fill: var(--accent); stroke: var(--surface); stroke-width: 2; }}
+.chart .mark-line {{ stroke: var(--accent); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; fill: none; }}
+.chart .mark-line.c2 {{ stroke: var(--orange); }} .chart .mark-line.c3 {{ stroke: var(--aqua); }} .chart .mark-line.thin {{ stroke-width: 1.5; opacity: 0.45; }}
+.chart .vline {{ stroke: var(--muted); stroke-width: 1; stroke-dasharray: 4 3; }}
+.chart .seg {{ stroke: var(--surface); stroke-width: 2; }} .chart .seg.bonus {{ fill: var(--aqua); opacity: 0.55; }}
+.sw.thin {{ opacity: 0.45; }}
+.chart .dot.c1 {{ fill: var(--accent); stroke: var(--surface); stroke-width: 2; }} .chart .dot.c2 {{ fill: var(--orange); stroke: var(--surface); stroke-width: 2; }}
 .chart .dot.hollow {{ fill: var(--surface); stroke: var(--accent); stroke-width: 2; }}
 .chart path.mark:hover {{ opacity: 0.8; }}
 /* nav */
