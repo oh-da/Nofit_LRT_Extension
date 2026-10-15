@@ -44,7 +44,7 @@ STAGES: list[tuple[str, str, str]] = [
     ("alternatives", "LRT alternatives (the deliverable)",
      "Demand for main route + extension vs extension only, two running regimes, 2022–2050, AM and PM, zone by zone."),
     ("reports", "Reports",
-     "Peak-hour factors for the charts, maps, the alternatives report, the comprehensive report in English and Hebrew, the decision deck."),
+     "Peak-hour factors for the charts, maps, the alternatives report, the comprehensive report in English, Hebrew and Simplified Technical English, the decision deck."),
     ("sensitivity", "Sensitivities and alternative runs",
      "The same notebooks with other settings: 2026 car skim, LRT headway, bus competition, bus wait rule, out-of-vehicle weights, slower buses, TAZ bus construction. Executed copies go to the scratch folder."),
     ("validation", "Validation and diagnostics",
@@ -355,6 +355,8 @@ STEPS: list[Step] = [
          note="Also reads the committed slower-bus run (Output/alternatives_bus_slow/) and the λ on the 2026 car skim (Output/mode_choice/car_network/)."),
     Step("r_comp_he", "reports", "The same report in simple Hebrew", "tools/build_comprehensive_report_he.py", "—", "—",
          needs=("r_comp",), outputs=("reports/Nofit_LRT_Extension_Comprehensive_Report_HE.docx",), packages=("docx",), minutes=1),
+    Step("r_comp_ste", "reports", "The same report in ASD-STE100 Simplified Technical English (self-checked for the countable STE rules)", "tools/build_comprehensive_report_ste.py", "—", "—",
+         needs=("r_comp",), outputs=("reports/Nofit_LRT_Extension_Comprehensive_Report_STE.docx",), packages=("docx",), minutes=1),
     Step("r_deck", "reports", "The decision deck, English and Hebrew (self-contained HTML)", "tools/build_decision_deck.py", "—", "—",
          needs=("r_comp", "r_comp_he"), outputs=("reports/Nofit_LRT_Extension_Decision_Deck.html", "reports/Nofit_LRT_Extension_Decision_Deck_HE.html"), packages=("docx",)),
 

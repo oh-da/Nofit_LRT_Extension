@@ -3841,7 +3841,13 @@ version in simple language**, `reports/Nofit_LRT_Extension_Comprehensive_Report_
 (`tools/build_comprehensive_report_he.py`), follows the same structure with the same numbers —
 it executes the English builder's data part and writes a shorter right-to-left document (Arial,
 `w:bidi` paragraphs, `w:bidiVisual` tables) with the English charts; the time-on-route table and
-the full caveat list are summarised in a paragraph and referred to the English report.
+the full caveat list are summarised in a paragraph and referred to the English report. An **ASD-STE100
+(Simplified Technical English) version**, `reports/Nofit_LRT_Extension_Comprehensive_Report_STE.docx`
+(`tools/build_comprehensive_report_ste.py` with `tools/report_appendices_ste.py`, 15 October 2026), follows
+the Hebrew version's structure with the same numbers and charts, appendices A–D included; it opens with a
+table of the technical names it uses, and the builder checks the countable STE rules (25 words per sentence,
+6 sentences per paragraph, no -ing verb forms) on every paragraph, bullet and caption it writes and prints
+what it finds (zero findings at the time of writing; formulas and source lines are exempt).
 
 **Chart convention of both reports (5 October 2026, at the study team's request).** One chart
 per image file — no multi-panel figures — and one axis scale for every chart of a set that spans
@@ -4485,6 +4491,7 @@ BUS_SLOWDOWN="BU_2040:1.10,BU_2050:1.20,HS_2040:1.10,HS_2050:1.20" ALT_OUT=Outpu
 python3 tools/peak_hour_factors_periods.py    # Output/alternatives/peak_hour_factors.csv (AM from step 27, PM by the same method; ≈ 2 minutes; needed by the two builders below)
 python3 tools/build_comprehensive_report.py   # reports/Nofit_LRT_Extension_Comprehensive_Report.docx + Output/figures/comprehensive/ (≈ 1 minute)
 python3 tools/build_comprehensive_report_he.py   # the same report in simple Hebrew, reports/Nofit_LRT_Extension_Comprehensive_Report_HE.docx (≈ 1 minute)
+python3 tools/build_comprehensive_report_ste.py   # the same report in ASD-STE100 Simplified Technical English, reports/Nofit_LRT_Extension_Comprehensive_Report_STE.docx; prints its STE self-check (≈ 1 minute)
 git checkout -- Output/figures/gc_first_fill_trunk_v2.png Output/figures/gc_bus_gtfs_vs_survey.png Output/figures/skims_logit_car_vs_transit.png Output/figures/skims_trunk_link_flows_bus_vs_lrt.png Output/figures/lrt_capture_forecast_2040_2050.png   # the alternative run redraws the default figures
 
 # regression test of the hybrid branch (committed outputs only)
