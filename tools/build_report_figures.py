@@ -168,3 +168,39 @@ S.heading(fig, 'ביקוש ושירות מזינים את הערכת הנסיע�
           'המודל: שרשרת של 45 שלבים מתועדים וניתנים לשחזור, בארבעה גושים')
 S.source(fig, 'מקור: הדוח המסכם, סעיף 2.1; כל שלב הוא מחברת Jupyter מתועדת וניתנת לשחזור')
 print(S.save(fig, 'fig03_model_structure_he.png'))
+
+# ---------- Figure 3b: the model structure as a flow chart, headers only ----------
+def flow_box(ax, x_right, y_c, w, h, color, label, num=None, outline=False, fs=14):
+    x0 = x_right - w; y0 = y_c - h / 2
+    ax.add_patch(FancyBboxPatch((x0, y0), w, h, boxstyle='round,pad=0,rounding_size=1.4', fc='white' if outline else color, ec=color, lw=2.2, zorder=3))
+    txt_col = color if outline else 'white'
+    if num:
+        ax.add_patch(plt.Circle((x_right - 2.6, y_c), 1.45, fc='white', ec='none', zorder=4))
+        ax.text(x_right - 2.6, y_c - .05, num, ha='center', va='center', fontsize=12, fontweight='bold', color=color, zorder=5)
+    ax.text(x_right - (5.0 if num else 1.8), y_c, he(label), ha='right', va='center', fontsize=fs, fontweight='bold', color=txt_col, zorder=4, linespacing=1.25)
+    return dict(x0=x0, x1=x_right, yc=y_c, y0=y0, y1=y0 + h)
+
+
+def flow_arrow(ax, pts, color):
+    xs, ys = zip(*pts)
+    ax.plot(xs[:-1], ys[:-1], color=color, lw=2.6, solid_capstyle='butt', zorder=2)
+    ax.plot(xs[-2:], ys[-2:], color=color, lw=0, zorder=2)
+    ax.add_patch(FancyArrowPatch(pts[-2], pts[-1], arrowstyle='-|>', mutation_scale=20, lw=2.6, color=color, zorder=2, shrinkA=0, shrinkB=0))
+
+
+fig = plt.figure(figsize=(12.4, 4.3)); ax = fig.add_axes([.01, .03, .98, .80]); ax.set_xlim(0, 100); ax.set_ylim(3.5, 36); ax.set_axis_off()
+W_, H_ = 20, 10.5; ROWS = dict(top=30, mid=20, bot=10)
+XA, XB, XC, XD = 99.0, 99.0 - (W_ + 5.5), 99.0 - 2 * (W_ + 5.5), 99.0 - 3 * (W_ + 5.5)
+f1 = flow_box(ax, XA, ROWS['top'], W_, H_, S.AQUA, 'שנת הבסיס', '1')
+f2 = flow_box(ax, XB, ROWS['top'], W_, H_, S.AQUA, 'התחזית', '2')
+f3 = flow_box(ax, XA, ROWS['bot'], W_, H_, S.PURPLE, 'רמת השירות', '3')
+f4 = flow_box(ax, XC, ROWS['mid'], W_, H_, S.BLUE, 'קליטת הנסיעות\nלרכבת הקלה', '4', fs=13)
+fo = flow_box(ax, XD, ROWS['mid'], W_, H_, S.BLUE, 'ביקוש\nלרכבת הקלה', outline=True)
+cx4 = (f4['x0'] + f4['x1']) / 2
+flow_arrow(ax, [(f1['x0'], ROWS['top']), (f2['x1'], ROWS['top'])], S.AQUA)
+flow_arrow(ax, [(f2['x0'], ROWS['top']), (cx4, ROWS['top']), (cx4, f4['y1'])], S.AQUA)
+flow_arrow(ax, [(f3['x0'], ROWS['bot']), (cx4, ROWS['bot']), (cx4, f4['y0'])], S.PURPLE)
+flow_arrow(ax, [(f4['x0'], ROWS['mid']), (fo['x1'], ROWS['mid'])], S.BLUE)
+S.heading(fig, 'ביקוש ושירות מזינים את הערכת הנסיעות לרכבת הקלה', 'המודל: שרשרת של 45 שלבים מתועדים וניתנים לשחזור, בארבעה גושים')
+S.source(fig, 'מקור: הדוח המסכם, סעיף 2.1')
+print(S.save(fig, 'fig03b_model_flow_he.png'))
