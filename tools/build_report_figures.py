@@ -95,7 +95,7 @@ from matplotlib.patches import FancyBboxPatch, FancyArrowPatch
 BLOCKS = {
     'base': dict(color=S.AQUA, num='1', title='מטריצות שנת הבסיס', wrap=44, bullets=[
         'נסיעות לפי אמצעי, שיא בוקר',
-        '778 אזורי תנועה, מסקר נסיעות 2017/18',
+        '781 אזורי תנועה, מסקר נסיעות 2017/18',
         'הכול מוזז ל-2022']),
     'forecast': dict(color=S.AQUA, num='2', title='מטריצות התחזית', wrap=44, bullets=[
         '2022 מוזזת ל-2040 ול-2050',
