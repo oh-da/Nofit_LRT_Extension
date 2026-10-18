@@ -86,3 +86,87 @@ S.heading(fig, f'ההארכה: 24 תחנות לאורך {ext_tot_km:.1f} ק"מ, 
           'תקריב על מסלול ההארכה (hf_lrt_3) מטירת כרמל עד מרכזית המפרץ, על רקע אזורי התנועה')
 S.source(fig, 'מקור: שלב 45 (stations_main_ext.csv); אזורי תנועה: TAZ_North')
 print(S.save(fig, 'fig02_extension_zoom_he.png'))
+
+# ---------- Figure 3: the model structure (section 2.1) ----------
+import textwrap
+from matplotlib.patches import FancyBboxPatch, FancyArrowPatch
+
+# ranges use a hyphen, not an en dash: an en dash splits the number run in right-to-left text and flips the range
+BLOCKS = {
+    'base': dict(color=S.AQUA, num='1', title='מטריצות שנת הבסיס', steps='שלבים 1-22', wrap=46, bullets=[
+        'נסיעות אנשים לפי אמצעי: שיא בוקר 06:00-09:00 (בהמשך גם 16:00-19:00 וצהריים)',
+        '778 אזורי התנועה של המחוז, מסקר נסיעות 2017/18 עם משקולות הרחבה',
+        'אוטובוס: כיול לנסיעות הרב-קו של מאי 2022, עם תבנית היעדים של סקר בתוך-הרכב',
+        'רכבת: הסדרה הארצית',
+        'הכול מוזז מ-2018 ל-2022']),
+    'forecast': dict(color=S.AQUA, num='2', title='מטריצות התחזית', steps='שלב 23', wrap=46, bullets=[
+        'מטריצות 2022 מוזזות ל-2040 ול-2050 לפי אוכלוסייה ותעסוקה בכל אזור תנועה',
+        'שיעורי הנסיעה, בחירת היעד ופיצול האמצעים נשארים כמו ב-2022']),
+    'los': dict(color=S.PURPLE, num='3', title='רמת השירות', steps='שלבים 25-30, 37, 43, 44', wrap=104, bullets=[
+        'זמני נסיעה, גישה, המתנה ומעבר לכל אמצעי, על 25 אזורי המסדרון ועל 781 אזורי התנועה',
+        'רכב: רשת מהירויות הרכב של מאי 2026',
+        'אוטובוס ומטרונית: קובץ GTFS של משרד התחבורה (22 במאי 2026, שירות של יום ג\' 2 ביוני 2026), עם זמני נסיעה ממהירויות האוטובוס שנמדדו במאי 2026',
+        'רכבת קלה: פונקציית זמן בין תחנות שכוילה על הקו האדום בתל אביב']),
+    'pivot': dict(color=S.BLUE, num='4', title='קליטת הנסיעות לרכבת הקלה', steps='שלבים 31-33, 39, 40, 45', wrap=46, bullets=[
+        '"ציר" (pivot) על חלקי האמצעים שנצפו ב-2022 בכל זוג אזורי תנועה',
+        'בתוך התחבורה הציבורית: הרכבת הקלה מתחרה במסלול האוטובוס / המטרונית',
+        'שיפור בעלות של כלל התחבורה הציבורית מעביר נסיעות מהרכב',
+        'שלב 45 מריץ זאת לכל חלופה, משטר, תקופה ותרחיש']),
+}
+LINE_H, HEAD_H, PAD = 1.75, 8.0, 1.8
+
+
+def block_lines(key):
+    b = BLOCKS[key]; lines = []
+    for t in b['bullets']:
+        ws = textwrap.wrap(t, b['wrap']); lines += [('\u2022 ' + ws[0], True)] + [(l, False) for l in ws[1:]]
+    return lines
+
+
+def block_h(key): return HEAD_H + PAD * 2 + len(block_lines(key)) * LINE_H
+
+
+def draw_block(ax, key, x_right, y_top, w, h):
+    b = BLOCKS[key]; x0 = x_right - w; y0 = y_top - h
+    ax.add_patch(FancyBboxPatch((x0, y0), w, h, boxstyle='round,pad=0,rounding_size=1.2', fc='white', ec=b['color'], lw=1.6, zorder=2))
+    ax.add_patch(FancyBboxPatch((x0, y_top - HEAD_H), w, HEAD_H, boxstyle='round,pad=0,rounding_size=1.2', fc=b['color'], ec=b['color'], lw=1.6, zorder=3))
+    ax.add_patch(plt.Rectangle((x0, y_top - HEAD_H), w, 2, fc=b['color'], ec='none', zorder=3))   # square the header's lower corners
+    ax.text(x_right - 1.3, y_top - 2.7, he(f"{b['num']}. {b['title']}"), ha='right', va='center', fontsize=12, fontweight='bold', color='white', zorder=4)
+    ax.text(x_right - 1.3, y_top - 5.8, he(b['steps']), ha='right', va='center', fontsize=9.2, color='white', zorder=4)
+    y = y_top - HEAD_H - PAD - LINE_H / 2
+    for txt, first in block_lines(key):
+        ax.text(x_right - 1.3 - (0 if first else 1.15), y, he(txt), ha='right', va='center', fontsize=8.8, color=S.INK, zorder=4); y -= LINE_H
+    return dict(x0=x0, x1=x_right, y0=y0, y1=y_top, h=h)
+
+
+def arrow(ax, p0, p1, color):
+    ax.add_patch(FancyArrowPatch(p0, p1, arrowstyle='-|>', mutation_scale=18, lw=2.4, color=color, zorder=1, shrinkA=0, shrinkB=0))
+
+
+fig = plt.figure(figsize=(12.4, 6.3)); ax = fig.add_axes([.01, .03, .98, .83]); ax.set_xlim(0, 100); ax.set_axis_off()
+WN, GAP = 28.2, 7.0; XR1 = 99.4; XR2 = XR1 - WN - GAP; XR4 = XR2 - WN - GAP
+h_top = max(block_h('base'), block_h('forecast')); h_low = block_h('los'); ROW_GAP = 4.5
+b1 = draw_block(ax, 'base', XR1, 59.5, WN, h_top); b2 = draw_block(ax, 'forecast', XR2, 59.5, WN, h_top)
+y_low = 59.5 - h_top - ROW_GAP
+b3 = draw_block(ax, 'los', XR1, y_low, WN * 2 + GAP, h_low)
+b4 = draw_block(ax, 'pivot', XR4, 59.5, WN, 59.5 - (y_low - h_low))
+ym1 = 59.5 - h_top / 2; ym2 = y_low - h_low / 2
+arrow(ax, (b1['x0'], ym1), (b2['x1'], ym1), S.AQUA)
+arrow(ax, (b2['x0'], ym1), (b4['x1'], ym1), S.AQUA)
+arrow(ax, (b3['x0'], ym2), (b4['x1'], ym2), S.PURPLE)
+for xc, y, txt, col in ((b2['x1'] + GAP / 2, ym1, 'מטריצות\n2022\n2040\n2050', S.AQUA), (b4['x1'] + GAP / 2, ym2, 'עלויות\nמוכללות\nלכל\nאמצעי', S.PURPLE)):
+    pass
+ax.text(b4['x1'] + GAP / 2, ym1 + 3.4, he('מטריצות\nנסיעות'), ha='center', va='bottom', fontsize=8.4, fontweight='bold', color=S.INK2, linespacing=1.15)
+ax.text(b4['x1'] + GAP / 2, ym2 + 3.4, he('עלויות\nמוכללות'), ha='center', va='bottom', fontsize=8.4, fontweight='bold', color=S.INK2, linespacing=1.15)
+ax.text(b2['x1'] + GAP / 2, ym1 + 3.4, he('מטריצות\nבסיס'), ha='center', va='bottom', fontsize=8.4, fontweight='bold', color=S.INK2, linespacing=1.15)
+ax.set_ylim(b4['y0'] - 1, 60)
+# output band at the foot of block 4
+oy = b4['y0'] + 1.6; oh = 8.2
+ax.add_patch(FancyBboxPatch((b4['x0'] + 1.3, oy), WN - 2.6, oh, boxstyle='round,pad=0,rounding_size=1', fc=S.BLUE, ec='none', zorder=3))
+ax.text(b4['x1'] - 2.6, oy + oh - 1.9, he('תוצר'), ha='right', va='center', fontsize=9.2, color='white', zorder=4)
+for k, t in enumerate(textwrap.wrap('ביקוש לרכבת הקלה בהארכה ובקו הראשי, לפי חלופה, משטר, תקופה ותרחיש', 40)):
+    ax.text(b4['x1'] - 2.6, oy + oh - 4.2 - k * 1.9, he(t), ha='right', va='center', fontsize=9.6, fontweight='bold', color='white', zorder=4)
+S.heading(fig, 'המודל הוא שרשרת של 45 שלבים בארבעה גושים: ביקוש ושירות נפגשים בציר שמעריך את הנסיעות לרכבת הקלה',
+          'מטריצות הנסיעות (ירוק) ורמת השירות (סגול) מזינות את קליטת הנסיעות לרכבת הקלה (כחול)')
+S.source(fig, 'מקור: הדוח המסכם, סעיף 2.1; כל שלב הוא מחברת Jupyter מתועדת וניתנת לשחזור')
+print(S.save(fig, 'fig03_model_structure_he.png'))
