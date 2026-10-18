@@ -93,22 +93,26 @@ from matplotlib.patches import FancyBboxPatch, FancyArrowPatch
 
 # ranges use a hyphen, not an en dash: an en dash splits the number run in right-to-left text and flips the range
 BLOCKS = {
-    'base': dict(color=S.AQUA, num='1', title='מטריצות שנת הבסיס', wrap=44, bullets=[
-        'נסיעות לפי אמצעי, שיא בוקר',
-        '781 אזורי תנועה, מסקר נסיעות 2017/18',
-        'הכול מוזז ל-2022']),
-    'forecast': dict(color=S.AQUA, num='2', title='מטריצות התחזית', wrap=44, bullets=[
-        '2022 מוזזת ל-2040 ול-2050',
-        'לפי אוכלוסייה ותעסוקה']),
-    'los': dict(color=S.PURPLE, num='3', title='רמת השירות', wrap=90, bullets=[
-        'זמני נסיעה, גישה, המתנה ומעבר לכל אמצעי',
-        'רכב: מהירויות מאי 2026',
-        'אוטובוס ומטרונית: GTFS',
-        'רכבת קלה: פונקציית זמן בין תחנות']),
-    'pivot': dict(color=S.BLUE, num='4', title='קליטת הנסיעות לרכבת הקלה', wrap=44, bullets=[
-        '"ציר" (pivot) על חלקי האמצעים ב-2022',
-        'הרכבת הקלה מתחרה באוטובוס / במטרונית',
-        'שיפור בעלות התח"צ מעביר נסיעות מהרכב']),
+    'base': dict(color=S.AQUA, num='1', title='שנת הבסיס: כמה נוסעים היום', wrap=37, bullets=[
+        'נסיעות אנשים לפי אמצעי: רכב, אוטובוס ורכבת',
+        'שיא בוקר, 06:00-09:00',
+        '781 אזורי תנועה במחוז הצפון',
+        'לפי סקר נסיעות 2017/18, מתוקן לנסיעות האוטובוס במאי 2022',
+        'הכול מקודם מ-2018 ל-2022']),
+    'forecast': dict(color=S.AQUA, num='2', title='התחזית: כמה יסעו בעתיד', wrap=37, bullets=[
+        'מגדילים את נסיעות 2022 ל-2040 ול-2050',
+        'לפי גידול האוכלוסייה והתעסוקה בכל אזור',
+        'הרגלי הנסיעה נשארים כמו ב-2022']),
+    'los': dict(color=S.PURPLE, num='3', title='רמת השירות: כמה זמן ועלות לכל נסיעה', wrap=100, bullets=[
+        'לכל זוג אזורים: הליכה, המתנה, נסיעה והחלפה, מאוחדים לעלות אחת',
+        'רכב: מהירויות הכבישים ממאי 2026',
+        'אוטובוס ומטרונית: לוחות הזמנים של משרד התחבורה וזמני נסיעה שנמדדו',
+        'רכבת קלה: נוסחת זמן שנלמדה מהקו האדום בתל אביב']),
+    'pivot': dict(color=S.BLUE, num='4', title='קליטה: כמה יעברו לרכבת הקלה', wrap=37, bullets=[
+        'מתחילים ממה שנצפה ב-2022 בכל זוג אזורים',
+        'מי שהרכבת הקלה נוחה לו יותר מאוטובוס או מטרונית עובר אליה',
+        'כשהתחבורה הציבורית משתפרת, גם נוסעי רכב עוברים אליה',
+        'מריצים לכל חלופה, משטר, שעת שיא ותרחיש']),
 }
 LINE_H, HEAD_H, PAD = 2.3, 5.6, 2.0
 
@@ -139,7 +143,7 @@ def arrow(ax, p0, p1, color):
     ax.add_patch(FancyArrowPatch(p0, p1, arrowstyle='-|>', mutation_scale=18, lw=2.4, color=color, zorder=1, shrinkA=0, shrinkB=0))
 
 
-fig = plt.figure(figsize=(12.4, 5.6)); ax = fig.add_axes([.01, .03, .98, .83]); ax.set_xlim(0, 100); ax.set_axis_off()
+fig = plt.figure(figsize=(12.4, 6.4)); ax = fig.add_axes([.01, .03, .98, .83]); ax.set_xlim(0, 100); ax.set_axis_off()
 WN, GAP = 28.2, 7.0; XR1 = 99.4; XR2 = XR1 - WN - GAP; XR4 = XR2 - WN - GAP
 h_top = max(block_h('base'), block_h('forecast')); h_low = block_h('los'); ROW_GAP = 3.5
 b1 = draw_block(ax, 'base', XR1, 59.5, WN, h_top); b2 = draw_block(ax, 'forecast', XR2, 59.5, WN, h_top)
