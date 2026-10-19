@@ -1,0 +1,4 @@
+window,bus 2022 layer,RavKav 2022 journeys,raw survey 2017/18 (expanded),layer / RavKav,layer / survey,RavKav / survey,intra-TAZ share: layer,intra-TAZ share: RavKav,intra-TAZ share: survey,"layer / RavKav, between TAZs","layer / survey, between TAZs","super-zone OD, layer vs RavKav: R2","super-zone OD, layer vs RavKav: slope","origin super-zones within ±15 %, layer vs RavKav","super-zone OD, layer vs survey: R2","super-zone OD, layer vs survey: slope","origin super-zones within ±15 %, layer vs survey"
+AM 06:00-09:00,117960.7246,92439.7500,125438.7523,1.2761,0.9404,0.7369,0.0447,0.0560,0.0654,1.2913,0.9612,0.6590,1.0458,19,0.8086,0.7755,22
+PM 16:00-19:00,88817.3595,78490.2500,81397.9173,1.1316,1.0912,0.9643,0.0525,0.0649,0.0449,1.1465,1.0825,0.7249,1.0235,20,0.7873,0.7938,15
+midday 10:00-14:00,129528.0497,119429.7500,129057.1552,1.0846,1.0036,0.9254,0.0565,0.0771,0.0505,1.1088,0.9973,0.8682,1.0208,25,0.9333,0.8703,20
