@@ -19,14 +19,10 @@ CODE = {'TiratCarmel': 201, 'Matam-NeotPeres': 202, 'HofCarmel-NeveDavid': 203, 
         'LowerCity': 208, 'Namal-Giborim': 209, 'Hamifrats': 210, 'Bazan-Hutsot': 211, 'TsometKiryatAta': 212, 'KiryatAta North': 213, 'KiryatAta North-East': 214,
         'Shefaram': 215, 'Hamovil': 216, 'Nazareth': 217, 'KiryatHaim': 104, 'KiryatBialik Center': 103, 'Kiryon': 102, 'TsurShalom': 101, 'KiryatHaim West': 304,
         'KiryatYam B+C': 303, 'KiryatYam A': 302, 'SavyoneyYam': 301}
-SERIES = [('step: survey bus 2018 (raw)', 'שלב: אוטובוס בסקר 2018 (גולמי)', MUTED, ':', 1.5, 1.0),
-          ('step: bus, all-RavKav volumes', 'שלב: אוטובוס, כל נפחי הרב-קו', PURPLE, '--', 1.3, 1.0),
-          ('survey: bus (calibrated)', 'סקר: אוטובוס (מכויל)', BLUE, '-', 2.2, 1.0),
-          ('ticketing: bus (RavKav, own alightings)', 'כרטוס: אוטובוס (רב-קו, ירידות רב-קו עצמן)', ORANGE, '-', 2.2, 1.0),
-          ('survey transit', 'סקר: תחבורה ציבורית (אוטובוס + רכבת)', BLUE, '-.', 1.0, 0.7),
-          ('ticketing transit', 'כרטוס: תחבורה ציבורית (אוטובוס + רכבת)', ORANGE, '-.', 1.0, 0.7),
-          ('survey: taxi-type', 'סקר: מוניות (בנפרד)', AQUA, ':', 1.2, 1.0)]
-DIR = {'up': 'כיוון עולה (מתירת כרמל והלאה)', 'down': 'כיוון יורד (לכיוון טירת כרמל)'}
+SERIES = [('step: survey bus 2018 (raw)', 'סקר 2018 (אוטובוס, גולמי)', MUTED, ':', 1.8, 1.0),
+          ('ticketing: bus (RavKav, own alightings)', 'רב-קו (ירידות רב-קו עצמן)', ORANGE, '-', 2.2, 1.0),
+          ('survey: bus (calibrated)', 'מטריצת אוטובוס 2022', BLUE, '-', 2.2, 1.0)]
+DIR = {'up': 'כיוון עולה (מטירת כרמל והלאה)', 'down': 'כיוון יורד (לכיוון טירת כרמל)'}
 SCOPE = {'T1': 'מסלול T1 (נצרת)', 'T2': 'מסלול T2 (הקריות)', 'T3': 'מסלול T3 (קריית ים)', 'network': 'רשת העץ (24 קטעים)'}
 N_TRUNK = 12                                              # areas 201-212, common to the three routes; the branches (shaded) start at the last of them
 
