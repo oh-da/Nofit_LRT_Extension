@@ -46,7 +46,7 @@ for sp in ax.spines.values(): sp.set_color(AXIS)
 ax.spines['left'].set_visible(False)
 ax.tick_params(axis='y', colors=INK2, labelsize=9)
 ax.set_title(H('חלוקת הנסיעות לפי אמצעי תחבורה: רכב, אוטובוס ורכבת — 2018 לעומת 2022'), color=INK, fontsize=12, pad=30)
-ax.text(0.5, 1.035, H('שעות הבוקר, לפי סוג הזוג מוצא-יעד ביחס למסדרון (ללא מוניות)'), transform=ax.transAxes, ha='center', fontsize=9, color=INK2)
+ax.text(0.5, 1.035, H('שעות הבוקר, לפי סוג הזוג מוצא-יעד ביחס למסדרון'), transform=ax.transAxes, ha='center', fontsize=9, color=INK2)
 handles = [Patch(color=c, label=H(l)) for m, l, c in MODES]
 ax.legend(handles=handles, frameon=False, fontsize=9, loc='upper center', bbox_to_anchor=(0.5, -0.17), ncol=3)
 fig.text(0.5, 0.005, H('גוון בהיר = 2018, גוון כהה = 2022. מעל כל עמודה: חלק הרכבת.'), ha='center', fontsize=8, color=INK2)
