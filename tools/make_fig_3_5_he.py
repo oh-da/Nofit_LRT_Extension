@@ -22,6 +22,12 @@ ax.scatter(skim.loc[trunk, 'bus_ivt_scheduled_min'], skim.loc[trunk, 'bus_ivt_ob
            label=f'זוגות בציר המרכזי ({LRI}201–210{PDI})')
 lim = float(np.nanmax([skim.bus_ivt_scheduled_min.max(), skim.bus_ivt_observed_min.max()])) * 1.05
 ax.plot([0, lim], [0, lim], color=AXIS, lw=1.3, label='זמן נצפה = זמן מתוכנן')
+ok = skim[['bus_ivt_scheduled_min', 'bus_ivt_observed_min']].dropna()                       # OLS on all area pairs: observed = a + b x scheduled
+b1, a0 = np.polyfit(ok.bus_ivt_scheduled_min, ok.bus_ivt_observed_min, 1); r2 = np.corrcoef(ok.bus_ivt_scheduled_min, ok.bus_ivt_observed_min)[0, 1] ** 2
+xx = np.array([0, lim]); ax.plot(xx, a0 + b1 * xx, color=ORANGE, lw=1.8, ls='--', label='קו רגרסיה לינארי')
+ax.text(0.97, 0.05, f'{LRI}y = {a0:.2f} + {b1:.3f}·x{PDI}\nשיפוע: {LRI}{b1:.3f}{PDI}\n{LRI}R² = {r2:.3f}{PDI}\nמספר זוגות: {LRI}{len(ok)}{PDI}', transform=ax.transAxes, ha='right', va='bottom',
+        fontsize=10, color=INK, bbox=dict(boxstyle='round,pad=0.5', facecolor='white', edgecolor=AXIS))
+print('regression', a0, b1, r2, len(ok))
 ax.set_xlim(0, lim); ax.set_ylim(0, lim); ax.set_aspect('equal')
 ax.set_xlabel('זמן נסיעה מתוכנן ברכב (דקות)', color=INK2, fontsize=10); ax.set_ylabel('זמן נסיעה נצפה ברכב (דקות)', color=INK2, fontsize=10)
 ax.set_title('זמן נסיעה באוטובוס בין זוגות אזורי V2', color=INK, fontsize=12.5, pad=26)
