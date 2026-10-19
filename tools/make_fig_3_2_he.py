@@ -46,7 +46,7 @@ for scope in ['T1', 'T2', 'T3', 'network']:
         ax.tick_params(colors=INK2); ax.set_ylabel('נסיעות החוצות את הקטע, \u206606:00–09:00\u2069', color=INK2, fontsize=10)
         if scope == 'network': ax.set_xticks(x[:-1] + 0.5); ax.set_xticklabels(labels, rotation=70, ha='right', fontsize=7, color=INK2)
         else: ax.set_xticks(x); ax.set_xticklabels(labels, rotation=60, ha='right', fontsize=8, color=INK2)
-        ax.set_title(f'{SCOPE[scope]} — {DIR[dname]}', color=INK, fontsize=12.5, pad=10)
+        ax.set_title(DIR[dname] if scope == 'network' else f'{SCOPE[scope]} — {DIR[dname]}', color=INK, fontsize=12.5, pad=10)
         h, l = ax.get_legend_handles_labels()
         if scope != 'network': h.append(Patch(facecolor=MUTED, alpha=0.15)); l.append('ענף מעבר לצומת קריית אתא (מוצל)')
         ax.legend(h, l, frameon=False, fontsize=8, loc='upper center', bbox_to_anchor=(0.5, -0.30 if scope != 'network' else -0.36), ncol=2)
