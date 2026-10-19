@@ -30,7 +30,7 @@ ax.text(0.97, 0.05, f'{LRI}y = {a0:.2f} + {b1:.3f}·x{PDI}\nשיפוע: {LRI}{b1
 print('regression', a0, b1, r2, len(ok))
 ax.set_xlim(0, lim); ax.set_ylim(0, lim); ax.set_aspect('equal')
 ax.set_xlabel('זמן נסיעה מתוכנן ברכב (דקות)', color=INK2, fontsize=10); ax.set_ylabel('זמן נסיעה נצפה ברכב (דקות)', color=INK2, fontsize=10)
-ax.set_title('זמן נסיעה באוטובוס בין זוגות אזורי V2', color=INK, fontsize=12.5, pad=26)
+ax.set_title('זמן נסיעה באוטובוס בין זוגות אזורים', color=INK, fontsize=12.5, pad=26)
 ax.text(0.5, 1.025, SUB, transform=ax.transAxes, ha='center', fontsize=8.5, color=INK2)
 ax.legend(frameon=False, fontsize=9, loc='upper left'); ax.grid(True, color=GRID, lw=0.6); ax.set_axisbelow(True)
 for sp in ax.spines.values(): sp.set_color(AXIS)
