@@ -28,12 +28,13 @@ N_TRUNK = 12                                              # areas 201-212, commo
 
 cmp = pd.read_csv('Output/corridor_v2/corridor_v2_survey_vs_ticketing.csv')
 os.makedirs('Output/figures/he', exist_ok=True)
-for scope in ['T1', 'T2', 'T3', 'network']:
+for scope, ext in [('T1', False), ('T2', False), ('T3', False), ('network', False), ('network', True)]:   # ext: only the extension, Tirat Carmel to Tsomet Kiryat Ata (links 1-11)
     for dname in ['up', 'down']:
         s = cmp[(cmp.scope == scope) & (cmp.direction == dname)].sort_values('link')
+        if ext: s = s[s.segment == 'trunk']
         n = len(s); x = np.arange(n + 1)
         if scope == 'network':
-            labels = [f'{HE[a]} – {HE[b]}' for a, b in zip(s.from_area, s.to_area)]; fig, ax = plt.subplots(figsize=(12, 7.2), facecolor='white')
+            labels = [f'{HE[a]} – {HE[b]}' for a, b in zip(s.from_area, s.to_area)]; fig, ax = plt.subplots(figsize=(10, 6.6) if ext else (12, 7.2), facecolor='white')
         else:
             seq = list(s.from_area) + [s.to_area.iloc[-1]]; labels = [f'{HE[a]} · {CODE[a]}' for a in seq]; fig, ax = plt.subplots(figsize=(9.5, 6.2), facecolor='white')
         handles = []
@@ -44,12 +45,12 @@ for scope in ['T1', 'T2', 'T3', 'network']:
         ax.set_xlim(0, n); ax.set_ylim(bottom=0); ax.grid(True, color=GRID, linewidth=0.6, axis='y'); ax.set_axisbelow(True)
         for sp in ax.spines.values(): sp.set_color(AXIS)
         ax.tick_params(colors=INK2); ax.set_ylabel('נסיעות החוצות את הקטע, \u206606:00–09:00\u2069', color=INK2, fontsize=10)
-        if scope == 'network': ax.set_xticks(x[:-1] + 0.5); ax.set_xticklabels(labels, rotation=70, ha='right', fontsize=7, color=INK2)
+        if scope == 'network': ax.set_xticks(x[:-1] + 0.5); ax.set_xticklabels(labels, rotation=65 if ext else 70, ha='right', fontsize=8.5 if ext else 7, color=INK2)
         else: ax.set_xticks(x); ax.set_xticklabels(labels, rotation=60, ha='right', fontsize=8, color=INK2)
         ax.set_title(DIR[dname] if scope == 'network' else f'{SCOPE[scope]} — {DIR[dname]}', color=INK, fontsize=12.5, pad=10)
         h, l = ax.get_legend_handles_labels()
         if scope != 'network': h.append(Patch(facecolor=MUTED, alpha=0.15)); l.append('ענף מעבר לצומת קריית אתא (מוצל)')
-        ax.legend(h, l, frameon=False, fontsize=8, loc='upper center', bbox_to_anchor=(0.5, -0.30 if scope != 'network' else -0.36), ncol=2)
+        ax.legend(h, l, frameon=False, fontsize=8, loc='upper center', bbox_to_anchor=(0.5, -0.30 if scope != 'network' else (-0.38 if ext else -0.36)), ncol=2)
         fig.text(0.5, 0.995, 'סכומי שלוש שעות של תנועות פוטנציאליות בין אזורי הקו, לא עומסים', ha='center', va='top', fontsize=9, color=INK2)
-        fig.savefig(f'Output/figures/he/corridor_v2_{scope}_{dname}_he.png', dpi=150, bbox_inches='tight', facecolor='white'); plt.close(fig)
+        fig.savefig(f'Output/figures/he/corridor_v2_{scope}_{dname}{'_ext' if ext else ''}_he.png', dpi=150, bbox_inches='tight', facecolor='white'); plt.close(fig)
 print('done')
