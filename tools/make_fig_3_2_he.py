@@ -9,16 +9,8 @@ BLUE, ORANGE, AQUA, PURPLE = '#2a78d6', '#eb6834', '#1baf7a', '#7b5bd6'
 INK, INK2, MUTED, GRID, AXIS = '#0b0b0b', '#52514e', '#898781', '#e1e0d9', '#c3c2b7'
 plt.rcParams['font.family'] = 'DejaVu Sans'
 
-HE = {'TiratCarmel': 'טירת כרמל', 'Matam-NeotPeres': 'מת"ם-נאות פרס', 'HofCarmel-NeveDavid': 'חוף הכרמל-נווה דוד', 'Hecht-Shprintzak': 'הכט-שפרינצק',
-      'EinHayam': 'עין הים', 'BatGalim-KiryatEliezer': 'בת גלים-קריית אליעזר', 'Hamoshava': 'המושבה', 'LowerCity': 'העיר התחתית', 'Namal-Giborim': 'הנמל-גיבורים',
-      'Hamifrats': 'המפרץ', 'Bazan-Hutsot': 'בזן-חוצות המפרץ', 'TsometKiryatAta': 'צומת קריית אתא', 'KiryatAta North': 'קריית אתא צפון',
-      'KiryatAta North-East': 'קריית אתא צפון-מזרח', 'Shefaram': 'שפרעם', 'Hamovil': 'המוביל', 'Nazareth': 'נצרת', 'KiryatHaim': 'קריית חיים',
-      'KiryatBialik Center': 'מרכז קריית ביאליק', 'Kiryon': 'הקריון', 'TsurShalom': 'צור שלום', 'KiryatHaim West': 'קריית חיים מערב',
-      'KiryatYam B+C': "קריית ים ב'+ג'", 'KiryatYam A': "קריית ים א'", 'SavyoneyYam': 'סביוני ים'}
-CODE = {'TiratCarmel': 201, 'Matam-NeotPeres': 202, 'HofCarmel-NeveDavid': 203, 'Hecht-Shprintzak': 204, 'EinHayam': 205, 'BatGalim-KiryatEliezer': 206, 'Hamoshava': 207,
-        'LowerCity': 208, 'Namal-Giborim': 209, 'Hamifrats': 210, 'Bazan-Hutsot': 211, 'TsometKiryatAta': 212, 'KiryatAta North': 213, 'KiryatAta North-East': 214,
-        'Shefaram': 215, 'Hamovil': 216, 'Nazareth': 217, 'KiryatHaim': 104, 'KiryatBialik Center': 103, 'Kiryon': 102, 'TsurShalom': 101, 'KiryatHaim West': 304,
-        'KiryatYam B+C': 303, 'KiryatYam A': 302, 'SavyoneyYam': 301}
+import sys; sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__))))
+from he_area_names import HE, CODE
 SERIES = [('step: survey bus 2018 (raw)', 'סקר 2018 (אוטובוס, גולמי)', MUTED, ':', 1.8, 1.0),
           ('ticketing: bus (RavKav, own alightings)', 'רב-קו (ירידות רב-קו עצמן)', ORANGE, '-', 2.2, 1.0),
           ('survey: bus (calibrated)', 'מטריצת אוטובוס 2022', BLUE, '-', 2.2, 1.0)]
