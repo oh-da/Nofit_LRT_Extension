@@ -12,7 +12,7 @@ plt.rcParams['font.family'] = 'DejaVu Sans'
 os.makedirs('Output/figures/he', exist_ok=True)
 LRI, PDI = '⁦', '⁩'
 DIRS_HE = ['לכיוון נצרת (S01 → M20)', 'לכיוון טירת כרמל (M20 → S01)']
-SC_HE = {'BU_2040': '2040 BU', 'BU_2050': '2050 BU', 'HS_2040': '2040 HS', 'HS_2050': '2050 HS'}
+SC_YEAR = {'BU_2040': '2040', 'BU_2050': '2050'}      # BU = המשך מגמות (business as usual)
 p, kind = 'AM', 'lrt'
 for sc in ['BU_2040', 'BU_2050']:
     l = loads(p, sc, kind); x = np.arange(len(l)); fig, ax = plt.subplots(figsize=(13, 5.2), facecolor='white')
@@ -22,7 +22,7 @@ for sc in ['BU_2040', 'BU_2050']:
     ax.yaxis.set_major_formatter(FuncFormatter(lambda v, _: f'{v:,.0f}'))
     ax.set_ylabel('נוסעים / שעת שיא'); ax.set_xticks(x); ax.set_xticklabels(seg_lab, rotation=90, fontsize=6.5)
     ax.grid(axis='y', alpha=0.3); ax.set_axisbelow(True); ax.legend(fontsize=9, loc='upper right')
-    ax.set_title(f'זרימת הרכבת הקלה לפי קטע וכיוון — {LRI}{SC_HE[sc]}{PDI}, שעת שיא בוקר (גורמים {LRI}{phf(p, "transit", "up"):.2f} / {phf(p, "transit", "down"):.2f}{PDI} משלוש השעות); קו ראשי + הרחבה, עם עדיפות', fontsize=10.5)
+    ax.set_title(f'פרופיל קו הרק"ל לפי קטע וכיוון, שעת שיא בוקר, תרחיש: {LRI}{SC_YEAR[sc]}{PDI} המשך מגמות', fontsize=12)
     # location pointers on the x axis: S01 = Tirat Carmel (start of the first segment), S24 = Hamifrats central station (the extension / main route junction), M20 = Nazareth (end of the last segment)
     for xp, name, ha in [(-0.5, 'טירת כרמל', 'left'), (n_ext - 0.5, 'מרכזית המפרץ', 'center'), (len(l) - 0.5, 'נצרת', 'right')]:
         ax.annotate('', xy=(xp, 0), xycoords=('data', 'axes fraction'), xytext=(xp, -0.22), textcoords=('data', 'axes fraction'),
