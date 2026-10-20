@@ -26,7 +26,10 @@ def run_rtl(r, size=None, bold=None, italic=None, mono=False, color=None):
     if color: r.font.color.rgb = RGBColor.from_string(color)
 LRM = '\u200e'
 RANGE = re.compile(r'(\d[\d.,:]*%?)\s?([–-])\s?(\d[\d.,:]*)')            # keep number ranges (1–5, 06:00–09:00, 0.02–0.05) left-to-right inside right-to-left text
-def fix_ranges(t): return RANGE.sub(lambda m: f'{LRM}{m.group(1)}{LRM}{m.group(2)}{LRM}{m.group(3)}{LRM}', t)
+SEC = re.compile(r'§\d+[a-z]*')
+def fix_ranges(t):
+    t = SEC.sub(lambda m: '\u2066' + m.group(0) + '\u2069', t)                       # keep section references (§6m) left-to-right
+    return RANGE.sub(lambda m: f'{LRM}{m.group(1)}{LRM}{m.group(2)}{LRM}{m.group(3)}{LRM}', t)
 TOK = re.compile(r'(\*\*.+?\*\*|`.+?`|\*[^*\s][^*]*?\*)')
 def add_inline(p, text, size=None, bold_all=False, color=None):
     text = fix_ranges(text)
@@ -58,11 +61,13 @@ def flush_table():
     global table
     if not table: return
     rows = [[c.strip() for c in r.strip().strip('|').split('|')] for r in table if not re.match(r'^\|[-| ]+\|$', r.strip())]
-    t = doc.add_table(rows=len(rows), cols=2); t.style = 'Table Grid'; t.alignment = 2
-    tblPr = t._tbl.tblPr; bv = OxmlElement('w:bidiVisual'); tblPr.append(bv)
+    ncols = len(rows[0]); WID = {2: [5.2, 11.2], 3: [1.5, 5.6, 9.3]}[ncols]
+    t = doc.add_table(rows=len(rows), cols=ncols); t.style = 'Table Grid'; t.alignment = 2
+    tblPr = t._tbl.tblPr; bv = OxmlElement('w:bidiVisual'); tblPr.append(bv); t.autofit = False
+    for ci_, w_ in enumerate(WID): t.columns[ci_].width = Cm(w_)
     for ri, row in enumerate(rows):
         for ci, txt in enumerate(row):
-            c = t.rows[ri].cells[ci]; c.width = Cm(5.2 if ci == 0 else 11.2); p = c.paragraphs[0]; rtl_par(p); p.paragraph_format.space_after = Pt(2)
+            c = t.rows[ri].cells[ci]; c.width = Cm(WID[ci]); p = c.paragraphs[0]; rtl_par(p); p.paragraph_format.space_after = Pt(2)
             add_inline(p, txt, 10, bold_all=(ri == 0), color='FFFFFF' if ri == 0 else None)
             if ri == 0: shade(c, '1F3864')
     doc.add_paragraph().paragraph_format.space_after = Pt(4); table = []
@@ -74,6 +79,7 @@ for l in lines:
     flush_table()
     if not l.strip() or l.strip() == '---': continue
     if l.startswith('# '): p = para(l[2:], 17, 10, bold_all=True, color='1F3864')
+    elif l.startswith('### '): p = para(l[4:], 12, 4, bold_all=True, color='2F5597'); p.paragraph_format.space_before = Pt(10); p.paragraph_format.keep_with_next = True
     elif l.startswith('## '): p = para(l[3:], 13.5, 6, bold_all=True, color='1F3864'); p.paragraph_format.space_before = Pt(12); p.paragraph_format.keep_with_next = True
     elif re.match(r'^\d+\. ', l):
         m = re.match(r'^(\d+)\. (.*)$', l); p = para(f'{m.group(1)}. ' + m.group(2), 10.5, 7)

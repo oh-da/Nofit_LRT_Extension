@@ -42,7 +42,7 @@ alternatives (steps 15–45).
   the chain reads. *Diagnostic* = evidence, not a product. *Historical* = superseded, kept as a
   record, read by nothing current. *Alternative scenario / sensitivity* = a parallel run, not
   the central case.
-- **Caveats are numbered** (§8, 1–29) and cited as "caveat *n*" wherever a result depends on
+- **Caveats are numbered** (§8, 1–34; the numbers never change, retired ones are listed in §8.2) and cited as "caveat *n*" wherever a result depends on
   one.
 - A plain-language companion that walks through every step with the same structure is
   `docs/PLAIN_ENGLISH_METHODOLOGY.md`.
@@ -4115,228 +4115,96 @@ zone i ends in zone j.
 
 ## 8. Known caveats and open questions
 
-> **In plain words.** The known limits of the products, numbered so results can cite them. Caveats 1–5 belong to the historical hybrids; 6–13 came out of the external review; 14–18 are the 23 September corrections and findings (mode codes, λ, the 2025 smart cards, the on-board pattern, the flatter real peak); 19–23 are the validation guideline's findings; 24–29 concern the car speeds, the capture model's behaviour and the alternatives. For a user of the LRT numbers the ones that matter most are 15 (λ), 18 (peak hour), 25–27 (what the pivot can and cannot move) and 28–29 (the assumptions of step 45).
+> **In plain words.** The known limits of the products as they stand after step 45, numbered so results can cite them; **the numbers never change**, so a caveat that no longer applies keeps its number in §8.2. The model is survey-only at its base: the 2017/18 household survey grown to 2022, the bus calibrated to the May 2022 smart cards, a demographic growth to 2040 / 2050, and an incremental-logit capture of the LRT between the 25 corridor areas. The survey × cellular hybrids of steps 1–4 and 6 are historical and read by nothing current, so the caveats written for them are retired (§8.2). For a user of the LRT numbers the ones that matter most are **30** (who is in the demand), **15** (λ), **18** (peak hour), **25–27** (what the pivot can and cannot move), **28–29** (the assumptions of step 45) and **32–33** (the line and its parameters).
 
-1. **Input data version** — the activities file is newer than the one used by the
-   original Colab run (§1); results are internally consistent but not comparable to the
-   numbers stored in `THS_2018_MTX.ipynb`.
-2. **Cellular zone mapping** — coarse national flows are replicated at full value to
-   child TAZ pairs (§2); within-superzone allocation in Step 3 inherits this.
-3. **Intra-zone divergence** — the largest survey–cellular disagreement (72% vs 34%
-   self-containment) is exactly where their *measurement* differs (short trips invisible
-   to cell towers). The hybrid resolves it in the survey's favor by construction; an
-   independent source on short-trip volumes would arbitrate.
-4. **Cross-day validation limits** — both survey days come from the same household
-   panel, so CV can calibrate against self-consistency only; at TAZ level this bias is
-   strong enough to disqualify CV entirely (§6, Route A).
-5. **Volumes at TAZ level** — `hybrid_taz_trips.csv` scales the hybrid probabilities by
-   superzone survey departure totals split among member TAZs by cellular outflow shares.
-   The superzone-level scale is survey-based and solid; the within-superzone origin split
-   rests on cellular structure (with its replication caveat), not on a production model —
-   treat individual TAZ origin totals accordingly.
+*Rewritten on 20 October 2026 against the chain of `pipeline/steps.py` (§0.5, §0.8): caveats 3, 5, 7, 8, 10, 11, 12 and 13 now describe the survey-only chain; 30–34 are new; 1, 2, 6, 9 and 14 are retired.*
 
-Added after the methodology review of 21 September 2026:
+### 8.1 Caveats of the current model
 
-6. **Superzone OD blocks of the TAZ hybrids are not conserved** by the correction-factor
-   construction (§6q); use `hybrid_taz_trips_balanced.csv` if a hybrid is needed at all.
-   The replicated cellular mapping (§2) also weights each national zone by its number of
-   child TAZs inside the within-superzone origin split and the TAZ destination mix; a
-   mass-preserving rebuild needs the cellular file (LFS) and the allocation-matrix
-   conversion of step 5.
-7. **Units of the transit sources are not reconciled.** The OnBoard file gives
-   P(alight | board) — whether per boarding leg or per journey is unconfirmed — and it is
-   applied to RavKav *journey* row totals; a bus-to-rail traveller may sit in both the
-   RavKav bus OD (journey ending at the station stop) and the station train matrix. Both
-   are untested. Keep person-journey products (the survey base) and boarding products
-   (RavKav, station matrix) separate until an access / transfer allocation links them.
-8. **The segmented coverage rule is an assumption with a threshold** (§6m): its bus
-   total exceeds both sources and moves by ± 5 % over thresholds 0.3–0.7; the cause of
-   sub-0.5 ratios (operator coverage, cash fares, survey over-expansion) is unresolved.
-9. **Taxi-type codes 5 / 8** are a separate layer; their exact meaning awaits the survey
-   codebook, and they should not be summed into an LRT market by default.
-10. **The forecast branch** (`transit/all_adjusted_*`, `forecast/*`) rests on the
-    historical 25-area composite, mixes a residents' door-to-door car / other layer with
-    all-rider boardings, freezes 2022 modal shares (its 8.9 % → 7.5–8.0 % transit decline
-    is composition, not behaviour), smooths shares with k = 50 applied to *expanded*
-    volumes (inert for cells of thousands of trips; sampled counts are the right
-    information measure), preserves the 155 zero cells of the base under Furness, and
-    excludes the 116,473 weighted trips with one end outside the study area and the three
-    line areas below 50 observed bus trips. It is a demographic reference, not a forecast
-    of LRT demand, and is to be rebuilt from the current base (tasks D1–D4).
-11. **Vintage alignment is an assumption**: `(X2025 / X2020)^(4/5)` extrapolates a forecast
-    trend to represent 2018–2022; the national rail ratio stands in for local AM change;
-    the claim that May 2022 bus ridership was not COVID-suppressed rests on the study
-    team's statement and has no evidence in the repository.
-12. **Corridor profiles are potential movements** between line areas — three-hour totals
-    (§6o) and, since step 20, peak-departure-hour values (§6r) — not passenger loads or
-    upper bounds on LRT demand. The peak-hour factors rest on survey departure times
-    (car by direction, bus and taxi-type study-area-wide); a boarding-hour factor from
-    RavKav is still to be derived.
-13. **Similarity tests are diagnostics**: day-to-day agreement of the same households is
-    a repeatability reference, not a ceiling (the hybrid exceeds it against the survey by
-    construction); a better fit to RavKav after calibrating to RavKav is not validation.
-    External counts (Haifa-segment bus loads, Nazareth local vs Haifa-bound services,
-    Hamifrats transfers, road screenlines, station boardings) are still absent.
+**A. The survey base and the zone system**
 
-Added 23 September 2026 (step 33):
+The base year is the 2017/18 household survey alone — no cellular data — expanded with the trips file's `new_wf`, converted from the survey's 1250-zones to the study TAZs by population and employment.
 
-14. **The trips file's mode codes 4 and 5 are swapped in steps 15–32.** Confirmed against
-    the activities file (§6ae): 4 is group taxi and 5 is Matronit, while the chain's
-    `COMP = {'BUS': [3, 4], 'TAXI': [5, 8]}` puts the Matronit in the taxi-type layer and the
-    group taxi in the bus layer. Effect at 2018 survey level, AM: study-area-wide 11,406
-    expanded trips per day belong in bus rather than taxi-type and 2,006 the other way;
-    within the 25 V2 areas (off-diagonal) the transit layer is 12,673 rather than 6,747 and the
-    taxi-type layer 723 rather than 6,650. The calibrated bus product of step 15 absorbs part
-    of this where it adopted RavKav volumes (which include Metronit boardings), but the taxi
-    layer that steps 22–32 carried unchanged and kept out of the choice set was mostly Metronit
-    riders. **Steps 15–32 were rerun with `BUS = [3, 5]`, `TAXI = [4, 8]` on 23 September
-    2026** (§0, "Rerun") and rebuilt again the same afternoon with step 15's prior on RavKav's
-    own alightings (§0, "Rebuild"); every number in §6m–§6ag is from that rebuild, and the
-    products under `Output/` are the corrected ones. The two reports under `reports/`
-    (revisions 2.2 and 1.4) carry a dated revision note with the before / after values, and
-    `docs/PLAIN_ENGLISH_METHODOLOGY.md` an update chapter; their body text still reads at the
-    22 September state. Caveat 9 is resolved by the same check: the taxi-type codes are 4 group
-    taxi (sherut) and 8 special taxi.
-15. **λ is estimated but the choice-rider λ is not identified** (§6ae): pooled 0.035
-    (0.002–0.068) supports the assumed 0.03; for licence holders in car-owning households
-    0.008 ± 0.017. λ_T and the LRT premium remain assumptions; a stated-preference survey is
-    the way to both.
-16. **The RavKav 2025 extracts (§6af) are boardings whose transfer tag is not the 2022 journey
-    linking, and whose stop codes collide across operators.** The tag marks 3.7 % of the bus +
-    Metronit boardings as transfers where the May 2022 linked journeys had a third of their
-    legs as transfer legs, so the 2025 "journey origins" are nearer to legs than to journeys and
-    must not be compared with the 2022 journeys, or fed to the coverage rule of §6m, as the same
-    unit; the question for the provider is what the tag means under the daily cap. `StopCode`
-    repeats across operator clusters, so every 2025 product is keyed by (cluster, code) and
-    located from the taps' own coordinates; the north stops file alone would have placed
-    52,000 non-northern boardings a day in the area. The rail extract's station coordinates are
-    wrong for several stations; the GTFS locations are used. Alightings for bus and Metronit
-    are still the OnBoard pattern (caveat 7); the rail OD is measured from the exit taps, with an
-    expansion for the exits after 09:00. The chain is not yet re-anchored on this layer. **Step
-    41 (23 September 2026, §6ai) tried a card-level chaining of the taps themselves in place of
-    the tag: it recovers a transfer share (27.5 %) close to 2022's (a third), supporting the
-    "nearer to legs" reading above, but resolves an alighting for only 45.8 % of taps, because
-    72.2 % of card-date groups tap once in this AM-only window — one leg, nothing to chain
-    against. Re-anchoring still needs a general alighting inference this file cannot supply
-    by tap-chaining alone.**
-17. **The OnBoard destination pattern is what separates the ticketing products from the
-    survey** (§6ag). At superzone level the survey's bus matrix matches RavKav's own inferred
-    alightings (step 8's `bus_od_taz_avg.csv`) as well as it matches itself between its two
-    days, and the two share the same principal destination structure; the RavKav matrices
-    built on the OnBoard pattern (step 9's `bus_od_taz_new.csv`, the 2025 layer) match the
-    survey no better than a permuted geography and carry trips twice as long. Step 9 chose
-    the OnBoard pattern over RavKav's alightings on a fine-grain (TAZ) correlation; every
-    coarser test now says the reverse. **Acted on the same day** (§0 "Rebuild", §6m): step
-    15 now takes its superzone prior, its TAZ destination split and its coverage-rule
-    volumes from `bus_od_taz_avg.csv`; the held-out validation confirms the choice (pure
-    RavKav rows predict held-out survey households at JSD 0.267 against 0.422 for the
-    OnBoard rows, and better than the survey's own rows at 0.336); the corridor-profile gap
-    of §6p / §6z **was** the OnBoard pattern — on RavKav's own alightings the survey and the
-    ticketing agree along the whole line to within ± 15 % on the segment ratios, and the
-    ticketing excess towards Tirat Carmel (2.5–3 ×) and from Nazareth (2.5 ×) is gone. What
-    remains open: on RavKav's own alightings the ticketing places 0.36 × the survey's transit
-    from Nazareth towards Haifa where the OnBoard pattern placed 2.5 × — the two alighting
-    inferences disagree by 13 × on that branch and bracket the survey. Which is right — the
-    OnBoard survey over-representing long lines, or RavKav's alighting inference truncating
-    journeys at the transfer hub — needs the OnBoard unit (caveat 7) and a count on the
-    Nazareth branch (task C3); until then the Nazareth-branch market is a range. Step 9's
-    product stays in the repository as that second reading, not as an input.
-18. **The survey's departure-time profile is peakier than the road and the fare gates** (§6ah,
-    §6af). On the counted cordon links the busiest clock hour holds 0.38–0.43 of 06:00–09:00
-    (1.1–1.3 × an average hour); the RavKav boardings hold 0.43–0.48 in the busiest 60 minutes;
-    the survey's car departures hold 0.62–0.66 and its bus departures 0.55–0.59 on 15-minute
-    windows (§6r, §6y). Definitions explain a small part (departure vs crossing, sliding vs clock
-    hour), reporting heaping at the whole and half hour and the flatter commercial traffic the
-    rest. The step-20 / 27 factors are therefore an upper bound, and every peak-hour figure in
-    §6r, §6v, §6y, §6ac and §6ad scales with them; the count-based 0.42–0.48 for car and the
-    boarding-based 0.43–0.48 for transit are the values to carry into the design hour until a
-    link-crossing profile from an assignment exists (task B1e).
+3. **No independent source for the volume of short and intra-zonal trips.** The survey holds many short trips that a phone-based matrix cannot see: at super-zone level the survey carries 3.6 × the cellular volume and 47 % of its trips stay inside one cellular zone against 14 % (T5, §6ar). The cellular matrix is not used in the chain, so nothing arbitrates the volume of short trips, and the TAZ matrices keep 20.6 % of the AM trips on the diagonal (T6, 15.4 % PM, 16.2 % midday) against the guideline's limit of 5 %. The LRT capture works between different areas and is not affected; any reading of the matrices below the area level is.
 
-19. **Two super-zone keys disagree** (§6ar). 142 of the 778 TAZs have a different `SZ_NEW` in `Input/Zonal_2020.csv` than in `Input/Matrices/1270_02_09_2021_TAZ_North_keys.csv`. **Decision of 4 October 2026: the keys table
-    the chain uses is authoritative.** A comparison with CBS or the national model by super-zone must use it; `Zonal_2020.csv`'s `SZ_NEW` should be corrected or ignored. Separately, the segmented bus rule gives thin segments
-    (fewer than 5 sampled survey trips) the origin-wide factor, so an "anchored" origin total can differ from RavKav by up to 35 % (zones 3, 12, 13, 20; §6ar T14).
+4. **Both survey days come from the same households.** Agreement between the two days is a repeatability reference, not a measure of accuracy (survey day 1 against day 2 gives R² 0.73 on the super-zone transit OD, T7), so the bus blend's weight `k` is chosen by a household split and not across days, which would favour the survey's own rows (§6m).
 
-20. **The RavKav shortfall against the survey is an AM, education-heavy phenomenon** (§6ar wave 1b). RavKav / survey bus is 0.74 in the AM, 0.96 in the PM peak and 0.93 at midday; home-based education is 40 % of the AM survey bus trips and 13-19 % in the other windows
-    (without them the ratio is 1.1-1.2 in every window). The coverage threshold of 0.5 and its guarded cells in the AM may therefore be guarding student travel rather than a general ticketing gap. Ask the provider whether school / student trips are in the extract; a coverage rule by purpose
-    is the candidate refinement.
+5. **TAZ detail is an allocation, not an observation.** The survey's own unit is the 1250-zone; the split to the 778 study TAZs (and to the 174 corridor TAZs) uses the 2020 population (origins) and employment (destinations) of `Zonal_2020.csv`, with the other variable and then a uniform split as fallbacks (396 zones; §6m). Super-zone and area totals are solid; the number of a single TAZ origin or destination is not, and the TAZ-level capture inherits this (caveat 27).
 
-21. **The car occupancy of step 36 was computed with the wrong hour** (§6ar wave 2, T10). The AM value 1.33 (and the PM / midday values 1.43 / 1.32 of wave 1b) used the `Dep_h` of the arrival row; the trip's departure hour is the `Dep_h` of the previous place. Right hour: **AM 1.52, PM 1.52, midday 1.33**. Only the vehicle conversion of the count comparisons is affected (person-trip matrices are not): T12 is rerun (AM 0.71 -> 0.62, PM 0.64 -> 0.61, midday 0.50 -> 0.49 of the counted vehicles). `Car_cordon_counts_validation.ipynb` (step 36) and §6ah keep the original numbers as a record and carry a correction note; any later use of 1.33 (a vehicle matrix for assignment, the through-trip factors) must use the window's own value, or segment occupancy (29 of 36 super-zones within +/-10 % in the AM, range 1.24-1.74; the vehicle-trip pattern by origin super-zone moves CR 0.92-0.95).
+19. **Two super-zone keys disagree** (§6ar). 142 of the 778 TAZs have a different `SZ_NEW` in `Input/Zonal_2020.csv` than in `Input/Matrices/1270_02_09_2021_TAZ_North_keys.csv`. **Decision of 4 October 2026: the keys table the chain uses is authoritative.** A comparison with CBS or the national model by super-zone must use it; `Zonal_2020.csv`'s `SZ_NEW` should be corrected or ignored. Separately, the segmented bus rule gives thin segments (fewer than 5 sampled survey trips) the origin-wide factor, so an "anchored" origin total can differ from RavKav by up to 35 % (zones 3, 12, 13, 20; §6ar T14).
 
 22. **The survey population is 5 % above the zonal population and its households are larger** (§6ar wave 2, T2). THS-expanded residents 2,670,719 vs 2,539,095 (zonal 2020); households 810,186 vs 841,502; average household size 3.39 vs 3.02 (5 of 36 super-zones within +/-5 %); the Haredi and Arab sectors are +26 % and +11 % over the zonal sector populations, Jewish non-Haredi -1 %. The spatial pattern agrees (R2 0.997 by super-zone, 29 of 36 within +/-5 % after one factor). The 2022 layers are grown from the zonal 2020 / 2025 controls, so the survey base year carries this 5 % into the 2018 layers and the 2018 -> 2022 trip rates per resident (T3, +7 %). Open: whether the zonal household count includes non-private households, and the HHSIZE definition of the survey (no dictionary in the repository); the CBS population by sector is needed to say which side is right. Also: the sub-area, V2 and GS geographies do not nest in the 36 super-zones (13 of 28, 15 of 25 and 11 of 25 groups span two or more), so figures by those levels cannot be summed to super-zones without an allocation rule.
 
+**B. The transit sources: smart cards and the bus calibration**
+
+The bus layer is the survey calibrated to the May 2022 RavKav journeys; the 2025 smart-card extracts and the OnBoard survey are an input layer and a comparison.
+
+7. **Units of the transit sources are not fully reconciled.** The survey's transit trips are residents' door-to-door person-journeys; the RavKav 2022 journeys are all riders' linked journeys from the first boarding to the final alighting, on RavKav's own inferred alightings; the rail layer is the survey's door-to-door rail grown by 0.793 (national ridership 2019 → 2022), beside the 2019 station-to-station smart-card matrix. A bus-to-rail traveller may sit in both the RavKav bus OD and the station matrix (untested). The OnBoard file gives P(alight | board) — whether per boarding leg or per journey is unconfirmed — and has been comparison only since 23 September 2026. Keep person-journey products (the survey base) and boarding products (RavKav, the station matrix) separate until an access / transfer allocation links them.
+
+8. **The segmented coverage rule is an assumption with a threshold** (§6m). RavKav records 0.74 of the survey's AM bus trips; an origin × segment with at least 5 sampled survey trips takes the RavKav volume where its RavKav / survey ratio is at least 0.5, and elsewhere keeps the survey volume (30 guarded cells). The bus total of the base moves with the threshold: 95,986 at 0.3, 109,713 at 0.4, **115,430 at 0.5 (the base)**, 124,654 at 0.6, 129,472 at 0.7 (−17 % to +12 %). The cause of the sub-0.5 ratios — operators outside the extract, cash fares, survey over-expansion, student travel (caveat 20) — is unresolved.
+
+16. **The RavKav 2025 extracts (§6af) are boardings whose transfer tag is not the 2022 journey linking, and whose stop codes collide across operators.** The tag marks 3.7 % of the bus + Metronit boardings as transfers where the May 2022 linked journeys had a third of their legs as transfer legs, so the 2025 "journey origins" are nearer to legs than to journeys and must not be compared with the 2022 journeys, or fed to the coverage rule of §6m, as the same unit; the question for the provider is what the tag means under the daily cap. `StopCode` repeats across operator clusters, so every 2025 product is keyed by (cluster, code) and located from the taps' own coordinates; the north stops file alone would have placed 52,000 non-northern boardings a day in the area. The rail extract's station coordinates are wrong for several stations; the GTFS locations are used. Alightings for bus and Metronit are still the OnBoard pattern (caveat 7); the rail OD is measured from the exit taps, with an expansion for the exits after 09:00. The chain is not yet re-anchored on this layer. **Step 41 (23 September 2026, §6ai) tried a card-level chaining of the taps themselves in place of the tag: it recovers a transfer share (27.5 %) close to 2022's (a third), supporting the "nearer to legs" reading above, but resolves an alighting for only 45.8 % of taps, because 72.2 % of card-date groups tap once in this AM-only window — one leg, nothing to chain against. Re-anchoring still needs a general alighting inference this file cannot supply by tap-chaining alone.**
+
+17. **The OnBoard destination pattern is what separates the ticketing products from the survey** (§6ag). At superzone level the survey's bus matrix matches RavKav's own inferred alightings (step 8's `bus_od_taz_avg.csv`) as well as it matches itself between its two days, and the two share the same principal destination structure; the RavKav matrices built on the OnBoard pattern (step 9's `bus_od_taz_new.csv`, the 2025 layer) match the survey no better than a permuted geography and carry trips twice as long. Step 9 chose the OnBoard pattern over RavKav's alightings on a fine-grain (TAZ) correlation; every coarser test now says the reverse. **Acted on the same day** (§0 "Rebuild", §6m): step 15 now takes its superzone prior, its TAZ destination split and its coverage-rule volumes from `bus_od_taz_avg.csv`; the held-out validation confirms the choice (pure RavKav rows predict held-out survey households at JSD 0.267 against 0.422 for the OnBoard rows, and better than the survey's own rows at 0.336); the corridor-profile gap of §6p / §6z **was** the OnBoard pattern — on RavKav's own alightings the survey and the ticketing agree along the whole line to within ± 15 % on the segment ratios, and the ticketing excess towards Tirat Carmel (2.5–3 ×) and from Nazareth (2.5 ×) is gone. What remains open: on RavKav's own alightings the ticketing places 0.36 × the survey's transit from Nazareth towards Haifa where the OnBoard pattern placed 2.5 × — the two alighting inferences disagree by 13 × on that branch and bracket the survey. Which is right — the OnBoard survey over-representing long lines, or RavKav's alighting inference truncating journeys at the transfer hub — needs the OnBoard unit (caveat 7) and a count on the Nazareth branch (task C3); until then the Nazareth-branch market is a range. Step 9's product stays in the repository as that second reading, not as an input.
+
+20. **The RavKav shortfall against the survey is an AM, education-heavy phenomenon** (§6ar wave 1b). RavKav / survey bus is 0.74 in the AM, 0.96 in the PM peak and 0.93 at midday; home-based education is 40 % of the AM survey bus trips and 13-19 % in the other windows (without them the ratio is 1.1-1.2 in every window). The coverage threshold of 0.5 and its guarded cells in the AM may therefore be guarding student travel rather than a general ticketing gap. Ask the provider whether school / student trips are in the extract; a coverage rule by purpose is the candidate refinement.
+
+**C. Growth to 2022, to 2040 / 2050 and the time frame**
+
+11. **The vintages are mixed and aligned by assumption.** The survey is 2017/18; it is grown to 2022 per TAZ by `(X2025 / X2020)^(4/5)` from the zonal files, an interpolation of a forecast trend; the national rail ratio 0.793 stands in for the local change in rail; the bus cells that take RavKav volumes are May 2022 anchors. The validation compares data of other years (road counts 2017–2023, RavKav 2025, GTFS June 2026, speeds May 2026) with no growth applied to shapes. The claim that May 2022 bus ridership was not COVID-suppressed rests on the study team's statement and has no evidence in the repository.
+
+10. **The 2040 / 2050 matrices are a demographic reference, not a behavioural forecast** (step 23, §6u). The 2022 layers are grown by composite land-use indices of population and employment (fitted on the 2022 demand, R² ≈ 0.5 at TAZ level) and Furnessed per layer; mode split, trip rates and destination choice stay at 2022 by construction, so the transit share is not a result (study-area growth: transit × 1.30–1.64 against car × 1.31–1.63 over the four sets). The BU / HS zonal files are taken as given, and HS also changes the composition of the market. Small-base and transforming TAZs receive the super-zone pattern, which seeds trips into TAZ pairs that are empty in 2022 (caveat 29). The taxi-type layer does not converge (9–35 % maximum row-margin error). The capture on the forecast sets (step 32) uses the May 2026 skims in every year: no congestion growth, no bus-network or car-ownership change, no branch LRT. The older 25-area composite forecast (`Output/forecast/`, `Output/transit/all_adjusted_*`) is historical and read by nothing current.
+
+31. **Time frame.** The base is a representative weekday: the survey's two days, the average of four May 2022 Tuesdays for RavKav, one GTFS service day (a Tuesday in June 2026) with the May 2026 observed bus times of step 30, and May 2026 car speeds (caveat 24). There is no seasonality or day-of-week variation, and the forecast PM sets are grown at the AM rates (caveat 28).
+
+**D. Corridor profiles, peak hour and the validation**
+
+12. **Corridor profiles are potential movements** between line areas — three-hour totals (§6o) and, since step 20, peak-departure-hour values (§6r) — not passenger loads or upper bounds on LRT demand. The peak-hour factors rest on survey departure times (caveat 18); a boarding-hour factor from RavKav exists for the AM only (0.43–0.48 in the 2025 extract, 06:00–09:00, §6af).
+
+13. **Similarity tests are diagnostics, not validation.** Day-to-day agreement of the same households is a repeatability reference, not a ceiling; a better fit to RavKav after calibrating to RavKav is not validation. External evidence now exists for the car (cordon counts T12, link counts T11) and for the bus against RavKav (T7, T8, T14), but not for the bus loads on the Haifa segment, Nazareth local against Haifa-bound services, the transfers at Hamifrats or the station boardings.
+
+18. **The survey's departure-time profile is peakier than the road and the fare gates** (§6ah, §6af). On the counted cordon links the busiest clock hour holds 0.38–0.43 of 06:00–09:00 (1.1–1.3 × an average hour); the RavKav boardings hold 0.43–0.48 in the busiest 60 minutes; the survey's car departures hold 0.62–0.66 and its bus departures 0.55–0.59 on 15-minute windows (§6r, §6y). Definitions explain a small part (departure vs crossing, sliding vs clock hour), reporting heaping at the whole and half hour and the flatter commercial traffic the rest. The step-20 / 27 factors are therefore an upper bound, and every peak-hour figure in §6r, §6v, §6y, §6ac and §6ad scales with them; the count-based 0.42–0.48 for car and the boarding-based 0.43–0.48 for transit are the values to carry into the design hour until a link-crossing profile from an assignment exists (task B1e).
+
+21. **The car occupancy of step 36 was computed with the wrong hour** (§6ar wave 2, T10). The AM value 1.33 (and the PM / midday values 1.43 / 1.32 of wave 1b) used the `Dep_h` of the arrival row; the trip's departure hour is the `Dep_h` of the previous place. Right hour: **AM 1.52, PM 1.52, midday 1.33**. Only the vehicle conversion of the count comparisons is affected (person-trip matrices are not): T12 is rerun (AM 0.71 -> 0.62, PM 0.64 -> 0.61, midday 0.50 -> 0.49 of the counted vehicles). `Car_cordon_counts_validation.ipynb` (step 36) and §6ah keep the original numbers as a record and carry a correction note; any later use of 1.33 (a vehicle matrix for assignment, the through-trip factors) must use the window's own value, or segment occupancy (29 of 36 super-zones within +/-10 % in the AM, range 1.24-1.74; the vehicle-trip pattern by origin super-zone moves CR 0.92-0.95).
+
 23. **The car layer does not reproduce the link counts' pattern** (§6ar wave 3, T11; step 42 done). All-or-nothing assignment on the Emme network (assumed free-flow speeds by link type): assigned / counted 0.93 on the 1,346 links counted 2021-2023 (slope 0.89), but R2 0.47 and RMSE% 113 against 0.85 and 35, and no peak-hour volume class inside its limit; one global factor does not help. The layer is residents' car trips without externals, trucks, taxis or intra-TAZ trips, so it should not be used as an assignment matrix for link forecasts without the missing demand components and an equilibrium assignment; corridor-level flows should be read through the cordon and screenline comparisons (T12) and the survey's own corridor profiles, not from individual link loads. The 2025 RavKav extracts hold 06:00-08:59 only, so T15-T17 cannot be extended to the PM and midday without new extracts.
 
-24. **The May 2026 car speeds are nearly the same in every hour** (§6am, step 43). On the links
-    observed in every hour the speed moves by a median of 2.3 km/h across 06:00–21:00 (p90 8.8,
-    constant on 739 of 8,660), and the study-area means per hour sit within 0.2 km/h of each
-    other — no morning-peak dip. The delivery holds one value per hour for the month, with no
-    weekday dimension, and exactly the same set of links in every hour, which reads as a monthly
-    aggregate lightly modulated by hour rather than hour-specific measurements. Half the
-    study-area links (short local ones; 20 % of the length) have no record. Before the 07:00
-    column is used as the peak car speed for the uplift (task C1 / E5), the provider's
-    aggregation method should be asked for; until then any skim built on it is a May 2026
-    all-day car speed, not a peak one.
+**E. Who is in the demand, the level of service, the line and the capture**
 
-25. **The car skim's level does not reach the capture** (§6ac addendum of 5 October 2026, step
-    37). The incremental logit pivots the pair's observed transit share on the change in the
-    transit nest's composite cost; the car's generalized cost is in neither term, so a different
-    car time — the 2026 network skim at 0.90 × the survey's on the trunk, or any other — leaves
-    every capture number unchanged. The model is thus insensitive to the car's absolute
-    attractiveness: a faster or slower car in 2040 would not alter the LRT's draw from it. That
-    is a limitation of the pivot, acceptable for a corridor screening where the car cost is
-    held constant between the build and no-build cases, but any statement about car-to-LRT
-    diversion rests on λ and the transit-side costs alone. A full mode-choice formulation is where the car time would
-    count; step 33's person-level λ re-estimated on the 2026 skim (§6ae addendum) moves from
-    0.035 to 0.040 and leaves the choice riders' λ unidentified, so the assumed 0.03 and its
-    0.02–0.05 range stand on either car skim.
+30. **Who is in the demand.** Residents of the study area, person-journeys with both trip ends in the study area, AM 06:00–09:00 (PM 16:00–19:00 and midday 10:00–14:00 on the same rules). Visitors, tourists, commuters from outside, through traffic and trucks are not in the layers, and taxi-type trips are carried unchanged as their own layer. The LRT capture is computed on the **corridor market only**: pairs of TAZs in *different* V2 areas (174 TAZs; 56,445 car / 14,133 transit / 720 taxi-type trips in 2022, §6ac). LRT trips from or to places outside the 25 areas, and trips inside one area, are not counted, so the LRT figures describe the corridor's own market and not the line's total ridership. The same exclusions put the car layer at 0.58–0.90 of the counted vehicles on closed cordons (T12).
 
-26. **The area-level transit skim understates the generalized cost a traveller from a given
-    TAZ faces** (§6ao, step 44). Routed TAZ by TAZ and aggregated with population × employment
-    weights, the transit GC on the trunk pairs is 45.2 generalized minutes against step 31's
-    29.8 (pooled wait) / 34.9 (best-line wait), a median pair ratio of 1.5, with the same
-    in-vehicle time and transfer count: the area skim combines the nearest stop's walk, the
-    best line's running time and the pooled headway of every direct line, which no single
-    traveller can do. The car skim shows no such gap (13.3 vs 13.0). For the capture this
-    matters less than it looks — the pivot moves on the *change* in the transit nest when the
-    LRT is added, and the LRT's own area skim carries the same kind of access averaging — but
-    the bus-versus-LRT comparison within the nest (`P_LRT|T`) is sensitive to it, and the
-    direction is not obvious: the LRT's station access is already TAZ-weighted (step 25), the
-    bus's is not. Step 39 (§6ap) ran the TAZ-level capture on `Output/los/`: with the bus at
-    the TAZ-routed cost and the LRT on the area skim the capture rises × 1.64 (6,963), with the
-    bus on the area components plus TAZ walks it stays (4,226) — the gap is the asymmetry, and
-    closing it needs the LRT's feeder leg and in-vehicle time at TAZ level too.
+34. **Bus level of service is a timetable routed over measured speeds** (steps 29–30). GTFS trips are routed stop to stop over the street network with the May 2026 measured bus speeds: shortest-length routing approximates the path a bus takes; 78 % of the directed links carry a measured speed (94 % of the routed length); 13.5 % of the trip-segments route only when one-way direction is ignored and 2.1 % fall back to the schedule. Whether the measured speeds include the dwell at stops is inferred (the short hops take exactly the scheduled time), not documented. Observed times are 1.09 × the scheduled per trip (Metronit 0.87), and 8–9 minutes above the schedule on the Nazareth → Haifa trunk.
 
-27. **The trips the pivot induces from the car depend on the level it is run at** (§6ap, step
-    39). With every TAZ pair given its area pair's skims, the TAZ-level pivot returns the area
-    result's trips from the bus exactly but only 130 of its 414 induced trips (underground
-    central; 77 of 234 ground, 187 of 614 design): the incremental shift is proportional to
-    S·(1 − S) of the pair's smoothed transit share, and the TAZ pairs' shares — allocations of
-    survey trips to TAZs — are far more dispersed than the area pair's. The induced component
-    is thus not a property of the demand alone but of the aggregation the pivot is applied at;
-    the area level's 414 is its upper reading, and any TAZ-level capture adopted later should
-    state which level its induced trips come from.
+24. **The May 2026 car speeds are nearly the same in every hour** (§6am, step 43). On the links observed in every hour the speed moves by a median of 2.3 km/h across 06:00–21:00 (p90 8.8, constant on 739 of 8,660), and the study-area means per hour sit within 0.2 km/h of each other — no morning-peak dip. The delivery holds one value per hour for the month, with no weekday dimension, and exactly the same set of links in every hour, which reads as a monthly aggregate lightly modulated by hour rather than hour-specific measurements. Half the study-area links (short local ones; 20 % of the length) have no record. Before the 07:00 column is used as the peak car speed for the uplift (task C1 / E5), the provider's aggregation method should be asked for; until then any skim built on it is a May 2026 all-day car speed, not a peak one.
 
-28. **The main route's operation is assumed, and the forecast PM sets are grown at the AM
-    rates** (§6aq, step 45). The stations are the delivered stop list (20 nodes,
-    `Main_Nofit_StopsID.csv`; the first run had assumed 27 at ≥ 1 km, which carried 3–5 % more
-    main-route demand), but its running at grade at 80 km/h with 10 s dwell, the 5-minute headway
-    and the through-running at Hamifrats without a transfer are assumptions; a terminating main
-    line would put a transfer penalty on every trip crossing Hamifrats. The PM forecast matrices
-    are the wave-1b PM base multiplied by step 23's AM growth per TAZ pair, since step 23's
-    margins are built on AM productions and attractions; a PM-specific growth would need the PM
-    rates (task).
+32. **The LRT line, and what is assumed about it.** The extension is the client's drawn alignment (`hf_lrt_3`, 24 stations S01–S24) with station-to-station running times in two regimes: *Prioritized* (calibrated on the underground times, 40.7 minutes S01 → S24) and *Unprioritized* (at grade, 65.8 minutes); there is no signal or junction simulation. The main route is the `Main_Nofit` alignment with its 20 stations (caveat 28); no branch LRT is modelled (the T1–T3 branches appear only as a synthetic sensitivity). There is no station or interchange design: the access and egress walk is the population-weighted nearest-station walk (areas) or a straight line from the polygon centroid (TAZs). The LRT premium (5 generalized minutes), the free LRT–Metronit transfer, the Metronit premium and the 5-minute headway are assumptions. There is no capacity or crowding, no fare (a flat integrated fare, by decision), no park-and-ride, and no bus-network response: the existing bus lines keep running as today.
 
-29. **The car shift is not comparable between the AM forecast scenarios** (§6aq addendum of
-    5 October 2026). The pivot's trips out of the car are proportional to `S·(1 − S)` of each
-    TAZ pair's smoothed transit share (caveat 27), and step 23's forecast sets seed trips into
-    TAZ pairs that are empty in 2022 (small-base and transforming TAZs take the super-zone
-    pattern), so the corridor pairs with both car and transit trips rise from 1,620 (2022) to
-    2,084 (BU 2040), 2,942 (BU 2050), 4,970 (HS 2040) and 5,688 (HS 2050) and the AM car → transit
-    shift doubles on a 4–16 % market growth (684 → 1,387–1,421); the PM sets, grown pair by pair
-    from the PM base, keep the 2022 pair set and move smoothly. The car shift is an order of
-    magnitude (0.4–1.5 % of the corridor car trips); differences between scenarios in that column
-    are an artefact of the seeding, and a scenario comparison of the car draw would need the pivot
-    run at the area level (caveat 27's upper reading) or a full mode-choice model.
+33. **The out-of-vehicle weights (walk, wait, transfer) are not confirmed** (§6al). They come from literature search summaries, several of which contradict each other, and the Israeli sources (the 2012 procedure and the Ministry guideline) were not read in full. Seven parameter sets run through the chain give an area-level underground capture of 1,456–4,935 (central case 4,254, unchanged): a sensitivity, not an estimate.
+
+15. **λ is estimated but the choice-rider λ is not identified** (§6ae): pooled 0.035 (0.002–0.068) supports the assumed 0.03; for licence holders in car-owning households 0.008 ± 0.017. λ_T and the LRT premium remain assumptions; a stated-preference survey is the way to both.
+
+25. **The car skim's level does not reach the capture** (§6ac addendum of 5 October 2026, step 37). The incremental logit pivots the pair's observed transit share on the change in the transit nest's composite cost; the car's generalized cost is in neither term, so a different car time — the 2026 network skim at 0.90 × the survey's on the trunk, or any other — leaves every capture number unchanged. The model is thus insensitive to the car's absolute attractiveness: a faster or slower car in 2040 would not alter the LRT's draw from it. That is a limitation of the pivot, acceptable for a corridor screening where the car cost is held constant between the build and no-build cases, but any statement about car-to-LRT diversion rests on λ and the transit-side costs alone. A full mode-choice formulation is where the car time would count; step 33's person-level λ re-estimated on the 2026 skim (§6ae addendum) moves from 0.035 to 0.040 and leaves the choice riders' λ unidentified, so the assumed 0.03 and its 0.02–0.05 range stand on either car skim.
+
+26. **The area-level transit skim understates the generalized cost a traveller from a given TAZ faces** (§6ao, step 44). Routed TAZ by TAZ and aggregated with population × employment weights, the transit GC on the trunk pairs is 45.2 generalized minutes against step 31's 29.8 (pooled wait) / 34.9 (best-line wait), a median pair ratio of 1.5, with the same in-vehicle time and transfer count: the area skim combines the nearest stop's walk, the best line's running time and the pooled headway of every direct line, which no single traveller can do. The car skim shows no such gap (13.3 vs 13.0). For the capture this matters less than it looks — the pivot moves on the *change* in the transit nest when the LRT is added, and the LRT's own area skim carries the same kind of access averaging — but the bus-versus-LRT comparison within the nest (`P_LRT|T`) is sensitive to it, and the direction is not obvious: the LRT's station access is already TAZ-weighted (step 25), the bus's is not. Step 39 (§6ap) ran the TAZ-level capture on `Output/los/`: with the bus at the TAZ-routed cost and the LRT on the area skim the capture rises × 1.64 (6,963), with the bus on the area components plus TAZ walks it stays (4,226) — the gap is the asymmetry, and closing it needs the LRT's feeder leg and in-vehicle time at TAZ level too.
+
+27. **The trips the pivot induces from the car depend on the level it is run at** (§6ap, step 39). With every TAZ pair given its area pair's skims, the TAZ-level pivot returns the area result's trips from the bus exactly but only 130 of its 414 induced trips (underground central; 77 of 234 ground, 187 of 614 design): the incremental shift is proportional to S·(1 − S) of the pair's smoothed transit share, and the TAZ pairs' shares — allocations of survey trips to TAZs — are far more dispersed than the area pair's. The induced component is thus not a property of the demand alone but of the aggregation the pivot is applied at; the area level's 414 is its upper reading, and any TAZ-level capture adopted later should state which level its induced trips come from.
+
+28. **The main route's operation is assumed, and the forecast PM sets are grown at the AM rates** (§6aq, step 45). The stations are the delivered stop list (20 nodes, `Main_Nofit_StopsID.csv`; the first run had assumed 27 at ≥ 1 km, which carried 3–5 % more main-route demand), but its running at grade at 80 km/h with 10 s dwell, the 5-minute headway and the through-running at Hamifrats without a transfer are assumptions; a terminating main line would put a transfer penalty on every trip crossing Hamifrats. The PM forecast matrices are the wave-1b PM base multiplied by step 23's AM growth per TAZ pair, since step 23's margins are built on AM productions and attractions; a PM-specific growth would need the PM rates (task).
+
+29. **The car shift is not comparable between the AM forecast scenarios** (§6aq addendum of 5 October 2026). The pivot's trips out of the car are proportional to `S·(1 − S)` of each TAZ pair's smoothed transit share (caveat 27), and step 23's forecast sets seed trips into TAZ pairs that are empty in 2022 (small-base and transforming TAZs take the super-zone pattern), so the corridor pairs with both car and transit trips rise from 1,620 (2022) to 2,084 (BU 2040), 2,942 (BU 2050), 4,970 (HS 2040) and 5,688 (HS 2050) and the AM car → transit shift doubles on a 4–16 % market growth (684 → 1,387–1,421); the PM sets, grown pair by pair from the PM base, keep the 2022 pair set and move smoothly. The car shift is an order of magnitude (0.4–1.5 % of the corridor car trips); differences between scenarios in that column are an artefact of the seeding, and a scenario comparison of the car draw would need the pivot run at the area level (caveat 27's upper reading) or a full mode-choice model.
+
+### 8.2 Retired caveats (kept so that older references can be traced)
+
+| No. | Was about | Why it is retired |
+|---|---|---|
+| 1 | The activities file was newer than the one used by the original Colab run | Concerned the 2018 survey × cellular matrices of steps 1–4, historical (§0.8); the chain now reads the 2017/18 trips file only |
+| 2 | Coarse national cellular flows replicated to child TAZ pairs | The cellular matrix is not an input of the chain; the survey's 1250-zones are split by population and employment (caveat 5) |
+| 6 | Superzone OD blocks of the TAZ hybrids not conserved | The TAZ hybrids and their rebalanced copy (step 19, §6q) are historical and read by nothing current |
+| 9 | Taxi-type codes 5 / 8 awaiting the codebook | Resolved on 23 September 2026 by the field metadata (step 33): 4 group taxi and 8 special taxi; the taxi-type layer is separate from the bus layer |
+| 14 | The trips file's mode codes 4 and 5 swapped in steps 15–32 | Resolved: steps 15–32 were rerun on 23 September 2026 with `BUS = [3, 5]`, `TAXI = [4, 8]` and rebuilt with the bus calibration's prior on RavKav's own alightings (§0, "Rerun" and "Rebuild"); every number from §6m on is from the rebuilt chain. Effect at 2018 survey level, AM: 11,406 expanded trips a day belonged in the bus layer and not in taxi-type, and 2,006 the other way |
+
+Caveats 3, 5, 7, 8, 10, 11, 12 and 13 keep their numbers but were rewritten for the current chain; their earlier text (about the hybrid matrices, the 25-area composite forecast and the replicated cellular mapping) is in the repository history before 20 October 2026.
+
 
 ## 8b. Related work — PCA-based analysis and structural comparison of OD matrices
 
