@@ -140,7 +140,7 @@ flowchart LR
 ## 4. What is still uncertain
 
 The main caveats, in order of how much they move the LRT number. The full list is
-[METHODOLOGY §8](METHODOLOGY.md#8-known-caveats-and-open-questions) (29 items).
+[METHODOLOGY §8](METHODOLOGY.md#8-known-caveats-and-open-questions) (34 items, numbered once and for all; retired ones are in §8.2).
 
 1. **The cost sensitivity λ.** It is assumed (0.03). The person-level estimate supports it
    (0.035) but cannot pin it down for people who own a car. Moving λ across 0.02–0.05
