@@ -57,7 +57,7 @@ optional step in and skips it when its committed outputs are present.
 | 6 | **Level of service** (`los`) | 4 | Bus and Metronit times from the national timetable routed over measured bus speeds; the generalized-cost inventory between the 25 areas; the May 2026 car speed network. |
 | 7 | **LRT capture** (`capture`) | 7 | The incremental logit between the 25 areas and its forecast; the person-level λ; car and transit level of service zone by zone; the capture zone by zone; the uncertainty analysis. |
 | 8 | **LRT alternatives (the deliverable)** (`alternatives`) | 2 | Demand for main route + extension vs extension only, two running regimes, 2022–2050, AM and PM, zone by zone. |
-| 9 | **Reports** (`reports`) | 6 | Peak-hour factors for the charts, maps, the alternatives report, the comprehensive report in English and Hebrew, the decision deck. |
+| 9 | **Reports** (`reports`) | 7 | Peak-hour factors for the charts, maps, the alternatives report, the comprehensive report in English, Hebrew and Simplified Technical English, the decision deck. |
 | 10 | **Sensitivities and alternative runs** (`sensitivity`) | 17 (17 optional) | The same notebooks with other settings: 2026 car skim, LRT headway, bus competition, bus wait rule, out-of-vehicle weights, slower buses, TAZ bus construction. Executed copies go to the scratch folder. |
 | 11 | **Validation and diagnostics** (`validation`) | 30 (30 optional) | Tests against smart cards, road counts, the phone-based matrix and the Ministry of Transport guideline. Evidence, not products. |
 
@@ -105,6 +105,7 @@ flowchart TB
         r_alt["r_alt: build_alternatives_report.py"]
         r_comp["r_comp: build_comprehensive_report.py"]
         r_comp_he["r_comp_he: build_comprehensive_report_he.py"]
+        r_comp_ste["r_comp_ste: build_comprehensive_report_ste.py"]
         r_deck["r_deck: build_decision_deck.py"]
     end
     s15 --> s16
@@ -169,6 +170,7 @@ flowchart TB
     r_maps --> r_comp
     s33 --> r_comp
     r_comp --> r_comp_he
+    r_comp --> r_comp_ste
     r_comp --> r_deck
     r_comp_he --> r_deck
 ```
@@ -308,7 +310,7 @@ Demand for main route + extension vs extension only, two running regimes, 2022�
 
 ### 9. Reports
 
-Peak-hour factors for the charts, maps, the alternatives report, the comprehensive report in English and Hebrew, the decision deck.
+Peak-hour factors for the charts, maps, the alternatives report, the comprehensive report in English, Hebrew and Simplified Technical English, the decision deck.
 
 | id | Step | § | Notebook / script | Needs | Inputs | Key outputs | Minutes |
 |---|---|---|---|---|---|---|---|
@@ -322,6 +324,8 @@ Peak-hour factors for the charts, maps, the alternatives report, the comprehensi
 | | | | *The comprehensive report for decision-makers (English) and its charts* Also reads the committed slower-bus run (Output/alternatives_bus_slow/) and the λ on the 2026 car skim (Output/mode_choice/car_network/). | | | | |
 | `r_comp_he` | — | — | `tools/build_comprehensive_report_he.py` | `r_comp` | — | `reports/Nofit_LRT_Extension_Comprehensive_Report_HE.docx` | 1 |
 | | | | *The same report in simple Hebrew* | | | | |
+| `r_comp_ste` | — | — | `tools/build_comprehensive_report_ste.py` | `r_comp` | — | `reports/Nofit_LRT_Extension_Comprehensive_Report_STE.docx` | 1 |
+| | | | *The same report in ASD-STE100 Simplified Technical English (self-checked for the countable STE rules)* | | | | |
 | `r_deck` | — | — | `tools/build_decision_deck.py` | `r_comp`, `r_comp_he` | — | `reports/Nofit_LRT_Extension_Decision_Deck.html`, `reports/Nofit_LRT_Extension_Decision_Deck_HE.html` | 1 |
 | | | | *The decision deck, English and Hebrew (self-contained HTML)* | | | | |
 

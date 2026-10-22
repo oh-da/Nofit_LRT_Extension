@@ -254,6 +254,7 @@ old 25-area forecast branch (`Forecast_matrices_2040_2050`, `Base_mode_shares_20
 |---|---|---|
 | [`reports/Nofit_LRT_Extension_Comprehensive_Report.docx`](reports/Nofit_LRT_Extension_Comprehensive_Report.docx) | 5 Oct 2026 | **The report for decision-makers:** one-page decision summary, goal, model and data, calibration and base year with every caveat, results for 2040 / 2050 × BU / HS, markets, the Metronit, conclusions. Built by `tools/build_comprehensive_report.py` |
 | [`reports/Nofit_LRT_Extension_Comprehensive_Report_HE.docx`](reports/Nofit_LRT_Extension_Comprehensive_Report_HE.docx) | 5 Oct 2026 | The same report in simple Hebrew, shorter, same numbers and charts |
+| [`reports/Nofit_LRT_Extension_Comprehensive_Report_STE.docx`](reports/Nofit_LRT_Extension_Comprehensive_Report_STE.docx) | 15 Oct 2026 | The same summary report (the Hebrew version's structure, appendices A–D included) in ASD-STE100 Simplified Technical English: sentences ≤ 25 words, paragraphs ≤ 6 sentences, active voice, no -ing forms, a technical-name table up front. Built by `tools/build_comprehensive_report_ste.py`, which checks the countable STE rules on every paragraph it writes |
 | [`reports/LRT_Alternatives_Demand_Report.docx`](reports/LRT_Alternatives_Demand_Report.docx) | 5 Oct 2026 | The alternatives in detail: times on route, demand tables AM / PM, 41 maps of time, demand, line loads, growth and shift to the LRT |
 | [`reports/Survey_Matrices_Car_Bus_Rail_Report.docx`](reports/Survey_Matrices_Car_Bus_Rail_Report.docx) (+ `_HE`) | 4 Oct 2026, rev. 3.0 | The base-year matrices in plain language: sources, calibration, tests against smart cards, road counts and the phone-based matrix, fitness for use |
 | [`reports/V2_Corridor_LRT_Times_and_GC_Inputs_Report.docx`](reports/V2_Corridor_LRT_Times_and_GC_Inputs_Report.docx) | 22 Sep 2026, rev. 1.4 | The corridor on the 25-area aggregation, the LRT times, the generalized-cost inputs; a dated revision note carries the later values |
@@ -323,7 +324,7 @@ step, with `jupyter nbconvert --to notebook --execute --inplace <notebook>` (all
 2. Corridor and LRT line: `Corridor_peak_hour_V2_routes` → `Corridor_flow_profile_V2_routes` → `Corridor_profile_V2_survey_vs_ticketing` → `LRT_line_stations_travel_time`
 3. Level of service: `GTFS_bus_LOS_TAZ` → `GTFS_bus_observed_times` → `GC_data_inventory_and_skims` → `Car_speed_network_North` → `Car_skim_2026_network` → `LOS_skims_TAZ_and_V2`
 4. LRT demand: `Mode_skims_and_flow_comparison` → `LRT_capture_forecast_2040_2050` → `Mode_choice_person_level` → `LRT_capture_TAZ` → `LRT_capture_uncertainty` → `LRT_alternatives_demand`
-5. Reports: `python3 tools/build_alternatives_maps.py`, `tools/build_alternatives_report.py`, `tools/peak_hour_factors_periods.py`, `tools/build_comprehensive_report.py`, `tools/build_comprehensive_report_he.py`
+5. Reports: `python3 tools/build_alternatives_maps.py`, `tools/build_alternatives_report.py`, `tools/peak_hour_factors_periods.py`, `tools/build_comprehensive_report.py`, `tools/build_comprehensive_report_he.py`, `tools/build_comprehensive_report_ste.py`
 
 The exact commands, the environment variables that select alternative runs (`NOFIT_PERIOD`,
 `CAR_SOURCE`, `BUS_WAIT_RULE`, `LRT_HEADWAY`, `BUS_COMPETITION`, `BUS_SLOWDOWN`, `OVT_TAG`)
