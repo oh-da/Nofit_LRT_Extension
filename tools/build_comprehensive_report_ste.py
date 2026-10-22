@@ -85,7 +85,7 @@ EXT_COL = 'LRT trips using the extension (at least one segment S01–S24)'
 doc.add_heading('Nofit LRT — extension of the line to Haifa and Tirat Carmel: the demand study', 0)
 P('This is the ASD-STE100 (Simplified Technical English) version of the summary report. It has the same structure and the same numbers as the Hebrew summary report '
   '(Nofit_LRT_Extension_Comprehensive_Report_HE.docx) and as the full English report (Nofit_LRT_Extension_Comprehensive_Report.docx). '
-  'The figures are the figures of the English report, with their English captions. The numbers of the study are of 5 October 2026. This version is of 15 October 2026.')
+  'The figures are the figures of the English report, with their English captions. The numbers of the study are of 5 October 2026. This version is of 22 October 2026.')
 P('How this version applies ASD-STE100 Issue 8:', size=9, italic=True)
 for s_ in ['Each sentence has 25 words or fewer (20 words in an instruction). Each sentence has one topic.',
            'Each paragraph has one topic and 6 sentences or fewer. Sequences are vertical lists.',
@@ -101,7 +101,7 @@ tn = pd.DataFrame([
     ['Capture', 'The number of LRT trips that the model calculates.'], ['Shift', 'Trips that move from one mode to a different mode when the LRT is added.'], ['Scenario', 'A year and a demographic forecast: 2040 or 2050; BU (business as usual) or HS (high scenario).'],
     ['Reference case', 'The scenario 2050 BU, the through line, the Prioritized regime.'], ['Regime', 'How the extension operates: Prioritized (full priority at the road junctions) or Unprioritized (at street level, with the traffic).'], ['Peak hour', 'The busiest 60 minutes of a three-hour period (AM 06:00–09:00, PM 16:00–19:00).'],
     ['Load', 'The number of passengers on one segment of the line in one direction.'], ['Headway', 'The time between two vehicles of the same line.'], ['Feeder', 'A bus or Metronit leg that brings a traveller to an LRT station.'],
-    ['Level of service', 'The travel time, access, wait and transfers of a mode between two zones.'], ['Matrix', 'A table of trips from each zone to each zone.'], ['Caveat', 'A documented limit of the model (chapter 8 of METHODOLOGY.md, 29 items).'],
+    ['Level of service', 'The travel time, access, wait and transfers of a mode between two zones.'], ['Matrix', 'A table of trips from each zone to each zone.'], ['Caveat', 'A documented limit of the model. Chapter 8 of METHODOLOGY.md has 34 numbered caveats: 29 apply to the current chain, 5 are retired. A number never changes.'],
     ['Step', 'One documented notebook of the chain of 45 steps (step 45 is the demand of the alternatives).']], columns=['Technical name', 'Meaning'])
 table(tn, font=8)
 
@@ -255,7 +255,7 @@ table(base); CAP('Table 3.1 — The 2022 base by corridor class. On the V2 corri
 fig(f'{FIG}/three_mode_2022.png', 15, 'Figure 3.1 — The 2022 layers: car, bus, taxi and rail by super-zone (step 16).')
 H('3.2 Tests against independent data', 2)
 for s_ in ['Bus against the RavKav tickets on the corridor (step 28). On the Haifa trunk, the calibrated survey profile is within 1–4 % of the ticket profile in the direction Nazareth. In the other direction, it is within −14 % / +12 %. After Hamifrats, the two frames differ by up to 1.5 × in one direction (Figure 3.2).',
-           'Bus against RavKav by time of day: RavKav / survey = 0.73 in the AM, 0.96 in the PM, 0.92 at midday. Trips to education are 40 % of the survey bus trips in the AM, and the card data under-represent them.',
+           'Bus coverage by time of day (a wave-1b diagnostic under section 5.2 of the guideline). RavKav journeys of May 2022 / raw survey bus trips of 2017/18 = 0.74 in the AM, 0.96 in the PM, 0.92 at midday. The guideline\'s own test T14 (the 2022 bus layer against the RavKav origins by super-zone) gives 1.28. Trips to education are 40 % of the survey bus trips in the AM, against 13–19 % in the other windows. Without them, the ratio is 1.22 / 1.10 / 1.13. The card data may under-record these trips; the data provider must confirm this.',
            'Car against the traffic counts on closed cordons (step 36, Figure 3.3). Survey vehicles ÷ counted vehicles = 0.58–0.90 on the outer cordons and 0.61–0.62 in the metropolitan core. This is the expected order for a layer of personal trips of residents against all traffic. Through, commercial and non-resident traffic are not in the survey. The departure profile of the survey has a sharper peak than the road. The peak hour has 62 % of the three hours in the survey, against 38–43 % in the counts (caveat 18).',
            'Car assignment against the counts on links (step 42). The all-or-nothing assignment on the Emme network gives the correct total: 0.93 on 1,346 links. It does not give the correct pattern: R² 0.47 and RMSE 113 %, against 0.85 and 35 % in the guideline. A layer of person trips without commercial traffic and without route choice does not pass a test at the link level (caveat 23).',
            'Survey against the cellular trips (step 1b): the super-zone matrices agree in structure. The only systematic difference is the trips inside a zone, which are higher in the survey in each super-zone.',
@@ -294,7 +294,8 @@ for s_ in ['Passenger loads for decisions on capacity, fleet or frequency, or fo
            'Detail for one TAZ. Below the area level, the matrices are an allocation of the survey trips with weights, not observations.',
            'The operation of the main route. Its stations, the run at 80 km/h at street level and the headway of 5 minutes are assumptions (caveat 28). The continuation at Hamifrats without a transfer is also an assumption.']:
     B(s_)
-P('The full list of caveats (29 items) is in chapter 8 of METHODOLOGY.md and in section 3.5 of the English report.')
+P('The full list of caveats is in chapter 8 of METHODOLOGY.md and in section 3.5 of the English report. Chapter 8 has 34 numbered items: 29 apply to the current chain and 5 are retired. '
+  'The authors rewrote chapter 8 on 20 October 2026 for the survey-only chain. The caveat numbers did not change.')
 
 # ======================= 4 =======================
 H('4. The results: the scenarios of 2040 and 2050')

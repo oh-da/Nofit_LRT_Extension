@@ -3843,7 +3843,9 @@ it executes the English builder's data part and writes a shorter right-to-left d
 `w:bidi` paragraphs, `w:bidiVisual` tables) with the English charts; the time-on-route table and
 the full caveat list are summarised in a paragraph and referred to the English report. An **ASD-STE100
 (Simplified Technical English) version**, `reports/Nofit_LRT_Extension_Comprehensive_Report_STE.docx`
-(`tools/build_comprehensive_report_ste.py` with `tools/report_appendices_ste.py`, 15 October 2026), follows
+(`tools/build_comprehensive_report_ste.py` with `tools/report_appendices_ste.py`, 15 October 2026; rebuilt
+22 October 2026 after the section 8 rewrite, with the caveat count and the bus-coverage bullet of 19 October
+carried over — the caveat numbers it cites, 15 to 29, are unchanged), follows
 the Hebrew version's structure with the same numbers and charts, appendices A–D included; it opens with a
 table of the technical names it uses, and the builder checks the countable STE rules (25 words per sentence,
 6 sentences per paragraph, no -ing verb forms) on every paragraph, bullet and caption it writes and prints
