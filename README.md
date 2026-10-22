@@ -1,17 +1,23 @@
 # Nofit LRT Extension — demand estimate
 
-**Status: 6 October 2026.** This repository estimates how many people would ride the
+**Status: 22 October 2026.** This repository estimates how many people would ride the
 planned **extension of the Nofit light rail (LRT)** in northern Israel. The main Nofit route
-(Hamifrats – Nazareth, 40.7 km) is under construction. The extension continues it from
-Hamifrats through Haifa to Tirat Carmel (18.9 km, 24 stations). Everything here is built in
-Jupyter notebooks (Python) on committed inputs, so every number can be reproduced.
+(Hamifrats – Nazareth, 40.7 km, 20 stations) is under construction. The extension continues it
+from Hamifrats through Haifa to Tirat Carmel (18.7 km, 24 stations). Everything here is built
+in Jupyter notebooks and Python scripts on committed inputs, so every number can be reproduced;
+the whole chain runs as one pipeline (`python3 -m pipeline run`).
 
 The full technical record is **[METHODOLOGY.md](METHODOLOGY.md)**. A plain-language
 walk-through of every step is
 **[docs/PLAIN_ENGLISH_METHODOLOGY.md](docs/PLAIN_ENGLISH_METHODOLOGY.md)**. The report for
 decision-makers is
-[`reports/Nofit_LRT_Extension_Comprehensive_Report.docx`](reports/Nofit_LRT_Extension_Comprehensive_Report.docx)
-(Hebrew version alongside it).
+[`reports/Nofit_LRT_Extension_Comprehensive_Report.docx`](reports/Nofit_LRT_Extension_Comprehensive_Report.docx),
+with a Hebrew version, a Simplified Technical English version and a slide deck alongside it
+(section 7).
+
+The numbers of the study are those of 5 October 2026 (step 45). The work since then has been
+documentation, reports, figures and the pipeline; no step has been rerun and no number has
+changed.
 
 ---
 
@@ -19,15 +25,16 @@ decision-makers is
 
 All figures are **LRT trips in the morning peak, 06:00–09:00**, for the through line
 (main route + extension) with the extension given priority at junctions. They are the
-central case of step 45 ([METHODOLOGY §6aq](METHODOLOGY.md#6aq-step-45--demand-for-the-lrt-alternatives-main-route--extension-and-extension-only-two-regimes-2022--2040--2050--bu--hs-am-and-pm-at-taz-and-corridor-area-level-lrt_alternatives_demandipynb)).
+central case of step 45 ([METHODOLOGY §6aq](METHODOLOGY.md#6aq-step-45--demand-for-the-lrt-alternatives-main-route--extension-and-extension-only-two-regimes-2022--2040--2050--bu--hs-am-and-pm-at-taz-and-corridor-area-level-lrt_alternatives_demandipynb)),
+read from `Output/alternatives/demand_summary.csv`.
 
 | Scenario-year | LRT trips, three hours | Of which on the extension |
 |---|---|---|
 | 2022 (today's demand) | 5,193 | 4,004 (77 %) |
-| 2040, business-as-usual (BU) | 6,309 | 4,950 |
+| 2040, business-as-usual (BU) | 6,309 | 4,950 (78 %) |
 | **2050, BU — the reference case** | **7,433** | **6,003 (81 %)** |
-| 2040, high-growth scenario (HS) | 7,476 | 5,651 |
-| 2050, HS | 9,225 | 7,010 |
+| 2040, high-growth scenario (HS) | 7,476 | 5,651 (76 %) |
+| 2050, HS | 9,225 | 7,010 (76 %) |
 
 What to read with these numbers:
 
@@ -35,10 +42,11 @@ What to read with these numbers:
   that moves the result most, the cost sensitivity λ (see "What is still uncertain" below).
 - **Extension only** (no through-running to Nazareth): 3,884 trips in 2022, 5,939 in 2050 BU.
   Through-running does not add extension riders; it spares them a transfer at Hamifrats.
-- **Without priority at junctions** (slower running): roughly 20 % fewer trips.
-- **The evening peak** (16:00–19:00) carries about 80 % of the morning figure.
+- **Without priority at junctions** (at-grade running): 20–25 % fewer trips (5,700 in 2050 BU).
+- **The evening peak** (16:00–19:00) carries about 80 % of the morning figure (6,135 in 2050 BU).
 - **Who rides:** today's bus and Metronit passengers moving to a faster vehicle. Only
-  6–14 % of the LRT trips come out of cars; the transit market grows only by that car shift.
+  6–14 % of the LRT trips come out of cars (818 of 7,433 in 2050 BU); the transit market grows
+  only by that car shift.
 - **Where they ride (2050 BU):** Tirat Carmel ↔ Haifa 29 %, inside Haifa 22 %, the Krayot
   by feeder 22 %, main route ↔ Haifa 12 %; 38 % cross Hamifrats.
 - **Peak hour:** the busiest hour holds about 55–60 % of the three hours in the survey, so
@@ -55,17 +63,19 @@ not passenger loads for capacity design, and they are not externally validated f
 
 | Product | Where | What it is |
 |---|---|---|
-| **LRT demand by alternative** | `Output/alternatives/` | Trip matrices, line loads by segment and direction, station boardings for 2 alternatives × 2 regimes × 5 scenario-years × AM / PM; summary in `demand_summary.csv`, workbook `LRT_alternatives_matrices.xlsx` |
+| **LRT demand by alternative** | `Output/alternatives/` | Trip matrices, line loads by segment and direction, station boardings for 2 alternatives × 2 regimes × 5 scenario-years × AM / PM; summary in `demand_summary.csv`, workbook `LRT_alternatives_matrices.xlsx`, station tables `stations_*.csv`, times on route, peak-hour factors |
 | **Base-year matrices, 2022** | `Output/final_2022/` | 778 × 778 zone matrices: `car`, `transit` (bus + rail), `total`; a long-format gzip file for SQL; a manifest |
-| Base-year layers, 2022 | `Output/ths2017/three_mode_2022/` | The same demand as four layers: car, bus, taxi-type, rail; superzone and area versions |
+| Base-year layers, 2022 | `Output/ths2017/three_mode_2022/` | The same demand as four layers: car, bus, taxi-type, rail; superzone and area versions; PM and midday copies |
 | Forecast matrices, 2040 / 2050 | `Output/forecast_taz/{BU,HS}_{2040,2050}/` | The 2022 matrices grown by the demographic scenarios; mode split and trip rates held at 2022 |
-| Level of service | `Output/los/`, `Output/skims/`, `Output/gc/` | Car and transit travel times, walks, waits and transfers between the 781 zones and between the 25 corridor areas |
+| Level of service | `Output/los/`, `Output/skims/`, `Output/gc/`, `Output/gtfs/`, `Output/car_speed/` | Car and transit travel times, walks, waits and transfers between the 781 zones and between the 25 corridor areas |
+| Cost sensitivity λ | `Output/mode_choice/` | The person-level logit of step 33 (λ 0.035, by car-availability segment), also on the 2026 car skim; the regression table and the estimation sample are exported under `exports/` |
 | Corridor flows | `Output/corridor_v2/` | Potential movements between the 25 corridor areas along three routes, three-hour and peak-hour |
 | LRT line and stations | `Output/lrt_v2/`, `Output/alternatives/stations_*.csv` | Station tables and station-to-station times for the extension and the main route |
-| Validation | `Output/validation/`, `Output/validation_mot/`, `Output/ths2017/tests/` | Checks against road counts, smart cards, the phone-based matrix and the Ministry of Transport guideline |
+| Sensitivities | `Output/alternatives_bus_slow/`, `Output/ovt_research/`, `Output/skims/ovt_*/` | Step 45 with slower buses in 2040 / 2050; the out-of-vehicle-weight research and the chain rerun on seven parameter sets |
+| Validation | `Output/validation/`, `Output/validation_mot/`, `Output/ths2017/tests/` | Checks against road counts, smart cards, the phone-based matrix and the Ministry of Transport guideline (`validation_workbook.xlsx`, one sheet per test) |
 
 Everything else under `Output/` is an input layer, a diagnostic, or historical. The
-lineage table in [METHODOLOGY §0](METHODOLOGY.md#0-status-what-to-trust-and-how-to-read-this-document-6-october-2026)
+lineage table in [METHODOLOGY §0.8](METHODOLOGY.md#08-product-lineage)
 says, for every file, what it was built from and whether it is current.
 
 ---
@@ -140,27 +150,33 @@ flowchart LR
 ## 4. What is still uncertain
 
 The main caveats, in order of how much they move the LRT number. The full list is
-[METHODOLOGY §8](METHODOLOGY.md#8-known-caveats-and-open-questions) (34 items, numbered once and for all; retired ones are in §8.2).
+[METHODOLOGY §8](METHODOLOGY.md#8-known-caveats-and-open-questions), rewritten on
+20 October 2026 for the survey-only chain: 34 items numbered once and for all, 29 of them
+current and 5 retired in §8.2. A Hebrew plain-language version is
+[docs/METHODOLOGY_section8_he.md](docs/METHODOLOGY_section8_he.md) (also as
+`exports/METHODOLOGY_section8_he.docx`).
 
-1. **The cost sensitivity λ.** It is assumed (0.03). The person-level estimate supports it
-   (0.035) but cannot pin it down for people who own a car. Moving λ across 0.02–0.05
-   changes the 2050 BU figure from 10,537 to 5,532.
-2. **Walk and wait weights, transfer penalties, station access time.** A literature review
-   found no confirmed values; across seven plausible parameter sets the area-level capture
-   spans 1,456–4,935 trips (central 4,254).
-3. **The LRT running regime.** Priority at junctions versus at-grade running is worth about
-   20–25 % of the trips.
-4. **The bus network after opening.** The model keeps every bus and Metronit line as it runs
-   today. Removing the parallel trunk bus would raise the capture by 21–64 %.
-5. **The peak-hour factor.** The survey's departure times give a sharper peak (0.55–0.65 of
-   three hours) than road counts (0.38–0.43) and smart cards (0.43–0.48).
-6. **The level of service is held at May 2026 in every forecast year.** A slower bus in
-   2040 / 2050 would add 2–5 % to the LRT trips; a slower car cannot register in this model.
-7. **The base matrices are residents' trips with both ends in the study area**, AM only.
-   They hold 0.6–0.9 of the vehicles counted on road cordons (no trucks, visitors or through
-   traffic) and reproduce the level, but not the link-by-link pattern, of the counts.
-8. **The main route's operation is assumed** (80 km/h at grade, 5-minute headway, no
-   transfer at Hamifrats); its 20 stations are the delivered list.
+1. **The cost sensitivity λ** (caveat 15). It is assumed (0.03). The person-level estimate
+   supports it (0.035) but cannot pin it down for people who own a car. Moving λ across
+   0.02–0.05 changes the 2050 BU figure from 10,537 to 5,532.
+2. **Walk and wait weights, transfer penalties, station access time** (caveat 33). A
+   literature review found no confirmed values; across seven plausible parameter sets the
+   area-level capture spans 1,456–4,935 trips (central 4,254).
+3. **The LRT running regime** (caveat 32). Priority at junctions versus at-grade running is
+   worth about 20–25 % of the trips.
+4. **The bus network after opening** (caveat 32). The model keeps every bus and Metronit line
+   as it runs today. Removing the parallel trunk bus would raise the capture by 21–64 %.
+5. **The peak-hour factor** (caveat 18). The survey's departure times give a sharper peak
+   (0.55–0.65 of three hours) than road counts (0.38–0.43) and smart cards (0.43–0.48).
+6. **The level of service is held at May 2026 in every forecast year** (caveats 10, 25). A
+   slower bus in 2040 / 2050 would add 2–5 % to the LRT trips; a slower car cannot register
+   in this model.
+7. **The base matrices are residents' trips with both ends in the study area** (caveat 30),
+   AM only. They hold 0.6–0.9 of the vehicles counted on road cordons (no trucks, visitors or
+   through traffic) and reproduce the level, but not the link-by-link pattern, of the counts
+   (caveat 23).
+8. **The main route's operation is assumed** (caveat 28): 80 km/h at grade, 5-minute
+   headway, no transfer at Hamifrats; its 20 stations are the delivered list.
 
 ---
 
@@ -169,26 +185,31 @@ The main caveats, in order of how much they move the LRT number. The full list i
 ```
 README.md                      this file
 METHODOLOGY.md                 the full record: every step's purpose, method, inputs, results, outputs, caveats
-docs/                          plans, the plain-English companion, the handover, the external review, the OVT research
+docs/                          plans, the plain-English companion, the handover, the external review, the OVT research, the generated pipeline document
 notebooks/current/             the chain (one notebook per step) and its input notebooks; periods/ holds PM and midday copies
-notebooks/diagnostics/         tests and validations: evidence, not products
+notebooks/diagnostics/         tests and validations: evidence, not products; periods/ holds PM and midday copies
 notebooks/historical/          superseded work (the survey x cellular hybrids, the 25-area composite), kept as record
-pipeline/                      the chain as one pipeline: the manifest of every step (steps.py) and the runner (python3 -m pipeline)
-tools/                         Python scripts: report builders, map builders, the LFS pull helper, validation metrics
-reports/                       the Word reports (English and Hebrew); reports/historical/ for superseded ones
+pipeline/                      the chain as one pipeline: the manifest of every step (steps.py), the runner, the checks, the doc generator
+tools/                         Python scripts: report, deck, map and figure builders, the OVT research, validation metrics, tests, the LFS pull helper
+reports/                       the Word reports and the HTML decision decks (English and Hebrew); reports/historical/ for superseded ones
+exports/                       tables and documents exported for use outside the repository (the λ regression table, the step 33 sample, the Hebrew section 8)
 Input/                         survey, smart cards, zonal files, timetables, speed networks, line drawings (large files in Git LFS)
 Output/                        every product, committed as plain CSV / PNG / XLSX (no LFS)
 ```
 
-Every notebook's first cell moves the working directory to the repository root, so all
-`Input/…` and `Output/…` paths are root-relative and a notebook runs from anywhere inside
-the repository.
+Every notebook and script finds the repository root by itself (it walks up until it sees
+`METHODOLOGY.md`), so all `Input/…` and `Output/…` paths are root-relative and a notebook
+runs from anywhere inside the repository.
 
 ---
 
 ## 6. Notebooks
 
 Step numbers are the ones used throughout METHODOLOGY.md. "§" points to the section there.
+The run order, with every step's inputs, outputs and dependencies, is the pipeline manifest
+`pipeline/steps.py`, rendered as [docs/PIPELINE.md](docs/PIPELINE.md): 11 stages, 31 steps
+in the default chain (about 56 minutes) and 90 with the optional upstream rebuilds,
+sensitivities and validation.
 
 ### The current chain (`notebooks/current/`), in run order
 
@@ -210,7 +231,7 @@ Step numbers are the ones used throughout METHODOLOGY.md. "§" points to the sec
 | 29 | `GTFS_bus_LOS_TAZ.ipynb` | 6aa | Bus and Metronit level of service per zone from the national timetable; timetable skim between areas |
 | 30 | `GTFS_bus_observed_times.ipynb` | 6ab | Timetable trips routed over measured May 2026 bus speeds → observed in-vehicle times |
 | 26 | `GC_data_inventory_and_skims.ipynb` | 6x | Generalized-cost components per mode between the 25 areas, with a gap inventory (runs after 29, 30) |
-| 31 | `Mode_skims_and_flow_comparison.ipynb` | 6ac | Complete skims per mode; the pivoted LRT capture model between the 25 areas (central 4,250 trips) |
+| 31 | `Mode_skims_and_flow_comparison.ipynb` | 6ac | Complete skims per mode; the pivoted LRT capture model between the 25 areas (central 4,254 trips) |
 | 32 | `LRT_capture_forecast_2040_2050.ipynb` | 6ad | The same capture on the 2040 / 2050 sets |
 | 33 | `Mode_choice_person_level.ipynb` | 6ae | Person-level logit on the survey: estimates λ (0.035) with car availability held constant |
 | 34 | `RavKav_2025_boardings_matrix.ipynb` | 6af | The 2025 smart-card extracts → boardings by stop and zone, bus + Metronit OD, rail OD, peak factors |
@@ -222,6 +243,7 @@ Step numbers are the ones used throughout METHODOLOGY.md. "§" points to the sec
 | 45 | `LRT_alternatives_demand.ipynb` | 6aq | **The deliverable:** LRT demand for main + extension vs extension only, two regimes, 2022–2050, AM and PM |
 | — | `BusOnBoard_matrix.ipynb` | 6g | RavKav volumes × on-board survey destinations; comparison only since 23 Sep 2026 |
 | — | `BusRavKav_matrix_periods.ipynb` | 6ar | Step 8 for the PM-peak and midday windows |
+| — | `periods/THS_2017_two_mode_matrix_{PM,MD}`, `periods/THS_2017_three_mode_2022_{PM,MD}` | 6ar | Steps 15 and 16 on the 16:00–19:00 and 10:00–14:00 windows |
 | 5, 7 | `THS_2017_trips_matrices.ipynb`, `THS_2017_trip_generation.ipynb` | 6c, 6e | The survey trips file extracted by day and mode; trips per resident (≈ 0.83 in the morning peak) |
 | — | `Demographic_scenario_comparison.ipynb` | — | BU vs HS forecasts compared by area |
 
@@ -236,7 +258,7 @@ Step numbers are the ones used throughout METHODOLOGY.md. "§" points to the sec
 | 36 | `Car_cordon_counts_validation` | 6ah | The car layer against road counts on six closed cordons |
 | 41 | `RavKav_2025_own_alightings` | 6ai | Chains the 2025 taps into journeys; checks the transfer tag |
 | 42 | `Car_AON_assignment_2022` | 6aj | All-or-nothing assignment of the car layer onto the road network |
-| — | `MOT_Validation_Stage*` (six notebooks + PM / midday copies), `Bus_destination_pattern_RavKav_vs_OnBoard` | 6ar | The Ministry of Transport validation guideline, waves 1, 1b, 2, 3 |
+| — | `MOT_Validation_Stage*` (nine notebooks: stages 1, 1c, 1d, 2, 2b, 2c, 3, 3b, 4; `periods/` holds ten PM and midday copies), `Bus_destination_pattern_RavKav_vs_OnBoard` | 6ar | The Ministry of Transport validation guideline, waves 1, 1b, 2, 3; `tools/build_validation_workbook.py` collects their results into one workbook |
 | — | `THS_2018_MTX_weighted_vs_cellular`, `*_PCA_vs_cellular`, `THS_PCA_*`, `Cellular_eigenplaces_TAZ` | 4, 8b | The survey vs phone-data comparisons of the first generation |
 
 ### Historical (`notebooks/historical/`), superseded and kept as record
@@ -248,33 +270,45 @@ old 25-area forecast branch (`Forecast_matrices_2040_2050`, `Base_mode_shares_20
 
 ---
 
-## 7. Reports
+## 7. Reports, decks and figures
 
 | Report | Date | What it is for |
 |---|---|---|
-| [`reports/Nofit_LRT_Extension_Comprehensive_Report.docx`](reports/Nofit_LRT_Extension_Comprehensive_Report.docx) | 22 Oct 2026 | **The report for decision-makers:** one-page decision summary, goal, model and data, calibration and base year with every caveat, results for 2040 / 2050 × BU / HS, markets, the Metronit, conclusions. Built by `tools/build_comprehensive_report.py` |
-| [`reports/Nofit_LRT_Extension_Comprehensive_Report_HE.docx`](reports/Nofit_LRT_Extension_Comprehensive_Report_HE.docx) | 22 Oct 2026 | The same report in simple Hebrew, shorter, same numbers and charts |
+| [`reports/Nofit_LRT_Extension_Comprehensive_Report.docx`](reports/Nofit_LRT_Extension_Comprehensive_Report.docx) | 22 Oct 2026 (numbers of 5 Oct) | **The report for decision-makers:** one-page decision summary, goal, model and data, calibration and base year with every caveat, results for 2040 / 2050 × BU / HS, markets, the Metronit, conclusions, appendices A–D. Built by `tools/build_comprehensive_report.py` and `tools/report_appendices.py` |
+| [`reports/Nofit_LRT_Extension_Comprehensive_Report_HE.docx`](reports/Nofit_LRT_Extension_Comprehensive_Report_HE.docx) | 22 Oct 2026 | The same report in simple Hebrew, shorter, same numbers and charts (`tools/build_comprehensive_report_he.py`, `tools/report_appendices_he.py`) |
 | [`reports/Nofit_LRT_Extension_Comprehensive_Report_STE.docx`](reports/Nofit_LRT_Extension_Comprehensive_Report_STE.docx) | 22 Oct 2026 | The same summary report (the Hebrew version's structure, appendices A–D included) in ASD-STE100 Simplified Technical English: sentences ≤ 25 words, paragraphs ≤ 6 sentences, active voice, no -ing forms, a technical-name table up front. Built by `tools/build_comprehensive_report_ste.py`, which checks the countable STE rules on every paragraph it writes |
-| [`reports/LRT_Alternatives_Demand_Report.docx`](reports/LRT_Alternatives_Demand_Report.docx) | 5 Oct 2026 | The alternatives in detail: times on route, demand tables AM / PM, 41 maps of time, demand, line loads, growth and shift to the LRT |
+| [`reports/Nofit_LRT_Extension_Report_Appendices.docx`](reports/Nofit_LRT_Extension_Report_Appendices.docx) (+ `_HE`) | 6 Oct 2026 | Appendices A–D of the comprehensive report as a document of their own: the LRT speed and time function, the out-of-vehicle weights, λ, the generalized cost (`tools/report_appendices.py --only`) |
+| [`reports/Nofit_LRT_Extension_Decision_Deck.html`](reports/Nofit_LRT_Extension_Decision_Deck.html) (+ `_HE`) | 6 Oct 2026 | The decision-maker slide deck, English and Hebrew: one self-contained HTML file each with inline charts, the route map and the appendices as backup slides (`tools/build_decision_deck.py`) |
+| [`reports/LRT_Alternatives_Demand_Report.docx`](reports/LRT_Alternatives_Demand_Report.docx) | 5 Oct 2026 | The alternatives in detail: times on route, demand tables AM / PM, 41 maps of time, demand, line loads, growth and shift to the LRT (`tools/build_alternatives_maps.py`, `tools/build_alternatives_report.py`) |
 | [`reports/Survey_Matrices_Car_Bus_Rail_Report.docx`](reports/Survey_Matrices_Car_Bus_Rail_Report.docx) (+ `_HE`) | 4 Oct 2026, rev. 3.0 | The base-year matrices in plain language: sources, calibration, tests against smart cards, road counts and the phone-based matrix, fitness for use |
 | [`reports/V2_Corridor_LRT_Times_and_GC_Inputs_Report.docx`](reports/V2_Corridor_LRT_Times_and_GC_Inputs_Report.docx) | 22 Sep 2026, rev. 1.4 | The corridor on the 25-area aggregation, the LRT times, the generalized-cost inputs; a dated revision note carries the later values |
 | [`reports/Matrices_Growth_and_Missing_Data_Plain_Hebrew_Report.docx`](reports/Matrices_Growth_and_Missing_Data_Plain_Hebrew_Report.docx) | 4 Oct 2026 | Hebrew plain-language note on the matrices, the forecasts and the missing data |
 | `reports/historical/` | Sep 2026 | The first OD report, the demographic scenario comparison and the PCA reports, each with a status note |
 
-Charts and maps: `Output/figures/comprehensive/` (one chart per file, one axis scale per set
-of scenario-years), `Output/figures/alternatives/` (maps, with `single/` and `_zoom` twins
-framed on the extension). Every chart and map shows the **peak hour**; the tables keep the
-three-hour totals beside it.
+The three comprehensive reports were rebuilt on 22 October 2026 so that their caveat
+references follow the rewritten METHODOLOGY §8; their numbers are unchanged since 5 October.
+
+Charts and maps, all drawn for the **peak hour** (the tables keep the three-hour totals beside it):
+
+- `Output/figures/comprehensive/` — the comprehensive report's charts, one chart per file, one axis scale per set of scenario-years
+- `Output/figures/alternatives/` — the maps of the alternatives report, with `single/` and `_zoom` twins framed on the extension
+- `Output/figures/appendix/` — the appendix figures (LRT time function, λ, the generalized-cost example)
+- `Output/figures/he/` — Hebrew-language versions of the report figures (numbered as in the comprehensive report: 3.1, 3.2, 3.5, 3.6, 4.1–4.30, A.1–A.4), the corridor map of the 25 areas and the extension-only network figures, built 18–20 October 2026 by `tools/make_fig_*_he.py`, `tools/make_corridor_map_he.py` and `tools/make_appendix_a_figs_he.py`; Hebrew area names are in `tools/he_area_names.py`
+- `Output/figures/report/` — Hebrew report figures 1–3 (the LRT lines map, the extension zoom, the model structure), `tools/build_report_figures.py` with the shared style of `tools/report_figure_style.py`
+- `Output/figures/` (top level) — the figures the notebooks write as they run
 
 ---
 
 ## 8. Documents in `docs/`
 
 - [`PLAIN_ENGLISH_METHODOLOGY.md`](docs/PLAIN_ENGLISH_METHODOLOGY.md) — every step explained in plain language, with an update chapter for the September–October work
+- [`PIPELINE.md`](docs/PIPELINE.md) — the whole chain in run order with every step's inputs, outputs and dependencies; generated from `pipeline/steps.py` by `python3 -m pipeline doc`
 - [`NEXT_STEPS_HANDOVER_2026-09-23.md`](docs/NEXT_STEPS_HANDOVER_2026-09-23.md) — how the repository is worked, where it stands, and the next steps specified for hand-over (inputs, method, outputs, checks)
 - [`CORRIDOR_DEMAND_TASKS.md`](docs/CORRIDOR_DEMAND_TASKS.md) — the open task list
 - [`MOT_VALIDATION_PLAN.md`](docs/MOT_VALIDATION_PLAN.md) — the validation plan under the Ministry of Transport guideline and its status
 - [`OVT_WEIGHTS_RESEARCH_PLAN.md`](docs/OVT_WEIGHTS_RESEARCH_PLAN.md), [`OVT_WEIGHTS_PARAMETER_MEMO.md`](docs/OVT_WEIGHTS_PARAMETER_MEMO.md), [`OVT_REPORTS_COMPARISON_2026-10-04.md`](docs/OVT_REPORTS_COMPARISON_2026-10-04.md) — the research on walk / wait weights and transfer penalties
+- [`APPENDIX_D_GENERALIZED_COST_STE100.md`](docs/APPENDIX_D_GENERALIZED_COST_STE100.md) — appendix D of the comprehensive report (the generalized cost function) in Simplified Technical English
+- [`METHODOLOGY_section8_he.md`](docs/METHODOLOGY_section8_he.md) — METHODOLOGY §8 (the caveats) translated and simplified in Hebrew, updated with the 20 October rewrite; the DOCX of it is `exports/METHODOLOGY_section8_he.docx` (`tools/md_he_to_docx.py`)
 - [`LRT_CAPTURE_PLAN.md`](docs/LRT_CAPTURE_PLAN.md) — the generalized-cost capture model as planned
 - [`PLAN_TIGHTENING_AND_SCENARIOS.md`](docs/PLAN_TIGHTENING_AND_SCENARIOS.md) — what moves the capture number and the scenarios to run
 - [`FORECAST_METHODOLOGY_2040_2050.md`](docs/FORECAST_METHODOLOGY_2040_2050.md) — how the 2022 matrices are grown to 2040 / 2050
@@ -282,13 +316,22 @@ three-hour totals beside it.
 - [`Transit_Travel_Time_Calibration_Report_Operator22.md`](docs/Transit_Travel_Time_Calibration_Report_Operator22.md) — the calibrated LRT running-time function
 - [`TRANSIT_DEMAND_PLAN.md`](docs/TRANSIT_DEMAND_PLAN.md) — the (historical) ticketing-substitution decision
 
+### Exports (`exports/`)
+
+Files made for use outside the repository, read by nothing in the chain:
+`lambda_M1_regression_table.{docx,pdf,csv}` (the step 33 central model's regression table),
+`lambda_estimation_step33.xlsx` (the estimation results and the sample) and
+`METHODOLOGY_section8_he.docx`.
+
 ---
 
 ## 9. Setup and how to run
 
-Every file directly under `Input/` is stored in Git LFS, as are the large archives. Pull the
-small inputs before any notebook runs. Without the git-lfs client, `tools/lfs_pull.py` fetches
-individual files.
+The large inputs are stored in Git LFS: every file directly under `Input/` except the five
+small zonal and key CSVs that the chain reads first, and the archives and extracts in its
+sub-folders. Pull the small inputs before any notebook runs. Without the git-lfs client,
+`tools/lfs_pull.py` fetches individual files; `python3 -m pipeline check` says which inputs
+are still pointers.
 
 ```bash
 pip install pandas numpy scipy matplotlib jupyter openpyxl pyshp shapely pyproj geopandas pyogrio statsmodels python-docx
@@ -313,7 +356,10 @@ python3 -m pipeline run --dry-run               # the plan: every default step i
 python3 -m pipeline run                         # base year → forecast → corridor and LRT line → level of service → capture → alternatives → reports
 python3 -m pipeline run --stage los capture     # or a stage, a slice (--from s31 --to s45), single steps (--only s45 r_comp)
 python3 -m pipeline run --skip-done             # skip every step whose outputs already exist
+python3 -m pipeline run --with-optional --stage validation   # the Ministry of Transport validation
 python3 -m pipeline list --all -v               # every step, including the optional upstream rebuilds, sensitivities and validation
+python3 -m pipeline graph --all                 # the dependency graph (Mermaid)
+python3 tools/test_pipeline.py                  # checks of the manifest and a smoke test of the runner
 ```
 
 Each step is still an ordinary notebook or script and can be run on its own. The same order, step by
@@ -324,11 +370,25 @@ step, with `jupyter nbconvert --to notebook --execute --inplace <notebook>` (all
 2. Corridor and LRT line: `Corridor_peak_hour_V2_routes` → `Corridor_flow_profile_V2_routes` → `Corridor_profile_V2_survey_vs_ticketing` → `LRT_line_stations_travel_time`
 3. Level of service: `GTFS_bus_LOS_TAZ` → `GTFS_bus_observed_times` → `GC_data_inventory_and_skims` → `Car_speed_network_North` → `Car_skim_2026_network` → `LOS_skims_TAZ_and_V2`
 4. LRT demand: `Mode_skims_and_flow_comparison` → `LRT_capture_forecast_2040_2050` → `Mode_choice_person_level` → `LRT_capture_TAZ` → `LRT_capture_uncertainty` → `LRT_alternatives_demand`
-5. Reports: `python3 tools/build_alternatives_maps.py`, `tools/build_alternatives_report.py`, `tools/peak_hour_factors_periods.py`, `tools/build_comprehensive_report.py`, `tools/build_comprehensive_report_he.py`, `tools/build_comprehensive_report_ste.py`
+5. Reports: `python3 tools/build_alternatives_maps.py`, `tools/build_alternatives_report.py`, `tools/peak_hour_factors_periods.py`, `tools/build_comprehensive_report.py`, `tools/build_comprehensive_report_he.py`, `tools/build_comprehensive_report_ste.py`, `tools/build_decision_deck.py`
+
+The report builders redraw the charts under `Output/figures/comprehensive/` and the shift
+tables under `Output/alternatives/` every time they run; when the data have not changed, the
+redrawn files differ only in bytes and need not be committed.
 
 The exact commands, the environment variables that select alternative runs (`NOFIT_PERIOD`,
 `CAR_SOURCE`, `BUS_WAIT_RULE`, `LRT_HEADWAY`, `BUS_COMPETITION`, `BUS_SLOWDOWN`, `OVT_TAG`)
 and the run times are in [METHODOLOGY §9](METHODOLOGY.md#9-reproduction).
+
+### Scripts in `tools/`
+
+| Group | Scripts | What they do |
+|---|---|---|
+| Report builders | `build_comprehensive_report.py`, `_he.py`, `_ste.py`; `report_appendices.py`, `_he.py`, `_ste.py`; `build_alternatives_report.py`; `build_decision_deck.py` | The comprehensive report in three languages with its appendices, the alternatives report, the HTML decision decks |
+| Map and figure builders | `build_alternatives_maps.py`, `peak_hour_factors_periods.py`, `build_report_figures.py`, `report_figure_style.py`, `make_fig_*_he.py`, `make_corridor_map_he.py`, `make_appendix_a_figs_he.py`, `he_area_names.py` | The 41 maps of the alternatives, the PM peak-hour factors, the Hebrew figure sets (section 7) |
+| Validation | `validation_metrics.py`, `test_validation_metrics.py`, `build_validation_workbook.py`, `bus_matrix_comparison.py` | The statistics of the Ministry of Transport guideline in one place with hand-checked tests; the validation workbook; the bus 2022 layer against RavKav and the raw survey by period |
+| OVT research | `ovt_build_evidence_table.py`, `ovt_sensitivity_screen.py`, `ovt_run_chain.py`, `ovt_chain_summary.py` | The evidence table of the out-of-vehicle-weight research, the sensitivity screen, the chain rerun on every parameter set and its summary |
+| Utilities | `lfs_pull.py`, `gtfs_extract_periods.py`, `md_he_to_docx.py`, `test_pipeline.py`, `appA_trip_time_histogram.json` | LFS objects without the client, the GTFS extracts by period, Hebrew Markdown to DOCX, the pipeline tests, the histogram data of appendix figure A.2 |
 
 ---
 
@@ -354,7 +414,18 @@ and the run times are in [METHODOLOGY §9](METHODOLOGY.md#9-reproduction).
 - **5 Oct.** May 2026 car speeds (steps 43, 37), level of service zone by zone (step 44),
   the capture zone by zone (step 39), the main route delivered and **the LRT alternatives
   (step 45)**, the comprehensive report in English and Hebrew with charts and maps at the
-  peak hour, and the decision summary.
+  peak hour, and the decision summary. **The numbers have not changed since.**
+- **6 Oct.** The chain organised as one pipeline (`pipeline/`, `docs/PIPELINE.md`); the
+  decision decks in English and Hebrew; appendices A–D added to the comprehensive report and
+  as a document of their own; appendix D also in Simplified Technical English.
+- **15 Oct.** The comprehensive report in ASD-STE100 Simplified Technical English.
+- **18–20 Oct.** Hebrew versions of the report figures (`Output/figures/he/`,
+  `Output/figures/report/`); the λ regression table and the step 33 sample exported; the bus
+  2022 layer compared with RavKav and the raw survey by period; METHODOLOGY §8 (the caveats)
+  **rewritten for the survey-only chain** (34 numbered items, 5 retired) with a Hebrew
+  version.
+- **22 Oct.** The three comprehensive reports rebuilt against the rewritten §8; the branches
+  merged and the repository tidied.
 
-The dated detail of every change, with the before and after values, is in
-[METHODOLOGY §0](METHODOLOGY.md#0-status-what-to-trust-and-how-to-read-this-document-6-october-2026).
+The dated detail of every change up to 5 October, with the before and after values, is in
+[METHODOLOGY §0.7](METHODOLOGY.md#07-work-log-by-date); the git log carries the rest.
