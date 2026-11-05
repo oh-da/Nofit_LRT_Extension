@@ -23,6 +23,8 @@ SOURCES = [3731, 2881, 818]                           # Table 4.3, 2050 BU: from
 THROUGH = {'ext_only': (5939, 5939), 'through': (6003, 7433)}   # Table 4.1: (extension riders, total LRT riders)
 REGIME = [6309, 7433, 5700]                           # Tables 4.3, 4.8: 2040 BU prioritized, 2050 BU prioritized, 2050 BU unprioritized
 RANGE = {'low': 5532, 'central': 7433, 'high': 10537, 'unprioritized': 5700}   # Executive summary planning range
+METRO_LRT = [8214, 9570, 9416, 11479]                 # Table 4.10 (section 4.10, the Metronit scenario): AM LRT riders with the Metronit on the Krayot side of Hamifrats only, 2040 BU / 2050 BU / 2040 HS / 2050 HS (central: LRT_TOTAL[1:])
+METRO_PEAK = [1450, 1623, 1631, 1958]                 # Table 4.10: busiest segment, AM peak hour, one direction, in the scenario (central: PEAK_LOAD[1:])
 
 # ---------------- the words ----------------
 S = {}
@@ -32,9 +34,9 @@ S['en'] = dict(
     display='"Archivo", "Helvetica Neue", Arial, sans-serif', body='"Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif',
     nav_title='Nofit light rail · extension through Haifa to Tirat Carmel', prev='‹ Prev', next='Next ›', prev_aria='Previous slide', next_aria='Next slide', slide_aria='Slide',
     scen=['2022', '2040 BU', '2050 BU', '2040 HS', '2050 HS'],
-    cover_eyebrow='Decision brief · Nofit light rail · October 2026',
+    cover_eyebrow='Decision brief · Nofit light rail · November 2026',
     cover_title='Should the Nofit light rail continue through Haifa to Tirat Carmel?',
-    cover_lede='What the travel demand evidence says, in plain language. Prepared for decision makers from the comprehensive demand report of 5 October 2026.',
+    cover_lede='What the travel demand evidence says, in plain language. Prepared for decision makers from the comprehensive demand report of 5 October 2026, with the Metronit scenario added on 5 November 2026.',
     cover_facts=[('Reference case', 'Year 2050, business-as-usual growth, trams with priority at road junctions'), ('Period', 'Morning peak, 06:00–09:00, unless stated'), ('Navigate', 'Arrow keys, space, or the buttons below')],
     s2_eyebrow='The short answer',
     s2_title='The extension has a real light-rail market. It needs priority at the junctions more than it needs a through service, and the numbers are ready for sizing the line, not yet for buying trains.',
@@ -100,10 +102,16 @@ S['en'] = dict(
     s11_facts=[('Firm part', 'The switch from the Metronit and buses rests on observed travel and measured timetables'), ('Soft part', 'The switch from cars. Read it as an order of magnitude'),
                ('A cautious assumption', 'Roads and buses keep 2026 speeds in 2050. If buses slow with traffic, the LRT gains about 5 percent')],
     s11_src='Source: executive summary planning range; sections 3.4 and 4.9 of the comprehensive report.',
-    s12_eyebrow='The open question', s12_title='The biggest open question is not in the model: will the Metronit and the light rail share the trunk?',
+    s12_eyebrow='The open question', s12_title='The biggest open question is a network decision, not a demand one: will the Metronit and the light rail share the trunk? We ran both answers.',
     s12_h1='What the model assumes', s12_l1=['Every Metronit and bus line keeps running next to the light rail, exactly as today.', 'About a third of Metronit passengers on the corridor switch; 7,800 stay because their trip is still quicker on the Metronit.', 'This is the cautious case for the light rail.'],
-    s12_h2='What a network decision would do', s12_l2=['Cut the Metronit back on the overlap, and up to its 11,300 morning corridor trips could move to the light rail.', 'Reorganise the Metronit to feed the light-rail stations, and the light rail gains riders too.', 'Either choice moves the figures more than any uncertainty in this report. Settle it before using them for capacity.'],
-    s12_src='Source: section 4.4 of the comprehensive report.',
+    s12_h2='What a network decision would do', s12_l2=['Cut the Metronit back to the Krayot side of Hamifrats, and the model gives 9,570 morning riders in 2050, 29 percent more, with the peak load at the Hamifrats junction up by half: the next slide.', 'Reorganise the Metronit to feed the light-rail stations, and the light rail gains riders too; that case is not modelled.', 'Either choice moves the figures more than any uncertainty in this report. Settle it before using them for capacity.'],
+    s12_src='Source: sections 4.4 and 4.10 of the comprehensive report.',
+    s12b_eyebrow='If the Metronit stops at Hamifrats', s12b_title='With the Metronit cut back to the Krayot, the light rail carries about 30 percent more riders, and the Hamifrats junction gets half as many passengers again in the peak hour.',
+    s12b_series=['Central case: every Metronit line as today', 'Metronit on the Krayot side of Hamifrats only'], s12b_chart='Morning LRT riders, central case and Metronit scenario',
+    s12b_caption='Morning LRT riders on the whole line, 06:00–09:00. In the scenario the Metronit runs only between the Krayot and Merkazit Hamifrats; in Haifa and Tirat Carmel the light rail is the only mass-transit mode beside the train and the buses. Nothing else changes.',
+    s12b_facts=[('Riders in 2050', '9,570 against 7,433: 29 percent more; 24 to 30 percent across the four scenario-years, 30 percent in the afternoon'), ('Who they are', 'Today’s Metronit passengers between the Krayot and Haifa, who change at Hamifrats, and riders inside Haifa'),
+                ('Peak load at Hamifrats', '1,620 per hour and direction against 1,070: half as much again, and 1,470 on the extension itself'), ('What stays out', 'No bus redesign in Haifa, no capacity limit, no change to the Metronit’s own frequencies. A few hundred trips go back to the car where the Metronit served better than the tram will')],
+    s12b_src='Source: section 4.10 and Table 4.10 of the comprehensive report.',
     s13_eyebrow='Fitness for use', s13_title='Use these numbers to size the market and rank the options. Do not use them yet to buy trains or set frequencies.',
     s13_h_good='Good for', s13_good=['Sizing the extension’s market and locating it: which areas, which stations.', 'Ranking the options: one line or two, priority or not.', 'The order of magnitude of the draw from the Metronit, buses and cars.', 'The scale of the peak load, for the design hour.'],
     s13_h_bad='Not yet good for', s13_bad=['Fleet size, frequencies or capacity: the loads have no capacity limit and were not checked link by link.', 'An economic appraisal.', 'Any claim about road congestion in 2040 or 2050.', 'Numbers for a single station or a single neighbourhood.'],
@@ -112,7 +120,7 @@ S['en'] = dict(
     s14_items=[('Plan on the 2050 reference case.', 'About 7,400 morning riders on the line, 6,000 of them on the extension, with 5,500 to 10,500 as the planning range.'),
                ('Protect priority at the junctions in the design.', 'Without it a quarter of the riders go, and the trip from Tirat Carmel to Hamifrats takes 66 minutes instead of 41.'),
                ('Treat through-running as a question of transfers, not of ridership.', 'One line spares 2,849 riders a morning a change of trains at Hamifrats; it does not add riders to the extension.'),
-               ('Decide the future of the Metronit on the shared trunk', 'before any capacity or fleet work, because that decision moves the figures more than any uncertainty here.'),
+               ('Decide the future of the Metronit on the shared trunk', 'before any capacity or fleet work: cutting it back to the Krayot adds 29 percent of riders and half as much peak load again at Hamifrats, more than any uncertainty here.'),
                ('Commission four pieces of work before appraisal:', 'a split of trips by purpose, a proper afternoon forecast, the main route’s operating plan, and a survey of how willing car owners are to switch.')],
     s14_src='Source: executive decision summary and section 5 of the comprehensive report.',
     s15_eyebrow='In one breath', s15_title='A light-rail-sized market in Haifa and Tirat Carmel, carried mostly from today’s transit, that lives or dies on priority at the junctions.',
@@ -169,9 +177,9 @@ S['he'] = dict(
     display='"Heebo", "Arial Hebrew", Arial, sans-serif', body='"Assistant", "Arial Hebrew", system-ui, Arial, sans-serif',
     nav_title='הרכבת הקלה נופית · הארכה דרך חיפה לטירת כרמל', prev='הקודם ›', next='‹ הבא', prev_aria='השקופית הקודמת', next_aria='השקופית הבאה', slide_aria='שקופית',
     scen=['2022', '2040 רגיל', '2050 רגיל', '2040 גבוה', '2050 גבוה'],
-    cover_eyebrow='תמצית למקבלי החלטות · הרכבת הקלה נופית · אוקטובר 2026',
+    cover_eyebrow='תמצית למקבלי החלטות · הרכבת הקלה נופית · נובמבר 2026',
     cover_title='האם להמשיך את הרכבת הקלה נופית דרך חיפה עד טירת כרמל?',
-    cover_lede='מה אומרות הראיות על הביקוש לנסיעות, בשפה פשוטה. הוכן למקבלי החלטות מתוך הדוח המסכם של 5 באוקטובר 2026.',
+    cover_lede='מה אומרות הראיות על הביקוש לנסיעות, בשפה פשוטה. הוכן למקבלי החלטות מתוך הדוח המסכם של 5 באוקטובר 2026, עם תרחיש המטרונית שנוסף ב-5 בנובמבר 2026.',
     cover_facts=[('תרחיש הייחוס', 'שנת 2050, צמיחה רגילה, רכבת עם עדיפות בצמתים'), ('התקופה', 'שיא הבוקר, 06:00–09:00, אלא אם צוין אחרת'), ('ניווט', 'מקשי החצים, רווח, או הכפתורים למטה')],
     s2_eyebrow='התשובה בקצרה',
     s2_title='להארכה יש שוק אמיתי בסדר גודל של רכבת קלה. היא זקוקה לעדיפות בצמתים יותר משהיא זקוקה לקו רציף, והמספרים בשלים לקביעת גודל הקו, לא עדיין לרכישת קרונות.',
@@ -237,10 +245,16 @@ S['he'] = dict(
     s11_facts=[('החלק המוצק', 'המעבר מהמטרונית ומהאוטובוסים נשען על נסיעות שנצפו ועל לוחות זמנים שנמדדו'), ('החלק הרך', 'המעבר מהרכב הפרטי. יש לקרוא אותו כסדר גודל'),
                ('הנחה זהירה', 'הכבישים והאוטובוסים שומרים על מהירויות 2026 גם ב-2050. אם האוטובוסים יואטו בפקקים, הרכבת הקלה מרוויחה כ-5 אחוז')],
     s11_src='מקור: טווח התכנון בתמצית; פרקים 3.4 ו-4.9 בדוח המסכם.',
-    s12_eyebrow='השאלה הפתוחה', s12_title='השאלה הפתוחה הגדולה ביותר אינה במודל: האם המטרונית והרכבת הקלה יחלקו את הציר?',
+    s12_eyebrow='השאלה הפתוחה', s12_title='השאלה הפתוחה הגדולה ביותר היא החלטת רשת, לא שאלת ביקוש: האם המטרונית והרכבת הקלה יחלקו את הציר? הרצנו את שתי התשובות.',
     s12_h1='מה המודל מניח', s12_l1=['כל קו מטרונית ואוטובוס ממשיך לנסוע לצד הרכבת הקלה, בדיוק כמו היום.', 'כשליש מנוסעי המטרונית במסדרון עוברים; 7,800 נשארים כי נסיעתם עדיין מהירה יותר במטרונית.', 'זהו המקרה הזהיר עבור הרכבת הקלה.'],
-    s12_h2='מה תעשה החלטה על הרשת', s12_l2=['צמצום המטרונית בקטע החופף, ועד 11,300 נסיעות הבוקר שלה במסדרון עשויות לעבור לרכבת הקלה.', 'ארגון מחדש של המטרונית כמזינה לתחנות הרכבת הקלה, והרכבת הקלה מרוויחה נוסעים גם כך.', 'כל אחת מההכרעות מזיזה את המספרים יותר מכל אי-ודאות בדוח הזה. יש להכריע בה לפני שמשתמשים בהם לקיבולת.'],
-    s12_src='מקור: פרק 4.4 בדוח המסכם.',
+    s12_h2='מה תעשה החלטה על הרשת', s12_l2=['קיצור המטרונית לצד הקריות של המפרץ נותן במודל 9,570 נוסעי בוקר ב-2050, 29 אחוז יותר, ועומס שיא בצומת המפרץ גבוה בכמחצית: בשקף הבא.', 'ארגון מחדש של המטרונית כמזינה לתחנות הרכבת הקלה, והרכבת הקלה מרוויחה נוסעים גם כך; המקרה הזה לא מודל.', 'כל אחת מההכרעות מזיזה את המספרים יותר מכל אי-ודאות בדוח הזה. יש להכריע בה לפני שמשתמשים בהם לקיבולת.'],
+    s12_src='מקור: פרקים 4.4 ו-4.10 בדוח המסכם.',
+    s12b_eyebrow='אם המטרונית תיעצר במפרץ', s12b_title='עם מטרונית שמקוצרת לקריות, הרכבת הקלה נושאת כ-30 אחוז יותר נוסעים, וצומת המפרץ מקבל עוד כמחצית נוסעים בשעת השיא.',
+    s12b_series=['המקרה המרכזי: כל קו מטרונית כמו היום', 'מטרונית רק בצד הקריות של המפרץ'], s12b_chart='נוסעי בוקר ברכבת הקלה, המקרה המרכזי ותרחיש המטרונית',
+    s12b_caption='נוסעי בוקר ברכבת הקלה בקו כולו, 06:00–09:00. בתרחיש המטרונית נוסעת רק בין הקריות למרכזית המפרץ; בחיפה ובטירת כרמל הרכבת הקלה היא אמצעי ההסעה ההמונית היחיד לצד הרכבת והאוטובוסים. שום דבר אחר לא משתנה.',
+    s12b_facts=[('נוסעים ב-2050', '9,570 לעומת 7,433: 29 אחוז יותר; 24 עד 30 אחוז בארבע שנות התרחיש, 30 אחוז אחר הצהריים'), ('מי הם', 'נוסעי המטרונית של היום בין הקריות לחיפה, שמחליפים במפרץ, ונוסעים בתוך חיפה'),
+                ('עומס השיא במפרץ', '1,620 לשעה ולכיוון לעומת 1,070: עוד כמחצית, ו-1,470 על ההארכה עצמה'), ('מה נשאר בחוץ', 'בלי תכנון מחדש של האוטובוסים בחיפה, בלי מגבלת קיבולת, בלי שינוי בתדירות המטרונית. כמה מאות נסיעות חוזרות לרכב במקום שבו המטרונית שירתה טוב יותר ממה שהרכבת תשרת')],
+    s12b_src='מקור: פרק 4.10 וטבלה 4.10 בדוח המסכם.',
     s13_eyebrow='למה המספרים מתאימים', s13_title='להשתמש במספרים האלה כדי לאמוד את השוק ולדרג את החלופות. לא להשתמש בהם עדיין כדי לרכוש קרונות או לקבוע תדירויות.',
     s13_h_good='מתאים ל', s13_good=['אומדן שוק ההארכה ומיקומו: אילו אזורים, אילו תחנות.', 'דירוג החלופות: קו אחד או שניים, עדיפות או לא.', 'סדר הגודל של המעבר מהמטרונית, מהאוטובוסים ומהרכב.', 'סדר הגודל של עומס השיא, לשעת התכן.'],
     s13_h_bad='עדיין לא מתאים ל', s13_bad=['גודל הצי, תדירויות או קיבולת: לעומסים אין מגבלת קיבולת והם לא נבדקו קטע-קטע.', 'הערכה כלכלית.', 'כל טענה על עומסי תנועה בכבישים ב-2040 או ב-2050.', 'מספרים לתחנה בודדת או לשכונה בודדת.'],
@@ -249,7 +263,7 @@ S['he'] = dict(
     s14_items=[('לתכנן על תרחיש הייחוס 2050.', 'כ-7,400 נוסעי בוקר בקו, 6,000 מהם על ההארכה, עם 5,500 עד 10,500 כטווח התכנון.'),
                ('לשמור בתכנון על עדיפות בצמתים.', 'בלעדיה רבע מהנוסעים הולכים לאיבוד, והנסיעה מטירת כרמל למפרץ נמשכת 66 דקות במקום 41.'),
                ('להתייחס לקו הרציף כשאלה של מעברים, לא של מספר נוסעים.', 'קו אחד חוסך ל-2,849 נוסעים בבוקר החלפת רכבת במפרץ; הוא אינו מוסיף נוסעים להארכה.'),
-               ('להכריע בעתיד המטרונית על הציר המשותף', 'לפני כל עבודת קיבולת או צי, כי ההכרעה הזאת מזיזה את המספרים יותר מכל אי-ודאות כאן.'),
+               ('להכריע בעתיד המטרונית על הציר המשותף', 'לפני כל עבודת קיבולת או צי: קיצורה לקריות מוסיף 29 אחוז נוסעים ועוד כמחצית עומס שיא במפרץ, יותר מכל אי-ודאות כאן.'),
                ('להזמין ארבע עבודות לפני הערכה כלכלית:', 'פיצול הנסיעות לפי מטרה, תחזית אחר-צהריים מסודרת, תוכנית ההפעלה של הקו הראשי, וסקר על נכונות בעלי הרכב לעבור.')],
     s14_src='מקור: התמצית למקבלי ההחלטות ופרק 5 בדוח המסכם.',
     s15_eyebrow='בנשימה אחת', s15_title='שוק בסדר גודל של רכבת קלה בחיפה ובטירת כרמל, שרובו מגיע מהתחבורה הציבורית של היום, ושחי או מת על עדיפות בצמתים.',
@@ -447,6 +461,7 @@ def build(lang):
     ch_regime = grouped_columns(t['s9_cats'], [(t['s9_series'], 'c1', REGIME)], t['s9_chart'], legend=False, cap=8500)
     ch_peak = grouped_columns(t['scen'], [(t['s10_series'], 'c1', PEAK_LOAD)], t['s10_chart'], legend=False, cap=1600)
     ch_range = range_chart(t)
+    ch_metro = grouped_columns(t['scen'][1:], [(t['s12b_series'][0], 'c1', LRT_TOTAL[1:]), (t['s12b_series'][1], 'c2', METRO_LRT)], t['s12b_chart'], cap=12000)
     n = [0]
     def slide(kind, eyebrow, title, body, source=''):
         n[0] += 1; src = f'<p class="source">{source}</p>' if source else ''
@@ -478,6 +493,7 @@ def build(lang):
     slides.append(slide('chart', t['s11_eyebrow'], t['s11_title'], chart_slide(ch_range, t['s11_caption'], t['s11_facts']), t['s11_src']))
     slides.append(slide('text', t['s12_eyebrow'], t['s12_title'],
         f'<div class="cols"><div><h3>{t["s12_h1"]}</h3>{ul(t["s12_l1"])}</div><div><h3>{t["s12_h2"]}</h3>{ul(t["s12_l2"])}</div></div>', t['s12_src']))
+    slides.append(slide('chart', t['s12b_eyebrow'], t['s12b_title'], chart_slide(ch_metro, t['s12b_caption'], t['s12b_facts'], html_legend([(t['s12b_series'][0], 'c1', 0), (t['s12b_series'][1], 'c2', 0)])), t['s12b_src']))
     slides.append(slide('text', t['s13_eyebrow'], t['s13_title'],
         f'<div class="cols fit"><div class="good"><h3>{t["s13_h_good"]}</h3>{ul(t["s13_good"])}</div><div class="bad"><h3>{t["s13_h_bad"]}</h3>{ul(t["s13_bad"])}</div></div>', t['s13_src']))
     slides.append(slide('cta', t['s14_eyebrow'], t['s14_title'],

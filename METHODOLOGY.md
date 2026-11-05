@@ -3942,7 +3942,10 @@ decision outside the study; this run puts the model's own choice reading on it: 
 LRT trips and +40–50 % on the busiest segment. The three comprehensive reports carry it as
 **section 4.10** (with Table 4.10, the markets Table 4.10b and Figures 4.27–4.30, drawn by the
 English builder at the peak hour; Time on route and Maps became 4.11 and 4.12, and the decision
-decks' references to Table 4.10 follow), a decision-summary row and a conclusions bullet. *The
+decks' references to Table 4.10 follow), a decision-summary row and a conclusions bullet; the
+decision decks (`tools/build_decision_deck.py`) carry it as slide 13 — a grouped-column chart of
+the AM LRT riders, central against scenario, over the four scenario-years, with the open-question
+slide 12 and the fourth ask rewritten to point at it. *The
 superzone key.* The cut reads `SZ_NEW` from `Zonal_2020.csv`; caveat 19 notes that this column
 disagrees with the chain's key table in 142 TAZs, and 18 of the 60 TAZs with a Metronit stop are
 among them (Kiryat Motzkin 5 against 6, Kiryat Haim 5 against 8, Yagur 9 against 11, Hadar 13
