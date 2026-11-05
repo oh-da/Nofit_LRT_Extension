@@ -3874,6 +3874,77 @@ flow charts exist at a second level: **flows between the corridor areas along th
 station's), one scale per kind over every period and scenario-year; the values are written per
 run as `{lrt,transit}_area_link_loads_peak_hour.csv`.
 
+**Addendum 5, 5 November 2026 — the Metronit scenario: the Metronit kept on the Krayot side
+of Merkazit Hamifrats only (`METRONIT_CUT`; `Output/alternatives_metronit_krayot/`, pipeline step
+`v45_metro`, `tools/metronit_scenario_summary.py`, `docs/METRONIT_KRAYOT_SCENARIO_2026-11-05.md`).**
+*The scenario asked for.* Once the LRT runs, the Metronit serves the Krayot only, up to Merkazit
+Hamifrats; in Haifa and Tirat Carmel the LRT is the one mass-transit mode beside the train and
+the buses. Estimated for the four forecast sets 2040 / 2050 × BU / HS; the 2022 base keeps
+today's network. *Method.* `METRONIT_CUT="BU_2040,BU_2050,HS_2040,HS_2050"` names the
+scenario-years; in each, every Metronit ride edge (`is_brt`) with a stop whose TAZ lies in Haifa
+proper or Tirat Carmel — the zonal superzones 13–17 and 24 (the Carmel coast and Hof HaCarmel,
+Bat Galim and Kiryat Eliezer, the lower city, Hadar, the Check Post / Gesher Paz, Tirat Carmel)
+— is dropped from the period's line graph, and the edges whose both stops lie in the Krayot,
+Kiryat Haim, the Hamifrats bay zone (Merkazit Hamifrats, Lev Hamifrats, the refineries, Tsomet
+Kiryat Ata), Nesher and Yagur (superzones 5–9, 11, 12, 18) stay: lines 1 (83001) and its
+limited-stop twin (62004) run Merkazit Hamifrats ↔ Merkazit HaKrayot, line 3 (67002) Merkazit
+Hamifrats ↔ Kiryat Ata, line 2 (67003) keeps its Krayot ↔ Hamifrats legs and loses its Hadar loop,
+the Yagur – Nesher – Hadar line (52005) ends at Nesher; of the 170 Metronit stops of either
+period 97 stay and 73 go, of the 265 Metronit ride edges 144 stay (the AM graph: 44,347 →
+44,226 ride edges; the TAZ pairs whose best no-LRT path is Metronit-based fall from 10,491 to
+2,468). Waits at the surviving stops are the period's. The buses (every line as it runs today,
+as in the central case), the train, the car and the LRT are untouched; the LRT's feeder legs use
+the scenario's graph. *The pivot's reference.* The observed 2022 shares were observed with the
+full Metronit, so the pivot now measures the transit nest's change from **today's** network: the
+uncut graph is built beside the scenario's (same slowdown), the nest's cost in the scenario is
+the logsum of the LRT (where it exists, net of its premium) and the scenario's best no-LRT path,
+and `delta` is that cost minus today's best no-LRT path. A pair that gains the LRT sees
+`delta < 0` and draws trips from the car as before; a pair that loses its Metronit without an LRT
+worth the change sees `delta > 0` and loses transit share to the car. The LRT's share within the
+nest is taken against the scenario's no-LRT path, so where the Metronit is gone the LRT competes
+with the bus alone and carries the bus premium (5), not the Metronit's (2.5); the source
+attribution (`from_brt`, `from_bus`, `BRT before`) keeps today's path type. Without a cut
+`bus_gc_ref == bus_gc` and the formula is step 31's `-(1/λ_T) log(1 + exp(-λ_T dL))` exactly: the
+rerun of the default case on the generalised code reproduces `demand_summary.csv`,
+`skims_summary.csv` and `time_on_route.csv` to the written precision and the 840 per-run files
+to 0.01, and the scenario run's 2022 rows equal the central run's. `demand_summary.csv` gains
+`Metronit cut at Hamifrats`, `TAZ pairs with transit dearer than today`, `transit trips on those
+pairs before`, `transit lost to the car on those pairs`, `LRT trips on those pairs`;
+`skims_summary.csv` the no-LRT best path on the cut graph (trunk TAZ pairs, AM: 44.8 → 52.4
+generalized minutes; all corridor pairs 54.4 → 63.5); `{AM,PM}/transit_gc_no_lrt_taz_{alt}_metronit_cut.csv.gz`
+the cut-graph skim. The folder keeps the summary files, the area matrices, the line loads and
+the boardings of the 40 runs, not the TAZ matrices (the slow-bus convention).
+*Results, main route + extension, Prioritized, three hours.* AM LRT trips **8,214 / 9,570 /
+9,416 / 11,479** (BU 2040 / BU 2050 / HS 2040 / HS 2050) against the central 6,309 / 7,433 /
+7,476 / 9,225 — **+30 / +29 / +26 / +24 %**; PM 7,022 / 8,031 / 7,304 / 7,777 against 5,358 /
+6,135 / 5,620 / 5,956 (+30–31 %). Trips using the extension 6,854 / 8,141 / 7,590 / 9,265
+(against 4,950 / 6,003 / 5,651 / 7,010). The busiest segment stays the entry into Hamifrats
+(S24–M02 towards Tirat Carmel): 3,173 / 3,552 / 3,570 / 4,286 in the AM three hours against
+2,114 / 2,345 / 2,509 / 3,058; at the peak hour (step 27's factor) 2050 BU 1,623 against 1,071,
+and 1,466 on the extension's own S23–S24. The AM corridor Metronit riders fall from 6,863 /
+7,816 / 6,992 / 7,908 (central, after the LRT) to 3,170 / 3,637 / 3,025 / 3,229 — the Krayot
+side's — of 10,000 / 11,282 / 10,496 / 12,102 today; the bus riders rise (2050 BU 6,824 → 8,338),
+since the Haifa pairs the LRT does not serve well keep a bus. Sources of the LRT trips, AM 2050
+BU: from Metronit-based pairs 3,731 → 6,008, from bus-based pairs 2,881 → 2,993, from the car
+817 → 567; the car → transit shift falls (684 → 271 BU 2040, 1,421 → 893 BU 2050, 1,387 → 964
+HS 2040, 2,035 → 1,537 HS 2050) because 2,150–2,230 TAZ pairs with 2,366–2,829 transit trips
+today lose their Metronit without an LRT path cheaper than it; of those trips 264–320 go to the
+car and 1,540–1,865 ride the LRT anyway (`LRT from car` is net of the first, hence lower, and
+negative in some of the Unprioritized and extension-only runs). Markets, AM 2050 BU: Krayot ↔
+Haifa by feeder 1,665 → 2,753 (+65 %, the trips that rode the Metronit through and now transfer
+at Hamifrats), Haifa internal 1,663 → 2,132 (+28 %), Tirat Carmel ↔ Haifa 2,189 → 2,367 (+8 %),
+main route ↔ Haifa 891 → 1,091 (+22 %); the stations gaining most are M02 (boardings 1,893 →
+2,997), S06 Matam, S19 and S16. Extension only, Prioritized, AM: 6,472 / 7,714 / 7,026 / 8,538
+(+28–33 %); the Unprioritized regime gains more in proportion (+29–41 %), its competitor having
+been the Metronit. *Reading.* The comprehensive report's section 4.4 anticipated that a reduced
+Metronit would raise the LRT's trunk loads by up to the Metronit's corridor volume, as a network
+decision outside the study; this run puts the model's own choice reading on it: about +30 % of
+LRT trips and +50 % on the busiest segment. Not modelled: bus restructuring beside the cut (the
+buses parallel to the Metronit's former Haifa section keep running, so the no-LRT alternative in
+Haifa is the bus), capacity on the LRT or at Merkazit Hamifrats, Metronit frequencies, fares,
+park-and-ride; caveats 15, 18, 27, 32 and 33 apply as in the central case, and the central
+planning range (λ 0.02–0.05) scales this scenario the same way.
+
 ## 6ar. Validation against the Ministry of Transport guideline, waves 1, 1b, 2 and 3 (T1-T12, T14-T17, T19; `MOT_Validation_Stage1_Inputs_Distribution`, `_Stage1d_Zones_Population_Rates`, `_Stage2_Timing`, `_Stage2c_Mode_Occupancy_Convergence`, `_Stage3_Counts_Transit`, `_Stage4_Link_volumes`, diagnostics)
 
 > **In plain words.** The Ministry of Transport's validation checklist applied to the base. Passes: the time-of-day shape, the calibrated bus at sub-area level, the transit trip lengths. Misses with a stated reason: the car layer against counts (residents only), the coincidence ratio against the phone data, the link-level fit, the intra-zonal share. Findings: two superzone keys disagree (the keys table wins), the car occupancy had been computed with the wrong hour (1.33 → 1.52), the smart cards fall short of the survey only in the AM and mostly on education trips, the survey population is 5 % above the zonal one. Also built the PM-peak and midday matrices. Diagnostic.
@@ -4112,6 +4183,7 @@ Counts: PCE / 1.10 on the 3,231 counted road links; count year read from `DATE` 
 | `alternatives/stations_{main_ext,ext}.csv`, `lrt_station_times_{alt}_{regime}.csv`, `main_route_nodes.csv`, `time_on_route.csv`, `skims_summary.csv`, `{AM,PM}/{car_gc,transit_gc_no_lrt_*,lrt_gc_*}_taz.csv.gz`, `{AM,PM}/{scenario}/{alt}_{regime}/{t_car_new,t_tr_new,t_lrt,t_bus,t_brt}_{taz.csv.gz,area_v2.csv}`, `lrt_line_loads.csv`, `transit_line_loads.csv`, `lrt_stations_boardings.csv`, `demand_summary.csv`, `shift_table_{AM,PM}_{regime}.csv`, `LRT_alternatives_matrices.xlsx` | 50 / 24 stations; 25 × 25 … 174 × 174; 40 runs | Step 45 | The LRT alternatives: stations and times, times on route (LRT / Metronit / train / car), the TAZ-level skims per period, the trip matrices after the LRT per run at both levels, LRT and total-transit line loads by segment and direction, boardings by station, the summary of all 40 runs (with the extension part within the through line), the shift-and-share tables, the workbook |
 | `figures/comprehensive/*.png` and `reports/Nofit_LRT_Extension_Comprehensive_Report.docx` | 11 charts | `tools/build_comprehensive_report.py` (after step 45) | The comprehensive report: LRT and total-transit flows by segment and direction per scenario (AM / PM), mode split on the corridor, demand by scenario, shift sources — all charts at the peak hour |
 | `alternatives_bus_slow/` (`demand_summary.csv`, `skims_summary.csv`, `time_on_route.csv`, per run the area matrices, `lrt_line_loads.csv`, `transit_line_loads.csv`, `lrt_stations_boardings.csv`; no TAZ matrices) | 40 runs | Step 45 with `BUS_SLOWDOWN` (§6aq addendum 3) | The slower-bus sensitivity: mixed-traffic buses × 1.10 in 2040, × 1.20 in 2050, Metronit and LRT unchanged — LRT +2 % / +4–5 % |
+| `alternatives_metronit_krayot/` (as `alternatives_bus_slow/`, plus `{AM,PM}/transit_gc_no_lrt_taz_{alt}_metronit_cut.csv.gz`, `comparison_vs_central.csv`, `markets_vs_central_AM.csv`, `line_loads_vs_central_{AM,PM}.csv`, `station_boardings_vs_central_AM.csv`, `figures/`) | 40 runs | Step 45 with `METRONIT_CUT` (§6aq addendum 5); `tools/metronit_scenario_summary.py` | The Metronit scenario: the Metronit on the Krayot side of Merkazit Hamifrats only in 2040 / 2050 × BU / HS, the LRT the one mass-transit mode in Haifa and Tirat Carmel — LRT +24–31 %, busiest segment +50 % |
 | `alternatives/peak_hour_factors.csv`, `corridor_v2/peak_hour_factors_v2_pm.csv` | 12 rows; the step-27 table for the PM | `tools/peak_hour_factors_periods.py` | The peak-hour factors applied to the alternatives' charts and maps: period × layer (car, transit) × direction (up, down, all); the PM window run of step 27's method |
 | `gtfs/stop_times_study_area_{am,pm}_trips_v45.csv.gz`, `stop_times_study_area_rail_day.csv.gz` | 259,001 / 259,883 / 1,959 rows | Step 45 | The study-area stop times of the service day for the AM and PM windows (bus and Metronit) and the day's rail trips |
 | `skims/taz/lrt_capture_scenarios_taz.csv`, `taz_vs_area_capture_comparison.csv`, `lrt_trips_2022_taz_{sc}_central.csv`, `lrt_share_of_transit_taz_{sc}_central.csv`, `transit_share_2022_pivot_taz.csv`, `taz_access_table.csv`, `lrt_trips_2022_area_from_taz_{sc}_central.csv`, `lrt_trips_by_area_taz_vs_area.csv`, `trunk_link_flows_taz.csv`, `lrt_boardings_by_station_area_taz.csv`, `lrt_boardings_by_station_taz.csv`, `lrt_capture_by_access_band.csv`, `regression_check_area_skims_on_taz.csv` (and the same under `bus_area_plus_walk/`) | 15 rows; 15; 174 × 174 (× 3 + 3); 174 rows; 25 × 25; 75 rows; 18; 10; stations; 15; 3 | Step 39 | The TAZ-level capture: scenario × case totals and the comparison with step 31; TAZ trip and share matrices; the pivot's shares; the TAZ access table; sums to areas, links, gateway areas and stations; the capture rate by access band; the regression check |
@@ -4358,6 +4430,9 @@ python3 tools/build_alternatives_maps.py      # Output/figures/alternatives/*.pn
 python3 tools/build_alternatives_report.py    # the workbook and the Word report, maps included
 # the slower-bus sensitivity of step 45 (§6aq addendum 3): the same notebook with the bus factors per scenario-year, into its own folder; the executed copy goes to a scratch folder
 BUS_SLOWDOWN="BU_2040:1.10,BU_2050:1.20,HS_2040:1.10,HS_2050:1.20" ALT_OUT=Output/alternatives_bus_slow jupyter nbconvert --to notebook --execute --output-dir /tmp/bus_slow notebooks/current/LRT_alternatives_demand.ipynb
+# the Metronit scenario of step 45 (§6aq addendum 5): the Metronit on the Krayot side of Merkazit Hamifrats only in the forecast years, into its own folder (pipeline: python3 -m pipeline run --only v45_metro); then the comparison tables, charts and note
+METRONIT_CUT="BU_2040,BU_2050,HS_2040,HS_2050" ALT_OUT=Output/alternatives_metronit_krayot jupyter nbconvert --to notebook --execute --output-dir /tmp/metronit_krayot notebooks/current/LRT_alternatives_demand.ipynb
+python3 tools/metronit_scenario_summary.py       # Output/alternatives_metronit_krayot/comparison_vs_central.csv …, figures/, docs/METRONIT_KRAYOT_SCENARIO_2026-11-05.md (seconds)
 python3 tools/peak_hour_factors_periods.py    # Output/alternatives/peak_hour_factors.csv (AM from step 27, PM by the same method; ≈ 2 minutes; needed by the two builders below)
 python3 tools/build_comprehensive_report.py   # reports/Nofit_LRT_Extension_Comprehensive_Report.docx + Output/figures/comprehensive/ (≈ 1 minute)
 python3 tools/build_comprehensive_report_he.py   # the same report in simple Hebrew, reports/Nofit_LRT_Extension_Comprehensive_Report_HE.docx (≈ 1 minute)

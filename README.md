@@ -1,6 +1,6 @@
 # Nofit LRT Extension — demand estimate
 
-**Status: 22 October 2026.** This repository estimates how many people would ride the
+**Status: 5 November 2026.** This repository estimates how many people would ride the
 planned **extension of the Nofit light rail (LRT)** in northern Israel. The main Nofit route
 (Hamifrats – Nazareth, 40.7 km, 20 stations) is under construction. The extension continues it
 from Hamifrats through Haifa to Tirat Carmel (18.7 km, 24 stations). Everything here is built
@@ -17,7 +17,8 @@ with a Hebrew version, a Simplified Technical English version and a slide deck a
 
 The numbers of the study are those of 5 October 2026 (step 45). The work since then has been
 documentation, reports, figures and the pipeline; no step has been rerun and no number has
-changed.
+changed. On 5 November 2026 one **scenario** was added beside the central case, without touching
+it: the Metronit kept on the Krayot side of Merkazit Hamifrats only (section 1).
 
 ---
 
@@ -44,6 +45,15 @@ What to read with these numbers:
   Through-running does not add extension riders; it spares them a transfer at Hamifrats.
 - **Without priority at junctions** (at-grade running): 20–25 % fewer trips (5,700 in 2050 BU).
 - **The evening peak** (16:00–19:00) carries about 80 % of the morning figure (6,135 in 2050 BU).
+- **The Metronit scenario** (5 November 2026): if, once the LRT runs, the Metronit serves the
+  Krayot only, up to Merkazit Hamifrats, and the LRT is the one mass-transit mode in Haifa and
+  Tirat Carmel beside the train and the buses, the through line carries **8,214 / 9,570 /
+  9,416 / 11,479** AM trips (2040 BU / 2050 BU / 2040 HS / 2050 HS), **24–30 % more** than the
+  central case, and its busiest segment about 50 % more; PM +30 %. The gain is today's Metronit
+  riders between the Krayot and Haifa transferring at Hamifrats, and Haifa-internal riders; the
+  car shift is smaller, since some Haifa pairs lose their Metronit without an LRT as good.
+  `Output/alternatives_metronit_krayot/`, [docs/METRONIT_KRAYOT_SCENARIO_2026-11-05.md](docs/METRONIT_KRAYOT_SCENARIO_2026-11-05.md),
+  [METHODOLOGY §6aq addendum 5](METHODOLOGY.md#6aq-step-45--demand-for-the-lrt-alternatives-main-route--extension-and-extension-only-two-regimes-2022--2040--2050--bu--hs-am-and-pm-at-taz-and-corridor-area-level-lrt_alternatives_demandipynb).
 - **Who rides:** today's bus and Metronit passengers moving to a faster vehicle. Only
   6–14 % of the LRT trips come out of cars (818 of 7,433 in 2050 BU); the transit market grows
   only by that car shift.
@@ -71,7 +81,7 @@ not passenger loads for capacity design, and they are not externally validated f
 | Cost sensitivity λ | `Output/mode_choice/` | The person-level logit of step 33 (λ 0.035, by car-availability segment), also on the 2026 car skim; the regression table and the estimation sample are exported under `exports/` |
 | Corridor flows | `Output/corridor_v2/` | Potential movements between the 25 corridor areas along three routes, three-hour and peak-hour |
 | LRT line and stations | `Output/lrt_v2/`, `Output/alternatives/stations_*.csv` | Station tables and station-to-station times for the extension and the main route |
-| Sensitivities | `Output/alternatives_bus_slow/`, `Output/ovt_research/`, `Output/skims/ovt_*/` | Step 45 with slower buses in 2040 / 2050; the out-of-vehicle-weight research and the chain rerun on seven parameter sets |
+| Sensitivities and scenarios | `Output/alternatives_bus_slow/`, `Output/alternatives_metronit_krayot/`, `Output/ovt_research/`, `Output/skims/ovt_*/` | Step 45 with slower buses in 2040 / 2050; step 45 with the Metronit on the Krayot side of Hamifrats only (the Metronit scenario, with its comparison tables and charts); the out-of-vehicle-weight research and the chain rerun on seven parameter sets |
 | Validation | `Output/validation/`, `Output/validation_mot/`, `Output/ths2017/tests/` | Checks against road counts, smart cards, the phone-based matrix and the Ministry of Transport guideline (`validation_workbook.xlsx`, one sheet per test) |
 
 Everything else under `Output/` is an input layer, a diagnostic, or historical. The
@@ -165,7 +175,9 @@ current and 5 retired in §8.2. A Hebrew plain-language version is
 3. **The LRT running regime** (caveat 32). Priority at junctions versus at-grade running is
    worth about 20–25 % of the trips.
 4. **The bus network after opening** (caveat 32). The model keeps every bus and Metronit line
-   as it runs today. Removing the parallel trunk bus would raise the capture by 21–64 %.
+   as it runs today. Removing the parallel trunk bus would raise the capture by 21–64 %; the
+   Metronit scenario of 5 November 2026 (the Metronit cut back to the Krayot) raises the LRT's
+   trips by 24–31 % (section 1).
 5. **The peak-hour factor** (caveat 18). The survey's departure times give a sharper peak
    (0.55–0.65 of three hours) than road counts (0.38–0.43) and smart cards (0.43–0.48).
 6. **The level of service is held at May 2026 in every forecast year** (caveats 10, 25). A
@@ -309,6 +321,7 @@ Charts and maps, all drawn for the **peak hour** (the tables keep the three-hour
 - [`OVT_WEIGHTS_RESEARCH_PLAN.md`](docs/OVT_WEIGHTS_RESEARCH_PLAN.md), [`OVT_WEIGHTS_PARAMETER_MEMO.md`](docs/OVT_WEIGHTS_PARAMETER_MEMO.md), [`OVT_REPORTS_COMPARISON_2026-10-04.md`](docs/OVT_REPORTS_COMPARISON_2026-10-04.md) — the research on walk / wait weights and transfer penalties
 - [`APPENDIX_D_GENERALIZED_COST_STE100.md`](docs/APPENDIX_D_GENERALIZED_COST_STE100.md) — appendix D of the comprehensive report (the generalized cost function) in Simplified Technical English
 - [`METHODOLOGY_section8_he.md`](docs/METHODOLOGY_section8_he.md) — METHODOLOGY §8 (the caveats) translated and simplified in Hebrew, updated with the 20 October rewrite; the DOCX of it is `exports/METHODOLOGY_section8_he.docx` (`tools/md_he_to_docx.py`)
+- [`METRONIT_KRAYOT_SCENARIO_2026-11-05.md`](docs/METRONIT_KRAYOT_SCENARIO_2026-11-05.md) — the Metronit scenario (the Metronit on the Krayot side of Merkazit Hamifrats only, 2040 / 2050 × BU / HS) against the central case: tables, charts, how to read it; written by `tools/metronit_scenario_summary.py` from the run's outputs
 - [`LRT_CAPTURE_PLAN.md`](docs/LRT_CAPTURE_PLAN.md) — the generalized-cost capture model as planned
 - [`PLAN_TIGHTENING_AND_SCENARIOS.md`](docs/PLAN_TIGHTENING_AND_SCENARIOS.md) — what moves the capture number and the scenarios to run
 - [`FORECAST_METHODOLOGY_2040_2050.md`](docs/FORECAST_METHODOLOGY_2040_2050.md) — how the 2022 matrices are grown to 2040 / 2050
@@ -377,7 +390,7 @@ tables under `Output/alternatives/` every time they run; when the data have not 
 redrawn files differ only in bytes and need not be committed.
 
 The exact commands, the environment variables that select alternative runs (`NOFIT_PERIOD`,
-`CAR_SOURCE`, `BUS_WAIT_RULE`, `LRT_HEADWAY`, `BUS_COMPETITION`, `BUS_SLOWDOWN`, `OVT_TAG`)
+`CAR_SOURCE`, `BUS_WAIT_RULE`, `LRT_HEADWAY`, `BUS_COMPETITION`, `BUS_SLOWDOWN`, `METRONIT_CUT`, `OVT_TAG`)
 and the run times are in [METHODOLOGY §9](METHODOLOGY.md#9-reproduction).
 
 ### Scripts in `tools/`
@@ -388,6 +401,7 @@ and the run times are in [METHODOLOGY §9](METHODOLOGY.md#9-reproduction).
 | Map and figure builders | `build_alternatives_maps.py`, `peak_hour_factors_periods.py`, `build_report_figures.py`, `report_figure_style.py`, `make_fig_*_he.py`, `make_corridor_map_he.py`, `make_appendix_a_figs_he.py`, `he_area_names.py` | The 41 maps of the alternatives, the PM peak-hour factors, the Hebrew figure sets (section 7) |
 | Validation | `validation_metrics.py`, `test_validation_metrics.py`, `build_validation_workbook.py`, `bus_matrix_comparison.py` | The statistics of the Ministry of Transport guideline in one place with hand-checked tests; the validation workbook; the bus 2022 layer against RavKav and the raw survey by period |
 | OVT research | `ovt_build_evidence_table.py`, `ovt_sensitivity_screen.py`, `ovt_run_chain.py`, `ovt_chain_summary.py` | The evidence table of the out-of-vehicle-weight research, the sensitivity screen, the chain rerun on every parameter set and its summary |
+| Scenarios | `metronit_scenario_summary.py` | The Metronit scenario against the central case: comparison tables, charts and the Markdown note |
 | Utilities | `lfs_pull.py`, `gtfs_extract_periods.py`, `md_he_to_docx.py`, `test_pipeline.py`, `appA_trip_time_histogram.json` | LFS objects without the client, the GTFS extracts by period, Hebrew Markdown to DOCX, the pipeline tests, the histogram data of appendix figure A.2 |
 
 ---
@@ -426,6 +440,10 @@ and the run times are in [METHODOLOGY §9](METHODOLOGY.md#9-reproduction).
   version.
 - **22 Oct.** The three comprehensive reports rebuilt against the rewritten §8; the branches
   merged and the repository tidied.
+- **5 Nov.** The **Metronit scenario**: step 45 gains `METRONIT_CUT` (the Metronit kept on the
+  Krayot side of Merkazit Hamifrats only, the pivot referenced to today's network) and is run
+  for 2040 / 2050 × BU / HS into `Output/alternatives_metronit_krayot/` (pipeline step
+  `v45_metro`); the default run is reproduced number for number. Central numbers unchanged.
 
 The dated detail of every change up to 5 October, with the before and after values, is in
 [METHODOLOGY §0.7](METHODOLOGY.md#07-work-log-by-date); the git log carries the rest.

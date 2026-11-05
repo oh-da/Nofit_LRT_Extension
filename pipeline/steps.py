@@ -46,7 +46,7 @@ STAGES: list[tuple[str, str, str]] = [
     ("reports", "Reports",
      "Peak-hour factors for the charts, maps, the alternatives report, the comprehensive report in English, Hebrew and Simplified Technical English, the decision deck."),
     ("sensitivity", "Sensitivities and alternative runs",
-     "The same notebooks with other settings: 2026 car skim, LRT headway, bus competition, bus wait rule, out-of-vehicle weights, slower buses, TAZ bus construction. Executed copies go to the scratch folder."),
+     "The same notebooks with other settings: 2026 car skim, LRT headway, bus competition, bus wait rule, out-of-vehicle weights, slower buses, the Metronit cut back to the Krayot, TAZ bus construction. Executed copies go to the scratch folder."),
     ("validation", "Validation and diagnostics",
      "Tests against smart cards, road counts, the phone-based matrix and the Ministry of Transport guideline. Evidence, not products."),
 ]
@@ -333,13 +333,20 @@ STEPS: list[Step] = [
     Step("s45", "alternatives", "THE DELIVERABLE: LRT demand for main + extension vs extension only, two regimes, 2022–2050, AM and PM", f"{NB}LRT_alternatives_demand.ipynb", "45", "6aq",
          needs=("s22", "s23", "s25", "s29", "s30", "s43", "gtfs45", "s16_pm"), inputs=(MAIN_LINE, MAIN_STOPS, CORR_V2, STREETS, TAZ_SHP, ZONAL), soft_inputs=(GTFS,),
          outputs=("Output/alternatives/demand_summary.csv", "Output/alternatives/time_on_route.csv", "Output/alternatives/stations_main_ext.csv", "Output/alternatives/skims_summary.csv"),
-         knobs=("ALT_OUT", "BUS_SLOWDOWN"), packages=GEO + ("pyogrio",), minutes=3),
+         knobs=("ALT_OUT", "BUS_SLOWDOWN", "METRONIT_CUT"), packages=GEO + ("pyogrio",), minutes=3),
 
     # ---- the slower-bus sensitivity of step 45, read by the comprehensive report ----
     Step("v45_slow", "sensitivity", "Step 45 with slower buses in the forecast years → Output/alternatives_bus_slow/", f"{NB}LRT_alternatives_demand.ipynb", "45", "6aq",
          needs=("s45",), inputs=(MAIN_LINE, MAIN_STOPS, CORR_V2, STREETS, TAZ_SHP, ZONAL),
-         env={"BUS_SLOWDOWN": "BU_2040:1.10,BU_2050:1.20,HS_2040:1.10,HS_2050:1.20", "ALT_OUT": "Output/alternatives_bus_slow"}, knobs=("ALT_OUT", "BUS_SLOWDOWN"),
+         env={"BUS_SLOWDOWN": "BU_2040:1.10,BU_2050:1.20,HS_2040:1.10,HS_2050:1.20", "ALT_OUT": "Output/alternatives_bus_slow"}, knobs=("ALT_OUT", "BUS_SLOWDOWN", "METRONIT_CUT"),
          outputs=("Output/alternatives_bus_slow/demand_summary.csv",), optional=True, inplace=False, packages=GEO + ("pyogrio",), minutes=3),
+
+    # ---- the Metronit scenario of step 45: the Metronit kept on the Krayot side of Merkazit Hamifrats only (§6aq addendum 5) ----
+    Step("v45_metro", "sensitivity", "Step 45 with the Metronit kept on the Krayot side of Merkazit Hamifrats only, in the forecast years → Output/alternatives_metronit_krayot/", f"{NB}LRT_alternatives_demand.ipynb", "45", "6aq",
+         needs=("s45",), inputs=(MAIN_LINE, MAIN_STOPS, CORR_V2, STREETS, TAZ_SHP, ZONAL),
+         env={"METRONIT_CUT": "BU_2040,BU_2050,HS_2040,HS_2050", "ALT_OUT": "Output/alternatives_metronit_krayot"}, knobs=("ALT_OUT", "BUS_SLOWDOWN", "METRONIT_CUT"),
+         outputs=("Output/alternatives_metronit_krayot/demand_summary.csv",), optional=True, inplace=False, packages=GEO + ("pyogrio",), minutes=5,
+         note="The scenario asked for on 5 November 2026: in Haifa and Tirat Carmel the LRT is the one mass-transit mode beside the train and the buses; the 2022 rows keep today's network. tools/metronit_scenario_summary.py compares it with the central run."),
 
     # ---- reports ----
     Step("r_phf", "reports", "Peak-hour factors for the charts: step 27's method on the PM window beside the AM values", "tools/peak_hour_factors_periods.py", "—", "6aq",
