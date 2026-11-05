@@ -209,7 +209,9 @@ L.append('## 7. Charts\n')
 for f_ in sorted(os.listdir(FIG)): L.append(f'- `{FIG}/{f_}`')
 L.append('\n## 8. How to read it\n')
 L.append('- The scenario is a **network decision**, not a demand uncertainty: the comprehensive report\'s section 4.4 anticipated that a reduced Metronit would raise the LRT\'s '
-         'trunk loads by up to the Metronit\'s corridor volume. This run puts a number on it with the model\'s own choice mechanism.')
+         'trunk loads by up to the Metronit\'s corridor volume. This run puts a number on it with the model\'s own choice mechanism; the comprehensive report carries it as section 4.10.')
+L.append('- The cut reads the superzone of each stop\'s TAZ from `Zonal_2020.csv` (`SZ_NEW`). Caveat 19 notes that this column disagrees with the chain\'s key table in 142 TAZs; 18 of the 60 TAZs with a '
+         'Metronit stop are among them, every one on the same side of the cut under either key, so the partition of the 170 stops is the same.')
 L.append('- What is not modelled: no bus restructuring beside the cut (the buses parallel to the Metronit\'s former Haifa section keep running, so the no-LRT alternative in Haifa is the bus, '
          'not nothing), no capacity on the LRT or at Merkazit Hamifrats, no change of Metronit frequencies, no fare, no park-and-ride. The λ, the out-of-vehicle weights, the peak-hour factor and the '
          'aggregation dependence of the pivot (caveats 15, 18, 27, 33) apply as in the central case; the planning range of the central case (λ 0.02–0.05) scales this scenario the same way.')

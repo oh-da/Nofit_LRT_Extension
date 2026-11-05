@@ -49,7 +49,8 @@ What to read with these numbers:
   Krayot only, up to Merkazit Hamifrats, and the LRT is the one mass-transit mode in Haifa and
   Tirat Carmel beside the train and the buses, the through line carries **8,214 / 9,570 /
   9,416 / 11,479** AM trips (2040 BU / 2050 BU / 2040 HS / 2050 HS), **24–30 % more** than the
-  central case, and its busiest segment about 50 % more; PM +30 %. The gain is today's Metronit
+  central case, and its busiest segment 40–50 % more; PM +30 %. The comprehensive report
+  carries it as section 4.10 (English, Hebrew and STE versions) and in its decision summary. The gain is today's Metronit
   riders between the Krayot and Haifa transferring at Hamifrats, and Haifa-internal riders; the
   car shift is smaller, since some Haifa pairs lose their Metronit without an LRT as good.
   `Output/alternatives_metronit_krayot/`, [docs/METRONIT_KRAYOT_SCENARIO_2026-11-05.md](docs/METRONIT_KRAYOT_SCENARIO_2026-11-05.md),
@@ -286,9 +287,9 @@ old 25-area forecast branch (`Forecast_matrices_2040_2050`, `Base_mode_shares_20
 
 | Report | Date | What it is for |
 |---|---|---|
-| [`reports/Nofit_LRT_Extension_Comprehensive_Report.docx`](reports/Nofit_LRT_Extension_Comprehensive_Report.docx) | 22 Oct 2026 (numbers of 5 Oct) | **The report for decision-makers:** one-page decision summary, goal, model and data, calibration and base year with every caveat, results for 2040 / 2050 × BU / HS, markets, the Metronit, conclusions, appendices A–D. Built by `tools/build_comprehensive_report.py` and `tools/report_appendices.py` |
-| [`reports/Nofit_LRT_Extension_Comprehensive_Report_HE.docx`](reports/Nofit_LRT_Extension_Comprehensive_Report_HE.docx) | 22 Oct 2026 | The same report in simple Hebrew, shorter, same numbers and charts (`tools/build_comprehensive_report_he.py`, `tools/report_appendices_he.py`) |
-| [`reports/Nofit_LRT_Extension_Comprehensive_Report_STE.docx`](reports/Nofit_LRT_Extension_Comprehensive_Report_STE.docx) | 22 Oct 2026 | The same summary report (the Hebrew version's structure, appendices A–D included) in ASD-STE100 Simplified Technical English: sentences ≤ 25 words, paragraphs ≤ 6 sentences, active voice, no -ing forms, a technical-name table up front. Built by `tools/build_comprehensive_report_ste.py`, which checks the countable STE rules on every paragraph it writes |
+| [`reports/Nofit_LRT_Extension_Comprehensive_Report.docx`](reports/Nofit_LRT_Extension_Comprehensive_Report.docx) | 5 Nov 2026 (numbers of 5 Oct; section 4.10 added) | **The report for decision-makers:** one-page decision summary, goal, model and data, calibration and base year with every caveat, results for 2040 / 2050 × BU / HS, markets, the Metronit, the Metronit scenario (section 4.10), conclusions, appendices A–D. Built by `tools/build_comprehensive_report.py` and `tools/report_appendices.py` |
+| [`reports/Nofit_LRT_Extension_Comprehensive_Report_HE.docx`](reports/Nofit_LRT_Extension_Comprehensive_Report_HE.docx) | 5 Nov 2026 | The same report in simple Hebrew, shorter, same numbers and charts (`tools/build_comprehensive_report_he.py`, `tools/report_appendices_he.py`) |
+| [`reports/Nofit_LRT_Extension_Comprehensive_Report_STE.docx`](reports/Nofit_LRT_Extension_Comprehensive_Report_STE.docx) | 5 Nov 2026 | The same summary report (the Hebrew version's structure, appendices A–D included) in ASD-STE100 Simplified Technical English: sentences ≤ 25 words, paragraphs ≤ 6 sentences, active voice, no -ing forms, a technical-name table up front. Built by `tools/build_comprehensive_report_ste.py`, which checks the countable STE rules on every paragraph it writes |
 | [`reports/Nofit_LRT_Extension_Report_Appendices.docx`](reports/Nofit_LRT_Extension_Report_Appendices.docx) (+ `_HE`) | 6 Oct 2026 | Appendices A–D of the comprehensive report as a document of their own: the LRT speed and time function, the out-of-vehicle weights, λ, the generalized cost (`tools/report_appendices.py --only`) |
 | [`reports/Nofit_LRT_Extension_Decision_Deck.html`](reports/Nofit_LRT_Extension_Decision_Deck.html) (+ `_HE`) | 6 Oct 2026 | The decision-maker slide deck, English and Hebrew: one self-contained HTML file each with inline charts, the route map and the appendices as backup slides (`tools/build_decision_deck.py`) |
 | [`reports/LRT_Alternatives_Demand_Report.docx`](reports/LRT_Alternatives_Demand_Report.docx) | 5 Oct 2026 | The alternatives in detail: times on route, demand tables AM / PM, 41 maps of time, demand, line loads, growth and shift to the LRT (`tools/build_alternatives_maps.py`, `tools/build_alternatives_report.py`) |
@@ -298,7 +299,9 @@ old 25-area forecast branch (`Forecast_matrices_2040_2050`, `Base_mode_shares_20
 | `reports/historical/` | Sep 2026 | The first OD report, the demographic scenario comparison and the PCA reports, each with a status note |
 
 The three comprehensive reports were rebuilt on 22 October 2026 so that their caveat
-references follow the rewritten METHODOLOGY §8; their numbers are unchanged since 5 October.
+references follow the rewritten METHODOLOGY §8, and on 5 November 2026 to add the Metronit
+scenario as section 4.10 (Time on route and Maps became 4.11 and 4.12; the decision decks'
+table references follow); their central numbers are unchanged since 5 October.
 
 Charts and maps, all drawn for the **peak hour** (the tables keep the three-hour totals beside it):
 
@@ -444,6 +447,7 @@ and the run times are in [METHODOLOGY §9](METHODOLOGY.md#9-reproduction).
   Krayot side of Merkazit Hamifrats only, the pivot referenced to today's network) and is run
   for 2040 / 2050 × BU / HS into `Output/alternatives_metronit_krayot/` (pipeline step
   `v45_metro`); the default run is reproduced number for number. Central numbers unchanged.
+  The three comprehensive reports gain the scenario as section 4.10 and a decision-summary row.
 
 The dated detail of every change up to 5 October, with the before and after values, is in
 [METHODOLOGY §0.7](METHODOLOGY.md#07-work-log-by-date); the git log carries the rest.

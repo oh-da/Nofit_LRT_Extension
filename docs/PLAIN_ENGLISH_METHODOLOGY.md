@@ -4392,14 +4392,15 @@ car. With the Metronit untouched the model gives exactly the central numbers, wh
 
 The answer: the through line carries about **30 % more** riders — 8,200 / 9,600 / 9,400 /
 11,500 in the morning three hours of 2040 BU / 2050 BU / 2040 HS / 2050 HS against 6,300 /
-7,400 / 7,500 / 9,200 — and its busiest stretch, the entry into Hamifrats, about 50 % more
+7,400 / 7,500 / 9,200 — and its busiest stretch, the entry into Hamifrats, 40–50 % more
 (1,600 against 1,100 in the 2050 BU peak hour). The extra riders are mostly today's Metronit
 riders between the Krayot and Haifa, who now change to the LRT at Hamifrats, and riders inside
 Haifa; the Metronit keeps about 3,200–3,600 corridor riders on the Krayot side. The shift from
 the car is smaller than in the central case, by a few hundred trips, because some Haifa pairs
 lose a direct Metronit and get a bus instead. What this does not include: any redesign of the
 buses in Haifa, capacity on the LRT or at Merkazit Hamifrats, or fares. The tables and charts
-are in `docs/METRONIT_KRAYOT_SCENARIO_2026-11-05.md` and `Output/alternatives_metronit_krayot/`.
+are in `docs/METRONIT_KRAYOT_SCENARIO_2026-11-05.md` and `Output/alternatives_metronit_krayot/`,
+and the comprehensive report carries the scenario as its section 4.10.
 
 ### 5.9 Where things stand now
 
