@@ -1,15 +1,19 @@
 """Build the scenario workbook: step 45's LRT demand model as live Excel formulas, zone pair by zone pair.
 
-    python3 tools/scenario_metronit_skims.py        # once: the Metronit network variants (Output/scenario_tool/)
+    python3 tools/scenario_metronit_skims.py        # once: the Metronit network variants (Output/scenario_tool/{AM,PM}/)
     python3 tools/build_scenario_workbook.py        # writes exports/Nofit_LRT_Scenario_Model.xlsx
     python3 tools/build_scenario_workbook.py --check-only
 
-The workbook holds the 26,022 inter-area corridor TAZ pairs that carry any trip in any scenario-year (AM 06:00-09:00) with
-their base car and transit trips (2022 and the four forecast sets) and, for every Metronit network variant, alternative
-and regime, the precomputed costs of `tools/scenario_metronit_skims.py`. Each pair row runs step 45's incremental logit
-(METHODOLOGY 6aq / 6ac) in formulas that read the Inputs sheet, so a change of lambda, lambda_T, the LRT premiums, the
-smoothing weight, the LRT headway, station access or running time, the scenario-year, the alternative, the regime or the
-Metronit network recalculates every pair, TAZ, area, station and segment.
+The workbook holds the inter-area corridor TAZ pairs that carry any trip in any scenario-year of either period (AM
+06:00-09:00, PM 16:00-19:00) with their base car and transit trips (2022 and the four forecast sets, both periods) and,
+for every period, Metronit network variant, alternative and regime, the precomputed costs of
+`tools/scenario_metronit_skims.py`. Each pair row runs step 45's incremental logit (METHODOLOGY 6aq / 6ac) in formulas
+that read the Inputs sheet, so a change of the period, lambda, lambda_T, the LRT premiums, the smoothing weight, the LRT
+headway, station access or running time, the scenario-year, the alternative, the regime or the Metronit network
+recalculates every pair, TAZ, area, station and segment.
+
+The PM bases are step 45's: 2022 = the wave-1b PM layers (car; bus + rail), and each forecast set = the PM base x step
+23's AM growth per TAZ pair (row growth where the AM 2022 cell is empty), an approximation the study states.
 
 A network change enters the pivot as the change of the transit nest's composite cost against today's network:
     Delta = (GC_transit_variant - GC_transit_today) - ln(1 + exp(-lambda_T * dL)) / lambda_T,   dL = GC_LRT - premium - GC_transit_variant
@@ -17,8 +21,8 @@ which is step 45's logsum term when the Metronit is kept (the first bracket is t
 (trips move to the car) where a Metronit cut is not made up by the LRT.
 
 Before writing, the script runs the same pivot in numpy at the default inputs with the Metronit as today and checks it
-against Output/alternatives/demand_summary.csv (all 20 AM combinations); it stops if any LRT total differs by more than
-0.5 trips. The static sheets (reference values, the lambda sweep, the scenario grid) come from that numpy run.
+against Output/alternatives/demand_summary.csv (all 40 combinations, AM and PM); it stops if any LRT total differs by
+more than 0.5 trips. The static sheets (reference values, the lambda sweep, the scenario grid) come from that numpy run.
 """
 import os
 import sys
@@ -42,6 +46,8 @@ from openpyxl.worksheet.datavalidation import DataValidation  # noqa: E402
 SK_DIR = 'Output/scenario_tool'
 OUT_XLSX = 'exports/Nofit_LRT_Scenario_Model.xlsx'
 
+PERIODS = ['AM', 'PM']
+PER_LABEL = {'AM': 'AM peak 06:00-09:00', 'PM': 'PM peak 16:00-19:00'}
 SCEN = ['2022', 'BU_2040', 'BU_2050', 'HS_2040', 'HS_2050']
 SCEN_LABEL = {'2022': '2022 (base year)', 'BU_2040': '2040 BU (business as usual)', 'BU_2050': '2050 BU (reference case)',
               'HS_2040': '2040 HS (high growth)', 'HS_2050': '2050 HS (high growth)'}
@@ -57,9 +63,18 @@ VAR_LABEL = {'M0': 'M0 - Metronit as today (all 5 lines)',
 W_WAIT = 2.0
 DEFAULTS = {'lam': 0.03, 'ratio': 2.0, 'prem_bus': 5.0, 'prem_brt': 2.5, 'k': 20.0, 'headway': 5.0, 'st_access': 0.5,
             'f_ext': 1.0, 'f_main': 1.0, 'lrt_on': 1}
-PHF = {'dir1': 0.549, 'dir2': 0.457}             # Output/alternatives/peak_hour_factors.csv, AM line loads by direction
 N_EXT = 24                                       # extension stations S01-S24 are orders 1-24 in both alternatives
 LAMBDAS = [0.01, 0.015, 0.02, 0.025, 0.03, 0.035, 0.04, 0.045, 0.05, 0.06]
+
+
+def load_phf():
+    """line-load peak-hour factors by period: the network bus factor of the direction (Output/alternatives/peak_hour_factors.csv)"""
+    f = pd.read_csv('Output/alternatives/peak_hour_factors.csv')
+    f = f[f['layer'] == 'transit'].set_index(['period', 'direction'])['PHF3h']
+    return {p: {'dir1': round(float(f[(p, 'up')]), 4), 'dir2': round(float(f[(p, 'down')]), 4)} for p in PERIODS}
+
+
+PHF = load_phf()
 
 
 # ----------------------------------------------------------------------------------------------------------------------
@@ -79,6 +94,7 @@ def load():
     D = {'AREAS': [int(a) for a in areas['AggCode']], 'ANAME': dict(zip(areas['AggCode'].astype(int), areas['AggAreaName']))}
     TAZS = sorted(key['TAZ'].astype(int))
     D['TAZS'] = TAZS
+    NT = len(TAZS)
     ta = key.set_index('TAZ')['AggCode'].reindex(TAZS).astype(int).values
     D['ta'] = ta
     D['apos'] = {a: i for i, a in enumerate(D['AREAS'])}
@@ -88,22 +104,27 @@ def load():
     zon = pd.read_csv('Input/Zonal_2020.csv', encoding='windows-1255').set_index('TAZ_ID')
     D['pop'] = zon['POPULATION'].reindex(TAZS).fillna(0).values
     D['emp'] = zon['EMPL_TOT'].reindex(TAZS).fillna(0).values
-    BASE = {}
-    for sc in SCEN:
-        if sc == '2022':
-            c = rdm('Output/final_2022/car_2022_taz.csv', TAZS)
-            t = rdm('Output/final_2022/transit_2022_taz.csv', TAZS)
-        else:
-            c = rdm(f'Output/forecast_taz/{sc}/car_{sc}_taz.csv', TAZS)
-            t = rdm(f'Output/forecast_taz/{sc}/transit_{sc}_taz.csv', TAZS)
-        BASE[sc] = (c * INTER, t * INTER)
-    D['BASE'] = BASE
-    rd = lambda name: pd.read_csv(f'{SK_DIR}/{name}.csv.gz', index_col=0).values  # noqa: E731
-    D['GCB'] = {(v, a): rd(f'transit_gc_no_lrt_{v}_{a}') for v in VARS for a in ALTS}
-    D['BRT'] = {(v, a): rd(f'metronit_based_{v}_{a}') for v in VARS for a in ALTS}
-    D['GCL'] = {(v, a, r): rd(f'lrt_gc_{v}_{a}_{r}') for v in VARS for a in ALTS for r in REGS}
-    D['BRD'] = {(v, a, r): rd(f'lrt_board_{v}_{a}_{r}').astype(int) for v in VARS for a in ALTS for r in REGS}
-    D['ALI'] = {(v, a, r): rd(f'lrt_alight_{v}_{a}_{r}').astype(int) for v in VARS for a in ALTS for r in REGS}
+    # the bases of step 45 (cell 10), built unmasked and masked to the inter-area pairs at the end, as there
+    RAW = {('AM', '2022'): {'car': rdm('Output/final_2022/car_2022_taz.csv', TAZS), 'transit': rdm('Output/final_2022/transit_2022_taz.csv', TAZS)},
+           ('PM', '2022'): {'car': rdm('Output/ths2017/three_mode_2022_pm/car_2022_taz.csv', TAZS),
+                            'transit': rdm('Output/ths2017/three_mode_2022_pm/bus_2022_taz.csv', TAZS) + rdm('Output/ths2017/three_mode_2022_pm/rail_2022_taz.csv', TAZS)}}
+    for sc in SCEN[1:]:
+        RAW[('AM', sc)] = {k: rdm(f'Output/forecast_taz/{sc}/{k}_{sc}_taz.csv', TAZS) for k in ('car', 'transit')}
+        RAW[('PM', sc)] = {}
+        for k in ('car', 'transit'):
+            b22, f_ = RAW[('AM', '2022')][k], RAW[('AM', sc)][k]
+            with np.errstate(divide='ignore', invalid='ignore'):
+                g_cell = np.where(b22 > 0, f_ / b22, np.nan)
+                g_row = np.where(b22.sum(1) > 0, f_.sum(1) / b22.sum(1), 1.0)[:, None].repeat(NT, 1)
+            g = np.where(np.isfinite(g_cell), g_cell, g_row)
+            RAW[('PM', sc)][k] = RAW[('PM', '2022')][k] * np.clip(g, 0, 5)
+    D['BASE'] = {key_: (B['car'] * INTER, B['transit'] * INTER) for key_, B in RAW.items()}
+    rd = lambda p, name: pd.read_csv(f'{SK_DIR}/{p}/{name}.csv.gz', index_col=0).values  # noqa: E731
+    D['GCB'] = {(p, v, a): rd(p, f'transit_gc_no_lrt_{v}_{a}') for p in PERIODS for v in VARS for a in ALTS}
+    D['BRT'] = {(p, v, a): rd(p, f'metronit_based_{v}_{a}') for p in PERIODS for v in VARS for a in ALTS}
+    D['GCL'] = {(p, v, a, r): rd(p, f'lrt_gc_{v}_{a}_{r}') for p in PERIODS for v in VARS for a in ALTS for r in REGS}
+    D['BRD'] = {(p, v, a, r): rd(p, f'lrt_board_{v}_{a}_{r}').astype(int) for p in PERIODS for v in VARS for a in ALTS for r in REGS}
+    D['ALI'] = {(p, v, a, r): rd(p, f'lrt_alight_{v}_{a}_{r}').astype(int) for p in PERIODS for v in VARS for a in ALTS for r in REGS}
     D['ST'] = {a: pd.read_csv(f'{SK_DIR}/stations_{a}.csv') for a in ALTS}
     return D
 
@@ -116,22 +137,22 @@ def to_area(D, M):
     return out
 
 
-def pivot(D, sc, alt, reg, v, P=None):
-    """step 45's pivot for one combination, with the Metronit network variant v; P overrides DEFAULTS"""
+def pivot(D, per, sc, alt, reg, v, P=None):
+    """step 45's pivot for one period and combination, with the Metronit network variant v; P overrides DEFAULTS"""
     P = {**DEFAULTS, **(P or {})}
-    car, tr = D['BASE'][sc]
+    car, tr = D['BASE'][(per, sc)]
     n = car + tr
     Fc, Ft = to_area(D, car), to_area(D, tr)
     p0 = Ft.sum() / max((Fc + Ft).sum(), 1e-9)
     S_area = np.where(Fc + Ft > 0, Ft / np.where(Fc + Ft > 0, Fc + Ft, 1), p0)
     S_prior = S_area[np.ix_(D['tai'], D['tai'])]
     S_piv = np.where(n > 0, (tr + P['k'] * S_prior) / (n + P['k']), 0.0)
-    gcb0 = np.nan_to_num(D['GCB'][('M0', alt)])
-    gcb = np.nan_to_num(D['GCB'][(v, alt)])
-    brt0 = D['BRT'][('M0', alt)]
-    brt = D['BRT'][(v, alt)]
-    gcl = np.nan_to_num(D['GCL'][(v, alt, reg)])
-    a, b = D['BRD'][(v, alt, reg)], D['ALI'][(v, alt, reg)]
+    gcb0 = np.nan_to_num(D['GCB'][(per, 'M0', alt)])
+    gcb = np.nan_to_num(D['GCB'][(per, v, alt)])
+    brt0 = D['BRT'][(per, 'M0', alt)]
+    brt = D['BRT'][(per, v, alt)]
+    gcl = np.nan_to_num(D['GCL'][(per, v, alt, reg)])
+    a, b = D['BRD'][(per, v, alt, reg)], D['ALI'][(per, v, alt, reg)]
     avail = (a > 0) & (n > 0) & (P['lrt_on'] == 1)
     t = D['ST'][alt][f'time_from_S01_{reg}'].values
     cumE, cumM = np.minimum(t, t[N_EXT - 1]), np.maximum(0.0, t - t[N_EXT - 1])
@@ -176,21 +197,26 @@ def totals(R):
     return s
 
 
+def published_row(ds, per, sc, alt, reg):
+    return ds[(ds['period'] == per) & (ds['scenario'].astype(str) == sc) & (ds['alternative'] == ALT_SUMMARY[alt])
+              & ds['regime'].str.startswith(REG_LABEL[reg].split(' ')[0])].iloc[0]
+
+
 def check_against_step45(D):
     ds = pd.read_csv('Output/alternatives/demand_summary.csv')
-    ds = ds[ds['period'] == 'AM']
     rows, worst = [], 0.0
-    for sc in SCEN:
-        for alt in ALTS:
-            for reg in REGS:
-                t = totals(pivot(D, sc, alt, reg, 'M0'))
-                r = ds[(ds['scenario'].astype(str) == sc) & (ds['alternative'] == ALT_SUMMARY[alt]) & ds['regime'].str.startswith(REG_LABEL[reg].split(' ')[0])].iloc[0]
-                pairs = [('LRT', t['lrt'], r['LRT']), ('car', t['car1'], r['car']), ('bus', t['bus1'], r['bus']), ('Metronit', t['brt1'], r['BRT (Metronit)']),
-                         ('LRT from car', t['lrt_car'], r['LRT from car']), ('LRT using extension', t['lrt_ext'], r['LRT trips using the extension (at least one segment S01–S24)']),
-                         ('busiest segment', t['busiest'], r['busiest segment load (3 h, one direction)'])]
-                for name, mine, pub in pairs:
-                    worst = max(worst, abs(mine - pub)) if name == 'LRT' else worst
-                    rows.append({'scenario': sc, 'alternative': alt, 'regime': reg, 'measure': name, 'this model': round(mine, 1), 'step 45': pub, 'diff': round(mine - pub, 2)})
+    for per in PERIODS:
+        for sc in SCEN:
+            for alt in ALTS:
+                for reg in REGS:
+                    t = totals(pivot(D, per, sc, alt, reg, 'M0'))
+                    r = published_row(ds, per, sc, alt, reg)
+                    pairs = [('LRT', t['lrt'], r['LRT']), ('car', t['car1'], r['car']), ('bus', t['bus1'], r['bus']), ('Metronit', t['brt1'], r['BRT (Metronit)']),
+                             ('LRT from car', t['lrt_car'], r['LRT from car']), ('LRT using extension', t['lrt_ext'], r['LRT trips using the extension (at least one segment S01–S24)']),
+                             ('busiest segment', t['busiest'], r['busiest segment load (3 h, one direction)'])]
+                    for nm, mine, pub in pairs:
+                        worst = max(worst, abs(mine - pub)) if nm == 'LRT' else worst
+                        rows.append({'period': per, 'scenario': sc, 'alternative': alt, 'regime': reg, 'measure': nm, 'this model': round(mine, 1), 'step 45': pub, 'diff': round(mine - pub, 2)})
     chk = pd.DataFrame(rows)
     return chk, worst, ds
 
@@ -259,8 +285,8 @@ def build(D, ds):
     TAZS, AREAS, ANAME = D['TAZS'], D['AREAS'], D['ANAME']
     NT = len(TAZS)
     U = np.zeros((NT, NT), bool)
-    for sc in SCEN:
-        U |= (D['BASE'][sc][0] + D['BASE'][sc][1]) > 0
+    for c_, t_ in D['BASE'].values():
+        U |= (c_ + t_) > 0
     I, J = np.where(U)
     NP = len(I)
     R0, R1 = 3, 3 + NP - 1                       # data rows of OD_Pairs
@@ -288,8 +314,8 @@ def build(D, ds):
     ws.column_dimensions['D'].width = 14
     ws.column_dimensions['E'].width = 70
     put(ws, 1, 2, 'Inputs - change the yellow cells; everything else recalculates', F_TITLE)
-    put(ws, 2, 2, 'AM peak 06:00-09:00, the 174 corridor TAZs (25 areas). Default values are the study\'s central case (METHODOLOGY 6aq).', F_NOTE)
-    lists = {'scen': [SCEN_LABEL[s] for s in SCEN], 'alt': [ALT_LABEL[a] for a in ALTS], 'reg': [REG_LABEL[r] for r in REGS],
+    put(ws, 2, 2, 'AM peak 06:00-09:00 or PM peak 16:00-19:00 (three hours), the 174 corridor TAZs (25 areas). Default values are the study\'s central case (METHODOLOGY 6aq).', F_NOTE)
+    lists = {'per': [PER_LABEL[p] for p in PERIODS], 'scen': [SCEN_LABEL[s] for s in SCEN], 'alt': [ALT_LABEL[a] for a in ALTS], 'reg': [REG_LABEL[r] for r in REGS],
              'var': [VAR_LABEL[v] for v in VARS], 'yesno': ['Yes', 'No']}
     ws_l = wb.create_sheet('Lists')
     put(ws_l, 1, 1, 'Dropdown lists of the Inputs sheet (do not edit)', F_NOTE)
@@ -370,6 +396,9 @@ def build(D, ds):
     ws.add_data_validation(dv_nonneg)
 
     section('1. What to model')
+    inp('per', 'Period', PER_LABEL['AM'], '', 'AM = 06:00-09:00 (the study\'s reference period). PM = 16:00-19:00: the PM survey layers (wave 1b) for 2022, grown to 2040 / 2050 at the AM growth of each TAZ pair, and the PM timetable (PM schedule x the AM observed / scheduled ratio per segment), as in step 45.',
+        dv=dvs['per'], idx_formula='=MATCH(C{r},List_per,0)')
+    name(wb, 'PerIdx', f'Inputs!$D${r}')
     inp('scen', 'Scenario-year (demand)', SCEN_LABEL['BU_2050'], '', 'Base car and transit trips of the year: 2022 = the survey-based 2022 matrices (step 22); 2040 / 2050 BU / HS = the demographic forecasts (step 23). 2050 BU is the study\'s reference case.',
         dv=dvs['scen'], idx_formula='=MATCH(C{r},List_scen,0)')
     name(wb, 'ScenIdx', f'Inputs!$D${r}')
@@ -387,7 +416,7 @@ def build(D, ds):
     name(wb, 'LrtOn', f'Inputs!$D${r}')
 
     section('2. Behaviour: the logit parameters')
-    inp('lam', 'λ - cost sensitivity, car <-> transit', DEFAULTS['lam'], 'per gen. min', 'Upper level of the nest: how strongly the transit share reacts to a change in transit generalized cost. Assumed 0.03 (range 0.02-0.05); the person-level estimate of step 33 gives 0.035. This is the assumption that moves the result most.',
+    inp('lam', 'λ - cost sensitivity, car <-> transit', DEFAULTS['lam'], 'per gen. min', 'Upper level of the nest: how strongly the transit share reacts to a change in transit generalized cost. Assumed 0.03 (range 0.02-0.05); the person-level estimate of step 33 gives 0.035. The study\'s planning range rests on it; at TAZ level it mainly moves the car shift, while λ_T moves the LRT (see Lambda_Sweep).',
         nf='0.000', dv=dv_pos, nm='Lambda')
     inp('ratio', 'λ_T / λ - nest ratio', DEFAULTS['ratio'], 'ratio', 'λ_T = ratio x λ is the sensitivity inside the transit nest (LRT vs bus / Metronit). The study uses λ_T = 2λ (ratio 2). The ratio must be at least 1 for a consistent nest.',
         nf='0.00', dv=dv_pos)
@@ -407,20 +436,27 @@ def build(D, ds):
     derived('gcadj', 'LRT generalized-cost change from headway and access', f'=2*(StAccess-0.5)+{W_WAIT:g}*(Headway/2-2.5)', 'gen. min', 'Calculated: added to every LRT path (0 at the defaults).', nf='0.00', nm='LrtGcAdj')
 
     section('4. Reporting')
-    inp('phf1', 'Peak-hour factor, line loads towards Nazareth / Hamifrats', PHF['dir1'], 'share of 3 h', 'Busiest hour / three hours for the LRT line loads (step 27 network bus factor, AM).', nf='0.000', dv=dv_pos, nm='PHF1')
-    inp('phf2', 'Peak-hour factor, line loads towards Tirat Carmel', PHF['dir2'], 'share of 3 h', 'As above, the other direction.', nf='0.000', dv=dv_pos, nm='PHF2')
+    inp('phf_am1', 'Peak-hour factor AM, line loads towards Nazareth / Hamifrats', PHF['AM']['dir1'], 'share of 3 h', 'Busiest hour / three hours for the LRT line loads: the network bus factor of the direction (step 27; Output/alternatives/peak_hour_factors.csv).', nf='0.0000', dv=dv_pos, nm='PHF_AM1')
+    inp('phf_am2', 'Peak-hour factor AM, line loads towards Tirat Carmel', PHF['AM']['dir2'], 'share of 3 h', 'As above, the other direction.', nf='0.0000', dv=dv_pos, nm='PHF_AM2')
+    inp('phf_pm1', 'Peak-hour factor PM, line loads towards Nazareth / Hamifrats', PHF['PM']['dir1'], 'share of 3 h', 'The same method on the 16:00-19:00 window (tools/peak_hour_factors_periods.py).', nf='0.0000', dv=dv_pos, nm='PHF_PM1')
+    inp('phf_pm2', 'Peak-hour factor PM, line loads towards Tirat Carmel', PHF['PM']['dir2'], 'share of 3 h', 'As above, the other direction.', nf='0.0000', dv=dv_pos, nm='PHF_PM2')
+    derived('phf1', 'Peak-hour factor applied, towards Nazareth / Hamifrats', '=CHOOSE(PerIdx,PHF_AM1,PHF_PM1)', 'share of 3 h', 'Calculated: the factor of the selected period.', nf='0.0000', nm='PHF1')
+    derived('phf2', 'Peak-hour factor applied, towards Tirat Carmel', '=CHOOSE(PerIdx,PHF_AM2,PHF_PM2)', 'share of 3 h', 'Calculated: the factor of the selected period.', nf='0.0000', nm='PHF2')
 
     section('5. Selection indices (calculated - do not edit)')
-    derived('netcol', 'Network column (variant x alternative)', '=(MetIdx-1)*2+AltIdx', '1-6', 'Picks the transit cost column in OD_Pairs.', nm='NetCol')
-    derived('combocol', 'LRT column (variant x alternative x regime)', '=(MetIdx-1)*4+(AltIdx-1)*2+RegIdx', '1-12', 'Picks the LRT cost and station columns in OD_Pairs.', nm='ComboCol')
-    derived('refcol', 'Reference combination (scenario x alternative x regime)', '=(ScenIdx-1)*4+(AltIdx-1)*2+RegIdx', '1-20', 'Picks the reference values (Metronit as today, default parameters).', nm='RefCol')
+    derived('demcol', 'Demand column (period x scenario-year)', '=(PerIdx-1)*5+ScenIdx', '1-10', 'Picks the base car and transit columns in OD_Pairs.', nm='DemCol')
+    derived('todaycol', 'Transit column, today\'s network (period x alternative)', '=(PerIdx-1)*6+AltIdx', '1-12', 'Picks the transit cost on today\'s network in OD_Pairs.', nm='TodayCol')
+    derived('netcol', 'Network column (period x variant x alternative)', '=(PerIdx-1)*6+(MetIdx-1)*2+AltIdx', '1-12', 'Picks the transit cost column in OD_Pairs.', nm='NetCol')
+    derived('combocol', 'LRT column (period x variant x alternative x regime)', '=(PerIdx-1)*12+(MetIdx-1)*4+(AltIdx-1)*2+RegIdx', '1-24', 'Picks the LRT cost and station columns in OD_Pairs.', nm='ComboCol')
+    derived('refcol', 'Reference combination (period x scenario x alternative x regime)', '=(PerIdx-1)*20+(ScenIdx-1)*4+(AltIdx-1)*2+RegIdx', '1-40', 'Picks the reference values (Metronit as today, default parameters).', nm='RefCol')
     derived('nst', 'Stations on the selected line', '=IF(AltIdx=1,43,24)', 'stations', '', nm='NStations')
 
     section('Fixed in the precomputed paths (change needs tools/scenario_metronit_skims.py)')
     fixed('Walk weight / wait weight / transfer penalty', '2 / 2 / 8', 'gen. min', 'Generalized cost = in-vehicle + 2 x walk + 2 x wait + 8 per transfer (OVT central set, METHODOLOGY 6al).')
     fixed('Boarding penalty onto the LRT', '8 after a bus, 4 after the Metronit, 0 on foot', 'gen. min', 'Each end boards at its cheapest-access station (step 31 gateway rule).')
     fixed('Walking speed / detour', '4 km/h, straight line x 1.3', '', 'Access 1 km from TAZ centroids, 400 m stop-station, 300 m stop-stop transfers.')
-    fixed('Bus and Metronit times', 'May 2026 observed bus speeds, GTFS AM timetable', '', 'Level of service held at May 2026 in every scenario-year (the study\'s convention).')
+    fixed('Bus and Metronit times', 'May 2026 observed bus speeds, GTFS AM / PM timetable', '', 'Level of service held at May 2026 in every scenario-year (the study\'s convention). PM: the PM schedule x the AM observed / scheduled ratio per segment (clipped 0.5-2.5).')
+    fixed('PM forecast demand', 'PM 2022 x AM growth per TAZ pair', '', 'Step 23\'s growth is AM-specific; the PM forecast sets apply it pair by pair (row growth where the AM 2022 cell is empty), as step 45 does - an approximation.')
     fixed('Car cost', 'not used by the pivot', '', 'The incremental logit moves trips on the change of the transit nest only, so a car-side change does not register (METHODOLOGY 6aq addendum 3).')
     ws.freeze_panes = 'B5'
 
@@ -430,46 +466,43 @@ def build(D, ds):
     static += [('o_taz', 'Origin TAZ', 'Keys', np.array(TAZS)[I], '0'), ('d_taz', 'Destination TAZ', 'Keys', np.array(TAZS)[J], '0'),
                ('o_area', 'Origin area', 'Keys', D['ta'][I], '0'), ('d_area', 'Destination area', 'Keys', D['ta'][J], '0'),
                ('o_idx', 'Origin area #', 'Keys', D['tai'][I] + 1, '0'), ('d_idx', 'Destination area #', 'Keys', D['tai'][J] + 1, '0')]
-    for sc in SCEN:
-        static.append((f'car_{sc}', f'Car {sc}', 'Base car trips (no LRT)', D['BASE'][sc][0][I, J], NF_TRIPS2))
-    for sc in SCEN:
-        static.append((f'tr_{sc}', f'Transit {sc}', 'Base transit trips (bus + Metronit + rail, no LRT)', D['BASE'][sc][1][I, J], NF_TRIPS2))
-    for v in VARS:
-        for a in ALTS:
-            static.append((f'gcb_{v}_{a}', f'{v} {a}', 'Transit GC without LRT (best bus / Metronit path)', D['GCB'][(v, a)][I, J], NF_GC))
-    for v in VARS:
-        for a in ALTS:
-            static.append((f'brt_{v}_{a}', f'{v} {a}', 'Metronit-based path (1 = yes)', D['BRT'][(v, a)][I, J].astype(int), '0'))
-    for v in VARS:
-        for a in ALTS:
-            for rg in REGS:
-                g = D['GCL'][(v, a, rg)][I, J]
-                static.append((f'gcl_{v}_{a}_{rg}', f'{v} {a} {rg[:5]}', 'LRT GC (access + wait + line + egress); blank = no LRT path', g, NF_GC))
-    for v in VARS:
-        for a in ALTS:
-            for rg in REGS:
-                code = D['BRD'][(v, a, rg)][I, J] * 100 + D['ALI'][(v, a, rg)][I, J]
-                static.append((f'gw_{v}_{a}_{rg}', f'{v} {a} {rg[:5]}', 'LRT stations: board x 100 + alight (station order; 0 = none)', code, '0'))
+    PVA = [(pp, v, a) for pp in PERIODS for v in VARS for a in ALTS]
+    PVAR = [(pp, v, a, rg) for pp in PERIODS for v in VARS for a in ALTS for rg in REGS]
+    for pp in PERIODS:
+        for sc in SCEN:
+            static.append((f'car_{pp}_{sc}', f'Car {pp} {sc}', 'Base car trips (no LRT)', D['BASE'][(pp, sc)][0][I, J], NF_TRIPS2))
+    for pp in PERIODS:
+        for sc in SCEN:
+            static.append((f'tr_{pp}_{sc}', f'Transit {pp} {sc}', 'Base transit trips (bus + Metronit + rail, no LRT)', D['BASE'][(pp, sc)][1][I, J], NF_TRIPS2))
+    for pp, v, a in PVA:
+        static.append((f'gcb_{pp}_{v}_{a}', f'{pp} {v} {a}', 'Transit GC without LRT (best bus / Metronit path)', D['GCB'][(pp, v, a)][I, J], NF_GC))
+    for pp, v, a in PVA:
+        static.append((f'brt_{pp}_{v}_{a}', f'{pp} {v} {a}', 'Metronit-based path (1 = yes)', D['BRT'][(pp, v, a)][I, J].astype(int), '0'))
+    for pp, v, a, rg in PVAR:
+        static.append((f'gcl_{pp}_{v}_{a}_{rg}', f'{pp} {v} {a} {rg[:5]}', 'LRT GC (access + wait + line + egress); blank = no LRT path', D['GCL'][(pp, v, a, rg)][I, J], NF_GC))
+    for pp, v, a, rg in PVAR:
+        code = D['BRD'][(pp, v, a, rg)][I, J] * 100 + D['ALI'][(pp, v, a, rg)][I, J]
+        static.append((f'gw_{pp}_{v}_{a}_{rg}', f'{pp} {v} {a} {rg[:5]}', 'LRT stations: board x 100 + alight (station order; 0 = none)', code, '0'))
     COL = {}
     for k, (key_, *_rest) in enumerate(static):
         COL[key_] = CL(k + 1)
     first_formula = len(static) + 1
 
     F = [  # (key, header, block, formula template, number format, comment)
-        ('car0', 'Car before', 'Selected base demand', '=INDEX({car_2022}{r}:{car_HS_2050}{r},1,ScenIdx)', NF_TRIPS2, 'Base car trips of the selected scenario-year'),
-        ('tr0', 'Transit before', 'Selected base demand', '=INDEX({tr_2022}{r}:{tr_HS_2050}{r},1,ScenIdx)', NF_TRIPS2, 'Base transit trips of the selected scenario-year'),
+        ('car0', 'Car before', 'Selected base demand', '=INDEX({car_AM_2022}{r}:{car_PM_HS_2050}{r},1,DemCol)', NF_TRIPS2, 'Base car trips of the selected period and scenario-year'),
+        ('tr0', 'Transit before', 'Selected base demand', '=INDEX({tr_AM_2022}{r}:{tr_PM_HS_2050}{r},1,DemCol)', NF_TRIPS2, 'Base transit trips of the selected period and scenario-year'),
         ('n', 'Car + transit', 'Selected base demand', '={car0}{r}+{tr0}{r}', NF_TRIPS2, None),
         ('s_prior', 'Area-pair transit share', 'Pivot share', '=INDEX(AreaShare,{o_idx}{r},{d_idx}{r})', NF_SHARE, 'Transit share of the area pair (Area_Prior sheet); the study-area share where the area pair has no trips'),
         ('s_piv', 'Smoothed transit share S', 'Pivot share', '=IF({n}{r}>0,({tr0}{r}+K_EB*{s_prior}{r})/({n}{r}+K_EB),0)', NF_SHARE, 'S = (transit + k x area share) / (car + transit + k)'),
-        ('gcb0', 'Transit GC today', 'Transit path', '=INDEX({gcb_M0_main_ext}{r}:{gcb_M2_ext}{r},1,AltIdx)', NF_GC, 'Best bus / Metronit path on today\'s network (Metronit as today)'),
-        ('gcb', 'Transit GC in scenario', 'Transit path', '=INDEX({gcb_M0_main_ext}{r}:{gcb_M2_ext}{r},1,NetCol)', NF_GC, 'Best bus / Metronit path on the selected Metronit network'),
-        ('brt0', 'Metronit-based today', 'Transit path', '=INDEX({brt_M0_main_ext}{r}:{brt_M2_ext}{r},1,AltIdx)', '0', None),
-        ('brt', 'Metronit-based in scenario', 'Transit path', '=INDEX({brt_M0_main_ext}{r}:{brt_M2_ext}{r},1,NetCol)', '0', None),
-        ('gw', 'LRT station code', 'LRT path', '=INDEX({gw_M0_main_ext_prioritized}{r}:{gw_M2_ext_unprioritized}{r},1,ComboCol)', '0', None),
+        ('gcb0', 'Transit GC today', 'Transit path', '=INDEX({gcb_AM_M0_main_ext}{r}:{gcb_PM_M2_ext}{r},1,TodayCol)', NF_GC, 'Best bus / Metronit path on today\'s network (Metronit as today)'),
+        ('gcb', 'Transit GC in scenario', 'Transit path', '=INDEX({gcb_AM_M0_main_ext}{r}:{gcb_PM_M2_ext}{r},1,NetCol)', NF_GC, 'Best bus / Metronit path on the selected Metronit network'),
+        ('brt0', 'Metronit-based today', 'Transit path', '=INDEX({brt_AM_M0_main_ext}{r}:{brt_PM_M2_ext}{r},1,TodayCol)', '0', None),
+        ('brt', 'Metronit-based in scenario', 'Transit path', '=INDEX({brt_AM_M0_main_ext}{r}:{brt_PM_M2_ext}{r},1,NetCol)', '0', None),
+        ('gw', 'LRT station code', 'LRT path', '=INDEX({gw_AM_M0_main_ext_prioritized}{r}:{gw_PM_M2_ext_unprioritized}{r},1,ComboCol)', '0', None),
         ('board', 'Board station #', 'LRT path', '=INT({gw}{r}/100)', '0', 'Order of the boarding station (Stations sheet)'),
         ('alight', 'Alight station #', 'LRT path', '=MOD({gw}{r},100)', '0', None),
         ('avail', 'LRT available', 'LRT path', '=IF(AND({gw}{r}>0,{n}{r}>0,LrtOn=1),1,0)', '0', None),
-        ('gcl0', 'LRT GC precomputed', 'LRT path', '=IF({avail}{r}=1,INDEX({gcl_M0_main_ext_prioritized}{r}:{gcl_M2_ext_unprioritized}{r},1,ComboCol),0)', NF_GC, None),
+        ('gcl0', 'LRT GC precomputed', 'LRT path', '=IF({avail}{r}=1,INDEX({gcl_AM_M0_main_ext_prioritized}{r}:{gcl_PM_M2_ext_unprioritized}{r},1,ComboCol),0)', NF_GC, None),
         ('ivtE', 'LRT minutes on extension', 'LRT path', '=IF({avail}{r}=1,ABS(INDEX(StCumE,{board}{r})-INDEX(StCumE,{alight}{r})),0)', NF_GC, None),
         ('ivtM', 'LRT minutes on main route', 'LRT path', '=IF({avail}{r}=1,ABS(INDEX(StCumM,{board}{r})-INDEX(StCumM,{alight}{r})),0)', NF_GC, None),
         ('gcl', 'LRT GC', 'LRT path', '=IF({avail}{r}=1,{gcl0}{r}+(RunFactorExt-1)*{ivtE}{r}+(RunFactorMain-1)*{ivtM}{r}+LrtGcAdj,0)', NF_GC, 'Precomputed LRT GC + running-time factors + headway / access change'),
@@ -585,7 +618,7 @@ def build(D, ds):
     # ------------------------------------------------------------------ Stations
     ws = ws_st
     STm = D['ST']['main_ext']                    # the through line's 43 stations; the extension's 24 are its first rows
-    put(ws, 1, 1, 'Stations and line loads of the selected alternative and regime (AM, three hours and peak hour)', F_TITLE)
+    put(ws, 1, 1, 'Stations and line loads of the selected period, alternative and regime (three hours and peak hour)', F_TITLE)
     put(ws, 2, 1, 'Station order = position on the line from Tirat Carmel (S01). Extension S01-S24; main route M02-M20 (M01 = S24 at Hamifrats). '
                   'Segment k runs from station k to station k+1. Reference = Metronit as today, default parameters, same scenario / alternative / regime.', F_NOTE)
     heads = ['Order', 'Station', 'Line', 'TAZ', 'Area', 'Min from S01 prioritized (static)', 'Min from S01 unprioritized (static)', 'Min from S01, selected regime',
@@ -599,6 +632,8 @@ def build(D, ds):
     S0 = 5
     n_st = len(STm)
     RS0, RS1 = 6, 6 + n_st - 1                     # rows of the station block on the Reference sheet
+    combos = [(pp, sc, a, rg) for pp in PERIODS for sc in SCEN for a in ALTS for rg in REGS]
+    LASTC = CL(1 + 4 * len(combos))                # last column of the per-combination blocks on the Reference sheet
     for k in range(n_st):
         rr = S0 + k
         srow = STm.iloc[k]
@@ -616,7 +651,7 @@ def build(D, ds):
         put(ws, rr, 10, f'=MAX(0,H{rr}-$H${S0 + N_EXT - 1})', F_BASE, nf=NF_GC)
         put(ws, rr, 11, f'=IF(A{rr}<=NStations,SUMIFS(od_lrt,od_board,A{rr}),"")', F_BASE, nf=NF_TRIPS)
         put(ws, rr, 12, f'=IF(A{rr}<=NStations,SUMIFS(od_lrt,od_alight,A{rr}),"")', F_BASE, nf=NF_TRIPS)
-        put(ws, rr, 13, f'=IF(A{rr}<=NStations,INDEX(Reference!$B${RS0}:$CC${RS1},A{rr},(RefCol-1)*4+1),"")', F_LINK, nf=NF_TRIPS)
+        put(ws, rr, 13, f'=IF(A{rr}<=NStations,INDEX(Reference!$B${RS0}:${LASTC}${RS1},A{rr},(RefCol-1)*4+1),"")', F_LINK, nf=NF_TRIPS)
         put(ws, rr, 14, f'=IF(A{rr}<=NStations,K{rr}-M{rr},"")', F_BASE, nf=NF_TRIPS)
         if k < n_st - 1:
             put(ws, rr, 15, f'=IF(A{rr}<NStations,B{rr}&"-"&B{rr + 1},"")', F_BASE)
@@ -624,8 +659,8 @@ def build(D, ds):
             put(ws, rr, 17, f'=IF(A{rr}<NStations,SUMIFS(od_lrt,od_alight,"<="&A{rr},od_board,">="&(A{rr}+1)),"")', F_BASE, nf=NF_TRIPS)
             put(ws, rr, 18, f'=IF(A{rr}<NStations,P{rr}*PHF1,"")', F_BASE, nf=NF_TRIPS)
             put(ws, rr, 19, f'=IF(A{rr}<NStations,Q{rr}*PHF2,"")', F_BASE, nf=NF_TRIPS)
-            put(ws, rr, 20, f'=IF(A{rr}<NStations,INDEX(Reference!$B${RS0}:$CC${RS1},A{rr},(RefCol-1)*4+3),"")', F_LINK, nf=NF_TRIPS)
-            put(ws, rr, 21, f'=IF(A{rr}<NStations,INDEX(Reference!$B${RS0}:$CC${RS1},A{rr},(RefCol-1)*4+4),"")', F_LINK, nf=NF_TRIPS)
+            put(ws, rr, 20, f'=IF(A{rr}<NStations,INDEX(Reference!$B${RS0}:${LASTC}${RS1},A{rr},(RefCol-1)*4+3),"")', F_LINK, nf=NF_TRIPS)
+            put(ws, rr, 21, f'=IF(A{rr}<NStations,INDEX(Reference!$B${RS0}:${LASTC}${RS1},A{rr},(RefCol-1)*4+4),"")', F_LINK, nf=NF_TRIPS)
     name(wb, 'StCumE', f'Stations!$I${S0}:$I${S0 + n_st - 1}')
     name(wb, 'StCumM', f'Stations!$J${S0}:$J${S0 + n_st - 1}')
     rt = S0 + n_st + 1
@@ -652,9 +687,8 @@ def build(D, ds):
 
     # ------------------------------------------------------------------ Reference (static, from the numpy pivot)
     ws = ws_ref
-    put(ws, 1, 1, 'Reference values (static): the study model at its default inputs with the Metronit as today, for each scenario-year x alternative x regime', F_SUB)
+    put(ws, 1, 1, 'Reference values (static): the study model at its default inputs with the Metronit as today, for each period x scenario-year x alternative x regime', F_SUB)
     put(ws, 2, 1, 'Computed by tools/build_scenario_workbook.py with the same equations as OD_Pairs (they reproduce Output/alternatives/demand_summary.csv). Do not edit.', F_NOTE)
-    combos = [(sc, a, rg) for sc in SCEN for a in ALTS for rg in REGS]
     REF = {}
     for cmb in combos:
         REF[cmb] = pivot(D, *cmb, 'M0')
@@ -663,7 +697,7 @@ def build(D, ds):
     hdr(ws, RS0 - 1, 1, 'Order')
     for ci, cmb in enumerate(combos):
         for m_, lab in enumerate(['board', 'alight', 'seg dir1', 'seg dir2']):
-            hdr(ws, RS0 - 1, 2 + ci * 4 + m_, f'{cmb[0]} {cmb[1]} {cmb[2][:5]} {lab}', width=9, fill=PatternFill('solid', fgColor='7F7F7F'))
+            hdr(ws, RS0 - 1, 2 + ci * 4 + m_, f'{cmb[0]} {cmb[1]} {cmb[2]} {cmb[3][:5]} {lab}', width=9, fill=PatternFill('solid', fgColor='7F7F7F'))
     for k in range(n_st):
         put(ws, RS0 + k, 1, k + 1, F_BOLD)
         for ci, cmb in enumerate(combos):
@@ -678,7 +712,7 @@ def build(D, ds):
     hdr(ws, RT0 - 1, 1, 'TAZ')
     for ci, cmb in enumerate(combos):
         for m_, lab in enumerate(['LRT orig', 'LRT dest', 'transit orig', 'car orig']):
-            hdr(ws, RT0 - 1, 2 + ci * 4 + m_, f'{cmb[0]} {cmb[1]} {cmb[2][:5]} {lab}', width=9, fill=PatternFill('solid', fgColor='7F7F7F'))
+            hdr(ws, RT0 - 1, 2 + ci * 4 + m_, f'{cmb[0]} {cmb[1]} {cmb[2]} {cmb[3][:5]} {lab}', width=9, fill=PatternFill('solid', fgColor='7F7F7F'))
     for t_i, taz in enumerate(TAZS):
         put(ws, RT0 + t_i, 1, taz, F_BOLD)
         for ci, cmb in enumerate(combos):
@@ -689,29 +723,29 @@ def build(D, ds):
     RT1 = RT0 + NT - 1
     # block 3: published totals of step 45 (demand_summary.csv) and this model's own totals
     RP0 = RT1 + 5
-    put(ws, RP0 - 2, 1, 'Totals per combination: step 45 as published (Output/alternatives/demand_summary.csv, AM) and this workbook\'s reference run', F_BOLD)
-    tot_heads = ['Combination #', 'Scenario', 'Alternative', 'Regime', 'Car (pub.)', 'Bus (pub.)', 'Metronit (pub.)', 'LRT (pub.)', 'Total transit (pub.)', 'LRT from car (pub.)',
+    put(ws, RP0 - 2, 1, 'Totals per combination: step 45 as published (Output/alternatives/demand_summary.csv) and this workbook\'s reference run', F_BOLD)
+    tot_heads = ['Combination #', 'Period', 'Scenario', 'Alternative', 'Regime', 'Car (pub.)', 'Bus (pub.)', 'Metronit (pub.)', 'LRT (pub.)', 'Total transit (pub.)', 'LRT from car (pub.)',
                  'LRT using the extension (pub.)', 'Busiest segment 3 h (pub.)', 'LRT (this model)', 'LRT from bus (this model)', 'LRT from Metronit (this model)', 'Car before', 'Transit before', 'Metronit before']
     for k, h in enumerate(tot_heads):
         hdr(ws, RP0 - 1, 1 + k, h, width=11)
     for ci, cmb in enumerate(combos):
-        sc, a, rg = cmb
+        pp, sc, a, rg = cmb
         rr = RP0 + ci
-        rp = ds[(ds['scenario'].astype(str) == sc) & (ds['alternative'] == ALT_SUMMARY[a]) & ds['regime'].str.startswith(REG_LABEL[rg].split(' ')[0])].iloc[0]
+        rp = published_row(ds, pp, sc, a, rg)
         t = totals(REF[cmb])
-        row = [ci + 1, sc, ALT_SUMMARY[a], rg, rp['car'], rp['bus'], rp['BRT (Metronit)'], rp['LRT'], rp['total transit'], rp['LRT from car'],
+        row = [ci + 1, pp, sc, ALT_SUMMARY[a], rg, rp['car'], rp['bus'], rp['BRT (Metronit)'], rp['LRT'], rp['total transit'], rp['LRT from car'],
                rp['LRT trips using the extension (at least one segment S01–S24)'], rp['busiest segment load (3 h, one direction)'], t['lrt'], t['lrt_bus'], t['lrt_brt'], t['car0'], t['tr0'], t['brt0']]
         for k, x in enumerate(row):
-            put(ws, rr, 1 + k, round(float(x), 1) if isinstance(x, (float, np.floating)) else x, F_INPUT if k >= 4 else F_BASE, nf=NF_TRIPS if k >= 4 else None)
+            put(ws, rr, 1 + k, round(float(x), 1) if isinstance(x, (float, np.floating)) else x, F_INPUT if k >= 5 else F_BASE, nf=NF_TRIPS if k >= 5 else None)
     RP1 = RP0 + len(combos) - 1
-    name(wb, 'RefTotals', f'Reference!$A${RP0}:$R${RP1}')
+    name(wb, 'RefTotals', f'Reference!$A${RP0}:${CL(len(tot_heads))}${RP1}')
     ws.freeze_panes = 'B6'
-    name(wb, 'RefTAZ', f'Reference!$B${RT0}:$CC${RT1}')
+    name(wb, 'RefTAZ', f'Reference!$B${RT0}:${LASTC}${RT1}')
     name(wb, 'RefTAZKeys', f'Reference!$A${RT0}:$A${RT1}')
 
     # ------------------------------------------------------------------ TAZ
     ws = ws_tz
-    put(ws, 1, 1, 'Travellers by TAZ (AM three hours): before the LRT, after (live), and against the reference', F_TITLE)
+    put(ws, 1, 1, 'Travellers by TAZ (selected period, three hours): before the LRT, after (live), and against the reference', F_TITLE)
     put(ws, 2, 1, 'By origin unless the header says destination. Before = base trips with today\'s network and no LRT. Reference = the study model for the same scenario / alternative / regime with the Metronit as today and default parameters.', F_NOTE)
     th = ['TAZ', 'Area', 'Area name', 'Population 2020', 'Employment 2020', 'Car before', 'Transit before', 'of which Metronit-based', 'Car after', 'Transit after',
           'Bus after', 'Metronit after', 'LRT (by origin)', 'LRT (by destination)', 'LRT from car', 'LRT from bus', 'LRT from Metronit', 'Transit lost to car',
@@ -771,7 +805,7 @@ def build(D, ds):
 
     # ------------------------------------------------------------------ Areas
     ws = ws_ar
-    put(ws, 1, 1, 'Travellers by area (the 25 corridor areas, the V2 superzones), AM three hours', F_TITLE)
+    put(ws, 1, 1, 'Travellers by area (the 25 corridor areas, the V2 superzones), selected period, three hours', F_TITLE)
     put(ws, 2, 1, 'By origin area unless stated. Areas 201-210 lie on the extension (Tirat Carmel to Hamifrats), 211-217 on the main route to Nazareth, 101-104 and 301-304 are the Krayot.', F_NOTE)
     ah = ['Area', 'Name', 'TAZs', 'Population 2020', 'Employment 2020', 'Car before', 'Transit before', 'of which Metronit-based', 'Car after', 'Transit after', 'Bus after',
           'Metronit after', 'LRT (by origin)', 'LRT (by destination)', 'LRT from car', 'LRT from bus', 'LRT from Metronit', 'Transit lost to car', 'Transit share before',
@@ -848,7 +882,7 @@ def build(D, ds):
     ws.column_dimensions['B'].width = 44
     for col in 'CDEFG':
         ws.column_dimensions[col].width = 16
-    put(ws, 1, 2, 'Results - LRT demand and the travellers it moves (AM 06:00-09:00, corridor TAZ pairs)', F_TITLE)
+    put(ws, 1, 2, '="Results - LRT demand and the travellers it moves ("&Inputs!C' + str(INP['per']) + '&", corridor TAZ pairs)"', F_TITLE)
     put(ws, 2, 2, '="Scenario: "&Inputs!C' + str(INP['scen']) + '&"  |  "&Inputs!C' + str(INP['alt']) + '&"  |  "&Inputs!C' + str(INP['reg']), F_LINK)
     put(ws, 3, 2, '="Metronit: "&Inputs!C' + str(INP['var']) + '&"  |  LRT in service: "&Inputs!C' + str(INP['lrt_on']) + '&"  |  λ = "&TEXT(Lambda,"0.000")&", λ_T = "&TEXT(LambdaT,"0.000")', F_LINK)
     put(ws, 5, 2, 'Trips by mode', F_SUB)
@@ -857,7 +891,7 @@ def build(D, ds):
         hdr(ws, 6, 2 + k, h)
     ws.row_dimensions[6].height = 42
     TZT = T1 + 1                                        # the TAZ totals row
-    ref = lambda col: f'INDEX(RefTotals,RefCol,{col})'  # noqa: E731
+    ref = lambda col: f'INDEX(RefTotals,RefCol,{col + 1})'  # noqa: E731  (column numbers of the AM-only layout; +1 for the Period column)
     rows = [
         ('Car', f'=TAZ!F{TZT}', f'=TAZ!I{TZT}', '=' + ref(5)),
         ('Bus', '=SUM(od_bus0)', f'=TAZ!K{TZT}', '=' + ref(6)),
@@ -922,7 +956,7 @@ def build(D, ds):
 
     put(ws, 30, 2, 'Model check', F_SUB)
     put(ws, 31, 2, 'LRT total, this workbook at the default inputs - published step 45 value', F_BASE, align=WRAP)
-    put(ws, 31, 3, '=INDEX(RefTotals,RefCol,13)-INDEX(RefTotals,RefCol,8)', F_BASE, nf='0.0')
+    put(ws, 31, 3, '=INDEX(RefTotals,RefCol,14)-INDEX(RefTotals,RefCol,9)', F_BASE, nf='0.0')
     put(ws, 31, 4, '=IF(ABS(C31)<1,"OK - reproduces step 45","CHECK")', F_BOLD)
     put(ws, 32, 2, 'Inputs at the study defaults?', F_BASE)
     dflt = (f'AND(Inputs!C{INP["var"]}="{VAR_LABEL["M0"]}",LrtOn=1,Lambda={DEFAULTS["lam"]},Inputs!C{INP["ratio"]}={DEFAULTS["ratio"]},PremBus={DEFAULTS["prem_bus"]},'
@@ -939,7 +973,7 @@ def build(D, ds):
     ch2 = BarChart()
     ch2.type, ch2.grouping = 'col', 'clustered'
     ch2.title = 'Transit trips by mode: before, after (live), reference'
-    ch2.y_axis.title = 'Trips, AM 3 h'
+    ch2.y_axis.title = 'Trips, 3 h'
     for col in (3, 4, 6):
         s = Reference(ws, min_col=col, min_row=8, max_row=10)
         ch2.add_data(s, titles_from_data=False)
@@ -962,59 +996,53 @@ def build(D, ds):
 
     # ------------------------------------------------------------------ Lambda_Sweep (static)
     ws = ws_sw
-    put(ws, 1, 1, 'λ sweep (static): LRT trips against the cost sensitivity λ, for each Metronit network (λ_T = 2λ, other inputs at their defaults)', F_TITLE)
-    put(ws, 2, 1, 'Precomputed by tools/build_scenario_workbook.py with the same equations as OD_Pairs. It does not follow the Inputs sheet; set λ on the Inputs sheet to see any one point live.', F_NOTE)
+    put(ws, 1, 1, 'λ sweep (static): LRT trips against the cost sensitivities, for each Metronit network and period (other inputs at their defaults)', F_TITLE)
+    put(ws, 2, 1, 'Precomputed by tools/build_scenario_workbook.py with the same equations as OD_Pairs. It does not follow the Inputs sheet; set λ / λ_T on the Inputs sheet to see any one point live. '
+                  'At TAZ level λ_T (inside the transit nest) moves the LRT more than λ does; λ moves the car shift.', F_NOTE)
     r = 4
     sweep_rows = []
-    for sc in ('2022', 'BU_2050'):
-        for a in ALTS:
-            put(ws, r, 1, f'{SCEN_LABEL[sc]}, {ALT_LABEL[a]}, {REG_LABEL["prioritized"]}', F_SUB)
-            r += 1
-            heads = ['λ'] + [f'LRT, {v}' for v in VARS] + [f'LRT from car, {v}' for v in VARS] + [f'Transit after, {v}' for v in VARS] + [f'Transit lost to car, {v}' for v in VARS]
-            for k, h in enumerate(heads):
-                hdr(ws, r, 1 + k, h, width=12)
-            ws.row_dimensions[r].height = 40
-            h_row = r
-            for lam in LAMBDAS:
+    for pp in PERIODS:
+        for sc in ('2022', 'BU_2050'):
+            for a in ALTS:
+                put(ws, r, 1, f'{PER_LABEL[pp]} - {SCEN_LABEL[sc]}, {ALT_LABEL[a]}, {REG_LABEL["prioritized"]}; λ_T = 2λ', F_SUB)
                 r += 1
-                put(ws, r, 1, lam, F_INPUT, nf='0.000')
-                for vi, v in enumerate(VARS):
-                    t = totals(pivot(D, sc, a, 'prioritized', v, {'lam': lam}))
-                    put(ws, r, 2 + vi, round(t['lrt'], 1), F_INPUT, nf=NF_TRIPS)
-                    put(ws, r, 5 + vi, round(t['lrt_car'], 1), F_INPUT, nf=NF_TRIPS)
-                    put(ws, r, 8 + vi, round(t['tr1'], 1), F_INPUT, nf=NF_TRIPS)
-                    put(ws, r, 11 + vi, round(t['tr_to_car'], 1), F_INPUT, nf=NF_TRIPS)
-            sweep_rows.append((sc, a, h_row, r))
-            r += 2
-    put(ws, r, 1, f'λ_T sweep at λ = 0.03: {SCEN_LABEL["BU_2050"]}, {ALT_LABEL["main_ext"]}, {REG_LABEL["prioritized"]}', F_SUB)
-    r += 1
-    put(ws, r, 1, 'λ_T is the sensitivity inside the transit nest (LRT against the bus / Metronit path). At TAZ level it moves the LRT more than λ does; λ moves the car shift.', F_NOTE)
-    r += 1
-    heads = ['λ_T'] + [f'LRT, {v}' for v in VARS] + [f'LRT from car, {v}' for v in VARS]
-    for k, h in enumerate(heads):
-        hdr(ws, r, 1 + k, h, width=12)
-    ws.row_dimensions[r].height = 40
-    h0t = r
-    for lt in [0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09, 0.10, 0.12]:
+                heads = ['λ'] + [f'LRT, {v}' for v in VARS] + [f'LRT from car, {v}' for v in VARS] + [f'Transit after, {v}' for v in VARS] + [f'Transit lost to car, {v}' for v in VARS]
+                for k, h in enumerate(heads):
+                    hdr(ws, r, 1 + k, h, width=12)
+                ws.row_dimensions[r].height = 40
+                h_row = r
+                for lam in LAMBDAS:
+                    r += 1
+                    put(ws, r, 1, lam, F_INPUT, nf='0.000')
+                    for vi, v in enumerate(VARS):
+                        t = totals(pivot(D, pp, sc, a, 'prioritized', v, {'lam': lam}))
+                        put(ws, r, 2 + vi, round(t['lrt'], 1), F_INPUT, nf=NF_TRIPS)
+                        put(ws, r, 5 + vi, round(t['lrt_car'], 1), F_INPUT, nf=NF_TRIPS)
+                        put(ws, r, 8 + vi, round(t['tr1'], 1), F_INPUT, nf=NF_TRIPS)
+                        put(ws, r, 11 + vi, round(t['tr_to_car'], 1), F_INPUT, nf=NF_TRIPS)
+                sweep_rows.append((f'LRT trips vs λ - {pp} {sc}, {ALT_SUMMARY[a]}', 'λ (per generalized minute)', h_row, r))
+                r += 2
+        put(ws, r, 1, f'{PER_LABEL[pp]} - λ_T sweep at λ = 0.03: {SCEN_LABEL["BU_2050"]}, {ALT_LABEL["main_ext"]}, {REG_LABEL["prioritized"]}', F_SUB)
         r += 1
-        put(ws, r, 1, lt, F_INPUT, nf='0.000')
-        for vi, v in enumerate(VARS):
-            t = totals(pivot(D, 'BU_2050', 'main_ext', 'prioritized', v, {'lam': 0.03, 'ratio': lt / 0.03}))
-            put(ws, r, 2 + vi, round(t['lrt'], 1), F_INPUT, nf=NF_TRIPS)
-            put(ws, r, 5 + vi, round(t['lrt_car'], 1), F_INPUT, nf=NF_TRIPS)
-    ch = LineChart()
-    ch.title = 'LRT trips vs λ_T (λ = 0.03) - BU_2050, Main route + extension'
-    ch.y_axis.title = 'LRT trips (AM 3 h)'
-    ch.x_axis.title = 'λ_T (per generalized minute)'
-    ch.add_data(Reference(ws, min_col=2, min_row=h0t, max_col=4, max_row=r), titles_from_data=True)
-    ch.set_categories(Reference(ws, min_col=1, min_row=h0t + 1, max_row=r))
-    ch.height, ch.width = 7.5, 14
-    ws.add_chart(ch, 'P36')
-    for i, (sc, a, h0, h1) in enumerate(sweep_rows):
+        heads = ['λ_T'] + [f'LRT, {v}' for v in VARS] + [f'LRT from car, {v}' for v in VARS]
+        for k, h in enumerate(heads):
+            hdr(ws, r, 1 + k, h, width=12)
+        ws.row_dimensions[r].height = 40
+        h0t = r
+        for lt in [0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09, 0.10, 0.12]:
+            r += 1
+            put(ws, r, 1, lt, F_INPUT, nf='0.000')
+            for vi, v in enumerate(VARS):
+                t = totals(pivot(D, pp, 'BU_2050', 'main_ext', 'prioritized', v, {'lam': 0.03, 'ratio': lt / 0.03}))
+                put(ws, r, 2 + vi, round(t['lrt'], 1), F_INPUT, nf=NF_TRIPS)
+                put(ws, r, 5 + vi, round(t['lrt_car'], 1), F_INPUT, nf=NF_TRIPS)
+        sweep_rows.append((f'LRT trips vs λ_T (λ = 0.03) - {pp} BU_2050, Main route + extension', 'λ_T (per generalized minute)', h0t, r))
+        r += 2
+    for i, (title, xt, h0, h1) in enumerate(sweep_rows):
         ch = LineChart()
-        ch.title = f'LRT trips vs λ - {sc}, {ALT_SUMMARY[a]}'
-        ch.y_axis.title = 'LRT trips (AM 3 h)'
-        ch.x_axis.title = 'λ (per generalized minute)'
+        ch.title = title
+        ch.y_axis.title = 'LRT trips (3 h)'
+        ch.x_axis.title = xt
         ch.add_data(Reference(ws, min_col=2, min_row=h0, max_col=4, max_row=h1), titles_from_data=True)
         ch.set_categories(Reference(ws, min_col=1, min_row=h0 + 1, max_row=h1))
         ch.height, ch.width = 7.5, 14
@@ -1022,36 +1050,38 @@ def build(D, ds):
 
     # ------------------------------------------------------------------ Scenario_Grid (static)
     ws = ws_grid
-    put(ws, 1, 1, 'Scenario grid (static): every scenario-year x alternative x regime x Metronit network at the default parameters', F_TITLE)
-    put(ws, 2, 1, 'Precomputed by tools/build_scenario_workbook.py with the same equations as OD_Pairs; AM three hours. "LRT off" rows show the Metronit change alone.', F_NOTE)
-    gh = ['Scenario', 'Alternative', 'Regime', 'Metronit', 'LRT in service', 'LRT', 'LRT using the extension', 'LRT from car', 'LRT from bus', 'LRT from Metronit',
+    put(ws, 1, 1, 'Scenario grid (static): every period x scenario-year x alternative x regime x Metronit network at the default parameters', F_TITLE)
+    put(ws, 2, 1, 'Precomputed by tools/build_scenario_workbook.py with the same equations as OD_Pairs; three hours. "LRT off" rows show the Metronit change alone.', F_NOTE)
+    gh = ['Period', 'Scenario', 'Alternative', 'Regime', 'Metronit', 'LRT in service', 'LRT', 'LRT using the extension', 'LRT from car', 'LRT from bus', 'LRT from Metronit',
           'Bus after', 'Metronit after', 'Transit before', 'Transit after', 'Transit lost to car', 'Car before', 'Car after', 'Busiest segment (3 h)', 'LRT vs M0 same case']
     for k, h in enumerate(gh):
-        hdr(ws, 4, 1 + k, h, width=12 if k > 3 else 16)
+        hdr(ws, 4, 1 + k, h, width=12 if k > 4 else 16)
     ws.row_dimensions[4].height = 40
     r = 5
     base_lrt = {}
-    for sc in SCEN:
-        for a in ALTS:
-            for rg in REGS:
-                for v in VARS:
-                    t = totals(pivot(D, sc, a, rg, v))
-                    if v == 'M0':
-                        base_lrt[(sc, a, rg)] = t['lrt']
-                    vals = [sc, ALT_SUMMARY[a], rg, v, 'Yes', t['lrt'], t['lrt_ext'], t['lrt_car'], t['lrt_bus'], t['lrt_brt'], t['bus1'], t['brt1'], t['tr0'], t['tr1'],
-                            t['tr_to_car'], t['car0'], t['car1'], t['busiest'], t['lrt'] / base_lrt[(sc, a, rg)] - 1]
-                    for k, x in enumerate(vals):
-                        nf = NF_PCT if k == 18 else (NF_TRIPS if k >= 5 else None)
-                        put(ws, r, 1 + k, round(x, 4) if isinstance(x, float) else x, F_INPUT if k >= 5 else F_BASE, nf=nf)
-                    r += 1
-    for sc in SCEN:
-        for v in VARS[1:]:
-            t = totals(pivot(D, sc, 'main_ext', 'prioritized', v, {'lrt_on': 0}))
-            vals = [sc, '(no LRT)', '-', v, 'No', 0, 0, 0, 0, 0, t['bus1'], t['brt1'], t['tr0'], t['tr1'], t['tr_to_car'], t['car0'], t['car1'], 0, None]
-            for k, x in enumerate(vals):
-                put(ws, r, 1 + k, round(x, 4) if isinstance(x, float) else x, F_INPUT if k >= 5 else F_BASE, nf=NF_TRIPS if 5 <= k < 18 else None)
-            r += 1
-    ws.freeze_panes = 'E5'
+    NUM0 = 6                                         # first numeric column (0-based) of a grid row
+    for pp in PERIODS:
+        for sc in SCEN:
+            for a in ALTS:
+                for rg in REGS:
+                    for v in VARS:
+                        t = totals(pivot(D, pp, sc, a, rg, v))
+                        if v == 'M0':
+                            base_lrt[(pp, sc, a, rg)] = t['lrt']
+                        vals = [pp, sc, ALT_SUMMARY[a], rg, v, 'Yes', t['lrt'], t['lrt_ext'], t['lrt_car'], t['lrt_bus'], t['lrt_brt'], t['bus1'], t['brt1'], t['tr0'], t['tr1'],
+                                t['tr_to_car'], t['car0'], t['car1'], t['busiest'], t['lrt'] / base_lrt[(pp, sc, a, rg)] - 1]
+                        for k, x in enumerate(vals):
+                            nf = NF_PCT if k == len(vals) - 1 else (NF_TRIPS if k >= NUM0 else None)
+                            put(ws, r, 1 + k, round(x, 4) if isinstance(x, float) else x, F_INPUT if k >= NUM0 else F_BASE, nf=nf)
+                        r += 1
+        for sc in SCEN:
+            for v in VARS[1:]:
+                t = totals(pivot(D, pp, sc, 'main_ext', 'prioritized', v, {'lrt_on': 0}))
+                vals = [pp, sc, '(no LRT)', '-', v, 'No', 0, 0, 0, 0, 0, t['bus1'], t['brt1'], t['tr0'], t['tr1'], t['tr_to_car'], t['car0'], t['car1'], 0, None]
+                for k, x in enumerate(vals):
+                    put(ws, r, 1 + k, round(x, 4) if isinstance(x, float) else x, F_INPUT if k >= NUM0 else F_BASE, nf=NF_TRIPS if NUM0 <= k < len(vals) - 1 else None)
+                r += 1
+    ws.freeze_panes = 'G5'
     ws.auto_filter.ref = f'A4:{CL(len(gh))}{r - 1}'
 
     # ------------------------------------------------------------------ Guide
@@ -1064,14 +1094,14 @@ def build(D, ds):
     g = 4
     guide = [
         ('HOW TO USE', None),
-        ('1. Inputs', 'Change the yellow cells: scenario-year, LRT alternative, running regime, Metronit network (e.g. M1 = Metronit removed in Haifa), LRT in service, λ, λ_T / λ, the LRT premiums, k, headway, station access, running-time factors. Excel recalculates at once (about 1 million formulas; allow a few seconds).'),
+        ('1. Inputs', 'Change the yellow cells: period (AM or PM peak), scenario-year, LRT alternative, running regime, Metronit network (e.g. M1 = Metronit removed in Haifa), LRT in service, λ, λ_T / λ, the LRT premiums, k, headway, station access, running-time factors. Excel recalculates at once (about 1 million formulas; allow a few seconds).'),
         ('2. Results', 'Trips by mode before the LRT, after (live) and in the published reference case; where the LRT riders come from; trips on the extension; the busiest segment; a model check that the defaults reproduce step 45.'),
         ('3. Areas', 'The 25 corridor areas (V2 superzones): travellers by mode before / after, LRT by origin and destination, shift sources, shares, live vs reference, and the area-to-area LRT matrix.'),
         ('4. TAZ', 'The 174 corridor TAZs with population and jobs: the same measures per TAZ, with green / red where the live result is above / below the reference. Use the filter arrows to sort.'),
         ('5. Stations', 'Boardings, alightings and line loads by segment and direction, three hours and peak hour, live vs reference.'),
-        ('6. Lambda_Sweep', 'Static: LRT trips for λ from 0.01 to 0.06 (λ_T = 2λ) and for λ_T from 0.03 to 0.12 (λ = 0.03) under each Metronit network, with charts. At TAZ level λ_T, the sensitivity inside the transit nest, moves the LRT more than λ does.'),
-        ('7. Scenario_Grid', 'Static: every scenario-year x alternative x regime x Metronit network at the default parameters, plus the Metronit change without the LRT.'),
-        ('8. OD_Pairs', 'The engine: one row per origin-destination TAZ pair (26,022 inter-area pairs with any trip in any year). Columns {G0}-{G1} (grouped; click + above the column letters to open) hold the precomputed data; the formula columns to the right run the model. Area_Prior holds the area-pair shares; Reference the static reference values.'),
+        ('6. Lambda_Sweep', 'Static: LRT trips for λ from 0.01 to 0.06 (λ_T = 2λ) and for λ_T from 0.03 to 0.12 (λ = 0.03) under each Metronit network, AM and PM, with charts. At TAZ level λ_T, the sensitivity inside the transit nest, moves the LRT more than λ does.'),
+        ('7. Scenario_Grid', 'Static: every period x scenario-year x alternative x regime x Metronit network at the default parameters, plus the Metronit change without the LRT.'),
+        ('8. OD_Pairs', 'The engine: one row per origin-destination TAZ pair ({NP} inter-area pairs with any trip in any year of either period). Columns {G0}-{G1} (grouped; click + above the column letters to open) hold the precomputed data; the formula columns to the right run the model. Area_Prior holds the area-pair shares; Reference the static reference values.'),
         ('COLOUR CODE', None),
         ('Yellow fill, blue text', 'An input you may change.'),
         ('Blue text', 'Data written by the Python model (base trips, precomputed path costs, reference values). Do not edit.'),
@@ -1079,17 +1109,18 @@ def build(D, ds):
         ('Green text', 'A formula that brings a value from another sheet.'),
         ('Grey text', 'Fixed in the precomputed paths: shown for information.'),
         ('THE MODEL, PAIR BY PAIR', None),
-        ('Base demand', 'Car and transit trips of the pair in the scenario-year without the LRT (2022: step 22; 2040 / 2050: step 23). Transit = bus + Metronit + rail; taxi is outside the choice.'),
+        ('Base demand', 'Car and transit trips of the pair in the period and scenario-year without the LRT. AM: 2022 = step 22, 2040 / 2050 = step 23. PM: 2022 = the wave-1b PM layers (car; bus + rail), 2040 / 2050 = PM 2022 x the AM growth of the pair. Transit = bus + Metronit + rail; taxi is outside the choice.'),
         ('Smoothed share S', 'S = (transit + k x S_area) / (car + transit + k): the pair\'s observed transit share pulled towards its area pair\'s share (Area_Prior), k = 20.'),
         ('Lower level: LRT vs bus / Metronit', 'dL = GC_LRT - premium - GC_transit.  P(LRT | transit) = 1 / (1 + exp(λ_T dL)). The premium is 5 against a bus-based path and 2.5 against a Metronit-based one.'),
         ('Upper level: car vs transit', 'Δ = (GC_transit,scenario - GC_transit,today) - ln(1 + exp(-λ_T dL)) / λ_T: the change of the transit nest\'s composite cost. S\' = S e^(-λΔ) / (S e^(-λΔ) + 1 - S). Δ < 0 draws car trips to transit; Δ > 0 (a Metronit cut that the LRT does not make up) sends transit trips to the car.'),
         ('Pivot', 'Transit after = transit before x S\' / S (capped at the pair\'s total); car after = total - transit after; LRT = transit after x P(LRT | transit); the rest stays on its bus or Metronit path. With the Metronit as today and the LRT out of service the model returns the base trips exactly.'),
-        ('Generalized cost', 'In-vehicle + 2 x walk + 2 x wait + 8 per transfer (bus to LRT 8, Metronit to LRT 4). LRT path = access leg (walk, bus or Metronit) to the cheapest-access station + 2 x headway/2 + 0.5 station access per end + line time + egress leg. Paths come from the May 2026 timetable and observed bus speeds (steps 29, 30, 44, 45).'),
+        ('Generalized cost', 'In-vehicle + 2 x walk + 2 x wait + 8 per transfer (bus to LRT 8, Metronit to LRT 4). LRT path = access leg (walk, bus or Metronit) to the cheapest-access station + 2 x headway/2 + 0.5 station access per end + line time + egress leg. Paths come from the May 2026 AM or PM timetable and observed bus speeds (steps 29, 30, 44, 45).'),
         ('Metronit networks', 'M0 = today. M1 = Metronit cut back to Hamifrats: every Metronit ride segment with a stop in Haifa south / west of Hamifrats (corridor areas 202-209 and the Haifa zones 1300-1899) removed; lines 1, 2 and 4 then run Hamifrats - Krayot / Kiryat Ata and line 3 keeps its Krayot loop. M2 = all five lines removed. Bus and Metronit paths, the Metronit-based flag and the LRT feeder legs are recomputed for each (tools/scenario_metronit_skims.py; Output/scenario_tool/).'),
         ('WHAT IT CANNOT DO', None),
         ('Network changes beyond the three Metronit variants', 'Bus routes, frequencies, walk / wait weights and penalties are inside the precomputed paths. A new variant needs a run of tools/scenario_metronit_skims.py (add it to VARIANTS) and of tools/build_scenario_workbook.py.'),
         ('Car-side changes', 'The pivot moves trips on the change of the transit nest only, so road congestion, parking or car cost do not register (METHODOLOGY 6aq addendum 3).'),
-        ('Capacity, fares, PM peak', 'No capacity restraint, no fare (flat integrated fare by decision), AM peak only. The line loads are screening values, not design loads.'),
+        ('Capacity, fares', 'No capacity restraint, no fare (flat integrated fare by decision). The line loads are screening values, not design loads.'),
+        ('PM peak', 'The PM forecast sets are the PM 2022 matrices grown at the AM growth of each TAZ pair (step 23 is AM-specific), and the PM bus times are the PM schedule scaled by the AM observed / scheduled ratio: both are step 45\'s approximations.'),
         ('Parallel buses', 'Every regular bus line is kept as it runs today; truncating the parallel buses would raise the LRT further (METHODOLOGY 6ac, task C7).'),
         ('SOURCES', None),
         ('Model and numbers', 'METHODOLOGY.md 6ac (the pivot), 6aq (step 45), 6ae (λ); Output/alternatives/demand_summary.csv (the published totals this workbook reproduces at its defaults).'),
@@ -1098,7 +1129,7 @@ def build(D, ds):
     for lab, txt in guide:
         g += 1
         if txt:
-            txt = txt.replace('{G0}', CL(7)).replace('{G1}', CL(first_formula - 1))
+            txt = txt.replace('{G0}', CL(7)).replace('{G1}', CL(first_formula - 1)).replace('{NP}', f'{NP:,}')
         if txt is None:
             g += 1
             put(ws, g, 2, lab, F_SUB, fill=FILL_BLOCK)
@@ -1137,7 +1168,7 @@ def main():
     D = load()
     chk, worst, ds = check_against_step45(D)
     lrt = chk[chk['measure'] == 'LRT']
-    print(lrt[['scenario', 'alternative', 'regime', 'this model', 'step 45', 'diff']].to_string(index=False))
+    print(lrt[['period', 'scenario', 'alternative', 'regime', 'this model', 'step 45', 'diff']].to_string(index=False))
     print(f'largest LRT difference against step 45: {worst:.3f} trips; all measures: {chk["diff"].abs().max():.3f}')
     if worst > 0.5:
         sys.exit('the numpy pivot does not reproduce step 45 - stopping')

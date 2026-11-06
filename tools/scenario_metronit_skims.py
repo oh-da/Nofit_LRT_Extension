@@ -1,4 +1,4 @@
-"""Level of service for the scenario workbook: step 45's AM transit graph rebuilt with the Metronit as today,
+"""Level of service for the scenario workbook: step 45's AM and PM transit graphs rebuilt with the Metronit as today,
 cut back to Hamifrats, or removed.
 
 The scenario workbook (`tools/build_scenario_workbook.py`, `exports/Nofit_LRT_Scenario_Model.xlsx`) runs step 45's pivot
@@ -6,7 +6,8 @@ in Excel formulas, so every parameter that enters the pivot after the network (Î
 weight k, the LRT headway, station access and running time) can be changed in the workbook. A change of the transit
 network cannot: it changes the shortest paths. This script therefore precomputes, for each Metronit network variant, the
 zone-to-zone costs the pivot needs, with the code of `notebooks/current/LRT_alternatives_demand.ipynb` (cells 2, 4, 8),
-AM period only:
+for both periods (AM 06:00-09:00; PM 16:00-19:00 with step 45's PM rule: the PM schedule times the AM observed /
+scheduled ratio per segment):
 
   M0  Metronit as today (all five lines: 83001, 67002, 67003, 62004, 52005) - reproduces step 45 exactly
   M1  Metronit cut back to Hamifrats: every Metronit ride edge with a stop in Haifa south / west of Hamifrats is removed
@@ -16,15 +17,18 @@ AM period only:
 
 The bus network is kept as it runs today in every variant (step 45's convention); only Metronit ride edges are dropped.
 
-Outputs (`Output/scenario_tool/`), 174 x 174 corridor TAZ matrices, gzip CSV:
+Outputs (`Output/scenario_tool/{AM,PM}/`), 174 x 174 corridor TAZ matrices, gzip CSV:
   transit_gc_no_lrt_{v}_{alt}.csv.gz       best bus / Metronit path without the LRT (generalized minutes)
   metronit_based_{v}_{alt}.csv.gz          1 where that path rides the Metronit for at least half its in-vehicle time
   lrt_gc_{v}_{alt}_{reg}.csv.gz            LRT path (access + boarding penalty + wait + station access + line + egress)
   lrt_board_{v}_{alt}_{reg}.csv.gz         boarding station (order in stations_{alt}.csv, 1-based; 0 = no LRT path)
   lrt_alight_{v}_{alt}_{reg}.csv.gz        alighting station (same coding)
-  metronit_edges_removed.csv               the ride edges each variant removes
+and in `Output/scenario_tool/`:
+  metronit_edges_removed.csv               the ride edges each variant removes, by period
   variants.csv                             variant codes and descriptions
-Run time about 1.5 minutes. Inputs: the committed step-30 / step-45 GTFS products under Output/gtfs/, Output/lrt_v2/,
+  stations_{alt}.csv                       station order and minutes from S01 per regime (the same in both periods)
+Usage: python3 tools/scenario_metronit_skims.py [AM|PM ...] [M0|M1|M2 ...] (default: both periods, all variants).
+Run time about 3 minutes. Inputs: the committed step-30 / step-45 GTFS products under Output/gtfs/, Output/lrt_v2/,
 Input/Main_Nofit/ (plain git), Input/TAZ_North/ (plain git), Input/Zonal_2020.csv and, from LFS,
 Input/Corridor_TAZ_Agg_V2.xlsx and Input/Main_Nofit/Main_Nofit_StopsID.csv (python3 tools/lfs_pull.py <file>).
 """
@@ -54,7 +58,7 @@ LRT_HEADWAY = 5.0
 LRT_WAIT = LRT_HEADWAY / 2
 MAIN_SPEED_KMH, MAIN_DWELL_S = 80.0, 10.0
 ACCESS_M, TRANSFER_M, STATION_STOP_M = 1000.0, 300.0, 400.0
-PERIOD = {'hours': (6, 9), 'peak': (7, 8)}
+PERIODS = {'AM': {'hours': (6, 9), 'peak': (7, 8)}, 'PM': {'hours': (16, 19), 'peak': (17, 18)}}
 ALTS = {'main_ext': 'Main route + extension', 'ext': 'Extension only'}
 REGIMES = {'prioritized': 'Prioritized', 'unprioritized': 'Unprioritized'}
 
@@ -143,7 +147,7 @@ for alt in ALTS:
 
 # --- transit graph (cell 8), with the Metronit variant ---
 stops_sa = pd.read_csv('Output/gtfs/stops_study_area.csv').set_index('stop_id')
-ST = pd.read_csv('Output/gtfs/stop_times_study_area_am_trips_v45.csv.gz')
+ST = {p: pd.read_csv(f'Output/gtfs/stop_times_study_area_{p.lower()}_trips_v45.csv.gz') for p in PERIODS}
 seg_obs = pd.read_csv('Output/gtfs/bus_segments_observed.csv')
 seg_obs = seg_obs[seg_obs['flag'].isin(['ok', 'ok_undirected']) & (seg_obs['observed_min'] > 0)].set_index(['stop_a', 'stop_b'])['observed_min']
 stop_taz = stops_sa['TAZ'].to_dict()
@@ -159,9 +163,27 @@ def haifa_south(stop_id):
     return HAIFA_SOUTH_TAZ[0] <= t <= HAIFA_SOUTH_TAZ[1]
 
 
-def build_transit(variant):
-    cfg = PERIOD
-    st = ST.copy()
+def pm_ratio():
+    """step 45's PM running times: the AM observed / AM scheduled ratio per stop pair (cell 8)"""
+    am = ST['AM'].copy()
+    am['line'] = am['route_code'].astype(int).astype(str) + '_' + am['direction_id'].astype(int).astype(str)
+    am = am.sort_values(['trip_id', 'stop_sequence'])
+    ga = am.groupby('trip_id')
+    am['next_stop'] = ga['stop_id'].shift(-1)
+    am['dt'] = (ga['arr'].shift(-1) - am['dep']) / 60
+    am = am.dropna(subset=['next_stop'])
+    am = am[am['dt'] > 0]
+    am_s = am.groupby(['stop_id', 'next_stop'])['dt'].median()
+    am_s.index = [(int(a), int(b)) for a, b in am_s.index]
+    return pd.Series({k: seg_obs[k] / am_s[k] for k in seg_obs.index if k in am_s.index and am_s[k] > 0})
+
+
+RATIO = {}
+
+
+def build_transit(p, variant):
+    cfg = PERIODS[p]
+    st = ST[p].copy()
     st['line'] = st['route_code'].astype(int).astype(str) + '_' + st['direction_id'].astype(int).astype(str)
     st = st.sort_values(['trip_id', 'stop_sequence'])
     g = st.groupby('trip_id')
@@ -173,7 +195,14 @@ def build_transit(variant):
     rides['next_stop'] = rides['next_stop'].astype(int)
     rt = rides.groupby(['line', 'stop_id', 'next_stop']).agg(sched_min=('dt_min', 'median'), is_brt=('is_brt', 'max')).reset_index()
     rt['obs_min'] = [seg_obs.get((a, b), np.nan) for a, b in zip(rt['stop_id'], rt['next_stop'])]
-    rt['ride_min'] = rt['obs_min'].where(rt['obs_min'].notna(), rt['sched_min'])
+    if p == 'AM':
+        rt['ride_min'] = rt['obs_min'].where(rt['obs_min'].notna(), rt['sched_min'])
+    else:
+        if 'PM' not in RATIO:
+            RATIO['PM'] = pm_ratio()
+        ratio = RATIO['PM']
+        rt['ratio'] = [ratio.get((a, b), np.nan) for a, b in zip(rt['stop_id'], rt['next_stop'])]
+        rt['ride_min'] = np.where(rt['ratio'].notna(), rt['sched_min'] * rt['ratio'].clip(0.5, 2.5), rt['sched_min'])
     # the variant: drop Metronit ride edges
     brt = rt['is_brt'].astype(bool)
     if variant == 'M1':
@@ -182,7 +211,7 @@ def build_transit(variant):
         drop = brt
     else:
         drop = pd.Series(False, index=rt.index)
-    removed = rt[drop].assign(variant=variant)
+    removed = rt[drop].assign(variant=variant, period=p)
     rt = rt[~drop].copy()
     dep = st.groupby(['line', 'stop_id']).agg(n_peak=('peak', 'sum'), n_win=('trip_id', 'nunique')).reset_index()
     dep['per_hour'] = np.where(dep['n_peak'] > 0, dep['n_peak'], dep['n_win'] / (cfg['hours'][1] - cfg['hours'][0]))
@@ -300,42 +329,42 @@ def lrt_skim(S, alt, reg):
     return gc, a_best, b_best
 
 
-def save(M, name, fmt='%.4f'):
-    pd.DataFrame(M, index=TAZS, columns=TAZS).to_csv(f'{OUT}/{name}.csv.gz', float_format=fmt, compression='gzip')
+def save(M, name, p, fmt='%.4f'):
+    os.makedirs(f'{OUT}/{p}', exist_ok=True)
+    pd.DataFrame(M, index=TAZS, columns=TAZS).to_csv(f'{OUT}/{p}/{name}.csv.gz', float_format=fmt, compression='gzip')
 
 
-def main(variants):
+def main(periods, variants):
     removed_all = []
-    for v in variants:
-        for alt in ALTS:
-            t0 = time.time()
-            T = build_transit(v)
-            if alt == 'main_ext':
-                removed_all.append(T['removed'])
-            sxy_st = STATIONS[alt][['x', 'y']].values.astype(float)
-            G, mats, O0, D0, K0, NK = finish_graph(T, sxy_st)
-            orig = np.arange(O0, O0 + NT); dest = np.arange(D0, D0 + NT); stn = np.arange(K0, K0 + NK)
-            bus = skim_sources(G, mats, orig, dest)
-            acc = skim_sources(G, mats, orig, stn)
-            Gt = G.T.tocsr()
-            mats_t = {k: M.T.tocsr() for k, M in mats.items()}
-            egr = skim_sources(Gt, mats_t, dest, stn)
-            for R in (bus, acc, egr):
-                R['gc'] = R['gc'] - TRANSFER_PEN * (R['board'] >= 1)
-            bus_gc = bus['gc'].copy()
-            np.fill_diagonal(bus_gc, np.nan)
-            brt_based = (bus['brt'] >= 0.5 * np.maximum(bus['ivt'], 1e-9)) & (bus['ivt'] > 0)
-            S = {'acc': acc, 'egr': egr, 'NK': NK}
-            save(bus_gc, f'transit_gc_no_lrt_{v}_{alt}')
-            save(brt_based.astype(int), f'metronit_based_{v}_{alt}', fmt='%d')
-            for reg in REGIMES:
-                gc, a_b, b_b = lrt_skim(S, alt, reg)
-                save(gc, f'lrt_gc_{v}_{alt}_{reg}')
-                save(a_b + 1, f'lrt_board_{v}_{alt}_{reg}', fmt='%d')
-                save(b_b + 1, f'lrt_alight_{v}_{alt}_{reg}', fmt='%d')
-            print(f'{v} / {alt}: {T["NS"]:,} stops, {T["lines"]} line-directions, {len(T["removed"])} Metronit ride edges removed; '
-                  f'no-LRT paths {np.isfinite(bus_gc).sum():,}, Metronit-based {int((brt_based & np.isfinite(bus_gc)).sum()):,}; {time.time() - t0:.0f} s', flush=True)
-    pd.concat(removed_all)[['variant', 'line', 'stop_id', 'next_stop', 'ride_min']].to_csv(f'{OUT}/metronit_edges_removed.csv', index=False, float_format='%.2f')
+    for p, v, alt in [(p, v, alt) for p in periods for v in variants for alt in ALTS]:
+        t0 = time.time()
+        T = build_transit(p, v)
+        if alt == 'main_ext':
+            removed_all.append(T['removed'])
+        sxy_st = STATIONS[alt][['x', 'y']].values.astype(float)
+        G, mats, O0, D0, K0, NK = finish_graph(T, sxy_st)
+        orig = np.arange(O0, O0 + NT); dest = np.arange(D0, D0 + NT); stn = np.arange(K0, K0 + NK)
+        bus = skim_sources(G, mats, orig, dest)
+        acc = skim_sources(G, mats, orig, stn)
+        Gt = G.T.tocsr()
+        mats_t = {k: M.T.tocsr() for k, M in mats.items()}
+        egr = skim_sources(Gt, mats_t, dest, stn)
+        for R in (bus, acc, egr):
+            R['gc'] = R['gc'] - TRANSFER_PEN * (R['board'] >= 1)
+        bus_gc = bus['gc'].copy()
+        np.fill_diagonal(bus_gc, np.nan)
+        brt_based = (bus['brt'] >= 0.5 * np.maximum(bus['ivt'], 1e-9)) & (bus['ivt'] > 0)
+        S = {'acc': acc, 'egr': egr, 'NK': NK}
+        save(bus_gc, f'transit_gc_no_lrt_{v}_{alt}', p)
+        save(brt_based.astype(int), f'metronit_based_{v}_{alt}', p, fmt='%d')
+        for reg in REGIMES:
+            gc, a_b, b_b = lrt_skim(S, alt, reg)
+            save(gc, f'lrt_gc_{v}_{alt}_{reg}', p)
+            save(a_b + 1, f'lrt_board_{v}_{alt}_{reg}', p, fmt='%d')
+            save(b_b + 1, f'lrt_alight_{v}_{alt}_{reg}', p, fmt='%d')
+        print(f'{p} / {v} / {alt}: {T["NS"]:,} stops, {T["lines"]} line-directions, {len(T["removed"])} Metronit ride edges removed; '
+              f'no-LRT paths {np.isfinite(bus_gc).sum():,}, Metronit-based {int((brt_based & np.isfinite(bus_gc)).sum()):,}; {time.time() - t0:.0f} s', flush=True)
+    pd.concat(removed_all)[['period', 'variant', 'line', 'stop_id', 'next_stop', 'ride_min']].to_csv(f'{OUT}/metronit_edges_removed.csv', index=False, float_format='%.2f')
     pd.DataFrame({'variant': list(VARIANTS), 'description': list(VARIANTS.values())}).to_csv(f'{OUT}/variants.csv', index=False)
     for alt in ALTS:
         s = STATIONS[alt].copy()
@@ -346,4 +375,5 @@ def main(variants):
 
 
 if __name__ == '__main__':
-    main(sys.argv[1:] or list(VARIANTS))
+    args = sys.argv[1:]
+    main([a for a in args if a in PERIODS] or list(PERIODS), [a for a in args if a in VARIANTS] or list(VARIANTS))

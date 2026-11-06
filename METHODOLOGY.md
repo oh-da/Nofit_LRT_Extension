@@ -333,7 +333,7 @@ the before / after values.
   the slower-bus sensitivity + 2–5 %; caveats 28–29. The comprehensive report (English and
   simple Hebrew) with every chart and map at the peak hour, and its decision revision (2050 BU
   as the reference, the planning range 5,532–10,537, through-running, markets, the Metronit).
-- **6 November 2026 — the scenario workbook (§6as).** Step 45 as live Excel formulas on the 26,022 corridor TAZ
+- **6 November 2026 — the scenario workbook (§6as).** Step 45 as live Excel formulas, AM and PM, on the 26,205 corridor TAZ
   pairs (`exports/Nofit_LRT_Scenario_Model.xlsx`), with the transit paths recomputed for the Metronit cut back to
   Hamifrats and removed: 2050 BU LRT 7,433 → 9,570 / 8,883. At TAZ level λ (with λ_T = 2λ) moves the LRT by
   − 0.3 / + 1.4 % over 0.05 / 0.02, far less than the published planning range, which scales by the area model's ratios.
@@ -4049,7 +4049,7 @@ Counts: PCE / 1.10 on the 3,231 counted road links; count year read from `DATE` 
 
 ## 6as. The scenario workbook — step 45 in Excel, with Metronit network variants (`tools/scenario_metronit_skims.py`, `tools/build_scenario_workbook.py`, `exports/Nofit_LRT_Scenario_Model.xlsx`; 6 November 2026)
 
-> **In plain words.** Step 45's model, zone pair by zone pair, as live Excel formulas. Change λ, λ_T, the LRT premiums, the smoothing weight, the LRT headway, station access or running time, the scenario-year, the alternative, the regime, or the Metronit network (as today / cut back to Hamifrats / removed), and every TAZ, area, station and segment recalculates. At its defaults it reproduces step 45 exactly. A new study product: no published number changes.
+> **In plain words.** Step 45's model, zone pair by zone pair, as live Excel formulas, AM and PM peak. Change the period, λ, λ_T, the LRT premiums, the smoothing weight, the LRT headway, station access or running time, the scenario-year, the alternative, the regime, or the Metronit network (as today / cut back to Hamifrats / removed), and every TAZ, area, station and segment recalculates. At its defaults it reproduces step 45 exactly in both periods. A new study product: no published number changes.
 
 **Purpose.** Let the study team test assumptions about the modes and the logit parameters without running the
 notebooks, and see where the travellers go: by TAZ, by corridor area (the 25 V2 superzones), by station and by
@@ -4057,16 +4057,18 @@ segment. The example request was the Metronit: what happens to the LRT and to th
 no longer runs in Haifa.
 
 **Method.** *Network variants.* A network change alters the shortest paths, which formulas cannot recompute.
-`tools/scenario_metronit_skims.py` therefore rebuilds step 45's AM transit graph (the code of cells 2, 4 and 8 of
-`LRT_alternatives_demand.ipynb`: GTFS line graph on the step-30 observed times, walk links, TAZ and station
-connectors, the same weights and penalties) for three Metronit networks, both alternatives:
+`tools/scenario_metronit_skims.py` therefore rebuilds step 45's transit graph for each period (the code of cells 2, 4
+and 8 of `LRT_alternatives_demand.ipynb`: GTFS line graph on the step-30 observed times — in the PM the PM schedule
+times the AM observed / scheduled ratio per segment, clipped 0.5–2.5 — walk links, TAZ and station connectors, the
+same weights and penalties) for three Metronit networks, both alternatives:
 **M0** as today (all five lines: 83001, 67002, 67003, 62004, 52005); **M1** cut back to Hamifrats: every Metronit
 ride edge with a stop in Haifa south / west of Hamifrats is removed (corridor areas 202–209 and the off-corridor
 Haifa zones 1300–1899; 133 of 265 directed ride edges), so lines 1, 2 and 4 run Hamifrats – Krayot / Kiryat Ata and
 feed the LRT there and line 3 keeps its Krayot loop; **M2** all Metronit removed. Regular buses are unchanged. Per
 variant it writes the best no-LRT transit cost, the Metronit-based flag (≥ half the in-vehicle time on the
 Metronit), and per regime the LRT cost with the boarding and alighting stations (the gateway rule of step 31). No TAZ
-pair loses its transit path in any variant. M0 reproduces step 45's committed skims to their 2-decimal rounding.
+pair loses its transit path in any variant or period. M0 reproduces step 45's committed AM and PM skims to their
+2-decimal rounding.
 *The pivot with a network change.* The transit nest's composite cost now changes for two reasons, the LRT and the
 network: with `dL = GC_LRT − premium − GC_transit,variant`,
 `Δ = (GC_transit,variant − GC_transit,today) − ln(1 + exp(−λ_T dL)) / λ_T`, `P(LRT | transit) = 1 / (1 + exp(λ_T dL))`
@@ -4074,24 +4076,30 @@ and `S' = S e^{−λΔ} / (S e^{−λΔ} + 1 − S)` on the smoothed share S of 
 bracket is zero and this is step 45's formula; where a Metronit cut is not made up by the LRT, Δ > 0 and transit
 trips move to the car (reported as "transit lost to car"). The LRT premium follows the variant's competing path
 (2.5 against a Metronit-based one, 5 against a bus-based one). LRT riders are attributed to their source by today's
-path type. *The workbook.* One row per inter-area corridor TAZ pair with a trip in any scenario-year (26,022 rows):
-keys, the base car and transit trips of the five sets (step 22, step 23), the precomputed costs (6 transit, 6 flags,
-12 LRT costs, 12 station pairs), and 36 formula columns running the pivot; the area-pair shares on `Area_Prior`;
+path type. *The workbook.* One row per inter-area corridor TAZ pair with a trip in any scenario-year of either period (26,205
+rows): keys, the base car and transit trips of the five sets in both periods (AM: step 22, step 23; PM: the wave-1b PM
+layers for 2022 and, as in step 45, the PM 2022 matrix times step 23's AM growth of the pair for 2040 / 2050), the
+precomputed costs per period (6 transit, 6 flags, 12 LRT costs, 12 station pairs each), and 36 formula columns
+running the pivot, which pick their columns by period; the area-pair shares on `Area_Prior`;
 station times and their split into extension and main-route minutes on `Stations` (so a running-time factor per
 section, the headway and the station access act on the LRT cost without new paths — the gateway choice does not
 depend on them); totals by TAZ, area, station and segment by `SUMIFS`; reference values (M0, default inputs) per
-scenario × alternative × regime from the same equations in numpy; a static λ / λ_T sweep and a scenario grid.
-AM only; 918,065 formulas, 15.6 MB.
+period × scenario × alternative × regime from the same equations in numpy; the line-load peak-hour factors of the
+period (AM 0.549 / 0.457, PM 0.535 / 0.468); a static λ / λ_T sweep and a scenario grid for both periods.
+924,476 formulas, 21.1 MB.
 
-**Checks.** The numpy run at the defaults reproduces `Output/alternatives/demand_summary.csv` for all 20 AM
-combinations (LRT, car, bus, Metronit, LRT from car, LRT using the extension, busiest segment) within 0.05 trips; the
-builder stops if the LRT differs by more than 0.5. The workbook recalculated in LibreOffice has no formula error and
+**Checks.** The numpy run at the defaults reproduces `Output/alternatives/demand_summary.csv` for all 40
+combinations, AM and PM (LRT, car, bus, Metronit, LRT from car, LRT using the extension, busiest segment), within
+0.05 trips; the builder stops if the LRT differs by more than 0.5. The workbook recalculated in LibreOffice has no formula error and
 gives 7,432.6 LRT trips at the defaults (2050 BU, through line, Prioritized); four further input sets (2022 defaults;
 2050 BU extension-only Unprioritized on M1 with λ 0.05, premiums 3 / 1.5, k 10, headway 7.5, access 1.0, running-time
 factors 1.1 / 0.9; HS 2050 on M2 with λ 0.02, λ_T / λ 3, main-route factor 1.2; BU 2040 on M1 with the LRT out of
-service) match the numpy pivot within 0.03 trips in total and per TAZ, station and segment.
+service) match the numpy pivot within 0.03 trips in total and per TAZ, station and segment; so do four sets on the
+two-period workbook (PM 2050 BU defaults; PM HS 2040 extension-only Unprioritized on M1 with λ 0.045, λ_T / λ 2.5,
+premiums 4 / 2, k 30, headway 6, access 0.8, extension factor 0.95; PM 2022 on M2 with the LRT out of service; AM
+2050 BU on M1 with a main-route factor of 1.15), the PM peak-hour line loads included.
 
-**Results** (AM three hours, main route + extension, Prioritized, default parameters; `Scenario_Grid`):
+**Results** (three hours, main route + extension, Prioritized, default parameters; `Scenario_Grid`):
 
 | Scenario-year, Metronit | LRT | using the extension | from car | Metronit after | transit after (before) | transit lost to car | busiest segment |
 |---|---|---|---|---|---|---|---|
@@ -4101,12 +4109,20 @@ service) match the numpy pivot within 0.03 trips in total and per TAZ, station a
 | 2050 BU, M0 as today | 7,433 | 6,003 | 818 | 7,816 | 22,073 (20,652) | 0 | 2,345 |
 | 2050 BU, M1 cut back to Hamifrats | 9,570 | 8,141 | 796 | 3,637 | 21,545 | 320 | 3,552 |
 | 2050 BU, M2 removed | 8,883 | 7,551 | 746 | 0 | 20,799 | 969 | 2,938 |
+| PM 2022, M0 as today | 4,101 | 3,235 | 274 | 5,071 | 12,159 (11,607) | 0 | 948 |
+| PM 2022, M1 cut back to Hamifrats | 5,402 | 4,535 | 256 | 2,552 | 11,924 | 147 | 1,495 |
+| PM 2022, M2 removed | 5,281 | 4,392 | 233 | 0 | 11,568 | 439 | 1,409 |
+| PM 2050 BU, M0 as today | 6,135 | 4,998 | 368 | 7,443 | 18,560 (17,818) | 0 | 1,684 |
+| PM 2050 BU, M1 cut back to Hamifrats | 8,031 | 6,894 | 346 | 3,999 | 18,257 | 190 | 2,226 |
+| PM 2050 BU, M2 removed | 7,818 | 6,645 | 316 | 0 | 17,713 | 655 | 2,115 |
 
 Cutting the Metronit back to Hamifrats raises the LRT by 29–30 % and the busiest segment by about half; removing it
 everywhere raises the LRT less (+ 20–21 %), because the Krayot then lose their Metronit feeder to Hamifrats (4-minute
 boarding penalty) and must reach the LRT by bus (8 minutes). Without the LRT the same cuts cost transit 1,251 (M1) /
 1,665 (M2) trips in 2022 and 1,824 / 2,422 in 2050 BU; with it, 230–969 — the LRT makes up most but not all of the
-Metronit's service.
+Metronit's service. The rows without a period label are the AM. The PM behaves alike: the cut-back adds 31–32 %
+to the LRT, the full removal 27–29 %, and without the LRT the cuts cost transit 890 / 1,253 trips (2022) and 1,154 /
+1,702 (2050 BU).
 
 **A finding on λ.** The published planning range (5,532–10,537 for 2050 BU, §6aq addendum 4) scales step 45 by the
 area-level ratios of step 40 (λ 0.05 / 0.02 against 0.03, `tools/build_comprehensive_report.py`, `RANGE_LO / RANGE_HI`).
@@ -4114,17 +4130,20 @@ Step 45's own TAZ-level model reacts far less: with λ_T = 2λ it gives 7,540 at
 2050 BU), because at TAZ level the LRT is cheaper than the bus path for 37 % of the transit trips (dL < 0) and dearer
 for the rest, so a sharper λ_T gains on one group what it loses on the other, while at area level the LRT was dearer
 on most pairs. Inside the TAZ model the nest's λ_T moves the LRT (λ_T 0.03 → 8,410, 0.09 → 7,033 at λ 0.03) and λ
-moves the car shift (λ 0.05 with λ_T 0.06 → 8,043, of which 1,429 from car). The planning range is therefore a
+moves the car shift (λ 0.05 with λ_T 0.06 → 8,043, of which 1,429 from car). The PM reacts somewhat more but in the
+same way: 6,366 at λ 0.02 and 5,850 at λ 0.05 against 6,135 (λ_T = 2λ), 6,942 / 5,750 at λ_T 0.03 / 0.09. The planning range is therefore a
 reading of the area model's sensitivity, not of the deliverable's; this is recorded here, the reports are not changed.
 
-**Outputs.** `Output/scenario_tool/` — `transit_gc_no_lrt_{M0,M1,M2}_{alt}.csv.gz`, `metronit_based_{v}_{alt}.csv.gz`,
-`lrt_gc_{v}_{alt}_{regime}.csv.gz`, `lrt_board_{v}_{alt}_{regime}.csv.gz`, `lrt_alight_{v}_{alt}_{regime}.csv.gz`
-(174 × 174), `stations_{alt}.csv` (order, times from S01 per regime), `metronit_edges_removed.csv`, `variants.csv`;
+**Outputs.** `Output/scenario_tool/{AM,PM}/` — `transit_gc_no_lrt_{M0,M1,M2}_{alt}.csv.gz`,
+`metronit_based_{v}_{alt}.csv.gz`, `lrt_gc_{v}_{alt}_{regime}.csv.gz`, `lrt_board_{v}_{alt}_{regime}.csv.gz`,
+`lrt_alight_{v}_{alt}_{regime}.csv.gz` (174 × 174); `Output/scenario_tool/` — `stations_{alt}.csv` (order, times
+from S01 per regime), `metronit_edges_removed.csv` (by period), `variants.csv`;
 `exports/Nofit_LRT_Scenario_Model.xlsx` (sheets Guide, Inputs, Results, Areas, TAZ, Stations, Lambda_Sweep,
 Scenario_Grid, OD_Pairs, Area_Prior, Reference).
 
 **Limits.** Only the three Metronit networks are precomputed; any other network change (bus lines, frequencies,
-walk / wait weights, penalties) needs a new variant in `tools/scenario_metronit_skims.py`. AM only. The car's cost
+walk / wait weights, penalties) needs a new variant in `tools/scenario_metronit_skims.py`. The PM forecast sets and
+the PM bus times are step 45's approximations (AM growth, AM observed ratio). The car's cost
 does not enter the pivot (§6aq addendum 3). The M1 boundary is a zone rule, not a line plan: a real cut-back would
 also re-time the remaining Metronit and the buses. The other limits of step 45 apply (no capacity, no fare, the
 parallel buses kept).
@@ -4200,7 +4219,7 @@ parallel buses kept).
 | `figures/comprehensive/*.png` and `reports/Nofit_LRT_Extension_Comprehensive_Report.docx` | 11 charts | `tools/build_comprehensive_report.py` (after step 45) | The comprehensive report: LRT and total-transit flows by segment and direction per scenario (AM / PM), mode split on the corridor, demand by scenario, shift sources — all charts at the peak hour |
 | `alternatives_bus_slow/` (`demand_summary.csv`, `skims_summary.csv`, `time_on_route.csv`, per run the area matrices, `lrt_line_loads.csv`, `transit_line_loads.csv`, `lrt_stations_boardings.csv`; no TAZ matrices) | 40 runs | Step 45 with `BUS_SLOWDOWN` (§6aq addendum 3) | The slower-bus sensitivity: mixed-traffic buses × 1.10 in 2040, × 1.20 in 2050, Metronit and LRT unchanged — LRT +2 % / +4–5 % |
 | `alternatives/peak_hour_factors.csv`, `corridor_v2/peak_hour_factors_v2_pm.csv` | 12 rows; the step-27 table for the PM | `tools/peak_hour_factors_periods.py` | The peak-hour factors applied to the alternatives' charts and maps: period × layer (car, transit) × direction (up, down, all); the PM window run of step 27's method |
-| `scenario_tool/transit_gc_no_lrt_{v}_{alt}`, `metronit_based_{v}_{alt}`, `lrt_{gc,board,alight}_{v}_{alt}_{regime}` (`.csv.gz`), `stations_{alt}.csv`, `metronit_edges_removed.csv`, `variants.csv` | 174 × 174 per matrix; v = M0 / M1 / M2 | `tools/scenario_metronit_skims.py` (§6as) | Step 45's AM transit and LRT costs for three Metronit networks, the inputs of the scenario workbook `exports/Nofit_LRT_Scenario_Model.xlsx` (`tools/build_scenario_workbook.py`) |
+| `scenario_tool/{AM,PM}/transit_gc_no_lrt_{v}_{alt}`, `metronit_based_{v}_{alt}`, `lrt_{gc,board,alight}_{v}_{alt}_{regime}` (`.csv.gz`); `scenario_tool/stations_{alt}.csv`, `metronit_edges_removed.csv`, `variants.csv` | 174 × 174 per matrix; v = M0 / M1 / M2 | `tools/scenario_metronit_skims.py` (§6as) | Step 45's AM and PM transit and LRT costs for three Metronit networks, the inputs of the scenario workbook `exports/Nofit_LRT_Scenario_Model.xlsx` (`tools/build_scenario_workbook.py`) |
 | `gtfs/stop_times_study_area_{am,pm}_trips_v45.csv.gz`, `stop_times_study_area_rail_day.csv.gz` | 259,001 / 259,883 / 1,959 rows | Step 45 | The study-area stop times of the service day for the AM and PM windows (bus and Metronit) and the day's rail trips |
 | `skims/taz/lrt_capture_scenarios_taz.csv`, `taz_vs_area_capture_comparison.csv`, `lrt_trips_2022_taz_{sc}_central.csv`, `lrt_share_of_transit_taz_{sc}_central.csv`, `transit_share_2022_pivot_taz.csv`, `taz_access_table.csv`, `lrt_trips_2022_area_from_taz_{sc}_central.csv`, `lrt_trips_by_area_taz_vs_area.csv`, `trunk_link_flows_taz.csv`, `lrt_boardings_by_station_area_taz.csv`, `lrt_boardings_by_station_taz.csv`, `lrt_capture_by_access_band.csv`, `regression_check_area_skims_on_taz.csv` (and the same under `bus_area_plus_walk/`) | 15 rows; 15; 174 × 174 (× 3 + 3); 174 rows; 25 × 25; 75 rows; 18; 10; stations; 15; 3 | Step 39 | The TAZ-level capture: scenario × case totals and the comparison with step 31; TAZ trip and share matrices; the pivot's shares; the TAZ access table; sums to areas, links, gateway areas and stations; the capture rate by access band; the regression check |
 | `figures/` | — | Steps 1b–3 | Scatter plots, CV curves, λ curves, R_AB heatmap |
