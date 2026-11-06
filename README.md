@@ -17,7 +17,12 @@ with a Hebrew version, a Simplified Technical English version and a slide deck a
 
 The numbers of the study are those of 5 October 2026 (step 45). The work since then has been
 documentation, reports, figures and the pipeline; no step has been rerun and no number has
-changed.
+changed. On 6 November 2026 a **scenario workbook** was added
+([`exports/Nofit_LRT_Scenario_Model.xlsx`](exports/Nofit_LRT_Scenario_Model.xlsx),
+[METHODOLOGY §6as](METHODOLOGY.md#6as-the-scenario-workbook--step-45-in-excel-with-metronit-network-variants-toolsscenario_metronit_skimspy-toolsbuild_scenario_workbookpy-exportsnofit_lrt_scenario_modelxlsx-6-november-2026)):
+step 45's model as live Excel formulas for every corridor TAZ pair, where λ, λ_T, the premiums,
+the LRT service and the Metronit network (as today, cut back to Hamifrats, removed) can be changed
+and the TAZ, area, station and segment results follow. At its defaults it reproduces step 45.
 
 ---
 
@@ -64,6 +69,7 @@ not passenger loads for capacity design, and they are not externally validated f
 | Product | Where | What it is |
 |---|---|---|
 | **LRT demand by alternative** | `Output/alternatives/` | Trip matrices, line loads by segment and direction, station boardings for 2 alternatives × 2 regimes × 5 scenario-years × AM / PM; summary in `demand_summary.csv`, workbook `LRT_alternatives_matrices.xlsx`, station tables `stations_*.csv`, times on route, peak-hour factors |
+| **Scenario workbook** | `exports/Nofit_LRT_Scenario_Model.xlsx`, `Output/scenario_tool/` | Step 45 in Excel formulas (AM): change λ, λ_T, premiums, smoothing, headway, station access, running time, scenario-year, alternative, regime and the Metronit network (as today / cut back to Hamifrats / removed); results by TAZ, area, station and segment against the published case. Built by `tools/scenario_metronit_skims.py` and `tools/build_scenario_workbook.py` (§6as) |
 | **Base-year matrices, 2022** | `Output/final_2022/` | 778 × 778 zone matrices: `car`, `transit` (bus + rail), `total`; a long-format gzip file for SQL; a manifest |
 | Base-year layers, 2022 | `Output/ths2017/three_mode_2022/` | The same demand as four layers: car, bus, taxi-type, rail; superzone and area versions; PM and midday copies |
 | Forecast matrices, 2040 / 2050 | `Output/forecast_taz/{BU,HS}_{2040,2050}/` | The 2022 matrices grown by the demographic scenarios; mode split and trip rates held at 2022 |
@@ -192,7 +198,7 @@ notebooks/historical/          superseded work (the survey x cellular hybrids, t
 pipeline/                      the chain as one pipeline: the manifest of every step (steps.py), the runner, the checks, the doc generator
 tools/                         Python scripts: report, deck, map and figure builders, the OVT research, validation metrics, tests, the LFS pull helper
 reports/                       the Word reports and the HTML decision decks (English and Hebrew); reports/historical/ for superseded ones
-exports/                       tables and documents exported for use outside the repository (the λ regression table, the step 33 sample, the Hebrew section 8)
+exports/                       tables and documents exported for use outside the repository (the λ regression table, the step 33 sample, the Hebrew section 8, the scenario workbook)
 Input/                         survey, smart cards, zonal files, timetables, speed networks, line drawings (large files in Git LFS)
 Output/                        every product, committed as plain CSV / PNG / XLSX (no LFS)
 ```
