@@ -1,0 +1,173 @@
+station,line,TAZ,AggCode,scenario,area,boardings central,boardings scenario,alightings central,alightings scenario
+S01,extension,2413,201.0,2040 BU,TiratCarmel,237.8,276.1,54.2,72.7
+S02,extension,2421,201.0,2040 BU,TiratCarmel,394.3,439.3,103.6,128.6
+S03,extension,2402,201.0,2040 BU,TiratCarmel,553.3,639.0,192.9,251.9
+S04,extension,2408,201.0,2040 BU,TiratCarmel,2.6,3.0,148.7,183.9
+S05,extension,2401,202.0,2040 BU,Matam-NeotPeres,12.8,14.6,69.9,80.1
+S06,extension,1517,202.0,2040 BU,Matam-NeotPeres,127.7,191.9,735.5,1033.3
+S07,extension,1517,202.0,2040 BU,Matam-NeotPeres,0.5,0.7,5.0,5.9
+S08,extension,1520,203.0,2040 BU,HofCarmel-NeveDavid,5.5,7.1,43.1,58.5
+S09,extension,1514,203.0,2040 BU,HofCarmel-NeveDavid,187.6,206.6,95.3,104.8
+S10,extension,1512,204.0,2040 BU,Hecht-Shprintzak,293.6,309.0,95.7,101.0
+S11,extension,1512,204.0,2040 BU,Hecht-Shprintzak,0.0,0.0,37.1,0.0
+S12,extension,1510,205.0,2040 BU,EinHayam,373.4,486.4,60.0,118.3
+S13,extension,1509,,2040 BU,,0.0,0.0,0.0,0.0
+S14,extension,1503,206.0,2040 BU,BatGalim-KiryatEliezer,158.0,212.2,99.8,127.8
+S15,extension,1505,206.0,2040 BU,BatGalim-KiryatEliezer,99.3,129.3,542.4,689.5
+S16,extension,1506,206.0,2040 BU,BatGalim-KiryatEliezer,209.3,273.4,350.1,452.2
+S17,extension,1302,207.0,2040 BU,Hamoshava,182.5,238.1,278.3,407.7
+S18,extension,1303,207.0,2040 BU,Hamoshava,99.2,129.7,349.5,497.3
+S19,extension,1312,208.0,2040 BU,LowerCity,85.5,120.3,571.9,884.4
+S20,extension,1309,208.0,2040 BU,LowerCity,11.0,12.9,39.9,48.7
+S21,extension,1311,209.0,2040 BU,Namal-Giborim,185.0,252.8,334.2,498.9
+S22,extension,1726,209.0,2040 BU,Namal-Giborim,32.9,42.1,91.6,79.3
+S23,extension,1218,210.0,2040 BU,Hamifrats,17.9,22.7,42.0,44.4
+S24,extension,1212,210.0,2040 BU,Hamifrats,227.4,335.2,811.7,924.5
+M02,main,1222,211.0,2040 BU,Bazan-Hutsot,1663.5,2630.5,553.9,746.3
+M03,main,905,212.0,2040 BU,TsometKiryatAta,42.4,72.4,365.2,418.4
+M04,main,902,213.0,2040 BU,KiryatAta North,0.0,0.0,0.0,0.0
+M05,main,917,213.0,2040 BU,KiryatAta North,216.5,261.7,89.7,103.6
+M06,main,911,214.0,2040 BU,KiryatAta North-East,64.6,66.4,2.8,3.0
+M07,main,911,214.0,2040 BU,KiryatAta North-East,242.6,249.0,33.6,34.2
+M08,main,422,215.0,2040 BU,Shefaram,208.8,211.5,5.9,6.0
+M09,main,423,215.0,2040 BU,Shefaram,31.6,32.0,8.7,9.0
+M10,main,1005,216.0,2040 BU,Hamovil,0.6,0.6,0.0,0.0
+M11,main,1924,217.0,2040 BU,Nazareth,17.4,18.6,2.6,2.8
+M12,main,1921,217.0,2040 BU,Nazareth,58.4,61.3,7.5,8.3
+M13,main,2001,217.0,2040 BU,Nazareth,12.4,12.4,12.2,12.3
+M14,main,2004,217.0,2040 BU,Nazareth,42.4,42.5,10.0,10.2
+M15,main,2004,217.0,2040 BU,Nazareth,32.3,32.5,5.5,5.6
+M16,main,2004,217.0,2040 BU,Nazareth,17.5,17.5,6.3,6.4
+M17,main,2010,217.0,2040 BU,Nazareth,40.1,40.1,15.2,15.3
+M18,main,2010,217.0,2040 BU,Nazareth,31.1,32.1,18.0,18.4
+M19,main,2011,217.0,2040 BU,Nazareth,44.0,44.1,8.7,8.8
+M20,main,1926,217.0,2040 BU,Nazareth,46.0,46.0,11.4,11.6
+S01,extension,2413,201.0,2050 BU,TiratCarmel,231.2,263.8,64.4,85.3
+S02,extension,2421,201.0,2050 BU,TiratCarmel,878.7,962.9,259.2,308.0
+S03,extension,2402,201.0,2050 BU,TiratCarmel,730.1,835.6,239.9,304.5
+S04,extension,2408,201.0,2050 BU,TiratCarmel,2.7,3.1,145.1,181.0
+S05,extension,2401,202.0,2050 BU,Matam-NeotPeres,15.4,17.3,85.2,97.3
+S06,extension,1517,202.0,2050 BU,Matam-NeotPeres,142.8,209.4,830.4,1141.4
+S07,extension,1517,202.0,2050 BU,Matam-NeotPeres,0.6,0.7,5.5,6.5
+S08,extension,1520,203.0,2050 BU,HofCarmel-NeveDavid,6.4,8.0,58.9,77.3
+S09,extension,1514,203.0,2050 BU,HofCarmel-NeveDavid,185.9,204.2,98.5,107.5
+S10,extension,1512,204.0,2050 BU,Hecht-Shprintzak,290.2,304.5,97.6,102.8
+S11,extension,1512,204.0,2050 BU,Hecht-Shprintzak,0.0,0.0,45.4,0.0
+S12,extension,1510,205.0,2050 BU,EinHayam,401.4,520.1,59.7,127.7
+S13,extension,1509,,2050 BU,,0.0,0.0,0.0,0.0
+S14,extension,1503,206.0,2050 BU,BatGalim-KiryatEliezer,153.7,203.5,107.3,136.1
+S15,extension,1505,206.0,2050 BU,BatGalim-KiryatEliezer,114.8,145.3,654.3,809.3
+S16,extension,1506,206.0,2050 BU,BatGalim-KiryatEliezer,273.4,349.5,683.4,873.6
+S17,extension,1302,207.0,2050 BU,Hamoshava,202.1,260.7,313.6,457.6
+S18,extension,1303,207.0,2050 BU,Hamoshava,110.8,143.2,387.0,546.8
+S19,extension,1312,208.0,2050 BU,LowerCity,94.4,131.1,615.5,944.7
+S20,extension,1309,208.0,2050 BU,LowerCity,17.3,20.1,62.6,75.6
+S21,extension,1311,209.0,2050 BU,Namal-Giborim,210.1,282.9,374.0,555.8
+S22,extension,1726,209.0,2050 BU,Namal-Giborim,32.6,41.5,98.2,84.2
+S23,extension,1218,210.0,2050 BU,Hamifrats,19.0,23.9,45.9,48.4
+S24,extension,1212,210.0,2050 BU,Hamifrats,242.2,354.1,864.5,979.5
+M02,main,1222,211.0,2050 BU,Bazan-Hutsot,1892.7,2996.7,594.3,803.1
+M03,main,905,212.0,2050 BU,TsometKiryatAta,45.7,76.2,381.3,435.0
+M04,main,902,213.0,2050 BU,KiryatAta North,0.0,0.0,0.0,0.0
+M05,main,917,213.0,2050 BU,KiryatAta North,242.8,299.9,97.5,114.6
+M06,main,911,214.0,2050 BU,KiryatAta North-East,69.2,71.1,2.9,3.0
+M07,main,911,214.0,2050 BU,KiryatAta North-East,207.4,212.8,31.2,31.7
+M08,main,422,215.0,2050 BU,Shefaram,226.0,228.8,6.5,6.6
+M09,main,423,215.0,2050 BU,Shefaram,34.2,34.6,10.1,10.4
+M10,main,1005,216.0,2050 BU,Hamovil,0.6,0.6,0.0,0.0
+M11,main,1924,217.0,2050 BU,Nazareth,18.0,19.2,2.8,3.0
+M12,main,1921,217.0,2050 BU,Nazareth,60.0,63.0,8.6,9.5
+M13,main,2001,217.0,2050 BU,Nazareth,12.1,12.2,13.0,13.1
+M14,main,2004,217.0,2050 BU,Nazareth,52.2,52.3,14.4,14.7
+M15,main,2004,217.0,2050 BU,Nazareth,32.5,32.7,6.4,6.6
+M16,main,2004,217.0,2050 BU,Nazareth,16.3,16.4,7.6,7.6
+M17,main,2010,217.0,2050 BU,Nazareth,41.4,41.5,17.5,17.5
+M18,main,2010,217.0,2050 BU,Nazareth,32.2,33.2,19.9,20.3
+M19,main,2011,217.0,2050 BU,Nazareth,45.9,45.9,10.3,10.3
+M20,main,1926,217.0,2050 BU,Nazareth,47.6,47.6,12.2,12.4
+S01,extension,2413,201.0,2040 HS,TiratCarmel,137.0,155.8,33.5,43.7
+S02,extension,2421,201.0,2040 HS,TiratCarmel,214.1,236.1,61.3,73.7
+S03,extension,2402,201.0,2040 HS,TiratCarmel,399.3,449.4,152.0,183.7
+S04,extension,2408,201.0,2040 HS,TiratCarmel,190.2,213.9,310.6,358.3
+S05,extension,2401,202.0,2040 HS,Matam-NeotPeres,152.6,167.5,213.3,238.6
+S06,extension,1517,202.0,2040 HS,Matam-NeotPeres,139.9,200.9,725.0,1029.6
+S07,extension,1517,202.0,2040 HS,Matam-NeotPeres,0.5,0.6,4.6,5.6
+S08,extension,1520,203.0,2040 HS,HofCarmel-NeveDavid,148.1,176.4,101.6,126.0
+S09,extension,1514,203.0,2040 HS,HofCarmel-NeveDavid,218.3,239.4,114.2,124.7
+S10,extension,1512,204.0,2040 HS,Hecht-Shprintzak,287.9,303.3,96.2,101.0
+S11,extension,1512,204.0,2040 HS,Hecht-Shprintzak,0.0,0.0,43.9,0.0
+S12,extension,1510,205.0,2040 HS,EinHayam,425.4,549.6,67.3,133.9
+S13,extension,1509,,2040 HS,,0.0,0.0,0.0,0.0
+S14,extension,1503,206.0,2040 HS,BatGalim-KiryatEliezer,183.3,241.6,118.1,150.0
+S15,extension,1505,206.0,2040 HS,BatGalim-KiryatEliezer,179.9,222.7,633.8,796.5
+S16,extension,1506,206.0,2040 HS,BatGalim-KiryatEliezer,225.9,292.6,337.8,434.4
+S17,extension,1302,207.0,2040 HS,Hamoshava,193.8,248.8,294.3,414.5
+S18,extension,1303,207.0,2040 HS,Hamoshava,135.0,175.9,397.1,549.1
+S19,extension,1312,208.0,2040 HS,LowerCity,96.3,134.1,628.1,936.4
+S20,extension,1309,208.0,2040 HS,LowerCity,12.8,14.9,46.0,55.1
+S21,extension,1311,209.0,2040 HS,Namal-Giborim,211.2,286.3,414.0,600.8
+S22,extension,1726,209.0,2040 HS,Namal-Giborim,34.7,44.8,100.7,85.8
+S23,extension,1218,210.0,2040 HS,Hamifrats,18.5,23.2,43.5,45.7
+S24,extension,1212,210.0,2040 HS,Hamifrats,232.0,338.0,848.1,958.2
+M02,main,1222,211.0,2040 HS,Bazan-Hutsot,1847.8,2796.4,793.2,994.7
+M03,main,905,212.0,2040 HS,TsometKiryatAta,45.2,74.9,432.1,487.5
+M04,main,902,213.0,2040 HS,KiryatAta North,93.8,99.9,40.5,41.4
+M05,main,917,213.0,2040 HS,KiryatAta North,362.2,413.1,157.1,174.6
+M06,main,911,214.0,2040 HS,KiryatAta North-East,456.0,466.2,114.5,116.0
+M07,main,911,214.0,2040 HS,KiryatAta North-East,234.8,240.7,36.9,37.5
+M08,main,422,215.0,2040 HS,Shefaram,146.7,148.6,4.8,4.9
+M09,main,423,215.0,2040 HS,Shefaram,42.6,43.0,9.5,9.8
+M10,main,1005,216.0,2040 HS,Hamovil,0.4,0.4,0.0,0.0
+M11,main,1924,217.0,2040 HS,Nazareth,22.4,23.9,3.4,3.6
+M12,main,1921,217.0,2040 HS,Nazareth,71.4,75.3,8.5,9.4
+M13,main,2001,217.0,2040 HS,Nazareth,16.3,16.4,25.1,25.3
+M14,main,2004,217.0,2040 HS,Nazareth,47.9,48.0,9.4,9.6
+M15,main,2004,217.0,2040 HS,Nazareth,31.7,31.9,4.4,4.5
+M16,main,2004,217.0,2040 HS,Nazareth,62.5,62.7,4.0,4.0
+M17,main,2010,217.0,2040 HS,Nazareth,45.0,45.0,14.2,14.2
+M18,main,2010,217.0,2040 HS,Nazareth,30.5,31.5,15.9,16.2
+M19,main,2011,217.0,2040 HS,Nazareth,37.6,37.7,7.0,7.1
+M20,main,1926,217.0,2040 HS,Nazareth,44.2,44.2,9.7,9.9
+S01,extension,2413,201.0,2050 HS,TiratCarmel,159.0,179.1,39.9,51.0
+S02,extension,2421,201.0,2050 HS,TiratCarmel,232.0,255.6,68.3,81.1
+S03,extension,2402,201.0,2050 HS,TiratCarmel,431.8,483.7,173.0,205.8
+S04,extension,2408,201.0,2050 HS,TiratCarmel,322.4,359.3,409.1,466.2
+S05,extension,2401,202.0,2050 HS,Matam-NeotPeres,269.3,294.0,326.5,364.1
+S06,extension,1517,202.0,2050 HS,Matam-NeotPeres,160.9,227.1,793.9,1125.9
+S07,extension,1517,202.0,2050 HS,Matam-NeotPeres,0.5,0.6,4.7,5.7
+S08,extension,1520,203.0,2050 HS,HofCarmel-NeveDavid,233.2,278.6,132.6,165.2
+S09,extension,1514,203.0,2050 HS,HofCarmel-NeveDavid,238.1,260.4,130.7,142.2
+S10,extension,1512,204.0,2050 HS,Hecht-Shprintzak,306.6,321.5,110.1,115.2
+S11,extension,1512,204.0,2050 HS,Hecht-Shprintzak,0.0,0.0,53.2,0.0
+S12,extension,1510,205.0,2050 HS,EinHayam,470.7,606.4,76.3,155.8
+S13,extension,1509,,2050 HS,,0.0,0.0,0.0,0.0
+S14,extension,1503,206.0,2050 HS,BatGalim-KiryatEliezer,205.0,264.5,140.1,175.2
+S15,extension,1505,206.0,2050 HS,BatGalim-KiryatEliezer,172.0,211.2,758.2,941.5
+S16,extension,1506,206.0,2050 HS,BatGalim-KiryatEliezer,465.9,597.0,696.7,888.7
+S17,extension,1302,207.0,2050 HS,Hamoshava,212.3,268.6,336.7,465.0
+S18,extension,1303,207.0,2050 HS,Hamoshava,154.8,198.9,452.3,615.8
+S19,extension,1312,208.0,2050 HS,LowerCity,107.4,147.2,702.2,1028.5
+S20,extension,1309,208.0,2050 HS,LowerCity,20.1,23.0,74.6,87.9
+S21,extension,1311,209.0,2050 HS,Namal-Giborim,251.0,335.9,522.2,767.5
+S22,extension,1726,209.0,2050 HS,Namal-Giborim,36.1,46.3,131.0,95.2
+S23,extension,1218,210.0,2050 HS,Hamifrats,20.1,24.9,48.1,50.5
+S24,extension,1212,210.0,2050 HS,Hamifrats,251.7,363.4,945.9,1069.2
+M02,main,1222,211.0,2050 HS,Bazan-Hutsot,2187.9,3270.7,995.8,1220.7
+M03,main,905,212.0,2050 HS,TsometKiryatAta,49.3,80.5,470.5,530.7
+M04,main,902,213.0,2050 HS,KiryatAta North,166.0,176.7,71.6,73.2
+M05,main,917,213.0,2050 HS,KiryatAta North,500.9,573.7,214.3,239.8
+M06,main,911,214.0,2050 HS,KiryatAta North-East,571.9,583.9,161.0,162.8
+M07,main,911,214.0,2050 HS,KiryatAta North-East,236.3,242.2,40.5,41.1
+M08,main,422,215.0,2050 HS,Shefaram,163.1,165.2,6.2,6.3
+M09,main,423,215.0,2050 HS,Shefaram,115.2,116.3,18.0,18.3
+M10,main,1005,216.0,2050 HS,Hamovil,0.5,0.5,0.0,0.0
+M11,main,1924,217.0,2050 HS,Nazareth,30.7,32.8,3.8,4.0
+M12,main,1921,217.0,2050 HS,Nazareth,89.5,94.6,9.2,10.0
+M13,main,2001,217.0,2050 HS,Nazareth,21.9,21.9,34.7,35.0
+M14,main,2004,217.0,2050 HS,Nazareth,54.8,54.9,11.1,11.2
+M15,main,2004,217.0,2050 HS,Nazareth,34.8,35.0,4.8,4.9
+M16,main,2004,217.0,2050 HS,Nazareth,91.2,91.4,4.7,4.7
+M17,main,2010,217.0,2050 HS,Nazareth,50.9,50.9,17.4,17.5
+M18,main,2010,217.0,2050 HS,Nazareth,40.0,41.4,17.0,17.4
+M19,main,2011,217.0,2050 HS,Nazareth,40.5,40.5,7.5,7.5
+M20,main,1926,217.0,2050 HS,Nazareth,58.5,58.5,10.3,10.4

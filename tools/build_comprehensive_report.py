@@ -219,6 +219,60 @@ ref_brt_shift = pd.read_csv(f'{OUT}/AM/{REF}/{ALT}_{REG}/from_brt_area_v2.csv', 
 ref_unp = srow('AM', REF, 'unprioritized'); ref_slow = srow('AM', REF, REG, src=summary_slow) if summary_slow is not None else None
 RANGE_LO, RANGE_HI = 3166 / 4254, 6031 / 4254   # step 40: λ 0.05 / 0.02 around the central 0.03 (the widest single factor; premium 0 / 10 gives 0.80 / 1.23)
 mk_ref, mk_tot = market_summary('AM', REF)
+# ---------------- the Metronit scenario (step 45 with METRONIT_CUT, ALT_OUT=Output/alternatives_metronit_krayot; METHODOLOGY §6aq addendum 5, 5 November 2026):
+# the Metronit kept on the Krayot side of Merkazit Hamifrats only in the four forecast sets; read beside the central run, which it does not touch ----------------
+METRO_OUT = 'Output/alternatives_metronit_krayot'; EXTC = 'LRT trips using the extension (at least one segment S01–S24)'
+summary_metro = pd.read_csv(f'{METRO_OUT}/demand_summary.csv') if os.path.exists(f'{METRO_OUT}/demand_summary.csv') else None
+ref_metro = srow('AM', REF, REG, src=summary_metro) if summary_metro is not None else None
+def metro_loads(p, sc, reg=REG, peak=True):
+    l = pd.read_csv(f'{METRO_OUT}/{p}/{sc}/{ALT}_{reg}/lrt_line_loads.csv').copy()
+    if peak: l['dir1_towards_Nazareth_end'] *= phf(p, 'transit', 'up'); l['dir2_towards_TiratCarmel'] *= phf(p, 'transit', 'down')
+    return l
+def metro_busiest(p, sc, ext_only_segments=False):
+    l = metro_loads(p, sc)
+    if ext_only_segments: l = l[l.to_station.str.startswith('S')]
+    return float(max(l['dir1_towards_Nazareth_end'].max(), l['dir2_towards_TiratCarmel'].max()))
+def metro_markets(p, sc):
+    """the LRT trips by market group (the groups of market_tables), central run and Metronit scenario side by side"""
+    out = []
+    for root in (OUT, METRO_OUT):
+        m = pd.read_csv(f'{root}/{p}/{sc}/{ALT}_{REG}/t_lrt_area_v2.csv', index_col=0); m.columns = m.columns.astype(int)
+        G = m.copy(); G.index = [GRP[a] for a in G.index]; G.columns = [GRP[a] for a in G.columns]; GG = G.groupby(level=0).sum().T.groupby(level=0).sum().T.reindex(index=GRP_ORDER, columns=GRP_ORDER)
+        sym = (GG + GG.T).values.copy(); np.fill_diagonal(sym, np.diag(GG.values)); sym = pd.DataFrame(sym, index=GRP_ORDER, columns=GRP_ORDER); T_, H_, K_, M_ = GRP_ORDER
+        out.append({'Tirat Carmel ↔ Haifa': sym.loc[T_, H_], 'Haifa internal': sym.loc[H_, H_], 'Krayot ↔ Haifa (by feeder)': sym.loc[K_, H_], 'Main route ↔ Haifa': sym.loc[M_, H_], 'Main route ↔ Krayot / Tirat Carmel': sym.loc[M_, K_] + sym.loc[M_, T_],
+                    'within the main route': sym.loc[M_, M_], 'Krayot ↔ Tirat Carmel': sym.loc[K_, T_], 'all LRT trips': float(m.values.sum())})
+    c, s = out; return pd.DataFrame({'market': list(c.keys()), 'central (3 h)': list(c.values()), 'Metronit scenario (3 h)': list(s.values()), 'difference': [s[k] - c[k] for k in c], 'ratio': [s[k] / c[k] if c[k] else np.nan for k in c]})
+def metro_table(reg=REG):
+    rows = []
+    for p in ['AM', 'PM']:
+        for sc in SCEN:
+            a, b = srow(p, sc, reg), srow(p, sc, reg, src=summary_metro)
+            rows.append({'period': p, 'scenario': SCEN_LAB[sc], 'LRT central': a['LRT'], 'LRT, Metronit scenario': b['LRT'], 'ratio': b['LRT'] / a['LRT'], 'using the extension, central': a[EXTC], 'using the extension, scenario': b[EXTC],
+                         'Metronit after, central': a['BRT (Metronit)'], 'Metronit after, scenario': b['BRT (Metronit)'], 'bus after, central': a['bus'], 'bus after, scenario': b['bus'], 'car → transit, central': a['car before'] - a['car'], 'car → transit, scenario': b['car before'] - b['car'],
+                         'transit → car on pairs dearer than today': b['transit lost to the car on those pairs'], 'busiest segment (peak hour), central': peak_busiest(p, sc, reg), 'busiest segment (peak hour), scenario': metro_busiest(p, sc)})
+    return pd.DataFrame(rows)
+if summary_metro is not None:
+    METRO_YMAX = nice(max(max(srow(p, sc, REG, src=summary_metro)['LRT'], srow(p, sc, REG)['LRT']) * phf(p, 'transit') for p in ['AM', 'PM'] for sc in SCEN) * 1.12)   # one scale over both periods, with room for the labels
+    def metro_trips_chart(p):
+        x = np.arange(len(SCEN)); f = phf(p, 'transit'); fig, ax = plt.subplots(figsize=(7, 5))
+        c = [srow(p, sc, REG)['LRT'] * f for sc in SCEN]; s = [srow(p, sc, REG, src=summary_metro)['LRT'] * f for sc in SCEN]
+        ax.bar(x - 0.2, c, 0.4, color='#1f77b4', label='central case (every Metronit line as today)'); ax.bar(x + 0.2, s, 0.4, color='#e6550d', label='Metronit on the Krayot side of Hamifrats only')
+        for xi, a, b in zip(x, c, s): ax.text(xi - 0.2, a, f'{a:,.0f}', ha='center', va='bottom', fontsize=7); ax.text(xi + 0.2, b, f'{b:,.0f}\n({(b / a - 1) * 100:+.0f} %)', ha='center', va='bottom', fontsize=7)
+        ax.set_ylim(0, METRO_YMAX); ax.set_xticks(x); ax.set_xticklabels([SCEN_LAB[sc] for sc in SCEN]); ax.set_ylabel('LRT trips / peak hour'); ax.grid(axis='y', alpha=0.3); ax.legend(fontsize=8, loc='upper left')
+        ax.set_title(f'{p} — LRT trips by scenario-year, peak hour ({f:.2f} of the three hours)\nthe Metronit scenario against the central case; main route + extension, Prioritized', fontsize=9)
+        fig.tight_layout(); fig.savefig(f'{CFIG}/scenario_metronit_trips_{p}.png', dpi=150); plt.close(fig)
+    METRO_LMAX = max(YMAX['lrt'], nice(max(metro_loads(p, sc)[[d[0] for d in DIRS]].values.max() for p in ['AM', 'PM'] for sc in SCEN)))   # the LRT flow scale, widened to the scenario's maximum
+    def metro_flow_chart(p, sc, col, lab, tag):
+        c = loads(p, sc, 'lrt'); s = metro_loads(p, sc); x = np.arange(len(c)); fig, ax = plt.subplots(figsize=(13, 4.2))
+        ax.bar(x - 0.2, c[col], 0.4, color='#1f77b4', label='central case'); ax.bar(x + 0.2, s[col], 0.4, color='#e6550d', label='Metronit on the Krayot side of Hamifrats only')
+        ax.axvline(n_ext - 0.5, color='k', ls='--', lw=0.8); ax.text(n_ext - 0.3, METRO_LMAX * 0.95, 'extension | main route', fontsize=7, va='top')
+        ax.set_ylim(0, METRO_LMAX); ax.set_ylabel('passengers / peak hour'); ax.set_xticks(x); ax.set_xticklabels(seg_lab, rotation=90, fontsize=6); ax.grid(axis='y', alpha=0.3); ax.legend(fontsize=8, loc='upper right')
+        ax.set_title(f'LRT flow by segment, {lab} — {SCEN_LAB[sc]}, {p} peak hour: the Metronit scenario against the central case; main route + extension, Prioritized', fontsize=9)
+        fig.tight_layout(); fig.savefig(f'{CFIG}/scenario_metronit_flow_lrt_{p}_{sc}_{tag}.png', dpi=150); plt.close(fig)
+    for p in ['AM', 'PM']:
+        metro_trips_chart(p)
+        for (col, lab, _), tag in zip(DIRS, ('dir1', 'dir2')): metro_flow_chart(p, REF, col, lab, tag)
+    metro_tab = metro_table(); metro_A = metro_tab[metro_tab.period == 'AM']; metro_mk = metro_markets('AM', REF)
 
 # ======================= 0 =======================
 H('Executive decision summary')
@@ -235,6 +289,7 @@ dec = pd.DataFrame([
     ['Largest markets (AM 3 h)', '; '.join(f'{r["market"]} {r["LRT trips (3 h)"]:,.0f} ({r["share of all LRT trips"]:.0f} %)' for _, r in mk_ref.iloc[[0, 1, 2, 3]].iterrows())],
     ['Unprioritized extension (at grade through the interchanges)', f'{ref_unp["LRT"]:,.0f} ({(ref_unp["LRT"] / ref["LRT"] - 1) * 100:+.0f} %)'],
     ['Slower buses in 2050 (× 1.20 in mixed traffic)', f'{ref_slow["LRT"]:,.0f} ({(ref_slow["LRT"] / ref["LRT"] - 1) * 100:+.0f} %)' if ref_slow is not None else 'n/a'],
+    ['Metronit scenario: the Metronit kept on the Krayot side of Merkazit Hamifrats only (section 4.10)', f'{ref_metro["LRT"]:,.0f} ({(ref_metro["LRT"] / ref["LRT"] - 1) * 100:+.0f} %)' if ref_metro is not None else 'n/a'],
 ], columns=[f'Reference case {REF_LAB}, main route + extension, Prioritized', 'value'])
 table(dec, font=8)
 P('Planning range (AM 06:00–09:00 LRT riders, reference case). The range is the cost sensitivity λ at the ends of its carried range (0.05 / 0.02 around the central 0.03), the widest single factor of the uncertainty experiment (step 40); the LRT premium (0 / 10 minutes) gives a narrower band inside it. The regime is a design choice, not an uncertainty, and is shown separately.').runs[0].font.bold = True
@@ -503,7 +558,7 @@ P(f'The model keeps every bus and Metronit line as it runs today (the June 2026 
 P('Four consequences for reading the numbers:')
 for s_ in ['The LRT and the Metronit coexist in the model on the whole trunk from Hof HaCarmel to the Krayot. The LRT\'s riders are, for the most part, today\'s transit riders on a better vehicle: the transit market itself grows only by the car shift, a few hundred to about a thousand trips in three hours. The LRT replaces existing transit capacity on the trunk far more than it creates a market.',
            f'Part of the "Metronit" and "bus" shift is a change of technology for one leg of the trip, not a new transit trip: the LRT path may begin or end with a Metronit or bus feeder (penalty 4 / 8 minutes), and such a trip is counted as an LRT trip. The Krayot market ({mk_ref.iloc[2]["LRT trips (3 h)"]:,.0f} trips) is almost entirely of this kind: Metronit riders who transfer to the LRT at Hamifrats or on the trunk. A rider count for the LRT is therefore a boarding count, not a count of trips that exist only because of the LRT.',
-           'If the Metronit were reduced on the overlap after opening, the riders it keeps in the model (the pairs where it is still cheaper) would have to move to the LRT or to the bus: the LRT loads on the trunk would rise, bounded by the Metronit\'s corridor trips before the LRT (' + f'{ref["BRT before"]:,.0f} in {REF_LAB} AM). The reverse, a feeder reorganisation that brings Metronit lines to the LRT stations, would raise the LRT\'s access quality and its draw. Neither is modelled; the report\'s figures are for the coexistence case, which is the conservative one for the LRT.',
+           'If the Metronit were reduced on the overlap after opening, the riders it keeps in the model (the pairs where it is still cheaper) would have to move to the LRT or to the bus: the LRT loads on the trunk would rise, bounded by the Metronit\'s corridor trips before the LRT (' + f'{ref["BRT before"]:,.0f} in {REF_LAB} AM). The reverse, a feeder reorganisation that brings Metronit lines to the LRT stations, would raise the LRT\'s access quality and its draw. The first is run as a scenario in section 4.10 (the Metronit kept on the Krayot side of Merkazit Hamifrats only: about +30 % of LRT trips, +40–50 % on the busiest segment); the feeder reorganisation is not modelled. The report\'s figures are for the coexistence case, which is the conservative one for the LRT.',
            'Whether the LRT and the Metronit are intended to coexist on the trunk is a network-planning decision outside this study. It changes the LRT\'s loads by up to the Metronit\'s trunk volume, more than any demand uncertainty in this report, and it should be settled before the figures are used for capacity.']:
     B(s_)
 H('4.5 Flow on the line — LRT, both directions', 2)
@@ -572,11 +627,34 @@ if summary_slow is not None:
     sA = sens[sens.period == 'AM']
     P(f'Table 4.9 — LRT trips with slower buses against the central case, main route + extension, Prioritized (three hours). AM: the LRT gains {(sA["ratio"].min() - 1) * 100:+.0f} % to {(sA["ratio"].max() - 1) * 100:+.0f} %, from {sA["LRT central"].min():,.0f}–{sA["LRT central"].max():,.0f} to {sA["LRT, buses slower"].min():,.0f}–{sA["LRT, buses slower"].max():,.0f}.').runs[0].font.size = Pt(8)
 else: P('[sensitivity run not found: Output/alternatives_bus_slow/]')
-H('4.10 Time on route', 2)
+H('4.10 Scenario: the Metronit kept on the Krayot side of Merkazit Hamifrats only', 2)
+P('The scenario asked for on 5 November 2026: once the LRT runs, the Metronit serves the Krayot only, up to Merkazit Hamifrats; in Haifa and Tirat Carmel the LRT is the one mass-transit mode beside the train and the buses. '
+  'Section 4.4 reads the central case as the coexistence case and names the reduced Metronit as the network decision that moves the LRT\'s loads most; this section runs it.')
+P('How it is run. Step 45 rerun with METRONIT_CUT for the four forecast sets: every Metronit stop-to-stop link with a stop in Haifa proper or Tirat Carmel (the Carmel coast and Hof HaCarmel, Bat Galim and Kiryat Eliezer, the lower city, Hadar, the Check Post, Tirat Carmel) is removed from the transit network; '
+  'the links between the Krayot, Kiryat Haim, the Hamifrats bay zone (Merkazit Hamifrats, Lev Hamifrats, the refineries, Tsomet Kiryat Ata), Nesher and Yagur stay, so every Metronit line terminates at Merkazit Hamifrats (the Yagur line at Nesher); of the 170 Metronit stops 97 stay and 73 go. '
+  'The buses (every line as it runs today), the train, the car and the LRT are as in the central case; the 2022 base keeps today\'s network. '
+  'The pivot measures each zone pair\'s transit bundle (the LRT plus whatever bus or Metronit is left) against today\'s bundle, not against the scenario\'s own bus-only offer: a pair that gains the LRT draws trips from the car as before; a pair that loses its Metronit without an LRT as good loses some transit share to the car. '
+  'Where the Metronit is gone the LRT competes with the bus alone and carries the bus premium (5 generalized minutes) rather than the Metronit\'s (2.5). Without a cut the formula is the central case\'s exactly, which the rerun confirms number for number. Source: Output/alternatives_metronit_krayot/ (METHODOLOGY §6aq addendum 5; docs/METRONIT_KRAYOT_SCENARIO_2026-11-05.md).')
+if summary_metro is not None:
+    table(metro_tab, {'ratio': '{:.2f}'}, font=7)
+    P(f'Table 4.10 — LRT trips in the Metronit scenario against the central case, main route + extension, Prioritized (three hours; the busiest segment in the peak hour). AM: the LRT gains {(metro_A["ratio"].min() - 1) * 100:+.0f} % to {(metro_A["ratio"].max() - 1) * 100:+.0f} %, from {metro_A["LRT central"].min():,.0f}–{metro_A["LRT central"].max():,.0f} to {metro_A["LRT, Metronit scenario"].min():,.0f}–{metro_A["LRT, Metronit scenario"].max():,.0f}; '
+      f'the busiest segment (the entry into Hamifrats, S24–M02 towards Tirat Carmel) carries about {(metro_A["busiest segment (peak hour), scenario"] / metro_A["busiest segment (peak hour), central"]).mean() * 100 - 100:.0f} % more. The corridor Metronit riders after the LRT fall to the Krayot side\'s (2050 BU {ref_metro["BRT (Metronit)"]:,.0f} against {ref["BRT (Metronit)"]:,.0f}); the bus riders rise, since the Haifa pairs the LRT does not serve well keep a bus. '
+      f'The car → transit shift falls (2050 BU {ref["car before"] - ref["car"]:,.0f} → {ref_metro["car before"] - ref_metro["car"]:,.0f}): {ref_metro["TAZ pairs with transit dearer than today"]:,.0f} zone pairs with {ref_metro["transit trips on those pairs before"]:,.0f} transit trips today lose their Metronit without a cheaper LRT path, {ref_metro["transit lost to the car on those pairs"]:,.0f} of those trips go to the car and {ref_metro["LRT trips on those pairs"]:,.0f} ride the LRT anyway.').runs[0].font.size = Pt(8)
+    fig(f'{CFIG}/scenario_metronit_trips_AM.png', 12, 'Figure 4.27 — LRT trips by scenario-year, AM peak hour: the Metronit scenario against the central case, main route + extension, Prioritized.')
+    fig(f'{CFIG}/scenario_metronit_trips_PM.png', 12, 'Figure 4.28 — The same for the PM.')
+    fig(f'{CFIG}/scenario_metronit_flow_lrt_AM_{REF}_dir2.png', 16, f'Figure 4.29 — LRT flow by segment towards Tirat Carmel, {REF_LAB}, AM peak hour: the Metronit scenario against the central case.')
+    fig(f'{CFIG}/scenario_metronit_flow_lrt_AM_{REF}_dir1.png', 16, f'Figure 4.30 — The same towards Nazareth.')
+    table(metro_mk, {'ratio': '{:.2f}'}, font=7)
+    _k = metro_mk.set_index('market'); P(f'Table 4.10b — Markets of the LRT trips, AM {REF_LAB}, central case and Metronit scenario. The gain is first the Krayot ↔ Haifa market ({_k.loc["Krayot ↔ Haifa (by feeder)", "central (3 h)"]:,.0f} → {_k.loc["Krayot ↔ Haifa (by feeder)", "Metronit scenario (3 h)"]:,.0f}: today\'s through Metronit riders, now transferring at Hamifrats), then Haifa internal ({_k.loc["Haifa internal", "central (3 h)"]:,.0f} → {_k.loc["Haifa internal", "Metronit scenario (3 h)"]:,.0f}); Tirat Carmel ↔ Haifa, where the Metronit was never the competitor, moves little ({_k.loc["Tirat Carmel ↔ Haifa", "central (3 h)"]:,.0f} → {_k.loc["Tirat Carmel ↔ Haifa", "Metronit scenario (3 h)"]:,.0f}).').runs[0].font.size = Pt(8)
+    P('Reading the scenario. It is a network decision, not a demand uncertainty, and it moves the LRT by more than any single demand factor except λ: about +30 % of trips and +40–50 % on the busiest segment. The extra riders are today\'s transit riders on a different vehicle; the transit market itself is slightly smaller than in the central case. '
+      'Not modelled: any bus restructuring beside the cut (the buses parallel to the Metronit\'s former Haifa section keep running, so the no-LRT alternative in Haifa is the bus, not nothing), capacity on the LRT or at Merkazit Hamifrats, Metronit frequencies, fares, park-and-ride. '
+      'The caveats of the central case (15, 18, 27, 32, 33) apply as they do there, and the planning range on λ scales this scenario by the same ratios. The Unprioritized regime and the extension-only alternative gain more in proportion (+29–41 %), their competitor having been the Metronit; their runs are in the same folder.')
+else: P('[scenario run not found: Output/alternatives_metronit_krayot/]')
+H('4.11 Time on route', 2)
 rt = route[['mode', 'period', 'direction', 'from', 'to', 'scheduled_min (median)', 'observed_min (step 30 ratio)']].copy() if 'direction' in route.columns else route
 rt.columns = [str(c) for c in rt.columns]; table(rt.head(40), {'scheduled_min (median)': '{:.0f}', 'observed_min (step 30 ratio)': '{:.0f}'}, font=7)
-P('Table 4.10 — End-to-end times on the route by mode (Output/alternatives/time_on_route.csv). The LRT through line runs 74.3 min Prioritized / 99.6 min Unprioritized from Tirat Carmel to Nazareth (extension 40.7 / 65.8 min; main route 33.7 min at 80 km/h with 10 s dwell).').runs[0].font.size = Pt(8)
-H('4.11 Maps', 2)
+P('Table 4.11 — End-to-end times on the route by mode (Output/alternatives/time_on_route.csv). The LRT through line runs 74.3 min Prioritized / 99.6 min Unprioritized from Tirat Carmel to Nazareth (extension 40.7 / 65.8 min; main route 33.7 min at 80 km/h with 10 s dwell).').runs[0].font.size = Pt(8)
+H('4.12 Maps', 2)
 P('The map set of the alternatives report (Output/figures/alternatives/, 41 maps: line loads, origins and destinations of the LRT trips, LRT share, growth, shift sources and rates, travel-time maps) applies to these runs; four are reproduced here.')
 P('One map per scenario-year, all on the same width scale (the HS 2050 maximum) and the same boarding-circle scale.')
 k_ = 12
@@ -610,6 +688,7 @@ for s_ in [f'Reference case. {REF_LAB}: {ref["LRT"]:,.0f} LRT riders in the AM t
            'Growth. Between 2040 BU and 2050 HS the LRT demand grows by about 45 %, in step with the corridor transit market (×1.3–1.5 on 2022), because the forecast holds behaviour at 2022; the HS scenario adds 15–25 % over BU in the same year.',
            'Regime. Priority at the interchanges is worth about 20–25 % of the LRT trips: at-grade running of the extension lengthens its end-to-end time from 41 to 66 minutes and loses a fifth of the riders, mostly on the extension.',
            'Robustness. The central figures sit within a range of about −25 % / +40 % from the cost sensitivity and the LRT premium alone (step 40); the level of service is held at May 2026 in every year, and if the buses slow with the road (10 % in 2040, 20 % in 2050) the LRT gains ' + (f'{(sA["ratio"].min() - 1) * 100:.0f}–{(sA["ratio"].max() - 1) * 100:.0f} % in the AM' if summary_slow is not None else 'a few percent') + ' (section 4.9), so the constant-LOS central case is conservative for the LRT; the car-to-LRT shift is the least certain component (caveats 15, 25, 27) and should be read as an order of magnitude; the bus and Metronit shifts rest on observed shares and measured service and are the firmer part.',
+           (f'Metronit scenario. If the Metronit is cut back to the Krayot side of Merkazit Hamifrats once the LRT runs (section 4.10), the through line carries {ref_metro["LRT"]:,.0f} AM trips in {REF_LAB} ({(ref_metro["LRT"] / ref["LRT"] - 1) * 100:+.0f} %) and the busiest segment 40–50 % more; the extra riders are today\'s Metronit riders between the Krayot and Haifa transferring at Hamifrats, and Haifa-internal riders, while the car shift is a few hundred trips smaller. It is a network decision, not a demand uncertainty, and it moves the loads more than any demand factor except λ.' if ref_metro is not None else 'Metronit scenario: run not found.'),
            'Fitness. The results support the sizing and location of the extension\'s market, the ranking of the regimes, and the design-hour scale of the trunk load. They do not support capacity, fleet or frequency decisions or an appraisal without a validated assignment and a full mode-choice model; the next steps are a purpose split of the survey, a PM-specific forecast, the main route\'s operating plan, and a choice-rider λ from a stated-preference or a revealed choice set with the car cost in it.']:
     B(s_)
 P('Repository record: METHODOLOGY.md §6aq (step 45) and §8; docs/PLAIN_ENGLISH_METHODOLOGY.md Part 5; the alternatives report reports/LRT_Alternatives_Demand_Report.docx and its workbook Output/alternatives/LRT_alternatives_matrices.xlsx; this report\'s builder tools/build_comprehensive_report.py.')

@@ -58,7 +58,7 @@ optional step in and skips it when its committed outputs are present.
 | 7 | **LRT capture** (`capture`) | 7 | The incremental logit between the 25 areas and its forecast; the person-level λ; car and transit level of service zone by zone; the capture zone by zone; the uncertainty analysis. |
 | 8 | **LRT alternatives (the deliverable)** (`alternatives`) | 2 | Demand for main route + extension vs extension only, two running regimes, 2022–2050, AM and PM, zone by zone. |
 | 9 | **Reports** (`reports`) | 7 | Peak-hour factors for the charts, maps, the alternatives report, the comprehensive report in English, Hebrew and Simplified Technical English, the decision deck. |
-| 10 | **Sensitivities and alternative runs** (`sensitivity`) | 17 (17 optional) | The same notebooks with other settings: 2026 car skim, LRT headway, bus competition, bus wait rule, out-of-vehicle weights, slower buses, TAZ bus construction. Executed copies go to the scratch folder. |
+| 10 | **Sensitivities and alternative runs** (`sensitivity`) | 18 (18 optional) | The same notebooks with other settings: 2026 car skim, LRT headway, bus competition, bus wait rule, out-of-vehicle weights, slower buses, the Metronit cut back to the Krayot, TAZ bus construction. Executed copies go to the scratch folder. |
 | 11 | **Validation and diagnostics** (`validation`) | 30 (30 optional) | Tests against smart cards, road counts, the phone-based matrix and the Ministry of Transport guideline. Evidence, not products. |
 
 ```mermaid
@@ -331,7 +331,7 @@ Peak-hour factors for the charts, maps, the alternatives report, the comprehensi
 
 ### 10. Sensitivities and alternative runs
 
-The same notebooks with other settings: 2026 car skim, LRT headway, bus competition, bus wait rule, out-of-vehicle weights, slower buses, TAZ bus construction. Executed copies go to the scratch folder.
+The same notebooks with other settings: 2026 car skim, LRT headway, bus competition, bus wait rule, out-of-vehicle weights, slower buses, the Metronit cut back to the Krayot, TAZ bus construction. Executed copies go to the scratch folder.
 
 | id | Step | § | Notebook / script | Needs | Inputs | Key outputs | Minutes |
 |---|---|---|---|---|---|---|---|
@@ -369,6 +369,8 @@ The same notebooks with other settings: 2026 car skim, LRT headway, bus competit
 | | | | *Step 39 with the hand-over's bus construction (BUS_TAZ_SOURCE=area_plus_walk)* | | | | |
 | `v45_slow` | 45 | 6aq | `notebooks/current/LRT_alternatives_demand.ipynb`<br>*optional, env `BUS_SLOWDOWN=BU_2040:1.10,BU_2050:1.20,HS_2040:1.10,HS_2050:1.20` `ALT_OUT=Output/alternatives_bus_slow`, executed copy to scratch* | `s45` | `Main_Nofit 2026-10-05.shp`, `Main_Nofit_StopsID.csv`, `Corridor_TAZ_Agg_V2.xlsx`, `Streets.shp`, `TAZ_North.shp`, `Zonal_2020.csv` | `Output/alternatives_bus_slow/demand_summary.csv` | 3 |
 | | | | *Step 45 with slower buses in the forecast years → Output/alternatives_bus_slow/* | | | | |
+| `v45_metro` | 45 | 6aq | `notebooks/current/LRT_alternatives_demand.ipynb`<br>*optional, env `METRONIT_CUT=BU_2040,BU_2050,HS_2040,HS_2050` `ALT_OUT=Output/alternatives_metronit_krayot`, executed copy to scratch* | `s45` | `Main_Nofit 2026-10-05.shp`, `Main_Nofit_StopsID.csv`, `Corridor_TAZ_Agg_V2.xlsx`, `Streets.shp`, `TAZ_North.shp`, `Zonal_2020.csv` | `Output/alternatives_metronit_krayot/demand_summary.csv` | 5 |
+| | | | *Step 45 with the Metronit kept on the Krayot side of Merkazit Hamifrats only, in the forecast years → Output/alternatives_metronit_krayot/* The scenario asked for on 5 November 2026: in Haifa and Tirat Carmel the LRT is the one mass-transit mode beside the train and the buses; the 2022 rows keep today's network. tools/metronit_scenario_summary.py compares it with the central run. | | | | |
 
 ### 11. Validation and diagnostics
 
