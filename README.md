@@ -178,6 +178,11 @@ current and 5 retired in §8.2. A Hebrew plain-language version is
 1. **The cost sensitivity λ** (caveat 15). It is assumed (0.03). The person-level estimate
    supports it (0.035) but cannot pin it down for people who own a car. Moving λ across
    0.02–0.05 changes the 2050 BU figure from 10,537 to 5,532.
+   A diagnostic of 13 November 2026 (step 46, METHODOLOGY §6at) adds how the model reacts to an
+   error in the LRT's cost: the choice between the LRT and the bus / Metronit is close to an
+   even split on most zone pairs, so one generalized minute on the LRT (half a minute of
+   walking or waiting) is worth 236 trips, 3.2 % of the 2050 BU line, spread along the
+   extension in proportion to the load.
 2. **Walk and wait weights, transfer penalties, station access time** (caveat 33). A
    literature review found no confirmed values; across seven plausible parameter sets the
    area-level capture spans 1,456–4,935 trips (central 4,254).
@@ -279,6 +284,7 @@ sensitivities and validation.
 | 36 | `Car_cordon_counts_validation` | 6ah | The car layer against road counts on six closed cordons |
 | 41 | `RavKav_2025_own_alightings` | 6ai | Chains the 2025 taps into journeys; checks the transfer tag |
 | 42 | `Car_AON_assignment_2022` | 6aj | All-or-nothing assignment of the car layer onto the road network |
+| 46 | `LRT_choice_entropy_sensitivity` | 6at | How settled step 45's choices are (entropy) and the LRT trips lost per generalized minute, by zone, station and segment |
 | — | `MOT_Validation_Stage*` (nine notebooks: stages 1, 1c, 1d, 2, 2b, 2c, 3, 3b, 4; `periods/` holds ten PM and midday copies), `Bus_destination_pattern_RavKav_vs_OnBoard` | 6ar | The Ministry of Transport validation guideline, waves 1, 1b, 2, 3; `tools/build_validation_workbook.py` collects their results into one workbook |
 | — | `THS_2018_MTX_weighted_vs_cellular`, `*_PCA_vs_cellular`, `THS_PCA_*`, `Cellular_eigenplaces_TAZ` | 4, 8b | The survey vs phone-data comparisons of the first generation |
 

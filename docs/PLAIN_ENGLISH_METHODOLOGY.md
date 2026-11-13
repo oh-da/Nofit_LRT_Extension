@@ -4402,6 +4402,29 @@ buses in Haifa, capacity on the LRT or at Merkazit Hamifrats, or fares. The tabl
 are in `docs/METRONIT_KRAYOT_SCENARIO_2026-11-05.md` and `Output/alternatives_metronit_krayot/`,
 and the comprehensive report carries the scenario as its section 4.10.
 
+### 5.8j How settled is the model's choice, and where does a minute matter? (step 46, 13 November 2026)
+
+For every pair of zones the model gives the LRT a share of the transit riders. This check asks how
+close those shares are to a coin flip, using entropy: 0 means the choice is settled, 1 means an even
+split. For the LRT against the bus and the Metronit the answer is 0.88 in the 2050 BU reference case:
+70 % of the LRT's riders come from zone pairs where the LRT takes between 30 % and 70 % of the transit
+riders. For transit against the car it is 0.33, a settled choice.
+
+Two things follow. First, this is not the uncertainty of the forecast: if every traveller tossed the
+model's coin, the total would move by about 58 trips of 7,433. The wide planning range comes from the
+assumptions, not from the coin. Second, a near-even split means small cost errors matter: one
+generalized minute more on the LRT (half a minute of walking or waiting, or a minute of riding) takes
+236 riders off the line, 3.2 %, of whom 203 go back to the bus or the Metronit and 33 to the car. The
+straight-line rule holds for about five minutes either way.
+
+The maps show where. On the extension every segment loses about 3 % of its load per extra minute of
+running time, so the busy segments are the costly ones (S24 into the main route, 76 riders per minute;
+S19–S24 and S03–S06, about 58). The main route towards Nazareth loses only 1–2 % per minute: there the
+LRT has less competition. No single zone or segment carries the risk; what matters is the level of the
+LRT's cost against the bus everywhere at once. The tables are in
+`Output/alternatives/choice_sensitivity/` and the figures are `Output/figures/lrt_choice_*.png`
+(METHODOLOGY §6at).
+
 ### 5.9 Where things stand now
 
 The single most current answer to "how many riders will the LRT capture" is **about 4,250

@@ -59,7 +59,7 @@ optional step in and skips it when its committed outputs are present.
 | 8 | **LRT alternatives (the deliverable)** (`alternatives`) | 2 | Demand for main route + extension vs extension only, two running regimes, 2022–2050, AM and PM, zone by zone. |
 | 9 | **Reports** (`reports`) | 7 | Peak-hour factors for the charts, maps, the alternatives report, the comprehensive report in English, Hebrew and Simplified Technical English, the decision deck. |
 | 10 | **Sensitivities and alternative runs** (`sensitivity`) | 18 (18 optional) | The same notebooks with other settings: 2026 car skim, LRT headway, bus competition, bus wait rule, out-of-vehicle weights, slower buses, the Metronit cut back to the Krayot, TAZ bus construction. Executed copies go to the scratch folder. |
-| 11 | **Validation and diagnostics** (`validation`) | 30 (30 optional) | Tests against smart cards, road counts, the phone-based matrix and the Ministry of Transport guideline. Evidence, not products. |
+| 11 | **Validation and diagnostics** (`validation`) | 31 (31 optional) | Tests against smart cards, road counts, the phone-based matrix and the Ministry of Transport guideline. Evidence, not products. |
 
 ```mermaid
 flowchart TB
@@ -398,6 +398,8 @@ Tests against smart cards, road counts, the phone-based matrix and the Ministry 
 | | | | *The 2025 taps chained into journeys; the transfer tag checked* Reads the 3.3 GB 2025 extracts. | | | | |
 | `s42` | 42 | 6aj | `notebooks/diagnostics/Car_AON_assignment_2022.ipynb`<br>*optional* | `s16` | `Emme_Links_Final_Res 2026-09-23.shp` | `Output/validation/car_aon_link_flows.csv` | 1 |
 | | | | *All-or-nothing assignment of the car layer onto the road network* Superseded by the guideline's T11 (MOT stage 4), kept as record. | | | | |
+| `s46` | 46 | 6at | `notebooks/diagnostics/LRT_choice_entropy_sensitivity.ipynb`<br>*optional* | `s45` | `Corridor_TAZ_Agg_V2.xlsx`, `TAZ_North.shp`, `Zonal_2020.csv` | `Output/alternatives/choice_sensitivity/choice_entropy_sensitivity_summary.csv`, `Output/figures/lrt_choice_sensitivity_map_AM_BU_2050_prioritized.png` | 0.5 |
+| | | | *Choice entropy of step 45 and the LRT trips lost per generalized minute, by TAZ, station and segment* Reads step 45's pivot from tools/build_scenario_workbook.py on the committed skims of Output/scenario_tool/ (tools/scenario_metronit_skims.py). | | | | |
 | `mot_stage1` | — | 6ar | `notebooks/diagnostics/MOT_Validation_Stage1_Inputs_Distribution.ipynb`<br>*optional* | `s15`, `s16`, `s08`, `s34` | `trips_ths_2017.xlsx`, `1270_02_09_2021_TAZ_North_keys.csv`, `TAZ_2636_Keys.xlsx`, `Submatrix_tazs.xlsx`, `Zonal_2020.csv`, `taz_keys_from_shapefile.csv`, `PersonsFin2.csv`, `HHfinal.csv`, `TAZ_GSnew.csv`, `TAZ_North.shp`, `AvgDayHourlyTrips201819_1270_weekday_v1.csv` | `Output/validation_mot/summary_stage1.csv` | 2 |
 | | | | *MoT guideline, stage 1: inputs and trip-length distributions (AM)* | | | | |
 | `mot_stage1_pm` |  | 6ar | `notebooks/diagnostics/MOT_Validation_Stage1_Inputs_Distribution.ipynb`<br>*optional, env `NOFIT_PERIOD=PM`, writes `notebooks/diagnostics/periods/MOT_Validation_Stage1_Inputs_Distribution_PM.ipynb`* | `s15_pm`, `s16_pm`, `s15_md`, `s16_md`, `s08p` | `trips_ths_2017.xlsx`, `1270_02_09_2021_TAZ_North_keys.csv`, `TAZ_2636_Keys.xlsx`, `Submatrix_tazs.xlsx`, `Zonal_2020.csv`, `taz_keys_from_shapefile.csv`, `PersonsFin2.csv`, `HHfinal.csv`, `TAZ_GSnew.csv`, `TAZ_North.shp`, `AvgDayHourlyTrips201819_1270_weekday_v1.csv` | — | 1.5 |

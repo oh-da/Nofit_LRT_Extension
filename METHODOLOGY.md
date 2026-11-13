@@ -185,6 +185,7 @@ Steps in the order the chain runs. "§" is the section in this document.
 | 36 | 6ah | `Car_cordon_counts_validation` | diagnostic | Car layer 0.58–0.90 of cordon counts; flatter road peak |
 | 41 | 6ai | `RavKav_2025_own_alightings` | diagnostic | Chaining the 2025 taps resolves 45.8 %; the transfer tag is a fare-rule flag |
 | 42 | 6aj | `Car_AON_assignment_2022` | diagnostic | AON assignment: level 1.04, poor link-level fit |
+| 46 | 6at | `LRT_choice_entropy_sensitivity` | diagnostic | LRT vs bus is near an even split (0.88 bits); one generalized minute on the LRT = 236 trips (3.2 %) in 2050 BU; by TAZ, station, segment |
 | — | 6ar | `MOT_Validation_Stage*` | diagnostic | The Ministry of Transport validation guideline, waves 1, 1b, 2, 3 |
 | **Historical (superseded)** | | | | |
 | 1–1e | 3–4d | `THS_2018_MTX_weighted*`, `_submatrix`, `_trip_generation` | historical | The 2018 activities-file matrices and their comparison with the cellular matrix |
@@ -337,6 +338,10 @@ the before / after values.
   pairs (`exports/Nofit_LRT_Scenario_Model.xlsx`), with the transit paths recomputed for the Metronit cut back to
   Hamifrats and removed: 2050 BU LRT 7,433 → 9,570 / 8,883. At TAZ level λ (with λ_T = 2λ) moves the LRT by
   − 0.3 / + 1.4 % over 0.05 / 0.02, far less than the published planning range, which scales by the area model's ratios.
+- **13 November 2026 — step 46, choice entropy and cost sensitivity (§6at).** A diagnostic on step 45's pair probabilities: the LRT
+  against the bus / Metronit is near an even split (0.88 bits; 70 % of the LRT trips on pairs with an LRT share of 0.3–0.7), so one
+  generalized minute on the LRT is worth 236 trips (3.2 %) in 2050 BU; on the extension the sensitivity follows the load. The entropy is
+  not the forecast's uncertainty (sampling sd 58 trips). No number of the study changes.
 
 ### 0.8 Product lineage
 
@@ -4231,6 +4236,66 @@ does not enter the pivot (§6aq addendum 3). The M1 boundary is a zone rule, not
 also re-time the remaining Metronit and the buses. The other limits of step 45 apply (no capacity, no fare, the
 parallel buses kept).
 
+## 6at. Step 46 — Choice entropy and the cost sensitivity of the LRT demand, by TAZ, station and segment (`LRT_choice_entropy_sensitivity.ipynb`, diagnostics; 13 November 2026)
+
+> **In plain words.** How settled is the choice the model makes, and where does a minute of error in the LRT's cost move the demand? The LRT against the bus / Metronit is close to a coin flip on most zone pairs (0.88 bits of 1), so one generalized minute on the LRT is worth 236 trips, 3.2 % of the 2050 BU line. On the extension that sensitivity follows the load, with no hot spot; the main route holds its riders more firmly. The entropy is not the uncertainty of the forecast. Diagnostic; no number of the study changes.
+
+**Purpose.** Step 45 gives every corridor TAZ pair two probabilities: the pair's transit share after the
+LRT and the LRT's share of that transit, `P_L = 1 / (1 + exp(λ_T · dL))`, `dL = GC_LRT − premium − GC_bus`.
+The step measures (1) how uncertain those choices are, as binary entropy, and (2) where one more generalized
+minute on the LRT moves the LRT trips, by TAZ, by station and by line segment and direction.
+
+**Method.** The model is not re-derived: the notebook imports `load` and `pivot` from
+`tools/build_scenario_workbook.py` (§6as), the numpy copy of step 45's pivot on the committed skims of
+`Output/scenario_tool/` with the Metronit as today, and stops unless the 40 LRT totals are within 0.5 trips
+of `Output/alternatives/demand_summary.csv` (they are within 0.05). *Entropy.* `H(p) = −p·log2 p −
+(1−p)·log2(1−p)` per pair, for `P_L` (mean weighted by the pair's transit trips) and for the pair's transit
+share (weighted by all trips), on the pairs with an LRT. *Sensitivity.* For a pair,
+`dT_LRT/dc = −T_LRT · [λ_T·(1 − P_L) + λ·(1 − S_new)·P_L]`: the first term is riders back to the bus or
+the Metronit, `λ_T · T_transit · P_L · (1 − P_L)`, the same `p(1 − p)` the entropy grows with; the second
+is the car shift given back through the logsum (zero on pairs with no car trips, where step 45 caps transit
+at the pair's total). It is taken as a central difference of ± 0.05 generalized minutes on the LRT cost of
+every pair, and the first term is checked against its closed form (within 1e-4 trips per pair). The pair
+sensitivities are summed by origin and destination TAZ (a minute at the TAZ's LRT leg: half a minute of
+walking or waiting at weight 2, or a minute of riding), by boarding and alighting station, and loaded on the
+segments between the pair's stations by direction (a minute of running time on the segment; every trip lost
+rode it, so the figure is also the change of the segment's own load). *Range of validity.* The pivot rerun
+with − 10 … + 10 minutes on every pair, against the straight line. All volumes are three-hour trips.
+
+**Results.** *Entropy.* Reference case (AM 2050 BU, main route + extension, Prioritized): LRT against bus /
+Metronit **0.88 bits** (0.82–0.88 over the 20 through-line runs; 0.59–0.65 for the extension alone);
+transit against car 0.33 (0.23–0.35). 70 % of the 7,433 LRT trips are on pairs with `P_L` 0.3–0.7, 22 %
+above 0.7. At λ_T = 0.06 ten minutes of advantage give 65 / 35, so the entropy is high partly by
+construction. *Not the forecast's uncertainty.* Travellers drawing modes with these probabilities give the
+LRT total a standard deviation of 58 trips (0.8 %), against the planning range 5,532–10,537, which comes
+from the parameters. *Sensitivity.* **236 LRT trips per generalized minute, 3.2 %** (203 back to the bus /
+Metronit, 33 to the car); 3.0–3.6 % over the through-line runs (Prioritized 3.0–3.2, Unprioritized 3.3–3.6),
+up to 4.1 % for the extension alone. The straight line is within about 1 % of the full model up to ± 5
+minutes and 1–6 % off at ± 10. It reproduces step 45's regime gap: the Unprioritized LRT is 8.3 generalized
+minutes dearer (LRT-trip mean), the gap is 1,733 trips, the mean of the two runs' pair sensitivities × the
+pair's cost difference gives 1,723. *Where.* An extension segment loses 3.0–3.4 % of its load per minute of
+running time, so the costly segments are the loaded ones: S24–M02 towards Tirat Carmel 76 trips per minute,
+S19–S24 in that direction 57–60, S03–S06 and S12–S15 towards Nazareth 57–59; east of M03 0.9–2.3 % and under
+25 trips. By area a minute at the LRT leg costs 80 trips in Tirat Carmel, 64 in Bat Galim – Kiryat Eliezer,
+42 in Matam – Neot Peres, 37 in Hamifrats and in the lower city; as a share, 2.7–3.2 % along the Haifa
+trunk, 3.6–4.1 % where the LRT takes a third of transit (the Krayot by feeder, Matam, Ein Hayam) and 1.2 %
+in Nazareth (LRT share 0.75, 0.62 bits). *Reading.* On the extension no zone or segment carries the risk; the
+total is exposed to the level of the LRT's cost against the bus everywhere at once (weights, penalties,
+regime, premium: without the premium the reference case is 6,622, − 11 %; at 2.5 / 1.5 it is 7,055). λ_T
+alone moves it less (7,942 at 0.04, 6,942 at 0.10), pairs above and below an even split moving in opposite
+directions.
+
+**Outputs.** `Output/alternatives/choice_sensitivity/` — `choice_entropy_sensitivity_summary.csv` (40 runs),
+`sensitivity_by_taz.csv.gz`, `sensitivity_by_station.csv`, `sensitivity_by_segment.csv` (every run, long
+format), `lrt_response_to_cost_shift.csv`; figures `Output/figures/lrt_choice_entropy_distribution.png`,
+`lrt_choice_sensitivity_map_AM_BU_2050_{prioritized,unprioritized}.png`,
+`lrt_choice_sensitivity_segments_AM_BU_2050.png`. Pipeline step `s46` (optional, validation stage).
+
+**Limits.** A local derivative of step 45's model: it carries that model's limits and does not say whether
+λ_T, the weights or the premium are right. Boarding and alighting stations are held fixed; a minute on a
+segment is charged to the trips that ride it now. The entropy depends on λ_T (a larger λ_T lowers it with no
+new information). The central case only (Metronit as today).
+
 ## 7. Output inventory (`Output/`)
 
 > **In plain words.** Every file under `Output/`, what produced it and what it holds. Read the lineage table in §0.8 first for what is current; this inventory is the complete list, historical products included.
@@ -4304,6 +4369,7 @@ parallel buses kept).
 | `alternatives_metronit_krayot/` (as `alternatives_bus_slow/`, plus `{AM,PM}/transit_gc_no_lrt_taz_{alt}_metronit_cut.csv.gz`, `comparison_vs_central.csv`, `markets_vs_central_AM.csv`, `line_loads_vs_central_{AM,PM}.csv`, `station_boardings_vs_central_AM.csv`, `figures/`) | 40 runs | Step 45 with `METRONIT_CUT` (§6aq addendum 5); `tools/metronit_scenario_summary.py` | The Metronit scenario: the Metronit on the Krayot side of Merkazit Hamifrats only in 2040 / 2050 × BU / HS, the LRT the one mass-transit mode in Haifa and Tirat Carmel — LRT +24–31 %, busiest segment +40–50 %; section 4.10 of the comprehensive reports |
 | `alternatives/peak_hour_factors.csv`, `corridor_v2/peak_hour_factors_v2_pm.csv` | 12 rows; the step-27 table for the PM | `tools/peak_hour_factors_periods.py` | The peak-hour factors applied to the alternatives' charts and maps: period × layer (car, transit) × direction (up, down, all); the PM window run of step 27's method |
 | `scenario_tool/{AM,PM}/transit_gc_no_lrt_{v}_{alt}`, `metronit_based_{v}_{alt}`, `lrt_{gc,board,alight}_{v}_{alt}_{regime}` (`.csv.gz`); `scenario_tool/stations_{alt}.csv`, `metronit_edges_removed.csv`, `variants.csv` | 174 × 174 per matrix; v = M0 / M1 / M2 | `tools/scenario_metronit_skims.py` (§6as) | Step 45's AM and PM transit and LRT costs for three Metronit networks, the inputs of the scenario workbook `exports/Nofit_LRT_Scenario_Model.xlsx` (`tools/build_scenario_workbook.py`) |
+| `alternatives/choice_sensitivity/choice_entropy_sensitivity_summary.csv`, `sensitivity_by_{taz,station,segment}`, `lrt_response_to_cost_shift.csv`; `figures/lrt_choice_*.png` | 40 runs; 6,960 / 1,340 / 1,300 rows; 42 rows; 4 figures | Step 46 | Entropy of step 45's choices and the LRT trips lost per generalized minute, by TAZ, station and segment (§6at) |
 | `gtfs/stop_times_study_area_{am,pm}_trips_v45.csv.gz`, `stop_times_study_area_rail_day.csv.gz` | 259,001 / 259,883 / 1,959 rows | Step 45 | The study-area stop times of the service day for the AM and PM windows (bus and Metronit) and the day's rail trips |
 | `skims/taz/lrt_capture_scenarios_taz.csv`, `taz_vs_area_capture_comparison.csv`, `lrt_trips_2022_taz_{sc}_central.csv`, `lrt_share_of_transit_taz_{sc}_central.csv`, `transit_share_2022_pivot_taz.csv`, `taz_access_table.csv`, `lrt_trips_2022_area_from_taz_{sc}_central.csv`, `lrt_trips_by_area_taz_vs_area.csv`, `trunk_link_flows_taz.csv`, `lrt_boardings_by_station_area_taz.csv`, `lrt_boardings_by_station_taz.csv`, `lrt_capture_by_access_band.csv`, `regression_check_area_skims_on_taz.csv` (and the same under `bus_area_plus_walk/`) | 15 rows; 15; 174 × 174 (× 3 + 3); 174 rows; 25 × 25; 75 rows; 18; 10; stations; 15; 3 | Step 39 | The TAZ-level capture: scenario × case totals and the comparison with step 31; TAZ trip and share matrices; the pivot's shares; the TAZ access table; sums to areas, links, gateway areas and stations; the capture rate by access band; the regression check |
 | `figures/` | — | Steps 1b–3 | Scatter plots, CV curves, λ curves, R_AB heatmap |
@@ -4558,6 +4624,8 @@ python3 tools/build_comprehensive_report_he.py   # the same report in simple Heb
 python3 tools/build_comprehensive_report_ste.py   # the same report in ASD-STE100 Simplified Technical English, reports/Nofit_LRT_Extension_Comprehensive_Report_STE.docx; prints its STE self-check (≈ 1 minute)
 git checkout -- Output/figures/gc_first_fill_trunk_v2.png Output/figures/gc_bus_gtfs_vs_survey.png Output/figures/skims_logit_car_vs_transit.png Output/figures/skims_trunk_link_flows_bus_vs_lrt.png Output/figures/lrt_capture_forecast_2040_2050.png   # the alternative run redraws the default figures
 
+# step 46 (§6at): choice entropy and cost sensitivity of step 45, from the committed Output/scenario_tool/ skims (pull Input/Corridor_TAZ_Agg_V2.xlsx; ≈ 0.5 minute; pipeline: python3 -m pipeline run --only s46)
+jupyter nbconvert --to notebook --execute --inplace notebooks/diagnostics/LRT_choice_entropy_sensitivity.ipynb
 # regression test of the hybrid branch (committed outputs only)
 jupyter nbconvert --to notebook --execute --inplace notebooks/diagnostics/Hybrid_superzone_conservation_test.ipynb
 # PCA within the survey, car vs transit (trips file + committed keys; needs scipy)
