@@ -215,6 +215,10 @@ STEPS: list[Step] = [
          packages=GEO, minutes=2, note="Without the four Zonal_*.csv forecasts (LFS) the notebook makes a dry run into Output/forecast_taz/dry_run/."),
     Step("demog", "forecast", "BU vs HS forecasts compared by area", f"{NB}Demographic_scenario_comparison.ipynb", "—", "—",
          inputs=DEMOG + (SUBMX,), outputs=("Output/demographics/scenario_comparison_area.csv",), optional=True),
+    Step("s46", "forecast", "Driving-licence model: logit on the survey persons, licence holders per zone in 2040 / 2050 (static and cohort carry-forward)", f"{NB}Driving_licence_model.ipynb", "46", "6at",
+         inputs=THS_PERSONS[:1] + (HH_WEIGHTS, ZONAL) + DEMOG,
+         outputs=("Output/licence_model/coefficients.csv", "Output/licence_model/licence_holders_taz_sector_band.csv", "Output/licence_model/summary_by_scenario.csv"),
+         packages=("statsmodels", "sklearn"), minutes=4, optional=True),
 
     # ---- corridor aggregation and the LRT line ----
     Step("s27", "corridor_lrt", "Peak-hour factors per route and direction on the 25-area V2 aggregation", f"{NB}Corridor_peak_hour_V2_routes.ipynb", "27", "6y",

@@ -4231,6 +4231,135 @@ does not enter the pivot (§6aq addendum 3). The M1 boundary is a zone rule, not
 also re-time the remaining Metronit and the buses. The other limits of step 45 apply (no capacity, no fare, the
 parallel buses kept).
 
+## 6at. Step 46 — Driving-licence model: who holds a car licence, and how many will in 2040 and 2050 (`Driving_licence_model.ipynb`, `tools/licence_model.py`; 16 November 2026)
+
+**Purpose.** A model of car-licence holding per person, estimated on the 2017–18 survey and
+applied to the BU and HS populations of 2040 and 2050. The product is the number of licence
+holders per zone, sector and age band: an input for later car-ownership or mode-choice work.
+Nothing in steps 31–45 reads it. Design: `docs/superpowers/specs/2026-11-16-driving-licence-model-design.md`.
+
+**Predictors are limited to what the forecast files carry**: age, gender, sector and the zone's
+socio-economic index and ring. Household cars, employment and education predict the licence
+better (licence rate 28 % in households without a car, 87 % with two), but they are decided
+together with the licence and the forecast does not carry them per person.
+
+**Sample.** `PersonsFin2.csv`: 16,388 persons, 11,262 aged 17 and over, 11,231 with a licence
+answer, 10,895 with a known gender, in 5,037 households. Licence rate 70.7 % unweighted, 70.9 %
+with the household weight `wf_new`. Persons under 17 are given probability zero (0.7 % at 16 in
+the survey). Sector: `arab` → Arab, `orto` → Haredi, `secular` / `religious` / `other` → rest,
+the three groups of the zonal files. A socio-economic index of 0 (zone not classified) is
+replaced by the sample mean, 4.91.
+
+**Model.** Binary logit, weighted by `wf_new` normalised to the sample size, standard errors
+clustered on the household (checked against a hand-built sandwich: largest gap 0.2 %).
+- Age: piecewise-linear in the log-odds, knots at 19, 26, 36, 65 and 75.
+- Gender, sector, sector × gender, gender × age, sector × age, sector × gender × age. The sector ×
+  age terms use reduced curves (Arab: knots 26, 36, 65; Haredi: 26, 65). With the full curve the
+  model separates: no Arab woman of 80 or over in the sample holds a licence.
+- Zone: socio-economic index (0.43 per class, z = 14.8), ring (ring 4 against ring 1: +0.46),
+  and index × sector (Arab: −0.32, so the index matters much less in Arab zones).
+- Settlement size was tested and left out (Wald p = 0.40).
+
+| Model | Adds | Parameters | Log-likelihood | BIC | CV AUC | Held-out AUC |
+|---|---|---|---|---|---|---|
+| M0 | age | 7 | −6,009.5 | 12,084 | 0.677 | 0.687 |
+| M1 | gender | 8 | −5,561.7 | 11,198 | 0.757 | 0.768 |
+| M2 | sector | 10 | −5,426.7 | 10,946 | 0.772 | 0.787 |
+| M3 | sector × gender | 12 | −5,419.6 | 10,951 | 0.772 | 0.785 |
+| M4 | gender × age, sector × age | 25 | −5,255.0 | 10,742 | 0.779 | 0.793 |
+| M5 | sector × gender × age | 32 | −5,228.0 | 10,753 | 0.782 | 0.792 |
+| M6 | zone index, ring | 36 | −5,000.4 | 10,335 | 0.808 | 0.823 |
+| **M7** | **index × sector** | **38** | **−4,970.7** | **10,295** | **0.811** | **0.827** |
+| M8 | settlement size | 40 | −4,969.1 | 10,310 | 0.810 | 0.827 |
+
+M7 is adopted: constant-only log-likelihood −6,574.1, McFadden ρ² 0.244. CV is five-fold with
+whole households held out; "held-out" is one fixed 20 % of the households (1,008 households,
+2,191 persons), the model estimated on the other 80 %.
+
+**Model against data.** `model_vs_data_full_sample.png` and `model_vs_data_holdout.png` show the
+licence rate per age group for each sector and gender.
+- Full sample: of 46 cells with 10 or more persons, 1 is outside ±2 standard errors; mean gap
+  2.8 points.
+- Held-out households: observed 69.1 %, predicted 69.8 %. Arab and rest cells follow the model
+  (by sector and gender: within 3 points). Of 39 cells, 8 are outside ±2 standard errors, and
+  the six largest gaps are all Haredi cells of 10–20 persons (Haredi women: observed 26.7 %,
+  predicted 39.7 %, 77 persons).
+- Along the zone index and ring the full-sample rates agree within 1.5 points.
+
+**What the model says** (zone of index 5, ring 1). Men reach about 85–90 % by 30 and hold it to
+70. Women differ by generation: Arab women 77 % at 30, 38 % at 50, 9 % at 70; rest-sector women
+70 %, 60 %, 39 %. Haredi women about 45–50 % from 30 to 60; Haredi men 77 % at 30, rising slowly.
+
+**Application.** Inside each band × sector cell of a zonal file, persons are spread over single
+years of age and gender with the survey's weighted distribution. The premise, set on 16 November
+2026: **a licence, once obtained, is not given up.** The fall of the 2017 profile with age is
+then a difference between generations, not something that happens to a person.
+- *Static*: the 2017 rate at the person's age. It applies the fall to everyone, so it is a
+  lower bound.
+- *Cohort carry-forward* (adopted; `lm.peak_rate`): with *a0* the cohort's age in 2017, the rate
+  is the highest value of the 2017 profile between *a0* (not below 17) and the person's age in
+  the forecast year. A cohort past the profile's peak in 2017 keeps the rate it had then; a
+  cohort that had not reached the peak takes the peak of its gender, sector and zone; where the
+  profile still rises with age (the Haredi sector), the cohort follows it up.
+- The profile's peak, zone of index 5 in ring 1: rest women 72 % at 36, rest men 86 % at 36,
+  Arab women 80 % at 26, Arab men 92 % at 36, Haredi women 50 % at 65, Haredi men 88 % at 75.
+
+**Results** (persons aged 17 and over):
+
+| Population | Aged 17+ | Holders, static | Holders, cohort | Rate, static | Rate, cohort |
+|---|---|---|---|---|---|
+| 2020 | 1,826,730 | 1,303,002 | 1,333,236 | 71.3 % | 73.0 % |
+| BU 2040 | 2,484,043 | 1,721,554 | 1,945,413 | 69.3 % | 78.3 % |
+| BU 2050 | 2,854,570 | 1,952,501 | 2,262,463 | 68.4 % | 79.3 % |
+| HS 2040 | 2,576,999 | 1,780,739 | 2,008,183 | 69.1 % | 77.9 % |
+| HS 2050 | 3,060,805 | 2,095,811 | 2,413,722 | 68.5 % | 78.9 % |
+
+- The static method has the licence rate *falling* by 2050 (the population ages into the
+  low-rate groups); the cohort method has it rising by about 6 points from 2020. The difference
+  is 224,000–318,000 licence holders.
+- By sector, cohort rate, BU 2050 (static in brackets): rest 83.6 % (76.1 %), Arab 81.8 %
+  (64.7 %), Haredi 48.2 % (47.9 %). Almost all of the gap is Arab and rest-sector women over 45:
+  Arab women aged 55–64 are at 81 % in 2050 against 23 % in the static profile.
+- Arab women of 75 and over are still at 52 % in 2050: they were 42 and over in 2017, past the
+  peak, and keep the rate they had.
+- Base check: the model on the 2020 zonal file (static) gives 71.3 % against the survey's
+  70.9 %; by sector 67.7 / 47.5 / 75.0 % against 68.0 / 49.8 / 74.3 %.
+- Sensitivity, BU 2050 (adopted 79.3 %). The first version of the rule gave new cohorts the mean
+  30–39 rate instead of the peak: 78.3 %. The same with a giving-up curve after 65 (the decline
+  of rest-sector men relative to their rate at 65): 76.7 %.
+- Sampling interval of the cohort rate (200 coefficient draws), BU 2050: all 78.1–80.5 %,
+  Arab 80.0–83.4 %, rest 82.1–85.0 %, Haredi 42.9–55.1 %.
+
+**Limits.**
+1. One survey year cannot separate age from generation. The cohort rule rests on the premise
+   that a licence is never given up; it is an assumption, not an estimate. The static result
+   bounds it from below, and the giving-up run shows the cost of relaxing the premise (−2.6
+   points in 2050).
+2. No trend in the uptake of new cohorts: a Haredi or Arab woman of 30 in 2050 is given the
+   peak rate of 2017. If uptake among them rises, the forecast is low.
+3. The Haredi rates rest on 627 persons and fail the held-out check cell by cell. The sector
+   grows from 3 % of adults in 2020 to 10–12 % in 2050, so this is the widest uncertainty. Its
+   profile peaks at 65–75; the rule reads that as licences obtained late in life, but it could
+   equally be an older generation that was more licensed.
+4. The peak is the peak of a fitted curve. For Arab women it sits at 26, where the curve has a
+   knot; the survey cell 26–35 (78 %, 456 persons) supports it.
+5. Gender and single years of age inside a band are the survey's, held fixed; the 65+ band will
+   in fact grow older.
+6. The dependent variable is holding a licence, not driving. Older holders who no longer drive
+   count as holders.
+
+**Outputs** (`Output/licence_model/`): `coefficients.csv`, `coefficients_covariance.csv`,
+`specification_ladder.csv`, `holdout_by_model.csv`, `holdout_by_sector_gender.csv`,
+`model_vs_data_full_sample.{csv,png}`, `model_vs_data_holdout.{csv,png}`, `calibration_zone.csv`,
+`age_gender_shares_within_band.csv`, `licence_holders_taz_sector_band.csv` (5 populations × 781
+zones × 3 sectors × 6 bands; holders under the static, cohort and two sensitivity runs),
+`licence_holders_taz.csv`, `summary_by_scenario.csv`, `summary_by_scenario_sector.csv`,
+`rates_by_sector_gender_age_group.csv`, `sensitivity_rates.csv`,
+`cohort_rate_sampling_interval.csv`, `forecast_static_vs_cohort_by_age_group.png`.
+
+**Reproduce.** `python3 tools/test_licence_model.py`, then
+`python3 -m pipeline run --only s46` (about 4 minutes; needs `statsmodels` and `scikit-learn`).
+
 ## 7. Output inventory (`Output/`)
 
 > **In plain words.** Every file under `Output/`, what produced it and what it holds. Read the lineage table in §0.8 first for what is current; this inventory is the complete list, historical products included.

@@ -262,6 +262,7 @@ sensitivities and validation.
 | 39 | `LRT_capture_TAZ.ipynb` | 6ap | The capture run zone by zone (diagnostic; not adopted) |
 | 40 | `LRT_capture_uncertainty.ipynb` | 6ak | Which assumptions move the capture most (factorial and tornado) |
 | 45 | `LRT_alternatives_demand.ipynb` | 6aq | **The deliverable:** LRT demand for main + extension vs extension only, two regimes, 2022–2050, AM and PM |
+| 46 | `Driving_licence_model.ipynb` | 6at | Driving-licence model: logit on the survey persons; licence holders per zone in 2040 / 2050, static and cohort carry-forward (optional step; feeds nothing downstream yet) |
 | — | `BusOnBoard_matrix.ipynb` | 6g | RavKav volumes × on-board survey destinations; comparison only since 23 Sep 2026 |
 | — | `BusRavKav_matrix_periods.ipynb` | 6ar | Step 8 for the PM-peak and midday windows |
 | — | `periods/THS_2017_two_mode_matrix_{PM,MD}`, `periods/THS_2017_three_mode_2022_{PM,MD}` | 6ar | Steps 15 and 16 on the 16:00–19:00 and 10:00–14:00 windows |
