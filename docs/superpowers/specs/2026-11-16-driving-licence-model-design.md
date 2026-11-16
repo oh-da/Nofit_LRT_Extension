@@ -1,6 +1,6 @@
 # Driving-licence model — design
 
-16 November 2026. Status: awaiting approval.
+16 November 2026. Status: approved and built (step 46, METHODOLOGY §6at).
 
 ## Intent
 
@@ -113,3 +113,14 @@ no giving-up at all.
 ## Left to the builder
 
 The final interaction set (by the tests above), figure design, table layouts.
+
+## Changes made while building
+
+- The Arab × age terms use a reduced curve (knots 26, 36, 65): the full curve separated.
+- Settlement size was tested and left out (Wald p = 0.40); the zone terms are the index, the
+  ring and index × sector.
+- The giving-up curve is evaluated in each zone, not at one reference zone, so that the cohort
+  rate of rest-sector men aged 65+ in 2017 equals their static rate.
+- A third sensitivity run was added: late acquisition (the larger of cohort and static).
+- A fixed 20 % of households is held out, in addition to the five-fold cross-validation, and the
+  model-against-data charts are drawn for both (requested during the build).

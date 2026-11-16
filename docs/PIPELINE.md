@@ -52,7 +52,7 @@ optional step in and skips it when its committed outputs are present.
 | 1 | **Upstream inputs from raw records** (`upstream`) | 7 (7 optional) | Smart-card and survey files turned into the matrices the chain starts from. Heavy LFS inputs; outputs committed, rerun only when the raw files change. |
 | 2 | **Base year 2022** (`base_year`) | 6 | Survey matrices (car, transit) with the bus calibrated to RavKav; grown to 2022 and split into car / bus / taxi-type / rail; corridor profiles and peak hour; the deliverable 2022 matrices. |
 | 3 | **PM and midday base matrices** (`periods`) | 4 (4 optional) | Steps 15 and 16 run on the 16:00–19:00 and 09:00–15:00 windows (NOFIT_PERIOD); the PM layers feed the PM runs of the alternatives. |
-| 4 | **Forecast 2040 / 2050** (`forecast`) | 2 (1 optional) | The 2022 matrices grown to the BU and HS demographic scenarios. |
+| 4 | **Forecast 2040 / 2050** (`forecast`) | 3 (2 optional) | The 2022 matrices grown to the BU and HS demographic scenarios. |
 | 5 | **Corridor aggregation and LRT line** (`corridor_lrt`) | 4 | The 25-area V2 aggregation, peak-hour factors per route, survey vs smart-card profiles, the drawn extension turned into stations and running times. |
 | 6 | **Level of service** (`los`) | 4 | Bus and Metronit times from the national timetable routed over measured bus speeds; the generalized-cost inventory between the 25 areas; the May 2026 car speed network. |
 | 7 | **LRT capture** (`capture`) | 7 | The incremental logit between the 25 areas and its forecast; the person-level λ; car and transit level of service zone by zone; the capture zone by zone; the uncertainty analysis. |
@@ -245,6 +245,8 @@ The 2022 matrices grown to the BU and HS demographic scenarios.
 | | | | *Grows the 2022 matrices to BU / HS × 2040 / 2050* Without the four Zonal_*.csv forecasts (LFS) the notebook makes a dry run into Output/forecast_taz/dry_run/. | | | | |
 | `demog` | — | — | `notebooks/current/Demographic_scenario_comparison.ipynb`<br>*optional* | — | `Zonal_BU_2040.csv`, `Zonal_BU_2050.csv`, `Zonal_HS_2040.csv`, `Zonal_HS_2050.csv`, `Submatrix_tazs.xlsx` | `Output/demographics/scenario_comparison_area.csv` | 1 |
 | | | | *BU vs HS forecasts compared by area* | | | | |
+| `s46` | 46 | 6at | `notebooks/current/Driving_licence_model.ipynb`<br>*optional* | — | `PersonsFin2.csv`, `households_with_weights.csv`, `Zonal_2020.csv`, `Zonal_BU_2040.csv`, `Zonal_BU_2050.csv`, `Zonal_HS_2040.csv`, `Zonal_HS_2050.csv` | `Output/licence_model/coefficients.csv`, `Output/licence_model/licence_holders_taz_sector_band.csv`, `Output/licence_model/summary_by_scenario.csv` | 4 |
+| | | | *Driving-licence model: logit on the survey persons, licence holders per zone in 2040 / 2050 (static and cohort carry-forward)* | | | | |
 
 ### 5. Corridor aggregation and LRT line
 
