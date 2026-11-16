@@ -45,6 +45,20 @@ close(lm.cohort_rate(p_fn, keep, np.array([40.]), 2060), 0.8)           # unborn
 close(lm.cohort_rate(lambda a: np.full(np.shape(a), 0.99), lambda a: np.where(np.asarray(a) > 65, 0.5, 1.0), np.array([60.]), 2020), 0.99)
 assert lm.cohort_rate(lambda a: np.full(np.shape(a), 0.99), lambda a: np.where(np.asarray(a) >= 65, 0.5, 1.0), np.array([64.]), 2010)[0] <= 1.0   # capped
 
+# peak rule (a licence is never given up) on a profile that peaks at 30-39: 0.4 under 30, 0.8 at 30-39, 0.5 from 40
+r = lm.peak_rate(p_fn, np.array([10., 16., 25., 35., 45., 60., 70., 90.]), 2040)
+close(r[:2], [0, 0])             # children
+close(r[2], 0.4)                 # 25: has not reached the peak yet
+close(r[3], 0.8)                 # 35: at the peak
+close(r[4], 0.8)                 # 45 in 2040 was 22 in 2017 -> passed through the peak, keeps it
+close(r[5], 0.8)                 # 60 was 37: at the peak in 2017, keeps it
+close(r[6], 0.5)                 # 70 was 47: already past the peak in 2017, keeps the 0.5 it had
+close(r[7], 0.5)                 # 90 was 67
+close(lm.peak_rate(p_fn, np.array([50.]), 2017), 0.5)                    # the survey year itself: the static rate
+rise = lambda a: np.clip((np.asarray(a, float) - 17) / 100, 0, 1)        # a profile that keeps rising: the cohort follows it up
+close(lm.peak_rate(rise, np.array([67.]), 2050), 0.5)
+assert (lm.peak_rate(p_fn, np.arange(17., 100.), 2050) >= p_fn(np.arange(17., 100.)) - 1e-12).all()   # never below the static rate
+
 # keep curve from a model whose rest-sector men lose 0.1 of log-odds a year after 65
 par = pd.Series({'const': 2.0, 'age65': -0.1})
 k = lm.keep_curve(par, ('age',), 5.0)
@@ -74,4 +88,6 @@ close(o[(o.band == '26_35') & (o.sec == 'ara')].holders, 50 * 0.5 + 50 * sig(1.0
 oc = lm.apply_zonal(par, ('age', 'male'), zon, sh, 2040, fill=5.0, method='cohort')
 close(oc.holders.sum(), o.holders.sum())      # a flat profile: cohort = static
 ol = lm.apply_zonal(par, ('age', 'male'), zon, sh, 2040, fill=5.0, method='late'); assert (ol.holders >= oc.holders - 1e-9).all()
+op = lm.apply_zonal(par, ('age', 'male'), zon, sh, 2040, fill=5.0, method='peak'); close(op.holders.sum(), o.holders.sum()); close(op.persons.sum(), 1700)
+assert len(op) == 18 and op.notna().all().all(); close(op[(op.band == '36_64') & (op.sec == 'ort')].holders, 0)
 print('licence_model: all tests passed')

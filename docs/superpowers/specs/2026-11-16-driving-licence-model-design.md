@@ -124,3 +124,12 @@ The final interaction set (by the tests above), figure design, table layouts.
 - A third sensitivity run was added: late acquisition (the larger of cohort and static).
 - A fixed 20 % of households is held out, in addition to the five-fold cross-validation, and the
   model-against-data charts are drawn for both (requested during the build).
+
+## Revision of the cohort rule (16 November 2026, after the first results)
+
+Decided in conversation: **a licence, once obtained, is not given up**, and the peak of each
+sector and gender is used for the generations that have not reached it. The adopted rule is now
+`lm.peak_rate`: a cohort holds the highest rate of the 2017 profile between its age in 2017 and
+its age in the forecast year. The giving-up curve and the 30–39 saturation window described
+above are no longer the adopted rule; they remain as two sensitivity runs. The "late
+acquisition" run is dropped, because the adopted rule already contains it.

@@ -191,6 +191,24 @@ def cohort_rate(p_fn, keep, a, year, sat=SAT, survey_year=SURVEY_YEAR):
     return np.clip(out, 0.0, 1.0)
 
 
+def peak_rate(p_fn, a, year, survey_year=SURVEY_YEAR):
+    """Cohort rate when a licence is never given up (the adopted rule).
+    A cohort holds the highest rate of the 2017 profile between its age in the survey year (a0,
+    not below MIN_AGE) and its age `a` in `year`:  max of p(k) for k in [max(a0, 17), a].
+      - a cohort past the profile's peak in 2017 keeps the rate it had then;
+      - a cohort that had not reached the peak takes the peak once it is old enough;
+      - where the profile still rises with age, the cohort follows it up (late acquisition).
+    p_fn(ages) -> the 2017 model rate for the same rows at other ages. 0 under MIN_AGE."""
+    a = np.floor(np.asarray(a, float)); a0 = a - (year - survey_year)
+    ac = np.clip(a, MIN_AGE, MAX_AGE); lo = np.clip(a0, MIN_AGE, MAX_AGE)
+    out = np.zeros(a.shape)
+    for k in range(MIN_AGE, MAX_AGE + 1):
+        use = (lo <= k) & (k <= ac)
+        if use.any():
+            out = np.where(use, np.maximum(out, p_fn(np.full(a.shape, float(k)))), out)
+    return np.where(a < MIN_AGE, 0.0, np.clip(out, 0.0, 1.0))
+
+
 def within_band_shares(persons, min_n=30):
     """Weighted share of each (single year of age, gender) inside a band x sector cell of the survey.
     A cell with fewer than `min_n` persons takes the all-sector distribution of its band."""
@@ -211,7 +229,8 @@ def within_band_shares(persons, min_n=30):
 
 def apply_zonal(params, spec, zonal, shares, year, fill, method='cohort', sat=SAT, giving_up=True, detail=False):
     """Licence holders per zone x sector x band of a zonal file.
-    method: 'static' (the 2017 rate at each age), 'cohort' (carry-forward), 'late' (the larger of the two).
+    method: 'peak' (adopted: a licence is never given up, lm.peak_rate), 'static' (the 2017 rate at each age),
+            'cohort' (the first rule: 30-39 window, with or without giving-up), 'late' (the larger of cohort and static).
     Returns TAZ_ID, sec, band, persons, holders (and per age x gender rows when detail=True)."""
     z = zonal[['TAZ_ID', 'SOCECO', 'SETTL_SIZE', 'TABAAT']].copy()
     z['soceco'] = clean_soceco(z.SOCECO, fill)
@@ -222,6 +241,16 @@ def apply_zonal(params, spec, zonal, shares, year, fill, method='cohort', sat=SA
     assert all((b, s) in have for b in BANDS for s in SECTORS), 'a band x sector cell has no age / gender distribution'
     g = pop.merge(shares[['band', 'sec', 'age', 'male', 'share']], on=['band', 'sec']).merge(z, on='TAZ_ID')
     g['n'] = g.persons * g.share
+    if method == 'peak':
+        # the rate depends on (sector, gender, zone attributes, age) only: evaluate it once per distinct profile
+        key = ['sec', 'male', 'soceco', 'SETTL_SIZE', 'TABAAT', 'age']
+        u = g[key].drop_duplicates().reset_index(drop=True)
+        us, um, uz = u.sec.to_numpy(object), u.male.to_numpy(), (u.soceco.to_numpy(), u.SETTL_SIZE.to_numpy(), u.TABAAT.to_numpy())
+        u['rate'] = peak_rate(lambda ages: predict(params, spec, ages, um, us, *uz), u.age.to_numpy(float), year)
+        g = g.merge(u, on=key, how='left'); g['holders'] = g.n * g.rate
+        if detail:
+            return g[['TAZ_ID', 'sec', 'band', 'age', 'male', 'n', 'rate', 'holders']]
+        return g.groupby(['TAZ_ID', 'sec', 'band'], sort=False).agg(persons=('n', 'sum'), holders=('holders', 'sum')).reset_index()
     sec = g.sec.to_numpy(object); male = g.male.to_numpy(); zz = (g.soceco.to_numpy(), g.SETTL_SIZE.to_numpy(), g.TABAAT.to_numpy())
     p_fn = lambda ages: predict(params, spec, ages, male, sec, *zz)
     age = g.age.to_numpy(float)
